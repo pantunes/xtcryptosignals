@@ -1,0 +1,15 @@
+# use glob syntax.
+syntax: glob
+
+*.pyc
+*.swp
+*.idea
+*~
+venv
+data
+tmp
+logs
+nohup.out
+celerybeat-schedule.db
+dump.rdb
+settings_local.py

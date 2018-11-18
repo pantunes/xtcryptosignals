@@ -1,0 +1,6 @@
+python-binance
+redis
+celery
+marshmallow
+mongoengine
+requests
