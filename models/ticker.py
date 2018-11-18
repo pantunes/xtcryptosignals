@@ -67,7 +67,9 @@ class Ticker(Document):
                 price_change_percent = None
                 volume_change_percent = None
                 if row:
-                    price_change_percent = (float(self['price']/row.price) - 1.0) * 100.0
+                    price_change_percent = (float(
+                        self['price']/row.price
+                    ) - 1.0) * 100.0
                     if round(price_change_percent, 2) == -0.00:
                         price_change_percent = 0.0
                     if self['number_trades_24h']:
