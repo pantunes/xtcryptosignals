@@ -33,7 +33,6 @@ def _process(exchange_class, symbol):
     assert errors == {}, errors
     ticker_model = TickerModel(**ticker_data_valid)
     ticker_model.save()
-    # print(ticker_model.get_object())  # debug
 
 
 def _get_24h_price_ticker_data(jobs, exchange_class, symbol):
