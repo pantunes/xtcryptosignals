@@ -11,7 +11,7 @@ MONGODB_NAME = 'XTCryptoSignals'
 
 TICKER_SCHEDULE = 10.0  # each X seconds
 TIMEOUT_PER_SYMBOL = 0.5  # in seconds
-SYMBOL_FLOAT_PRECISION = 6
+SYMBOL_FLOAT_PRECISION = 8
 
 HISTORY_FREQUENCY = (
     '10s', '30s', '1m', '10m', '30m', '1h', '3h', '6h', '12h', '24h'
