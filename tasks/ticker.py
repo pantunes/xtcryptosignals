@@ -12,7 +12,6 @@ import os
 from celery.task import task
 from celery.exceptions import Ignore
 from celery import states
-from datetime import datetime
 from billiard.context import Process
 sys.path.append(os.getcwd())
 import settings as s  # noqa
@@ -21,13 +20,13 @@ from utils.helpers import get_class  # noqa
 from models.ticker import Ticker as TickerModel  # noqa
 
 
-def _process(exchange_class, schema_class, symbol):
+def _process(logger, exchange_class, schema_class, symbol):
     try:
         ticker_data = exchange_class().get_ticker(
             symbol=symbol
         )
     except ValueError as err:
-        print(err)
+        logger.error(err)
         return
     ticker_data_valid, errors = schema_class().load(ticker_data)
     assert errors == {}, errors
@@ -36,11 +35,11 @@ def _process(exchange_class, schema_class, symbol):
 
 
 def _get_24h_price_ticker_data(
-        jobs, exchange_class, schema_class, symbol
+        jobs, logger, exchange_class, schema_class, symbol
 ):
     p = Process(
         target=_process, args=(
-            exchange_class, schema_class, symbol
+            logger, exchange_class, schema_class, symbol
         )
     )
     jobs.append(p)
@@ -58,6 +57,7 @@ def _terminate_running_jobs(jobs):
 @use_mongodb(connect=False)
 def update(self):
     jobs = []
+    logger = self.get_logger()
     try:
         for exchange, symbols in s.EXCHANGES_AND_SYMBOLS.items():
             try:
@@ -65,18 +65,18 @@ def update(self):
                     folder='exchanges', module=exchange
                 )
             except ModuleNotFoundError as err:
-                print(err)
+                logger.error(err)
                 continue
             try:
                 schema_class = get_class(
                     folder='schemas', module=exchange
                 )
             except ModuleNotFoundError as err:
-                print(err)
+                logger.error(err)
                 continue
             for coin, quote in symbols.items():
                 _get_24h_price_ticker_data(
-                    jobs, exchange_class, schema_class,
+                    jobs, logger, exchange_class, schema_class,
                     symbol=coin + quote
                 )
         for j in jobs:
@@ -90,11 +90,12 @@ def update(self):
 
 
 if __name__ == "__main__":
-    from multiprocessing import Process
-    print('starting job...')
-    now = datetime.now()
-    update()
-    print('ending job...')
-    print('took {0:.1f} second(s)'.format(
-        (datetime.now() - now).total_seconds())
+    import logging
+    logging.basicConfig(
+        format='%(asctime)s %(levelname)s %(message)s',
+        level=logging.INFO,
     )
+    from multiprocessing import Process
+    logging.info('starting job...')
+    update()
+    logging.info('ending job...')
