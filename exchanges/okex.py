@@ -8,22 +8,16 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import requests
-import settings as s
 
 
-class Uphold:
+class Okex:
     def __init__(self):
-        self.base_url = 'https://api.uphold.com/v0/ticker/{}'
+        self.base_url = 'https://www.okex.com/api/spot/v3/' \
+                        'instruments/{}/ticker'
 
     def get_ticker(self, symbol):
         url = self.base_url.format(symbol)
         request = requests.get(url)
         if request.status_code != 200:
-            raise ValueError(
-                'Error connecting Uphold on URL: {}'.format(url)
-            )
-        item = request.json()
-        item.update(
-            symbol=symbol
-        )
-        return item
+            raise ValueError('Error connecting OKEx on URL: {}'.format(url))
+        return request.json()

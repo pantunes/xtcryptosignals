@@ -14,9 +14,10 @@ from marshmallow import (
     pre_load,
     post_load
 )
+import settings as s
 
 
-class Ticker(Schema):
+class Binance(Schema):
     symbol = fields.Str(required=True)
     source = fields.Str(required=True)
     openTime = fields.DateTime(attribute='opened_on')
@@ -30,20 +31,13 @@ class Ticker(Schema):
 
     @pre_load
     def pre_load(self, data):
-        open_time = data.get('openTime')
-        if open_time:
-            data['openTime'] = dateparser.parse(str(open_time)).isoformat()
-        close_time = data.get('closeTime')
-        if close_time:
-            data['closeTime'] = dateparser.parse(str(close_time)).isoformat()
+        data['source'] = s.BINANCE
+        data['openTime'] = dateparser.parse(str(data['openTime'])).isoformat()
+        data['closeTime'] = dateparser.parse(str(data['closeTime'])).isoformat()
         return data
 
     @post_load
     def post_load(self, data):
-        opened_on = data.get('opened_on')
-        if opened_on:
-            data['opened_on'] = opened_on.utcnow()
-        closed_on = data.get('closed_on')
-        if closed_on:
-            data['closed_on'] = closed_on.utcnow()
+        data['opened_on'] = data['opened_on'].utcnow()
+        data['closed_on'] = data['closed_on'].utcnow()
         return data

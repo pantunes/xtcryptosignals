@@ -12,7 +12,10 @@ USDT = 'USDT'
 BTC = 'BTC'
 
 BINANCE = 'binance'
+UPHOLD = 'uphold'
+OKEX = 'okex'
 
+# Binance
 EXCHANGES_AND_SYMBOLS = {
     BINANCE: {
         'BTC': USDT,
@@ -28,13 +31,22 @@ EXCHANGES_AND_SYMBOLS = {
     }
 }
 
-UPHOLD = 'uphold'
-
+# Uphold
 EXCHANGES_AND_SYMBOLS.update({
     UPHOLD: {
         'BTC': USD,
         'ETH': USD,
         'LTC': USD,
         'XRP': USD,
+    }
+})
+
+# OKEx
+EXCHANGES_AND_SYMBOLS.update({
+    OKEX: {
+        'BTC-': USDT,
+        'ETH-': USDT,
+        'LTC-': USDT,
+        'XRP-': USDT,
     }
 })

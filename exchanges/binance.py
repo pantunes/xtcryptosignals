@@ -14,13 +14,13 @@ from binance.exceptions import BinanceAPIException
 
 class Binance:
     def __init__(self):
-        self.client = Client(s.BINANCE_API_KEY, s.BINANCE_API_SECRET)
+        self.client = Client(
+            s.BINANCE_API_KEY, s.BINANCE_API_SECRET
+        )
 
     def get_ticker(self, symbol):
         try:
-            item = self.client.get_ticker(symbol=symbol)
-            item.update(source=s.BINANCE)
-            return item
+            return self.client.get_ticker(symbol=symbol)
         except BinanceAPIException:
             raise ValueError('Invalid Symbol: {}'.format(symbol))
         except Exception as err:
