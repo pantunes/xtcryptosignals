@@ -26,12 +26,12 @@ from settings_local import (
 # exchanges settings
 from settings_exchanges import (
     USD, BTC, USDT,
-    BINANCE, UPHOLD, OKEX,
+    BINANCE, UPHOLD, OKEX, IDEX,
     EXCHANGES_AND_SYMBOLS,
 )  # noqa
 
 __all__ = [
     'BINANCE_API_KEY', 'BINANCE_API_SECRET', 'USD',
-    'BTC', 'USDT', 'BINANCE', 'UPHOLD', 'OKEX',
+    'BTC', 'USDT', 'BINANCE', 'UPHOLD', 'OKEX', 'IDEX',
     'EXCHANGES_AND_SYMBOLS',
 ]

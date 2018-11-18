@@ -32,8 +32,12 @@ class Binance(Schema):
     @pre_load
     def pre_load(self, data):
         data['source'] = s.BINANCE
-        data['openTime'] = dateparser.parse(str(data['openTime'])).isoformat()
-        data['closeTime'] = dateparser.parse(str(data['closeTime'])).isoformat()
+        data['openTime'] = dateparser.parse(
+            str(data['openTime'])
+        ).isoformat()
+        data['closeTime'] = dateparser.parse(
+            str(data['closeTime'])
+        ).isoformat()
         return data
 
     @post_load

@@ -14,6 +14,7 @@ BTC = 'BTC'
 BINANCE = 'binance'
 UPHOLD = 'uphold'
 OKEX = 'okex'
+IDEX = 'idex'
 
 # Binance
 EXCHANGES_AND_SYMBOLS = {
@@ -48,5 +49,12 @@ EXCHANGES_AND_SYMBOLS.update({
         'ETH-': USDT,
         'LTC-': USDT,
         'XRP-': USDT,
+    }
+})
+
+# IDEX
+EXCHANGES_AND_SYMBOLS.update({
+    IDEX: {
+        'ETH_': 'AUC',
     }
 })

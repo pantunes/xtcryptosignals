@@ -23,3 +23,4 @@ class Uphold(Schema):
     @pre_load
     def pre_load(self, data):
         data['source'] = s.UPHOLD
+        return data
