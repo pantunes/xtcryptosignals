@@ -80,7 +80,7 @@ def update(self):
                     symbol=coin + quote
                 )
         for j in jobs:
-            j.join(timeout=s.TIMEOUT_PER_SYMBOL)
+            j.join(timeout=s.TIMEOUT_CONNECTION_PER_SYMBOL)
     except ValueError as error:
         _terminate_running_jobs(jobs)
         self.update_state(state=states.FAILURE, meta=str(error))
