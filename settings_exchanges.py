@@ -10,17 +10,20 @@ __email__ = "pjmlantunes@gmail.com"
 USD = 'USD'
 USDT = 'USDT'
 BTC = 'BTC'
+ETH = 'ETH'
 
 BINANCE = 'binance'
 UPHOLD = 'uphold'
 OKEX = 'okex'
 IDEX = 'idex'
 
+EXCHANGES_AND_SYMBOLS = {}
+
 # Binance
-EXCHANGES_AND_SYMBOLS = {
+EXCHANGES_AND_SYMBOLS.update({
     BINANCE: {
-        'BTC': USDT,
-        'ETH': USDT,
+        BTC: USDT,
+        ETH: USDT,
         'LTC': USDT,
         'NEO': USDT,
         'ICX': USDT,
@@ -30,13 +33,13 @@ EXCHANGES_AND_SYMBOLS = {
         'POA': BTC,
         'ZRX': BTC,
     }
-}
+})
 
 # Uphold
 EXCHANGES_AND_SYMBOLS.update({
     UPHOLD: {
-        'BTC': USD,
-        'ETH': USD,
+        BTC: USD,
+        ETH: USD,
         'LTC': USD,
         'XRP': USD,
     }
@@ -45,16 +48,16 @@ EXCHANGES_AND_SYMBOLS.update({
 # OKEx
 EXCHANGES_AND_SYMBOLS.update({
     OKEX: {
-        'BTC-': USDT,
-        'ETH-': USDT,
-        'LTC-': USDT,
-        'XRP-': USDT,
+        BTC: USDT,
+        ETH: USDT,
+        'LTC': USDT,
+        'XRP': USDT,
     }
 })
 
 # IDEX
 EXCHANGES_AND_SYMBOLS.update({
     IDEX: {
-        'ETH_': 'AUC',
+        'AUC': ETH,
     }
 })

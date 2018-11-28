@@ -16,7 +16,8 @@ class Uphold:
         self.base_url = 'https://api.uphold.com/v0/ticker/{}'
 
     def get_ticker(self, symbol):
-        url = self.base_url.format(symbol)
+        _symbol = ''.join(symbol)
+        url = self.base_url.format(_symbol)
         request = requests.get(url)
         if request.status_code != 200:
             raise ValueError(
@@ -24,6 +25,6 @@ class Uphold:
             )
         item = request.json()
         item.update(
-            symbol=symbol
+            symbol=_symbol
         )
         return item

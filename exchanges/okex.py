@@ -16,8 +16,11 @@ class Okex:
                         'instruments/{}/ticker'
 
     def get_ticker(self, symbol):
-        url = self.base_url.format(symbol)
+        _symbol = '-'.join(symbol)
+        url = self.base_url.format(_symbol)
         request = requests.get(url)
         if request.status_code != 200:
-            raise ValueError('Error connecting OKEx on URL: {}'.format(url))
+            raise ValueError(
+                'Error connecting OKEx on URL: {}'.format(url)
+            )
         return request.json()

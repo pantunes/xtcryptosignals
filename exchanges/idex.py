@@ -15,12 +15,15 @@ class Idex:
         self.base_url = 'https://api.idex.market/returnTicker'
 
     def get_ticker(self, symbol):
-        url = self.base_url.format(symbol)
-        request = requests.post(url, json={'market': symbol})
+        request = requests.post(
+            self.base_url, json={'market': '_'.join(reversed(symbol))}
+        )
         if request.status_code != 200:
-            raise ValueError('Error connecting Idex on URL: {}'.format(url))
+            raise ValueError(
+                'Error connecting IDEX on URL: {}'.format(self.base_url)
+            )
         item = request.json()
         item.update(
-            symbol=symbol
+            symbol=''.join(symbol)
         )
         return item

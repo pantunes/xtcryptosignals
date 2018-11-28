@@ -77,7 +77,7 @@ def update(self):
             for coin, quote in symbols.items():
                 _get_24h_price_ticker_data(
                     jobs, logger, exchange_class, schema_class,
-                    symbol=coin + quote
+                    symbol=[coin, quote]
                 )
         for j in jobs:
             j.join(timeout=s.TIMEOUT_CONNECTION_PER_SYMBOL)

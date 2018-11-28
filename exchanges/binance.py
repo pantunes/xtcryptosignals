@@ -19,9 +19,12 @@ class Binance:
         )
 
     def get_ticker(self, symbol):
+        _symbol = ''.join(symbol)
         try:
-            return self.client.get_ticker(symbol=symbol)
+            return self.client.get_ticker(symbol=_symbol)
         except BinanceAPIException:
-            raise ValueError('Invalid Symbol: {}'.format(symbol))
+            raise ValueError(
+                'Invalid Symbol: {}'.format(_symbol)
+            )
         except Exception as err:
             raise ValueError(str(err))
