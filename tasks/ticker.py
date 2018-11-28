@@ -38,7 +38,9 @@ def _get_24h_price_ticker_data(
         jobs, logger, exchange_class, schema_class, symbol
 ):
     p = Process(
-        target=_process, args=(
+        name='{} {}'.format(exchange_class.__name__, '-'.join(symbol)),
+        target=_process,
+        args=(
             logger, exchange_class, schema_class, symbol
         )
     )
@@ -46,9 +48,10 @@ def _get_24h_price_ticker_data(
     p.start()
 
 
-def _terminate_running_jobs(jobs):
+def _terminate_running_jobs(logger, jobs):
     for j in jobs:
         if j.is_alive():
+            logger.warning('Timeout in {}'.format(j.name))
             j.terminate()
             j.join()
 
@@ -80,13 +83,13 @@ def update(self):
                     symbol=[coin, quote]
                 )
         for j in jobs:
-            j.join(timeout=s.TIMEOUT_CONNECTION_PER_SYMBOL)
+            j.join(timeout=s.TIMEOUT_CONNECTION_PER_REQUEST)
     except ValueError as error:
-        _terminate_running_jobs(jobs)
+        _terminate_running_jobs(logger, jobs)
         self.update_state(state=states.FAILURE, meta=str(error))
         raise Ignore()
     finally:
-        _terminate_running_jobs(jobs)
+        _terminate_running_jobs(logger, jobs)
 
 
 if __name__ == "__main__":
