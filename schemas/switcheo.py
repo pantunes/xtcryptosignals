@@ -16,20 +16,20 @@ from marshmallow import (
 import settings as s
 
 
-class Okex(Schema):
-    product_id = fields.Str(required=True, attribute='symbol')
+class Switcheo(Schema):
+    pair = fields.Str(required=True, attribute='symbol')
     source = fields.Str(required=True)
-    last = fields.Float(required=True, attribute='price')
-    base_volume_24h = fields.Float(required=True, attribute='volume_24h')
-    high_24h = fields.Float(required=True, attribute='highest_price_24h')
-    low_24h = fields.Float(required=True, attribute='lowest_price_24h')
+    price = fields.Float(required=True)
+    volume = fields.Float(required=True, attribute='volume_24h')
+    high = fields.Float(required=True, attribute='highest_price_24h')
+    low = fields.Float(required=True, attribute='lowest_price_24h')
 
     @pre_load
     def pre_load(self, data):
-        data['source'] = s.OKEX
+        data['source'] = s.SWITCHEO
         return data
 
     @post_load
     def post_load(self, data):
-        data['symbol'] = data['symbol'].replace('-', '')
+        data['symbol'] = data['symbol'].replace('_', '')
         return data

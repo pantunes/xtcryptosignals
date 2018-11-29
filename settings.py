@@ -10,7 +10,7 @@ __email__ = "pjmlantunes@gmail.com"
 MONGODB_NAME = 'XTCryptoSignals'
 
 TICKER_SCHEDULE = 10.0  # each X seconds
-TIMEOUT_CONNECTION_PER_REQUEST = 0.5  # in seconds
+TIMEOUT_PER_SYMBOL_REQUEST = 6.0  # in seconds
 SYMBOL_FLOAT_PRECISION = 8
 
 HISTORY_FREQUENCY = (
@@ -26,12 +26,12 @@ from settings_local import (
 # exchanges settings
 from settings_exchanges import (
     USD, BTC, USDT,
-    BINANCE, UPHOLD, OKEX, IDEX,
+    BINANCE, UPHOLD, OKEX, IDEX, SWITCHEO,
     EXCHANGES_AND_SYMBOLS,
 )  # noqa
 
 __all__ = [
     'BINANCE_API_KEY', 'BINANCE_API_SECRET', 'USD',
-    'BTC', 'USDT', 'BINANCE', 'UPHOLD', 'OKEX', 'IDEX',
+    'BTC', 'USDT', 'BINANCE', 'UPHOLD', 'OKEX', 'IDEX', 'SWITCHEO',
     'EXCHANGES_AND_SYMBOLS',
 ]

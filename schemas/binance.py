@@ -20,14 +20,16 @@ import settings as s
 class Binance(Schema):
     symbol = fields.Str(required=True)
     source = fields.Str(required=True)
-    openTime = fields.DateTime(attribute='opened_on')
-    closeTime = fields.DateTime(attribute='closed_on')
-    count = fields.Int(attribute='number_trades_24h')
-    quoteVolume = fields.Float(attribute='volume_24h')
-    priceChangePercent = fields.Float(attribute='price_change_24h_percent')
+    openTime = fields.DateTime(required=True, attribute='opened_on')
+    closeTime = fields.DateTime(required=True, attribute='closed_on')
+    count = fields.Int(required=True, attribute='number_trades_24h')
+    quoteVolume = fields.Float(required=True, attribute='volume_24h')
+    priceChangePercent = fields.Float(
+        required=True, attribute='price_change_24h_percent'
+    )
     lastPrice = fields.Float(required=True, attribute='price')
-    highPrice = fields.Float(attribute='highest_price_24h')
-    lowPrice = fields.Float(attribute='lowest_price_24h')
+    highPrice = fields.Float(required=True, attribute='highest_price_24h')
+    lowPrice = fields.Float(required=True, attribute='lowest_price_24h')
 
     @pre_load
     def pre_load(self, data):

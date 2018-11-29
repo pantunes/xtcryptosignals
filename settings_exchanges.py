@@ -11,53 +11,77 @@ USD = 'USD'
 USDT = 'USDT'
 BTC = 'BTC'
 ETH = 'ETH'
+NEO = 'NEO'
+GAS = 'GAS'
 
 BINANCE = 'binance'
 UPHOLD = 'uphold'
 OKEX = 'okex'
 IDEX = 'idex'
+SWITCHEO = 'switcheo'
 
-EXCHANGES_AND_SYMBOLS = {}
+
+EXCHANGES_AND_SYMBOLS = list()
 
 # Binance
-EXCHANGES_AND_SYMBOLS.update({
+EXCHANGES_AND_SYMBOLS.append({
     BINANCE: {
-        BTC: USDT,
-        ETH: USDT,
-        'LTC': USDT,
-        'NEO': USDT,
-        'ICX': USDT,
-        'XRP': USDT,
-        'ONT': USDT,
-        'NANO': BTC,
-        'POA': BTC,
-        'ZRX': BTC,
+        'pairs': [
+            (BTC, USDT),
+            (ETH, USDT),
+            ('LTC', USDT),
+            (NEO, USDT),
+            ('ICX', USDT),
+            ('XRP', USDT),
+            ('ONT', USDT),
+            ('NANO', BTC),
+            ('POA', BTC),
+            ('ZRX', BTC),
+            (GAS, BTC),
+        ]
     }
 })
 
 # Uphold
-EXCHANGES_AND_SYMBOLS.update({
+EXCHANGES_AND_SYMBOLS.append({
     UPHOLD: {
-        BTC: USD,
-        ETH: USD,
-        'LTC': USD,
-        'XRP': USD,
+        'pairs': [
+            (BTC, USD),
+            (ETH, USD),
+            ('LTC', USD),
+            ('XRP', USD),
+        ]
     }
 })
 
 # OKEx
-EXCHANGES_AND_SYMBOLS.update({
+EXCHANGES_AND_SYMBOLS.append({
     OKEX: {
-        BTC: USDT,
-        ETH: USDT,
-        'LTC': USDT,
-        'XRP': USDT,
+        'pairs': [
+            (BTC, USDT),
+            (ETH, USDT),
+            ('LTC', USDT),
+            ('XRP', USDT),
+        ]
     }
 })
 
 # IDEX
-EXCHANGES_AND_SYMBOLS.update({
+EXCHANGES_AND_SYMBOLS.append({
     IDEX: {
-        'AUC': ETH,
+        'pairs': [
+            ('AUC', ETH),
+        ]
+    }
+})
+
+# SWITCHEO
+EXCHANGES_AND_SYMBOLS.append({
+    SWITCHEO: {
+        'single_request': True,
+        'pairs': [
+            ('SDS', NEO),
+            ('NOS', NEO),
+        ]
     }
 })

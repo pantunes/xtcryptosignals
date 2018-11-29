@@ -20,9 +20,9 @@ class Idex(Schema):
     symbol = fields.Str(required=True)
     source = fields.Str(required=True)
     last = fields.Float(required=True, attribute='price')
-    baseVolume = fields.Float(attribute='volume_24h')
-    high = fields.Float(attribute='highest_price_24h')
-    low = fields.Float(attribute='lowest_price_24h')
+    baseVolume = fields.Float(required=True, attribute='volume_24h')
+    high = fields.Float(required=True, attribute='highest_price_24h')
+    low = fields.Float(required=True, attribute='lowest_price_24h')
 
     @pre_load
     def pre_load(self, data):
@@ -33,6 +33,6 @@ class Idex(Schema):
     def post_load(self, data):
         pos = data['symbol'].find('_')
         data['symbol'] = '{}{}'.format(
-            data['symbol'][pos + 1:], data['symbol'][0:pos]
+            data['symbol'][pos + 1:], data['symbol'][:pos]
         )
         return data

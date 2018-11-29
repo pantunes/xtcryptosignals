@@ -20,28 +20,43 @@ from utils.helpers import get_class  # noqa
 from models.ticker import Ticker as TickerModel  # noqa
 
 
-def _process(logger, exchange_class, schema_class, symbol):
-    try:
-        ticker_data = exchange_class().get_ticker(
-            symbol=symbol
+def _process(logger, exchange_class, schema_class, symbol, pairs):
+    ticker_kwargs = dict()
+    if symbol:
+        ticker_kwargs.update(symbol=symbol)
+    elif pairs:
+        ticker_kwargs.update(pairs=pairs)
+    else:
+        logger.error(
+            'Error in {} Not either a symbol or pair', exchange_class.__name__
         )
+    try:
+        ticker_data = exchange_class().get_ticker(**ticker_kwargs)
     except ValueError as err:
         logger.error(err)
         return
-    ticker_data_valid, errors = schema_class().load(ticker_data)
+    ticker_data_valid, errors = schema_class(
+        many=symbol is None
+    ).load(ticker_data)
     assert errors == {}, errors
-    ticker_model = TickerModel(**ticker_data_valid)
-    ticker_model.save()
+    if pairs:
+        for x in ticker_data_valid:
+            ticker_model = TickerModel(**x)
+            ticker_model.save()
+    else:
+        ticker_model = TickerModel(**ticker_data_valid)
+        ticker_model.save()
 
 
 def _get_24h_price_ticker_data(
-        jobs, logger, exchange_class, schema_class, symbol
+        jobs, logger, exchange_class, schema_class, symbol=None, pairs=None
 ):
+    symbol_or_pairs = '-'.join(symbol) if symbol else 'PAIRS'
     p = Process(
-        name='{} {}'.format(exchange_class.__name__, '-'.join(symbol)),
+        name='{} {}'.format(exchange_class.__name__, symbol_or_pairs),
         target=_process,
         args=(
-            logger, exchange_class, schema_class, symbol
+            logger, exchange_class, schema_class, symbol, pairs
         )
     )
     jobs.append(p)
@@ -62,7 +77,9 @@ def update(self):
     jobs = []
     logger = self.get_logger()
     try:
-        for exchange, symbols in s.EXCHANGES_AND_SYMBOLS.items():
+        for row in s.EXCHANGES_AND_SYMBOLS:
+            exchange = list(row.keys())[0]
+            pairs = row[exchange]['pairs']
             try:
                 exchange_class = get_class(
                     folder='exchanges', module=exchange
@@ -77,13 +94,20 @@ def update(self):
             except ModuleNotFoundError as err:
                 logger.error(err)
                 continue
-            for coin, quote in symbols.items():
+            single_request = row[exchange].get('single_request')
+            if not single_request:
+                for coin, quote in pairs:
+                    _get_24h_price_ticker_data(
+                        jobs, logger, exchange_class, schema_class,
+                        symbol=[coin, quote]
+                    )
+            else:
                 _get_24h_price_ticker_data(
                     jobs, logger, exchange_class, schema_class,
-                    symbol=[coin, quote]
+                    pairs=pairs
                 )
         for j in jobs:
-            j.join(timeout=s.TIMEOUT_CONNECTION_PER_REQUEST)
+            j.join(timeout=s.TIMEOUT_PER_SYMBOL_REQUEST)
     except ValueError as error:
         _terminate_running_jobs(logger, jobs)
         self.update_state(state=states.FAILURE, meta=str(error))
