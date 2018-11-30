@@ -1,5 +1,5 @@
 python-binance
-redis
+redis==2.10.6
 celery
 marshmallow
 mongoengine
