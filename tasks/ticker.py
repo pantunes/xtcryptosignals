@@ -13,6 +13,7 @@ from celery.task import task
 from celery.exceptions import Ignore
 from celery import states
 from billiard.context import Process
+from pymongo.errors import ServerSelectionTimeoutError
 sys.path.append(os.getcwd())
 import settings as s  # noqa
 from utils.decorators import use_mongodb  # noqa
@@ -28,24 +29,31 @@ def _process(logger, exchange_class, schema_class, symbol, pairs):
         ticker_kwargs.update(pairs=pairs)
     else:
         logger.error(
-            'Error in {} Not either a symbol or pair', exchange_class.__name__
+            '{}: Not either a symbol or pair'.format(exchange_class.__name__)
         )
     try:
         ticker_data = exchange_class().get_ticker(**ticker_kwargs)
     except ValueError as err:
         logger.error(err)
         return
+
     ticker_data_valid, errors = schema_class(
         many=symbol is None
     ).load(ticker_data)
     assert errors == {}, errors
-    if pairs:
-        for x in ticker_data_valid:
-            ticker_model = TickerModel(**x)
+
+    try:
+        if pairs:
+            for x in ticker_data_valid:
+                ticker_model = TickerModel(**x)
+                ticker_model.save()
+        else:
+            ticker_model = TickerModel(**ticker_data_valid)
             ticker_model.save()
-    else:
-        ticker_model = TickerModel(**ticker_data_valid)
-        ticker_model.save()
+    except ServerSelectionTimeoutError as error:
+        logger.error(
+            '{}: {}'.format(exchange_class.__name__, error)
+        )
 
 
 def _get_24h_price_ticker_data(
