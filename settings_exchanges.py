@@ -14,6 +14,7 @@ OKEX = 'okex'
 IDEX = 'idex'
 SWITCHEO = 'switcheo'
 HOTBIT = 'hotbit'
+BIBOX = 'bibox'
 
 SYMBOLS_PER_EXCHANGE = list()
 
@@ -87,6 +88,15 @@ SYMBOLS_PER_EXCHANGE.append({
         'pairs': [
             ('NOS', 'BTC'),
             ('NOS', 'ETH'),
+        ]
+    }
+})
+
+# BIBOX
+SYMBOLS_PER_EXCHANGE.append({
+    BIBOX: {
+        'pairs': [
+            ('BTC', 'USDT'),
         ]
     }
 })
