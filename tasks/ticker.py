@@ -85,35 +85,35 @@ def update(self):
     jobs = []
     logger = self.get_logger()
     try:
-        for row in s.EXCHANGES_AND_SYMBOLS:
-            exchange = list(row.keys())[0]
-            pairs = row[exchange]['pairs']
-            try:
-                exchange_class = get_class(
-                    folder='exchanges', module=exchange
-                )
-            except ModuleNotFoundError as err:
-                logger.error(err)
-                continue
-            try:
-                schema_class = get_class(
-                    folder='schemas', module=exchange
-                )
-            except ModuleNotFoundError as err:
-                logger.error(err)
-                continue
-            single_request = row[exchange].get('single_request')
-            if not single_request:
-                for coin, quote in pairs:
+        for row in s.SYMBOLS_PER_EXCHANGE:
+            for exchange, data in row.items():
+                pairs = data['pairs']
+                try:
+                    exchange_class = get_class(
+                        folder='exchanges', module=exchange
+                    )
+                except ModuleNotFoundError as err:
+                    logger.error(err)
+                    continue
+                try:
+                    schema_class = get_class(
+                        folder='schemas', module=exchange
+                    )
+                except ModuleNotFoundError as err:
+                    logger.error(err)
+                    continue
+                single_request = data.get('single_request')
+                if not single_request:
+                    for coin, quote in pairs:
+                        _get_24h_price_ticker_data(
+                            jobs, logger, exchange_class, schema_class,
+                            symbol=[coin, quote]
+                        )
+                else:
                     _get_24h_price_ticker_data(
                         jobs, logger, exchange_class, schema_class,
-                        symbol=[coin, quote]
+                        pairs=pairs
                     )
-            else:
-                _get_24h_price_ticker_data(
-                    jobs, logger, exchange_class, schema_class,
-                    pairs=pairs
-                )
         for j in jobs:
             j.join(timeout=s.TIMEOUT_PER_SYMBOL_REQUEST)
     except ValueError as error:

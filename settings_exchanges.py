@@ -7,13 +7,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-USD = 'USD'
-USDT = 'USDT'
-BTC = 'BTC'
-ETH = 'ETH'
-NEO = 'NEO'
-GAS = 'GAS'
-
+# Exchanges
 BINANCE = 'binance'
 UPHOLD = 'uphold'
 OKEX = 'okex'
@@ -21,67 +15,67 @@ IDEX = 'idex'
 SWITCHEO = 'switcheo'
 
 
-EXCHANGES_AND_SYMBOLS = list()
+SYMBOLS_PER_EXCHANGE = list()
 
 # Binance
-EXCHANGES_AND_SYMBOLS.append({
+SYMBOLS_PER_EXCHANGE.append({
     BINANCE: {
         'pairs': [
-            (BTC, USDT),
-            (ETH, USDT),
-            ('LTC', USDT),
-            (NEO, USDT),
-            ('ICX', USDT),
-            ('XRP', USDT),
-            ('ONT', USDT),
-            ('NANO', BTC),
-            ('POA', BTC),
-            ('ZRX', BTC),
-            (GAS, BTC),
+            ('BTC', 'USDT'),
+            ('ETH', 'USDT'),
+            ('LTC', 'USDT'),
+            ('NEO', 'USDT'),
+            ('ICX', 'USDT'),
+            ('XRP', 'USDT'),
+            ('ONT', 'USDT'),
+            ('NANO', 'BTC'),
+            ('POA', 'BTC'),
+            ('ZRX', 'BTC'),
+            ('GAS', 'BTC'),
         ]
     }
 })
 
 # Uphold
-EXCHANGES_AND_SYMBOLS.append({
+SYMBOLS_PER_EXCHANGE.append({
     UPHOLD: {
         'pairs': [
-            (BTC, USD),
-            (ETH, USD),
-            ('LTC', USD),
-            ('XRP', USD),
+            ('BTC', 'USD'),
+            ('ETH', 'USD'),
+            ('LTC', 'USD'),
+            ('XRP', 'USD'),
         ]
     }
 })
 
 # OKEx
-EXCHANGES_AND_SYMBOLS.append({
+SYMBOLS_PER_EXCHANGE.append({
     OKEX: {
         'pairs': [
-            (BTC, USDT),
-            (ETH, USDT),
-            ('LTC', USDT),
-            ('XRP', USDT),
+            ('BTC', 'USDT'),
+            ('ETH', 'USDT'),
+            ('LTC', 'USDT'),
+            ('XRP', 'USDT'),
         ]
     }
 })
 
 # IDEX
-EXCHANGES_AND_SYMBOLS.append({
+SYMBOLS_PER_EXCHANGE.append({
     IDEX: {
         'pairs': [
-            ('AUC', ETH),
+            ('AUC', 'ETH'),
         ]
     }
 })
 
 # SWITCHEO
-EXCHANGES_AND_SYMBOLS.append({
+SYMBOLS_PER_EXCHANGE.append({
     SWITCHEO: {
         'single_request': True,
         'pairs': [
-            ('SDS', NEO),
-            ('NOS', NEO),
+            ('SDS', 'NEO'),
+            ('NOS', 'NEO'),
         ]
     }
 })
