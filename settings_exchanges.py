@@ -13,7 +13,7 @@ UPHOLD = 'uphold'
 OKEX = 'okex'
 IDEX = 'idex'
 SWITCHEO = 'switcheo'
-
+HOTBIT = 'hotbit'
 
 SYMBOLS_PER_EXCHANGE = list()
 
@@ -76,6 +76,17 @@ SYMBOLS_PER_EXCHANGE.append({
         'pairs': [
             ('SDS', 'NEO'),
             ('NOS', 'NEO'),
+        ]
+    }
+})
+
+# HOTBIT
+SYMBOLS_PER_EXCHANGE.append({
+    HOTBIT: {
+        'single_request': True,
+        'pairs': [
+            ('NOS', 'BTC'),
+            ('NOS', 'ETH'),
         ]
     }
 })
