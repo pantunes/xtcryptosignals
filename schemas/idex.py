@@ -28,11 +28,3 @@ class Idex(Schema):
     def pre_load(self, data):
         data['source'] = s.IDEX
         return data
-
-    @post_load
-    def post_load(self, data):
-        pos = data['symbol'].find('_')
-        data['symbol'] = '{}{}'.format(
-            data['symbol'][pos + 1:], data['symbol'][:pos]
-        )
-        return data
