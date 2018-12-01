@@ -8,7 +8,6 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from datetime import datetime, timedelta
-from importlib import import_module
 from mongoengine import (
     Document,
     StringField,
@@ -18,6 +17,7 @@ from mongoengine import (
 )
 from mongoengine.queryset.visitor import Q
 import settings as s
+from models.history import History
 from utils.helpers import convert_to_seconds
 
 
@@ -45,9 +45,8 @@ class Ticker(Document):
     }
 
     def save(self, *args, **kwargs):
-        module = import_module('models.history')
         for x in s.HISTORY_FREQUENCY:
-            model = getattr(module, 'History{}'.format(x))
+            model = type('History{}'.format(x), (History,), {})
             dt = datetime.utcnow() - timedelta(
                 seconds=convert_to_seconds(x) - 1.0
             )
