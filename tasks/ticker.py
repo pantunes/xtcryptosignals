@@ -57,7 +57,8 @@ def _process(logger, exchange_class, schema_class, symbol, pairs):
 
 
 def _get_24h_price_ticker_data(
-        jobs, logger, exchange_class, schema_class, symbol=None, pairs=None
+        jobs, logger, exchange_class, schema_class,
+        symbol=None, pairs=None
 ):
     symbol_or_pairs = '-'.join(symbol) if symbol else 'PAIRS'
     p = Process(
@@ -67,16 +68,24 @@ def _get_24h_price_ticker_data(
             logger, exchange_class, schema_class, symbol, pairs
         )
     )
-    jobs.append(p)
+    jobs.append(
+        dict(
+            job=p,
+            timeout=s.TIMEOUT_PER_SYMBOL_REQUEST
+            if symbol else s.TIMEOUT_PER_SYMBOLS_REQUEST
+        )
+    )
     p.start()
 
 
 def _terminate_running_jobs(logger, jobs):
     for j in jobs:
-        if j.is_alive():
-            logger.warning('Timeout in {}'.format(j.name))
-            j.terminate()
-            j.join()
+        if j['job'].is_alive():
+            logger.warning('Exceeded timeout of {} in {}'.format(
+                j['timeout'], j['job'].name)
+            )
+            j['job'].terminate()
+            j['job'].join()
 
 
 @task(bind=True)
@@ -115,7 +124,7 @@ def update(self):
                         pairs=pairs
                     )
         for j in jobs:
-            j.join(timeout=s.TIMEOUT_PER_SYMBOL_REQUEST)
+            j['job'].join(timeout=j['timeout'])
     except ValueError as error:
         _terminate_running_jobs(logger, jobs)
         self.update_state(state=states.FAILURE, meta=str(error))
