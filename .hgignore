@@ -10,6 +10,7 @@ data
 tmp
 logs
 nohup.out
-celerybeat-schedule.db
+celerybeat-schedule
 dump.rdb
 settings_local.py
+*egg-info
