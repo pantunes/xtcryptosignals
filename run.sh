@@ -1,5 +1,5 @@
 #
-# In case of executing the script directly without using Celery
+# Script that starts manually external dependencies and celery task
 #
 
 # Activate Virtual Environment
