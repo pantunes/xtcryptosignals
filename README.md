@@ -44,14 +44,13 @@ pip install -e .
 
 ### Start service
 
-Manually
 ```bash
-. run.sh
+xt-crypto-signals
 ```
 
-### Test
+Starts the script without Celery (for testing purposes)
 ```bash
-python task/ticker.py
+xt-crypto-signals-test
 ```
 
 
