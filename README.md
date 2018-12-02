@@ -6,11 +6,19 @@
 ## Roadmap
 
 * Setup notification rules (Dec 2018)
+* Implement e-mail and push notifications (Dec 2018)
 * Implement automatic trading (Jan 2019)
 * Build iOS app (Feb 2019)
 
 
 ## Getting Started
+
+### Pre-requisites
+
+* [Python 3.x](https://www.python.org/download/releases/3.0)
+* [Redis-Server](https://redis.io/download)
+* [MongoDB](https://www.mongodb.com)
+
 
 ### Install from source
 ```bash
@@ -29,14 +37,21 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
-Install
+Install package
 ```bash
 pip install -e .
 ```
 
 ### Start service
+
+Manually
 ```bash
 . run.sh
+```
+
+### Test
+```bash
+python task/ticker.py
 ```
 
 
