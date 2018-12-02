@@ -7,18 +7,15 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import sys
-import os
 from celery.task import task
 from celery.exceptions import Ignore
 from celery import states
 from billiard.context import Process
 from pymongo.errors import ServerSelectionTimeoutError
-sys.path.append(os.getcwd())
-import settings as s  # noqa
-from utils.decorators import use_mongodb  # noqa
-from utils.helpers import get_class  # noqa
-from models.ticker import Ticker as TickerModel  # noqa
+import settings as s
+from utils.decorators import use_mongodb
+from utils.helpers import get_class
+from models.ticker import Ticker as TickerModel
 
 
 def _process(logger, exchange_class, schema_class, symbol, pairs):
