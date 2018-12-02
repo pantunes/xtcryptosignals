@@ -133,13 +133,30 @@ def update(self):
         _terminate_running_jobs(logger, jobs)
 
 
-if __name__ == "__main__":
+def test():
     import logging
     logging.basicConfig(
         format='%(asctime)s %(levelname)s %(message)s',
         level=logging.INFO,
     )
-    from multiprocessing import Process
-    logging.info('starting job...')
+    logging.info('Testing Ticker without Celery')
+    logging.info('Starting...')
     update()
-    logging.info('ending job...')
+    logging.info('Ending...')
+
+
+def main():
+    from celery import current_app
+    from celery.bin import worker
+
+    app = current_app._get_current_object()
+    worker = worker.worker(app=app)
+    options = {
+        'beat': True,
+        'loglevel': 'INFO',
+    }
+    worker.run(**options)
+
+
+if __name__ == "__main__":
+    main()

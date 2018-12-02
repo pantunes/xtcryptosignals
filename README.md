@@ -1,6 +1,6 @@
 # XTCryptoSignals
 
-**XTCryptoSignals** is a Python service that collects symbols pairs data such as BTC/USDT, ETH/BTC or any other pair that a Cryptocurrency Exchange API supports and allows the user to setup **signals** based on rules to send real-time notifications through e-mail or Push Notifications to the browser or mobile app.
+**XTCryptoSignals** is a Python service that collects cryptocurrencies symbols pairs data such as BTC/USDT, ETH/BTC or any other pair that a Cryptocurrency Exchange API supports and allows the user to setup **signals** based on rules to send real-time notifications through e-mail or Push Notifications to the browser or mobile app.
 
 
 ## Roadmap
