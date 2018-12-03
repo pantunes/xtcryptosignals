@@ -18,11 +18,14 @@ HISTORY_FREQUENCY = (
     '10s', '30s', '1m', '10m', '30m', '1h', '3h', '6h', '12h', '24h'
 )
 
-# local settings
-from settings_local import (
-    BINANCE_API_KEY,
-    BINANCE_API_SECRET,
-)  # noqa
+try:
+    # local settings
+    from settings_local import (
+        BINANCE_API_KEY,
+        BINANCE_API_SECRET,
+    )  # noqa
+except ModuleNotFoundError:
+    pass
 
 # exchanges settings
 from settings_exchanges import (
