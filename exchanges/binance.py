@@ -14,9 +14,15 @@ from binance.exceptions import BinanceAPIException
 
 class Binance:
     def __init__(self):
-        self.client = Client(
-            s.BINANCE_API_KEY, s.BINANCE_API_SECRET
-        )
+        try:
+            self.client = Client(
+                s.BINANCE_API_KEY, s.BINANCE_API_SECRET
+            )
+        except AttributeError:
+            raise ValueError(
+                'Binance keys (BINANCE_API_KEY and BINANCE_API_SECRET) '
+                'must be set in settings_local.py'
+            )
 
     def get_ticker(self, symbol):
         _symbol = ''.join(symbol)
