@@ -33,6 +33,7 @@ SYMBOLS_PER_EXCHANGE.append({
             ('POA', 'BTC'),
             ('ZRX', 'BTC'),
             ('GAS', 'BTC'),
+            ('ZEC', 'BTC'),
         ]
     }
 })
@@ -86,6 +87,8 @@ SYMBOLS_PER_EXCHANGE.append({
     HOTBIT: {
         'single_request': True,
         'pairs': [
+            ('LQD', 'BTC'),
+            ('LQD', 'ETH'),
             ('NOS', 'BTC'),
             ('NOS', 'ETH'),
         ]
@@ -96,7 +99,10 @@ SYMBOLS_PER_EXCHANGE.append({
 SYMBOLS_PER_EXCHANGE.append({
     BIBOX: {
         'pairs': [
-            ('BTC', 'USDT'),
+            ('LTC', 'USDT'),
+            ('NEO', 'USDT'),
+            ('NEO', 'BTC'),
+            ('NEO', 'ETH'),
         ]
     }
 })
