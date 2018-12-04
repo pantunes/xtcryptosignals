@@ -12,5 +12,4 @@ logs
 nohup.out
 celerybeat-schedule
 dump.rdb
-settings_local.py
 *egg-info
