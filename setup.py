@@ -10,8 +10,12 @@ __email__ = "pjmlantunes@gmail.com"
 import setuptools
 
 
-with open("README.md", "r") as f:
+with open('requirements.txt') as f:
+    requirements = [x for x in f.readlines()]
+
+with open('README.md', 'r') as f:
     long_description = f.read()
+
 
 setuptools.setup(
     name="XTCryptoSignals",
@@ -30,4 +34,5 @@ setuptools.setup(
                 'xt-crypto-signals-test=tasks.ticker:test',
             ],
         },
+    install_requires=requirements,
 )
