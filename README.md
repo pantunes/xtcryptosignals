@@ -16,7 +16,7 @@
 ### Pre-requisites
 
 * [Python 3.x](https://www.python.org/download/releases/3.0)
-* [Redis-Server](https://redis.io/download)
+* [Redis](https://redis.io/download)
 * [MongoDB](https://www.mongodb.com)
 
 
@@ -32,15 +32,12 @@ virtualenv venv -p python3
 source venv/bin/activate
 ```
 
-Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
 Install package
 ```bash
 pip install -e .
 ```
+
+(Dependencies will be installed automatically from *requirements.txt*)
 
 ### Start service
 
@@ -48,7 +45,7 @@ pip install -e .
 xt-crypto-signals
 ```
 
-Starts the script without Celery (for testing purposes)
+Starts standalone script without Celery (for testing purposes)
 ```bash
 xt-crypto-signals-test
 ```

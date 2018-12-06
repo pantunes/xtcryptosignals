@@ -22,5 +22,4 @@ class Bibox:
             raise ValueError(
                 'Error connecting Bibox on URL: {}'.format(url)
             )
-        response = request.json()['result']
-        return response
+        return request.json()['result']
