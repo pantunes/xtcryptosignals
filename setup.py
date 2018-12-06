@@ -22,8 +22,9 @@ setuptools.setup(
     version="0.0.1",
     author="Paulo Antunes",
     author_email="pjmlantunes@gmail.com",
-    description="Python service that collects cryptocurrencies "
-                "symbols pairs data",
+    description="Python service that collects crypto-currencies "
+                "symbols pairs data & allows setup of notifications & "
+                "automatic trading",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://bitbucket.org/pantunes/xtcryptosignals",

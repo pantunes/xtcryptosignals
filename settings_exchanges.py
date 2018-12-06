@@ -120,19 +120,18 @@ SYMBOLS_PER_EXCHANGE.append({
 # SWITCHEO
 SYMBOLS_PER_EXCHANGE.append({
     SWITCHEO: {
-        'single_request': True,
         'pairs': [
             ('NOS', 'NEO'),
             ('SOUL', 'NEO'),
             ('AUC', 'ETH'),
-        ]
+        ],
+        'single_request': True,
     }
 })
 
 # HOTBIT
 SYMBOLS_PER_EXCHANGE.append({
     HOTBIT: {
-        'single_request': True,
         'pairs': [
             ('NOS', 'ETH'),
             ('NOS', 'BTC'),
@@ -142,6 +141,7 @@ SYMBOLS_PER_EXCHANGE.append({
             ('CARD', 'ETH'),
             ('LQD', 'BTC'),
             ('LQD', 'ETH'),
-        ]
+        ],
+        'single_request': True,
     }
 })
