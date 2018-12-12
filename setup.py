@@ -10,7 +10,7 @@ __email__ = "pjmlantunes@gmail.com"
 import setuptools
 
 
-with open('requirements.txt') as f:
+with open('requirements.txt', 'r') as f:
     requirements = [x for x in f.readlines()]
 
 with open('README.md', 'r') as f:

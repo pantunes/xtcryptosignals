@@ -57,10 +57,9 @@ xt-crypto-signals-test
 
 ### Setup
 
-The library has some initial setup of crypto-currencies that can be changed 
-in the file [settings_exchanges.py](settings_exchanges.py).
+There is already an initial setup with some crypto-currencies (coins and tokens) that can be changed 
+in [settings_exchanges.py](settings_exchanges.py).
 
-Examples:
 ```python
 BIBOX: {
     'pairs': [
