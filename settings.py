@@ -27,11 +27,11 @@ from settings_local import (
 # exchanges settings
 from settings_exchanges import (
     SYMBOLS_PER_EXCHANGE,
-    BINANCE, UPHOLD, OKEX, IDEX, SWITCHEO, HOTBIT, BIBOX,
+    BINANCE, UPHOLD, OKEX, IDEX, SWITCHEO, HOTBIT, BIBOX, OKCOIN,
 )  # noqa
 
 __all__ = [
     'BINANCE_API_KEY', 'BINANCE_API_SECRET', 'SYMBOLS_PER_EXCHANGE',
     'BINANCE', 'UPHOLD', 'OKEX', 'IDEX', 'SWITCHEO', 'HOTBIT', 'BIBOX',
-
+    'OKCOIN',
 ]

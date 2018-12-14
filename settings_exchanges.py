@@ -14,6 +14,7 @@ IDEX = 'idex'
 SWITCHEO = 'switcheo'
 HOTBIT = 'hotbit'
 BIBOX = 'bibox'
+OKCOIN = 'okcoin'
 
 
 SYMBOLS_PER_EXCHANGE = list()
@@ -142,5 +143,18 @@ SYMBOLS_PER_EXCHANGE.append({
             ('LQD', 'ETH'),
         ],
         'single_request': True,
+    }
+})
+
+# OKCoin
+SYMBOLS_PER_EXCHANGE.append({
+    OKCOIN: {
+        'pairs': [
+            ('BTC', 'USD'),
+            ('ETH', 'USD'),
+            ('LTC', 'USD'),
+            ('XRP', 'USD'),
+            ('ZEC', 'USD'),
+        ]
     }
 })
