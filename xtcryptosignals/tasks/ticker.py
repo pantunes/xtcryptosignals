@@ -2,7 +2,6 @@ __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
 __credits__ = ["Paulo Antunes", ]
 __license__ = "GPL"
-__version__ = "1.0"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
@@ -13,9 +12,9 @@ from celery import states
 from billiard.context import Process
 from pymongo.errors import ServerSelectionTimeoutError
 import settings as s
-from utils.decorators import use_mongodb
-from utils.helpers import get_class
-from models.ticker import Ticker as TickerModel
+from xtcryptosignals.utils.decorators import use_mongodb
+from xtcryptosignals.utils.helpers import get_class
+from xtcryptosignals.models.ticker import Ticker as TickerModel
 
 
 def _process(logger, exchange_class, schema_class, symbol, pairs):
@@ -96,14 +95,14 @@ def update(self):
                 pairs = data['pairs']
                 try:
                     exchange_class = get_class(
-                        folder='exchanges', module=exchange
+                        folder='xtcryptosignals.exchanges', module=exchange
                     )
                 except ModuleNotFoundError as err:
                     logger.error(err)
                     continue
                 try:
                     schema_class = get_class(
-                        folder='schemas', module=exchange
+                        folder='xtcryptosignals.schemas', module=exchange
                     )
                 except ModuleNotFoundError as err:
                     logger.error(err)

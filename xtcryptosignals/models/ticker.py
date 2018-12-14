@@ -2,7 +2,6 @@ __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
 __credits__ = ["Paulo Antunes", ]
 __license__ = "GPL"
-__version__ = "1.0"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
@@ -17,8 +16,8 @@ from mongoengine import (
 )
 from mongoengine.queryset.visitor import Q
 import settings as s
-from models.history import History
-from utils.helpers import convert_to_seconds
+from xtcryptosignals.models.history import History
+from xtcryptosignals.utils.helpers import convert_to_seconds
 
 
 class Ticker(Document):
