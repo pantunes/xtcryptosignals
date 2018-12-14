@@ -2,7 +2,6 @@ __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
 __credits__ = ["Paulo Antunes", ]
 __license__ = "GPL"
-__version__ = "1.0"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
@@ -10,20 +9,20 @@ __email__ = "pjmlantunes@gmail.com"
 import requests
 
 
-class Idex:
+class Uphold:
     def __init__(self):
-        self.base_url = 'https://api.idex.market/returnTicker'
+        self.base_url = 'https://api.uphold.com/v0/ticker/{}'
 
     def get_ticker(self, symbol):
-        request = requests.post(
-            self.base_url, json={'market': '_'.join(reversed(symbol))}
-        )
+        _symbol = ''.join(symbol)
+        url = self.base_url.format(_symbol)
+        request = requests.get(url)
         if request.status_code != 200:
             raise ValueError(
-                'Error connecting IDEX on URL: {}'.format(self.base_url)
+                'Error connecting Uphold on URL: {}'.format(url)
             )
         item = request.json()
         item.update(
-            symbol=''.join(symbol)
+            symbol=_symbol
         )
         return item

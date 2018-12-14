@@ -2,7 +2,6 @@ __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
 __credits__ = ["Paulo Antunes", ]
 __license__ = "GPL"
-__version__ = "1.0"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
@@ -15,12 +14,15 @@ from marshmallow import (
 import settings as s
 
 
-class Uphold(Schema):
+class Hotbit(Schema):
     symbol = fields.Str(required=True)
     source = fields.Str(required=True)
-    ask = fields.Float(required=True, attribute='price')
+    last = fields.Float(required=True, attribute='price')
+    deal = fields.Float(required=True, attribute='volume_24h')
+    high = fields.Float(required=True, attribute='highest_price_24h')
+    low = fields.Float(required=True, attribute='lowest_price_24h')
 
     @pre_load
     def pre_load(self, data):
-        data['source'] = s.UPHOLD
+        data['source'] = s.HOTBIT
         return data

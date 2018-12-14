@@ -2,7 +2,6 @@ __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
 __credits__ = ["Paulo Antunes", ]
 __license__ = "GPL"
-__version__ = "1.0"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
@@ -22,12 +21,12 @@ CELERY_TIMEZONE = 'UTC'
 BROKER_URL = 'redis://localhost:6379'
 
 CELERY_IMPORTS = (
-    'tasks.ticker',
+    'xtcryptosignals.tasks.ticker',
 )
 
 CELERYBEAT_SCHEDULE = {
     'ticker': {
-        'task': 'tasks.ticker.update',
+        'task': 'xtcryptosignals.tasks.ticker.update',
         'schedule': s.TICKER_SCHEDULE
     }
 }

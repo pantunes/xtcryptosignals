@@ -2,29 +2,23 @@ __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
 __credits__ = ["Paulo Antunes", ]
 __license__ = "GPL"
-__version__ = "1.0"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
 import requests
-import settings as s
 
 
-class Uphold:
+class Bibox:
     def __init__(self):
-        self.base_url = 'https://api.uphold.com/v0/ticker/{}'
+        self.base_url = 'https://api.bibox.com/v1/mdata?cmd=ticker&pair={}'
 
     def get_ticker(self, symbol):
-        _symbol = ''.join(symbol)
+        _symbol = '_'.join(symbol)
         url = self.base_url.format(_symbol)
         request = requests.get(url)
         if request.status_code != 200:
             raise ValueError(
-                'Error connecting Uphold on URL: {}'.format(url)
+                'Error connecting Bibox on URL: {}'.format(url)
             )
-        item = request.json()
-        item.update(
-            symbol=_symbol
-        )
-        return item
+        return request.json()['result']

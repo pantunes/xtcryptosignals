@@ -16,10 +16,13 @@ with open('requirements.txt', 'r') as f:
 with open('README.md', 'r') as f:
     long_description = f.read()
 
+cfg = {}
+with open('xtcryptosignals/__init__.py', 'r') as f:
+    exec(f.read(), cfg)
 
 setuptools.setup(
     name="XTCryptoSignals",
-    version="0.0.1",
+    version=cfg['__version__'],
     author="Paulo Antunes",
     author_email="pjmlantunes@gmail.com",
     description="Python service that collects crypto-currencies "
@@ -29,11 +32,13 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://bitbucket.org/pantunes/xtcryptosignals",
     packages=setuptools.find_packages(),
+    include_package_data=True,
     entry_points={
             'console_scripts': [
-                'xt-crypto-signals=tasks.ticker:main',
-                'xt-crypto-signals-test=tasks.ticker:test',
+                'xt-crypto-signals=xtcryptosignals.tasks.ticker:main',
+                'xt-crypto-signals-test=xtcryptosignals.tasks.ticker:test',
             ],
         },
     install_requires=requirements,
+    zip_safe=False,
 )
