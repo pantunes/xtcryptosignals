@@ -21,10 +21,10 @@ with open('xtcryptosignals/__init__.py', 'r') as f:
     exec(f.read(), cfg)
 
 setuptools.setup(
-    name="XTCryptoSignals",
+    name=cfg['__title__'],
     version=cfg['__version__'],
-    author="Paulo Antunes",
-    author_email="pjmlantunes@gmail.com",
+    author=cfg['__author__'],
+    author_email=cfg['__email__'],
     description="Python service that collects crypto-currencies "
                 "symbols pairs data & allows setup of notifications & "
                 "automatic trading",
