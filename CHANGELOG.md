@@ -4,8 +4,10 @@ All changes will be registered here per release
 ## [0.0.3] - 2018-12-15
 Added collection of data for any configured crypto-currency (coin or token) in 
 the following exchanges:
+
 * OkCoin
-* Bug fixing
+
+Bug fixing
 
 Added MANIFEST.in
 
