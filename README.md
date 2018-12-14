@@ -57,8 +57,9 @@ xt-crypto-signals-test
 
 ### Setup
 
-There is already an initial setup with some crypto-currencies (coins and tokens) that can be changed 
-in [settings_exchanges.py](settings_exchanges.py).
+There is already an initial setup with some crypto-currencies 
+(coins and tokens) that can be changed in 
+[settings_exchanges.py](settings_exchanges.py).
 
 ```python
 BIBOX: {
@@ -85,9 +86,24 @@ UPHOLD: {
 }
 ```
 
+Initial setup to create dynamic MongoDB collections for data segmentation 
+categorized by Exchanges pooling frequency in [settings.py](settings.py).
+```python
+HISTORY_FREQUENCY = (
+    '10s', '30s', '1m', '10m', '30m', '1h', '3h', '6h', '12h', '24h'
+)
+```
+
+### Results
+This service is fast as it uses threading.
+It takes around 6 seconds to collect data of 70 crypto-currencies symbols pairs
+from 7 exchanges and save it in 11 collections in MongoDB.
+(Depending on external Exchange APIs availability and Internet 
+connection/latency)
+
 ## Disclaimer
- This project is work in progress and when it comes to trading use it at your 
- own risk.
+This project is work in progress and when it comes to trading use it at your 
+own risk.
 
 
 ## License
