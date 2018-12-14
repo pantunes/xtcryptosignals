@@ -8,9 +8,9 @@ the following exchanges:
 
 * OkCoin
 
-Bug fixing
-
 Added MANIFEST.in
+
+Bug fixing
 
 
 ## [0.0.2] - 2018-12-07
