@@ -6,7 +6,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import settings as s
+import xtcryptosignals.settings as s
 from functools import wraps
 from mongoengine import connect
 

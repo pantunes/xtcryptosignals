@@ -19,13 +19,13 @@ HISTORY_FREQUENCY = (
 )
 
 # local settings
-from settings_local import (
+from xtcryptosignals.settings_local import (
     BINANCE_API_KEY,
     BINANCE_API_SECRET,
 )  # noqa
 
 # exchanges settings
-from settings_exchanges import (
+from xtcryptosignals.settings_exchanges import (
     SYMBOLS_PER_EXCHANGE,
     BINANCE, UPHOLD, OKEX, IDEX, SWITCHEO, HOTBIT, BIBOX, OKCOIN, BITHUMB,
 )  # noqa

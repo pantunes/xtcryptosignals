@@ -13,7 +13,7 @@ from mongoengine import (
     IntField,
     DateTimeField
 )
-import settings as s
+import xtcryptosignals.settings as s
 
 
 class History(Document):

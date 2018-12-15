@@ -15,7 +15,7 @@ from mongoengine import (
     DateTimeField,
 )
 from mongoengine.queryset.visitor import Q
-import settings as s
+import xtcryptosignals.settings as s
 from xtcryptosignals.models.history import History
 from xtcryptosignals.utils.helpers import convert_to_seconds
 

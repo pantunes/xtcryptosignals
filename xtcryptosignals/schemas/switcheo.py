@@ -12,7 +12,7 @@ from marshmallow import (
     pre_load,
     post_load
 )
-import settings as s
+import xtcryptosignals.settings as s
 
 
 class Switcheo(Schema):

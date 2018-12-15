@@ -11,7 +11,7 @@ from marshmallow import (
     fields,
     pre_load,
 )
-import settings as s
+import xtcryptosignals.settings as s
 
 
 class Bithumb(Schema):
