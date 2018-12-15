@@ -146,6 +146,8 @@ def main():
     from celery.bin import worker
 
     app = current_app._get_current_object()
+    app.config_from_object('xtcryptosignals.celeryconfig')
+
     worker = worker.worker(app=app)
     options = {
         'beat': True,
