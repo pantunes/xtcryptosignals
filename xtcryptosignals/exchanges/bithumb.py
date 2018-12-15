@@ -7,6 +7,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import requests
+from requests.exceptions import SSLError
 
 
 class Bithumb:
@@ -15,7 +16,10 @@ class Bithumb:
 
     def get_ticker(self, symbol):
         url = self.base_url.format(symbol[0])
-        request = requests.get(url)
+        try:
+            request = requests.get(url)
+        except SSLError:
+            raise ValueError('SSLError in URL: {}'.format(url))
         if request.status_code != 200:
             raise ValueError(
                 'Error connecting Bithumb on URL: {}'.format(url)
