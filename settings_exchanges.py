@@ -15,6 +15,7 @@ SWITCHEO = 'switcheo'
 HOTBIT = 'hotbit'
 BIBOX = 'bibox'
 OKCOIN = 'okcoin'
+BITHUMB = 'bithumb'
 
 
 SYMBOLS_PER_EXCHANGE = list()
@@ -155,6 +156,19 @@ SYMBOLS_PER_EXCHANGE.append({
             ('LTC', 'USD'),
             ('XRP', 'USD'),
             ('ZEC', 'USD'),
+        ]
+    }
+})
+
+# Bithumb
+SYMBOLS_PER_EXCHANGE.append({
+    BITHUMB: {
+        'pairs': [
+            ('XMR', 'SKW'),
+            ('ZEC', 'KRW'),
+            ('BTC', 'SKW'),
+            ('XRP', 'SKW'),
+            ('ETH', 'SKW'),
         ]
     }
 })
