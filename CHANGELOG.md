@@ -7,6 +7,11 @@ Added collection of data for any configured crypto-currency (coin or token) in
 the following exchanges:
 
 * Bithumb
+* Coinbene
+
+Bug fixing
+
+Changed settings.py
 
 
 ## [0.0.3] - 2018-12-15
