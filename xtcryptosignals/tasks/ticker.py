@@ -11,7 +11,7 @@ from celery.exceptions import Ignore
 from celery import states
 from billiard.context import Process
 from pymongo.errors import ServerSelectionTimeoutError
-import settings as s
+import xtcryptosignals.settings as s
 from xtcryptosignals.utils.decorators import use_mongodb
 from xtcryptosignals.utils.helpers import get_class
 from xtcryptosignals.models.ticker import Ticker as TickerModel
