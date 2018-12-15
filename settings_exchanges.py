@@ -164,11 +164,11 @@ SYMBOLS_PER_EXCHANGE.append({
 SYMBOLS_PER_EXCHANGE.append({
     BITHUMB: {
         'pairs': [
-            ('XMR', 'SKW'),
+            ('XMR', 'KRW'),
             ('ZEC', 'KRW'),
-            ('BTC', 'SKW'),
-            ('XRP', 'SKW'),
-            ('ETH', 'SKW'),
+            ('BTC', 'KRW'),
+            ('XRP', 'KRW'),
+            ('ETH', 'KRW'),
         ]
     }
 })
