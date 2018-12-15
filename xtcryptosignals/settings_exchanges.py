@@ -16,6 +16,7 @@ HOTBIT = 'hotbit'
 BIBOX = 'bibox'
 OKCOIN = 'okcoin'
 BITHUMB = 'bithumb'
+COINBENE = 'coinbene'
 
 
 SYMBOLS_PER_EXCHANGE = list()
@@ -169,6 +170,15 @@ SYMBOLS_PER_EXCHANGE.append({
             ('BTC', 'KRW'),
             ('XRP', 'KRW'),
             ('ETH', 'KRW'),
+        ]
+    }
+})
+
+# Coinbene
+SYMBOLS_PER_EXCHANGE.append({
+    COINBENE: {
+        'pairs': [
+            ('BTC', 'USDT'),
         ]
     }
 })
