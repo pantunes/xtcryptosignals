@@ -9,10 +9,11 @@ browser or mobile app. It will allow as well automatic trading.
 
 ## Roadmap
 
-* Setup notification rules (Dec 2018)
-* Implement e-mail and push notifications (Dec 2018)
-* Implement automatic trading (Jan 2019)
-* Build iOS app (Feb 2019)
+* Add crypto-currencies exchanges (Dec 2018)
+* Setup notification rules (Dec 2018 / Jan 2019)
+* Implement e-mail and web browser push notifications signals (Jan 2019)
+* Implement automatic trading (Feb/Mar 2019)
+* Build iOS app (Mar 2019)
 
 
 ## Getting Started
