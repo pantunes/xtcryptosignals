@@ -93,6 +93,9 @@ def update(self):
         for row in s.SYMBOLS_PER_EXCHANGE:
             for exchange, data in row.items():
                 pairs = data['pairs']
+                if not pairs:
+                    logger.info('No pairs for {}'.format(exchange))
+                    continue
                 try:
                     exchange_class = get_class(
                         folder='xtcryptosignals.exchanges', module=exchange
