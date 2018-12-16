@@ -18,19 +18,19 @@ def get_class(folder, module):
 
 def convert_to_seconds(x):
     _t = x[-1]
+    seconds = int(x[:-1])
     if _t == 's':
-        # seconds
-        return int(x[:-1])
+        return seconds
+    minutes = seconds * 60
     if _t == 'm':
-        # minutes
-        return int(x[:-1]) * 60
+        return minutes
+    hours = minutes * 60 * 60
     if _t == 'h':
-        # hours
-        return int(x[:-1]) * 60 * 60
+        return hours
+    days = hours * 24
     if _t == 'd':
-        # days
-        return int(x[:-1]) * 60 * 60 * 24
+        return days
+    weeks = days * 7
     if _t == 'w':
-        # weeks
-        return int(x[:-1]) * 60 * 60 * 24 * 7
+        return weeks
     raise ValueError('Undefined item: {}'.format(x))

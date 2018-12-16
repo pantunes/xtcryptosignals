@@ -21,6 +21,7 @@ with open('xtcryptosignals/__init__.py', 'r') as f:
     exec(f.read(), cfg)
 
 setuptools.setup(
+    python_requires='>=3.6',
     name=cfg['__title__'],
     version=cfg['__version__'],
     author=cfg['__author__'],
