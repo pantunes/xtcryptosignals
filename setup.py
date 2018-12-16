@@ -42,4 +42,22 @@ setuptools.setup(
         },
     install_requires=requirements,
     zip_safe=False,
+    keywords=[
+        'xtcryptosignals', 'trade', 'bitcoin', 'ethereum', 'litecoin',
+        'client', 'api', 'wrapper', 'exchange', 'dex', 'crypto',
+        'currency', 'cryptocurrency', 'trading', 'trading-api',
+        'signals', 'data'
+    ],
+    classifiers=[
+        'Development Status :: 3 - Alpha',
+        'Intended Audience :: Developers',
+        'Intended Audience :: Financial and Insurance Industry',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        'Operating System :: OS Independent',
+        'Natural Language :: English',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+    ],
 )
