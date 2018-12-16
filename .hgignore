@@ -14,3 +14,4 @@ celerybeat-schedule
 dump.rdb
 *egg-info
 /dist/
+/build/
