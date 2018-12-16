@@ -9,12 +9,12 @@ browser or mobile app. It will allow as well automatic trading.
 
 ## Roadmap
 
-* Add crypto-currencies exchanges (Dec 2018)
-* Setup notification rules (Dec 2018 / Jan 2019)
-* Implement e-mail and web browser push notifications signals (Jan 2019)
-* Start building Unit, functional and end-to-end testing (From Jan 2019)
-* Implement automatic trading (Feb/Mar 2019)
-* Build iOS app (Mar 2019)
+* [x] Add crypto-currencies exchanges (Dec 2018)
+* [ ] Setup notification rules (Dec 2018 / Jan 2019)
+* [ ] Implement e-mail and web browser push notifications signals (Jan 2019)
+* [ ] Start building Unit, functional and end-to-end testing (From Jan 2019)
+* [ ] Implement automatic trading (Feb/Mar 2019)
+* [ ] Build iOS app (Mar 2019)
 
 
 ## Getting Started
@@ -26,13 +26,16 @@ browser or mobile app. It will allow as well automatic trading.
 * [MongoDB](https://www.mongodb.com)
 
 
-## Install from source
+## Installation
+
+### Install from source
+Clone project repository
 ```bash
 hg clone ssh://hg@bitbucket.org/pantunes/xtcryptosignals
 cd xtcryptosignals
 ```
 
-Create Python virtualenv:
+Setup Python virtual environment:
 ```bash
 virtualenv venv -p python3
 source venv/bin/activate
@@ -45,6 +48,30 @@ pip install -e .
 
 (Dependencies will be installed automatically from 
 [requirements.txt](requirements.txt))
+
+
+### Install from PyPi
+Create folder project:
+```bash
+mkdir <project directory>
+cd <project directory>
+```
+
+Setup Python virtual environment:
+```bash
+virtualenv venv -p python3
+source venv/bin/activate
+```
+
+Install package
+```bash
+pip install xtcryptosignals
+pip install -e .
+```
+
+(Dependencies will be installed automatically from 
+[requirements.txt](requirements.txt))
+
 
 ## Start service
 

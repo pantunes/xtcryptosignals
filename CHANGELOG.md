@@ -2,7 +2,7 @@
 All changes will be registered here per release 
 
 
-## [0.0.4] - Current version
+## [0.0.4] - 2018-12-16
 Added collection of data for any configured crypto-currency (coin or token) in 
 the following exchanges:
 
@@ -12,6 +12,8 @@ the following exchanges:
 Bug fixing
 
 Changed settings.py
+
+Published it on PyPI
 
 
 ## [0.0.3] - 2018-12-15

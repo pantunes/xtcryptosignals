@@ -13,3 +13,4 @@ nohup.out
 celerybeat-schedule
 dump.rdb
 *egg-info
+/dist/
