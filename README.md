@@ -68,9 +68,6 @@ Install package
 pip install xtcryptosignals
 ```
 
-(Dependencies will be installed automatically from 
-[requirements.txt](requirements.txt))
-
 
 ## Start service
 
