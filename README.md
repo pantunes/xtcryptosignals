@@ -66,7 +66,6 @@ source venv/bin/activate
 Install package
 ```bash
 pip install xtcryptosignals
-pip install -e .
 ```
 
 (Dependencies will be installed automatically from 
