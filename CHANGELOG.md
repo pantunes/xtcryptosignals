@@ -2,6 +2,9 @@
 All changes will be registered here per release 
 
 
+## [0.0.4.1] - 2018-12-17
+Fixed README.md
+
 ## [0.0.4] - 2018-12-16
 Added collection of data for any configured crypto-currency (coin or token) in 
 the following exchanges:
