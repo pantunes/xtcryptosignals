@@ -31,15 +31,6 @@
 Clone project repository
 ```bash
 foo@bar:~$ hg clone ssh://hg@bitbucket.org/pantunes/xtcryptosignals
-requesting all changes
-adding changesets
-adding manifests
-adding file changes
-added 112 changesets with 257 changes to 73 files
-new changesets 0da50900b1da:80dacc610deb
-updating to branch default
-43 files updated, 0 files merged, 0 files removed, 0 files unresolved
-
 foo@bar:~$ cd xtcryptosignals
 ```
 
