@@ -1,10 +1,12 @@
 # XTCryptoSignals
 
-**XTCryptoSignals** is a Python service that collects crypto-currencies symbols 
-pairs data such as BTC/USDT, ETH/BTC or any other pair that a Crypto-currency 
-Exchange API supports and allows the user to setup **signals** based on rules 
-to send real-time notifications through e-mail or Push Notifications to the 
-browser or mobile app. It will allow as well automatic trading.
+**XTCryptoSignals** is a Python library that includes multiple services such as:
+Data collection crypto-currencies coins and/or tokens symbols pairs data such 
+as BTC/USDT, ETH/BTC or any other pair that a Crypto-currency Exchange API 
+supports;
+A **signals** service based on rules to send real-time notifications 
+through e-mail or Push Notifications to the browser or mobile app;
+And a service that enables automatic trading.
 
 
 ## Roadmap
@@ -45,10 +47,7 @@ Install package
 ```bash
 pip install -e .
 ```
-
-(Dependencies will be installed automatically from 
-[requirements.txt](requirements.txt))
-
+(Dependencies will be installed automatically from [requirements.txt](requirements.txt))
 
 ### Install from PyPi
 Create folder project:
@@ -63,7 +62,7 @@ virtualenv venv -p python3
 source venv/bin/activate
 ```
 
-Install package
+Install package:
 ```bash
 pip install xtcryptosignals
 ```
@@ -75,15 +74,51 @@ pip install xtcryptosignals
 xt-crypto-signals
 ```
 
-Starts standalone script without Celery (for testing purposes)
+Starts standalone script without Celery (for testing purposes):
 ```bash
-xt-crypto-signals-test
+xt-crypto-signals --testing
+```
+
+To get a list of supported exchanges:
+```bash
+xt-crypto-signals --list-config exchanges
+
+binance
+uphold
+okex
+idex
+switcheo
+hotbit
+bibox
+okcoin
+bithumb
+coinbene
+```
+(Drop [me](mailto:pjmlantunes@gmail.com) an email if you want a new one to be supported or contribute to this project creating a pull request)
+
+Command line help
+```bash
+xt-crypto-signals --help
+
+Usage: xt-crypto-signals [OPTIONS]
+
+  Use this tool to collect data from configured coins or/and tokens from
+  configured crypto-currencies exchanges.
+
+Options:
+  --testing                       Execute this tool for 1 iteration for all
+                                  configured coins and/or tokens. Not using
+                                  Celery. (Useful for testing purposes)
+  --list-config [exchanges|currencies]
+                                  List 'exchanges' or 'currencies' (coins or
+                                  tokens) per exchange that the tool currently
+                                  supports.
+  -h, --help                      Show this message and exit.
 ```
 
 ### Setup
 
-There is already an initial setup with some crypto-currencies 
-(coins and tokens) that can be changed in 
+There is already an initial setup with some crypto-currencies (coins and tokens) that can be added or/and removed in 
 [settings_exchanges.py](xtcryptosignals/settings_exchanges.py).
 
 ```python
@@ -111,8 +146,7 @@ UPHOLD: {
 }
 ```
 
-Initial setup to create dynamic MongoDB collections for data segmentation 
-categorized by Exchanges pooling frequency in 
+Initial setup to create dynamic MongoDB collections for data segmentation categorized by Exchanges pooling frequency in 
 [settings.py](xtcryptosignals/settings.py).
 ```python
 HISTORY_FREQUENCY = (
@@ -122,14 +156,12 @@ HISTORY_FREQUENCY = (
 
 ### Results
 This service is fast as it uses threading.
-It takes around 6 seconds to collect data of 70 crypto-currencies symbols pairs
-from 7 exchanges and save it in 11 collections in MongoDB.
-(Depending on external Exchange APIs availability and Internet 
-connection/latency)
+In my current system *(Macbook pro 2017)* it takes around 6 seconds to collect data of 70 crypto-currencies symbols pairs from 7 exchanges and save 
+it in 11 collections in MongoDB.
+(This performance figure depends on used hardware and Internet connection / latency)
 
 ## Disclaimer
-This project is work in progress and when it comes to trading use it at your 
-own risk.
+This project is work in progress and when it comes to trading use it at your own risk.
 
 
 ## License

@@ -5,3 +5,4 @@ marshmallow
 mongoengine
 requests
 switcheo
+click

@@ -37,7 +37,6 @@ setuptools.setup(
     entry_points={
             'console_scripts': [
                 'xt-crypto-signals=xtcryptosignals.tasks.ticker:main',
-                'xt-crypto-signals-test=xtcryptosignals.tasks.ticker:test',
             ],
         },
     install_requires=requirements,

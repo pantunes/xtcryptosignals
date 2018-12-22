@@ -27,13 +27,13 @@ from xtcryptosignals.settings_local import (
 
 # exchanges settings
 from xtcryptosignals.settings_exchanges import (
-    SYMBOLS_PER_EXCHANGE,
+    EXCHANGES, SYMBOLS_PER_EXCHANGE,
     BINANCE, UPHOLD, OKEX, IDEX, SWITCHEO, HOTBIT, BIBOX, OKCOIN,
     BITHUMB, COINBENE,
 )  # noqa
 
 __all__ = [
-    'BINANCE_API_KEY', 'BINANCE_API_SECRET', 'SYMBOLS_PER_EXCHANGE',
-    'BINANCE', 'UPHOLD', 'OKEX', 'IDEX', 'SWITCHEO', 'HOTBIT', 'BIBOX',
-    'OKCOIN', 'BITHUMB', 'COINBENE',
+    'BINANCE_API_KEY', 'BINANCE_API_SECRET', 'EXCHANGES',
+    'SYMBOLS_PER_EXCHANGE', 'BINANCE', 'UPHOLD', 'OKEX', 'IDEX', 'SWITCHEO',
+    'HOTBIT', 'BIBOX', 'OKCOIN', 'BITHUMB', 'COINBENE',
 ]
