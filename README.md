@@ -47,8 +47,7 @@ Install package
 ```bash
 pip install -e .
 ```
-(Dependencies will be installed automatically from 
-[requirements.txt](requirements.txt))
+(Dependencies will be installed automatically from [requirements.txt](requirements.txt))
 
 ### Install from PyPi
 Create folder project:
@@ -96,8 +95,7 @@ bithumb
 coinbene
 ```
 (Drop [me](pjmlantunes@gmail.com) an email 
-if you want a new one to be supported or contribute to this project creating a 
-pull request)
+if you want a new one to be supported or contribute to this project creating a pull request)
 
 Command line help
 ```bash
@@ -121,8 +119,7 @@ Options:
 
 ### Setup
 
-There is already an initial setup with some crypto-currencies 
-(coins and tokens) that can be added or/and removed in 
+There is already an initial setup with some crypto-currencies (coins and tokens) that can be added or/and removed in 
 [settings_exchanges.py](xtcryptosignals/settings_exchanges.py).
 
 ```python
@@ -150,8 +147,7 @@ UPHOLD: {
 }
 ```
 
-Initial setup to create dynamic MongoDB collections for data segmentation 
-categorized by Exchanges pooling frequency in 
+Initial setup to create dynamic MongoDB collections for data segmentation categorized by Exchanges pooling frequency in 
 [settings.py](xtcryptosignals/settings.py).
 ```python
 HISTORY_FREQUENCY = (
@@ -161,15 +157,12 @@ HISTORY_FREQUENCY = (
 
 ### Results
 This service is fast as it uses threading.
-In my current system *(Macbook pro 2017)* it takes around 6 seconds 
-to collect data of 70 crypto-currencies symbols pairs from 7 exchanges and save 
+In my current system *(Macbook pro 2017)* it takes around 6 seconds to collect data of 70 crypto-currencies symbols pairs from 7 exchanges and save 
 it in 11 collections in MongoDB.
-(This performance figure depends on used hardware and Internet 
-connection / latency)
+(This performance figure depends on used hardware and Internet connection / latency)
 
 ## Disclaimer
-This project is work in progress and when it comes to trading use it at your 
-own risk.
+This project is work in progress and when it comes to trading use it at your own risk.
 
 
 ## License
