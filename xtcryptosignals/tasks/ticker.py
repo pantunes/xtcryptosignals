@@ -6,6 +6,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+import click
 from celery.task import task
 from celery.exceptions import Ignore
 from celery import states
@@ -144,20 +145,48 @@ def test():
     logging.info('Ending...')
 
 
-def main():
-    from celery import current_app
-    from celery.bin import worker
+@click.command(
+    context_settings=dict(help_option_names=['-h', '--help'])
+)
+@click.option(
+    '--testing',
+    is_flag=True,
+    help="Execute this tool for 1 iteration for all configured "
+         "coins and/or tokens. Not using Celery. "
+         "(Useful for testing purposes)",
+)
+@click.option(
+    '--list-config',
+    type=click.Choice(['exchanges', 'currencies']),
+    help="List 'exchanges' or 'currencies' (coins or tokens) per exchange "
+         "that the tool currently supports."
+)
+def main(testing, list_config):
+    """
+    Use this tool to collect data from configured coins or/and tokens from
+    configured crypto-currencies exchanges.
+    """
+    if list_config:
+        if list_config == 'currencies':
+            import pprint
+            click.echo(pprint.pprint(s.SYMBOLS_PER_EXCHANGE))
+        if list_config == 'exchanges':
+            click.echo('\n'.join(s.EXCHANGES))
+        return
 
-    app = current_app._get_current_object()
-    app.config_from_object('xtcryptosignals.celeryconfig')
+    if not testing:
+        from celery import current_app
+        from celery.bin import worker
 
-    worker = worker.worker(app=app)
-    options = {
-        'beat': True,
-        'loglevel': 'INFO',
-    }
-    worker.run(**options)
+        app = current_app._get_current_object()
+        app.config_from_object('xtcryptosignals.celeryconfig')
 
+        worker = worker.worker(app=app)
+        options = {
+            'beat': True,
+            'loglevel': 'INFO',
+        }
+        worker.run(**options)
+        return
 
-if __name__ == "__main__":
-    main()
+    test()
