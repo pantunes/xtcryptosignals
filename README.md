@@ -1,11 +1,9 @@
 # XTCryptoSignals
 
 **XTCryptoSignals** is a Python library that includes multiple services such as:
-Data collection crypto-currencies coins and/or tokens symbols pairs data such 
-as BTC/USDT, ETH/BTC or any other pair that a Crypto-currency Exchange API 
+Data collection crypto-currencies coins and/or tokens symbols pairs data such as BTC/USDT, ETH/BTC or any other pair that a Crypto-currency Exchange API 
 supports;
-A **signals** service based on rules to send real-time notifications 
-through e-mail or Push Notifications to the browser or mobile app;
+A **signals** service based on rules to send real-time notifications through e-mail or Push Notifications to the browser or mobile app;
 And a service that enables automatic trading.
 
 
@@ -118,8 +116,7 @@ Options:
 
 ### Setup
 
-There is already an initial setup with some crypto-currencies (coins and tokens) that can be added or/and removed in 
-[settings_exchanges.py](xtcryptosignals/settings_exchanges.py).
+There is already an initial setup with some crypto-currencies (coins and tokens) that can be added or/and removed in [settings_exchanges.py](xtcryptosignals/settings_exchanges.py).
 
 ```python
 BIBOX: {
@@ -146,8 +143,7 @@ UPHOLD: {
 }
 ```
 
-Initial setup to create dynamic MongoDB collections for data segmentation categorized by Exchanges pooling frequency in 
-[settings.py](xtcryptosignals/settings.py).
+Initial setup to create dynamic MongoDB collections for data segmentation categorized by Exchanges pooling frequency in [settings.py](xtcryptosignals/settings.py).
 ```python
 HISTORY_FREQUENCY = (
     '10s', '30s', '1m', '10m', '30m', '1h', '3h', '6h', '12h', '24h'
@@ -156,8 +152,7 @@ HISTORY_FREQUENCY = (
 
 ### Results
 This service is fast as it uses threading.
-In my current system *(Macbook pro 2017)* it takes around 6 seconds to collect data of 70 crypto-currencies symbols pairs from 7 exchanges and save 
-it in 11 collections in MongoDB.
+In my current system *(Macbook pro 2017)* it takes around 6 seconds to collect data of 70 crypto-currencies symbols pairs from 7 exchanges and save it in 11 collections in MongoDB.
 (This performance figure depends on used hardware and Internet connection / latency)
 
 ## Disclaimer
