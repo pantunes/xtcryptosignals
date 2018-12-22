@@ -96,7 +96,6 @@ coinbene
 Command line help
 ```bash
 (venv) foo@bar:~/xtcryptosignals$ xt-crypto-signals --help
-
 Usage: xt-crypto-signals [OPTIONS]
 
   Use this tool to collect data from configured coins or/and tokens from
