@@ -1,6 +1,7 @@
 # XTCryptoSignals
 
 **XTCryptoSignals** is a Python library that includes multiple services such as:
+
 * **Data collection** of crypto-currencies pairs such as BTC/USDT, ETH/BTC or any other pair that is supported by the Exchange API
 * A **Signals** service based on setup rules to send real-time notifications through E-mail or Push Notifications to the browser or mobile app
 * A service that enables **automatic trading**
