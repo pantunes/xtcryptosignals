@@ -94,7 +94,7 @@ okcoin
 bithumb
 coinbene
 ```
-(Drop [me](pjmlantunes@gmail.com) an email if you want a new one to be supported or contribute to this project creating a pull request)
+(Drop [me](mailto:pjmlantunes@gmail.com) an email if you want a new one to be supported or contribute to this project creating a pull request)
 
 Command line help
 ```bash
