@@ -2,6 +2,11 @@
 All changes will be registered here per release 
 
 
+## [0.0.5] - 2018-12-22
+Added command line help support
+
+Added more help in README.md
+
 ## [0.0.4.1] - 2018-12-17
 Fixed README.md
 
