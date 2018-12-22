@@ -80,7 +80,6 @@ Starts standalone script without Celery (for testing purposes):
 To get a list of supported exchanges:
 ```bash
 (venv) foo@bar:~/xtcryptosignals$ xt-crypto-signals --list-config exchanges
-
 binance
 uphold
 okex
