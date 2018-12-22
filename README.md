@@ -1,10 +1,9 @@
 # XTCryptoSignals
 
 **XTCryptoSignals** is a Python library that includes multiple services such as:
-Data collection crypto-currencies coins and/or tokens symbols pairs data such as BTC/USDT, ETH/BTC or any other pair that a Crypto-currency Exchange API 
-supports;
-A **signals** service based on rules to send real-time notifications through e-mail or Push Notifications to the browser or mobile app;
-And a service that enables automatic trading.
+* **Data collection** of crypto-currencies pairs such as BTC/USDT, ETH/BTC or any other pair that is supported by the Exchange API
+* A **Signals** service based on setup rules to send real-time notifications through E-mail or Push Notifications to the browser or mobile app
+* A service that enables **automatic trading**
 
 
 ## Roadmap
@@ -21,7 +20,7 @@ And a service that enables automatic trading.
 
 ### Pre-requisites
 
-* [Python 3.x](https://www.python.org/download/releases/3.0)
+* [Python >=3.6](https://www.python.org/downloads)
 * [Redis](https://redis.io/download)
 * [MongoDB](https://www.mongodb.com)
 
@@ -31,55 +30,64 @@ And a service that enables automatic trading.
 ### Install from source
 Clone project repository
 ```bash
-hg clone ssh://hg@bitbucket.org/pantunes/xtcryptosignals
-cd xtcryptosignals
+foo@bar:~$ hg clone ssh://hg@bitbucket.org/pantunes/xtcryptosignals
+requesting all changes
+adding changesets
+adding manifests
+adding file changes
+added 112 changesets with 257 changes to 73 files
+new changesets 0da50900b1da:80dacc610deb
+updating to branch default
+43 files updated, 0 files merged, 0 files removed, 0 files unresolved
+
+foo@bar:~$ cd xtcryptosignals
 ```
 
 Setup Python virtual environment:
 ```bash
-virtualenv venv -p python3
-source venv/bin/activate
+foo@bar:~/xtcryptosignals$ virtualenv venv -p python3
+foo@bar:~/xtcryptosignals$ source venv/bin/activate
 ```
 
 Install package
 ```bash
-pip install -e .
+(venv) foo@bar:~/xtcryptosignals$ pip install -e .
 ```
 (Dependencies will be installed automatically from [requirements.txt](requirements.txt))
 
 ### Install from PyPi
 Create folder project:
 ```bash
-mkdir <project directory>
-cd <project directory>
+foo@bar:~$ mkdir xtcryptosignals
+foo@bar:~$ cd xtcryptosignals
 ```
 
 Setup Python virtual environment:
 ```bash
-virtualenv venv -p python3
-source venv/bin/activate
+foo@bar:~/xtcryptosignals$ virtualenv venv -p python3
+foo@bar:~/xtcryptosignals$ source venv/bin/activate
 ```
 
 Install package:
 ```bash
-pip install xtcryptosignals
+(venv) foo@bar:~/xtcryptosignals$ pip install xtcryptosignals
 ```
 
 
 ## Start service
 
 ```bash
-xt-crypto-signals
+(venv) foo@bar:~/xtcryptosignals$ xt-crypto-signals
 ```
 
 Starts standalone script without Celery (for testing purposes):
 ```bash
-xt-crypto-signals --testing
+(venv) foo@bar:~/xtcryptosignals$ xt-crypto-signals --testing
 ```
 
 To get a list of supported exchanges:
 ```bash
-xt-crypto-signals --list-config exchanges
+(venv) foo@bar:~/xtcryptosignals$ xt-crypto-signals --list-config exchanges
 
 binance
 uphold
@@ -96,7 +104,7 @@ coinbene
 
 Command line help
 ```bash
-xt-crypto-signals --help
+(venv) foo@bar:~/xtcryptosignals$ xt-crypto-signals --help
 
 Usage: xt-crypto-signals [OPTIONS]
 
