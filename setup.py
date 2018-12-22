@@ -26,7 +26,6 @@ setuptools.setup(
     description="Python service that collects crypto-currencies "
                 "symbols pairs data & allows setup of notifications & "
                 "automatic trading",
-    long_description_content_type="text/markdown",
     url="https://bitbucket.org/pantunes/xtcryptosignals",
     packages=setuptools.find_packages(),
     include_package_data=True,
