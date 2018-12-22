@@ -43,12 +43,12 @@ virtualenv venv -p python3
 source venv/bin/activate
 ```
 
-Install package\
-<small>(Dependencies will be installed automatically from 
-[requirements.txt](requirements.txt))</small>
+Install package
 ```bash
 pip install -e .
 ```
+(Dependencies will be installed automatically from 
+[requirements.txt](requirements.txt))
 
 ### Install from PyPi
 Create folder project:
@@ -63,7 +63,7 @@ virtualenv venv -p python3
 source venv/bin/activate
 ```
 
-Install package
+Install package:
 ```bash
 pip install xtcryptosignals
 ```
@@ -75,15 +75,12 @@ pip install xtcryptosignals
 xt-crypto-signals
 ```
 
-Starts standalone script without Celery (for testing purposes)
+Starts standalone script without Celery (for testing purposes):
 ```bash
 xt-crypto-signals --testing
 ```
 
-To get a list of supported exchanges.\
-<small>(Drop [me](pjmlantunes@gmail.com) an email 
-if you want a new one to be supported or contribute to this project creating a 
-pull request.)</small>
+To get a list of supported exchanges:
 ```bash
 xt-crypto-signals --list-config exchanges
 
@@ -98,8 +95,11 @@ okcoin
 bithumb
 coinbene
 ```
+(Drop [me](pjmlantunes@gmail.com) an email 
+if you want a new one to be supported or contribute to this project creating a 
+pull request)
 
-In any case Command-line help
+Command line help
 ```bash
 xt-crypto-signals --help
 
@@ -160,12 +160,12 @@ HISTORY_FREQUENCY = (
 ```
 
 ### Results
-This service is fast as it uses threading.\
-In my current system <small>(Macbook pro 2017)</small> it takes around 6 seconds 
+This service is fast as it uses threading.
+In my current system *(Macbook pro 2017)* it takes around 6 seconds 
 to collect data of 70 crypto-currencies symbols pairs from 7 exchanges and save 
-it in 11 collections in MongoDB.\
-<small>(This performance figure depends on used hardware and Internet 
-connection / latency)</small>
+it in 11 collections in MongoDB.
+(This performance figure depends on used hardware and Internet 
+connection / latency)
 
 ## Disclaimer
 This project is work in progress and when it comes to trading use it at your 
