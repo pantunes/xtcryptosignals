@@ -151,8 +151,8 @@ def test():
 @click.option(
     '--testing',
     is_flag=True,
-    help="Execute this tool for 1 iteration for all configured "
-         "coins and/or tokens. Not using Celery. "
+    help="Execute 1 iteration for all configured "
+         "coins and/or tokens without Celery. "
          "(Useful for testing purposes)",
 )
 @click.option(

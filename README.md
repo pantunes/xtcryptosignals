@@ -102,13 +102,10 @@ Usage: xt-crypto-signals [OPTIONS]
   configured crypto-currencies exchanges.
 
 Options:
-  --testing                       Execute this tool for 1 iteration for all
-                                  configured coins and/or tokens. Not using
-                                  Celery. (Useful for testing purposes)
+  --testing                       Execute 1 iteration for all configured cryptocurrencies.
+                                  wihtout Celery. (Useful for testing purposes)
   --list-config [exchanges|currencies]
-                                  List 'exchanges' or 'currencies' (coins or
-                                  tokens) per exchange that the tool currently
-                                  supports.
+                                  List 'exchanges' or 'currencies' (coins and tokens) per exchange.
   -h, --help                      Show this message and exit.
 ```
 
