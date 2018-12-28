@@ -31,55 +31,57 @@
 ### Install from source
 Clone project repository
 ```bash
-foo@bar:~$ hg clone ssh://hg@bitbucket.org/pantunes/xtcryptosignals
-foo@bar:~$ cd xtcryptosignals
+hg clone ssh://hg@bitbucket.org/pantunes/xtcryptosignals
+cd xtcryptosignals
 ```
 
 Setup Python virtual environment:
 ```bash
-foo@bar:~/xtcryptosignals$ virtualenv venv -p python3
-foo@bar:~/xtcryptosignals$ source venv/bin/activate
+virtualenv venv -p python3
+source venv/bin/activate
 ```
 
 Install package
 ```bash
-(venv) foo@bar:~/xtcryptosignals$ pip install -e .
+pip install -e .
 ```
 (Dependencies will be installed automatically from [requirements.txt](requirements.txt))
 
 ### Install from PyPi
 Create folder project:
 ```bash
-foo@bar:~$ mkdir xtcryptosignals
-foo@bar:~$ cd xtcryptosignals
+mkdir xtcryptosignals
+cd xtcryptosignals
 ```
 
 Setup Python virtual environment:
 ```bash
-foo@bar:~/xtcryptosignals$ virtualenv venv -p python3
-foo@bar:~/xtcryptosignals$ source venv/bin/activate
+virtualenv venv -p python3
+source venv/bin/activate
 ```
 
 Install package:
 ```bash
-(venv) foo@bar:~/xtcryptosignals$ pip install xtcryptosignals
+pip install xtcryptosignals
 ```
 
 
 ## Start service
 
 ```bash
-(venv) foo@bar:~/xtcryptosignals$ xt-crypto-signals
+xt-crypto-signals
 ```
 
 Starts standalone script without Celery (for testing purposes):
 ```bash
-(venv) foo@bar:~/xtcryptosignals$ xt-crypto-signals --testing
+xt-crypto-signals --testing
 ```
 
 To get a list of supported exchanges:
 ```bash
-(venv) foo@bar:~/xtcryptosignals$ xt-crypto-signals --list-config exchanges
+xt-crypto-signals --list-config exchanges
+```
+```bash
 binance
 uphold
 okex
@@ -95,17 +97,20 @@ coinbene
 
 Command line help
 ```bash
-(venv) foo@bar:~/xtcryptosignals$ xt-crypto-signals --help
-Usage: xt-crypto-signals [OPTIONS]
-
-  Use this tool to collect data from configured coins or/and tokens from
+xt-crypto-signals --help
+```
+```bash
+Use this tool to collect data from configured coins or/and tokens from
   configured crypto-currencies exchanges.
 
 Options:
-  --testing                       Execute 1 iteration for all configured cryptocurrencies.
-                                  wihtout Celery. (Useful for testing purposes)
+  --testing                       Execute this tool for 1 iteration for all
+                                  configured coins and/or tokens. Not using
+                                  Celery. (Useful for testing purposes)
   --list-config [exchanges|currencies]
-                                  List 'exchanges' or 'currencies' (coins and tokens) per exchange.
+                                  List 'exchanges' or 'currencies' (coins or
+                                  tokens) per exchange that the tool currently
+                                  supports.
   -h, --help                      Show this message and exit.
 ```
 
