@@ -161,7 +161,12 @@ def test():
     help="List 'exchanges' or 'currencies' (coins or tokens) per exchange "
          "that the tool currently supports."
 )
-def main(testing, list_config):
+@click.option(
+    '--version',
+    is_flag=True,
+    help="Show version."
+)
+def main(testing, list_config, version):
     """
     Use this tool to collect data from configured coins or/and tokens from
     configured crypto-currencies exchanges.
@@ -174,19 +179,24 @@ def main(testing, list_config):
             click.echo('\n'.join(s.EXCHANGES))
         return
 
-    if not testing:
-        from celery import current_app
-        from celery.bin import worker
-
-        app = current_app._get_current_object()
-        app.config_from_object('xtcryptosignals.celeryconfig')
-
-        worker = worker.worker(app=app)
-        options = {
-            'beat': True,
-            'loglevel': 'INFO',
-        }
-        worker.run(**options)
+    if testing:
+        test()
         return
 
-    test()
+    if version:
+        from xtcryptosignals import __title__, __version__
+        click.echo('{} {}'.format(__title__, __version__))
+        return
+
+    from celery import current_app
+    from celery.bin import worker
+
+    app = current_app._get_current_object()
+    app.config_from_object('xtcryptosignals.celeryconfig')
+
+    worker = worker.worker(app=app)
+    options = {
+        'beat': True,
+        'loglevel': 'INFO',
+    }
+    worker.run(**options)
