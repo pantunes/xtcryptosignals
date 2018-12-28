@@ -100,17 +100,20 @@ Command line help
 xt-crypto-signals --help
 ```
 ```bash
-Use this tool to collect data from configured coins or/and tokens from
+Usage: xt-crypto-signals [OPTIONS]
+
+  Use this tool to collect data from configured coins or/and tokens from
   configured crypto-currencies exchanges.
 
 Options:
-  --testing                       Execute this tool for 1 iteration for all
-                                  configured coins and/or tokens. Not using
-                                  Celery. (Useful for testing purposes)
+  --testing                       Execute 1 iteration for all configured coins
+                                  and/or tokens without Celery. (Useful for
+                                  testing purposes)
   --list-config [exchanges|currencies]
                                   List 'exchanges' or 'currencies' (coins or
                                   tokens) per exchange that the tool currently
                                   supports.
+  --version                       Show version.
   -h, --help                      Show this message and exit.
 ```
 
