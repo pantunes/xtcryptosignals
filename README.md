@@ -3,18 +3,18 @@
 **XTCryptoSignals** is a Python library that includes multiple services such as:
 
 * **Data collection** of crypto-currencies pairs such as BTC/USDT, ETH/BTC or any other pair that is supported by the Exchange API
-* A **Signals** service based on setup rules to send real-time notifications through E-mail or Push Notifications to the browser or mobile app
+* A **Signals** service based on setup rules to send real-time alerts about price, price change or market sentiment through E-mail or Push Notifications to the browser or mobile app
 * A service that enables **automatic trading**
 
 
 ## Roadmap
 
 * [x] Add crypto-currencies exchanges (Dec 2018)
-* [ ] Setup notification rules (Dec 2018 / Jan 2019)
+* [ ] Setup notification rules for price range, price change, trading volume, price sentiment (Dec 2018 / Jan 2019)
 * [ ] Implement e-mail and web browser push notifications signals (Jan 2019)
 * [ ] Start building Unit, functional and end-to-end testing (From Jan 2019)
-* [ ] Implement automatic trading (Feb/Mar 2019)
-* [ ] Build iOS app (Mar 2019)
+* [ ] Implement automatic trading (Feb-Mar 2019)
+* [ ] Build iOS app (Mar-May 2019)
 
 
 ## Getting Started
