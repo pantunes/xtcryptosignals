@@ -27,9 +27,8 @@ setuptools.setup(
     version=cfg['__version__'],
     author=cfg['__author__'],
     author_email=cfg['__email__'],
-    description="Python service that collects crypto-currencies "
-                "symbols pairs data & allows setup of notifications & "
-                "automatic trading",
+    description="Cryptocurrencies price data collection, price sentiment "
+                "alerts and automatic trading",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://bitbucket.org/pantunes/xtcryptosignals",
