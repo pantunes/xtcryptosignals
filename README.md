@@ -4,7 +4,7 @@
 
 * **Data collection** of crypto-currencies pairs such as BTC/USDT, ETH/BTC or any other pair that is supported by the Exchange API
 * A **Signals** service based on setup rules to send real-time alerts about price, price change, trading volume or market sentiment through E-mail or Push Notifications to the browser or mobile app
-* A service that enables **automatic trading**
+* **Automatic trading**
 
 
 ## Roadmap
