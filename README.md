@@ -10,11 +10,12 @@
 ## Roadmap
 
 * [x] Add crypto-currencies exchanges (Dec 2018)
-* [ ] Setup notification rules for price range, price change, trading volume, price sentiment (Dec 2018 / Jan 2019)
-* [ ] Implement e-mail and web browser push notifications signals (Jan 2019)
-* [ ] Start building Unit, functional and end-to-end testing (From Jan 2019)
-* [ ] Implement automatic trading (Feb-Mar 2019)
-* [ ] Build iOS app (Mar-May 2019)
+* [ ] Implement RESTFul API and socket.io to access price data in real time (Jan 2019)
+* [ ] Setup notification rules for price range, price change, trading volume, price sentiment (Feb 2019)
+* [ ] Build Unit, functional and end-to-end testing (From Jan 2019)
+* [ ] Implement e-mail and web browser push notifications signals (Mar 2019)
+* [ ] Implement automatic trading (Apr 2019)
+* [ ] Build iOS app (May-Jul 2019)
 
 
 ## Getting Started
