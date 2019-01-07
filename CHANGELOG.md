@@ -3,6 +3,8 @@ All changes will be registered here per release
 
 
 ## [0.0.6] - Current
+Updated section Roadmap in CHANGELOG
+
 Added --version argument to display current version of the tool
 
 Added more help in README.md

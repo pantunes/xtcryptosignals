@@ -11,6 +11,7 @@
 
 * [x] Add crypto-currencies exchanges (Dec 2018)
 * [ ] Implement RESTFul API and socket.io to access price data in real time (Jan 2019)
+* [ ] Build website to use this platform (From Jan 2019)
 * [ ] Setup notification rules for price range, price change, trading volume, price sentiment (Feb 2019)
 * [ ] Build Unit, functional and end-to-end testing (From Jan 2019)
 * [ ] Implement e-mail and web browser push notifications signals (Mar 2019)
