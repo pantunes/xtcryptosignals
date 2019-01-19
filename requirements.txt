@@ -6,3 +6,6 @@ mongoengine
 requests
 switcheo
 click
+flask
+flask-socketio
+eventlet
