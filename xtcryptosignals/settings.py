@@ -8,7 +8,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 MONGODB_NAME = 'XTCryptoSignals'
 
-TICKER_SCHEDULE = 30.0  # executed each X seconds
+TICKER_SCHEDULE = 15.0  # executed each X seconds
 TIMEOUT_PER_SYMBOL_REQUEST = 2.0  # in seconds
 TIMEOUT_PER_SYMBOLS_REQUEST = 5.0  # in seconds
 SYMBOL_FLOAT_PRECISION = 8

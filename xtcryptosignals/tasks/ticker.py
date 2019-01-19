@@ -12,13 +12,29 @@ from celery.exceptions import Ignore
 from celery import states
 from billiard.context import Process
 from pymongo.errors import ServerSelectionTimeoutError
+from flask_socketio import SocketIO
 import xtcryptosignals.settings as s
+from xtcryptosignals.celeryconfig import BROKER_URL
 from xtcryptosignals.utils.decorators import use_mongodb
 from xtcryptosignals.utils.helpers import get_class
 from xtcryptosignals.models.ticker import Ticker as TickerModel
 
 
-def _process(logger, exchange_class, schema_class, symbol, pairs):
+def _safe_payload(data):
+    try:
+        data['opened_on'] = data['opened_on'].isoformat()
+    except KeyError:
+        pass
+    try:
+        data['closed_on'] = data['closed_on'].isoformat()
+    except KeyError:
+        pass
+    return data
+
+
+def _process(
+        logger, socketio, exchange_class, schema_class, symbol, pairs
+):
     ticker_kwargs = dict()
     if symbol:
         ticker_kwargs.update(symbol=symbol)
@@ -44,9 +60,12 @@ def _process(logger, exchange_class, schema_class, symbol, pairs):
             for x in ticker_data_valid:
                 ticker_model = TickerModel(**x)
                 ticker_model.save()
+                socketio.emit('ticker', _safe_payload(x))
         else:
             ticker_model = TickerModel(**ticker_data_valid)
             ticker_model.save()
+            socketio.emit('ticker', _safe_payload(ticker_data_valid))
+
     except ServerSelectionTimeoutError as error:
         logger.error(
             '{}: {}'.format(exchange_class.__name__, error)
@@ -57,12 +76,16 @@ def _get_24h_price_ticker_data(
         jobs, logger, exchange_class, schema_class,
         symbol=None, pairs=None
 ):
+    socketio = SocketIO(message_queue=BROKER_URL)
+
     symbol_or_pairs = '-'.join(symbol) if symbol else 'PAIRS'
+
     p = Process(
         name='{} {}'.format(exchange_class.__name__, symbol_or_pairs),
         target=_process,
         args=(
-            logger, exchange_class, schema_class, symbol, pairs
+            logger, socketio, exchange_class,
+            schema_class, symbol, pairs,
         )
     )
     jobs.append(
