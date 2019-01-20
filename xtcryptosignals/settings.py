@@ -6,6 +6,8 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+DEBUG = True
+
 MONGODB_NAME = 'XTCryptoSignals'
 
 TICKER_SCHEDULE = 15.0  # executed each X seconds

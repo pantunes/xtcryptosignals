@@ -9,7 +9,9 @@ __email__ = "pjmlantunes@gmail.com"
 import eventlet
 from flask import Flask, jsonify
 from flask_socketio import SocketIO
+import xtcryptosignals.settings as s
 from xtcryptosignals.celeryconfig import BROKER_URL
+
 
 eventlet.monkey_patch()
 
@@ -33,4 +35,4 @@ def on_disconnect():
     print('on_disconnect')
 
 
-socketio.run(app, debug=False, port=5000, host='0.0.0.0')
+socketio.run(app, debug=s.DEBUG, port=5000, host='0.0.0.0')
