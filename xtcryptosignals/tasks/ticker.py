@@ -60,11 +60,13 @@ def _process(
             for x in ticker_data_valid:
                 ticker_model = TickerModel(**x)
                 ticker_model.save()
-                socketio.emit('ticker', _safe_payload(x))
+                if _ENABLE_SOCKET_IO:
+                    socketio.emit('ticker', _safe_payload(x))
         else:
             ticker_model = TickerModel(**ticker_data_valid)
             ticker_model.save()
-            socketio.emit('ticker', _safe_payload(ticker_data_valid))
+            if _ENABLE_SOCKET_IO:
+                socketio.emit('ticker', _safe_payload(ticker_data_valid))
 
     except ServerSelectionTimeoutError as error:
         logger.error(
@@ -76,7 +78,9 @@ def _get_24h_price_ticker_data(
         jobs, logger, exchange_class, schema_class,
         symbol=None, pairs=None
 ):
-    socketio = SocketIO(message_queue=BROKER_URL)
+    socketio = None
+    if _ENABLE_SOCKET_IO:
+        socketio = SocketIO(message_queue=BROKER_URL)
 
     symbol_or_pairs = '-'.join(symbol) if symbol else 'PAIRS'
 
@@ -168,6 +172,9 @@ def test():
     logging.info('Ending...')
 
 
+_ENABLE_SOCKET_IO = False
+
+
 @click.command(
     context_settings=dict(help_option_names=['-h', '--help'])
 )
@@ -185,11 +192,16 @@ def test():
          "that the tool currently supports."
 )
 @click.option(
+    '--enable-socketio',
+    is_flag=True,
+    help="Enable SocketIO real-time crypto-data message broadcasting."
+)
+@click.option(
     '--version',
     is_flag=True,
     help="Show version."
 )
-def main(testing, list_config, version):
+def main(testing, list_config, enable_socketio, version):
     """
     Use this tool to collect data from configured coins or/and tokens from
     configured crypto-currencies exchanges.
@@ -210,6 +222,9 @@ def main(testing, list_config, version):
         from xtcryptosignals import __title__, __version__
         click.echo('{} {}'.format(__title__, __version__))
         return
+
+    global _ENABLE_SOCKET_IO
+    _ENABLE_SOCKET_IO = enable_socketio
 
     from celery import current_app
     from celery.bin import worker
