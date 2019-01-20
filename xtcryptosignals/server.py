@@ -35,4 +35,8 @@ def on_disconnect():
     print('on_disconnect')
 
 
-socketio.run(app, debug=s.DEBUG, port=5000, host='0.0.0.0')
+def main():
+    """
+    Start RESTFul server API and socketIO server.
+    """
+    socketio.run(app, debug=s.DEBUG, port=5000, host='0.0.0.0')
