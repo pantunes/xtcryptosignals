@@ -2,10 +2,12 @@
 All changes will be registered here per release 
 
 
-## [0.0.6] - Current
-Updated section Roadmap in CHANGELOG
+## [0.0.6] - 2018-01-20
+Added first working version of Web Server API and Web page
 
 Added --version argument to display current version of the tool
+
+Updated section Roadmap in CHANGELOG
 
 Added more help in README.md
 
