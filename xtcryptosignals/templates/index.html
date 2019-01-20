@@ -14,11 +14,12 @@
             if (json.source == "binance") {
                 if (json.symbol == "BTCUSDT") {
                     $("#btc").html(json.price);
+                    $('#title').after('<div id="space">' + json.price + '</div>');
                 }
             }
         });
     </script>
     <body>
-      <div>BTC price in USDT from Binance: <span id="btc">-</span></div>
+      <div id="title">BTC price in USDT from Binance:</div>
     </body>
 </html>
