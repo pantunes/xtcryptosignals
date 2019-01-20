@@ -115,6 +115,8 @@ Options:
                                   List 'exchanges' or 'currencies' (coins or
                                   tokens) per exchange that the tool currently
                                   supports.
+  --enable-socketio               Enable SocketIO real-time crypto-data
+                                  message broadcasting.
   --version                       Show version.
   -h, --help                      Show this message and exit.
 ```
