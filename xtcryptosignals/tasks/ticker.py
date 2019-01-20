@@ -50,23 +50,24 @@ def _process(
         logger.error(err)
         return
 
-    ticker_data_valid, errors = schema_class(
+    ticker, errors = schema_class(
+        strict=True,
         many=symbol is None
     ).load(ticker_data)
     assert errors == {}, errors
 
     try:
         if pairs:
-            for x in ticker_data_valid:
+            for x in ticker:
                 ticker_model = TickerModel(**x)
                 ticker_model.save()
                 if _ENABLE_SOCKET_IO:
                     socketio.emit('ticker', _safe_payload(x))
         else:
-            ticker_model = TickerModel(**ticker_data_valid)
+            ticker_model = TickerModel(**ticker)
             ticker_model.save()
             if _ENABLE_SOCKET_IO:
-                socketio.emit('ticker', _safe_payload(ticker_data_valid))
+                socketio.emit('ticker', _safe_payload(ticker))
 
     except ServerSelectionTimeoutError as error:
         logger.error(
