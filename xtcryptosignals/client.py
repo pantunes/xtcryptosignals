@@ -22,4 +22,8 @@ def root():
     return render_template('index.html')
 
 
-app.run(debug=s.DEBUG, port=8000, host='0.0.0.0')
+def main():
+    """
+    Start web client
+    """
+    app.run(debug=s.DEBUG, port=8000, host='0.0.0.0')

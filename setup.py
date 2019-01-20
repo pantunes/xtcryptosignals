@@ -37,7 +37,9 @@ setuptools.setup(
     include_package_data=True,
     entry_points={
         'console_scripts': [
-            'xt-crypto-signals=xtcryptosignals.tasks.ticker:main',
+            'xt-ticker=xtcryptosignals.tasks.ticker:main',
+            'xt-server=xtcryptosignals.server:main',
+            'xt-client=xtcryptosignals.client:main',
         ],
     },
     install_requires=requirements,
