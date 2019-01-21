@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>XTCryptoSignals - Main coins per Exchange</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+          integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.slim.js" type="text/javascript" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript" ></script>
+    <script>
+        var socket = io.connect('http://127.0.0.1:5000');
+        socket.on('connect', function() {
+            console.log('Connected');
+        });
+        socket.on('ticker', function(json) {
+            var _id = '#' + json.source + '_' + json.symbol.toLowerCase();
+            $(_id).html(json.price.toFixed(2));
+        });
+    </script>
+    <body>
+        <table class="pure-table pure-table-horizontal">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>BTC</th>
+                    <th>ETH</th>
+                    <th>XRP</th>
+                    <th>LTC</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for exchange in exchanges %}
+                <tr class="{{ loop.cycle('pure-table-odd', 'pure-table-odd-even') }}">
+                    <td>{{exchange}}</td>
+                    <td id="{{exchange.lower()}}_btcusdt">-</td>
+                    <td id="{{exchange.lower()}}_ethusdt">-</td>
+                    <td id="{{exchange.lower()}}_xrpusdt">-</td>
+                    <td id="{{exchange.lower()}}_ltcusdt">-</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>

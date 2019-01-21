@@ -18,8 +18,16 @@ if s.DEBUG:
 
 
 @app.route('/')
-def root():
-    return render_template('index.html')
+def coins_per_exchange():
+    return render_template(
+        'coins_per_exchange.html',
+        exchanges=['Binance', 'OKEx', 'Bibox'],
+    )
+
+
+@app.route('/price/okex/btcusdt')
+def price_updates():
+    return render_template('price_update.html')
 
 
 def main():
