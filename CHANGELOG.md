@@ -5,6 +5,8 @@ All changes will be registered here per release
 ## [0.0.6] - 2018-01-20
 Added first working version of Web Server API and Web page
 
+Implemented SocketIO
+
 Added --version argument to display current version of the tool
 
 Updated section Roadmap in CHANGELOG
