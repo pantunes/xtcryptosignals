@@ -11,7 +11,7 @@
             console.log('Connected');
         });
         socket.on('ticker', function(json) {
-            if (json.source == "binance") {
+            if (json.source == "okex") {
                 if (json.symbol == "BTCUSDT") {
                     $("#btc").html(json.price);
                     $('#title').after('<div id="space">' + json.price + '</div>');
@@ -20,6 +20,6 @@
         });
     </script>
     <body>
-      <div id="title">BTC price in USDT from Binance:</div>
+      <div id="title">BTC price in USDT from OKEx:</div>
     </body>
 </html>
