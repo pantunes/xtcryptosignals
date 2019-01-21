@@ -11,14 +11,14 @@
             console.log('Connected');
         });
         socket.on('ticker', function(json) {
-            if (json.source == "okex") {
-                if (json.symbol == "BTCUSDT") {
+            if (json.source == "{{exchange.lower()}}") {
+                if (json.symbol == "{{pair.upper()}}") {
                     $('#title').after('<div>' + json.price.toFixed(2) + '</div>');
                 }
             }
         });
     </script>
     <body>
-      <div id="title">BTC price from OKEx (in USDT):</div>
+      <div id="title">{{pair.upper()}} price from {{exchange.capitalize()}}:</div>
     </body>
 </html>

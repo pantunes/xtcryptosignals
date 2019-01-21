@@ -17,7 +17,7 @@ if s.DEBUG:
     app.config['TEMPLATES_AUTO_RELOAD'] = s.DEBUG
 
 
-@app.route('/')
+@app.route('/io')
 def coins_per_exchange():
     return render_template(
         'coins_per_exchange.html',
@@ -25,9 +25,13 @@ def coins_per_exchange():
     )
 
 
-@app.route('/price/okex/btcusdt')
-def price_updates():
-    return render_template('price_update.html')
+@app.route('/io/price/<exchange>/<pair>')
+def price_updates(exchange, pair):
+    return render_template(
+        'price_update.html',
+        exchange=exchange,
+        pair=pair,
+    )
 
 
 def main():
