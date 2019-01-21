@@ -14,7 +14,7 @@
             if (json.source == "okex") {
                 if (json.symbol == "BTCUSDT") {
                     $("#btc").html(json.price);
-                    $('#title').after('<div id="space">' + json.price + '</div>');
+                    $('#title').after('<div>' + json.price + '</div>');
                 }
             }
         });
