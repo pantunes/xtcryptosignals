@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>XTCryptoSignals</title>
+    <meta charset="UTF-8">
+    <title>XTCryptoSignals - Price Update</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.slim.js" type="text/javascript" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript" ></script>
     <script>
@@ -13,12 +13,12 @@
         socket.on('ticker', function(json) {
             if (json.source == "okex") {
                 if (json.symbol == "BTCUSDT") {
-                    $('#title').after('<div>' + json.price + '</div>');
+                    $('#title').after('<div>' + json.price.toFixed(2) + '</div>');
                 }
             }
         });
     </script>
     <body>
-      <div id="title">BTC price in USDT from OKEx:</div>
+      <div id="title">BTC price from OKEx (in USDT):</div>
     </body>
 </html>
