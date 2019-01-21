@@ -6,5 +6,5 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-BINANCE_API_KEY = 'x'  # Add Personal Binance API KEY
-BINANCE_API_SECRET = 'x'  # Add Personal Binance API SECRET
+BINANCE_API_KEY = ''  # Add Personal Binance API KEY
+BINANCE_API_SECRET = ''  # Add Personal Binance API SECRET
