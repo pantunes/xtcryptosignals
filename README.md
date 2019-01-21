@@ -2,16 +2,24 @@
 
 **XTCryptoSignals** is a Python library that includes multiple services such as:
 
+### Ticker
+
 * **Data collection** of crypto-currencies pairs such as BTC/USDT, ETH/BTC or any other pair that is supported by the Exchange API
 * A **Signals** service based on setup rules to send real-time alerts about price, price change, trading volume or market sentiment through E-mail or Push Notifications to the browser or mobile app
 * **Automatic trading**
 
+### Web Server API
+* Restful interface that exposes API calls to get desired crypto-currencies data and runs as well SocketIO Server.
+(This service must be running to allow the Ticker to send real-time data to the Website, using SocketIO)
+
+### Website
+* Website to show some of the platform functionalities. 
 
 ## Roadmap
 
 * [x] Add crypto-currencies exchanges (Dec 2018)
-* [ ] Implement RESTFul API and socket.io to access price data in real time (Jan 2019)
-* [ ] Build website to use this platform (From Jan 2019)
+* [x] Implement RESTFul API and socket.io to access price data in real time (Jan 2019)
+* [x] Build website to use this platform (From Jan 2019)
 * [ ] Setup notification rules for price range, price change, trading volume, price sentiment (Feb 2019)
 * [ ] Build Unit, functional and end-to-end testing (From Jan 2019)
 * [ ] Implement e-mail and web browser push notifications signals (Mar 2019)
@@ -68,20 +76,21 @@ pip install xtcryptosignals
 ```
 
 
-## Start service
+## Ticker
+### Start service
 
 ```bash
-xt-crypto-signals
+xt-ticker
 ```
 
-Starts standalone script without Celery (for testing purposes):
+Run without Celery (for testing purposes):
 ```bash
-xt-crypto-signals --testing
+xt-ticker --testing
 ```
 
 To get a list of supported exchanges:
 ```bash
-xt-crypto-signals --list-config exchanges
+xt-ticker --list-config exchanges
 ```
 ```bash
 binance
@@ -99,10 +108,10 @@ coinbene
 
 Command line help
 ```bash
-xt-crypto-signals --help
+xt-ticker --help
 ```
 ```bash
-Usage: xt-crypto-signals [OPTIONS]
+Usage: xt-ticker [OPTIONS]
 
   Use this tool to collect data from configured coins or/and tokens from
   configured crypto-currencies exchanges.
@@ -115,6 +124,8 @@ Options:
                                   List 'exchanges' or 'currencies' (coins or
                                   tokens) per exchange that the tool currently
                                   supports.
+  --enable-real-time              Enable SocketIO real-time crypto-data
+                                  message broadcasting.
   --version                       Show version.
   -h, --help                      Show this message and exit.
 ```
@@ -159,6 +170,20 @@ HISTORY_FREQUENCY = (
 This service is fast as it uses threading.
 In my current system *(Macbook pro 2017)* it takes around 6 seconds to collect data of 70 crypto-currencies symbols pairs from 7 exchanges and save it in 11 collections in MongoDB.
 (This performance figure depends on used hardware and Internet connection / latency)
+
+## Web Server API
+### Start service
+
+```bash
+xt-server
+```
+
+## Website
+### Start service
+
+```bash
+xt-client
+```
 
 ## Disclaimer
 This project is work in progress and when it comes to trading use it at your own risk.
