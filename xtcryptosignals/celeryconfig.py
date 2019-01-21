@@ -27,6 +27,6 @@ CELERY_IMPORTS = (
 CELERYBEAT_SCHEDULE = {
     'ticker': {
         'task': 'xtcryptosignals.tasks.ticker.update',
-        'schedule': s.TICKER_SCHEDULE
+        'schedule': s.TICKER_SCHEDULE,
     }
 }

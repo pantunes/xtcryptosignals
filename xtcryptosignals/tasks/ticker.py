@@ -12,13 +12,29 @@ from celery.exceptions import Ignore
 from celery import states
 from billiard.context import Process
 from pymongo.errors import ServerSelectionTimeoutError
+from flask_socketio import SocketIO
 import xtcryptosignals.settings as s
+from xtcryptosignals.celeryconfig import BROKER_URL
 from xtcryptosignals.utils.decorators import use_mongodb
 from xtcryptosignals.utils.helpers import get_class
 from xtcryptosignals.models.ticker import Ticker as TickerModel
 
 
-def _process(logger, exchange_class, schema_class, symbol, pairs):
+def _safe_payload(data):
+    try:
+        data['opened_on'] = data['opened_on'].isoformat()
+    except KeyError:
+        pass
+    try:
+        data['closed_on'] = data['closed_on'].isoformat()
+    except KeyError:
+        pass
+    return data
+
+
+def _process(
+        logger, socketio, exchange_class, schema_class, symbol, pairs
+):
     ticker_kwargs = dict()
     if symbol:
         ticker_kwargs.update(symbol=symbol)
@@ -34,19 +50,25 @@ def _process(logger, exchange_class, schema_class, symbol, pairs):
         logger.error(err)
         return
 
-    ticker_data_valid, errors = schema_class(
+    ticker, errors = schema_class(
+        strict=True,
         many=symbol is None
     ).load(ticker_data)
     assert errors == {}, errors
 
     try:
         if pairs:
-            for x in ticker_data_valid:
+            for x in ticker:
                 ticker_model = TickerModel(**x)
                 ticker_model.save()
+                if _ENABLE_SOCKET_IO:
+                    socketio.emit('ticker', _safe_payload(x))
         else:
-            ticker_model = TickerModel(**ticker_data_valid)
+            ticker_model = TickerModel(**ticker)
             ticker_model.save()
+            if _ENABLE_SOCKET_IO:
+                socketio.emit('ticker', _safe_payload(ticker))
+
     except ServerSelectionTimeoutError as error:
         logger.error(
             '{}: {}'.format(exchange_class.__name__, error)
@@ -57,12 +79,18 @@ def _get_24h_price_ticker_data(
         jobs, logger, exchange_class, schema_class,
         symbol=None, pairs=None
 ):
+    socketio = None
+    if _ENABLE_SOCKET_IO:
+        socketio = SocketIO(message_queue=BROKER_URL)
+
     symbol_or_pairs = '-'.join(symbol) if symbol else 'PAIRS'
+
     p = Process(
         name='{} {}'.format(exchange_class.__name__, symbol_or_pairs),
         target=_process,
         args=(
-            logger, exchange_class, schema_class, symbol, pairs
+            logger, socketio, exchange_class,
+            schema_class, symbol, pairs,
         )
     )
     jobs.append(
@@ -145,6 +173,9 @@ def test():
     logging.info('Ending...')
 
 
+_ENABLE_SOCKET_IO = False
+
+
 @click.command(
     context_settings=dict(help_option_names=['-h', '--help'])
 )
@@ -162,11 +193,16 @@ def test():
          "that the tool currently supports."
 )
 @click.option(
+    '--enable-real-time',
+    is_flag=True,
+    help="Enable SocketIO real-time crypto-data message broadcasting."
+)
+@click.option(
     '--version',
     is_flag=True,
     help="Show version."
 )
-def main(testing, list_config, version):
+def main(testing, list_config, enable_real_time, version):
     """
     Use this tool to collect data from configured coins or/and tokens from
     configured crypto-currencies exchanges.
@@ -187,6 +223,9 @@ def main(testing, list_config, version):
         from xtcryptosignals import __title__, __version__
         click.echo('{} {}'.format(__title__, __version__))
         return
+
+    global _ENABLE_SOCKET_IO
+    _ENABLE_SOCKET_IO = enable_real_time
 
     from celery import current_app
     from celery.bin import worker
