@@ -6,15 +6,52 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+from copy import deepcopy
 from flask import Flask, render_template
 import xtcryptosignals.settings as s
 
 
 app = Flask(__name__)
 app.config['STATIC_FOLDER'] = 'static'
-if s.DEBUG:
-    app.jinja_env.auto_reload = s.DEBUG
-    app.config['TEMPLATES_AUTO_RELOAD'] = s.DEBUG
+app.config['TEMPLATES_AUTO_RELOAD'] = s.DEBUG
+app.jinja_env.auto_reload = s.DEBUG
+
+
+@app.route('/io/ticker/pair/<pair>/<offset>')
+def ticker_per_pair(pair, offset):
+    x = deepcopy(s.SYMBOLS_PER_EXCHANGE)
+    for idx, i in enumerate(s.SYMBOLS_PER_EXCHANGE):
+        for a, b in i.items():
+            for c, d in b['pairs']:
+                if c + d == pair.upper():
+                    x[idx][a]['pairs'] = [(c, d)]
+                    break
+            else:
+                x[idx][a]['pairs'] = []
+    return render_template(
+        'ticker_per_offset.html',
+        symbols_per_exchange=x,
+        attributes=[
+            'Price', 'Price Change Percent', 'Volume 24h',
+            'Volume Change Percent', 'Number Trades 24h',
+            'Number Trades Change Percent', 'Created On'
+        ],
+        offset=offset,
+    )
+
+
+@app.route('/io/ticker/<offset>')
+def ticker_per_offset(offset):
+    return render_template(
+        'ticker_per_offset.html',
+        symbols_per_exchange=s.SYMBOLS_PER_EXCHANGE,
+        attributes=[
+            'Price', 'Price Change Percent', 'Volume 24h',
+            'Volume Change Percent', 'Number Trades 24h',
+            'Number Trades Change Percent', 'Created On'
+        ],
+        offset=offset,
+    )
 
 
 @app.route('/io')
@@ -22,6 +59,7 @@ def coins_per_exchange():
     return render_template(
         'coins_per_exchange.html',
         exchanges=['Binance', 'OKEx', 'Bibox'],
+        offset=s.HISTORY_FREQUENCY[0],
     )
 
 
@@ -31,6 +69,7 @@ def price_updates(exchange, pair):
         'price_update.html',
         exchange=exchange,
         pair=pair,
+        offset=s.HISTORY_FREQUENCY[0],
     )
 
 
