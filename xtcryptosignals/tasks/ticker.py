@@ -20,18 +20,6 @@ from xtcryptosignals.utils.helpers import get_class
 from xtcryptosignals.models.ticker import Ticker as TickerModel
 
 
-def _safe_payload(data):
-    try:
-        data['opened_on'] = data['opened_on'].isoformat()
-    except KeyError:
-        pass
-    try:
-        data['closed_on'] = data['closed_on'].isoformat()
-    except KeyError:
-        pass
-    return data
-
-
 def _process(
         logger, socketio, exchange_class, schema_class, symbol, pairs
 ):
@@ -60,14 +48,20 @@ def _process(
         if pairs:
             for x in ticker:
                 ticker_model = TickerModel(**x)
-                ticker_model.save()
+                history_objects = ticker_model.save()
                 if _ENABLE_SOCKET_IO:
-                    socketio.emit('ticker', _safe_payload(x))
+                    for ho in history_objects:
+                        socketio.emit(
+                            'ticker{}'.format(ho['frequency']), ho
+                        )
         else:
             ticker_model = TickerModel(**ticker)
-            ticker_model.save()
+            history_objects = ticker_model.save()
             if _ENABLE_SOCKET_IO:
-                socketio.emit('ticker', _safe_payload(ticker))
+                for ho in history_objects:
+                    socketio.emit(
+                        'ticker{}'.format(ho['frequency']), ho
+                    )
 
     except ServerSelectionTimeoutError as error:
         logger.error(

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>XTCryptoSignals - Ticker per Exchange</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+          integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.slim.js" type="text/javascript" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript" ></script>
+    <script>
+        var socket = io.connect('http://127.0.0.1:5000');
+        socket.on('connect', function() {
+            console.log('Connected');
+        });
+        socket.on('ticker{{offset}}', function(json) {
+            const list = {{attributes|safe}}
+            for (let i = 0; i < list.length; i++) {
+                var _attr = list[i].split(' ').join('_').toLowerCase()
+                var _id = '#' + json.source + '_' + json.symbol.toLowerCase() + '_' + _attr + '_{{offset}}';
+                $(_id).html(json[_attr]);
+            }
+        });
+    </script>
+    <body>
+        <h2>Ticker {{offset}}</h2>
+        {% for i in symbols_per_exchange %}
+            {% for x, d in i.items() %}
+            {% if d['pairs']%}
+            <table class="pure-table pure-table-horizontal">
+                <thead>
+                    <tr>
+                        <th><b>{{x.upper()}}</b></th>
+                        {% for att in attributes %}
+                        <th>{{att}}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c, r in d['pairs'] %}
+                    <tr class="{{ loop.cycle('pure-table-odd', 'pure-table-odd-even') }}">
+                    <td>{{c}}-{{r}}</td>
+                    {% for att in attributes %}
+                    <td id="{{x.lower()}}_{{c.lower()}}{{r.lower()}}_{{att.replace(' ', '_').lower()}}_{{offset}}">-</td>
+                    {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br/>
+            {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </body>
+</html>
