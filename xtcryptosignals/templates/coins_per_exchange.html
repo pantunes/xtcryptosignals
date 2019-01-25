@@ -13,7 +13,7 @@
         socket.on('connect', function() {
             console.log('Connected');
         });
-        socket.on('ticker{{offset}}', function(json) {
+        socket.on('ticker{{frequency}}', function(json) {
             var _id = '#' + json.source + '_' + json.symbol.toLowerCase();
             $(_id).html(json.price.toFixed(2));
         });

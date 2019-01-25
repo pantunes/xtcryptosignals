@@ -10,7 +10,7 @@
         socket.on('connect', function() {
             console.log('Connected');
         });
-        socket.on('ticker{{offset}}', function(json) {
+        socket.on('ticker{{frequency}}', function(json) {
             if (json.source == "{{exchange.lower()}}") {
                 if (json.symbol == "{{pair.upper()}}") {
                     $('#title').after('<div>' + json.price.toFixed(2) + '</div>');

@@ -13,17 +13,17 @@
         socket.on('connect', function() {
             console.log('Connected');
         });
-        socket.on('ticker{{offset}}', function(json) {
+        socket.on('ticker{{frequency}}', function(json) {
             const list = {{attributes|safe}}
             for (let i = 0; i < list.length; i++) {
                 var _attr = list[i].split(' ').join('_').toLowerCase()
-                var _id = '#' + json.source + '_' + json.symbol.toLowerCase() + '_' + _attr + '_{{offset}}';
+                var _id = '#' + json.source + '_' + json.symbol.toLowerCase() + '_' + _attr + '_{{frequency}}';
                 $(_id).html(json[_attr]);
             }
         });
     </script>
     <body>
-        <h2>Ticker {{offset}}</h2>
+        <h2>Ticker {{frequency}}</h2>
         {% for i in symbols_per_exchange %}
             {% for x, d in i.items() %}
             {% if d['pairs']%}
@@ -41,7 +41,7 @@
                     <tr class="{{ loop.cycle('pure-table-odd', 'pure-table-odd-even') }}">
                     <td>{{c}}-{{r}}</td>
                     {% for att in attributes %}
-                    <td id="{{x.lower()}}_{{c.lower()}}{{r.lower()}}_{{att.replace(' ', '_').lower()}}_{{offset}}">-</td>
+                    <td id="{{x.lower()}}_{{c.lower()}}{{r.lower()}}_{{att.replace(' ', '_').lower()}}_{{frequency}}">-</td>
                     {% endfor %}
                     </tr>
                     {% endfor %}

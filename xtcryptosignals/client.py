@@ -17,8 +17,8 @@ app.config['TEMPLATES_AUTO_RELOAD'] = s.DEBUG
 app.jinja_env.auto_reload = s.DEBUG
 
 
-@app.route('/io/ticker/pair/<pair>/<offset>')
-def ticker_per_pair(pair, offset):
+@app.route('/io/ticker/pair/<pair>/<frequency>')
+def ticker_per_pair(pair, frequency):
     x = deepcopy(s.SYMBOLS_PER_EXCHANGE)
     for idx, i in enumerate(s.SYMBOLS_PER_EXCHANGE):
         for a, b in i.items():
@@ -29,28 +29,28 @@ def ticker_per_pair(pair, offset):
             else:
                 x[idx][a]['pairs'] = []
     return render_template(
-        'ticker_per_offset.html',
+        'ticker_per_frequency.html',
         symbols_per_exchange=x,
         attributes=[
             'Price', 'Price Change Percent', 'Volume 24h',
             'Volume Change Percent', 'Number Trades 24h',
             'Number Trades Change Percent', 'Created On'
         ],
-        offset=offset,
+        frequency=frequency,
     )
 
 
-@app.route('/io/ticker/<offset>')
-def ticker_per_offset(offset):
+@app.route('/io/ticker/<frequency>')
+def ticker_per_frequency(frequency):
     return render_template(
-        'ticker_per_offset.html',
+        'ticker_per_frequency.html',
         symbols_per_exchange=s.SYMBOLS_PER_EXCHANGE,
         attributes=[
             'Price', 'Price Change Percent', 'Volume 24h',
             'Volume Change Percent', 'Number Trades 24h',
             'Number Trades Change Percent', 'Created On'
         ],
-        offset=offset,
+        frequency=frequency,
     )
 
 
@@ -59,7 +59,7 @@ def coins_per_exchange():
     return render_template(
         'coins_per_exchange.html',
         exchanges=['Binance', 'OKEx', 'Bibox'],
-        offset=s.HISTORY_FREQUENCY[0],
+        frequency=s.HISTORY_FREQUENCY[0],
     )
 
 
@@ -69,7 +69,7 @@ def price_updates(exchange, pair):
         'price_update.html',
         exchange=exchange,
         pair=pair,
-        offset=s.HISTORY_FREQUENCY[0],
+        frequency=s.HISTORY_FREQUENCY[0],
     )
 
 
