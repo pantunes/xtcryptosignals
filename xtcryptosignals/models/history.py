@@ -38,10 +38,16 @@ class History(Document):
     def get_object(self):
         item = {}
         for k in self._fields.keys():
+            if self[k] is None:
+                continue
             if k == "id":
                 continue
-            if k in ['symbol', 'source', 'price', 'number_trades', 'volume']:
+            if k in ['symbol', 'source', 'number_trades_24h']:
                 item[k] = self[k]
+                continue
+            if k in ['price', 'volume_24h', 'price_change_percent',
+                     'number_trades_change_percent', 'volume_change_percent']:
+                item[k] = float(self[k])
                 continue
             if k in ['created_on']:
                 item[k] = str(self[k])
