@@ -1,6 +1,19 @@
 # Changelog
 All changes will be registered here per release 
 
+## [0.0.7] - Current date
+Built 3 webpages to show platform functionalities in the following URLs:
+* /io
+* /io/ticker/pair/btcusdt/10s
+
+Note that any pair can be used in URL instead of btcusdt;
+10s, can be substituted by other frequency setup in HISTORY_FREQUENCY in
+settings.py
+
+* /io/ticker/10s
+
+10s, again, can be substituted by other frequency setup in HISTORY_FREQUENCY in
+settings.py
 
 ## [0.0.6] - 2018-01-20
 Added first working version of Web Server API and Web page
