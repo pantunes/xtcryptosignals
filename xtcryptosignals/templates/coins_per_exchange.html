@@ -33,10 +33,10 @@
                 {% for exchange in exchanges %}
                 <tr class="{{ loop.cycle('pure-table-odd', 'pure-table-odd-even') }}">
                     <td>{{exchange}}</td>
-                    <td id="{{exchange.lower()}}_btcusdt">-</td>
-                    <td id="{{exchange.lower()}}_ethusdt">-</td>
-                    <td id="{{exchange.lower()}}_xrpusdt">-</td>
-                    <td id="{{exchange.lower()}}_ltcusdt">-</td>
+                    <td id="{{exchange.lower()}}_btcusdt" style="text-align: right;">-</td>
+                    <td id="{{exchange.lower()}}_ethusdt" style="text-align: right;">-</td>
+                    <td id="{{exchange.lower()}}_xrpusdt" style="text-align: right;">-</td>
+                    <td id="{{exchange.lower()}}_ltcusdt" style="text-align: right;">-</td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -35,8 +35,8 @@ class History(Document):
         'ordering': ['-created_on'],
     }
 
-    def get_object(self):
-        item = {}
+    def get_object(self, frequency):
+        item = dict(frequency=frequency)
         for k in self._fields.keys():
             if self[k] is None:
                 continue
