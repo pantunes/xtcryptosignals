@@ -50,6 +50,6 @@ class History(Document):
                 item[k] = float(self[k])
                 continue
             if k in ['created_on']:
-                item[k] = str(self[k])
+                item[k] = self[k].strftime('%Y-%m-%d %H:%M:%S')
                 continue
         return item
