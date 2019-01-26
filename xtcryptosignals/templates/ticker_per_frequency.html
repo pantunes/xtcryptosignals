@@ -8,7 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.slim.js" type="text/javascript" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script>
+        function isInt(n){
+            return Number(n) === n && n % 1 === 0;
+        }
+        function isFloat(n) {
+            return Number(n) === n && n % 1 !== 0;
+        }
         var socket = io.connect('http://127.0.0.1:5000');
         socket.on('connect', function() {
             console.log('Connected');
@@ -18,7 +25,18 @@
             for (let i = 0; i < list.length; i++) {
                 var _attr = list[i].split(' ').join('_').toLowerCase()
                 var _id = '#' + json.source + '_' + json.symbol.toLowerCase() + '_' + _attr + '_{{frequency}}';
-                $(_id).html(json[_attr]);
+                val = json[_attr]
+                if (_attr == 'price') {
+                    const formatter = new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                        minimumFractionDigits: (val + "").split(".")[1].length,
+                    })
+                    val = formatter.format(val)
+                } else if (isFloat(json[_attr])) {
+                    val = numeral(val).format('0,0.00');
+                }
+                $(_id).html(val);
             }
         });
     </script>
@@ -41,7 +59,7 @@
                     <tr class="{{ loop.cycle('pure-table-odd', 'pure-table-odd-even') }}">
                     <td>{{c}}-{{r}}</td>
                     {% for att in attributes %}
-                    <td id="{{x.lower()}}_{{c.lower()}}{{r.lower()}}_{{att.replace(' ', '_').lower()}}_{{frequency}}">-</td>
+                    <td id="{{x.lower()}}_{{c.lower()}}{{r.lower()}}_{{att.replace(' ', '_').lower()}}_{{frequency}}" style="text-align: right;">-</td>
                     {% endfor %}
                     </tr>
                     {% endfor %}

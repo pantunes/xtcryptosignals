@@ -96,7 +96,7 @@ class Ticker(Document):
                 )
                 m.save()
 
-                objects.append({ **m.get_object(), **dict(frequency=x)})
+                objects.append(m.get_object(frequency=x))
 
         super(Ticker, self).save(*args, **kwargs)
         return objects
