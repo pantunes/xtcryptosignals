@@ -13,7 +13,6 @@
         })
         var socket = io.connect('http://127.0.0.1:5000/{{frequency}}');
         socket.on('ticker', function(json) {
-            console.log(json)
             if (json.source == "{{exchange.lower()}}") {
                 if (json.symbol == "{{pair.upper()}}") {
                     $('#price').after('<div>' + price_formatter.format(json.price) + '</div>');

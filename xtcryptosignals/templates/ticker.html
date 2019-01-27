@@ -16,7 +16,6 @@
         })
         var socket = io.connect('http://127.0.0.1:5000/{{frequency}}');
         socket.on('ticker', function(json) {
-            console.log(json);
             var _id = '#' + json.source + '_' + json.symbol.toUpperCase();
             $(_id).html(price_formatter.format(json.price));
         });
