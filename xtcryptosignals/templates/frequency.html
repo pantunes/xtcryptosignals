@@ -23,6 +23,9 @@
                 var _attr = list[i].split(' ').join('_').toLowerCase()
                 var _id = '#' + json.source + '_' + json.symbol.toLowerCase() + '_' + _attr + '_' + json.frequency;
                 var val = json[_attr]
+                if (val == null) {
+                    continue
+                }
                 if (_attr == 'price' || _attr == 'volume_24h') {
                     var precision = (val + "").split(".")
                     var frac_digits = 2
