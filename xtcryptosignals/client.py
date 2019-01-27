@@ -17,8 +17,25 @@ app.config['TEMPLATES_AUTO_RELOAD'] = s.DEBUG
 app.jinja_env.auto_reload = s.DEBUG
 
 
-@app.route('/io/ticker/pair/<pair>/<frequency>')
-def ticker_per_pair(pair, frequency):
+_COLUMN_ATTRIBUTES = [
+    'Price', 'Price Change Percent', 'Volume 24h',
+    'Volume Change Percent', 'Number Trades 24h',
+    'Number Trades Change Percent', 'Created On'
+]
+
+
+@app.route('/io/ticker/<exchange>/<pair>/<frequency>')
+def exchange_pair_frequency(exchange, pair, frequency):
+    return render_template(
+        'exchange_pair_frequency.html',
+        exchange=exchange,
+        pair=pair,
+        frequency=frequency,
+    )
+
+
+@app.route('/io/ticker/<pair>/<frequency>')
+def pair_frequency(pair, frequency):
     x = deepcopy(s.SYMBOLS_PER_EXCHANGE)
     for idx, i in enumerate(s.SYMBOLS_PER_EXCHANGE):
         for a, b in i.items():
@@ -29,46 +46,29 @@ def ticker_per_pair(pair, frequency):
             else:
                 x[idx][a]['pairs'] = []
     return render_template(
-        'ticker_per_frequency.html',
+        'frequency.html',
         symbols_per_exchange=x,
-        attributes=[
-            'Price', 'Price Change Percent', 'Volume 24h',
-            'Volume Change Percent', 'Number Trades 24h',
-            'Number Trades Change Percent', 'Created On'
-        ],
+        attributes=_COLUMN_ATTRIBUTES,
         frequency=frequency,
     )
 
 
 @app.route('/io/ticker/<frequency>')
-def ticker_per_frequency(frequency):
+def frequency(frequency):
     return render_template(
-        'ticker_per_frequency.html',
+        'frequency.html',
         symbols_per_exchange=s.SYMBOLS_PER_EXCHANGE,
-        attributes=[
-            'Price', 'Price Change Percent', 'Volume 24h',
-            'Volume Change Percent', 'Number Trades 24h',
-            'Number Trades Change Percent', 'Created On'
-        ],
+        attributes=_COLUMN_ATTRIBUTES,
         frequency=frequency,
     )
 
 
-@app.route('/io')
-def coins_per_exchange():
+@app.route('/io/ticker')
+def ticker():
     return render_template(
-        'coins_per_exchange.html',
+        'ticker.html',
         exchanges=['Binance', 'OKEx', 'Bibox'],
-        frequency=s.HISTORY_FREQUENCY[0],
-    )
-
-
-@app.route('/io/price/<exchange>/<pair>')
-def price_updates(exchange, pair):
-    return render_template(
-        'price_update.html',
-        exchange=exchange,
-        pair=pair,
+        pairs=['BTCUSDT', 'ETHUSDT', 'XRPUSDT', 'LTCUSDT', ],
         frequency=s.HISTORY_FREQUENCY[0],
     )
 

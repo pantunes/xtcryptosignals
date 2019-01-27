@@ -52,7 +52,7 @@ def _process(
                 if _ENABLE_SOCKET_IO:
                     for h in history_dicts:
                         socketio.emit(
-                            'ticker{}'.format(h['frequency']), h
+                            'ticker', h, namespace='/{}'.format(h['frequency'])
                         )
         else:
             ticker_model = TickerModel(**ticker)
@@ -60,7 +60,7 @@ def _process(
             if _ENABLE_SOCKET_IO:
                 for h in history_dicts:
                     socketio.emit(
-                        'ticker{}'.format(h['frequency']), h
+                        'ticker', h, namespace='/{}'.format(h['frequency'])
                     )
 
     except ServerSelectionTimeoutError as error:
