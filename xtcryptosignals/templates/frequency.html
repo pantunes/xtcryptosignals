@@ -21,11 +21,11 @@
             const list = {{attributes|safe}}
             for (let i = 0; i < list.length; i++) {
                 var _attr = list[i].split(' ').join('_').toLowerCase()
-                var _id = '#' + json.source + '_' + json.symbol.toLowerCase() + '_' + _attr + '_' + json.frequency;
                 var val = json[_attr]
                 if (val == null) {
                     continue
                 }
+                var _id = '#' + json.source + '_' + json.symbol.toLowerCase() + '_' + _attr + '_' + json.frequency;
                 if (_attr == 'price' || _attr == 'volume_24h') {
                     var precision = (val + "").split(".")
                     var frac_digits = 2
