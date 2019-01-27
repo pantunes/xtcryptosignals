@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>XTCryptoSignals - Ticker per Exchange</title>
+    <title>XTCryptoSignals - Frequency</title>
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
           integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,15 +16,13 @@
         function isFloat(n) {
             return Number(n) === n && n % 1 !== 0;
         }
-        var socket = io.connect('http://127.0.0.1:5000');
-        socket.on('connect', function() {
-            console.log('Connected');
-        });
-        socket.on('ticker{{frequency}}', function(json) {
+        var socket = io.connect('http://127.0.0.1:5000/{{frequency}}');
+        socket.on('ticker', function(json) {
+            console.log(json)
             const list = {{attributes|safe}}
             for (let i = 0; i < list.length; i++) {
                 var _attr = list[i].split(' ').join('_').toLowerCase()
-                var _id = '#' + json.source + '_' + json.symbol.toLowerCase() + '_' + _attr + '_{{frequency}}';
+                var _id = '#' + json.source + '_' + json.symbol.toLowerCase() + '_' + _attr + '_' + json.frequency;
                 var val = json[_attr]
                 if (_attr == 'price' || _attr == 'volume_24h') {
                     var precision = (val + "").split(".")
@@ -34,12 +32,12 @@
                             frac_digits = precision[1].length
                         }
                     }
-                    const formatter = new Intl.NumberFormat('en-US', {
+                    const price_formatter = new Intl.NumberFormat('en-US', {
                         style: 'currency',
                         currency: 'USD',
                         minimumFractionDigits: frac_digits,
                     })
-                    val = formatter.format(val)
+                    val = price_formatter.format(val)
                 } else if (_attr == 'number_trades_24h') {
                     val = numeral(val).format('0,0');
                 } else if (isFloat(json[_attr])) {

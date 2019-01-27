@@ -44,7 +44,7 @@ class Ticker(Document):
     }
 
     def save(self, *args, **kwargs):
-        objects = []
+        history_list_dicts = []
         for x in s.HISTORY_FREQUENCY:
             model = type('History{}'.format(x), (History,), {})
             dt = datetime.utcnow() - timedelta(
@@ -83,7 +83,7 @@ class Ticker(Document):
                         ) - 1.0) * 100.0
                         if round(volume_change_percent, 2) == -0.00:
                             volume_change_percent = 0.0
-                m = model(
+                history_object = model(
                     symbol=self['symbol'],
                     source=self['source'],
                     price=self['price'],
@@ -94,12 +94,14 @@ class Ticker(Document):
                     volume_change_percent=volume_change_percent,
                     created_on=self['created_on'],
                 )
-                m.save()
+                history_object.save()
 
-                objects.append(m.get_object(frequency=x))
+                history_list_dicts.append(
+                    history_object.get_object(frequency=x)
+                )
 
         super(Ticker, self).save(*args, **kwargs)
-        return objects
+        return history_list_dicts
 
     def get_object(self):
         item = {}
