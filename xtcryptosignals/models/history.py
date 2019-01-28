@@ -35,8 +35,8 @@ class History(Document):
         'ordering': ['-created_on'],
     }
 
-    def get_object(self):
-        item = {}
+    def get_object(self, frequency):
+        item = dict(frequency=frequency)
         for k in self._fields.keys():
             if self[k] is None:
                 continue
@@ -50,6 +50,6 @@ class History(Document):
                 item[k] = float(self[k])
                 continue
             if k in ['created_on']:
-                item[k] = str(self[k])
+                item[k] = self[k].strftime('%Y-%m-%d %H:%M:%S')
                 continue
         return item

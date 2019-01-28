@@ -8,9 +8,11 @@ __email__ = "pjmlantunes@gmail.com"
 
 import eventlet
 from flask import Flask, jsonify
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, Namespace
 import xtcryptosignals.settings as s
 from xtcryptosignals.celeryconfig import BROKER_URL
+from xtcryptosignals.utils import helpers
+from xtcryptosignals.utils.decorators import use_mongodb
 
 
 eventlet.monkey_patch()
@@ -26,13 +28,32 @@ def root():
 
 
 @socketio.on('connect')
-def on_connect():
-    print('on_connect')
+def on_general_connect():
+    print('on_connect /')
 
 
 @socketio.on('disconnect')
-def on_disconnect():
-    print('on_disconnect')
+def on_general_disconnect():
+    print('on_disconnect /')
+
+
+class RootSockeIONamespace(Namespace):
+    @use_mongodb()
+    def on_connect(self):
+        print('on_connect ' + self.namespace)
+        rows = helpers.get_ticker_data_from_namespace(self.namespace)
+        for row in rows:
+            socketio.emit('ticker', row, namespace=self.namespace)
+
+    def on_disconnect(self):
+        print('on_disconnect ' + self.namespace)
+
+
+for x in s.HISTORY_FREQUENCY:
+    socketio_model = type(
+        'SockeIONamespace{}'.format(x), (RootSockeIONamespace,), {}
+    )
+    socketio.on_namespace(socketio_model('/{}'.format(x)))
 
 
 def main():

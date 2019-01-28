@@ -48,19 +48,19 @@ def _process(
         if pairs:
             for x in ticker:
                 ticker_model = TickerModel(**x)
-                history_objects = ticker_model.save()
+                history_dicts = ticker_model.save()
                 if _ENABLE_SOCKET_IO:
-                    for ho in history_objects:
+                    for h in history_dicts:
                         socketio.emit(
-                            'ticker{}'.format(ho['frequency']), ho
+                            'ticker', h, namespace='/{}'.format(h['frequency'])
                         )
         else:
             ticker_model = TickerModel(**ticker)
-            history_objects = ticker_model.save()
+            history_dicts = ticker_model.save()
             if _ENABLE_SOCKET_IO:
-                for ho in history_objects:
+                for h in history_dicts:
                     socketio.emit(
-                        'ticker{}'.format(ho['frequency']), ho
+                        'ticker', h, namespace='/{}'.format(h['frequency'])
                     )
 
     except ServerSelectionTimeoutError as error:
