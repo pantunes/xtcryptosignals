@@ -3,6 +3,7 @@ All changes will be registered here per release
 
 ## [0.0.7] - Current date
 Built 3 webpages to show platform functionalities in the following URLs:
+
 * /io
 * /io/ticker/pair/btcusdt/10s
 
