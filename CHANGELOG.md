@@ -1,7 +1,7 @@
 # Changelog
 All changes will be registered here per release 
 
-## [0.0.7] - Current date
+## [0.0.7] - 2019-01-28
 Built 3 web pages to show platform functionalities in the following URLs:
 
 * /io/ticker/<exchange>/<pair>/<frequency>
@@ -9,7 +9,7 @@ Built 3 web pages to show platform functionalities in the following URLs:
 * /io/ticker/<frequency>
 * /io/ticker
 
-## [0.0.6] - 2018-01-20
+## [0.0.6] - 2019-01-20
 Added first working version of Web Server API and Web page
 
 Implemented SocketIO
