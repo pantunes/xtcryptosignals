@@ -4,9 +4,9 @@ All changes will be registered here per release
 ## [0.0.7] - Current date
 Built 3 web pages to show platform functionalities in the following URLs:
 
-* /io/ticker/&lt;exchange&gt;/&lt;pair&gt;/&lt;frequency&gt;
-* /io/ticker/&lt;pair&gt;/&lt;frequency&gt;
-* /io/ticker/&lt;frequency&gt;
+* /io/ticker/<exchange>/<pair>/<frequency>
+* /io/ticker/<pair>/<frequency>
+* /io/ticker/<frequency>
 * /io/ticker
 
 ## [0.0.6] - 2018-01-20
