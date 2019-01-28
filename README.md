@@ -168,7 +168,7 @@ HISTORY_FREQUENCY = (
 
 ### Results
 This service is fast as it uses threading.
-In my current system *(Macbook pro 2017)* it takes around 6 seconds to collect data of 70 crypto-currencies symbols pairs from 7 exchanges and save it in 11 collections in MongoDB.
+It takes me around 6 seconds to collect data of 70 crypto-currencies symbols pairs from 7 exchanges and save it in 11 collections in MongoDB.
 (This performance figure depends on used hardware and Internet connection / latency)
 
 ## Web Server API
