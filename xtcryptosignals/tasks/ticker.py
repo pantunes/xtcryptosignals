@@ -187,7 +187,7 @@ _ENABLE_SOCKET_IO = False
          "that the tool currently supports."
 )
 @click.option(
-    '--enable-real-time',
+    '--enable-real-time-messaging',
     is_flag=True,
     help="Enable SocketIO real-time crypto-data message broadcasting."
 )
@@ -196,7 +196,7 @@ _ENABLE_SOCKET_IO = False
     is_flag=True,
     help="Show version."
 )
-def main(testing, list_config, enable_real_time, version):
+def main(testing, list_config, enable_real_time_messaging, version):
     """
     Use this tool to collect data from configured coins or/and tokens from
     configured crypto-currencies exchanges.
@@ -219,7 +219,7 @@ def main(testing, list_config, enable_real_time, version):
         return
 
     global _ENABLE_SOCKET_IO
-    _ENABLE_SOCKET_IO = enable_real_time
+    _ENABLE_SOCKET_IO = enable_real_time_messaging
 
     from celery import current_app
     from celery.bin import worker
