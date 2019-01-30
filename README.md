@@ -124,7 +124,7 @@ Options:
                                   List 'exchanges' or 'currencies' (coins or
                                   tokens) per exchange that the tool currently
                                   supports.
-  --enable-real-time              Enable SocketIO real-time crypto-data
+  --enable-real-time-messaging    Enable SocketIO real-time crypto-data
                                   message broadcasting.
   --version                       Show version.
   -h, --help                      Show this message and exit.
@@ -162,7 +162,7 @@ UPHOLD: {
 Initial setup to create dynamic MongoDB collections for data segmentation categorized by Exchanges pooling frequency in [settings.py](xtcryptosignals/settings.py).
 ```python
 HISTORY_FREQUENCY = (
-    '10s', '30s', '1m', '10m', '30m', '1h', '3h', '6h', '12h', '24h'
+    '10s', '30s', '1m', '10m', '30m', '1h', '3h', '6h', '12h', '24h', '1w',
 )
 ```
 
@@ -184,7 +184,7 @@ xt-server
 ```bash
 xt-client
 ```
-Open the browser with the URL http://127.0.0.1:8000
+Open the browser with the URL http://127.0.0.1:8000/io/ticker/10s
 
 ## Disclaimer
 This project is work in progress and when it comes to trading use it at your own risk.
