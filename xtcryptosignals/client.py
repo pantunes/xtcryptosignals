@@ -24,18 +24,18 @@ _COLUMN_ATTRIBUTES = [
 ]
 
 
-@app.route('/io/ticker/<exchange>/<pair>/<frequency>')
-def exchange_pair_frequency(exchange, pair, frequency):
+@app.route('/io/ticker/<frequency>')
+def ticker(frequency):
     return render_template(
-        'exchange_pair_frequency.html',
-        exchange=exchange,
-        pair=pair,
+        'ticker.html',
+        symbols_per_exchange=s.SYMBOLS_PER_EXCHANGE,
+        attributes=_COLUMN_ATTRIBUTES,
         frequency=frequency,
     )
 
 
 @app.route('/io/ticker/<pair>/<frequency>')
-def pair_frequency(pair, frequency):
+def ticker_pair(pair, frequency):
     x = deepcopy(s.SYMBOLS_PER_EXCHANGE)
     for idx, i in enumerate(s.SYMBOLS_PER_EXCHANGE):
         for a, b in i.items():
@@ -46,30 +46,11 @@ def pair_frequency(pair, frequency):
             else:
                 x[idx][a]['pairs'] = []
     return render_template(
-        'frequency.html',
+        'ticker_pair.html',
         symbols_per_exchange=x,
         attributes=_COLUMN_ATTRIBUTES,
         frequency=frequency,
-    )
-
-
-@app.route('/io/ticker/<frequency>')
-def frequency(frequency):
-    return render_template(
-        'frequency.html',
-        symbols_per_exchange=s.SYMBOLS_PER_EXCHANGE,
-        attributes=_COLUMN_ATTRIBUTES,
-        frequency=frequency,
-    )
-
-
-@app.route('/io/ticker')
-def ticker():
-    return render_template(
-        'ticker.html',
-        exchanges=['Binance', 'OKEx', 'Bibox'],
-        pairs=['BTCUSDT', 'ETHUSDT', 'XRPUSDT', 'LTCUSDT', ],
-        frequency=s.HISTORY_FREQUENCY[0],
+        pair=pair,
     )
 
 
