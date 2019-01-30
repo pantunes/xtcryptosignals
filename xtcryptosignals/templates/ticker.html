@@ -1,45 +1,75 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>XTCryptoSignals - Ticker</title>
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
-          integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.slim.js" type="text/javascript" ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript" ></script>
-    <script>
-        const price_formatter = new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-            minimumFractionDigits: 2,
-        })
-        var socket = io.connect('http://127.0.0.1:5000/{{frequency}}');
-        socket.on('ticker', function(json) {
-            var _id = '#' + json.source + '_' + json.symbol.toUpperCase();
-            $(_id).html(price_formatter.format(json.price));
-        });
-    </script>
-    <body>
-        <table class="pure-table pure-table-horizontal">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    {% for pair in pairs %}
-                    <th>{{pair}}</th>
-                    {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for exchange in exchanges %}
-                <tr class="{{ loop.cycle('pure-table-odd', 'pure-table-odd-even') }}">
-                    <td>{{exchange}}</td>
-                    {% for pair in pairs %}
-                    <td id="{{exchange.lower()}}_{{pair}}" style="text-align: right;">-</td>
-                    {% endfor %}
-                </tr>
+{% extends 'base.html' %}
+
+{% block title %}{{frequency}}{% endblock %}
+
+{% block scripts %}
+function isInt(n){
+    return Number(n) === n && n % 1 === 0;
+}
+function isFloat(n) {
+    return Number(n) === n && n % 1 !== 0;
+}
+var socket = io.connect('http://127.0.0.1:5000/{{frequency}}');
+socket.on('ticker', function(json) {
+    const list = {{attributes|safe}}
+    for (let i = 0; i < list.length; i++) {
+        var _attr = list[i].split(' ').join('_').toLowerCase()
+        var val = json[_attr]
+        if (val == null) {
+            continue
+        }
+        var _id = '#' + json.source + '_' + json.symbol.toLowerCase() + '_' + _attr + '_' + json.frequency;
+        if (_attr == 'price' || _attr == 'volume_24h') {
+            var precision = (val + "").split(".")
+            var frac_digits = 2
+            if (_attr == 'price') {
+                if (precision.length > 1) {
+                    frac_digits = precision[1].length
+                }
+            }
+            const price_formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: frac_digits,
+            })
+            val = price_formatter.format(val)
+        } else if (_attr == 'number_trades_24h') {
+            val = numeral(val).format('0,0');
+        } else if (isFloat(json[_attr])) {
+            val = numeral(val).format('0,0.00');
+        }
+        $(_id).html(val);
+    }
+});
+{% endblock %}
+
+{% block body %}
+{% for i in symbols_per_exchange %}
+    {% for exchange, d in i.items() %}
+    {% if d['pairs']%}
+    <table>
+        <caption><h3>{{exchange.upper()}} - {{frequency}}</h3></caption>
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                {% for att in attributes %}
+                <th>{{att}}</th>
                 {% endfor %}
-            </tbody>
-        </table>
-    </body>
-</html>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c, r in d['pairs'] %}
+            <tr>
+            <td>{{c}}-{{r}}</td>
+            {% for att in attributes %}
+            <td id="{{exchange.lower()}}_{{c.lower()}}{{r.lower()}}_{{att.replace(' ', '_').lower()}}_{{frequency}}" style="text-align: right;">-</td>
+            {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br/>
+    {% endif %}
+    {% endfor %}
+{% endfor %}
+{% endblock %}
