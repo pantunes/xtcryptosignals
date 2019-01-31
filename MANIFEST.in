@@ -1,0 +1,2 @@
+include xtcryptosignals/templates/*.*
+include xtcryptosignals/static/*.*
