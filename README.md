@@ -185,6 +185,7 @@ xt-server
 xt-client
 ```
 Open the browser with the URL http://127.0.0.1:8000
+![alt text](xtcryptosignals/static/imgs/page.png)
 
 ## Disclaimer
 This project is work in progress and when it comes to trading use it at your own risk.
