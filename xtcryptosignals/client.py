@@ -9,7 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 from copy import deepcopy
 from flask import Flask, render_template
 import xtcryptosignals.settings as s
-
+from xtcryptosignals import __version__
 
 app = Flask(__name__)
 app.config['STATIC_FOLDER'] = 'static'
@@ -22,6 +22,11 @@ _COLUMN_ATTRIBUTES = [
     'Volume Change Percent', 'Number Trades 24h',
     'Number Trades Change Percent', 'Created On'
 ]
+
+
+@app.route('/')
+def index():
+    return render_template('index.html', version=__version__)
 
 
 @app.route('/io/ticker/<frequency>')

@@ -1,6 +1,6 @@
 # XTCryptoSignals
 
-**XTCryptoSignals** is a Python library that includes multiple services such as:
+**XTCryptoSignals** is a Python library that includes the following services:
 
 ### Ticker
 
@@ -8,8 +8,8 @@
 * A **Signals** service based on setup rules to send real-time alerts about price, price change, trading volume or market sentiment through E-mail or Push Notifications to the browser or mobile app
 * **Automatic trading**
 
-### Web Server API
-* Restful interface that exposes API calls to get desired crypto-currencies data and runs as well SocketIO Server.
+### RESTFul Server API
+* Restful interface that exposes API entry points to get desired crypto-currencies data and runs as well SocketIO Server.
 (This service must be running to allow the Ticker to send real-time data to the Website, using SocketIO)
 
 ### Website
@@ -171,7 +171,7 @@ This service is fast as it uses threading.
 It takes me around 6 seconds to collect data of 70 crypto-currencies symbols pairs from 7 exchanges and save it in 11 collections in MongoDB.
 (This performance figure depends on used hardware and Internet connection / latency)
 
-## Web Server API
+### RESTFul Server API
 ### Start service
 
 ```bash
@@ -184,7 +184,7 @@ xt-server
 ```bash
 xt-client
 ```
-Open the browser with the URL http://127.0.0.1:8000/io/ticker/10s
+Open the browser with the URL http://127.0.0.1:8000
 
 ## Disclaimer
 This project is work in progress and when it comes to trading use it at your own risk.

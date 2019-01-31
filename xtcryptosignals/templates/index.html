@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Ticker{% endblock %}
+
+{% block body %}
+<div class="container">
+  <section class="header">
+    <h2 class="title">XTCryptoSignals <small>v{{version}}</small></h2>
+    <a class="button button-primary" href="https://bitbucket.org/pantunes/xtcryptosignals">Clone Bitbucket Project</a>
+    <a class="button button-primary" href="https://pypi.org/project/XTCryptoSignals">Download Pypi Package</a>
+    <div class="value-props row">
+      <div class="four columns value-prop">
+        <img class="value-img" src="/static/imgs/icons8-timer-480.png">
+        Ticker with Data collection, Signals Service and Automatic Trading
+      </div>
+      <div class="four columns value-prop">
+        <img class="value-img" src="/static/imgs/icons8-server-480.png">
+        RESTFul Server API
+      </div>
+      <div class="four columns value-prop">
+        <img class="value-img" src="/static/imgs/icons8-website-480.png">
+        Website
+      </div>
+    </div>
+  </section>
+  <div id="intro">
+    <h6 class="docs-header">Examples of functionality:</h6>
+    <a class="button button-secondary" href="/io/ticker/10s">See 10 seconds Ticker page</a><br/>
+    <a class="button button-secondary" href="/io/ticker/btcusdt/10s">See BTC-USDT 10 seconds Ticker page</a>
+  </div>
+</div>
+{% endblock %}
