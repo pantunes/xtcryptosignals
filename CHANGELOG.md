@@ -1,8 +1,8 @@
 # Changelog
 All changes will be registered here per release 
 
-## [0.0.8] - Current
-Refactored templates and server API
+## [0.0.8] - 2019-01-31
+Refactored HTML templates and server API
 
 ## [0.0.7] - 2019-01-28
 Built 3 web pages to show platform functionalities in the following URLs:
