@@ -24,7 +24,7 @@ _COLUMN_ATTRIBUTES = [
 ]
 
 
-@app.route('/io/ticker')
+@app.route('/')
 def index():
     return render_template('index.html', version=__version__)
 
