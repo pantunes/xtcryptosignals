@@ -1,6 +1,6 @@
 # XTCryptoSignals
 
-**XTCryptoSignals** is a Python library that includes multiple services such as:
+**XTCryptoSignals** is a Python library that includes the following services:
 
 ### Ticker
 
