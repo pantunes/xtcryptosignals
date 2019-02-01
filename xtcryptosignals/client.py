@@ -6,6 +6,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+import random
 from copy import deepcopy
 from flask import Flask, render_template
 import xtcryptosignals.settings as s
@@ -26,7 +27,22 @@ _COLUMN_ATTRIBUTES = [
 
 @app.route('/')
 def index():
-    return render_template('index.html', version=__version__)
+    symbols_per_exchange = []
+    for x in s.SYMBOLS_PER_EXCHANGE:
+        for exchange, item in x.items():
+            if not item['pairs']:
+                continue
+            random_list = [x[0]+x[1] for x in item['pairs']]
+            random.shuffle(random_list)
+            symbols_per_exchange.append(
+                {exchange: random_list[:3]}
+            )
+    return render_template(
+        'index.html',
+        version=__version__,
+        symbols_per_exchange=symbols_per_exchange,
+        frequency=", ".join(s.HISTORY_FREQUENCY),
+    )
 
 
 @app.route('/io/ticker/<frequency>')

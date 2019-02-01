@@ -1,6 +1,12 @@
 # Changelog
 All changes will be registered here per release 
 
+## [0.1.0] - 2019-02-01
+Updated Webpage
+
+## [0.0.9] - 2019-01-31
+Small fixes
+
 ## [0.0.8] - 2019-01-31
 Refactored HTML templates and server API
 

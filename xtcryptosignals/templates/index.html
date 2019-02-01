@@ -24,9 +24,19 @@
     </div>
   </section>
   <div id="intro">
-    <h6 class="docs-header">Examples of functionality:</h6>
-    <a class="button button-secondary" href="/io/ticker/10s">See 10 seconds Ticker page</a><br/>
-    <a class="button button-secondary" href="/io/ticker/btcusdt/10s">See BTC-USDT 10 seconds Ticker page</a>
+    <h6 class="docs-header">Ticker with all configured coins/tokens:</h6>
+    <a class="button button-secondary" href="/io/ticker/10s">10 seconds Ticker</a><br/><br/>
+    <h6 class="docs-header">Ticker with 3 random configured coins/tokens per Exchange:</h6>
+    {% for data in symbols_per_exchange %}
+    {% for exchange, items in data.items() %}
+    <h6 class="docs-header">{{exchange}}:</h6>
+    {% for item in items %}
+    <a class="button button-secondary" href="/io/ticker/{{item}}/10s">{{item}} 10 seconds</a>
+    {% endfor %}
+    {% endfor %}
+    {% endfor %}
   </div>
 </div>
+<br/>
+<small>Possible pooling frequency: {{frequency}}</small>
 {% endblock %}
