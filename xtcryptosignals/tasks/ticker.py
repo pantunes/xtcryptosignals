@@ -49,7 +49,7 @@ def _process(
             for x in ticker:
                 ticker_model = TickerModel(**x)
                 history_dicts = ticker_model.save()
-                if _ENABLE_SOCKET_IO:
+                if socketio:
                     for h in history_dicts:
                         socketio.emit(
                             'ticker', h, namespace='/{}'.format(h['frequency'])
@@ -57,7 +57,7 @@ def _process(
         else:
             ticker_model = TickerModel(**ticker)
             history_dicts = ticker_model.save()
-            if _ENABLE_SOCKET_IO:
+            if socketio:
                 for h in history_dicts:
                     socketio.emit(
                         'ticker', h, namespace='/{}'.format(h['frequency'])
