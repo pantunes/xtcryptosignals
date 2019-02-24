@@ -188,7 +188,7 @@ Open the browser with the URL http://127.0.0.1:8000
 
 ![alt text](xtcryptosignals/static/imgs/intro.png)
 
-Example of Ticker detail page
+Example of Ticker detail page in the URL http://127.0.0.1:8000/io/ticker/10s
 
 ![alt text](xtcryptosignals/static/imgs/detail.png)
 
