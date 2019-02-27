@@ -46,10 +46,10 @@ setuptools.setup(
     install_requires=requirements,
     zip_safe=False,
     keywords=[
-        'xtcryptosignals', 'trade', 'bitcoin', 'ethereum', 'litecoin',
-        'client', 'api', 'wrapper', 'exchange', 'dex', 'crypto',
-        'currency', 'cryptocurrency', 'trading', 'trading-api',
-        'signals', 'data'
+        'xtcryptosignals', 'trading', 'coins', 'tokens', 'altcoins',
+        'bitcoin', 'ethereum', 'litecoin', 'tron', 'ripple',
+        'exchange', 'dex', 'crypto', 'currency', 'cryptocurrency',
+        'trading', 'trading-api', 'signals'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
