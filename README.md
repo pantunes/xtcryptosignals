@@ -20,11 +20,11 @@
 * [x] Add crypto-currencies exchanges (Dec 2018)
 * [x] Implement RESTFul API and socket.io to access price data in real time (Jan 2019)
 * [x] Build website to use this platform (From Jan 2019)
-* [ ] Setup notification rules for price range, price change, trading volume, price sentiment (Feb 2019)
 * [ ] Build Unit, functional and end-to-end testing (From Jan 2019)
-* [ ] Implement e-mail and web browser push notifications signals (Mar 2019)
-* [ ] Implement automatic trading (Apr 2019)
+* [ ] Setup notification rules for price range, price change, trading volume, price sentiment (Feb-Mar 2019)
+* [ ] Implement e-mail and web browser push notifications signals (Apr 2019)
 * [ ] Build iOS app (May-Jul 2019)
+* [ ] Implement automatic trading (Aug 2019)
 
 
 ## Getting Started
@@ -167,8 +167,7 @@ HISTORY_FREQUENCY = (
 ```
 
 ### Results
-This service is fast as it uses threading.
-It takes me around 6 seconds to collect data of 70 crypto-currencies symbols pairs from 7 exchanges and save it in 11 collections in MongoDB.
+The Ticker service uses multi-processing and it takes around 6 seconds to collect data of 70 crypto-currencies symbols pairs from 7 exchanges and save it in 11 collections in MongoDB.
 (This performance figure depends on used hardware and Internet connection / latency)
 
 ### RESTFul Server API
