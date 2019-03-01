@@ -47,7 +47,7 @@ socket.on('ticker', function(json) {
 {% for i in symbols_per_exchange %}
     {% for exchange, d in i.items() %}
     {% if d['pairs']%}
-    <table>
+    <table class="u-max-full-width" id="{{exchange.upper()}}">
         <caption><h3>{{exchange.upper()}} - {{frequency}}</h3></caption>
         <thead>
             <tr>
@@ -60,7 +60,7 @@ socket.on('ticker', function(json) {
         <tbody>
             {% for c, r in d['pairs'] %}
             <tr>
-            <td>{{c}}-{{r}}</td>
+            <td><a href="/io/ticker/{{c}}{{r}}/{{frequency}}">{{c}}-{{r}}</a></td>
             {% for att in attributes %}
             <td id="{{exchange.lower()}}_{{c.lower()}}{{r.lower()}}_{{att.replace(' ', '_').lower()}}_{{frequency}}" style="text-align: right;">-</td>
             {% endfor %}
