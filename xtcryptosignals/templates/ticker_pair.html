@@ -3,7 +3,7 @@
 {% block title %}{{pair.upper()}} - {{frequency}}{% endblock %}
 
 {% block body %}
-<table>
+<table class="u-max-full-width">
     <caption><h3>{{pair}} - {{frequency}}</h3></caption>
     <thead>
         <tr>
@@ -19,7 +19,7 @@
     {% if d['pairs']%}
         {% for c, r in d['pairs'] %}
         <tr>
-        <td>{{exchange.upper()}}</td>
+            <td><a href="/io/ticker/{{frequency}}#{{exchange.upper()}}">{{exchange.upper()}}</a></td>
         {% for att in attributes %}
         <td id="{{exchange.lower()}}_{{c.lower()}}{{r.lower()}}_{{att.replace(' ', '_').lower()}}_{{frequency}}" style="text-align: right;">-</td>
         {% endfor %}
