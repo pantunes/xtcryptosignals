@@ -15,7 +15,7 @@ from pymongo.errors import ServerSelectionTimeoutError
 from flask_socketio import SocketIO
 import xtcryptosignals.settings as s
 from xtcryptosignals.celeryconfig import BROKER_URL
-from xtcryptosignals.utils.decorators import use_mongodb
+from xtcryptosignals.storage.service import use_mongodb
 from xtcryptosignals.utils.helpers import get_class
 from xtcryptosignals.models.ticker import Ticker as TickerModel
 

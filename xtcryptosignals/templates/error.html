@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Error{% endblock %}
+
+{% block body %}
+<div class="container">
+    <section class="header">
+        <img class="value-img" src="/static/imgs/icons8-nothing-found-80.png">
+        <h4 class="title">Page is invalid - <small>{{error}}</small></h4>
+    </section>
+</div>
+{% endblock %}

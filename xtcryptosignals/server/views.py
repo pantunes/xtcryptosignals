@@ -11,8 +11,8 @@ from flask import Flask, jsonify
 from flask_socketio import SocketIO, Namespace
 import xtcryptosignals.settings as s
 from xtcryptosignals.celeryconfig import BROKER_URL
-from xtcryptosignals.services import server
-from xtcryptosignals.utils.decorators import use_mongodb
+from xtcryptosignals.server.service import get_ticker_data_from_namespace
+from xtcryptosignals.storage.service import use_mongodb
 
 
 eventlet.monkey_patch()
@@ -41,7 +41,7 @@ class RootSockeIONamespace(Namespace):
     @use_mongodb()
     def on_connect(self):
         print('on_connect ' + self.namespace)
-        rows = server.get_ticker_data_from_namespace(self.namespace)
+        rows = get_ticker_data_from_namespace(self.namespace)
         for row in rows:
             socketio.emit('ticker', row, namespace=self.namespace)
 

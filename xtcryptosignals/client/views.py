@@ -11,9 +11,10 @@ from copy import deepcopy
 from flask import Flask, render_template
 import xtcryptosignals.settings as s
 from xtcryptosignals import __version__
+from xtcryptosignals.client.service import validate_args
 
-app = Flask(__name__)
-app.config['STATIC_FOLDER'] = 'static'
+
+app = Flask(__name__, static_folder='../static', template_folder='../templates')
 app.config['TEMPLATES_AUTO_RELOAD'] = s.DEBUG
 app.jinja_env.auto_reload = s.DEBUG
 
@@ -38,7 +39,7 @@ def index():
                 {exchange: random_list[:3]}
             )
     return render_template(
-        'index.html',
+        template_name_or_list='index.html',
         version=__version__,
         symbols_per_exchange=symbols_per_exchange,
         frequency=", ".join(s.HISTORY_FREQUENCY),
@@ -46,9 +47,10 @@ def index():
 
 
 @app.route('/io/ticker/<frequency>')
+@validate_args()
 def ticker(frequency):
-    return render_template(
-        'ticker.html',
+    return dict(
+        template_name_or_list='ticker.html',
         symbols_per_exchange=s.SYMBOLS_PER_EXCHANGE,
         attributes=_COLUMN_ATTRIBUTES,
         frequency=frequency,
@@ -56,18 +58,23 @@ def ticker(frequency):
 
 
 @app.route('/io/ticker/<pair>/<frequency>')
+@validate_args()
 def ticker_pair(pair, frequency):
     x = deepcopy(s.SYMBOLS_PER_EXCHANGE)
+    pair_not_found = True
     for idx, i in enumerate(s.SYMBOLS_PER_EXCHANGE):
         for a, b in i.items():
             for c, d in b['pairs']:
                 if c + d == pair.upper():
+                    pair_not_found = False
                     x[idx][a]['pairs'] = [(c, d)]
                     break
             else:
                 x[idx][a]['pairs'] = []
-    return render_template(
-        'ticker_pair.html',
+    if pair_not_found:
+        raise ValueError('Pair not found')
+    return dict(
+        template_name_or_list='ticker_pair.html',
         symbols_per_exchange=x,
         attributes=_COLUMN_ATTRIBUTES,
         frequency=frequency,
