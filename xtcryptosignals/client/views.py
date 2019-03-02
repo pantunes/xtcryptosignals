@@ -46,7 +46,7 @@ def index():
     )
 
 
-@app.route('/io/ticker/<frequency>')
+@app.route('/ticker/<frequency>')
 @validate_args()
 def ticker(frequency):
     return dict(
@@ -57,7 +57,7 @@ def ticker(frequency):
     )
 
 
-@app.route('/io/ticker/<pair>/<frequency>')
+@app.route('/ticker/<pair>/<frequency>')
 @validate_args()
 def ticker_pair(pair, frequency):
     x = deepcopy(s.SYMBOLS_PER_EXCHANGE)
