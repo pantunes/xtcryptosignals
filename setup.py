@@ -2,7 +2,6 @@ __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
 __credits__ = ["Paulo Antunes", ]
 __license__ = "GPL"
-__version__ = "1.0"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
@@ -39,8 +38,8 @@ setuptools.setup(
     entry_points={
         'console_scripts': [
             'xt-ticker=xtcryptosignals.tasks.ticker:main',
-            'xt-server=xtcryptosignals.server:main',
-            'xt-client=xtcryptosignals.client:main',
+            'xt-server=xtcryptosignals.server.views:main',
+            'xt-client=xtcryptosignals.client.views:main',
         ],
     },
     install_requires=requirements,
