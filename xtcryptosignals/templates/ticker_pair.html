@@ -19,7 +19,7 @@
     {% if d['pairs']%}
         {% for c, r in d['pairs'] %}
         <tr>
-            <td><a href="/io/ticker/{{frequency}}#{{exchange.upper()}}">{{exchange.upper()}}</a></td>
+            <td><a href="/ticker/{{frequency}}#{{exchange.upper()}}">{{exchange.upper()}}</a></td>
         {% for att in attributes %}
         <td id="{{exchange.lower()}}_{{c.lower()}}{{r.lower()}}_{{att.replace(' ', '_').lower()}}_{{frequency}}" style="text-align: right;">-</td>
         {% endfor %}

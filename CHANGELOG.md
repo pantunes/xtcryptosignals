@@ -16,10 +16,10 @@ Refactored HTML templates and server API
 ## [0.0.7] - 2019-01-28
 Built 3 web pages to show platform functionalities in the following URLs:
 
-* /io/ticker/<exchange>/<pair>/<frequency>
-* /io/ticker/<pair>/<frequency>
-* /io/ticker/<frequency>
-* /io/ticker
+* /ticker/<exchange>/<pair>/<frequency>
+* /ticker/<pair>/<frequency>
+* /ticker/<frequency>
+* /ticker
 
 ## [0.0.6] - 2019-01-20
 Added first working version of Web Server API and Web page

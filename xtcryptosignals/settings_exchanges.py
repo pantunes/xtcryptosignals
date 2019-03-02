@@ -31,44 +31,11 @@ SYMBOLS_PER_EXCHANGE.append({
     BINANCE: {
         'pairs': [
             ('BTC', 'USDT'),
-            ('XRP', 'USDT'),
-            ('XRP', 'BTC'),
-            ('ZIL', 'BTC'),
-            ('ZIL', 'ETH'),
-            ('VET', 'USDT'),
-            ('VET', 'BTC'),
-            ('VET', 'ETH'),
-            ('ZEC', 'BTC'),
-            ('NEO', 'USDT'),
-            ('NEO', 'BTC'),
-            ('BNB', 'BTC'),
-            ('BNB', 'USDT'),
-            ('BNB', 'ETH'),
-            ('XMR', 'BTC'),
-            ('XMR', 'ETH'),
             ('ETH', 'USDT'),
-            ('ETH', 'BTC'),
-            ('NANO', 'BTC'),
-            ('NANO', 'ETH'),
-            ('NANO', 'BNB'),
-            ('ICX', 'USDT'),
-            ('ICX', 'BTC'),
-            ('ICX', 'ETH'),
-            ('GAS', 'BTC'),
-            ('QLC', 'BTC'),
-            ('QLC', 'ETH'),
-        ]
-    }
-})
-
-# Uphold
-SYMBOLS_PER_EXCHANGE.append({
-    UPHOLD: {
-        'pairs': [
-            ('BTC', 'USD'),
-            ('ETH', 'USD'),
-            ('LTC', 'USD'),
-            ('XRP', 'USD'),
+            ('LTC', 'USDT'),
+            ('XRP', 'USDT'),
+            ('NEO', 'USDT'),
+            ('ONT', 'USDT'),
         ]
     }
 })
@@ -78,23 +45,11 @@ SYMBOLS_PER_EXCHANGE.append({
     OKEX: {
         'pairs': [
             ('BTC', 'USDT'),
-            ('XRP', 'USDT'),
-            ('XRP', 'BTC'),
-            ('ZIL', 'USDT'),
-            ('ZIL', 'BTC'),
-            ('ONT', 'USDT'),
-            ('ONT', 'BTC'),
-            ('LTC', 'USDT'),
-            ('LTC', 'BTC'),
             ('ETH', 'USDT'),
-            ('ETH', 'BTC'),
-            ('NANO', 'USDT'),
-            ('NANO', 'BTC'),
-            ('ICX', 'USDT'),
-            ('ICX', 'BTC'),
-            ('GAS', 'BTC'),
-            ('GAS', 'USDT'),
-            ('GAS', 'ETH'),
+            ('LTC', 'USDT'),
+            ('XRP', 'USDT'),
+            ('NEO', 'USDT'),
+            ('ONT', 'USDT'),
         ]
     }
 })
@@ -111,45 +66,11 @@ SYMBOLS_PER_EXCHANGE.append({
 SYMBOLS_PER_EXCHANGE.append({
     BIBOX: {
         'pairs': [
-            ('ONT', 'USDT'),
-            ('ONT', 'BTC'),
-            ('ONT', 'ETH'),
-            ('NEO', 'USDT'),
-            ('NEO', 'BTC'),
-            ('NEO', 'ETH'),
+            ('BTC', 'USDT'),
+            ('ETH', 'USDT'),
             ('LTC', 'USDT'),
-            ('LTC', 'BTC'),
-            ('CARD', 'ETH'),
+            ('NEO', 'USDT'),
         ]
-    }
-})
-
-# SWITCHEO
-SYMBOLS_PER_EXCHANGE.append({
-    SWITCHEO: {
-        'pairs': [
-            ('NOS', 'NEO'),
-            ('SOUL', 'NEO'),
-            ('AUC', 'ETH'),
-        ],
-        'single_request': True,
-    }
-})
-
-# HOTBIT
-SYMBOLS_PER_EXCHANGE.append({
-    HOTBIT: {
-        'pairs': [
-            ('NOS', 'ETH'),
-            ('NOS', 'BTC'),
-            ('SOUL', 'BTC'),
-            ('SOUL', 'ETH'),
-            ('CARD', 'BTC'),
-            ('CARD', 'ETH'),
-            ('LQD', 'BTC'),
-            ('LQD', 'ETH'),
-        ],
-        'single_request': True,
     }
 })
 
@@ -161,20 +82,6 @@ SYMBOLS_PER_EXCHANGE.append({
             ('ETH', 'USD'),
             ('LTC', 'USD'),
             ('XRP', 'USD'),
-            ('ZEC', 'USD'),
-        ]
-    }
-})
-
-# Bithumb
-SYMBOLS_PER_EXCHANGE.append({
-    BITHUMB: {
-        'pairs': [
-            ('XMR', 'KRW'),
-            ('ZEC', 'KRW'),
-            ('BTC', 'KRW'),
-            ('XRP', 'KRW'),
-            ('ETH', 'KRW'),
         ]
     }
 })
@@ -184,6 +91,40 @@ SYMBOLS_PER_EXCHANGE.append({
     COINBENE: {
         'pairs': [
             ('BTC', 'USDT'),
+            ('ETH', 'USDT'),
+            ('LTC', 'USDT'),
+            ('XRP', 'USDT'),
+            ('NEO', 'USDT'),
         ]
+    }
+})
+
+# Uphold
+SYMBOLS_PER_EXCHANGE.append({
+    UPHOLD: {
+        'pairs': [
+            ('BTC', 'USD'),
+            ('ETH', 'USD'),
+            ('LTC', 'USD'),
+            ('XRP', 'USD'),
+        ]
+    }
+})
+
+# SWITCHEO
+SYMBOLS_PER_EXCHANGE.append({
+    SWITCHEO: {
+        'pairs': [
+        ],
+        'single_request': True,
+    }
+})
+
+# HOTBIT
+SYMBOLS_PER_EXCHANGE.append({
+    HOTBIT: {
+        'pairs': [
+        ],
+        'single_request': True,
     }
 })

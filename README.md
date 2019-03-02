@@ -185,11 +185,15 @@ xt-client
 ```
 Open the browser with the URL http://127.0.0.1:8000
 
-![alt text](xtcryptosignals/static/imgs/intro.png)
+![alt text](xtcryptosignals/static/imgs/readme/1.png)
 
-Example of Ticker detail page in the URL http://127.0.0.1:8000/io/ticker/10s
+Ticker page in the URL http://127.0.0.1:8000/ticker/10s
 
-![alt text](xtcryptosignals/static/imgs/detail.png)
+![alt text](xtcryptosignals/static/imgs/readme/2.png)
+
+Ticker page for Bitcoin in the URL http://127.0.0.1:8000/ticker/BTCUSDT/10s
+
+![alt text](xtcryptosignals/static/imgs/readme/3.png)
 
 ## Disclaimer
 This project is work in progress and when it comes to trading use it at your own risk.

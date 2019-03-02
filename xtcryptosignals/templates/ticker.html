@@ -60,7 +60,7 @@ socket.on('ticker', function(json) {
         <tbody>
             {% for c, r in d['pairs'] %}
             <tr>
-            <td><a href="/io/ticker/{{c}}{{r}}/{{frequency}}">{{c}}-{{r}}</a></td>
+            <td><a href="/ticker/{{c}}{{r}}/{{frequency}}">{{c}}-{{r}}</a></td>
             {% for att in attributes %}
             <td id="{{exchange.lower()}}_{{c.lower()}}{{r.lower()}}_{{att.replace(' ', '_').lower()}}_{{frequency}}" style="text-align: right;">-</td>
             {% endfor %}
