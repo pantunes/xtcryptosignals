@@ -38,6 +38,13 @@ socket.on('ticker', function(json) {
         } else if (isFloat(json[_attr])) {
             val = numeral(val).format('0,0.00');
         }
+        var color = (json.price_change_percent > 0) ? "#e3ffe2" : "#ffe2e2";
+        if (_attr == 'price') {
+            $(_id).effect("highlight", {color: color, queue: false}, 1100, "slow");
+        }
+        if (_attr == 'price_change_percent') {
+            $(_id).css("color", (json.price_change_percent > 0) ? "green" : "red");
+        }
         $(_id).html(val);
     }
 });
@@ -62,7 +69,8 @@ socket.on('ticker', function(json) {
             <tr>
             <td><a href="/ticker/{{c}}{{r}}/{{frequency}}">{{c}}-{{r}}</a></td>
             {% for att in attributes %}
-            <td id="{{exchange.lower()}}_{{c.lower()}}{{r.lower()}}_{{att.replace(' ', '_').lower()}}_{{frequency}}" style="text-align: right;">-</td>
+            <td style="text-align: right;">
+                <span id="{{exchange.lower()}}_{{c.lower()}}{{r.lower()}}_{{att.replace(' ', '_').lower()}}_{{frequency}}" style="padding: 5px;">-</span></td>
             {% endfor %}
             </tr>
             {% endfor %}

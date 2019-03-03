@@ -1,18 +1,26 @@
 # Changelog
 All changes will be registered here per release 
 
+
 ## [0.1.1] - Currently
-Updated Webpage
-Refactored HTML templates and server API
+Beautified HTML templates
+
+Code refactoring
+
+Code fixes
+
 
 ## [0.1.0] - 2019-02-01
 Updated Webpage
 
+
 ## [0.0.9] - 2019-01-31
 Small fixes
 
+
 ## [0.0.8] - 2019-01-31
 Refactored HTML templates and server API
+
 
 ## [0.0.7] - 2019-01-28
 Built 3 web pages to show platform functionalities in the following URLs:
@@ -21,6 +29,7 @@ Built 3 web pages to show platform functionalities in the following URLs:
 * /ticker/<pair>/<frequency>
 * /ticker/<frequency>
 * /ticker
+
 
 ## [0.0.6] - 2019-01-20
 Added first working version of Web Server API and Web page

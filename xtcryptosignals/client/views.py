@@ -82,6 +82,14 @@ def ticker_pair(pair, frequency):
     )
 
 
+@app.errorhandler(404)
+def page_not_found(_):
+    return render_template(
+        template_name_or_list='error.html',
+        error='The URL is incorrect'
+    ), 404
+
+
 def main():
     """
     Start web client
