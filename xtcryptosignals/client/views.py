@@ -14,7 +14,11 @@ from xtcryptosignals import __version__
 from xtcryptosignals.client.service import validate_args
 
 
-app = Flask(__name__, static_folder='../static', template_folder='../templates')
+app = Flask(
+    import_name=__name__,
+    static_folder='../static',
+    template_folder='../templates'
+)
 app.config['TEMPLATES_AUTO_RELOAD'] = s.DEBUG
 app.jinja_env.auto_reload = s.DEBUG
 
@@ -42,7 +46,7 @@ def index():
         template_name_or_list='index.html',
         version=__version__,
         symbols_per_exchange=symbols_per_exchange,
-        frequency=", ".join(s.HISTORY_FREQUENCY),
+        frequencies=s.HISTORY_FREQUENCY,
     )
 
 

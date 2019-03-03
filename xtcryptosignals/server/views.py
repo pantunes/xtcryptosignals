@@ -7,7 +7,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import eventlet
-from flask import Flask, jsonify
+from flask import Flask
 from flask_socketio import SocketIO, Namespace
 import xtcryptosignals.settings as s
 from xtcryptosignals.celeryconfig import BROKER_URL
@@ -20,11 +20,6 @@ eventlet.monkey_patch()
 
 app = Flask(__name__)
 socketio = SocketIO(app, message_queue=BROKER_URL)
-
-
-@app.route('/')
-def root():
-    return jsonify(dict(status='Ok'))
 
 
 @socketio.on('connect')
