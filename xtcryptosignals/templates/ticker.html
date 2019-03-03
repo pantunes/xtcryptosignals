@@ -2,6 +2,10 @@
 
 {% block title %}{{frequency}}{% endblock %}
 
+{% block include_scripts %}
+<script src="/static/js/site.js"></script>
+{% endblock %}
+
 {% block scripts %}
 function isInt(n){
     return Number(n) === n && n % 1 === 0;
@@ -51,6 +55,9 @@ socket.on('ticker', function(json) {
 {% endblock %}
 
 {% block body %}
+
+{% include 'snippets/menu.html' %}
+
 {% for i in symbols_per_exchange %}
     {% for exchange, d in i.items() %}
     {% if d['pairs']%}

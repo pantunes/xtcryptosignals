@@ -2,7 +2,14 @@
 
 {% block title %}{{pair.upper()}} - {{frequency}}{% endblock %}
 
+{% block include_scripts %}
+<script src="/static/js/site.js"></script>
+{% endblock %}
+
 {% block body %}
+
+{% include 'snippets/menu.html' %}
+
 <table class="u-max-full-width">
     <caption><h3>{{pair}} - {{frequency}}</h3></caption>
     <thead>
