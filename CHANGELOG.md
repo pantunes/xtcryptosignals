@@ -3,7 +3,7 @@ All changes will be registered here per release
 
 
 ## [0.1.1.1] - 2019-03-03
-Added menu in HTML templates to show Ticker frequencies
+Added menu in HTML templates to show tickers and pairs
 
 
 ## [0.1.1] - 2019-03-03
