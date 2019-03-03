@@ -1,2 +1,3 @@
 include xtcryptosignals/templates/*.*
+include xtcryptosignals/templates/snippets/*.*
 include xtcryptosignals/static/*.*
