@@ -57,6 +57,7 @@ def ticker(frequency):
         template_name_or_list='ticker.html',
         symbols_per_exchange=s.SYMBOLS_PER_EXCHANGE,
         attributes=_COLUMN_ATTRIBUTES,
+        frequencies=s.HISTORY_FREQUENCY,
         frequency=frequency,
     )
 
@@ -81,6 +82,7 @@ def ticker_pair(pair, frequency):
         template_name_or_list='ticker_pair.html',
         symbols_per_exchange=x,
         attributes=_COLUMN_ATTRIBUTES,
+        frequencies=s.HISTORY_FREQUENCY,
         frequency=frequency,
         pair=pair,
     )
