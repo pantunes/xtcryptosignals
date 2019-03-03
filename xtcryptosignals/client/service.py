@@ -27,3 +27,12 @@ def validate_args():
                 ), 404
         return wrapper
     return decorator
+
+
+def get_pairs():
+    pairs = set()
+    for i in s.SYMBOLS_PER_EXCHANGE:
+        for a, b in i.items():
+            for c, d in b['pairs']:
+                pairs.add(c + d)
+    return sorted(pairs)
