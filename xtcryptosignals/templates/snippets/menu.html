@@ -4,13 +4,27 @@
   <ul class="navbar-list">
     <li class="navbar-item"><a class="navbar-link" href="/">Main Page</a></li>
     <li class="navbar-item">
-      <a class="navbar-link" href="#" data-popover="#tickerNavPopover">Ticker</a>
+      <a class="navbar-link" href="#" data-popover="#tickerNavPopover">Tickers</a>
       <div id="tickerNavPopover" class="popover">
         <ul class="popover-list">
           {% for f in frequencies %}
           <li class="popover-item">
             <a class="popover-link" href="{{url_for(url, frequency=f, **params)}}">
-              {% for _ in range(10) %}&nbsp;{% endfor %}{{f}}{% for _ in range(10) %}&nbsp;{% endfor %}
+              {% for _ in range(11) %}&nbsp;{% endfor %}{{f}}{% for _ in range(11) %}&nbsp;{% endfor %}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </li>
+    <li class="navbar-item">
+      <a class="navbar-link" href="#" data-popover="#pairsNavPopover">Pairs</a>
+      <div id="pairsNavPopover" class="popover">
+        <ul class="popover-list">
+          {% for p in pairs %}
+          <li class="popover-item">
+            <a class="popover-link" href="{{url_for('ticker_pair', frequency=frequency, pair=p)}}">
+              {% for _ in range(2) %}&nbsp;{% endfor %}{{p}}{% for _ in range(2) %}&nbsp;{% endfor %}
             </a>
           </li>
           {% endfor %}
