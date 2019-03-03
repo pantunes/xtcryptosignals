@@ -56,7 +56,9 @@ socket.on('ticker', function(json) {
 
 {% block body %}
 
+{% with url='ticker', params=dict() %}
 {% include 'snippets/menu.html' %}
+{% endwith %}
 
 {% for i in symbols_per_exchange %}
     {% for exchange, d in i.items() %}
