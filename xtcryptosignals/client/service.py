@@ -18,12 +18,12 @@ def validate_args():
             if kwargs['frequency'] not in s.HISTORY_FREQUENCY:
                 return render_template(
                     'error.html', error='Frequency is incorrect'
-                )
+                ), 404
             try:
                 return render_template(**f(*args, **kwargs))
             except ValueError as error:
                 return render_template(
                     'error.html', error=error
-                )
+                ), 404
         return wrapper
     return decorator
