@@ -2,7 +2,8 @@
 All changes will be registered here per release 
 
 
-## [0.1.2] - Currently
+## [0.1.1.1] - 2019-03-03
+Added menu in HTML templates to show tickers and pairs
 
 
 ## [0.1.1] - 2019-03-03
@@ -14,11 +15,11 @@ Code fixes
 
 
 ## [0.1.0] - 2019-02-01
-Updated Webpage
+Updated HTML templates
 
 
 ## [0.0.9] - 2019-01-31
-Small fixes
+General Code fixes
 
 
 ## [0.0.8] - 2019-01-31

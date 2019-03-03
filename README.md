@@ -191,9 +191,17 @@ Open the browser with the URL http://127.0.0.1:8000
 
 ![alt text](xtcryptosignals/static/imgs/readme/2.png)
 
-10 seconds ticker page for Bitcoin in the URL http://127.0.0.1:8000/ticker/BTCUSDT/10s
+Displaying Tickers menu
 
 ![alt text](xtcryptosignals/static/imgs/readme/3.png)
+
+Displaying Pairs menu
+
+![alt text](xtcryptosignals/static/imgs/readme/4.png)
+
+10 seconds ticker page for Bitcoin in the URL http://127.0.0.1:8000/ticker/BTCUSDT/10s
+
+![alt text](xtcryptosignals/static/imgs/readme/5.png)
 
 ## Disclaimer
 This project is work in progress and when it comes to trading use it at your own risk.
