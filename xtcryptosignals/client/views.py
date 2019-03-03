@@ -11,7 +11,9 @@ from copy import deepcopy
 from flask import Flask, render_template
 import xtcryptosignals.settings as s
 from xtcryptosignals import __version__
-from xtcryptosignals.client.service import validate_args
+from xtcryptosignals.client.service import (
+    validate_args, get_pairs
+)
 
 
 app = Flask(
@@ -57,7 +59,9 @@ def ticker(frequency):
         template_name_or_list='ticker.html',
         symbols_per_exchange=s.SYMBOLS_PER_EXCHANGE,
         attributes=_COLUMN_ATTRIBUTES,
+        frequencies=s.HISTORY_FREQUENCY,
         frequency=frequency,
+        pairs=get_pairs(),
     )
 
 
@@ -81,7 +85,9 @@ def ticker_pair(pair, frequency):
         template_name_or_list='ticker_pair.html',
         symbols_per_exchange=x,
         attributes=_COLUMN_ATTRIBUTES,
+        frequencies=s.HISTORY_FREQUENCY,
         frequency=frequency,
+        pairs=get_pairs(),
         pair=pair,
     )
 
