@@ -187,11 +187,11 @@ Open the browser with the URL http://127.0.0.1:8000
 
 ![alt text](xtcryptosignals/static/imgs/readme/1.png)
 
-Ticker page in the URL http://127.0.0.1:8000/ticker/10s
+10 seconds ticker page in the URL http://127.0.0.1:8000/ticker/10s
 
 ![alt text](xtcryptosignals/static/imgs/readme/2.png)
 
-Ticker page for Bitcoin in the URL http://127.0.0.1:8000/ticker/BTCUSDT/10s
+10 seconds ticker page for Bitcoin in the URL http://127.0.0.1:8000/ticker/BTCUSDT/10s
 
 ![alt text](xtcryptosignals/static/imgs/readme/3.png)
 
