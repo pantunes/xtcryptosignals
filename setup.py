@@ -21,7 +21,7 @@ with open('xtcryptosignals/__init__.py', 'r') as f:
 
 
 setuptools.setup(
-    python_requires='>=3.6',
+    python_requires='>=3.5',
     name=cfg['__title__'],
     version=cfg['__version__'],
     author=cfg['__author__'],
@@ -59,6 +59,7 @@ setuptools.setup(
         'Operating System :: OS Independent',
         'Natural Language :: English',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
     ],
