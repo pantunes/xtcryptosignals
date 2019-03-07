@@ -9,7 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 import xtcryptosignals.settings as s
 
 
-CELERY_DEFAULT_QUEUE = 'xtcrypto-signals'
+CELERY_DEFAULT_QUEUE = 'xtcryptosignals'
 
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
