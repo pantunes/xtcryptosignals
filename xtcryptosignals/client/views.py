@@ -57,6 +57,7 @@ def index():
 def ticker(frequency):
     return dict(
         template_name_or_list='ticker.html',
+        version=__version__,
         symbols_per_exchange=s.SYMBOLS_PER_EXCHANGE,
         attributes=_COLUMN_ATTRIBUTES,
         frequencies=s.HISTORY_FREQUENCY,
@@ -83,6 +84,7 @@ def ticker_pair(pair, frequency):
         raise ValueError('Pair not found')
     return dict(
         template_name_or_list='ticker_pair.html',
+        version=__version__,
         symbols_per_exchange=x,
         attributes=_COLUMN_ATTRIBUTES,
         frequencies=s.HISTORY_FREQUENCY,
