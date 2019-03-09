@@ -4,7 +4,7 @@
   <ul class="navbar-list">
     <li class="navbar-item"><a class="navbar-link" href="/">Main Page</a></li>
     <li class="navbar-item">
-      <a class="navbar-link" href="#" data-popover="#tickerNavPopover">Tickers</a>
+      <a class="navbar-link" href="javascript:;" data-popover="#tickerNavPopover">Tickers</a>
       <div id="tickerNavPopover" class="popover">
         <ul class="popover-list">
           {% for f in frequencies %}
@@ -18,7 +18,7 @@
       </div>
     </li>
     <li class="navbar-item">
-      <a class="navbar-link" href="#" data-popover="#pairsNavPopover">Pairs</a>
+      <a class="navbar-link" href="javascript:;" data-popover="#pairsNavPopover">Pairs</a>
       <div id="pairsNavPopover" class="popover">
         <ul class="popover-list">
           {% for p in pairs %}
@@ -32,7 +32,7 @@
       </div>
     </li>
     <li class="navbar-item">
-      <a class="navbar-link" href="#" data-popover="#moreNavPopover">More</a>
+      <a class="navbar-link" href="javascript:;" data-popover="#moreNavPopover">More</a>
       <div id="moreNavPopover" class="popover">
         <ul class="popover-list">
           <li class="popover-item">
@@ -43,6 +43,9 @@
           </li>
         </ul>
       </div>
+    </li>
+    <li class="navbar-item">
+      <a class="navbar-link" data-popover="#versionNavPopover">XTCryptoSignals v{{version}}</a>
     </li>
   </ul>
 </div>
