@@ -47,7 +47,11 @@ socket.on('ticker', function(json) {
             $(_id).effect("highlight", {color: color, queue: false}, 1100, "slow");
         }
         if (_attr == 'price_change_percent') {
-            $(_id).css("color", (json.price_change_percent > 0) ? "green" : "red");
+            if (json.price_change_percent != 0) {
+                $(_id).css("color", (json.price_change_percent > 0) ? "green" : "red");
+            } else {
+                $(_id).css("color", "black");
+            }
         }
         $(_id).html(val);
     }
