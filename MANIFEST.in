@@ -1,3 +1,6 @@
 include xtcryptosignals/templates/*.*
 include xtcryptosignals/templates/snippets/*.*
-include xtcryptosignals/static/*.*
+include xtcryptosignals/static/css/*.*
+include xtcryptosignals/static/imgs/*.*
+include xtcryptosignals/static/imgs/readme/*.*
+include xtcryptosignals/static/js/*.*
