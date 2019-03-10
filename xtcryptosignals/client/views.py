@@ -12,7 +12,7 @@ from flask import Flask, request, render_template
 import xtcryptosignals.settings as s
 from xtcryptosignals import __version__
 from xtcryptosignals.client.service import (
-    validate_args, get_pairs
+    validate_args, get_pairs, get_server_api_base_url,
 )
 
 
@@ -32,11 +32,6 @@ _COLUMN_ATTRIBUTES = [
 ]
 
 
-def _get_server_api_base_url(_request):
-    return s.SERVER_API_BASE_URL if s.SERVER_API_BASE_URL else \
-        _request.host_url.replace(str(s.PORT_CLIENT), str(s.PORT_SERVER))
-
-
 @app.route('/')
 def index():
     symbols_per_exchange = []
@@ -51,6 +46,7 @@ def index():
             )
     return render_template(
         template_name_or_list='index.html',
+        server_api_base_url=get_server_api_base_url(request),
         version=__version__,
         symbols_per_exchange=symbols_per_exchange,
         frequencies=s.HISTORY_FREQUENCY,
@@ -62,7 +58,7 @@ def index():
 def ticker(frequency):
     return dict(
         template_name_or_list='ticker.html',
-        server_api_base_url=_get_server_api_base_url(request),
+        server_api_base_url=get_server_api_base_url(request),
         version=__version__,
         symbols_per_exchange=s.SYMBOLS_PER_EXCHANGE,
         attributes=_COLUMN_ATTRIBUTES,
@@ -90,7 +86,7 @@ def ticker_pair(pair, frequency):
         raise ValueError('Pair not found')
     return dict(
         template_name_or_list='ticker_pair.html',
-        server_api_base_url=_get_server_api_base_url(request),
+        server_api_base_url=get_server_api_base_url(request),
         version=__version__,
         symbols_per_exchange=x,
         attributes=_COLUMN_ATTRIBUTES,
