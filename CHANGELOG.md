@@ -3,6 +3,10 @@ All changes will be registered here per release
 
 
 ## [0.1.2] - 2019-03-10
+Code improvements related with project configuration
+
+
+## [0.1.1.2] - 2019-03-10
 Code fixes regarding sdist package
 
 
