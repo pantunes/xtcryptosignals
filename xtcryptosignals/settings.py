@@ -10,6 +10,9 @@ DEBUG = True
 
 MONGODB_NAME = 'XTCryptoSignals'
 
+PORT_SERVER = 5000
+PORT_CLIENT = 8000
+
 TICKER_SCHEDULE = 10  # executed each X seconds
 TIMEOUT_PER_SYMBOL_REQUEST = 2.0  # in seconds
 TIMEOUT_PER_SYMBOLS_REQUEST = 5.0  # in seconds

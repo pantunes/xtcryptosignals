@@ -34,7 +34,7 @@ _COLUMN_ATTRIBUTES = [
 
 def _get_server_api_base_url(_request):
     return s.SERVER_API_BASE_URL if s.SERVER_API_BASE_URL else \
-        _request.host_url.replace('8000', '5000')
+        _request.host_url.replace(str(s.PORT_CLIENT), str(s.PORT_SERVER))
 
 
 @app.route('/')
@@ -113,4 +113,4 @@ def main():
     """
     Start web client
     """
-    app.run(debug=s.DEBUG, port=8000, host='0.0.0.0')
+    app.run(debug=s.DEBUG, port=s.PORT_CLIENT, host='0.0.0.0')
