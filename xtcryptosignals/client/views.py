@@ -8,7 +8,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 import random
 from copy import deepcopy
-from flask import Flask, render_template
+from flask import Flask, request, render_template
 import xtcryptosignals.settings as s
 from xtcryptosignals import __version__
 from xtcryptosignals.client.service import (
@@ -30,6 +30,11 @@ _COLUMN_ATTRIBUTES = [
     'Volume Change Percent', 'Number Trades 24h',
     'Number Trades Change Percent', 'Created On'
 ]
+
+
+def _get_server_api_base_url(_request):
+    return s.SERVER_API_BASE_URL if s.SERVER_API_BASE_URL else \
+        _request.host_url.replace('8000', '5000')
 
 
 @app.route('/')
@@ -57,7 +62,7 @@ def index():
 def ticker(frequency):
     return dict(
         template_name_or_list='ticker.html',
-        server_api_base_url=s.SERVER_API_BASE_URL,
+        server_api_base_url=_get_server_api_base_url(request),
         version=__version__,
         symbols_per_exchange=s.SYMBOLS_PER_EXCHANGE,
         attributes=_COLUMN_ATTRIBUTES,
@@ -85,7 +90,7 @@ def ticker_pair(pair, frequency):
         raise ValueError('Pair not found')
     return dict(
         template_name_or_list='ticker_pair.html',
-        server_api_base_url=s.SERVER_API_BASE_URL,
+        server_api_base_url=_get_server_api_base_url(request),
         version=__version__,
         symbols_per_exchange=x,
         attributes=_COLUMN_ATTRIBUTES,
