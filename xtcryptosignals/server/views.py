@@ -21,32 +21,43 @@ eventlet.monkey_patch()
 app = Flask(__name__)
 socketio = SocketIO(app, message_queue=BROKER_URL)
 
+users_per_namespace = {'/'+x: 0 for x in s.HISTORY_FREQUENCY}
+users_per_namespace.update({'/': 0})
+
 
 @socketio.on('connect')
 def on_general_connect():
-    print('on_connect /')
+    global users_per_namespace
+    users_per_namespace['/'] += 1
+    socketio.emit('general', users_per_namespace)
 
 
 @socketio.on('disconnect')
 def on_general_disconnect():
-    print('on_disconnect /')
+    global users_per_namespace
+    users_per_namespace['/'] -= 1
+    socketio.emit('general', users_per_namespace)
 
 
-class RootSockeIONamespace(Namespace):
+class TickerSockeIONamespace(Namespace):
     @use_mongodb()
     def on_connect(self):
-        print('on_connect ' + self.namespace)
+        global users_per_namespace
+        users_per_namespace[self.namespace] += 1
         rows = get_ticker_data_from_namespace(self.namespace)
         for row in rows:
             socketio.emit('ticker', row, namespace=self.namespace)
+        socketio.emit('general', users_per_namespace)
 
     def on_disconnect(self):
-        print('on_disconnect ' + self.namespace)
+        global users_per_namespace
+        users_per_namespace[self.namespace] -= 1
+        socketio.emit('general', users_per_namespace)
 
 
 for x in s.HISTORY_FREQUENCY:
     socketio_model = type(
-        'SockeIONamespace{}'.format(x), (RootSockeIONamespace,), {}
+        'SocketIONamespace{}'.format(x), (TickerSockeIONamespace,), {}
     )
     socketio.on_namespace(socketio_model('/{}'.format(x)))
 

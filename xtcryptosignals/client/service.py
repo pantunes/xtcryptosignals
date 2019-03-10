@@ -36,3 +36,8 @@ def get_pairs():
             for c, d in b['pairs']:
                 pairs.add(c + d)
     return sorted(pairs)
+
+
+def get_server_api_base_url(request):
+    return s.SERVER_API_BASE_URL if s.SERVER_API_BASE_URL else \
+        request.host_url.replace(str(s.PORT_CLIENT), str(s.PORT_SERVER))
