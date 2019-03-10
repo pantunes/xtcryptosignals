@@ -29,14 +29,14 @@ users_per_namespace.update({'/': 0})
 def on_general_connect():
     global users_per_namespace
     users_per_namespace['/'] += 1
-    socketio.emit('general', users_per_namespace)
+    socketio.emit('general', users_per_namespace, broadcast=True)
 
 
 @socketio.on('disconnect')
 def on_general_disconnect():
     global users_per_namespace
     users_per_namespace['/'] -= 1
-    socketio.emit('general', users_per_namespace)
+    socketio.emit('general', users_per_namespace, broadcast=True)
 
 
 class TickerSockeIONamespace(Namespace):
@@ -47,12 +47,12 @@ class TickerSockeIONamespace(Namespace):
         rows = get_ticker_data_from_namespace(self.namespace)
         for row in rows:
             socketio.emit('ticker', row, namespace=self.namespace)
-        socketio.emit('general', users_per_namespace)
+        socketio.emit('general', users_per_namespace, broadcast=True)
 
     def on_disconnect(self):
         global users_per_namespace
         users_per_namespace[self.namespace] -= 1
-        socketio.emit('general', users_per_namespace)
+        socketio.emit('general', users_per_namespace, broadcast=True)
 
 
 for x in s.HISTORY_FREQUENCY:
