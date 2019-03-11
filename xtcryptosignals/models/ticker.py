@@ -20,6 +20,13 @@ from xtcryptosignals.models.history import History
 from xtcryptosignals.utils.helpers import convert_to_seconds
 
 
+def _get_abs_zero(f):
+    try:
+        return 0.0 if round(f, 2) == -0.00 else f
+    except TypeError:
+        return f
+
+
 class Ticker(Document):
     symbol = StringField(required=True)
     source = StringField(required=True)
@@ -69,29 +76,24 @@ class Ticker(Document):
                     price_change_percent = (float(
                         self['price']/row.price
                     ) - 1.0) * 100.0
-                    if round(price_change_percent, 2) == -0.00:
-                        price_change_percent = 0.0
                     if self['number_trades_24h']:
                         number_trades_change_percent = (float(
                             self['number_trades_24h']/row.number_trades_24h
                         ) - 1.0) * 100.0
-                        if round(number_trades_change_percent, 2) == -0.00:
-                            number_trades_change_percent = 0.0
                     if self['volume_24h']:
                         volume_change_percent = (float(
                             self['volume_24h']/row.volume_24h
                         ) - 1.0) * 100.0
-                        if round(volume_change_percent, 2) == -0.00:
-                            volume_change_percent = 0.0
                 history_object = model(
                     symbol=self['symbol'],
                     source=self['source'],
                     price=self['price'],
                     number_trades_24h=self['number_trades_24h'],
                     volume_24h=self['volume_24h'],
-                    price_change_percent=price_change_percent,
-                    number_trades_change_percent=number_trades_change_percent,
-                    volume_change_percent=volume_change_percent,
+                    price_change_percent=_get_abs_zero(price_change_percent),
+                    number_trades_change_percent=_get_abs_zero(
+                        number_trades_change_percent),
+                    volume_change_percent=_get_abs_zero(volume_change_percent),
                     created_on=self['created_on'],
                 )
                 history_object.save()

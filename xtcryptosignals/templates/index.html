@@ -5,7 +5,7 @@
 {% block scripts %}
 var socket = io.connect('{{server_api_base_url}}');
 socket.on('general', function(json) {
-  $("#current_num_users").html(json['/']);
+  $("#active_users").html(json['/']);
 });
 {% endblock %}
 
@@ -44,5 +44,5 @@ socket.on('general', function(json) {
 </div>
 <br/>
 <div class="title"><small><b>Pooling frequency:</b> {{", ".join(frequencies)}}</small></div>
-<div class="title"><small><b>Current users:</b> <span id="current_num_users">-</span></small></div>
+<div class="title"><small><b>Active users:</b> <span id="active_users">-</span></small></div>
 {% endblock %}
