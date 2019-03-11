@@ -126,6 +126,8 @@ Options:
                                   supports.
   --enable-real-time-messaging    Enable SocketIO real-time crypto-data
                                   message broadcasting.
+  --log-minimal                   Only log errors and important warnings in
+                                  stdout.
   --version                       Show version.
   -h, --help                      Show this message and exit.
 ```
