@@ -24,7 +24,7 @@ def convert_to_seconds(x):
     minutes = seconds * 60
     if _t == 'm':
         return minutes
-    hours = minutes * 60 * 60
+    hours = minutes * 60
     if _t == 'h':
         return hours
     days = hours * 24

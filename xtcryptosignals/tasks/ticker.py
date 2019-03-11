@@ -7,6 +7,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import click
+import logging
 from celery.task import task
 from celery.exceptions import Ignore
 from celery import states
@@ -18,6 +19,14 @@ from xtcryptosignals.celeryconfig import BROKER_URL
 from xtcryptosignals.storage.service import use_mongodb
 from xtcryptosignals.utils.helpers import get_class
 from xtcryptosignals.models.ticker import Ticker as TickerModel
+
+
+_ENABLE_SOCKET_IO = False
+_LOG_MINIMAL = True
+
+
+def _get_log_level():
+    return logging.INFO if not _LOG_MINIMAL else logging.ERROR
 
 
 def _process(
@@ -45,24 +54,16 @@ def _process(
     assert errors == {}, errors
 
     try:
-        if pairs:
-            for x in ticker:
-                ticker_model = TickerModel(**x)
-                history_dicts = ticker_model.save()
-                if socketio:
-                    for h in history_dicts:
-                        socketio.emit(
-                            'ticker', h, namespace='/{}'.format(h['frequency'])
-                        )
-        else:
-            ticker_model = TickerModel(**ticker)
+        if not pairs:
+            ticker = (ticker,)
+        for x in ticker:
+            ticker_model = TickerModel(**x)
             history_dicts = ticker_model.save()
             if socketio:
                 for h in history_dicts:
                     socketio.emit(
                         'ticker', h, namespace='/{}'.format(h['frequency'])
                     )
-
     except ServerSelectionTimeoutError as error:
         logger.error(
             '{}: {}'.format(exchange_class.__name__, error)
@@ -110,6 +111,10 @@ def _terminate_running_jobs(logger, jobs):
 @task(bind=True)
 @use_mongodb(connect=False)
 def update(self):
+    if _ENABLE_SOCKET_IO:
+        log_level = _get_log_level()
+        logging.getLogger('engineio').setLevel(log_level)
+        logging.getLogger('socketio').setLevel(log_level)
     jobs = []
     logger = self.get_logger()
     try:
@@ -156,7 +161,6 @@ def update(self):
 
 
 def test():
-    import logging
     logging.basicConfig(
         format='%(asctime)s %(levelname)s %(message)s',
         level=logging.INFO,
@@ -165,9 +169,6 @@ def test():
     logging.info('Starting...')
     update()
     logging.info('Ending...')
-
-
-_ENABLE_SOCKET_IO = False
 
 
 @click.command(
@@ -192,14 +193,20 @@ _ENABLE_SOCKET_IO = False
     help="Enable SocketIO real-time crypto-data message broadcasting."
 )
 @click.option(
+    '--log-minimal',
+    is_flag=_LOG_MINIMAL,
+    help="Only log errors and important warnings in stdout."
+)
+@click.option(
     '--version',
     is_flag=True,
     help="Show version."
 )
-def main(testing, list_config, enable_real_time_messaging, version):
+def main(testing, list_config, enable_real_time_messaging,
+         log_minimal, version):
     """
-    Use this tool to collect data from configured coins or/and tokens from
-    configured crypto-currencies exchanges.
+    Use this tool to collect and broadcast data from configured coins
+    or/and tokens from configured crypto-currencies exchanges.
     """
     if list_config:
         if list_config == 'currencies':
@@ -218,8 +225,9 @@ def main(testing, list_config, enable_real_time_messaging, version):
         click.echo('{} {}'.format(__title__, __version__))
         return
 
-    global _ENABLE_SOCKET_IO
+    global _ENABLE_SOCKET_IO, _LOG_MINIMAL
     _ENABLE_SOCKET_IO = enable_real_time_messaging
+    _LOG_MINIMAL = log_minimal
 
     from celery import current_app
     from celery.bin import worker
@@ -228,8 +236,7 @@ def main(testing, list_config, enable_real_time_messaging, version):
     app.config_from_object('xtcryptosignals.celeryconfig')
 
     worker = worker.worker(app=app)
-    options = {
-        'beat': True,
-        'loglevel': 'INFO',
-    }
-    worker.run(**options)
+    worker.run(
+        beat=True,
+        loglevel=logging.INFO,
+    )
