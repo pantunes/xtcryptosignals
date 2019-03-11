@@ -67,7 +67,8 @@ def main():
     Start RESTFul server API and socketIO server.
     """
     socketio.run(
-        app, debug=s.DEBUG,
+        app,
+        debug=s.DEBUG,
         use_reloader=s.DEBUG,
         port=s.PORT_SERVER,
         host='0.0.0.0',
