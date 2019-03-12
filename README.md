@@ -9,8 +9,9 @@
 * **Automatic trading**
 
 ### RESTFul Server API
-* Restful interface that exposes API entry points to get desired crypto-currencies data and runs as well SocketIO Server.
-(This service must be running to allow the Ticker to send real-time data to the Website, using SocketIO)
+* Restful interface that exposes API entry points to get desired crypto-currencies data.
+* SocketIO Server to broadcast real-time data to clients.
+
 
 ### Website
 * Website to show some of the platform functionalities. 
