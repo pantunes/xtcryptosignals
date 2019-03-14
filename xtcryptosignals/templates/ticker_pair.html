@@ -19,7 +19,7 @@
         <tr>
             <th>Exchange</th>
             {% for att in attributes %}
-            <th>{{att}}</th>
+            <th>{{att | replace(" On",  " On UTC") }}</th>
             {% endfor %}
         </tr>
     </thead>
