@@ -31,6 +31,8 @@ class History(Document):
         'abstract': True,
         'indexes': [
             ("-created_on", ),
+            ("symbol", "source", ),
+            ("symbol", "source", "-created_on", ),
         ],
         'ordering': ['-created_on'],
     }
