@@ -21,9 +21,11 @@
 * [x] Add crypto-currencies exchanges (Dec 2018)
 * [x] Implement RESTFul API and socket.io to access price data in real time (Jan 2019)
 * [x] Build website to use this platform (From Jan 2019)
+* [ ] Add Gunicorn to make it production ready
 * [ ] Build Unit, functional and end-to-end testing (From Jan 2019)
 * [ ] Setup notification rules for price range, price change, trading volume, price sentiment (Feb-Mar 2019)
 * [ ] Implement e-mail and web browser push notifications signals (Apr 2019)
+* [ ] Integrate platform with Docker (Apr 2019)
 * [ ] Build iOS app (May-Jul 2019)
 * [ ] Implement automatic trading (Aug 2019)
 
@@ -165,7 +167,8 @@ UPHOLD: {
 Initial setup to create dynamic MongoDB collections for data segmentation categorized by Exchanges pooling frequency in [settings.py](xtcryptosignals/settings.py).
 ```python
 HISTORY_FREQUENCY = (
-    '10s', '30s', '1m', '10m', '30m', '1h', '3h', '6h', '12h', '24h', '1w',
+    '10s', '30s', '1m', '10m', '30m', '1h', '2h', '3h', '4h', '12h', '1d', '4d', 
+    '1w', '2w', '4w', '12w', '24w', '1y',
 )
 ```
 
