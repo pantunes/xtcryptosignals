@@ -3,7 +3,7 @@ All changes will be registered here per release
 
 
 ## [0.1.3] - Current date
-Add number of users in real time in the main page
+Added real-time active number of users in dashboard page
 
 Added 6 more Tickers
 
