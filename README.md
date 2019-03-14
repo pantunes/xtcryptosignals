@@ -21,8 +21,8 @@
 * [x] Add crypto-currencies exchanges (Dec 2018)
 * [x] Implement RESTFul API and socket.io to access price data in real time (Jan 2019)
 * [x] Build website to use this platform (From Jan 2019)
-* [ ] Add Gunicorn to make it production ready
 * [ ] Build Unit, functional and end-to-end testing (From Jan 2019)
+* [ ] Add Gunicorn to make it production ready (March 2019)
 * [ ] Setup notification rules for price range, price change, trading volume, price sentiment (Feb-Mar 2019)
 * [ ] Implement e-mail and web browser push notifications signals (Apr 2019)
 * [ ] Integrate platform with Docker (Apr 2019)
