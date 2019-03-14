@@ -33,4 +33,8 @@ def convert_to_seconds(x):
     weeks = days * 7
     if _t == 'w':
         return weeks
+    months = weeks * 4
+    year = months * 12
+    if _t == 'y':
+        return year
     raise ValueError('Undefined item: {}'.format(x))

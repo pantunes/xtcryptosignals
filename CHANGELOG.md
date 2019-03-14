@@ -5,6 +5,10 @@ All changes will be registered here per release
 ## [0.1.3] - Current date
 Add number of users in real time in the main page
 
+Added 6 more Tickers
+
+Added adequate mongodb collection indexes to improve data fetching performance 
+
 
 ## [0.1.2] - 2019-03-10
 Code improvements related with project configuration
