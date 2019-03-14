@@ -35,7 +35,7 @@ def get_pairs():
         for a, b in i.items():
             for c, d in b['pairs']:
                 pairs.add(c + d)
-    return sorted(pairs)
+    return ['ALL'] + sorted(pairs)
 
 
 def get_server_api_base_url(request):
