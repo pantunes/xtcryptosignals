@@ -34,7 +34,6 @@ def start(handler, host, port, workers=None):
     options = {
         'bind': '%s:%s' % (host, port),
         'workers': workers or NUMBER_OF_WORKERS,
-        'daemon': True,
     }
 
     WSGIGunicorn(handler, options).run()
