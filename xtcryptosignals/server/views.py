@@ -70,6 +70,6 @@ def main():
         app,
         debug=s.DEBUG,
         use_reloader=s.DEBUG,
+        host=s.IP_ADDRESS,
         port=s.PORT_SERVER,
-        host='0.0.0.0',
     )

@@ -7,12 +7,14 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import random
+import click
 from copy import deepcopy
-from flask import Flask, request, render_template
+from flask import Flask, render_template
 import xtcryptosignals.settings as s
+from xtcryptosignals.wsgi_gunicorn import start
 from xtcryptosignals import __version__
 from xtcryptosignals.client.service import (
-    validate_args, get_pairs, get_server_api_base_url,
+    validate_args, get_pairs,
 )
 
 
@@ -46,7 +48,7 @@ def index():
             )
     return render_template(
         template_name_or_list='index.html',
-        server_api_base_url=get_server_api_base_url(request),
+        server_api_base_url=s.SERVER_API_BASE_URL,
         version=__version__,
         symbols_per_exchange=symbols_per_exchange,
         frequencies=s.HISTORY_FREQUENCY,
@@ -58,7 +60,7 @@ def index():
 def ticker(frequency):
     return dict(
         template_name_or_list='ticker.html',
-        server_api_base_url=get_server_api_base_url(request),
+        server_api_base_url=s.SERVER_API_BASE_URL,
         version=__version__,
         symbols_per_exchange=s.SYMBOLS_PER_EXCHANGE,
         attributes=_COLUMN_ATTRIBUTES,
@@ -86,7 +88,7 @@ def ticker_pair(pair, frequency):
         raise ValueError('Pair not found')
     return dict(
         template_name_or_list='ticker_pair.html',
-        server_api_base_url=get_server_api_base_url(request),
+        server_api_base_url=s.SERVER_API_BASE_URL,
         version=__version__,
         symbols_per_exchange=x,
         attributes=_COLUMN_ATTRIBUTES,
@@ -105,8 +107,23 @@ def page_not_found(_):
     ), 404
 
 
-def main():
+@click.command(
+    context_settings=dict(help_option_names=['-h', '--help'])
+)
+@click.option(
+    '--gunicorn',
+    is_flag=True,
+    help="Enable production setup mode",
+)
+def main(gunicorn):
     """
     Start web client
     """
-    app.run(debug=s.DEBUG, port=s.PORT_CLIENT, host='0.0.0.0')
+    port = s.PORT_CLIENT
+    host = s.IP_ADDRESS
+
+    if gunicorn:
+        start(handler=app, host=host, port=port)
+        return
+
+    app.run(debug=s.DEBUG, host=host, port=port)
