@@ -9,3 +9,4 @@ click
 flask
 flask-socketio
 eventlet
+gunicorn

@@ -6,7 +6,10 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import setuptools
+from setuptools import (
+    setup,
+    find_packages,
+)
 
 
 with open('requirements.txt', 'r') as f:
@@ -20,7 +23,7 @@ with open('xtcryptosignals/__init__.py', 'r') as f:
     exec(f.read(), cfg)
 
 
-setuptools.setup(
+setup(
     python_requires='>=3.6',
     name=cfg['__title__'],
     version=cfg['__version__'],
@@ -33,13 +36,14 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://bitbucket.org/pantunes/xtcryptosignals",
-    packages=setuptools.find_packages(),
+    packages=find_packages(),
     include_package_data=True,
     entry_points={
         'console_scripts': [
             'xt-ticker=xtcryptosignals.tasks.ticker:main',
             'xt-server=xtcryptosignals.server.views:main',
             'xt-client=xtcryptosignals.client.views:main',
+            'xt-all=xtcryptosignals.scripts.manage:main',
         ],
     },
     install_requires=requirements,
