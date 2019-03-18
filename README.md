@@ -179,16 +179,33 @@ The Ticker service uses multi-processing and it takes around 6 seconds to collec
 ### RESTFul Server API
 ### Start service
 
+Development:
+
 ```bash
 xt-server
 ```
 
+Production:
+
+```bash
+DEBUG=0 xt-server
+```
+
+
 ## Website
 ### Start service
+
+Development:
 
 ```bash
 xt-client
 ```
+
+Production:
+```bash
+SERVER_API_BASE_URL=https://api.xtcryptosignals.com/ xt-client --gunicorn
+```
+
 Open the browser with the URL http://127.0.0.1:8000
 
 ![alt text](xtcryptosignals/static/imgs/readme/1.png)
