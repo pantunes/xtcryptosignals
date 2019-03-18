@@ -17,29 +17,17 @@ SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 @click.command(
     context_settings=dict(help_option_names=['-h', '--help'])
 )
-@click.option(
-    '--start',
-    is_flag=True,
-    help="Start xt-server, xt-client and xt-ticker",
+@click.argument(
+    'operation', required=True, type=click.Choice(
+        ['start', 'stop', 'restart']
+    )
 )
-@click.option(
-    '--stop',
-    is_flag=True,
-    help="Stop xt-server, xt-client and xt-ticker",
-)
-@click.option(
-    '--restart',
-    is_flag=True,
-    help="Restart xt-server, xt-client and xt-ticker",
-)
-def main(start, stop, restart):
-    if start:
+def main(operation):
+    if operation == 'start':
         subprocess.call("sh {}/xt-start.sh".format(SCRIPT_PATH), shell=True)
-    elif stop:
+    elif operation == 'stop':
         subprocess.call("sh {}/xt-stop.sh".format(SCRIPT_PATH), shell=True)
-    elif restart:
+    else:
         subprocess.call("sh {}/xt-stop.sh ; sh {}/xt-start.sh".format(
             SCRIPT_PATH, SCRIPT_PATH
         ), shell=True)
-    else:
-        click.echo('Nothing to do!')
