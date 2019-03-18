@@ -8,4 +8,5 @@ switcheo
 click
 flask
 flask-socketio
+flask-login
 eventlet

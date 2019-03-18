@@ -9,23 +9,35 @@ __email__ = "pjmlantunes@gmail.com"
 import eventlet
 from flask import Flask
 from flask_socketio import SocketIO, Namespace
+from flask_login import LoginManager
 import xtcryptosignals.settings as s
 from xtcryptosignals.celeryconfig import BROKER_URL
 from xtcryptosignals.server.service import get_ticker_data_from_namespace
-from xtcryptosignals.storage.service import use_mongodb
+from xtcryptosignals.common.service import (
+    use_mongodb,
+    authenticated,
+)
 
 
 eventlet.monkey_patch()
 
 
 app = Flask(__name__)
+
+# socketIO
 socketio = SocketIO(app, message_queue=BROKER_URL)
 
+# session
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+# pre-processing
 users_per_namespace = {'/'+x: 0 for x in s.HISTORY_FREQUENCY}
 users_per_namespace.update({'/': 0})
 
 
 @socketio.on('connect')
+@authenticated
 def on_general_connect():
     global users_per_namespace
     users_per_namespace['/'] += 1
@@ -33,6 +45,7 @@ def on_general_connect():
 
 
 @socketio.on('disconnect')
+@authenticated
 def on_general_disconnect():
     global users_per_namespace
     users_per_namespace['/'] -= 1
@@ -41,6 +54,7 @@ def on_general_disconnect():
 
 class TickerSockeIONamespace(Namespace):
     @use_mongodb()
+    @authenticated
     def on_connect(self):
         global users_per_namespace
         users_per_namespace[self.namespace] += 1
@@ -49,6 +63,7 @@ class TickerSockeIONamespace(Namespace):
             socketio.emit('ticker', row, namespace=self.namespace)
         socketio.emit('general', users_per_namespace, broadcast=True)
 
+    @authenticated
     def on_disconnect(self):
         global users_per_namespace
         users_per_namespace[self.namespace] -= 1
