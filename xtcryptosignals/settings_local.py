@@ -10,3 +10,5 @@ SERVER_API_BASE_URL = None
 
 BINANCE_API_KEY = ''  # Add Personal Binance API KEY
 BINANCE_API_SECRET = ''  # Add Personal Binance API SECRET
+
+X_API = 'uRFMJsdDxnbYhGTfKutKEhhtdbUNsLJo'

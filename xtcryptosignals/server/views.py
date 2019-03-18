@@ -17,6 +17,7 @@ from xtcryptosignals.common.service import (
     use_mongodb,
     authenticated,
 )
+from xtcryptosignals.session.service import User
 
 
 eventlet.monkey_patch()
@@ -31,7 +32,16 @@ socketio = SocketIO(app, message_queue=BROKER_URL)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-# pre-processing
+
+@login_manager.request_loader
+def load_user_from_request(request):
+    # TODO
+    print(request.args.get('X-API'))
+    print(User().get_id())
+    return User()
+
+
+# pre-processing - active users
 users_per_namespace = {'/'+x: 0 for x in s.HISTORY_FREQUENCY}
 users_per_namespace.update({'/': 0})
 
