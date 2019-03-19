@@ -107,7 +107,7 @@ okcoin
 bithumb
 coinbene
 ```
-(Drop [me](mailto:pjmlantunes@gmail.com) an email if you want a new one to be supported or contribute to this project creating a pull request)
+(Drop [me](mailto:pjmlantunes@gmail.com) an e-mail if you want support for a new exchange or contribute to this project creating a pull request)
 
 Command line help
 ```bash
@@ -173,7 +173,7 @@ HISTORY_FREQUENCY = (
 ```
 
 ### Results
-The Ticker service uses multi-processing and it takes around 6 seconds to collect data of 70 crypto-currencies symbols pairs from 7 exchanges and save it in 11 collections in MongoDB.
+The Ticker service uses multi-processing and it takes around 6 seconds to collect data of 70 crypto-currencies symbols pairs from 7 exchanges and save it in 11 collections in MongoDB.  
 (This performance figure depends on used hardware and Internet connection / latency)
 
 ### RESTFul Server API
@@ -203,8 +203,11 @@ xt-client
 
 Production:
 ```bash
-SERVER_API_BASE_URL=https://api.xtcryptosignals.com/ xt-client --gunicorn
+# if using default settings
+SERVER_API_BASE_URL=http://127.0.0.1:5000 xt-client --gunicorn
 ```
+`SERVER_API_BASE_URL` should contain the public address where `xt-server` was started.
+
 
 Open the browser with the URL http://127.0.0.1:8000
 
