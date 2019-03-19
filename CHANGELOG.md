@@ -2,7 +2,7 @@
 All changes will be registered here per release 
 
 
-## [0.1.3] - Current date
+## [0.1.3] - 2019-03-19
 Added support for dev and prod (using eventlet and Gunicorn) environments when
 running `xt-server` and `xt-client`.    
 Added real-time active number of users in dashboard page.  
