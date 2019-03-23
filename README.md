@@ -173,8 +173,9 @@ HISTORY_FREQUENCY = (
 ```
 
 ### Results
-The Ticker service uses multi-processing and it takes around 6 seconds to collect data of 70 crypto-currencies symbols pairs from 7 exchanges and save it in 11 collections in MongoDB.  
-(This performance figure depends on used hardware and Internet connection / latency)
+The Ticker service uses multi-processing as it can take advantage of a multi-core CPU.  
+It takes around 6 seconds to collect data of 70 crypto-currencies symbols pairs from 7 exchanges and save it in 11 collections in MongoDB.  
+(This performance figure mainly depends on used hardware as CPU cores and Internet connection / latency)
 
 ### RESTFul Server API
 ### Start service
