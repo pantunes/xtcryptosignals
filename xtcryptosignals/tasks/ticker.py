@@ -22,7 +22,7 @@ from xtcryptosignals.models.ticker import Ticker as TickerModel
 
 
 _ENABLE_SOCKET_IO = False
-_LOG_MINIMAL = True
+_LOG_MINIMAL = False
 
 
 def _get_log_level():
@@ -194,7 +194,7 @@ def test():
 )
 @click.option(
     '--log-minimal',
-    is_flag=_LOG_MINIMAL,
+    is_flag=True,
     help="Only log errors and important warnings in stdout."
 )
 @click.option(
