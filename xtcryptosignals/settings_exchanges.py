@@ -58,6 +58,7 @@ SYMBOLS_PER_EXCHANGE.append({
 SYMBOLS_PER_EXCHANGE.append({
     IDEX: {
         'pairs': [
+            ('LTO', 'ETH'),
         ]
     }
 })
