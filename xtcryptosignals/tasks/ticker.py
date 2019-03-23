@@ -188,9 +188,9 @@ def test():
          "that the tool currently supports."
 )
 @click.option(
-    '--enable-real-time-messaging',
+    '--enable-messaging',
     is_flag=True,
-    help="Enable SocketIO real-time crypto-data message broadcasting."
+    help="Enable real-time crypto data message broadcasting."
 )
 @click.option(
     '--log-minimal',

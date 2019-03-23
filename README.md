@@ -127,8 +127,7 @@ Options:
                                   List 'exchanges' or 'currencies' (coins or
                                   tokens) per exchange that the tool currently
                                   supports.
-  --enable-real-time-messaging    Enable SocketIO real-time crypto-data
-                                  message broadcasting.
+  --enable-messaging              Enable real-time crypto data message broadcasting.
   --log-minimal                   Only log errors and important warnings in
                                   stdout.
   --version                       Show version.
