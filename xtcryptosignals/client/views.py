@@ -20,8 +20,9 @@ from xtcryptosignals.client.service import (
 
 app = Flask(
     import_name=__name__,
+    template_folder='../templates',
+    # Note: let nginx or other more resourceful WS serve static content
     static_folder='../static',
-    template_folder='../templates'
 )
 app.config['TEMPLATES_AUTO_RELOAD'] = s.DEBUG
 app.jinja_env.auto_reload = s.DEBUG
