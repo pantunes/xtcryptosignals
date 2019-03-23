@@ -202,8 +202,7 @@ def test():
     is_flag=True,
     help="Show version."
 )
-def main(testing, list_config, enable_real_time_messaging,
-         log_minimal, version):
+def main(testing, list_config, enable_messaging, log_minimal, version):
     """
     Use this tool to collect and broadcast data from configured coins
     or/and tokens from configured crypto-currencies exchanges.
@@ -226,7 +225,7 @@ def main(testing, list_config, enable_real_time_messaging,
         return
 
     global _ENABLE_SOCKET_IO, _LOG_MINIMAL
-    _ENABLE_SOCKET_IO = enable_real_time_messaging
+    _ENABLE_SOCKET_IO = enable_messaging
     _LOG_MINIMAL = log_minimal
 
     from celery import current_app
