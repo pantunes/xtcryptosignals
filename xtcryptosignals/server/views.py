@@ -11,8 +11,10 @@ from flask import Flask
 from flask_socketio import SocketIO, Namespace
 import xtcryptosignals.settings as s
 from xtcryptosignals.celeryconfig import BROKER_URL
-from xtcryptosignals.server.service import get_ticker_data_from_namespace
-from xtcryptosignals.storage.service import use_mongodb
+from xtcryptosignals.server.service import (
+    get_ticker_data_from_namespace,
+    use_mongodb,
+)
 
 
 eventlet.monkey_patch()
