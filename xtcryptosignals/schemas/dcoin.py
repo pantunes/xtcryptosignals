@@ -31,4 +31,5 @@ class Dcoin(Schema):
     @post_load
     def post_load(self, data):
         data['symbol'] = data['symbol'].replace('_', '')
+        data['volume_24h'] = data['volume_24h'] * data['price']
         return data
