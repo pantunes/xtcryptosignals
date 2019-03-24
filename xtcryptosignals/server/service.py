@@ -6,8 +6,20 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+from functools import wraps
+from mongoengine import connect
 from xtcryptosignals.models.history import History
 import xtcryptosignals.settings as s
+
+
+def use_mongodb(**config_params):
+    def decorator(f):
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+            connect(s.MONGODB_NAME, **config_params)
+            return f(*args, **kwargs)
+        return wrapper
+    return decorator
 
 
 def get_ticker_data_from_namespace(namespace):
