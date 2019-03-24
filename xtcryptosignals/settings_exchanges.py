@@ -17,11 +17,15 @@ BIBOX = 'bibox'
 OKCOIN = 'okcoin'
 BITHUMB = 'bithumb'
 COINBENE = 'coinbene'
+DCOIN = 'dcoin'
+BITMAX = 'bitmax'
+BILAXY = 'bilaxy'
 
 
 EXCHANGES = [
     BINANCE, UPHOLD, OKEX, IDEX, SWITCHEO, HOTBIT,
-    BIBOX, OKCOIN, BITHUMB, COINBENE
+    BIBOX, OKCOIN, BITHUMB, COINBENE, DCOIN, BITMAX,
+    BILAXY,
 ]
 
 SYMBOLS_PER_EXCHANGE = list()
@@ -58,6 +62,7 @@ SYMBOLS_PER_EXCHANGE.append({
 SYMBOLS_PER_EXCHANGE.append({
     IDEX: {
         'pairs': [
+            ('LTO', 'ETH'),
         ]
     }
 })
@@ -111,18 +116,54 @@ SYMBOLS_PER_EXCHANGE.append({
     }
 })
 
-# SWITCHEO
+# DCoin
 SYMBOLS_PER_EXCHANGE.append({
-    SWITCHEO: {
+    DCOIN: {
         'pairs': [
+            ('LTO', 'USDT'),
         ],
         'single_request': True,
     }
 })
 
-# HOTBIT
+# Bitmax
+SYMBOLS_PER_EXCHANGE.append({
+    BITMAX: {
+        'pairs': [
+            ('LTO', 'USDT'),
+            ('LTO', 'BTC'),
+        ],
+        'single_request': True,
+    }
+})
+
+# Hotbit
 SYMBOLS_PER_EXCHANGE.append({
     HOTBIT: {
+        'pairs': [
+            ('LTO', 'USDT'),
+            ('LTO', 'BTC'),
+            ('LTO', 'ETH'),
+        ],
+        'single_request': True,
+    }
+})
+
+# Bilaxy
+SYMBOLS_PER_EXCHANGE.append({
+    BILAXY: {
+        'pairs': [
+            ('LTO', 'ETH'),
+            ('BTC', 'USDT'),
+            ('ETH', 'USDT'),
+        ],
+        'single_request': True,
+    }
+})
+
+# Switcheo
+SYMBOLS_PER_EXCHANGE.append({
+    SWITCHEO: {
         'pairs': [
         ],
         'single_request': True,
