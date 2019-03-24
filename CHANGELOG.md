@@ -1,10 +1,20 @@
 # Changelog
 All changes will be registered here per release 
 
+## [0.1.4] - Current date
+Added collection of data for any configured crypto-currency (coin or token) in 
+the following exchanges:  
+
+* Bitmax
+* DCoin
+* Bilaxy
+
+Added pairs LTO/BTC, LTO/ETH and LTO/USDT in `settings_exchanges.py`.  
+General Code fixes. 
 
 ## [0.1.3] - 2019-03-19
 Added support for dev and prod (using eventlet and Gunicorn) environments when
-running `xt-server` and `xt-client`.    
+running `xt-server` and `xt-client`.  
 Added real-time active number of users in dashboard page.  
 Added 6 more Tickers.  
 Added adequate mongodb collection indexes to improve data fetching performance.  
