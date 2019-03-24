@@ -15,6 +15,7 @@ function isFloat(n) {
 }
 var socket = io.connect('{{server_api_base_url}}{{frequency}}');
 socket.on('ticker', function(json) {
+    const is_usd = json['symbol'].substr(json['symbol'].length - 3) == 'USD'
     const list = {{attributes|safe}}
     for (let i = 0; i < list.length; i++) {
         var _attr = list[i].split(' ').join('_').toLowerCase()
@@ -31,11 +32,15 @@ socket.on('ticker', function(json) {
                     frac_digits = precision[1].length
                 }
             }
-            const price_formatter = new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
-                minimumFractionDigits: frac_digits,
-            })
+            var setup = {
+                maximumFractionDigits: frac_digits
+            }
+            if (is_usd) {
+                setup.minimumFractionDigits = frac_digits
+                setup.style = 'currency'
+                setup.currency = 'USD'
+            }
+            const price_formatter = new Intl.NumberFormat('en-US', setup)
             val = price_formatter.format(val)
         } else if (_attr == 'number_trades_24h') {
             val = numeral(val).format('0,0');

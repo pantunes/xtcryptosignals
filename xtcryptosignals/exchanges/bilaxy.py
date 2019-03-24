@@ -1,0 +1,42 @@
+__author__ = "Paulo Antunes"
+__copyright__ = "Copyright 2018, XTCryptoSignals"
+__credits__ = ["Paulo Antunes", ]
+__license__ = "GPL"
+__maintainer__ = "Paulo Antunes"
+__email__ = "pjmlantunes@gmail.com"
+
+
+import requests
+
+
+class Bilaxy:
+    def get_ticker(self, pairs):
+        url = 'https://www.bilaxy.com/api/v2/market/coins'
+        request = requests.get(url)
+        if request.status_code != 200:
+            raise ValueError(
+                'Error connecting Bilaxy on URL: {}'.format(url)
+            )
+        response = request.json()['dataMap']
+        _pairs = dict()
+        for x, y in pairs:
+            try:
+                _pairs[y].append(x)
+            except KeyError:
+                _pairs[y] = [x]
+        rows = list()
+        url = 'https://api.bilaxy.com/v1/ticker?symbol={}'
+        for x, y in _pairs.items():
+            for z in response[x]:
+                if z['fShortName'] in y:
+                    request = requests.get(url.format(z['fid']))
+                    if request.status_code != 200:
+                        raise ValueError(
+                            'Error connecting Bilaxy on URL: {}'.format(url)
+                        )
+                    response_per_pair = request.json()['data']
+                    response_per_pair.update(
+                        symbol=''.join([z['fShortName'], x])
+                    )
+                    rows.append(response_per_pair)
+        return rows
