@@ -25,11 +25,12 @@ class Bilaxy:
             except KeyError:
                 _pairs[y] = [x]
         rows = list()
-        url = 'https://api.bilaxy.com/v1/ticker?symbol={}'
+        url_template = 'https://api.bilaxy.com/v1/ticker?symbol={}'
         for x, y in _pairs.items():
             for z in response[x]:
                 if z['fShortName'] in y:
-                    request = requests.get(url.format(z['fid']))
+                    url = url_template.format(z['fid'])
+                    request = requests.get(url)
                     if request.status_code != 200:
                         raise ValueError(
                             'Error connecting Bilaxy on URL: {}'.format(url)
