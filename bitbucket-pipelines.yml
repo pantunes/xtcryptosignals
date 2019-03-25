@@ -15,14 +15,14 @@ pipelines:
           - pip install flake8-bugbear flake8
           - flake8 bvp
     - step:
-        name: Install and build requirements
+        name: Build and install requirements
         caches:
           - pip
         script:
           - pip install --upgrade pip
           - pip install -r requirements.txt
     - step:
-        name: Testing
+        name: Run Test cases
         caches:
           - pip
         script:
