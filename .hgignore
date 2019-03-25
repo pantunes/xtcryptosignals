@@ -4,6 +4,7 @@ syntax: glob
 *.pyc
 *.swp
 *.idea
+*.eggs
 *~
 
 nohup.out
@@ -11,6 +12,7 @@ celerybeat-schedule
 dump.rdb
 
 *egg-info/
+*pytest_cache/
 dist/
 build/
 data/
