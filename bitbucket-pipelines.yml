@@ -8,8 +8,22 @@ image: python:3.6
 pipelines:
   default:
     - step:
+        name: Lint by Flake8
         caches:
           - pip
-        script: # Modify the commands below to build your repository.
+        script:
+          - pip install flake8-bugbear flake8
+          - flake8 bvp
+    - step:
+        name: Install and build requirements
+        caches:
+          - pip
+        script:
           - pip install --upgrade pip
           - pip install -r requirements.txt
+    - step:
+        name: Testing
+        caches:
+          - pip
+        script:
+          - python setup.py test
