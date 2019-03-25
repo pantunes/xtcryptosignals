@@ -10,6 +10,7 @@ the following exchanges:
 * Bilaxy
 
 Added pairs LTO/BTC, LTO/ETH and LTO/USDT in `settings_exchanges.py`.  
+Setup and added testing to the whole framework.  
 General Code fixes. 
 
 ## [0.1.3] - 2019-03-19
