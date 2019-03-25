@@ -37,6 +37,8 @@ setup(
     long_description_content_type="text/markdown",
     url="https://bitbucket.org/pantunes/xtcryptosignals",
     packages=find_packages(),
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest'],
     include_package_data=True,
     entry_points={
         'console_scripts': [
