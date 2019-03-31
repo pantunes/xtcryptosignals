@@ -6,20 +6,23 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+import os
 from setuptools import (
     setup,
     find_packages,
 )
 
 
-with open('requirements.txt', 'r') as f:
+ROOT_FOLDER = os.path.dirname(os.path.abspath(__file__))
+
+with open(os.path.join(ROOT_FOLDER, 'requirements.txt'), 'r') as f:
     requirements = [x for x in f.readlines()]
 
-with open('README.md', 'r') as f:
+with open(os.path.join(ROOT_FOLDER, 'README.md'), 'r') as f:
     long_description = f.read()
 
 cfg = {}
-with open('xtcryptosignals/__init__.py', 'r') as f:
+with open(os.path.join(ROOT_FOLDER, 'xtcryptosignals/__init__.py'), 'r') as f:
     exec(f.read(), cfg)
 
 
