@@ -10,12 +10,14 @@ import requests
 
 
 class Bilaxy:
+    def __init__(self):
+        self.base_url = 'https://www.bilaxy.com/api/v2/market/coins'
+
     def get_ticker(self, pairs):
-        url = 'https://www.bilaxy.com/api/v2/market/coins'
-        request = requests.get(url)
+        request = requests.get(self.base_url)
         if request.status_code != 200:
             raise ValueError(
-                'Error connecting Bilaxy on URL: {}'.format(url)
+                'Error connecting Bilaxy on URL: {}'.format(self.base_url)
             )
         response = request.json()['dataMap']
         _pairs = dict()
