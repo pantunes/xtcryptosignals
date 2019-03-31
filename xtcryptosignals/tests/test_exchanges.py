@@ -18,5 +18,8 @@ def test_exchanges():
     for filename in files:
         if filename[0] == '_':
             continue
-        _class = get_class(folder='xtcryptosignals.exchanges', module=filename.partition('.')[0])
+        _class = get_class(
+            folder='xtcryptosignals.exchanges',
+            module=filename.partition('.')[0],
+        )
         assert _class.get_ticker
