@@ -6,5 +6,17 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-def test_something():
-    assert True
+import os
+from xtcryptosignals.utils.helpers import get_class
+
+
+ROOT_FOLDER = os.path.dirname(os.path.abspath(__file__))
+
+
+def test_exchanges():
+    files = os.listdir(os.path.join(ROOT_FOLDER, '../', 'exchanges'))
+    for filename in files:
+        if filename[0] == '_':
+            continue
+        _class = get_class(folder='xtcryptosignals.exchanges', module=filename.partition('.')[0])
+        assert _class.get_ticker
