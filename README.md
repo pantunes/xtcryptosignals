@@ -60,6 +60,12 @@ pip install -e .
 ```
 (Dependencies will be installed automatically from [requirements.txt](requirements.txt))
 
+Running tests
+
+```bash
+python setup.py test
+```
+
 ### Install from PyPi
 Create folder project:
 ```bash
