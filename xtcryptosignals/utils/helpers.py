@@ -18,7 +18,10 @@ def get_class(folder, module):
 
 def convert_to_seconds(x):
     _t = x[-1]
-    seconds = int(x[:-1])
+    try:
+        seconds = int(x[:-1])
+    except ValueError:
+        raise ValueError('Invalid item: {}'.format(x))
     if _t == 's':
         return seconds
     minutes = seconds * 60
