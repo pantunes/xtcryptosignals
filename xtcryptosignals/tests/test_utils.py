@@ -17,6 +17,11 @@ def test_get_class():
     with pytest.raises(ModuleNotFoundError):
         get_class('aaa', 'bbb')
 
+    with pytest.raises(ModuleNotFoundError):
+        get_class(folder='xtcryptosignals.exchanges', module='aaa')
+
+    get_class(folder='xtcryptosignals.exchanges', module='binance')
+
 
 def test_convert_to_seconds():
     with pytest.raises(TypeError):
