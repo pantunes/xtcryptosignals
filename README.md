@@ -54,7 +54,7 @@ virtualenv venv -p python3
 source venv/bin/activate
 ```
 
-Install package
+Install package in develop mode:
 ```bash
 pip install -e .
 ```
@@ -188,13 +188,13 @@ It takes around 6 seconds to collect data of 70 crypto-currencies symbols pairs 
 Development:
 
 ```bash
-xt-server
+xt-server --enable-messaging
 ```
 
 Production:
 
 ```bash
-DEBUG=0 xt-server
+DEBUG=0 xt-server --enable-messaging
 ```
 
 
