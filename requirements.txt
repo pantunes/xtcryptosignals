@@ -1,3 +1,4 @@
+urllib3==1.21.1
 python-binance
 redis
 celery
@@ -10,4 +11,3 @@ flask
 flask-socketio
 eventlet
 gunicorn
-urllib3==1.21.1
