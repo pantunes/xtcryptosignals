@@ -37,9 +37,6 @@ SYMBOLS_PER_EXCHANGE.append({
             ('BTC', 'USDT'),
             ('ETH', 'USDT'),
             ('LTC', 'USDT'),
-            ('XRP', 'USDT'),
-            ('NEO', 'USDT'),
-            ('ONT', 'USDT'),
         ]
     }
 })
@@ -51,9 +48,6 @@ SYMBOLS_PER_EXCHANGE.append({
             ('BTC', 'USDT'),
             ('ETH', 'USDT'),
             ('LTC', 'USDT'),
-            ('XRP', 'USDT'),
-            ('NEO', 'USDT'),
-            ('ONT', 'USDT'),
         ]
     }
 })
@@ -74,7 +68,6 @@ SYMBOLS_PER_EXCHANGE.append({
             ('BTC', 'USDT'),
             ('ETH', 'USDT'),
             ('LTC', 'USDT'),
-            ('NEO', 'USDT'),
         ]
     }
 })
@@ -86,7 +79,6 @@ SYMBOLS_PER_EXCHANGE.append({
             ('BTC', 'USD'),
             ('ETH', 'USD'),
             ('LTC', 'USD'),
-            ('XRP', 'USD'),
         ]
     }
 })
@@ -98,8 +90,6 @@ SYMBOLS_PER_EXCHANGE.append({
             ('BTC', 'USDT'),
             ('ETH', 'USDT'),
             ('LTC', 'USDT'),
-            ('XRP', 'USDT'),
-            ('NEO', 'USDT'),
         ]
     }
 })
@@ -111,7 +101,6 @@ SYMBOLS_PER_EXCHANGE.append({
             ('BTC', 'USD'),
             ('ETH', 'USD'),
             ('LTC', 'USD'),
-            ('XRP', 'USD'),
         ]
     }
 })
