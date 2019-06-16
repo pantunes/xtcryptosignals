@@ -120,7 +120,7 @@ SYMBOLS_PER_EXCHANGE.append({
 SYMBOLS_PER_EXCHANGE.append({
     DCOIN: {
         'pairs': [
-            ('LTO', 'USDT'),
+            # ('LTO', 'USDT'),
         ],
         'single_request': True,
     }
