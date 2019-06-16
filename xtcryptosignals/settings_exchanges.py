@@ -130,8 +130,8 @@ SYMBOLS_PER_EXCHANGE.append({
 SYMBOLS_PER_EXCHANGE.append({
     BITMAX: {
         'pairs': [
-            ('LTO', 'USDT'),
-            ('LTO', 'BTC'),
+            # ('LTO', 'USDT'),
+            # ('LTO', 'BTC'),
         ],
         'single_request': True,
     }
