@@ -112,6 +112,9 @@ bibox
 okcoin
 bithumb
 coinbene
+dcoin
+bitmax
+bilaxy
 ```
 (Drop [me](mailto:pjmlantunes@gmail.com) an e-mail if you want support for a new exchange or contribute to this project creating a pull request)
 
