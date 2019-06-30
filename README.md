@@ -217,6 +217,21 @@ SERVER_API_BASE_URL=http://127.0.0.1:5000 xt-client --gunicorn
 ```
 `SERVER_API_BASE_URL` should contain the public address where `xt-server` was started.
 
+or
+
+```
+# start all services, xt-all --help
+xt-all
+
+# start only client
+xt-client
+
+# start only server
+xt-server
+
+# start only ticker
+xt-ticker
+```
 
 Open the browser with the URL http://127.0.0.1:8000
 
