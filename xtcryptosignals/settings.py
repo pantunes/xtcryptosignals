@@ -9,11 +9,21 @@ __email__ = "pjmlantunes@gmail.com"
 import os
 
 
+IP_ADDRESS = '0.0.0.0'
+PORT_SERVER = 5000
+PORT_CLIENT = 8000
+
 try:
     DEBUG = bool(int(os.environ['DEBUG']))
 except KeyError:
     # development
     DEBUG = True
+
+try:
+    SERVER_API_BASE_URL = os.environ['SERVER_API_BASE_URL']
+except KeyError:
+    # development
+    SERVER_API_BASE_URL = 'http://127.0.0.1:{}/'.format(PORT_SERVER)
 
 MONGODB_NAME = 'XTCryptoSignals'
 
@@ -24,15 +34,13 @@ SYMBOL_FLOAT_PRECISION = 8
 
 # mongodb collections created during runtime
 HISTORY_FREQUENCY = (
-    str(TICKER_SCHEDULE) + 's', '30s', '1m', '3m', '5m', '15m', '30m', '45m',
-    '1h', '2h', '3h', '4h', '12h', '1d', '4d', '1w', '2w', '4w', '12w', '24w',
+    str(TICKER_SCHEDULE) + 's', '30s', '1m', '5m', '15m', '30m',
+    '1h', '5h', '12h', '1d', '5d', '1w', '5w', '12w', '24w',
     '1y',
 )
 
 # local settings
 from xtcryptosignals.settings_local import (
-    IP_ADDRESS, PORT_SERVER, PORT_CLIENT,
-    SERVER_API_BASE_URL,
     BINANCE_API_KEY,
     BINANCE_API_SECRET,
 )  # noqa
@@ -45,7 +53,6 @@ from xtcryptosignals.settings_exchanges import (
 )  # noqa
 
 __all__ = [
-    'IP_ADDRESS', 'PORT_SERVER', 'PORT_CLIENT', 'SERVER_API_BASE_URL',
     'BINANCE_API_KEY', 'BINANCE_API_SECRET', 'EXCHANGES',
     'SYMBOLS_PER_EXCHANGE', 'BINANCE', 'UPHOLD', 'OKEX', 'IDEX', 'SWITCHEO',
     'HOTBIT', 'BIBOX', 'OKCOIN', 'BITHUMB', 'COINBENE', 'DCOIN', 'BITMAX',
