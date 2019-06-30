@@ -50,7 +50,7 @@ class Ticker(Document):
         'ordering': ['-created_on'],
     }
 
-    def exists_row_offset(self, model, offset):
+    def _exists_row_offset(self, model, offset):
         dt = datetime.utcnow() - timedelta(
             seconds=convert_to_seconds(offset) - 1.0
         )
@@ -98,7 +98,7 @@ class Ticker(Document):
                 created_on=self['created_on'],
             )
 
-            if not self.exists_row_offset(model, offset=x):
+            if not self._exists_row_offset(model, offset=x):
                 history_object.save()
 
             history_list_dicts.append(
