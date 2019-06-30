@@ -1,7 +1,7 @@
 # Changelog
 All changes will be registered here per release.
 
-## [0.1.4] - Current date
+## [0.1.4] - 2019-06-30
 Added collection of data for any configured crypto-currency (coin or token) in 
 the following exchanges:  
 
@@ -9,8 +9,9 @@ the following exchanges:
 * DCoin
 * Bilaxy
 
-All tickers will always be updated each 10sec compared with referenced history 
-ticker.  
+Added Mongo data migrations capability.  
+All tickers will always be updated each 10 seconds compared with 
+referenced history ticker.  
 Added pairs LTO/BTC, LTO/ETH and LTO/USDT in `settings_exchanges.py`.  
 Setup and added testing to the whole framework.  
 General Code fixes. 
