@@ -63,44 +63,46 @@ class Ticker(Document):
                 Q(created_on__gte=dt)
             ).first()
 
-            if not row:
-                row = model.objects(
-                    symbol=self['symbol'],
-                    source=self['source']
-                ).first()
+            if row:
+                continue
 
-                number_trades_change_percent = None
-                price_change_percent = None
-                volume_change_percent = None
-                if row:
-                    price_change_percent = (float(
-                        self['price']/row.price
+            row = model.objects(
+                symbol=self['symbol'],
+                source=self['source']
+            ).first()
+
+            number_trades_change_percent = None
+            price_change_percent = None
+            volume_change_percent = None
+            if row:
+                price_change_percent = (float(
+                    self['price']/row.price
+                ) - 1.0) * 100.0
+                if self['number_trades_24h']:
+                    number_trades_change_percent = (float(
+                        self['number_trades_24h']/row.number_trades_24h
                     ) - 1.0) * 100.0
-                    if self['number_trades_24h']:
-                        number_trades_change_percent = (float(
-                            self['number_trades_24h']/row.number_trades_24h
-                        ) - 1.0) * 100.0
-                    if self['volume_24h']:
-                        volume_change_percent = (float(
-                            self['volume_24h']/row.volume_24h
-                        ) - 1.0) * 100.0
-                history_object = model(
-                    symbol=self['symbol'],
-                    source=self['source'],
-                    price=self['price'],
-                    number_trades_24h=self['number_trades_24h'],
-                    volume_24h=self['volume_24h'],
-                    price_change_percent=_get_abs_zero(price_change_percent),
-                    number_trades_change_percent=_get_abs_zero(
-                        number_trades_change_percent),
-                    volume_change_percent=_get_abs_zero(volume_change_percent),
-                    created_on=self['created_on'],
-                )
-                history_object.save()
+                if self['volume_24h']:
+                    volume_change_percent = (float(
+                        self['volume_24h']/row.volume_24h
+                    ) - 1.0) * 100.0
+            history_object = model(
+                symbol=self['symbol'],
+                source=self['source'],
+                price=self['price'],
+                number_trades_24h=self['number_trades_24h'],
+                volume_24h=self['volume_24h'],
+                price_change_percent=_get_abs_zero(price_change_percent),
+                number_trades_change_percent=_get_abs_zero(
+                    number_trades_change_percent),
+                volume_change_percent=_get_abs_zero(volume_change_percent),
+                created_on=self['created_on'],
+            )
+            history_object.save()
 
-                history_list_dicts.append(
-                    history_object.get_object(frequency=x)
-                )
+            history_list_dicts.append(
+                history_object.get_object(frequency=x)
+            )
 
         super(Ticker, self).save(*args, **kwargs)
         return history_list_dicts
