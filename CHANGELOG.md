@@ -9,6 +9,7 @@ the following exchanges:
 * DCoin
 * Bilaxy
 
+All tickers will always be updated each 10sec compared with reference ticker.
 Added pairs LTO/BTC, LTO/ETH and LTO/USDT in `settings_exchanges.py`.  
 Setup and added testing to the whole framework.  
 General Code fixes. 
