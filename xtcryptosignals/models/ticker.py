@@ -50,21 +50,20 @@ class Ticker(Document):
         'ordering': ['-created_on'],
     }
 
+    def exists_row_offset(self, model, offset):
+        dt = datetime.utcnow() - timedelta(
+            seconds=convert_to_seconds(offset) - 1.0
+        )
+        return model.objects(
+            Q(symbol=self['symbol']) &
+            Q(source=self['source']) &
+            Q(created_on__gte=dt)
+        ).first()
+
     def save(self, *args, **kwargs):
         history_list_dicts = []
         for x in s.HISTORY_FREQUENCY:
             model = type('History{}'.format(x), (History,), {})
-            dt = datetime.utcnow() - timedelta(
-                seconds=convert_to_seconds(x) - 1.0
-            )
-            row = model.objects(
-                Q(symbol=self['symbol']) &
-                Q(source=self['source']) &
-                Q(created_on__gte=dt)
-            ).first()
-
-            if row:
-                continue
 
             row = model.objects(
                 symbol=self['symbol'],
@@ -98,7 +97,9 @@ class Ticker(Document):
                 volume_change_percent=_get_abs_zero(volume_change_percent),
                 created_on=self['created_on'],
             )
-            history_object.save()
+
+            if not self.exists_row_offset(model, offset=x):
+                history_object.save()
 
             history_list_dicts.append(
                 history_object.get_object(frequency=x)
