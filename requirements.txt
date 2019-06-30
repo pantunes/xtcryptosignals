@@ -10,3 +10,4 @@ flask
 flask-socketio
 eventlet
 gunicorn
+mongodb-migrations
