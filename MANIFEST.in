@@ -1,5 +1,6 @@
 include requirements.txt
 include requirements-test.txt
+include xtcryptosignals/migrations/*.*
 include xtcryptosignals/scripts/*.*
 include xtcryptosignals/templates/*.*
 include xtcryptosignals/templates/snippets/*.*
