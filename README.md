@@ -247,6 +247,7 @@ Open the browser with the URL http://127.0.0.1:8000
 **BTC-USDT in all Exchanges** | 
 ![screen-shot](xtcryptosignals/static/imgs/readme/5.png) | 
 
+
 ## Disclaimer
 
 This project is work in progress and when it comes to trading use it at your own risk.
@@ -254,4 +255,10 @@ This project is work in progress and when it comes to trading use it at your own
 
 ## License
 
-[GNU](https://www.gnu.org/licenses/gpl-3.0.en.html)
+This project is licensed under the [GNU](https://www.gnu.org/licenses/gpl-3.0.en.html) License.
+
+
+
+## Acknowledgments
+
+Thanks to [Jetbrains](https://www.jetbrains.com/?from=xtcryptosignals) in order to support us with an Open Source license.
