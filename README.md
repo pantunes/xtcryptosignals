@@ -239,11 +239,13 @@ Options:
 
 Open the browser with the URL http://127.0.0.1:8000
 
-&nbsp; | &nbsp;
+  Home page | Ticker 10 seconds
 :-------------------------:|:-------------------------:
-![alt text](xtcryptosignals/static/imgs/readme/1.png) | ![alt text](xtcryptosignals/static/imgs/readme/2.png)
-![alt text](xtcryptosignals/static/imgs/readme/3.png) | ![alt text](xtcryptosignals/static/imgs/readme/4.png)
-![alt text](xtcryptosignals/static/imgs/readme/5.png) | 
+![screen-shot](xtcryptosignals/static/imgs/readme/1.png) | ![screen-shot](xtcryptosignals/static/imgs/readme/2.png)
+Tickers | Pairs
+![screen-shot](xtcryptosignals/static/imgs/readme/3.png) | ![screen-shot](xtcryptosignals/static/imgs/readme/4.png)
+BTC-USDT in all Exchanges | 
+![screen-shot](xtcryptosignals/static/imgs/readme/5.png) | 
 
 ## Disclaimer
 
