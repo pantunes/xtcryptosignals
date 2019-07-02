@@ -88,13 +88,20 @@ pip install xtcryptosignals
 ## Ticker
 ### Start service
 
+Development:
+
 ```bash
-xt-ticker
+xt-ticker --enable-messaging
+
+# to test 1 tick
+xt-ticker --testing
+
 ```
 
-Run without Celery (for testing purposes):
+Production
+
 ```bash
-xt-ticker --testing
+xt-ticker --enable-messaging --log-minimal
 ```
 
 To get a list of supported exchanges:
@@ -181,9 +188,7 @@ HISTORY_FREQUENCY = (
 ```
 
 ### Results
-The Ticker service uses multi-processing as it can take advantage of a multi-core CPU.  
-It takes around 6 seconds to collect data of 70 crypto-currencies symbols pairs from 7 exchanges and save it in 11 collections in MongoDB.  
-(This performance figure mainly depends on used hardware as CPU cores and Internet connection / latency)
+The Ticker service is highly performant as can take advantage of multi-processing multi-core CPU.  
 
 ### RESTFul Server API
 ### Start service
@@ -191,13 +196,13 @@ It takes around 6 seconds to collect data of 70 crypto-currencies symbols pairs 
 Development:
 
 ```bash
-xt-server --enable-messaging
+xt-server
 ```
 
 Production:
 
 ```bash
-DEBUG=0 xt-server --enable-messaging
+DEBUG=0 xt-server
 ```
 
 
@@ -213,24 +218,21 @@ xt-client
 Production:
 ```bash
 # if using default settings
-SERVER_API_BASE_URL=http://127.0.0.1:5000 xt-client --gunicorn
+DEBUG=0 SERVER_API_BASE_URL=http://127.0.0.1:5000 xt-client --gunicorn
 ```
 `SERVER_API_BASE_URL` should contain the public address where `xt-server` was started.
 
-or
+## Run all services at once
 
+```bash
+xt-all --help
 ```
-# start all services, xt-all --help
-xt-all
 
-# start only client
-xt-client
+```bash
+Usage: xt-all [OPTIONS] [start|stop|restart]
 
-# start only server
-xt-server
-
-# start only ticker
-xt-ticker
+Options:
+  -h, --help  Show this message and exit.
 ```
 
 Open the browser with the URL http://127.0.0.1:8000
