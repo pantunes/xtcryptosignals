@@ -165,7 +165,7 @@ def test():
         format='%(asctime)s %(levelname)s %(message)s',
         level=logging.INFO,
     )
-    logging.info('Testing Ticker without Celery')
+    logging.info('Process 1 Tick')
     logging.info('Starting...')
     update()
     logging.info('Ending...')
@@ -177,8 +177,8 @@ def test():
 @click.option(
     '--testing',
     is_flag=True,
-    help="Execute 1 iteration for all configured "
-         "coins and/or tokens without Celery. "
+    help="Process 1 iteration for all configured "
+         "coins and/or tokens."
          "(Useful for testing purposes)",
 )
 @click.option(
