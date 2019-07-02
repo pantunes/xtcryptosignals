@@ -123,7 +123,7 @@ dcoin
 bitmax
 bilaxy
 ```
-(Drop [me](mailto:pjmlantunes@gmail.com) an e-mail if you want support for a new exchange or contribute to this project creating a pull request)
+(Drop [me](mailto:pjmlantunes@gmail.com) an e-mail if you want support for a new exchange or please contribute to this project creating a pull request)
 
 Command line help
 ```bash
