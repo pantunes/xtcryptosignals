@@ -1,7 +1,10 @@
 # Changelog
 All changes will be registered here per release.
 
-## [0.1.4] - 2019-06-30
+## [0.1.4.1] - current date
+Improved README.md
+
+## [0.1.3.1] - 2019-06-30
 Added collection of data for any configured crypto-currency (coin or token) in 
 the following exchanges:  
 
