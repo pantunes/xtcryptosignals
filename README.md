@@ -235,27 +235,18 @@ Options:
   -h, --help  Show this message and exit.
 ```
 
+## Screenshots
+
 Open the browser with the URL http://127.0.0.1:8000
 
-![alt text](xtcryptosignals/static/imgs/readme/1.png)
-
-10 seconds ticker page in the URL http://127.0.0.1:8000/ticker/10s
-
-![alt text](xtcryptosignals/static/imgs/readme/2.png)
-
-Displaying Tickers menu
-
-![alt text](xtcryptosignals/static/imgs/readme/3.png)
-
-Displaying Pairs menu
-
-![alt text](xtcryptosignals/static/imgs/readme/4.png)
-
-10 seconds ticker page for Bitcoin in the URL http://127.0.0.1:8000/ticker/BTCUSDT/10s
-
-![alt text](xtcryptosignals/static/imgs/readme/5.png)
+&nbsp; | &nbsp;
+:-------------------------:|:-------------------------:
+![alt text](xtcryptosignals/static/imgs/readme/1.png) | ![alt text](xtcryptosignals/static/imgs/readme/2.png)
+![alt text](xtcryptosignals/static/imgs/readme/3.png) | ![alt text](xtcryptosignals/static/imgs/readme/4.png)
+![alt text](xtcryptosignals/static/imgs/readme/5.png) | 
 
 ## Disclaimer
+
 This project is work in progress and when it comes to trading use it at your own risk.
 
 
