@@ -119,6 +119,7 @@ def update(self):
 
     jobs = []
     logger = self.get_logger()
+
     try:
         for row in s.SYMBOLS_PER_EXCHANGE:
             for exchange, data in row.items():
