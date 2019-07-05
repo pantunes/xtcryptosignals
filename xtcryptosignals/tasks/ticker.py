@@ -207,12 +207,6 @@ def main(testing, list_config, enable_messaging, log_minimal, version):
     Use this tool to collect and broadcast data from configured coins
     or/and tokens from configured crypto-currencies exchanges.
     """
-    import sys
-    sys.argv = [sys.argv[0]]
-    from xtcryptosignals.data_migrations import data_migrations_manager
-
-    data_migrations_manager.run()
-
     if list_config:
         if list_config == 'currencies':
             import pprint

@@ -46,8 +46,8 @@ setup(
     entry_points={
         'console_scripts': [
             'xt-ticker=xtcryptosignals.tasks.ticker:main',
-            'xt-server=xtcryptosignals.server.views:main',
-            'xt-client=xtcryptosignals.client.views:main',
+            'xt-server=xtcryptosignals.apps:main_server',
+            'xt-client=xtcryptosignals.apps:main_client',
             'xt-all=xtcryptosignals.scripts.manage:main',
         ],
     },
