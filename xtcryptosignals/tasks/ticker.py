@@ -6,7 +6,6 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import click
 import logging
 from celery.task import task
 from celery.exceptions import Ignore
@@ -21,12 +20,13 @@ from xtcryptosignals.utils.helpers import get_class
 from xtcryptosignals.models.ticker import Ticker as TickerModel
 
 
-_ENABLE_SOCKET_IO = False
-_LOG_MINIMAL = False
+class TickerSettings(object):
+    enable_socket_io = False
+    log_minimal = False
 
 
 def _get_log_level():
-    return logging.INFO if not _LOG_MINIMAL else logging.ERROR
+    return logging.INFO if not TickerSettings.log_minimal else logging.ERROR
 
 
 def _process(
@@ -75,7 +75,7 @@ def _get_24h_price_ticker_data(
         symbol=None, pairs=None
 ):
     socketio = None
-    if _ENABLE_SOCKET_IO:
+    if TickerSettings.enable_socket_io:
         socketio = SocketIO(message_queue=BROKER_URL)
 
     symbol_or_pairs = '-'.join(symbol) if symbol else 'PAIRS'
@@ -111,10 +111,12 @@ def _terminate_running_jobs(logger, jobs):
 @task(bind=True)
 @use_mongodb(connect=False)
 def update(self):
-    if _ENABLE_SOCKET_IO:
+
+    if TickerSettings.enable_socket_io:
         log_level = _get_log_level()
         logging.getLogger('engineio').setLevel(log_level)
         logging.getLogger('socketio').setLevel(log_level)
+
     jobs = []
     logger = self.get_logger()
     try:
@@ -169,73 +171,3 @@ def test():
     logging.info('Starting...')
     update()
     logging.info('Ending...')
-
-
-@click.command(
-    context_settings=dict(help_option_names=['-h', '--help'])
-)
-@click.option(
-    '--testing',
-    is_flag=True,
-    help="Process 1 iteration for all configured "
-         "coins and/or tokens."
-         "(Useful for testing purposes)",
-)
-@click.option(
-    '--list-config',
-    type=click.Choice(['exchanges', 'currencies']),
-    help="List 'exchanges' or 'currencies' (coins or tokens) per exchange "
-         "that the tool currently supports."
-)
-@click.option(
-    '--enable-messaging',
-    is_flag=True,
-    help="Enable real-time crypto data message broadcasting."
-)
-@click.option(
-    '--log-minimal',
-    is_flag=True,
-    help="Only log errors and important warnings in stdout."
-)
-@click.option(
-    '--version',
-    is_flag=True,
-    help="Show version."
-)
-def main(testing, list_config, enable_messaging, log_minimal, version):
-    """
-    Use this tool to collect and broadcast data from configured coins
-    or/and tokens from configured crypto-currencies exchanges.
-    """
-    if list_config:
-        if list_config == 'currencies':
-            import pprint
-            click.echo(pprint.pprint(s.SYMBOLS_PER_EXCHANGE))
-        if list_config == 'exchanges':
-            click.echo('\n'.join(s.EXCHANGES))
-        return
-
-    if testing:
-        test()
-        return
-
-    if version:
-        from xtcryptosignals import __title__, __version__
-        click.echo('{} {}'.format(__title__, __version__))
-        return
-
-    global _ENABLE_SOCKET_IO, _LOG_MINIMAL
-    _ENABLE_SOCKET_IO = enable_messaging
-    _LOG_MINIMAL = log_minimal
-
-    from celery import current_app
-    from celery.bin import worker
-
-    app = current_app._get_current_object()
-    app.config_from_object('xtcryptosignals.celeryconfig')
-
-    worker = worker.worker(app=app)
-    worker.run(
-        beat=True,
-        loglevel=logging.INFO,
-    )
