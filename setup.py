@@ -32,10 +32,10 @@ setup(
     version=cfg['__version__'],
     author=cfg['__author__'],
     author_email=cfg['__email__'],
-    description="Service that collects cryptocurrencies price data, "
+    description="Service that collects crypto currencies price data, "
                 "fires alerts based on price sentiment "
-                "and performs automatic trading. It includes Restful API and "
-                "lite website showing functionality.",
+                "and performs automatic trading. Includes Restful API and "
+                "website functionality.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://bitbucket.org/pantunes/xtcryptosignals",
@@ -45,9 +45,9 @@ setup(
     include_package_data=True,
     entry_points={
         'console_scripts': [
-            'xt-ticker=xtcryptosignals.tasks.ticker:main',
-            'xt-server=xtcryptosignals.server.views:main',
-            'xt-client=xtcryptosignals.client.views:main',
+            'xt-ticker=xtcryptosignals.app_ticker:main',
+            'xt-server=xtcryptosignals.app_server:main',
+            'xt-client=xtcryptosignals.app_client:main',
             'xt-all=xtcryptosignals.scripts.manage:main',
         ],
     },
@@ -55,8 +55,8 @@ setup(
     zip_safe=False,
     keywords=[
         'xtcryptosignals', 'trading', 'coins', 'tokens', 'altcoins',
-        'bitcoin', 'ethereum', 'litecoin', 'tron', 'ripple',
-        'exchange', 'dex', 'crypto', 'currency', 'cryptocurrency',
+        'bitcoin', 'btc', 'ethereum', 'eth', 'litecoin', 'ltc', 'xrp',
+        'exchange', 'dex', 'crypto', 'currency', 'crypto-currency',
         'trading', 'trading-api', 'signals'
     ],
     classifiers=[
