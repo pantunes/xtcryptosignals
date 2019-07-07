@@ -62,16 +62,3 @@ for x in s.HISTORY_FREQUENCY:
         'SocketIONamespace{}'.format(x), (TickerSockeIONamespace,), {}
     )
     socketio.on_namespace(socketio_model('/{}'.format(x)))
-
-
-def main():
-    """
-    Start RESTFul server API and socketIO server.
-    """
-    socketio.run(
-        app,
-        debug=s.DEBUG,
-        use_reloader=s.DEBUG,
-        host=s.IP_ADDRESS,
-        port=s.PORT_SERVER,
-    )

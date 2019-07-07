@@ -7,11 +7,9 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import random
-import click
 from copy import deepcopy
 from flask import Flask, render_template
 import xtcryptosignals.settings as s
-from xtcryptosignals.wsgi_gunicorn import start
 from xtcryptosignals import __version__
 from xtcryptosignals.client.service import (
     validate_args, get_pairs,
@@ -106,25 +104,3 @@ def page_not_found(_):
         template_name_or_list='error.html',
         error='The URL is incorrect'
     ), 404
-
-
-@click.command(
-    context_settings=dict(help_option_names=['-h', '--help'])
-)
-@click.option(
-    '--gunicorn',
-    is_flag=True,
-    help="Enable production setup mode",
-)
-def main(gunicorn):
-    """
-    Start web client
-    """
-    port = s.PORT_CLIENT
-    host = s.IP_ADDRESS
-
-    if gunicorn:
-        start(handler=app, host=host, port=port)
-        return
-
-    app.run(debug=s.DEBUG, host=host, port=port)
