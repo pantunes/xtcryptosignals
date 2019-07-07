@@ -7,7 +7,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 import xtcryptosignals.settings as s
 from xtcryptosignals.server.views import socketio
-from xtcryptosignals.client.views import app
+from xtcryptosignals.server.views import app
 
 
 def main():
