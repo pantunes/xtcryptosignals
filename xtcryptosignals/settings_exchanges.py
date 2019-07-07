@@ -57,6 +57,7 @@ SYMBOLS_PER_EXCHANGE.append({
     IDEX: {
         'pairs': [
             ('LTO', 'ETH'),
+            ('LQD', 'ETH'),
         ]
     }
 })
@@ -123,6 +124,7 @@ SYMBOLS_PER_EXCHANGE.append({
             ('LTO', 'USDT'),
             ('LTO', 'BTC'),
             ('LTO', 'ETH'),
+            ('LQD', 'ETH'),
         ],
         'single_request': True,
     }
@@ -134,6 +136,7 @@ SYMBOLS_PER_EXCHANGE.append({
         'pairs': [
             ('BTC', 'USDT'),
             ('ETH', 'USDT'),
+            ('LQD', 'ETH'),
         ],
         'single_request': True,
     }
