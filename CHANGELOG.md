@@ -1,7 +1,7 @@
 # Changelog
 All changes will be registered here per release.
 
-## [0.1.4.1] - current date
+## [0.1.4.1] - 2019-07-08
 Added exchange:
 
 * Binance DEX
