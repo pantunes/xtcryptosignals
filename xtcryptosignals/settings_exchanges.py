@@ -8,6 +8,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 # Exchanges
 BINANCE = 'binance'
+BINANCE_DEX = 'binance_dex'
 UPHOLD = 'uphold'
 OKEX = 'okex'
 IDEX = 'idex'
@@ -23,7 +24,7 @@ BILAXY = 'bilaxy'
 
 
 EXCHANGES = [
-    BINANCE, UPHOLD, OKEX, IDEX, SWITCHEO, HOTBIT,
+    BINANCE, BINANCE_DEX, UPHOLD, OKEX, IDEX, SWITCHEO, HOTBIT,
     BIBOX, OKCOIN, BITHUMB, COINBENE, DCOIN, BITMAX,
     BILAXY,
 ]
@@ -38,6 +39,16 @@ SYMBOLS_PER_EXCHANGE.append({
             ('ETH', 'USDT'),
             ('LTC', 'USDT'),
         ]
+    }
+})
+
+# Binance DEX
+SYMBOLS_PER_EXCHANGE.append({
+    BINANCE_DEX: {
+        'pairs': [
+            ('LTO', 'BNB'),
+        ],
+        'single_request': True,
     }
 })
 
@@ -58,6 +69,7 @@ SYMBOLS_PER_EXCHANGE.append({
         'pairs': [
             ('LTO', 'ETH'),
             ('LQD', 'ETH'),
+            ('IDEX', 'ETH'),
         ]
     }
 })
