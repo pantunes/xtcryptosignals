@@ -13,7 +13,8 @@ def get_class(folder, module):
     exchange_module = import_module(
         '{}.{}'.format(folder, module)
     )
-    return getattr(exchange_module, module.capitalize())
+    module_class_name = "".join([x.capitalize() for x in module.split('_')])
+    return getattr(exchange_module, module_class_name)
 
 
 def convert_to_seconds(x):
