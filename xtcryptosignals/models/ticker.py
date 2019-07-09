@@ -74,17 +74,26 @@ class Ticker(Document):
             price_change_percent = None
             volume_change_percent = None
             if row:
-                price_change_percent = (float(
-                    self['price']/row.price
-                ) - 1.0) * 100.0
+                try:
+                    price_change_percent = (float(
+                        self['price']/row.price
+                    ) - 1.0) * 100.0
+                except ZeroDivisionError:
+                    price_change_percent = 1.0
                 if self['number_trades_24h']:
-                    number_trades_change_percent = (float(
-                        self['number_trades_24h']/row.number_trades_24h
-                    ) - 1.0) * 100.0
+                    try:
+                        number_trades_change_percent = (float(
+                            self['number_trades_24h']/row.number_trades_24h
+                        ) - 1.0) * 100.0
+                    except ZeroDivisionError:
+                        number_trades_change_percent = 1.0
                 if self['volume_24h']:
-                    volume_change_percent = (float(
-                        self['volume_24h']/row.volume_24h
-                    ) - 1.0) * 100.0
+                    try:
+                        volume_change_percent = (float(
+                            self['volume_24h']/row.volume_24h
+                        ) - 1.0) * 100.0
+                    except ZeroDivisionError:
+                        volume_change_percent = 1.0
             history_object = model(
                 symbol=self['symbol'],
                 source=self['source'],
