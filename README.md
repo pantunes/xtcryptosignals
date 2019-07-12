@@ -110,6 +110,7 @@ xt-ticker --list-config exchanges
 ```
 ```bash
 binance
+binance_dex
 uphold
 okex
 idex
