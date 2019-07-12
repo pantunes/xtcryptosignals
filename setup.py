@@ -33,9 +33,8 @@ setup(
     author=cfg['__author__'],
     author_email=cfg['__email__'],
     description="Service that collects crypto currencies price data, "
-                "fires alerts based on price sentiment "
-                "and performs automatic trading. Includes Restful API and "
-                "website functionality.",
+                "fires alerts based on price sentiment and performs automatic "
+                "trading. Includes Restful API and website.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://bitbucket.org/pantunes/xtcryptosignals",
