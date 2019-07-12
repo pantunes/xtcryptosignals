@@ -7,7 +7,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 import click
 import xtcryptosignals.settings as s
-from xtcryptosignals.wsgi_gunicorn import start
+from xtcryptosignals.wsgi import start
 from xtcryptosignals.client.views import app
 
 
