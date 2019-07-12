@@ -137,6 +137,7 @@ SYMBOLS_PER_EXCHANGE.append({
             ('LTO', 'BTC'),
             ('LTO', 'ETH'),
             ('LQD', 'ETH'),
+            ('LQD', 'BTC'),
         ],
         'single_request': True,
     }
