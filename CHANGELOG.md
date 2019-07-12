@@ -6,8 +6,8 @@ Added exchange:
 
 * Binance DEX
 
-Updated README.md  
-Code refactor and fixes
+Updated README.md.  
+Code refactoring and code fixes.
 
 ## [0.1.3.1] - 2019-06-30
 Added collection of data for any configured crypto-currency (coin or token) in 
