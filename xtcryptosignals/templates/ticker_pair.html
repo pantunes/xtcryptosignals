@@ -29,9 +29,11 @@
     {% if d['pairs']%}
         {% for c, r in d['pairs'] %}
         <tr>
-            <td><a href="/ticker/{{frequency}}#{{exchange.upper()}}">{{exchange.replace('_', ' ').upper()}}</a></td>
+            <td style="width: 100px;">
+                <a href="/ticker/{{frequency}}#{{exchange.upper()}}">{{exchange.replace('_', ' ').upper()}}</a>
+            </td>
         {% for att in attributes %}
-        <td style="text-align: right; width: 144px;">
+        <td style="text-align: right; width: 100px;">
             <span id="{{exchange.lower()}}_{{c.lower()}}{{r.lower()}}_{{att.replace(' ', '_').lower()}}_{{frequency}}" style="padding: 5px;">-</span>
         </td>
         {% endfor %}
