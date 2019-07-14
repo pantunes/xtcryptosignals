@@ -13,31 +13,31 @@ from setuptools import (
 )
 
 
-ROOT_FOLDER = os.path.dirname(os.path.abspath(__file__))
+_ROOT_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
-with open(os.path.join(ROOT_FOLDER, 'requirements.txt'), 'r') as f:
-    requirements = [x for x in f.readlines()]
+with open(os.path.join(_ROOT_FOLDER, 'requirements.txt'), 'r') as f:
+    _REQUIREMENTS = [x for x in f.readlines()]
 
-with open(os.path.join(ROOT_FOLDER, 'README.md'), 'r') as f:
-    long_description = f.read()
+with open(os.path.join(_ROOT_FOLDER, 'README.md'), 'r') as f:
+    _LONG_DESCRIPTION = f.read()
 
-cfg = {}
-with open(os.path.join(ROOT_FOLDER, 'xtcryptosignals/__init__.py'), 'r') as f:
-    exec(f.read(), cfg)
+_CFG = {}
+with open(os.path.join(_ROOT_FOLDER, 'xtcryptosignals/__init__.py'), 'r') as f:
+    exec(f.read(), _CFG)
 
 
 setup(
     python_requires='>=3.6',
-    name=cfg['__title__'],
-    version=cfg['__version__'],
-    author=cfg['__author__'],
-    author_email=cfg['__email__'],
-    maintainer=cfg['__author__'],
-    maintainer_email=cfg['__email__'],
+    name=_CFG['__title__'],
+    version=_CFG['__version__'],
+    author=_CFG['__author__'],
+    author_email=_CFG['__email__'],
+    maintainer=_CFG['__author__'],
+    maintainer_email=_CFG['__email__'],
     description="Includes Client, Ticker and Server API that collects crypto "
                 "currencies price data, fires alerts based on price sentiment "
                 "and performs automatic trading.",
-    long_description=long_description,
+    long_description=_LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
     url="https://bitbucket.org/pantunes/xtcryptosignals",
     packages=find_packages(),
@@ -52,7 +52,7 @@ setup(
             'xt-all=xtcryptosignals.scripts.manage:main',
         ],
     },
-    install_requires=requirements,
+    install_requires=_REQUIREMENTS,
     zip_safe=False,
     keywords=[
         'xtcryptosignals', 'api', 'bitcoin', 'ethereum', 'signals', 'trading',
