@@ -47,13 +47,13 @@ socket.on('ticker', function(json) {
         } else if (isFloat(json[_attr])) {
             val = numeral(val).format('0,0.00');
         }
-        var color = (json.price_change_percent > 0) ? "#e3ffe2" : "#ffe2e2";
+        var color = (json.price_change > 0) ? "#e3ffe2" : "#ffe2e2";
         if (_attr == 'price') {
             $(_id).effect("highlight", {color: color, queue: false}, 1100, "slow");
         }
-        if (_attr == 'price_change_percent') {
-            if (json.price_change_percent != 0) {
-                $(_id).css("color", (json.price_change_percent > 0) ? "green" : "red");
+        if (_attr == 'price_change') {
+            if (json.price_change != 0) {
+                $(_id).css("color", (json.price_change > 0) ? "green" : "red");
             } else {
                 $(_id).css("color", "black");
             }

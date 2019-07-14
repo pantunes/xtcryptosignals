@@ -22,9 +22,9 @@ class History(Document):
     price = DecimalField(required=True, precision=s.SYMBOL_FLOAT_PRECISION)
     number_trades_24h = IntField()
     volume_24h = DecimalField(precision=s.SYMBOL_FLOAT_PRECISION)
-    price_change_percent = DecimalField(precision=2)
-    number_trades_change_percent = DecimalField(precision=2)
-    volume_change_percent = DecimalField(precision=2)
+    price_change = DecimalField(precision=2)
+    number_trades_change = DecimalField(precision=2)
+    volume_change = DecimalField(precision=2)
     created_on = DateTimeField(required=True)
 
     meta = {
@@ -47,8 +47,8 @@ class History(Document):
             if k in ['symbol', 'source', 'number_trades_24h']:
                 item[k] = self[k]
                 continue
-            if k in ['price', 'volume_24h', 'price_change_percent',
-                     'number_trades_change_percent', 'volume_change_percent']:
+            if k in ['price', 'volume_24h', 'price_change',
+                     'number_trades_change', 'volume_change']:
                 item[k] = float(self[k])
                 continue
             if k in ['created_on']:

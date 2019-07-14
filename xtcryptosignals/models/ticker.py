@@ -32,7 +32,7 @@ class Ticker(Document):
     source = StringField(required=True)
     price = DecimalField(required=True, precision=s.SYMBOL_FLOAT_PRECISION)
     # 24h
-    price_change_24h_percent = DecimalField(precision=s.SYMBOL_FLOAT_PRECISION)
+    price_change_24h = DecimalField(precision=s.SYMBOL_FLOAT_PRECISION)
     lowest_price_24h = DecimalField(precision=s.SYMBOL_FLOAT_PRECISION)
     highest_price_24h = DecimalField(precision=s.SYMBOL_FLOAT_PRECISION)
     number_trades_24h = IntField()
@@ -70,40 +70,40 @@ class Ticker(Document):
                 source=self['source']
             ).first()
 
-            number_trades_change_percent = None
-            price_change_percent = None
-            volume_change_percent = None
+            number_trades_change = None
+            price_change = None
+            volume_change = None
             if row:
                 try:
-                    price_change_percent = (float(
+                    price_change = (float(
                         self['price']/row.price
                     ) - 1.0) * 100.0
                 except ZeroDivisionError:
-                    price_change_percent = 1.0
+                    price_change = 1.0
                 if self['number_trades_24h']:
                     try:
-                        number_trades_change_percent = (float(
+                        number_trades_change = (float(
                             self['number_trades_24h']/row.number_trades_24h
                         ) - 1.0) * 100.0
                     except ZeroDivisionError:
-                        number_trades_change_percent = 1.0
+                        number_trades_change = 1.0
                 if self['volume_24h']:
                     try:
-                        volume_change_percent = (float(
+                        volume_change = (float(
                             self['volume_24h']/row.volume_24h
                         ) - 1.0) * 100.0
                     except ZeroDivisionError:
-                        volume_change_percent = 1.0
+                        volume_change = 1.0
             history_object = model(
                 symbol=self['symbol'],
                 source=self['source'],
                 price=self['price'],
                 number_trades_24h=self['number_trades_24h'],
                 volume_24h=self['volume_24h'],
-                price_change_percent=_get_abs_zero(price_change_percent),
-                number_trades_change_percent=_get_abs_zero(
-                    number_trades_change_percent),
-                volume_change_percent=_get_abs_zero(volume_change_percent),
+                price_change=_get_abs_zero(price_change),
+                number_trades_change=_get_abs_zero(
+                    number_trades_change),
+                volume_change=_get_abs_zero(volume_change),
                 created_on=self['created_on'],
             )
 
@@ -116,19 +116,3 @@ class Ticker(Document):
 
         super(Ticker, self).save(*args, **kwargs)
         return history_list_dicts
-
-    def get_object(self):
-        item = {}
-        for k in self._fields.keys():
-            if k == "id":
-                continue
-            if k in ['symbol', 'source', 'price']:
-                item[k] = self[k]
-                continue
-            if k in ['price']:
-                item[k] = float(self[k])
-                continue
-            if k in ['created_on']:
-                item[k] = self[k].strftime('%Y-%m-%d %H:%M:%S')
-                continue
-        return item
