@@ -24,7 +24,7 @@ class Binance(Schema):
     count = fields.Int(required=True, attribute='number_trades_24h')
     quoteVolume = fields.Float(required=True, attribute='volume_24h')
     priceChangePercent = fields.Float(
-        required=True, attribute='price_change_24h_percent'
+        required=True, attribute='price_change_24h'
     )
     lastPrice = fields.Float(required=True, attribute='price')
     highPrice = fields.Float(required=True, attribute='highest_price_24h')

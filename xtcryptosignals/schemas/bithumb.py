@@ -19,7 +19,7 @@ class Bithumb(Schema):
     source = fields.Str(required=True)
     buy_price = fields.Float(required=True, attribute='price')
     fluctate_rate_1d = fields.Float(
-        required=True, attribute='price_change_24h_percent'
+        required=True, attribute='price_change_24h'
     )
     volume_1day = fields.Float(required=True, attribute='volume_24h')
     units_traded = fields.Int(required=True, attribute='number_trades_24h')
