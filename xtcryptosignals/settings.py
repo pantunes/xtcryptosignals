@@ -34,8 +34,8 @@ SYMBOL_FLOAT_PRECISION = 8
 
 # mongodb collections created during runtime
 HISTORY_FREQUENCY = (
-    str(TICKER_SCHEDULE) + 's', '30s', '1m', '5m', '15m', '30m',
-    '1h', '5h', '12h', '1d', '5d', '1w', '5w', '12w', '24w',
+    str(TICKER_SCHEDULE) + 's', '30s', '1m', '10m', '30m',
+    '1h', '4h', '12h', '1d', '4d', '1w', '4w', '12w', '24w',
     '1y',
 )
 
