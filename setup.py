@@ -32,9 +32,11 @@ setup(
     version=cfg['__version__'],
     author=cfg['__author__'],
     author_email=cfg['__email__'],
-    description="Service that collects crypto currencies price data, "
-                "fires alerts based on price sentiment and performs automatic "
-                "trading. Includes Restful API and website.",
+    maintainer=cfg['__author__'],
+    maintainer_email=cfg['__email__'],
+    description="Includes Client, Ticker and Server API that collects crypto "
+                "currencies price data, fires alerts based on price sentiment "
+                "and performs automatic trading.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://bitbucket.org/pantunes/xtcryptosignals",
@@ -53,11 +55,10 @@ setup(
     install_requires=requirements,
     zip_safe=False,
     keywords=[
-        'xtcryptosignals', 'trading', 'coins', 'tokens', 'altcoins',
-        'bitcoin', 'btc', 'ethereum', 'eth', 'litecoin', 'ltc', 'xrp',
-        'exchange', 'dex', 'crypto', 'currency', 'crypto-currency',
-        'trading', 'trading-api', 'signals'
+        'xtcryptosignals', 'api', 'bitcoin', 'ethereum', 'signals', 'trading',
+        'crypto signals', 'exchange', 'crypto',
     ],
+    license=__license__,
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
