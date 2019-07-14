@@ -25,4 +25,12 @@ class Idex(Schema):
     @pre_load
     def pre_load(self, data):
         data['source'] = s.IDEX
+        try:
+            float(data['low'])
+        except ValueError:
+            data['low'] = 0.0
+        try:
+            float(data['high'])
+        except ValueError:
+            data['high'] = 0.0
         return data
