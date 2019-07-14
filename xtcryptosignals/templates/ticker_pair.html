@@ -31,8 +31,9 @@
         <tr>
             <td><a href="/ticker/{{frequency}}#{{exchange.upper()}}">{{exchange.replace('_', ' ').upper()}}</a></td>
         {% for att in attributes %}
-        <td style="text-align: right;">
-            <span id="{{exchange.lower()}}_{{c.lower()}}{{r.lower()}}_{{att.replace(' ', '_').lower()}}_{{frequency}}" style="padding: 5px;">-</span></td>
+        <td style="text-align: right; width: 144px;">
+            <span id="{{exchange.lower()}}_{{c.lower()}}{{r.lower()}}_{{att.replace(' ', '_').lower()}}_{{frequency}}" style="padding: 5px;">-</span>
+        </td>
         {% endfor %}
         </tr>
         {% endfor %}

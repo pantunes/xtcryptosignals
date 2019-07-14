@@ -27,9 +27,9 @@ app.jinja_env.auto_reload = s.DEBUG
 
 
 _COLUMN_ATTRIBUTES = [
-    'Price', 'Price Change Percent', 'Volume 24h',
-    'Volume Change Percent', 'Number Trades 24h',
-    'Number Trades Change Percent', 'Created On'
+    'Price', '% Price Change', 'Volume 24h',
+    '% Volume Change', 'Number Trades 24h',
+    '% Number Trades Change', 'Created On'
 ]
 
 
