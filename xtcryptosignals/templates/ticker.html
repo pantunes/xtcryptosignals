@@ -51,14 +51,16 @@ socket.on('ticker', function(json) {
         if (_attr == 'price') {
             $(_id).effect("highlight", {color: color, queue: false}, 1100, "slow");
         }
-        if (_attr == 'price_change') {
-            if (json.price_change != 0) {
-                $(_id).css("color", (json.price_change > 0) ? "green" : "red");
+        suffix = ''
+        if(['price_change', 'volume_change', 'number_trades_change'].indexOf(_attr) >= 0) {
+            if (json[_attr] != 0) {
+                $(_id).css("color", (json[_attr] > 0) ? "green" : "red")
             } else {
-                $(_id).css("color", "black");
+                $(_id).css("color", "black")
             }
+            suffix = '%'
         }
-        $(_id).html(val);
+        $(_id).html(val + suffix);
     }
 });
 {% endblock %}
