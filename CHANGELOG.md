@@ -1,6 +1,10 @@
 # Changelog
 All changes will be registered here per release.
 
+## [0.1.5] - Current data
+Added changes and improvements in UI.  
+General Code fixes. 
+
 ## [0.1.4.1] - 2019-07-08
 Added exchange:
 
