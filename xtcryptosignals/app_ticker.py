@@ -43,7 +43,8 @@ from xtcryptosignals.tasks.ticker import (
     is_flag=True,
     help="Show version."
 )
-def main(testing, list_config, enable_messaging, log_minimal, version):
+@click.pass_context
+def main(ctx, testing, list_config, enable_messaging, log_minimal, version):
     """
     Use this tool to collect and broadcast data from configured coins
     or/and tokens from configured crypto-currencies exchanges.
@@ -52,18 +53,18 @@ def main(testing, list_config, enable_messaging, log_minimal, version):
         if list_config == 'currencies':
             import pprint
             click.echo(pprint.pprint(s.SYMBOLS_PER_EXCHANGE))
-        if list_config == 'exchanges':
+        elif list_config == 'exchanges':
             click.echo('\n'.join(s.EXCHANGES))
-        return
+        ctx.exit()
 
     if testing:
         test()
-        return
+        ctx.exit()
 
     if version:
         from xtcryptosignals import __title__, __version__
         click.echo('{} {}'.format(__title__, __version__))
-        return
+        ctx.exit()
 
     TickerSettings.enable_socket_io = enable_messaging
     TickerSettings.log_minimal = log_minimal
