@@ -19,7 +19,8 @@ from xtcryptosignals.client.views import app
     is_flag=True,
     help="Enable production setup mode",
 )
-def main(gunicorn):
+@click.pass_context
+def main(ctx, gunicorn):
     """
     Start web client
     """
@@ -28,6 +29,6 @@ def main(gunicorn):
 
     if gunicorn:
         start(handler=app, host=host, port=port)
-        return
+        ctx.exit()
 
     app.run(debug=s.DEBUG, host=host, port=port)
