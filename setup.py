@@ -34,9 +34,9 @@ setup(
     author_email=_CFG['__email__'],
     maintainer=_CFG['__author__'],
     maintainer_email=_CFG['__email__'],
-    description="Includes Client, Ticker and Server API that collects crypto "
-                "currencies price data, fires alerts based on price sentiment "
-                "and performs automatic trading.",
+    description="Platform that collects crypto-currencies price "
+                "data, fires alerts based on price sentiment and "
+                "performs automatic trading.",
     long_description=_LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
     url="https://bitbucket.org/pantunes/xtcryptosignals",
