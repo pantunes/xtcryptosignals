@@ -14,20 +14,19 @@
 
 
 ### Website
-* Website to show some of the platform functionalities. 
+
 
 ## Roadmap
 
 * [x] Add crypto-currencies exchanges (Dec 2018)
 * [x] Implement RESTFul API and socket.io to access price data in real time (Jan 2019)
-* [x] Build website to use this platform (From Jan 2019)
+* [x] Build website (From Jan 2019)
 * [x] Add Gunicorn to make it production ready (March 2019)
 * [x] Building Unit, functional and end-to-end testing for existing and future features (From Jan 2019)
-* [ ] Setup notification rules for price range, price change, trading volume, price sentiment (Apr-July 2019)
-* [ ] Implement e-mail and web browser push notifications signals (Aug 2019)
-* [ ] Integrate platform with Docker and Docker Compose (Aug 2019)
-* [ ] Build iOS app (Sep-Oct 2019)
-* [ ] Implement automatic trading (Nov-Dec 2019)
+* [ ] Setup notification rules for price range, price change, trading volume, price sentiment (From July 2019)
+* [ ] Implement e-mail and web browser push notifications signals (Aug-Oct 2019)
+* [ ] Implement automatic trading (From 2019)
+* [ ] Build iOS app (From 2020)
 
 
 ## Getting Started
