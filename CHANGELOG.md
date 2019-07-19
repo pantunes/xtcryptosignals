@@ -1,7 +1,7 @@
 # Changelog
 All changes will be registered here per release.
 
-## [0.1.5] - Current data
+## [0.1.5] - 2019-07-20
 Added changes and improvements in UI.  
 General Code fixes. 
 
