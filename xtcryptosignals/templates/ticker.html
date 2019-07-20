@@ -2,56 +2,53 @@
 
 {% block title %}{{frequency}}{% endblock %}
 
-{% block include_scripts %}
+{% block include_scripts_top %}
+<script src="//code.highcharts.com/highcharts.js"></script>
 <script src="/static/js/site.js"></script>
-{% endblock %}
 
-{% block scripts %}
-function isInt(n){
-    return Number(n) === n && n % 1 === 0;
-}
+<script type="text/javascript">
 function isFloat(n) {
     return Number(n) === n && n % 1 !== 0;
 }
-var socket = io.connect('{{server_api_base_url}}{{frequency}}');
+const socket = io.connect('{{server_api_base_url}}{{frequency}}');
 socket.on('ticker', function(json) {
-    const is_usd = json['symbol'].substr(json['symbol'].length - 3) == 'USD'
+    const is_usd = json['symbol'].substr(json['symbol'].length - 3) == 'USD';
     const list = {{attributes|safe}}
     for (let i = 0; i < list.length; i++) {
-        var _attr = list[i].split(' ').join('_').toLowerCase()
-        var val = json[_attr]
+        let _attr = list[i].split(' ').join('_').toLowerCase();
+        let val = json[_attr]
         if (val == null) {
             continue
         }
-        var _id = '#' + json.source + '_' + json.symbol.toLowerCase() + '_' + _attr + '_' + json.frequency;
+        const _id = '#' + json.source + '_' + json.symbol.toLowerCase() + '_' + _attr + '_' + json.frequency;
         if (_attr == 'price' || _attr == 'volume_24h') {
-            var precision = (val + "").split(".")
-            var frac_digits = 2
+            const precision = (val + "").split(".")
+            let frac_digits = 2;
             if (_attr == 'price') {
                 if (precision.length > 1) {
                     frac_digits = precision[1].length
                 }
             }
-            var setup = {
+            let setup = {
                 maximumFractionDigits: frac_digits
-            }
+            };
             if (is_usd) {
-                setup.minimumFractionDigits = frac_digits
-                setup.style = 'currency'
+                setup.minimumFractionDigits = frac_digits;
+                setup.style = 'currency';
                 setup.currency = 'USD'
             }
-            const price_formatter = new Intl.NumberFormat('en-US', setup)
+            const price_formatter = new Intl.NumberFormat('en-US', setup);
             val = price_formatter.format(val)
         } else if (_attr == 'number_trades_24h') {
             val = numeral(val).format('0,0');
         } else if (isFloat(json[_attr])) {
             val = numeral(val).format('0,0.00');
         }
-        var color = (json.price_change > 0) ? "#e3ffe2" : "#ffe2e2";
+        const color = (json.price_change > 0) ? "#e3ffe2" : "#ffe2e2";
         if (_attr == 'price') {
             $(_id).effect("highlight", {color: color, queue: false}, 1100, "slow");
         }
-        suffix = ''
+        let suffix = '';
         if(['price_change', 'volume_change', 'number_trades_change'].indexOf(_attr) >= 0) {
             if (json[_attr] != 0) {
                 $(_id).css("color", (json[_attr] > 0) ? "green" : "red")
@@ -63,6 +60,7 @@ socket.on('ticker', function(json) {
         $(_id).html(val + suffix);
     }
 });
+</script>
 {% endblock %}
 
 {% block body %}
@@ -83,6 +81,7 @@ socket.on('ticker', function(json) {
                 {% for att in attributes %}
                 <th>{{att | replace(" On",  " On UTC") }}</th>
                 {% endfor %}
+                <th>Price Change Chart</th>
             </tr>
         </thead>
         <tbody>
@@ -96,6 +95,7 @@ socket.on('ticker', function(json) {
                     <span id="{{exchange.lower()}}_{{c.lower()}}{{r.lower()}}_{{att.replace(' ', '_').lower()}}_{{frequency}}" style="padding: 5px;">-</span>
                 </td>
                 {% endfor %}
+                <td data-sparkline="0, 0, 0, 0 "/>
             </tr>
             {% endfor %}
         </tbody>
@@ -103,4 +103,156 @@ socket.on('ticker', function(json) {
     {% endif %}
     {% endfor %}
 {% endfor %}
+
+<div id="result"></div>
+
+{% endblock %}
+
+{% block include_scripts_bottom %}
+<script type="text/javascript">
+    /**
+     * Create a constructor for sparklines that takes some sensible defaults and merges in the individual
+     * chart options. This function is also available from the jQuery plugin as $(element).highcharts('SparkLine').
+     */
+    Highcharts.SparkLine = function (a, b, c) {
+        let hasRenderToArg = typeof a === 'string' || a.nodeName,
+            options = arguments[hasRenderToArg ? 1 : 0],
+            defaultOptions = {
+                chart: {
+                    renderTo: (options.chart && options.chart.renderTo) || this,
+                    backgroundColor: null,
+                    borderWidth: 0,
+                    type: 'area',
+                    margin: [2, 0, 2, 0],
+                    width: 120,
+                    height: 20,
+                    style: {
+                        overflow: 'visible'
+                    },
+                    // saves 1-2 ms each sparkline
+                    skipClone: true
+                },
+                title: {
+                    text: ''
+                },
+                credits: {
+                    enabled: false
+                },
+                xAxis: {
+                    labels: {
+                        enabled: false
+                    },
+                    title: {
+                        text: null
+                    },
+                    startOnTick: false,
+                    endOnTick: false,
+                    tickPositions: []
+                },
+                yAxis: {
+                    endOnTick: false,
+                    startOnTick: false,
+                    labels: {
+                        enabled: false
+                    },
+                    title: {
+                        text: null
+                    },
+                    tickPositions: [0]
+                },
+                legend: {
+                    enabled: false
+                },
+                tooltip: {
+                    hideDelay: 0,
+                    outside: true,
+                    shared: true
+                },
+                plotOptions: {
+                    series: {
+                        animation: false,
+                        lineWidth: 1,
+                        shadow: false,
+                        states: {
+                            hover: {
+                                lineWidth: 1
+                            }
+                        },
+                        marker: {
+                            radius: 1,
+                            states: {
+                                hover: {
+                                    radius: 2
+                                }
+                            }
+                        },
+                        fillOpacity: 0.25
+                    },
+                    column: {
+                        negativeColor: '#910000',
+                        borderColor: 'silver'
+                    }
+                }
+            };
+
+        options = Highcharts.merge(defaultOptions, options);
+
+        return hasRenderToArg ?
+            new Highcharts.Chart(a, options, c) :
+            new Highcharts.Chart(options, b);
+    };
+    let start = +new Date(),
+        $tds = $('td[data-sparkline]'),
+        fullLen = $tds.length,
+        n = 0;
+
+    function doChunk() {
+        let time = +new Date(),
+            i,
+            len = $tds.length,
+            $td,
+            stringdata,
+            arr,
+            data,
+            chart;
+
+        for (i = 0; i < len; i += 1) {
+            $td = $($tds[i]);
+            stringdata = $td.data('sparkline');
+            arr = stringdata.split('; ');
+            data = $.map(arr[0].split(', '), parseFloat);
+            chart = {};
+
+            if (arr[1]) {
+                chart.type = arr[1];
+            }
+            $td.highcharts('SparkLine', {
+                series: [{
+                    data: data,
+                    pointStart: 1
+                }],
+                tooltip: {
+                    headerFormat: '',
+                    pointFormat: '<b>{point.y}</b>'
+                },
+                chart: chart
+            });
+
+            n += 1;
+
+            // If the process takes too much time, run a timeout to allow interaction with the browser
+            if (new Date() - time > 500) {
+                $tds.splice(0, i + 1);
+                setTimeout(doChunk, 0);
+                break;
+            }
+
+            // Print a feedback on the performance
+            if (n === fullLen) {
+                $('#result').html('Generated ' + fullLen + ' sparklines in ' + (new Date() - start) + ' ms');
+            }
+        }
+    }
+    doChunk();
+</script>
 {% endblock %}
