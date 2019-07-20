@@ -2,10 +2,6 @@
 
 {% block title %}{{pair.upper()}} - {{frequency}}{% endblock %}
 
-{% block include_scripts %}
-<script src="/static/js/site.js"></script>
-{% endblock %}
-
 {% block body %}
 
 {% with url='ticker_pair', params=dict(pair=pair) %}

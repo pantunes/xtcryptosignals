@@ -2,11 +2,13 @@
 
 {% block title %}Ticker{% endblock %}
 
-{% block scripts %}
+{% block include_scripts_top %}
+<script type="text/javascript">
 var socket = io.connect('{{server_api_base_url}}');
 socket.on('general', function(json) {
   $("#active_users").html(json['/']);
 });
+</script>
 {% endblock %}
 
 {% block body %}
