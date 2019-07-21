@@ -27,6 +27,15 @@ def _get_abs_zero(f):
         return f
 
 
+def _get_price_change_chart(row, price_change):
+    x = row.price_change_chart
+    x.append(price_change)
+    x.reverse()
+    x = x[:s.PRICES_CHANGE_CHART_SIZE]
+    x.reverse()
+    return x
+
+
 class Ticker(Document):
     symbol = StringField(required=True)
     source = StringField(required=True)
@@ -85,14 +94,6 @@ class Ticker(Document):
                 volume_change = 1.0
         return price_change, number_trades_change, volume_change
 
-    def _get_price_change_chart(self, row, price_change):
-        x = row.price_change_chart
-        x.append(price_change)
-        x.reverse()
-        x = x[:s.PRICES_CHANGE_CHART_SIZE]
-        x.reverse()
-        return x
-
     def save(self, *args, **kwargs):
         history_list_dicts = []
         for x in s.HISTORY_FREQUENCY:
@@ -112,7 +113,7 @@ class Ticker(Document):
                 price_change, number_trades_change, volume_change = \
                     self._calculate_changes(row)
                 price_change_prepared = _get_abs_zero(price_change)
-                price_change_chart = self._get_price_change_chart(
+                price_change_chart = _get_price_change_chart(
                     row, price_change_prepared
                 )
 

@@ -29,9 +29,14 @@
                 <a href="/ticker/{{frequency}}#{{exchange.upper()}}">{{exchange.replace('_', ' ').upper()}}</a>
             </td>
         {% for att in attributes %}
-        <td style="text-align: right; width: 100px;">
-            <span id="{{exchange.lower()}}_{{c.lower()}}{{r.lower()}}_{{att.replace(' ', '_').lower()}}_{{frequency}}" style="padding: 5px;">-</span>
-        </td>
+            {% set _id = "{}_{}{}_{}_{}".format(exchange.lower(), c.lower(), r.lower(), att.replace(' ', '_').lower(), frequency) %}
+            {% if 'price_change_chart' != att.replace(' ', '_').lower() %}
+                <td style="text-align: right; width: 100px;">
+                    <span id="{{_id}}" style="padding: 5px;">-</span>
+                </td>
+            {% else %}
+                <td id="{{_id}}" style="width: 140px;"/>
+            {% endif %}
         {% endfor %}
         </tr>
         {% endfor %}
