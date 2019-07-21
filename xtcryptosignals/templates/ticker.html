@@ -129,6 +129,11 @@ socket.on('ticker', function(json) {
                 headerFormat: '',
                 pointFormat: '<b>{point.y}%</b>'
             },
+            plotOptions: {
+                series: {
+                    lineColor: null,
+                }
+            }
         });
     }
 </script>
