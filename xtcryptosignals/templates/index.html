@@ -45,6 +45,9 @@ socket.on('general', function(json) {
   {% endfor %}
 </div>
 <br/>
+{% endblock %}
+
+{% block footer %}
 <div class="title"><small><b>Pooling frequency:</b> {{frequencies|join(", ")}}</small></div>
 <div class="title"><small><b>Active users:</b> <span id="active_users">-</span></small></div>
 {% endblock %}

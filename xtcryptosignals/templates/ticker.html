@@ -95,7 +95,7 @@ socket.on('ticker', function(json) {
                     <span id="{{exchange.lower()}}_{{c.lower()}}{{r.lower()}}_{{att.replace(' ', '_').lower()}}_{{frequency}}" style="padding: 5px;">-</span>
                 </td>
                 {% endfor %}
-                <td data-sparkline="0, 0, 0, 0 "/>
+                <td data-sparkline="1.2, 1.4, 1.6, 1.0"/>
             </tr>
             {% endfor %}
         </tbody>
@@ -103,9 +103,10 @@ socket.on('ticker', function(json) {
     {% endif %}
     {% endfor %}
 {% endfor %}
+{% endblock %}
 
-<div id="result"></div>
-
+{% block footer %}
+<div class="title"><small><span id="result"></span></small></div>
 {% endblock %}
 
 {% block include_scripts_bottom %}
@@ -125,7 +126,7 @@ socket.on('ticker', function(json) {
                     type: 'area',
                     margin: [2, 0, 2, 0],
                     width: 120,
-                    height: 20,
+                    height: 40,
                     style: {
                         overflow: 'visible'
                     },
@@ -249,7 +250,7 @@ socket.on('ticker', function(json) {
 
             // Print a feedback on the performance
             if (n === fullLen) {
-                $('#result').html('Generated ' + fullLen + ' sparklines in ' + (new Date() - start) + ' ms');
+                $('#result').html((new Date() - start) + ' ms');
             }
         }
     }
