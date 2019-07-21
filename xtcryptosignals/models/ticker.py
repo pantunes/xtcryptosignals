@@ -60,6 +60,39 @@ class Ticker(Document):
             Q(created_on__gte=dt)
         ).first()
 
+    def _calculate_changes(self, row):
+        number_trades_change = None
+        volume_change = None
+        try:
+            price_change = (float(
+                self['price'] / row.price
+            ) - 1.0) * 100.0
+        except ZeroDivisionError:
+            price_change = 1.0
+        if self['number_trades_24h']:
+            try:
+                number_trades_change = (float(
+                    self['number_trades_24h'] / row.number_trades_24h
+                ) - 1.0) * 100.0
+            except ZeroDivisionError:
+                number_trades_change = 1.0
+        if self['volume_24h']:
+            try:
+                volume_change = (float(
+                    self['volume_24h'] / row.volume_24h
+                ) - 1.0) * 100.0
+            except ZeroDivisionError:
+                volume_change = 1.0
+        return price_change, number_trades_change, volume_change
+
+    def _get_price_change_chart(self, row):
+        x = row.price_change_chart
+        x.append(self['price'])
+        x.reverse()
+        x = x[:s.PRICES_CHANGE_CHART_SIZE]
+        x.reverse()
+        return x
+
     def save(self, *args, **kwargs):
         history_list_dicts = []
         for x in s.HISTORY_FREQUENCY:
@@ -73,27 +106,13 @@ class Ticker(Document):
             number_trades_change = None
             price_change = None
             volume_change = None
+            price_change_chart = []
+
             if row:
-                try:
-                    price_change = (float(
-                        self['price']/row.price
-                    ) - 1.0) * 100.0
-                except ZeroDivisionError:
-                    price_change = 1.0
-                if self['number_trades_24h']:
-                    try:
-                        number_trades_change = (float(
-                            self['number_trades_24h']/row.number_trades_24h
-                        ) - 1.0) * 100.0
-                    except ZeroDivisionError:
-                        number_trades_change = 1.0
-                if self['volume_24h']:
-                    try:
-                        volume_change = (float(
-                            self['volume_24h']/row.volume_24h
-                        ) - 1.0) * 100.0
-                    except ZeroDivisionError:
-                        volume_change = 1.0
+                price_change, number_trades_change, volume_change = \
+                    self._calculate_changes(row)
+                price_change_chart = self._get_price_change_chart(row)
+
             history_object = model(
                 symbol=self['symbol'],
                 source=self['source'],
@@ -104,6 +123,7 @@ class Ticker(Document):
                 number_trades_change=_get_abs_zero(
                     number_trades_change),
                 volume_change=_get_abs_zero(volume_change),
+                price_change_chart=price_change_chart,
                 created_on=self['created_on'],
             )
 
