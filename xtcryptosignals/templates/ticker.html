@@ -59,7 +59,7 @@ socket.on('ticker', function(json) {
             suffix = '%'
         }
         if (_attr == 'price_change_chart') {
-            doChart($(_id), json.price_change_chart, is_usd);
+            doChart($(_id), json.price_change_chart);
             return
         }
         $(_id).html(val + suffix);
@@ -118,8 +118,7 @@ socket.on('ticker', function(json) {
 
 {% block include_scripts_bottom %}
 <script type="text/javascript">
-    function doChart(elem, data, is_usd) {
-        const currency = is_usd ? '$' : '';
+    function doChart(elem, data) {
         elem.highcharts('SparkLine', {
             series: [{
                 data: data,
@@ -127,9 +126,8 @@ socket.on('ticker', function(json) {
             }],
             tooltip: {
                 headerFormat: '',
-                pointFormat: '<b>' + currency + '{point.y}' + '</b>'
+                pointFormat: '<b>{point.y}%</b>'
             },
-            chart: {}
         });
     }
 </script>

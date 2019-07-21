@@ -27,7 +27,7 @@ class History(Document):
     number_trades_change = DecimalField(precision=2)
     volume_change = DecimalField(precision=2)
     price_change_chart = ListField(
-        DecimalField(required=True, precision=s.SYMBOL_FLOAT_PRECISION)
+        DecimalField(required=True, precision=2)
     )
     created_on = DateTimeField(required=True)
 

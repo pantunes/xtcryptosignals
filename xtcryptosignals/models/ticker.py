@@ -85,9 +85,9 @@ class Ticker(Document):
                 volume_change = 1.0
         return price_change, number_trades_change, volume_change
 
-    def _get_price_change_chart(self, row):
+    def _get_price_change_chart(self, row, price_change):
         x = row.price_change_chart
-        x.append(self['price'])
+        x.append(price_change)
         x.reverse()
         x = x[:s.PRICES_CHANGE_CHART_SIZE]
         x.reverse()
@@ -104,14 +104,17 @@ class Ticker(Document):
             ).first()
 
             number_trades_change = None
-            price_change = None
+            price_change_prepared = None
             volume_change = None
             price_change_chart = []
 
             if row:
                 price_change, number_trades_change, volume_change = \
                     self._calculate_changes(row)
-                price_change_chart = self._get_price_change_chart(row)
+                price_change_prepared = _get_abs_zero(price_change)
+                price_change_chart = self._get_price_change_chart(
+                    row, price_change_prepared
+                )
 
             history_object = model(
                 symbol=self['symbol'],
@@ -119,7 +122,7 @@ class Ticker(Document):
                 price=self['price'],
                 number_trades_24h=self['number_trades_24h'],
                 volume_24h=self['volume_24h'],
-                price_change=_get_abs_zero(price_change),
+                price_change=price_change_prepared,
                 number_trades_change=_get_abs_zero(
                     number_trades_change),
                 volume_change=_get_abs_zero(volume_change),
