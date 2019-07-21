@@ -11,6 +11,7 @@ from mongoengine import (
     StringField,
     DecimalField,
     IntField,
+    ListField,
     DateTimeField
 )
 import xtcryptosignals.settings as s
@@ -25,6 +26,9 @@ class History(Document):
     price_change = DecimalField(precision=2)
     number_trades_change = DecimalField(precision=2)
     volume_change = DecimalField(precision=2)
+    price_change_chart = ListField(
+        DecimalField(required=True, precision=s.SYMBOL_FLOAT_PRECISION)
+    )
     created_on = DateTimeField(required=True)
 
     meta = {
@@ -53,5 +57,8 @@ class History(Document):
                 continue
             if k in ['created_on']:
                 item['updated_on'] = self[k].strftime('%Y-%m-%d %H:%M:%S')
+                continue
+            if k in ['price_change_chart']:
+                item[k] = [float(x) for x in self[k]]
                 continue
         return item
