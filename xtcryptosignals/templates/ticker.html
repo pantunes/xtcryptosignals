@@ -119,7 +119,29 @@ socket.on('ticker', function(json) {
 
 {% block include_scripts_bottom %}
 <script type="text/javascript">
+    function _equal(l1, l2) {
+        if (l1.length !== l2.length) return false;
+        if (l1.length < 1) return false;
+        for (let i = 0; i < l1.length; i++) {
+            if (l1[i] !== l2[i]) return false
+        }
+        return true
+    }
+
     function doChart(elem, data) {
+        const asc = [...data].sort();
+        const desc = [...asc].reverse();
+        let lineColor = null;
+        let fillColor = null;
+        if (!_equal(data, asc)) {
+            if (_equal(data, desc)) {
+                lineColor = 'red';
+                fillColor = '#ffd4d4';
+            }
+        } else {
+            lineColor = 'green';
+            fillColor = '#e1ffd9';
+        }
         elem.highcharts('SparkLine', {
             series: [{
                 data: data,
@@ -131,7 +153,8 @@ socket.on('ticker', function(json) {
             },
             plotOptions: {
                 series: {
-                    lineColor: null,
+                    lineColor: lineColor,
+                    fillColor: fillColor
                 }
             }
         });
