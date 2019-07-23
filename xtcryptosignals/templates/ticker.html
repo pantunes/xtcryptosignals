@@ -129,7 +129,7 @@ socket.on('ticker', function(json) {
     }
 
     function doChart(elem, data) {
-        const asc = [...data].sort();
+        const asc = [...data].sort(function(a, b){return a-b});
         const desc = [...asc].reverse();
         let lineColor = null;
         let fillColor = null;
