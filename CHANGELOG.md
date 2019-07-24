@@ -1,7 +1,7 @@
 # Changelog
 All changes will be registered here per release.
 
-## [0.1.6] - 2019-07-21
+## [0.1.6] - Current date
 Added sparkline chart for each pair.  
 General Code fixes. 
 
