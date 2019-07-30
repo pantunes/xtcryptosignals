@@ -2,9 +2,10 @@
 All changes will be registered here per release.
 
 ## [0.1.6] - Current date
-Added sparkline chart for each pair.  
-General Code fixes.  
-Added Team and Donations sections in README.md file.  
+Added sparkline chart for each pair.    
+Added Team and Donations sections in `README.md` file.  
+Added Contact Form.  
+Code fixes.  
 
 ## [0.1.5] - 2019-07-20
 Added changes and improvements in UI.  

@@ -272,7 +272,7 @@ ETH 0x2bda8e92B42AB005918E5A126E2bD7cC19Bf5fF6
 
 ##Contact Us
 
-Through the website [xtcryptosignals.com](https://xtcryptosignals.com/contact).  
+Through the website [xtcryptosignals.com](https://xtcryptosignals.com/#contact).  
 
 ## Acknowledgments
 
