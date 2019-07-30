@@ -64,8 +64,9 @@
               <textarea class="u-full-width" placeholder="e.g. How can I integrate this project in my servers?" id="m" name="message"></textarea>
               <input class="button-primary" type="button" value="Submit" onClick="(
                   function() {
-                      $.post('{{server_api_base_url}}contact', $('#form_contact').serialize());
-                      $.modal.close();
+                      $.post('/contact', $('#form_contact').serialize(), function(data) {
+                        $.modal.close();
+                      });
                       return false;
                 })();return false;">
             </form>
