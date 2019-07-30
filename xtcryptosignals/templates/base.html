@@ -54,7 +54,7 @@
                 </div>
                 <div class="six columns">
                   <label for="r">Reason for contacting</label>
-                  <select class="u-full-width" id="r" name="reasons">
+                  <select class="u-full-width" id="r" name="reason">
                     <option value="question">Question</option>
                     <option value="bug">Report a Bug</option>
                   </select>
@@ -63,10 +63,11 @@
               <label for="m">Message</label>
               <textarea class="u-full-width" placeholder="e.g. How can I integrate this project in my servers?" id="m" name="message"></textarea>
               <input class="button-primary" type="button" value="Submit" onClick="(
-                  function(){
-                    console.log($('#form_contact').serialize());
-                    return false;
-              })();return false;">
+                  function() {
+                      $.post('{{server_api_base_url}}contact', $('#form_contact').serialize());
+                      $.modal.close();
+                      return false;
+                })();return false;">
             </form>
         </div>
         <!-- /Contact Modal -->

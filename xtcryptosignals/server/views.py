@@ -6,8 +6,10 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+import os
 import eventlet
-from flask import Flask
+from datetime import datetime
+from flask import Flask, request, jsonify
 from flask_socketio import SocketIO, Namespace
 import xtcryptosignals.settings as s
 from xtcryptosignals.celeryconfig import BROKER_URL
@@ -62,3 +64,19 @@ for x in s.HISTORY_FREQUENCY:
         'SocketIONamespace{}'.format(x), (TickerSockeIONamespace,), {}
     )
     socketio.on_namespace(socketio_model('/{}'.format(x)))
+
+
+@app.route('/contact', methods=['POST'])
+def contact():
+    with open(os.path.join('/tmp', 'contact.csv'), 'a') as f:
+        f.write("{}\t{}\t{}\t{}\n".format(
+            str(datetime.utcnow()),
+            request.form.get('email'),
+            request.form.get('reason'),
+            request.form.get('message').replace(
+                '\r\n', ' '
+            ).replace(
+                '\n', ' '
+            ))
+        )
+    return jsonify({})

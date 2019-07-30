@@ -34,6 +34,11 @@ _COLUMN_ATTRIBUTES = [
 ]
 
 
+@app.context_processor
+def server_api_base_url():
+    return dict(server_api_base_url=s.SERVER_API_BASE_URL)
+
+
 @app.route('/')
 def index():
     symbols_per_exchange = []
