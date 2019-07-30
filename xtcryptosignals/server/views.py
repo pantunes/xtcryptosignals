@@ -79,4 +79,4 @@ def contact():
                 '\n', ' '
             ))
         )
-    return jsonify({})
+    return 'OK'

@@ -7,8 +7,9 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import random
+import requests
 from copy import deepcopy
-from flask import Flask, render_template
+from flask import Flask, request, render_template
 import xtcryptosignals.settings as s
 from xtcryptosignals import __version__
 from xtcryptosignals.client.service import (
@@ -32,11 +33,6 @@ _COLUMN_ATTRIBUTES = [
     'Number Trades Change', 'Updated On',
     'Price Change Chart',
 ]
-
-
-@app.context_processor
-def server_api_base_url():
-    return dict(server_api_base_url=s.SERVER_API_BASE_URL)
 
 
 @app.route('/')
@@ -102,6 +98,14 @@ def ticker_pair(pair, frequency):
         pairs=get_pairs(),
         pair=pair,
     )
+
+
+@app.route('/contact', methods=['POST'])
+def contact():
+    r = requests.post(
+        '{}contact'.format(s.SERVER_API_BASE_URL), data=request.form
+    )
+    return r.text, r.status_code
 
 
 @app.errorhandler(404)
