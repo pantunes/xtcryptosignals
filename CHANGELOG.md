@@ -1,7 +1,7 @@
 # Changelog
 All changes will be registered here per release.
 
-## [0.1.6] - Current date
+## [0.1.6] - 2019-07-30
 Added sparkline chart for each pair.    
 Added Team and Donations sections in `README.md` file.  
 Added Contact Form.  
