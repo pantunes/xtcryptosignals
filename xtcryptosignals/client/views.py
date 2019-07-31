@@ -35,6 +35,14 @@ _COLUMN_ATTRIBUTES = [
 ]
 
 
+@app.context_processor
+def server_api_base_url():
+    return dict(
+        server_api_base_url=s.SERVER_API_BASE_URL,
+        version=__version__,
+    )
+
+
 @app.route('/')
 def index():
     symbols_per_exchange = []
@@ -49,8 +57,6 @@ def index():
             )
     return render_template(
         template_name_or_list='index.html',
-        server_api_base_url=s.SERVER_API_BASE_URL,
-        version=__version__,
         symbols_per_exchange=symbols_per_exchange,
         frequencies=s.HISTORY_FREQUENCY,
     )
@@ -61,8 +67,6 @@ def index():
 def ticker(frequency):
     return dict(
         template_name_or_list='ticker.html',
-        server_api_base_url=s.SERVER_API_BASE_URL,
-        version=__version__,
         symbols_per_exchange=s.SYMBOLS_PER_EXCHANGE,
         attributes=_COLUMN_ATTRIBUTES,
         frequencies=s.HISTORY_FREQUENCY,
@@ -89,8 +93,6 @@ def ticker_pair(pair, frequency):
         raise ValueError('Pair not found')
     return dict(
         template_name_or_list='ticker_pair.html',
-        server_api_base_url=s.SERVER_API_BASE_URL,
-        version=__version__,
         symbols_per_exchange=x,
         attributes=_COLUMN_ATTRIBUTES,
         frequencies=s.HISTORY_FREQUENCY,

@@ -9,7 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 import os
 import eventlet
 from datetime import datetime
-from flask import Flask, request, jsonify
+from flask import Flask, request
 from flask_socketio import SocketIO, Namespace
 import xtcryptosignals.settings as s
 from xtcryptosignals.celeryconfig import BROKER_URL
@@ -23,7 +23,14 @@ eventlet.monkey_patch()
 
 
 app = Flask(__name__)
-socketio = SocketIO(app, message_queue=BROKER_URL)
+socketio = SocketIO(
+    app=app,
+    message_queue=BROKER_URL,
+    cors_allowed_origins=(
+        'http://127.0.0.1:8000',
+        'https://api.xtcryptosignals.com',
+    ),
+)
 
 users_per_namespace = {'/'+x: 0 for x in s.HISTORY_FREQUENCY}
 users_per_namespace.update({'/': 0})
