@@ -28,7 +28,7 @@ socketio = SocketIO(
     message_queue=BROKER_URL,
     cors_allowed_origins=(
         'http://127.0.0.1:8000',
-        'https://api.xtcryptosignals.com',
+        'https://xtcryptosignals.com',
     ),
 )
 
