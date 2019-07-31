@@ -4,7 +4,7 @@
 
 {% block include_scripts_top %}
 <script type="text/javascript">
-var socket = io.connect('{{server_api_base_url}}');
+var socket = io('{{server_api_base_url}}');
 socket.on('general', function(json) {
   $("#active_users").html(json['/']);
 });
