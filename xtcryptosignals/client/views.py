@@ -105,7 +105,8 @@ def ticker_pair(pair, frequency):
 @app.route('/contact', methods=['POST'])
 def contact():
     r = requests.post(
-        '{}contact'.format(s.SERVER_API_BASE_URL), data=request.form
+        'http://127.0.0.1:5000/contact'.format(s.SERVER_API_BASE_URL),
+        data=request.form,
     )
     return r.text, r.status_code
 
