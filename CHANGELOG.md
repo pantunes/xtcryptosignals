@@ -1,6 +1,9 @@
 # Changelog
 All changes will be registered here per release.
 
+## [0.1.6.1] - 2019-07-31
+Code fix regarding CORS.      
+
 ## [0.1.6] - 2019-07-30
 Added sparkline chart for each pair.    
 Added Team and Donations sections in `README.md` file.  
