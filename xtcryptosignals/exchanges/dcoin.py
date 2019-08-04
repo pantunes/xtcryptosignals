@@ -27,6 +27,7 @@ class Dcoin:
             if counter == len(_pairs):
                 break
             if x['symbol'] in _pairs:
+                x.update(ticker=x['symbol'].split('_')[0])
                 rows.append(x)
                 counter += 1
         return rows

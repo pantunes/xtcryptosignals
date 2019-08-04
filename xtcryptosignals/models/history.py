@@ -20,6 +20,7 @@ import xtcryptosignals.settings as s
 class History(Document):
     symbol = StringField(required=True)
     source = StringField(required=True)
+    ticker = StringField(required=True)
     price = DecimalField(required=True, precision=s.SYMBOL_FLOAT_PRECISION)
     number_trades_24h = IntField()
     volume_24h = DecimalField(precision=s.SYMBOL_FLOAT_PRECISION)
@@ -35,6 +36,7 @@ class History(Document):
         'abstract': True,
         'indexes': [
             ("-created_on", ),
+            ("ticker", ),
             ("symbol", "source", ),
             ("symbol", "source", "-created_on", ),
         ],
@@ -48,7 +50,7 @@ class History(Document):
                 continue
             if k == "id":
                 continue
-            if k in ['symbol', 'source', 'number_trades_24h']:
+            if k in ['symbol', 'source', 'ticker', 'number_trades_24h']:
                 item[k] = self[k]
                 continue
             if k in ['price', 'volume_24h', 'price_change',

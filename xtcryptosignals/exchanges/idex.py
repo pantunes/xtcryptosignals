@@ -22,7 +22,5 @@ class Idex:
                 'Error connecting IDEX on URL: {}'.format(self.base_url)
             )
         item = request.json()
-        item.update(
-            symbol=''.join(symbol)
-        )
+        item.update(symbol=''.join(symbol), ticker=symbol[0])
         return item

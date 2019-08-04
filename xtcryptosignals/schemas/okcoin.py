@@ -7,15 +7,15 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from marshmallow import (
-    Schema,
     fields,
     pre_load,
     post_load
 )
+from xtcryptosignals.schemas.base import BaseSchema
 import xtcryptosignals.settings as s
 
 
-class Okcoin(Schema):
+class Okcoin(BaseSchema):
     symbol = fields.Str(required=True)
     source = fields.Str(required=True)
     last = fields.Float(required=True, attribute='price')
