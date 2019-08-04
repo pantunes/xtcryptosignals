@@ -21,4 +21,6 @@ class Bibox:
             raise ValueError(
                 'Error connecting Bibox on URL: {}'.format(url)
             )
-        return request.json()['result']
+        item = request.json()['result']
+        item.update(ticker=symbol[0])
+        return item

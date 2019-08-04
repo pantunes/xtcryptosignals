@@ -28,9 +28,9 @@ class BinanceDex:
 
         rows = list()
         for x in pairs:
-            symbol = ''.join(x)
-            item = _pairs[symbol]
-            item['symbol'] = symbol
+            _symbol = ''.join(x)
+            item = _pairs[_symbol]
+            item.update(symbol=_symbol, ticker=x[0])
             rows.append(item)
 
         return rows

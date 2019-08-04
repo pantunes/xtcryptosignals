@@ -39,6 +39,7 @@ def _get_price_change_chart(row, price_change):
 class Ticker(Document):
     symbol = StringField(required=True)
     source = StringField(required=True)
+    ticker = StringField(required=True)
     price = DecimalField(required=True, precision=s.SYMBOL_FLOAT_PRECISION)
     # 24h
     price_change_24h = DecimalField(precision=s.SYMBOL_FLOAT_PRECISION)
@@ -120,6 +121,7 @@ class Ticker(Document):
             history_object = model(
                 symbol=self['symbol'],
                 source=self['source'],
+                ticker=self['ticker'],
                 price=self['price'],
                 number_trades_24h=self['number_trades_24h'],
                 volume_24h=self['volume_24h'],

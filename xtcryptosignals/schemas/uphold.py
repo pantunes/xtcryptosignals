@@ -7,15 +7,16 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from marshmallow import (
-    Schema,
     fields,
     pre_load,
 )
+from xtcryptosignals.schemas.base import BaseSchema
 import xtcryptosignals.settings as s
 
 
-class Uphold(Schema):
+class Uphold(BaseSchema):
     symbol = fields.Str(required=True)
+    ticker = fields.Str(required=True)
     source = fields.Str(required=True)
     ask = fields.Float(required=True, attribute='price')
 

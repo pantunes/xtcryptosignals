@@ -27,6 +27,7 @@ class Bitmax:
             if counter == len(_pairs):
                 break
             if x['symbol'] in _pairs:
+                x.update(ticker=x['symbol'].split('/')[0])
                 rows.append(x)
                 counter += 1
         return rows

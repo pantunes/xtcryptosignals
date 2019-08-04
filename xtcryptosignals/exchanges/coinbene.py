@@ -21,4 +21,6 @@ class Coinbene:
             raise ValueError(
                 'Error connecting Coinbene on URL: {}'.format(url)
             )
-        return request.json()['ticker'][0]
+        item = request.json()['ticker'][0]
+        item.update(ticker=symbol[0])
+        return item

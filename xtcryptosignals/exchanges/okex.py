@@ -22,4 +22,6 @@ class Okex:
             raise ValueError(
                 'Error connecting OKEx on URL: {}'.format(url)
             )
-        return request.json()
+        item = request.json()
+        item.update(ticker=symbol[0])
+        return item
