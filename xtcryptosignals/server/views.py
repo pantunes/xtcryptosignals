@@ -23,6 +23,7 @@ eventlet.monkey_patch()
 
 
 app = Flask(__name__)
+
 socketio = SocketIO(
     app=app,
     message_queue=BROKER_URL,
