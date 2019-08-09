@@ -1,6 +1,9 @@
 # Changelog
 All changes will be registered here per release.
 
+## [0.1.7] - Current date
+Added new endpoint to see all pairs related with the given coin/token.  
+
 ## [0.1.6.1] - 2019-07-31
 Code fix regarding CORS.      
 

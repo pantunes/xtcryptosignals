@@ -1,0 +1,61 @@
+{% extends 'ticker.html' %}
+
+{% block title %}{{pair.upper()}} - {{frequency}}{% endblock %}
+
+{% block body %}
+
+{% with url='ticker_pair', params=dict(pair=pair) %}
+{% include 'snippets/menu.html' %}
+{% endwith %}
+
+<br/>
+<table class="u-max-full-width">
+    <caption><h3>{{pair}} - {{frequency}}</h3></caption>
+    <thead>
+        <tr>
+            <th>Pair</th>
+            <th>Exchange</th>
+            {% for att in attributes %}
+            <th>{{att | replace(" On",  " On UTC") }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+{% for i in symbols_per_exchange %}
+    {% for exchange, d in i.items() %}
+    {% if d['pairs']%}
+        {% for c, r in d['pairs'] %}
+        <tr>
+            <td style="width: 100px;">
+                <a href="/ticker/{{c}}{{r}}/{{frequency}}">{{c}}-{{r}}</a>
+            </td>
+            <td style="width: 100px;">
+                <a href="/ticker/{{frequency}}#{{exchange.upper()}}">{{exchange.replace('_', ' ').upper()}}</a>
+            </td>
+        {% for att in attributes %}
+            {% set _id = "{}_{}{}_{}_{}".format(exchange.lower(), c.lower(), r.lower(), att.replace(' ', '_').lower(), frequency) %}
+            {% if 'price_change_chart' != att.replace(' ', '_').lower() %}
+                <td style="text-align: right; width: 100px;">
+                    <span id="{{_id}}" style="padding: 5px;">-</span>
+                </td>
+            {% else %}
+                <td id="{{_id}}" style="width: 140px;"/>
+            {% endif %}
+        {% endfor %}
+        </tr>
+        {% endfor %}
+    {% endif %}
+    {% endfor %}
+{% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+
+{% block include_extra_scripts_bottom %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".container").css("maxWidth", "1280px" );
+    });
+</script>
+{% endblock %}
