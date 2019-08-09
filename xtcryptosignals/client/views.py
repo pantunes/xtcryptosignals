@@ -102,6 +102,33 @@ def ticker_pair(pair, frequency):
     )
 
 
+@app.route('/ticker/source/<source>/<frequency>')
+@validate_args()
+def ticker_source(source, frequency):
+    x = deepcopy(s.SYMBOLS_PER_EXCHANGE)
+    pair_not_found = True
+    for idx, i in enumerate(s.SYMBOLS_PER_EXCHANGE):
+        for a, b in i.items():
+            for c, d in b['pairs']:
+                if c == source.upper():
+                    pair_not_found = False
+                    x[idx][a]['pairs'] = [(c, d)]
+                    break
+            else:
+                x[idx][a]['pairs'] = []
+    if pair_not_found:
+        raise ValueError('Pair not found')
+    return dict(
+        template_name_or_list='ticker_source.html',
+        symbols_per_exchange=x,
+        attributes=_COLUMN_ATTRIBUTES,
+        frequencies=s.HISTORY_FREQUENCY,
+        frequency=frequency,
+        pairs=get_pairs(),
+        pair=source,
+    )
+
+
 @app.route('/contact', methods=['POST'])
 def contact():
     r = requests.post(
