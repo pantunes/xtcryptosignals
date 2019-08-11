@@ -97,7 +97,7 @@ def ticker_pair(pair, frequency):
         frequencies=s.HISTORY_FREQUENCY,
         frequency=frequency,
         pairs=get_pairs(),
-        pair=pair,
+        pair=pair.upper(),
     )
 
 
@@ -122,7 +122,7 @@ def ticker_source(source, frequency):
         frequencies=s.HISTORY_FREQUENCY,
         frequency=frequency,
         pairs=get_pairs(),
-        pair=source,
+        pair=source.upper(),
     )
 
 
