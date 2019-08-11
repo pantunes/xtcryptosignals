@@ -82,13 +82,12 @@ def ticker_pair(pair, frequency):
     pair_not_found = True
     for idx, i in enumerate(s.SYMBOLS_PER_EXCHANGE):
         for a, b in i.items():
+            x[idx][a]['pairs'] = []
             for c, d in b['pairs']:
                 if c + d == pair.upper():
                     pair_not_found = False
                     x[idx][a]['pairs'] = [(c, d)]
                     break
-            else:
-                x[idx][a]['pairs'] = []
     if pair_not_found:
         raise ValueError('Pair not found')
     return dict(
@@ -109,13 +108,11 @@ def ticker_source(source, frequency):
     pair_not_found = True
     for idx, i in enumerate(s.SYMBOLS_PER_EXCHANGE):
         for a, b in i.items():
+            x[idx][a]['pairs'] = []
             for c, d in b['pairs']:
                 if c == source.upper():
                     pair_not_found = False
-                    x[idx][a]['pairs'] = [(c, d)]
-                    break
-            else:
-                x[idx][a]['pairs'] = []
+                    x[idx][a]['pairs'].append((c, d))
     if pair_not_found:
         raise ValueError('Pair not found')
     return dict(
