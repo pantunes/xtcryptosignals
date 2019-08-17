@@ -32,7 +32,16 @@ def validate_args():
 def get_pairs():
     pairs = set()
     for i in s.SYMBOLS_PER_EXCHANGE:
-        for a, b in i.items():
+        for _, b in i.items():
             for c, d in b['pairs']:
                 pairs.add(c + d)
     return ['ALL'] + sorted(pairs)
+
+
+def get_tokens():
+    tokens = set()
+    for i in s.SYMBOLS_PER_EXCHANGE:
+        for _, b in i.items():
+            for c, _ in b['pairs']:
+                tokens.add(c)
+    return sorted(tokens)

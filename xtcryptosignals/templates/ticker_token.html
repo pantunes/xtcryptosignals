@@ -4,13 +4,13 @@
 
 {% block body %}
 
-{% with url='ticker_pair', params=dict(pair=pair) %}
+{% with url='ticker_token', params=dict(token=token) %}
 {% include 'snippets/menu.html' %}
 {% endwith %}
 
 <br/>
 <table class="u-max-full-width">
-    <caption><h3>{{pair}} - {{frequency}}</h3></caption>
+    <caption><h3>{{token}} - {{frequency}}</h3></caption>
     <thead>
         <tr>
             <th>Pair</th>

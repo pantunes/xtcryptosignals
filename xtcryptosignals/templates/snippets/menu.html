@@ -2,16 +2,26 @@
 <nav class="navbar">
 <div class="container">
   <ul class="navbar-list">
-    <li class="navbar-item"><a class="navbar-link" href="/">Main Page</a></li>
+    <li class="navbar-item"><a class="navbar-link" href="/">Home</a></li>
     <li class="navbar-item">
       <a class="navbar-link" href="javascript:;" data-popover="#tickerNavPopover">Tickers</a>
       <div id="tickerNavPopover" class="popover">
         <ul class="popover-list">
           {% for f in frequencies %}
           <li class="popover-item">
-            <a class="popover-link" href="{{url_for(url, frequency=f, **params)}}">
-              {% for _ in range(11) %}&nbsp;{% endfor %}{{f}}{% for _ in range(11) %}&nbsp;{% endfor %}
-            </a>
+            <a class="popover-link" href="{{url_for(url, frequency=f, **params)}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{f}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </li>
+    <li class="navbar-item">
+      <a class="navbar-link" href="javascript:;" data-popover="#tokensNavPopover">Tokens</a>
+      <div id="tokensNavPopover" class="popover">
+        <ul class="popover-list">
+          {% for t in tokens %}
+          <li class="popover-item">
+            <a class="popover-link" href="{{url_for('ticker_token', frequency=frequency, token=t)}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{t}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
           </li>
           {% endfor %}
         </ul>
@@ -23,16 +33,14 @@
         <ul class="popover-list">
           {% for p in pairs %}
           <li class="popover-item">
-            <a class="popover-link" href="{{url_for('ticker_pair', frequency=frequency, pair=p) if p != 'ALL' else url_for('ticker', frequency=frequency)}}">
-              {% for _ in range(2) %}&nbsp;{% endfor %}{{p}}{% for _ in range(2) %}&nbsp;{% endfor %}
-            </a>
+            <a class="popover-link" href="{{url_for('ticker_pair', frequency=frequency, pair=p) if p != 'ALL' else url_for('ticker', frequency=frequency)}}">{{p}}</a>
           </li>
           {% endfor %}
         </ul>
       </div>
     </li>
     <li class="navbar-item">
-      <a class="navbar-link" href="javascript:;" data-popover="#moreNavPopover">More</a>
+      <a class="navbar-link" href="javascript:;" data-popover="#moreNavPopover">Project</a>
       <div id="moreNavPopover" class="popover">
         <ul class="popover-list">
           <li class="popover-item">
