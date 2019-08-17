@@ -105,7 +105,7 @@ def ticker_pair(pair, frequency):
     )
 
 
-@app.route('/ticker/token/<token>/<frequency>')
+@app.route('/ticker/source/<token>/<frequency>')
 @validate_args()
 def ticker_token(token, frequency):
     x = deepcopy(s.SYMBOLS_PER_EXCHANGE)
