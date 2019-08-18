@@ -44,6 +44,7 @@ HISTORY_FREQUENCY = (
 from xtcryptosignals.settings_local import (
     BINANCE_API_KEY,
     BINANCE_API_SECRET,
+    CORS_ALLOWED_ORIGINS,
 )  # noqa
 
 # exchanges settings
@@ -54,8 +55,8 @@ from xtcryptosignals.settings_exchanges import (
 )  # noqa
 
 __all__ = [
-    'BINANCE_API_KEY', 'BINANCE_API_SECRET', 'EXCHANGES',
-    'SYMBOLS_PER_EXCHANGE', 'BINANCE', 'BINANCE_DEX', 'UPHOLD', 'OKEX',
-    'IDEX', 'SWITCHEO', 'HOTBIT', 'BIBOX', 'OKCOIN', 'BITHUMB', 'COINBENE',
-    'DCOIN', 'BITMAX', 'BILAXY',
+    'BINANCE_API_KEY', 'BINANCE_API_SECRET', 'CORS_ALLOWED_ORIGINS',
+    'EXCHANGES', 'SYMBOLS_PER_EXCHANGE', 'BINANCE', 'BINANCE_DEX', 'UPHOLD',
+    'OKEX', 'IDEX', 'SWITCHEO', 'HOTBIT', 'BIBOX', 'OKCOIN', 'BITHUMB',
+    'COINBENE', 'DCOIN', 'BITMAX', 'BILAXY',
 ]

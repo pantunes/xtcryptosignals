@@ -27,10 +27,7 @@ app = Flask(__name__)
 socketio = SocketIO(
     app=app,
     message_queue=BROKER_URL,
-    cors_allowed_origins=(
-        'http://127.0.0.1:8000',
-        'https://xtcryptosignals.com',
-    ),
+    cors_allowed_origins=s.CORS_ALLOWED_ORIGINS,
 )
 
 users_per_namespace = {'/'+x: 0 for x in s.HISTORY_FREQUENCY}
