@@ -42,7 +42,8 @@ def server_api_base_url():
     data = dict(
         server_api_base_url=s.SERVER_API_BASE_URL,
         version=__version__,
-        frequencies=s.HISTORY_FREQUENCY
+        frequencies=s.HISTORY_FREQUENCY,
+        frequency_lower=s.TICKER_SCHEDULE,
     )
     if request.path != '/':
         data.update(
