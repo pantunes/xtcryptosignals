@@ -13,7 +13,9 @@ from flask import Flask, request, render_template
 import xtcryptosignals.settings as s
 from xtcryptosignals import __version__
 from xtcryptosignals.client.service import (
-    validate_args, get_pairs,
+    validate_args,
+    get_pairs,
+    get_tokens,
 )
 
 
@@ -37,10 +39,17 @@ _COLUMN_ATTRIBUTES = [
 
 @app.context_processor
 def server_api_base_url():
-    return dict(
+    data = dict(
         server_api_base_url=s.SERVER_API_BASE_URL,
         version=__version__,
+        frequencies=s.HISTORY_FREQUENCY
     )
+    if request.path != '/':
+        data.update(
+            pairs=get_pairs(),
+            tokens=get_tokens(),
+        )
+    return data
 
 
 @app.route('/')
@@ -58,7 +67,6 @@ def index():
     return render_template(
         template_name_or_list='index.html',
         symbols_per_exchange=symbols_per_exchange,
-        frequencies=s.HISTORY_FREQUENCY,
     )
 
 
@@ -69,9 +77,7 @@ def ticker(frequency):
         template_name_or_list='ticker.html',
         symbols_per_exchange=s.SYMBOLS_PER_EXCHANGE,
         attributes=_COLUMN_ATTRIBUTES,
-        frequencies=s.HISTORY_FREQUENCY,
         frequency=frequency,
-        pairs=get_pairs(),
     )
 
 
@@ -82,26 +88,48 @@ def ticker_pair(pair, frequency):
     pair_not_found = True
     for idx, i in enumerate(s.SYMBOLS_PER_EXCHANGE):
         for a, b in i.items():
+            x[idx][a]['pairs'] = []
             for c, d in b['pairs']:
                 if c + d == pair.upper():
                     pair_not_found = False
                     x[idx][a]['pairs'] = [(c, d)]
                     break
-            else:
-                x[idx][a]['pairs'] = []
     if pair_not_found:
         raise ValueError('Pair not found')
     return dict(
         template_name_or_list='ticker_pair.html',
         symbols_per_exchange=x,
         attributes=_COLUMN_ATTRIBUTES,
-        frequencies=s.HISTORY_FREQUENCY,
         frequency=frequency,
-        pairs=get_pairs(),
-        pair=pair,
+        pair=pair.upper(),
     )
 
 
+@app.route('/ticker/source/<token>/<frequency>')
+@validate_args()
+def ticker_token(token, frequency):
+    x = deepcopy(s.SYMBOLS_PER_EXCHANGE)
+    token_not_found = True
+    _token = token.upper()
+    for idx, i in enumerate(s.SYMBOLS_PER_EXCHANGE):
+        for a, b in i.items():
+            x[idx][a]['pairs'] = []
+            for c, d in b['pairs']:
+                if c == _token:
+                    token_not_found = False
+                    x[idx][a]['pairs'].append((c, d))
+    if token_not_found:
+        raise ValueError('Token not found')
+    return dict(
+        template_name_or_list='ticker_token.html',
+        symbols_per_exchange=x,
+        attributes=_COLUMN_ATTRIBUTES,
+        frequency=frequency,
+        token=_token,
+    )
+
+
+# Form Request
 @app.route('/contact', methods=['POST'])
 def contact():
     r = requests.post(
@@ -111,6 +139,7 @@ def contact():
     return r.text, r.status_code
 
 
+# 404 Page not Found
 @app.errorhandler(404)
 def page_not_found(_):
     return render_template(

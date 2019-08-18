@@ -8,15 +8,15 @@ __email__ = "pjmlantunes@gmail.com"
 
 import dateparser
 from marshmallow import (
-    Schema,
     fields,
     pre_load,
     post_load
 )
+from xtcryptosignals.schemas.base import BaseSchema
 import xtcryptosignals.settings as s
 
 
-class Binance(Schema):
+class Binance(BaseSchema):
     symbol = fields.Str(required=True)
     source = fields.Str(required=True)
     openTime = fields.DateTime(required=True, attribute='opened_on')

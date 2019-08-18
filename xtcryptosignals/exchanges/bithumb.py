@@ -25,7 +25,5 @@ class Bithumb:
                 'Error connecting Bithumb on URL: {}'.format(url)
             )
         item = request.json()['data']
-        item.update(
-            symbol=''.join(symbol)
-        )
+        item.update(symbol=''.join(symbol), ticker=symbol[0])
         return item

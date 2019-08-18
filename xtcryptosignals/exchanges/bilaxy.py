@@ -37,9 +37,11 @@ class Bilaxy:
                         raise ValueError(
                             'Error connecting Bilaxy on URL: {}'.format(url)
                         )
+                    ticker = [z['fShortName'], x]
                     response_per_pair = request.json()['data']
                     response_per_pair.update(
-                        symbol=''.join([z['fShortName'], x])
+                        symbol=''.join(ticker),
+                        ticker=ticker[0]
                     )
                     rows.append(response_per_pair)
         return rows

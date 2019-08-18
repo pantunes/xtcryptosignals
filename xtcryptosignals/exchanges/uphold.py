@@ -22,7 +22,5 @@ class Uphold:
                 'Error connecting Uphold on URL: {}'.format(url)
             )
         item = request.json()
-        item.update(
-            symbol=_symbol
-        )
+        item.update(symbol=_symbol, ticker=symbol[0])
         return item
