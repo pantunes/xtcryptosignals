@@ -8,6 +8,25 @@
 <script src="/static/js/sparkline.js"></script>
 
 <script type="text/javascript">
+    let is_locked = false;
+
+    function do_countdown() {
+        if (is_locked) {
+            return
+        }
+        is_locked = true;
+        let timeleft = {{frequency_lower}};
+        const downloadTimer = setInterval(function() {
+          $('#countdown').text(timeleft);
+          timeleft -= 1;
+          if(timeleft < 0) {
+              clearInterval(downloadTimer);
+              is_locked = false;
+          }
+        }, 1000);
+    }
+</script>
+<script type="text/javascript">
 function isFloat(n) {
     return Number(n) === n && n % 1 !== 0;
 }
@@ -63,6 +82,7 @@ socket.on('ticker', function(json) {
             return
         }
         $(_id).html(val + suffix);
+        do_countdown();
     }
 });
 </script>
