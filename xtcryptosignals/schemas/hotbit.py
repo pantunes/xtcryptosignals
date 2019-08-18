@@ -7,14 +7,14 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from marshmallow import (
-    Schema,
     fields,
     pre_load,
 )
+from xtcryptosignals.schemas.base import BaseSchema
 import xtcryptosignals.settings as s
 
 
-class Hotbit(Schema):
+class Hotbit(BaseSchema):
     symbol = fields.Str(required=True)
     source = fields.Str(required=True)
     last = fields.Float(required=True, attribute='price')

@@ -22,8 +22,8 @@ class Hotbit:
         response = request.json()
         rows = list()
         for x in pairs:
-            symbol = ''.join(x)
-            item = response[symbol]
-            item['symbol'] = symbol
+            _symbol = ''.join(x)
+            item = response[_symbol]
+            item.update(symbol=_symbol, ticker=x[0])
             rows.append(item)
         return rows

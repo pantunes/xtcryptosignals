@@ -22,7 +22,5 @@ class Okcoin:
                 'Error connecting OkCoin on URL: {}'.format(url)
             )
         item = request.json()['ticker']
-        item.update(
-            symbol=''.join(symbol)
-        )
+        item.update(symbol=''.join(symbol), ticker=symbol[0])
         return item

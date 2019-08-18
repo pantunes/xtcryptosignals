@@ -23,6 +23,7 @@ class Switcheo:
                 continue
             pos = x['pair'].find('_')
             x['price'] = _last_prices[x['pair'][:pos]][x['pair'][pos + 1:]]
+            x['ticker'] = x['pair'].split('_')[0]
             rows.append(x)
             if len(rows) == len(pairs):
                 break
