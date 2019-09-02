@@ -8,23 +8,11 @@
 <script src="/static/js/sparkline.js"></script>
 
 <script type="text/javascript">
-    let is_locked = false;
-
-    function do_countdown() {
-        if (is_locked) {
-            return
-        }
-        is_locked = true;
-        let timeleft = {{frequency_lower}};
-        const downloadTimer = setInterval(function() {
-          $('#countdown').text(timeleft);
-          timeleft -= 1;
-          if(timeleft < 0) {
-              clearInterval(downloadTimer);
-              is_locked = false;
-          }
-        }, 1000);
-    }
+    let timeleft = 1;
+    setInterval(function() {
+      $('#update_ticker').text(timeleft);
+      timeleft += 1;
+    }, 1000);
 </script>
 <script type="text/javascript">
 function isFloat(n) {
@@ -81,8 +69,10 @@ socket.on('ticker', function(json) {
             doChart($(_id), json.price_change_chart);
             return
         }
+        if (_id === '#binance_btcusdt_price_10s') {
+            timeleft = 1;
+        }
         $(_id).html(val + suffix);
-        do_countdown();
     }
 });
 </script>
