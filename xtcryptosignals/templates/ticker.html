@@ -65,11 +65,11 @@ socket.on('ticker', function(json) {
             }
             suffix = '%'
         }
-        if (_attr == 'price_change_chart') {
+        if (_attr === 'price_change_chart') {
             doChart($(_id), json.price_change_chart);
             return
         }
-        if (_id === '#binance_btcusdt_price_10s') {
+        if (_id.indexOf('#binance_btcusdt_price_') !== -1) {
             timeleft = 1;
         }
         $(_id).html(val + suffix);
