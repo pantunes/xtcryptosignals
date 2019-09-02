@@ -1,6 +1,9 @@
 # Changelog
 All changes will be registered here per release.
 
+## [0.1.8] - Current date
+UI Changes regarding the countdown.  
+
 ## [0.1.7] - 2019-08-21
 Added new endpoint to see all pairs related with the given coin/token.  
 
