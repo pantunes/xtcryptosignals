@@ -1,7 +1,7 @@
 python-binance
 redis
 celery
-marshmallow
+marshmallow==2.20.5
 mongoengine
 requests
 switcheo
