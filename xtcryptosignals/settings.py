@@ -26,6 +26,7 @@ except KeyError:
     SERVER_API_BASE_URL = 'http://127.0.0.1:{}/'.format(PORT_SERVER)
 
 MONGODB_NAME = 'XTCryptoSignals'
+MONGODB_PORT = 27017
 
 TICKER_SCHEDULE = 10  # executed each X seconds
 TIMEOUT_PER_SYMBOL_REQUEST = 2.0  # in seconds
