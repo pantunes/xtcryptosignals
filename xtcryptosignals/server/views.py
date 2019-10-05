@@ -48,7 +48,7 @@ def on_general_disconnect():
     socketio.emit('general', users_per_namespace, broadcast=True)
 
 
-class TickerSockeIONamespace(Namespace):
+class TickerSocketIONamespace(Namespace):
     @use_mongodb()
     def on_connect(self):
         global users_per_namespace
@@ -66,7 +66,7 @@ class TickerSockeIONamespace(Namespace):
 
 for x in s.HISTORY_FREQUENCY:
     socketio_model = type(
-        'SocketIONamespace{}'.format(x), (TickerSockeIONamespace,), {}
+        'SocketIONamespace{}'.format(x), (TickerSocketIONamespace,), {}
     )
     socketio.on_namespace(socketio_model('/{}'.format(x)))
 
