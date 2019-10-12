@@ -61,7 +61,7 @@ socket.on('ticker', function(json) {
             if (json[_attr] !== 0) {
                 $(_id).css("color", (json[_attr] > 0) ? "green" : "red")
             } else {
-                $(_id).css("color", "black")
+                $(_id).attr("class", "numeric_value");
             }
             suffix = '%'
         }
@@ -169,5 +169,17 @@ socket.on('ticker', function(json) {
             }
         });
     }
+</script>
+<link rel="stylesheet" href="/static/css/darkmode.css">
+<script src="//cdn.jsdelivr.net/npm/darkmode-js@1.5.0/lib/darkmode-js.min.js"></script>
+<script type="text/javascript">
+    const options = {
+        time: '0.0s', // default: '0.3s'
+        saveInCookies: false, // default: true,
+        label: '🌓', // default: ''
+        autoMatchOsTheme: true // default: true
+    };
+    const darkmode = new Darkmode(options);
+    darkmode.showWidget();
 </script>
 {% endblock %}
