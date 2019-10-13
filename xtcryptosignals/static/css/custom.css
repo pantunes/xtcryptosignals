@@ -82,9 +82,6 @@
   bottom: 5px;
   left: 5px; }
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
   display: none; }
 .numeric_value {
   color: #000;
