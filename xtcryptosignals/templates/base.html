@@ -80,4 +80,17 @@
     <div id="footer">2019 @ <a href="https://pauloantunes.com">pauloantunes.com</a></div>
 </html>
 
+<link rel="stylesheet" href="/static/css/darkmode.css">
+<script src="//cdn.jsdelivr.net/npm/darkmode-js@1.5.0/lib/darkmode-js.min.js"></script>
+<script type="text/javascript">
+    const options = {
+        time: '0.0s', // default: '0.3s'
+        saveInCookies: true, // default: true,
+        label: '🌓', // default: ''
+        autoMatchOsTheme: true // default: true
+    };
+    const darkmode = new Darkmode(options);
+    darkmode.showWidget();
+</script>
+
 {% block include_extra_scripts_bottom %}{% endblock %}
