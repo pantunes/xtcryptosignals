@@ -40,7 +40,7 @@ socket.on('general', function(json) {
   <h6 class="docs-header">{{exchange.replace('_', ' ')}}:</h6>
   {% for item in items %}
   <a class="button button-secondary" href="/ticker/{{item}}/{{frequencies[0]}}">{{item}} {{frequencies[0][:-1]}} seconds</a>
-  {% endfor %}
+  {% endfor %}<br/><br/>
   {% endfor %}
   {% endfor %}
 </div>
