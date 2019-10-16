@@ -42,6 +42,7 @@ def server_api_base_url():
     data = dict(
         server_api_base_url=s.SERVER_API_BASE_URL,
         version=__version__,
+        ga_tracking_id=s.GA_TRACKING_ID,
         frequencies=s.HISTORY_FREQUENCY,
         frequency_lower=s.TICKER_SCHEDULE,
     )
