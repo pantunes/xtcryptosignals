@@ -2,7 +2,7 @@
 All changes will be registered here per release.
 
 ## [0.1.8] - Current date
-Added UI Dark mode
+Added UI Dark mode.  
 UI Changes regarding the seconds ticker in Prices pages.  
 Added Google Analytics.  
 
