@@ -216,9 +216,10 @@ xt-client
 Production:
 ```bash
 # if using default settings
-DEBUG=0 SERVER_API_BASE_URL=http://127.0.0.1:5000 xt-client --gunicorn
+DEBUG=0 SERVER_API_BASE_URL=http://127.0.0.1:5000 GA_TRACKING_ID=UA-xxxxxxxxx-x xt-client --gunicorn
 ```
-`SERVER_API_BASE_URL` should contain the public address where `xt-server` was started.
+`SERVER_API_BASE_URL` should contain the public address where `xt-server` was started.  
+(all environment variables are optional)
 
 ## Run all services at once
 

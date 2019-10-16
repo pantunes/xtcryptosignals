@@ -83,6 +83,9 @@
   left: 5px; }
 .navbar {
   display: none; }
+.numeric_value {
+  color: #000;
+}
 
 /* Larger than phone */
 @media (min-width: 550px) {

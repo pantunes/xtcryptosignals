@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>XTCryptoSignals - {% block title %}{% endblock %}</title>
@@ -38,7 +38,7 @@
 
     {% block include_scripts_top %}{% endblock %}
 
-    <body>
+    <body class="has-docked-nav">
         <div class="container">
         {% block body %}{% endblock %}
         {% block footer %}{% endblock %}
@@ -72,12 +72,43 @@
             </form>
         </div>
         <!-- /Contact Modal -->
+
+        {% block include_scripts_bottom %}{% endblock %}
+
+        <br/>
+        <div id="footer">2019 @ <a href="https://pauloantunes.com">pauloantunes.com</a></div>
+
+
+        <!-- Dark Mode -->
+        <link rel="stylesheet" href="/static/css/darkmode.css">
+        <script src="//cdn.jsdelivr.net/npm/darkmode-js@1.5.0/lib/darkmode-js.min.js"></script>
+        <script type="text/javascript">
+            const options = {
+                time: '0.0s', // default: '0.3s'
+                saveInCookies: true, // default: true,
+                label: '🌓', // default: ''
+                autoMatchOsTheme: true // default: true
+            };
+            const darkmode = new Darkmode(options);
+            darkmode.showWidget();
+        </script>
+        <!-- /Dark Mode -->
+
+        {% if ga_tracking_id %}
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_tracking_id }}"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', '{{ ga_tracking_id }}');
+            </script>
+            <!-- /Global site tag (gtag.js) - Google Analytics -->
+        {% endif %}
+
+        {% block include_extra_scripts_bottom %}{% endblock %}
+
     </body>
 
-    {% block include_scripts_bottom %}{% endblock %}
-
-    <br/>
-    <div id="footer">2019 @ <a href="https://pauloantunes.com">pauloantunes.com</a></div>
 </html>
-
-{% block include_extra_scripts_bottom %}{% endblock %}
