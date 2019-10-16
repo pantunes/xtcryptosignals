@@ -61,7 +61,7 @@ socket.on('ticker', function(json) {
             if (json[_attr] !== 0) {
                 $(_id).css("color", (json[_attr] > 0) ? "green" : "red")
             } else {
-                $(_id).css("color", "black")
+                $(_id).attr("class", "numeric_value");
             }
             suffix = '%'
         }
