@@ -22,8 +22,8 @@
 * [x] Add Gunicorn to make it production ready (March 2019)
 * [x] Building Unit, functional and end-to-end testing for existing and future features (From Jan 2019)
 * [ ] Setup notification rules for price range, price change, trading volume, price sentiment (From July 2019)
-* [ ] Implement e-mail and web browser push notifications signals (Aug-Oct 2019)
-* [ ] Implement automatic trading (From 2019)
+* [ ] Implement e-mail and web browser push notifications signals (From Oct 2019)
+* [ ] Implement automatic trading (From 2020)
 * [ ] Build iOS app (From 2020)
 
 
