@@ -7,26 +7,18 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import random
-import requests
 from copy import deepcopy
-from flask import Flask, request, render_template
+from flask import request, render_template, Blueprint
 import xtcryptosignals.settings as s
 from xtcryptosignals import __version__
-from xtcryptosignals.client.service import (
+from xtcryptosignals.client.utils import (
     validate_args,
     get_pairs,
     get_tokens,
 )
 
 
-app = Flask(
-    import_name=__name__,
-    template_folder='../templates',
-    # Note: let nginx or other more resourceful WS serve static content
-    static_folder='../static',
-)
-app.config['TEMPLATES_AUTO_RELOAD'] = s.DEBUG
-app.jinja_env.auto_reload = s.DEBUG
+bp = Blueprint('ticker', __name__)
 
 
 _COLUMN_ATTRIBUTES = [
@@ -37,7 +29,7 @@ _COLUMN_ATTRIBUTES = [
 ]
 
 
-@app.context_processor
+@bp.context_processor
 def server_api_base_url():
     data = dict(
         server_api_base_url=s.SERVER_API_BASE_URL,
@@ -54,7 +46,7 @@ def server_api_base_url():
     return data
 
 
-@app.route('/')
+@bp.route('/')
 def index():
     symbols_per_exchange = []
     for x in s.SYMBOLS_PER_EXCHANGE:
@@ -72,7 +64,7 @@ def index():
     )
 
 
-@app.route('/ticker/<frequency>')
+@bp.route('/ticker/<frequency>')
 @validate_args()
 def ticker(frequency):
     return dict(
@@ -83,7 +75,7 @@ def ticker(frequency):
     )
 
 
-@app.route('/ticker/<pair>/<frequency>')
+@bp.route('/ticker/<pair>/<frequency>')
 @validate_args()
 def ticker_pair(pair, frequency):
     x = deepcopy(s.SYMBOLS_PER_EXCHANGE)
@@ -107,7 +99,7 @@ def ticker_pair(pair, frequency):
     )
 
 
-@app.route('/ticker/source/<token>/<frequency>')
+@bp.route('/ticker/source/<token>/<frequency>')
 @validate_args()
 def ticker_token(token, frequency):
     x = deepcopy(s.SYMBOLS_PER_EXCHANGE)
@@ -129,22 +121,3 @@ def ticker_token(token, frequency):
         frequency=frequency,
         token=_token,
     )
-
-
-# Form Request
-@app.route('/contact', methods=['POST'])
-def contact():
-    r = requests.post(
-        url='http://127.0.0.1:{}/contact'.format(s.PORT_SERVER),
-        data=request.form,
-    )
-    return r.text, r.status_code
-
-
-# 404 Page not Found
-@app.errorhandler(404)
-def page_not_found(_):
-    return render_template(
-        template_name_or_list='error.html',
-        error='The URL is incorrect'
-    ), 404
