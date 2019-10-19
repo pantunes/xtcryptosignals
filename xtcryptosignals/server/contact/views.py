@@ -19,7 +19,7 @@ api = Api(bp)
 class ContactPost(Resource):
     def post(self):
         """
-        Submit contact message
+        Submit contact form data
         ---
         tags:
             - Public
