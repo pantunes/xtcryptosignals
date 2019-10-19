@@ -6,13 +6,10 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import os
 import eventlet
-from datetime import datetime
-from flask import Flask, request
-from flask_socketio import SocketIO, Namespace
+from flask_socketio import Namespace
+from xtcryptosignals.server import socketio
 import xtcryptosignals.settings as s
-from xtcryptosignals.celeryconfig import BROKER_URL
 from xtcryptosignals.server.service import (
     get_ticker_data_from_namespace,
     use_mongodb,
@@ -21,14 +18,6 @@ from xtcryptosignals.server.service import (
 
 eventlet.monkey_patch()
 
-
-app = Flask(__name__)
-
-socketio = SocketIO(
-    app=app,
-    message_queue=BROKER_URL,
-    cors_allowed_origins=s.CORS_ALLOWED_ORIGINS,
-)
 
 users_per_namespace = {'/'+x: 0 for x in s.HISTORY_FREQUENCY}
 users_per_namespace.update({'/': 0})
@@ -69,19 +58,3 @@ for x in s.HISTORY_FREQUENCY:
         'SocketIONamespace{}'.format(x), (TickerSocketIONamespace,), {}
     )
     socketio.on_namespace(socketio_model('/{}'.format(x)))
-
-
-@app.route('/contact', methods=['POST'])
-def contact():
-    with open(os.path.join('/tmp', 'contact.csv'), 'a') as f:
-        f.write("{}\t{}\t{}\t{}\n".format(
-            str(datetime.utcnow()),
-            request.form.get('email'),
-            request.form.get('reason'),
-            request.form.get('message').replace(
-                '\r\n', ' '
-            ).replace(
-                '\n', ' '
-            ))
-        )
-    return 'OK'

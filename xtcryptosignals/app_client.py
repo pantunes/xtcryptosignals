@@ -15,19 +15,19 @@ from xtcryptosignals.client.views import app
     context_settings=dict(help_option_names=['-h', '--help'])
 )
 @click.option(
-    '--gunicorn',
+    '--prod',
     is_flag=True,
     help="Enable production setup mode",
 )
 @click.pass_context
-def main(ctx, gunicorn):
+def main(ctx, prod):
     """
     Start web client
     """
     port = s.PORT_CLIENT
     host = s.IP_ADDRESS
 
-    if gunicorn:
+    if prod:
         start(handler=app, host=host, port=port)
         ctx.exit()
 

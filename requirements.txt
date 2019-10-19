@@ -7,6 +7,8 @@ requests
 switcheo
 click
 flask
+Flask-RESTful
+flasgger
 flask-socketio
 eventlet
 gunicorn
