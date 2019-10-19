@@ -8,7 +8,10 @@ __email__ = "pjmlantunes@gmail.com"
 import click
 import xtcryptosignals.settings as s
 from xtcryptosignals.wsgi import start
-from xtcryptosignals.client.views import app
+from xtcryptosignals.client import create_app
+
+
+app = create_app()
 
 
 @click.command(
