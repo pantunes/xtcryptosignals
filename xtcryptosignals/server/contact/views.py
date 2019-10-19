@@ -38,7 +38,7 @@ class ContactPost(Resource):
               required: true
         responses:
             200:
-                description: Contact was submitted successfully
+                description: Contact form was submitted successfully
         """
         with open(os.path.join('/tmp', 'contact.csv'), 'a') as f:
             f.write("{}\t{}\t{}\t{}\n".format(
