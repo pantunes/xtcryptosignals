@@ -25,6 +25,11 @@ except KeyError:
     # development
     SERVER_API_BASE_URL = 'http://127.0.0.1:{}/'.format(PORT_SERVER)
 
+try:
+    GA_TRACKING_ID = os.environ['GA_TRACKING_ID']
+except KeyError:
+    GA_TRACKING_ID = None
+
 MONGODB_NAME = 'XTCryptoSignals'
 MONGODB_PORT = 27017
 
@@ -46,7 +51,6 @@ from xtcryptosignals.settings_local import (
     BINANCE_API_KEY,
     BINANCE_API_SECRET,
     CORS_ALLOWED_ORIGINS,
-    GA_TRACKING_ID,
 )  # noqa
 
 # exchanges settings
@@ -58,7 +62,7 @@ from xtcryptosignals.settings_exchanges import (
 
 __all__ = [
     'BINANCE_API_KEY', 'BINANCE_API_SECRET', 'CORS_ALLOWED_ORIGINS',
-    'GA_TRACKING_ID', 'EXCHANGES', 'SYMBOLS_PER_EXCHANGE', 'BINANCE',
-    'BINANCE_DEX', 'UPHOLD', 'OKEX', 'IDEX', 'SWITCHEO', 'HOTBIT', 'BIBOX',
-    'OKCOIN', 'BITHUMB', 'COINBENE', 'DCOIN', 'BITMAX', 'BILAXY',
+    'EXCHANGES', 'SYMBOLS_PER_EXCHANGE', 'BINANCE', 'BINANCE_DEX', 'UPHOLD',
+    'OKEX', 'IDEX', 'SWITCHEO', 'HOTBIT', 'BIBOX', 'OKCOIN', 'BITHUMB',
+    'COINBENE', 'DCOIN', 'BITMAX', 'BILAXY',
 ]
