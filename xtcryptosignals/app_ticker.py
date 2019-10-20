@@ -5,6 +5,7 @@ __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
+
 import click
 from xtcryptosignals.config import settings as s
 from xtcryptosignals.tasks.ticker import (
