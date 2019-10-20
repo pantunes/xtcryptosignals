@@ -11,24 +11,25 @@ from marshmallow import (
     pre_load,
     post_load,
 )
-from xtcryptosignals.schemas.base import BaseSchema
+from xtcryptosignals.tasks.schemas.base import BaseSchema
 from xtcryptosignals.config import settings as s
 
 
-class Bilaxy(BaseSchema):
+class Bitmax(BaseSchema):
     symbol = fields.Str(required=True)
     source = fields.Str(required=True)
-    last = fields.Float(required=True, attribute='price')
-    vol = fields.Float(required=True, attribute='volume_24h')
-    high = fields.Float(required=True, attribute='highest_price_24h')
-    low = fields.Float(required=True, attribute='lowest_price_24h')
+    closePrice = fields.Float(required=True, attribute='price')
+    volume = fields.Float(required=True, attribute='volume_24h')
+    highPrice = fields.Float(required=True, attribute='highest_price_24h')
+    lowPrice = fields.Float(required=True, attribute='lowest_price_24h')
 
     @pre_load
     def pre_load(self, data):
-        data['source'] = s.BILAXY
+        data['source'] = s.BITMAX
         return data
 
     @post_load
     def post_load(self, data):
+        data['symbol'] = data['symbol'].replace('/', '')
         data['volume_24h'] = data['volume_24h'] * data['price']
         return data

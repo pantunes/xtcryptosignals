@@ -12,7 +12,7 @@ from marshmallow import (
     pre_load,
     post_load
 )
-from xtcryptosignals.schemas.base import BaseSchema
+from xtcryptosignals.tasks.schemas.base import BaseSchema
 from xtcryptosignals.config import settings as s
 
 

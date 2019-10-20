@@ -10,19 +10,17 @@ from marshmallow import (
     fields,
     pre_load,
 )
-from xtcryptosignals.schemas.base import BaseSchema
+from xtcryptosignals.tasks.schemas.base import BaseSchema
 from xtcryptosignals.config import settings as s
 
 
-class Hotbit(BaseSchema):
+class Uphold(BaseSchema):
     symbol = fields.Str(required=True)
+    ticker = fields.Str(required=True)
     source = fields.Str(required=True)
-    last = fields.Float(required=True, attribute='price')
-    deal = fields.Float(required=True, attribute='volume_24h')
-    high = fields.Float(required=True, attribute='highest_price_24h')
-    low = fields.Float(required=True, attribute='lowest_price_24h')
+    ask = fields.Float(required=True, attribute='price')
 
     @pre_load
     def pre_load(self, data):
-        data['source'] = s.HOTBIT
+        data['source'] = s.UPHOLD
         return data

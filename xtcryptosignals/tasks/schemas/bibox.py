@@ -11,25 +11,25 @@ from marshmallow import (
     pre_load,
     post_load
 )
-from xtcryptosignals.schemas.base import BaseSchema
+from xtcryptosignals.tasks.schemas.base import BaseSchema
 from xtcryptosignals.config import settings as s
 
 
-class Okex(BaseSchema):
-    product_id = fields.Str(required=True, attribute='symbol')
+class Bibox(BaseSchema):
+    pair = fields.Str(required=True, attribute='symbol')
     source = fields.Str(required=True)
     last = fields.Float(required=True, attribute='price')
-    base_volume_24h = fields.Float(required=True, attribute='volume_24h')
-    high_24h = fields.Float(required=True, attribute='highest_price_24h')
-    low_24h = fields.Float(required=True, attribute='lowest_price_24h')
+    vol = fields.Float(required=True, attribute='volume_24h')
+    high = fields.Float(required=True, attribute='highest_price_24h')
+    low = fields.Float(required=True, attribute='lowest_price_24h')
 
     @pre_load
     def pre_load(self, data):
-        data['source'] = s.OKEX
+        data['source'] = s.BIBOX
         return data
 
     @post_load
     def post_load(self, data):
-        data['symbol'] = data['symbol'].replace('-', '')
+        data['symbol'] = data['symbol'].replace('_', '')
         data['volume_24h'] = data['volume_24h'] * data['price']
         return data

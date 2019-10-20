@@ -16,7 +16,7 @@ from mongoengine import (
 )
 from mongoengine.queryset.visitor import Q
 from xtcryptosignals.config import settings as s
-from xtcryptosignals.models.history import History
+from xtcryptosignals.tasks.models.history import History
 from xtcryptosignals.tasks.utils import convert_to_seconds
 
 

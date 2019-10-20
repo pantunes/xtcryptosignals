@@ -11,12 +11,12 @@ from marshmallow import (
     pre_load,
     post_load
 )
-from xtcryptosignals.schemas.base import BaseSchema
+from xtcryptosignals.tasks.schemas.base import BaseSchema
 from xtcryptosignals.config import settings as s
 
 
-class Bibox(BaseSchema):
-    pair = fields.Str(required=True, attribute='symbol')
+class Okcoin(BaseSchema):
+    symbol = fields.Str(required=True)
     source = fields.Str(required=True)
     last = fields.Float(required=True, attribute='price')
     vol = fields.Float(required=True, attribute='volume_24h')
@@ -25,7 +25,7 @@ class Bibox(BaseSchema):
 
     @pre_load
     def pre_load(self, data):
-        data['source'] = s.BIBOX
+        data['source'] = s.OKCOIN
         return data
 
     @post_load
