@@ -9,13 +9,13 @@ __email__ = "pjmlantunes@gmail.com"
 from marshmallow import (
     fields,
     pre_load,
-    post_load
+    post_load,
 )
-from xtcryptosignals.schemas.base import BaseSchema
+from xtcryptosignals.tasks.schemas.base import BaseSchema
 from xtcryptosignals.config import settings as s
 
 
-class Okcoin(BaseSchema):
+class Dcoin(BaseSchema):
     symbol = fields.Str(required=True)
     source = fields.Str(required=True)
     last = fields.Float(required=True, attribute='price')
@@ -25,7 +25,7 @@ class Okcoin(BaseSchema):
 
     @pre_load
     def pre_load(self, data):
-        data['source'] = s.OKCOIN
+        data['source'] = s.DCOIN
         return data
 
     @post_load

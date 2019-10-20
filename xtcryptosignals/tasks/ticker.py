@@ -17,7 +17,7 @@ import xtcryptosignals.config.settings as s
 from xtcryptosignals.config.celeryconfig import BROKER_URL
 from xtcryptosignals.server.utils import use_mongodb
 from xtcryptosignals.tasks.utils import get_class
-from xtcryptosignals.models.ticker import Ticker as TickerModel
+from xtcryptosignals.tasks.models.ticker import Ticker as TickerModel
 
 
 class TickerSettings(object):
@@ -129,14 +129,14 @@ def update(self):
                     continue
                 try:
                     exchange_class = get_class(
-                        folder='xtcryptosignals.exchanges', module=exchange
+                        folder='xtcryptosignals.tasks.exchanges', module=exchange
                     )
                 except ModuleNotFoundError as err:
                     logger.error(err)
                     continue
                 try:
                     schema_class = get_class(
-                        folder='xtcryptosignals.schemas', module=exchange
+                        folder='xtcryptosignals.tasks.schemas', module=exchange
                     )
                 except ModuleNotFoundError as err:
                     logger.error(err)

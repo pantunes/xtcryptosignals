@@ -8,7 +8,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 from functools import wraps
 from mongoengine import connect
-from xtcryptosignals.models.history import History
+from xtcryptosignals.tasks.models.history import History
 from xtcryptosignals.config import settings as s
 
 

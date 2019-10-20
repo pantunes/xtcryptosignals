@@ -9,23 +9,26 @@ __email__ = "pjmlantunes@gmail.com"
 from marshmallow import (
     fields,
     pre_load,
+    post_load
 )
-from xtcryptosignals.schemas.base import BaseSchema
+from xtcryptosignals.tasks.schemas.base import BaseSchema
 from xtcryptosignals.config import settings as s
 
 
-class Coinbene(BaseSchema):
-    symbol = fields.Str(required=True)
+class Switcheo(BaseSchema):
+    pair = fields.Str(required=True, attribute='symbol')
     source = fields.Str(required=True)
-    last = fields.Float(required=True, attribute='price')
-    vol = fields.Float(required=True, attribute='volume_24h')
+    price = fields.Float(required=True)
+    volume = fields.Float(required=True, attribute='volume_24h')
     high = fields.Float(required=True, attribute='highest_price_24h')
     low = fields.Float(required=True, attribute='lowest_price_24h')
 
     @pre_load
     def pre_load(self, data):
-        data['source'] = s.COINBENE
-        data['high'] = data['24hrHigh']
-        data['low'] = data['24hrLow']
-        data['vol'] = float(data['24hrVol']) * float(data['last'])
+        data['source'] = s.SWITCHEO
+        return data
+
+    @post_load
+    def post_load(self, data):
+        data['symbol'] = data['symbol'].replace('_', '')
         return data

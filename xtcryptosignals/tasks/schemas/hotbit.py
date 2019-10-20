@@ -10,27 +10,19 @@ from marshmallow import (
     fields,
     pre_load,
 )
-from xtcryptosignals.schemas.base import BaseSchema
+from xtcryptosignals.tasks.schemas.base import BaseSchema
 from xtcryptosignals.config import settings as s
 
 
-class Idex(BaseSchema):
+class Hotbit(BaseSchema):
     symbol = fields.Str(required=True)
     source = fields.Str(required=True)
     last = fields.Float(required=True, attribute='price')
-    baseVolume = fields.Float(required=True, attribute='volume_24h')
+    deal = fields.Float(required=True, attribute='volume_24h')
     high = fields.Float(required=True, attribute='highest_price_24h')
     low = fields.Float(required=True, attribute='lowest_price_24h')
 
     @pre_load
     def pre_load(self, data):
-        data['source'] = s.IDEX
-        try:
-            float(data['low'])
-        except ValueError:
-            data['low'] = 0.0
-        try:
-            float(data['high'])
-        except ValueError:
-            data['high'] = 0.0
+        data['source'] = s.HOTBIT
         return data
