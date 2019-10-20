@@ -9,7 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 import random
 from copy import deepcopy
 from flask import request, render_template, Blueprint
-import xtcryptosignals.settings as s
+from xtcryptosignals.config import settings as s
 from xtcryptosignals import __version__
 from xtcryptosignals.client.utils import (
     validate_args,

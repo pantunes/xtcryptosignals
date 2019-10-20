@@ -6,7 +6,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import xtcryptosignals.settings as s
+from xtcryptosignals.config import settings as s
 from binance.client import Client
 from binance.exceptions import BinanceAPIException
 

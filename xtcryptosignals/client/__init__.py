@@ -7,7 +7,8 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from flask import Flask
-import xtcryptosignals.settings as s
+from flask_login import LoginManager
+from xtcryptosignals.config import settings as s
 
 
 app = Flask(
@@ -19,19 +20,30 @@ app = Flask(
 app.config['TEMPLATES_AUTO_RELOAD'] = s.DEBUG
 app.jinja_env.auto_reload = s.DEBUG
 
+app.config['SECRET_KEY'] = s.SECRET_KEY
+
+
+login_manager = LoginManager()
+
 
 def create_app():
-    from xtcryptosignals.client.common.views import bp as bp_common
-    from xtcryptosignals.client.ticker.views import bp as bp_ticker
-    from xtcryptosignals.client.contact.views import bp as bp_contact
+    from xtcryptosignals.client.api.auth import views
+    from xtcryptosignals.client.api.common.views import bp as bp_common
+    from xtcryptosignals.client.api.ticker.views import bp as bp_ticker
+    from xtcryptosignals.client.api.contact.views import bp as bp_contact
+    from xtcryptosignals.client.api.me.views import bp as bp_me
 
     bps = (
         bp_ticker,
         bp_contact,
         bp_common,
+        bp_me,
     )
 
     for x in bps:
         app.register_blueprint(x)
+
+    login_manager.init_app(app)
+    login_manager.login_view = "me.login"
 
     return app

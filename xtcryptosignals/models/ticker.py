@@ -15,9 +15,9 @@ from mongoengine import (
     DateTimeField,
 )
 from mongoengine.queryset.visitor import Q
-import xtcryptosignals.settings as s
+from xtcryptosignals.config import settings as s
 from xtcryptosignals.models.history import History
-from xtcryptosignals.utils.helpers import convert_to_seconds
+from xtcryptosignals.tasks.utils import convert_to_seconds
 
 
 def _get_abs_zero(f):

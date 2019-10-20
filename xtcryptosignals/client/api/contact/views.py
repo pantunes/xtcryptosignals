@@ -8,7 +8,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 import requests
 from flask import request, Blueprint
-import xtcryptosignals.settings as s
+from xtcryptosignals.config import settings as s
 
 
 bp = Blueprint('contact', __name__)

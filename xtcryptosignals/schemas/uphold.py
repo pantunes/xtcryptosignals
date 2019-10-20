@@ -11,7 +11,7 @@ from marshmallow import (
     pre_load,
 )
 from xtcryptosignals.schemas.base import BaseSchema
-import xtcryptosignals.settings as s
+from xtcryptosignals.config import settings as s
 
 
 class Uphold(BaseSchema):

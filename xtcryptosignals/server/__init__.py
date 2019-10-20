@@ -6,6 +6,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+from redis import Redis
 from flask import Flask
 from flask_session import Session
 from flask_socketio import SocketIO
@@ -14,8 +15,8 @@ from xtcryptosignals import (
     __version__,
     __description__,
 )
-from xtcryptosignals.celeryconfig import BROKER_URL
-import xtcryptosignals.settings as s
+from xtcryptosignals.config.celeryconfig import BROKER_URL
+import xtcryptosignals.config.settings as s
 
 
 app = Flask(__name__)
@@ -44,7 +45,7 @@ app.config['SWAGGER'] = {
 }
 
 app.config['SESSION_TYPE'] = 'redis'
-app.config['SESSION_REDIS'] = BROKER_URL
+app.config['SESSION_REDIS'] = Redis(host='localhost', port=6379)
 
 
 sess = Session()
@@ -53,8 +54,8 @@ socketio = SocketIO()
 
 
 def create_app():
-    from xtcryptosignals.server.messaging import views
-    from xtcryptosignals.server.contact.views import bp as bp_contact
+    from xtcryptosignals.server.api.messaging import views
+    from xtcryptosignals.server.api.contact.views import bp as bp_contact
 
     bps = (
         bp_contact,

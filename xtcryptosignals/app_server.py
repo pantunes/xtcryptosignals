@@ -6,25 +6,32 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import xtcryptosignals.settings as s
+import os
+from flasgger import Swagger
+from mongodb_migrations.cli import MigrationManager
+from xtcryptosignals.config import settings as s
 from xtcryptosignals.server import create_app, socketio
 
 
 app = create_app()
 
+migration_manager = MigrationManager()
+
+migration_manager.config.mongo_database = s.MONGODB_NAME
+migration_manager.config.mongo_port = s.MONGODB_PORT
+migration_manager.config.mongo_migrations_path = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), 'server', 'migrations'
+)
+migration_manager.config.metastore = '_migrations'
+
 
 def main():
     """
-    Start RESTFul server API and socketIO server.
+    Start RESTFul API and socketIO servers.
     """
-    import sys
-    sys.argv = [sys.argv[0]]
-    from flasgger import Swagger
-    from xtcryptosignals.data_migrations import data_migrations_manager
-
     Swagger(app)
 
-    data_migrations_manager.run()
+    migration_manager.run()
 
     socketio.run(
         app=app,
