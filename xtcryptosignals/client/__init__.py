@@ -31,13 +31,13 @@ def create_app():
     from xtcryptosignals.client.api.common.views import bp as bp_common
     from xtcryptosignals.client.api.ticker.views import bp as bp_ticker
     from xtcryptosignals.client.api.contact.views import bp as bp_contact
-    from xtcryptosignals.client.api.me.views import bp as bp_me
+    from xtcryptosignals.client.api.user.views import bp as bp_user
 
     bps = (
         bp_ticker,
         bp_contact,
         bp_common,
-        bp_me,
+        bp_user,
     )
 
     for x in bps:
