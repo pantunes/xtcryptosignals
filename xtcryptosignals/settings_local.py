@@ -6,6 +6,11 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+import os
+
+
+SECRET_KEY = os.environ['SECRET_KEY']
+
 BINANCE_API_KEY = ''  # Add Personal Binance API KEY
 BINANCE_API_SECRET = ''  # Add Personal Binance API SECRET
 
