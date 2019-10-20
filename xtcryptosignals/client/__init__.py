@@ -6,6 +6,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+from datetime import timedelta
 from flask import Flask
 from flask_login import LoginManager
 from xtcryptosignals.config import settings as s
@@ -21,6 +22,7 @@ app.config['TEMPLATES_AUTO_RELOAD'] = s.DEBUG
 app.jinja_env.auto_reload = s.DEBUG
 
 app.config['SECRET_KEY'] = s.SECRET_KEY
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
 
 
 login_manager = LoginManager()
@@ -44,6 +46,6 @@ def create_app():
         app.register_blueprint(x)
 
     login_manager.init_app(app)
-    login_manager.login_view = "me.login"
+    login_manager.login_view = "user.login"
 
     return app
