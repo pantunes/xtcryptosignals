@@ -7,9 +7,10 @@ requests
 switcheo
 click
 flask
-Flask-RESTful
-flasgger
+flask-restful
+flask-session
 flask-socketio
+flasgger
 eventlet
 gunicorn
 mongodb-migrations

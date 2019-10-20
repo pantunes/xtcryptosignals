@@ -7,6 +7,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from flask import Flask
+from flask_session import Session
 from flask_socketio import SocketIO
 from xtcryptosignals import (
     __title__,
@@ -19,6 +20,7 @@ import xtcryptosignals.settings as s
 
 app = Flask(__name__)
 
+app.config['SECRET_KEY'] = s.SECRET_KEY
 
 app.config['SWAGGER'] = {
     "info": {
@@ -41,6 +43,11 @@ app.config['SWAGGER'] = {
     ],
 }
 
+app.config['SESSION_TYPE'] = 'redis'
+app.config['SESSION_REDIS'] = BROKER_URL
+
+
+sess = Session()
 
 socketio = SocketIO()
 
@@ -55,6 +62,8 @@ def create_app():
 
     for x in bps:
         app.register_blueprint(x)
+
+    sess.init_app(app)
 
     socketio.init_app(
         app=app,
