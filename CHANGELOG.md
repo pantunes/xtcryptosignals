@@ -1,7 +1,11 @@
 # Changelog
 All changes will be registered here per release.
 
-## [0.1.8] - Current date
+## [0.1.9] - Current date
+Added User Sessions.  
+Added Blueprints.  
+
+## [0.1.8] - 2019-10-16
 Added UI Dark mode.  
 UI Changes regarding the seconds ticker in Prices pages.  
 Added Google Analytics.  
