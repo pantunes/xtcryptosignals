@@ -11,7 +11,7 @@ from flask_login import login_required, login_user
 from xtcryptosignals.client.api.auth.models import User
 
 
-bp = Blueprint('me', __name__)
+bp = Blueprint('user', __name__)
 
 
 @bp.route('/me', methods=['GET'])
@@ -24,3 +24,9 @@ def me():
 def login():
     login_user(User(1234))
     return Response("/login")
+
+
+@bp.route('/signup', methods=['GET'])
+def signup():
+    login_user(User(1234))
+    return Response("/signup")
