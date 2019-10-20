@@ -6,8 +6,8 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-from xtcryptosignals import settings as s
-from xtcryptosignals.utils.helpers import convert_to_seconds
+from xtcryptosignals.config import settings as s
+from xtcryptosignals.tasks.utils import convert_to_seconds
 
 
 def test_ticker_schedule():

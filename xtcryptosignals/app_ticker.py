@@ -6,7 +6,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 import click
-import xtcryptosignals.settings as s
+from xtcryptosignals.config import settings as s
 from xtcryptosignals.tasks.ticker import (
     TickerSettings, test, logging,
 )
@@ -73,7 +73,7 @@ def main(ctx, testing, list_config, enable_messaging, log_minimal, version):
     from celery.bin import worker
 
     app = current_app._get_current_object()
-    app.config_from_object('xtcryptosignals.celeryconfig')
+    app.config_from_object('xtcryptosignals.config.celeryconfig')
 
     worker = worker.worker(app=app)
     worker.run(

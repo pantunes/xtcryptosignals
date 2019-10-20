@@ -13,10 +13,10 @@ from celery import states
 from billiard.context import Process
 from pymongo.errors import ServerSelectionTimeoutError
 from flask_socketio import SocketIO
-import xtcryptosignals.settings as s
-from xtcryptosignals.celeryconfig import BROKER_URL
+import xtcryptosignals.config.settings as s
+from xtcryptosignals.config.celeryconfig import BROKER_URL
 from xtcryptosignals.server.utils import use_mongodb
-from xtcryptosignals.utils.helpers import get_class
+from xtcryptosignals.tasks.utils import get_class
 from xtcryptosignals.models.ticker import Ticker as TickerModel
 
 

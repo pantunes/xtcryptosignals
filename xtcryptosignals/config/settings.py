@@ -47,7 +47,7 @@ HISTORY_FREQUENCY = (
 )
 
 # local settings
-from xtcryptosignals.settings_local import (
+from xtcryptosignals.config.settings_local import (
     SECRET_KEY,
     BINANCE_API_KEY,
     BINANCE_API_SECRET,
@@ -55,7 +55,7 @@ from xtcryptosignals.settings_local import (
 )  # noqa
 
 # exchanges settings
-from xtcryptosignals.settings_exchanges import (
+from xtcryptosignals.config.settings_exchanges import (
     EXCHANGES, SYMBOLS_PER_EXCHANGE,
     BINANCE, BINANCE_DEX, UPHOLD, OKEX, IDEX, SWITCHEO, HOTBIT, BIBOX, OKCOIN,
     BITHUMB, COINBENE, DCOIN, BITMAX, BILAXY,

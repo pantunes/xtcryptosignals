@@ -9,7 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 from functools import wraps
 from mongoengine import connect
 from xtcryptosignals.models.history import History
-import xtcryptosignals.settings as s
+from xtcryptosignals.config import settings as s
 
 
 def use_mongodb(**config_params):

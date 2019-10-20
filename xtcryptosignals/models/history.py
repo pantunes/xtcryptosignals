@@ -14,7 +14,7 @@ from mongoengine import (
     ListField,
     DateTimeField
 )
-import xtcryptosignals.settings as s
+from xtcryptosignals.config import settings as s
 
 
 class History(Document):

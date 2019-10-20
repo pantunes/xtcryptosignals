@@ -7,14 +7,14 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import os
-from xtcryptosignals.utils.helpers import get_class
+from xtcryptosignals.tasks.utils import get_class
 
 
 ROOT_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
 
 def test_exchanges():
-    files = os.listdir(os.path.join(ROOT_FOLDER, '../', 'exchanges'))
+    files = os.listdir(os.path.join(ROOT_FOLDER, '../../', 'exchanges'))
     for filename in files:
         if filename[0] == '_':
             continue

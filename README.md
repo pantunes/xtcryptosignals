@@ -150,7 +150,7 @@ Options:
 
 ### Setup
 
-There is already an initial setup with some crypto-currencies (coins and tokens) that can be added or/and removed in [settings_exchanges.py](xtcryptosignals/settings_exchanges.py).
+There is already an initial setup with some crypto-currencies (coins and tokens) that can be added or/and removed in [settings_exchanges.py](xtcryptosignals/config/settings_exchanges.py).
 
 ```python
 BIBOX: {
@@ -177,7 +177,7 @@ UPHOLD: {
 }
 ```
 
-Initial setup to create dynamic MongoDB collections for data segmentation categorized by Exchanges pooling frequency in [settings.py](xtcryptosignals/settings.py).
+Initial setup to create dynamic MongoDB collections for data segmentation categorized by Exchanges pooling frequency in [settings.py](xtcryptosignals/config/settings.py).
 ```python
 HISTORY_FREQUENCY = (
     '10s', '30s', '1m', '10m', '30m', '1h', '2h', '3h', '4h', '12h', '1d', '4d', 
