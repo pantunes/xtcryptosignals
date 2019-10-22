@@ -43,3 +43,8 @@
 .darkmode--activated .popover-link:hover:after {
   border-bottom-color: #fff;
 }
+
+.darkmode--activated .modal {
+  color: #6c6c6c;
+  background: #212224;
+}
