@@ -15,6 +15,7 @@ from xtcryptosignals.server import create_app, socketio
 
 app = create_app()
 
+
 migration_manager = MigrationManager()
 
 migration_manager.config.mongo_database = s.MONGODB_NAME

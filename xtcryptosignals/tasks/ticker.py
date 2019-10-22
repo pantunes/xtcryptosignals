@@ -129,14 +129,16 @@ def update(self):
                     continue
                 try:
                     exchange_class = get_class(
-                        folder='xtcryptosignals.tasks.exchanges', module=exchange
+                        folder='xtcryptosignals.tasks.exchanges',
+                        module=exchange
                     )
                 except ModuleNotFoundError as err:
                     logger.error(err)
                     continue
                 try:
                     schema_class = get_class(
-                        folder='xtcryptosignals.tasks.schemas', module=exchange
+                        folder='xtcryptosignals.tasks.schemas',
+                        module=exchange
                     )
                 except ModuleNotFoundError as err:
                     logger.error(err)
