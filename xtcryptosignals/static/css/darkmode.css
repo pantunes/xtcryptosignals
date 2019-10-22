@@ -1,12 +1,21 @@
-.darkmode--activated th, .darkmode--activated td {
+.darkmode--activated th,
+.darkmode--activated td {
     border-bottom: 1px solid #505050;
 }
 
-.darkmode--activated td, .darkmode--activated .numeric_value, .darkmode--activated #footer, .darkmode--activated a.navbar-link {
+.darkmode--activated td,
+.darkmode--activated .numeric_value,
+.darkmode--activated #footer,
+.darkmode--activated a.navbar-link {
   color: #b3b3b3;
 }
 
-.darkmode--activated h2, .darkmode--activated h3, .darkmode--activated h6, .darkmode--activated th, .darkmode--activated .four, .darkmode--activated .title {
+.darkmode--activated h2,
+.darkmode--activated h3,
+.darkmode--activated h6,
+.darkmode--activated th,
+.darkmode--activated .four,
+.darkmode--activated .title {
   color: #6c6c6c;
 }
 
@@ -18,7 +27,8 @@
   background: #999;
 }
 
-.darkmode--activated .popover, .darkmode--activated .popover-link {
+.darkmode--activated .popover,
+.darkmode--activated .popover-link {
   background: #161616;
   color: #b3b3b3;
 }
@@ -29,6 +39,7 @@
 }
 
 .darkmode--activated .popover-link:hover,
-.darkmode--activated .popover-item:first-child, .darkmode--activated .popover-link:hover:after {
+.darkmode--activated .popover-item:first-child,
+.darkmode--activated .popover-link:hover:after {
   border-bottom-color: #fff;
 }
