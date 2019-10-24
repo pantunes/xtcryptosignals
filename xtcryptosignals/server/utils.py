@@ -7,9 +7,10 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from functools import wraps
+from flask import request
 from mongoengine import connect
-from xtcryptosignals.tasks.models.history import History
 from xtcryptosignals.config import settings as s
+from xtcryptosignals.server.api.auth import service
 
 
 def use_mongodb(**config_params):
@@ -22,17 +23,58 @@ def use_mongodb(**config_params):
     return decorator
 
 
-def get_ticker_data_from_namespace(namespace):
-    model = type('History{}'.format(namespace[1:]), (History,), {})
-    rows = []
-    for x in s.SYMBOLS_PER_EXCHANGE:
-        for exchange, items in x.items():
-            for symbol in [x[0]+x[1] for x in items['pairs']]:
-                row = model.objects(
-                    symbol=symbol,
-                    source=exchange
-                ).first()
-                if not row:
-                    continue
-                rows.append(row.get_object(frequency=namespace[1:]))
-    return rows
+def user_auth():
+    def decorator(f):
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+            try:
+                token = request.headers['Authorization']
+            except KeyError:
+                raise ValueError('Invalid Token Session.', 400)
+            auth = service.get_auth_with_token(token=token)
+            return f(*args, **kwargs, auth=auth)
+        return wrapper
+    return decorator
+
+
+def _sanitize_errors(errors):
+    _errors = []
+    for k, v in errors.items():
+        for x in v:
+            _errors.append("{} ({}).".format(x[:-1], k))
+    return '\n'.join(_errors)
+
+
+def validate_io(
+    schema_in=None, schema_out=None, many_in=False, many_out=False
+):
+    def decorator(f):
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+            if schema_in:
+                try:
+                    _json = request.get_json()
+                except Exception:
+                    return dict(error='Invalid JSON payload.'), 402
+                data, errors = schema_in().load(_json, many=many_in)
+                if errors:
+                    return dict(error=_sanitize_errors(errors)), 400
+                kwargs.update(valid_data=data)
+            try:
+                data = f(*args, **kwargs)
+            except ValueError as error:
+                error, status = error.args
+                return dict(error=error), status
+            status = None
+            if type(data) is tuple:
+                data, status = data
+            if schema_out:
+                data, errors = schema_out().dump(data, many=many_out)
+                if errors:
+                    return dict(error=_sanitize_errors(errors)), 415
+                errors = schema_out().validate(data, many=many_out)
+                if errors:
+                    return dict(error=_sanitize_errors(errors)), 416
+            return data, status or 200
+        return wrapper
+    return decorator

@@ -9,10 +9,10 @@ __email__ = "pjmlantunes@gmail.com"
 from flask_login import UserMixin
 
 
-class User(UserMixin):
-    def __init__(self, _id):
-        self.id = _id
-        self.name = "TODO"
+class Auth(UserMixin):
+    def __init__(self, _json):
+        self.id = _json['token']
+        self.user = _json['user']
 
     def __repr__(self):
-        return "%d/%s/" % (self.id, self.name)
+        return "%d/%s/" % (self.id, self.user['email'])

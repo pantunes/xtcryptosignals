@@ -1,0 +1,35 @@
+<!-- Signup Modal -->
+<div id="signup" class="modal">
+    <h4>Signup</h4>
+    <form id="form_signup">
+      <div class="row">
+          <label for="signup_email">E-mail address</label>
+          <input class="u-full-width" type="email" placeholder="you@mailbox.com" id="signup_email" name="email">
+      </div>
+      <div class="row">
+          <label for="signup_password">Password</label>
+          <input class="u-full-width" type="password" id="signup_password" name="password">
+      </div>
+      <div class="row">
+          <label for="signup_confirm_password">Re-type Password</label>
+          <input class="u-full-width" type="password" id="signup_confirm_password" name="confirm_password">
+      </div>
+      <input class="button-primary" type="button" value="Submit" onClick="(
+          function() {
+              if ($('#signup_password').val() !== $('#signup_confirm_password').val()) {
+                  $('#form_signup_error').html('Passwords must be exact');
+                  return false
+              }
+              $.post('/signup', $('#form_signup').serialize())
+                .done(function(msg) {
+                   $.modal.close();
+                })
+                .fail(function(xhr, status, error) {
+                    $('#form_signup_error').html(JSON.parse(xhr.responseText).error);
+                });
+              return false;
+        })(); return false;">
+        <span id="form_signup_error" class="modal_error"></span>
+    </form>
+</div>
+<!-- /Signup Modal -->
