@@ -54,11 +54,15 @@ socketio = SocketIO()
 
 
 def create_app():
-    from xtcryptosignals.server.api.messaging import views
+    from xtcryptosignals.server.api.ticker import views
     from xtcryptosignals.server.api.contact.views import bp as bp_contact
+    from xtcryptosignals.server.api.auth.views import bp as bp_auth
+    from xtcryptosignals.server.api.user.views import bp as bp_user
 
     bps = (
         bp_contact,
+        bp_auth,
+        bp_user,
     )
 
     for x in bps:

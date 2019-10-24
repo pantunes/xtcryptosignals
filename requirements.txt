@@ -16,3 +16,4 @@ eventlet
 gunicorn
 mongodb-migrations
 requests
+bcrypt

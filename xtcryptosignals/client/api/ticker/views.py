@@ -89,7 +89,7 @@ def ticker_pair(pair, frequency):
                     x[idx][a]['pairs'] = [(c, d)]
                     break
     if pair_not_found:
-        raise ValueError('Pair not found')
+        raise ValueError('Pair not found.')
     return dict(
         template_name_or_list='ticker_pair.html',
         symbols_per_exchange=x,
@@ -113,7 +113,7 @@ def ticker_token(token, frequency):
                     token_not_found = False
                     x[idx][a]['pairs'].append((c, d))
     if token_not_found:
-        raise ValueError('Token not found')
+        raise ValueError('Token not found.')
     return dict(
         template_name_or_list='ticker_token.html',
         symbols_per_exchange=x,

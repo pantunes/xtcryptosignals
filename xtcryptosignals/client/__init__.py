@@ -14,15 +14,15 @@ from xtcryptosignals.config import settings as s
 
 app = Flask(
     import_name=__name__,
-    template_folder='../templates',
-    # Note: let nginx or other more resourceful WS serve static content
-    static_folder='../static',
+    template_folder='templates',
+    # @Note: let nginx or other more resourceful WS serve static content
+    static_folder='static',
 )
 app.config['TEMPLATES_AUTO_RELOAD'] = s.DEBUG
 app.jinja_env.auto_reload = s.DEBUG
 
 app.config['SECRET_KEY'] = s.SECRET_KEY
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
+app.config['PERMANENT_SESSION_LIFETIME'] = s.PERMANENT_SESSION_LIFETIME
 
 
 login_manager = LoginManager()
@@ -46,6 +46,6 @@ def create_app():
         app.register_blueprint(x)
 
     login_manager.init_app(app)
-    login_manager.login_view = "user.login"
+    login_manager.login_view = "ticker.index"
 
     return app

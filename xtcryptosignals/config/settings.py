@@ -7,6 +7,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import os
+from datetime import timedelta
 
 
 IP_ADDRESS = '0.0.0.0'
@@ -38,6 +39,8 @@ TIMEOUT_PER_SYMBOL_REQUEST = 2.0  # in seconds
 TIMEOUT_PER_SYMBOLS_REQUEST = 5.0  # in seconds
 SYMBOL_FLOAT_PRECISION = 8
 PRICES_CHANGE_CHART_SIZE = 6
+
+PERMANENT_SESSION_LIFETIME = timedelta(days=1)
 
 # mongodb collections created during runtime
 HISTORY_FREQUENCY = (

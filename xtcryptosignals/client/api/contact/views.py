@@ -16,8 +16,8 @@ bp = Blueprint('contact', __name__)
 
 @bp.route('/contact', methods=['POST'])
 def contact():
-    r = requests.post(
-        url='http://127.0.0.1:{}/contact'.format(s.PORT_SERVER),
+    response = requests.post(
+        url='{}contact'.format(s.SERVER_API_BASE_URL),
         data=request.form,
     )
-    return r.text, r.status_code
+    return response.text, response.status_code
