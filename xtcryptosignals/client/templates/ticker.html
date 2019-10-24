@@ -8,6 +8,12 @@
 <script src="/static/js/sparkline.js"></script>
 
 <script type="text/javascript">
+    function openModal(x) {
+        $(x).modal();
+    }
+</script>
+
+<script type="text/javascript">
     let timeleft = 1;
     setInterval(function() {
       $('#update_ticker').text(timeleft);

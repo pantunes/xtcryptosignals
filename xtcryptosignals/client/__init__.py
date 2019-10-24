@@ -6,7 +6,6 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-from datetime import timedelta
 from flask import Flask
 from flask_login import LoginManager
 from xtcryptosignals.config import settings as s
