@@ -5,6 +5,7 @@ All changes will be registered here per release.
 Performed a code refactoring as the Project is getting more extensive.  
 Added User Sessions.  
 Added Blueprints.  
+Added Marshmallows API UI.  
 Code fixes and improvements.  
 
 ## [0.1.8] - 2019-10-16
