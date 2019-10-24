@@ -63,6 +63,27 @@ class LoginPost(Resource):
         return auth.to_dict()
 
 
+class LogoutPost(Resource):
+    @use_mongodb()
+    @validate_io()
+    @user_auth()
+    def post(self, auth):
+        """
+        User logs out
+        ---
+        tags:
+            - Authentication
+        security:
+            - Bearer: []
+        responses:
+            200:
+                description: User logged out successfully
+            401:
+                description: Unauthorized
+        """
+        service.logout(auth=auth)
+
+
 class AuthGet(Resource):
     @use_mongodb()
     @validate_io(schema_out=AuthOutputSchema)
@@ -87,4 +108,5 @@ class AuthGet(Resource):
 
 
 api.add_resource(LoginPost, '/login')
+api.add_resource(LogoutPost, '/logout')
 api.add_resource(AuthGet, '/auth')

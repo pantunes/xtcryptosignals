@@ -7,7 +7,11 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import bcrypt
-from mongoengine.errors import NotUniqueError, ValidationError
+from mongoengine.errors import (
+    NotUniqueError,
+    ValidationError,
+    DoesNotExist,
+)
 from xtcryptosignals.server.api.user.models import User
 
 
@@ -28,4 +32,17 @@ def create_user(data):
         raise ValueError(
             'Invalid e-mail address ({email}).'.format(**data), 406
         )
+    return user
+
+
+def get_user(data, authenticate=True):
+    try:
+        user = User.objects.get(email=data['email'])
+    except DoesNotExist:
+        raise ValueError('User not found ({email}).'.format(**data), 404)
+    if authenticate:
+        if not bcrypt.checkpw(
+            data['password'].encode(), user.password.encode()
+        ):
+            raise ValueError('Bad credentials.', 404)
     return user

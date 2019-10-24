@@ -7,11 +7,11 @@
       <a class="navbar-link" href="javascript:;" data-popover="#tickerNavPopover">Tickers</a>
       <div id="tickerNavPopover" class="popover">
         <ul class="popover-list">
-          {% for f in frequencies %}
+{% for f in frequencies %}
           <li class="popover-item">
             <a class="popover-link" href="{{url_for('ticker.'+url, frequency=f, **params)}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{f}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
           </li>
-          {% endfor %}
+{% endfor %}
         </ul>
       </div>
     </li>
@@ -19,11 +19,11 @@
       <a class="navbar-link" href="javascript:;" data-popover="#tokensNavPopover">Tokens</a>
       <div id="tokensNavPopover" class="popover">
         <ul class="popover-list">
-          {% for t in tokens %}
+{% for t in tokens %}
           <li class="popover-item">
             <a class="popover-link" href="{{url_for('ticker.ticker_token', frequency=frequency, token=t)}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{t}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
           </li>
-          {% endfor %}
+{% endfor %}
         </ul>
       </div>
     </li>
@@ -31,11 +31,11 @@
       <a class="navbar-link" href="javascript:;" data-popover="#pairsNavPopover">Pairs</a>
       <div id="pairsNavPopover" class="popover">
         <ul class="popover-list">
-          {% for p in pairs %}
+{% for p in pairs %}
           <li class="popover-item">
             <a class="popover-link" href="{{url_for('ticker.ticker_pair', frequency=frequency, pair=p) if p != 'ALL' else url_for('ticker.ticker', frequency=frequency)}}">{{p}}</a>
           </li>
-          {% endfor %}
+{% endfor %}
         </ul>
       </div>
     </li>
@@ -62,6 +62,11 @@
           <li class="popover-item">
             <a class="popover-link" href="javascript:openModal('#signup');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Signup&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
           </li>
+{% if current_user.is_authenticated %}
+          <li class="popover-item">
+            <a class="popover-link" href="/logout">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+          </li>
+{% endif %}
         </ul>
       </div>
     </li>

@@ -16,9 +16,7 @@ from xtcryptosignals.config import settings as s
 def load_user(token):
     response = requests.get(
         url='{}auth'.format(s.SERVER_API_BASE_URL),
-        headers=dict(
-            Authorization=token
-        )
+        headers=dict(Authorization=token)
     )
 
     if response.status_code != 200:
