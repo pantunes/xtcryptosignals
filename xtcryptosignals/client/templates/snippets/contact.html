@@ -20,6 +20,7 @@
       <input class="button-primary" type="button" value="Submit" onClick="(
           function() {
               $.post('/contact', $('#form_contact').serialize(), function(_) {
+                $.notify('Sent!', 'success');
                 $.modal.close();
               });
               return false;

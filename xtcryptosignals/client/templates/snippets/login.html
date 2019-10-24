@@ -14,14 +14,14 @@
           function() {
               $.post('/login', $('#form_login').serialize())
                 .done(function(msg) {
-                   $.modal.close();
+                    $.notify('Welcome!', 'success');
+                    $.modal.close();
                 })
                 .fail(function(xhr, status, error) {
-                    $('#form_login_error').html(JSON.parse(xhr.responseText).error);
+                    $.notify(JSON.parse(xhr.responseText).error);
                 });
               return false;
         })(); return false;">
-        <span id="form_login_error" class="modal_error"></span>
     </form>
 </div>
 <!-- /Login Modal -->
