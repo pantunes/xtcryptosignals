@@ -7,8 +7,20 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import requests
-from flask import Blueprint, Response, request
-from flask_login import login_required, login_user, logout_user
+from flask import (
+    Blueprint,
+    Response,
+    request,
+    redirect,
+    url_for,
+)
+from flask_login import (
+    login_required,
+    login_user,
+    logout_user,
+    current_user,
+)
+from flask import session
 from xtcryptosignals.client.api.auth.models import Auth
 from xtcryptosignals.config import settings as s
 
@@ -58,7 +70,16 @@ def login():
     return _json, response.status_code
 
 
-@bp.route('/logout', methods=['POST'])
+@bp.route('/logout', methods=['GET'])
+@login_required
 def logout():
-    logout_user()
-    return Response("/logout")
+    response = requests.post(
+        url='{}logout'.format(s.SERVER_API_BASE_URL),
+        headers=dict(Authorization=current_user.id)
+    )
+
+    if response.status_code == 200:
+        logout_user()
+        session.clear()
+
+    return redirect(url_for('ticker.index'))

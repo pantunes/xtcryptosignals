@@ -15,4 +15,4 @@ class Auth(UserMixin):
         self.user = _json['user']
 
     def __repr__(self):
-        return "%d/%s/" % (self.id, self.user['email'])
+        return "%s" % (self.user['email'])

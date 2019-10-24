@@ -6,29 +6,15 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import bcrypt
 import secrets
 from mongoengine.errors import DoesNotExist, NotUniqueError
 from xtcryptosignals.server.api.auth.models import Auth
-from xtcryptosignals.server.api.user.models import User
-
-
-def get_user(data, authenticate=True):
-    try:
-        user = User.objects.get(email=data['email'])
-    except DoesNotExist:
-        raise ValueError('User not found ({email}).'.format(**data), 404)
-    if authenticate:
-        if not bcrypt.checkpw(
-            data['password'].encode(), user.password.encode()
-        ):
-            raise ValueError('Bad credentials.', 404)
-    return user
+from xtcryptosignals.server.api.user.service import get_user
 
 
 def get_auth_with_token(token):
     try:
-        auth = Auth.objects.get(token=token)
+        auth = Auth.objects.get(token=token, active=True)
     except DoesNotExist:
         raise ValueError('Session is invalid.', 401)
     return auth
@@ -39,7 +25,7 @@ def login(data):
     if not user.active:
         raise ValueError('User account needs to be activated.', 403)
     try:
-        auth = Auth.objects.get(user=user)
+        auth = Auth.objects.get(user=user, active=True)
     except DoesNotExist:
         auth = Auth(user=user)
     auth.token = secrets.token_hex(64)
@@ -48,3 +34,8 @@ def login(data):
     except NotUniqueError:
         raise ValueError('Session token is not unique.', 412)
     return auth
+
+
+def logout(auth):
+    auth.active = False
+    auth.save()
