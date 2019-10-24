@@ -45,6 +45,8 @@ def create_app():
         app.register_blueprint(x)
 
     login_manager.init_app(app)
+
     login_manager.login_view = "ticker.index"
+    login_manager.session_protection = "strong"
 
     return app

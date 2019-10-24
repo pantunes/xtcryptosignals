@@ -62,11 +62,9 @@
           <li class="popover-item">
             <a class="popover-link" href="javascript:openModal('#signup');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Signup&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
           </li>
-{% if current_user.is_authenticated %}
-          <li class="popover-item">
+          <li id="menu_login" class="popover-item" style="display: {{ 'inline' if current_user.is_authenticated else 'none' }}">
             <a class="popover-link" href="/logout">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
           </li>
-{% endif %}
         </ul>
       </div>
     </li>

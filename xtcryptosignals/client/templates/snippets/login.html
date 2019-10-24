@@ -16,7 +16,7 @@
                 .done(function(msg) {
                     $.notify('Welcome!', 'success');
                     $.modal.close();
-                    location.reload();
+                    $('#menu_login').css('display', 'inline');
                 })
                 .fail(function(xhr, status, error) {
                     $.notify(JSON.parse(xhr.responseText).error);
