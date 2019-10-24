@@ -17,19 +17,19 @@
       <input class="button-primary" type="button" value="Submit" onClick="(
           function() {
               if ($('#signup_password').val() !== $('#signup_confirm_password').val()) {
-                  $('#form_signup_error').html('Passwords must be exact');
+                  $.notify('Passwords must be exact.');
                   return false
               }
               $.post('/signup', $('#form_signup').serialize())
                 .done(function(msg) {
-                   $.modal.close();
+                    $.notify('Welcome!', 'success');
+                    $.modal.close();
                 })
                 .fail(function(xhr, status, error) {
-                    $('#form_signup_error').html(JSON.parse(xhr.responseText).error);
+                    $.notify(JSON.parse(xhr.responseText).error);
                 });
               return false;
         })(); return false;">
-        <span id="form_signup_error" class="modal_error"></span>
     </form>
 </div>
 <!-- /Signup Modal -->
