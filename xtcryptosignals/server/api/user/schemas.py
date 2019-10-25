@@ -6,8 +6,18 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-from marshmallow import fields, Schema, ValidationError
+from marshmallow import (
+    fields,
+    Schema,
+    ValidationError,
+    validates_schema,
+)
 from xtcryptosignals.server.api.common.schemas import OutputSchema
+
+
+def _validate_name(n):
+    if len(n.strip()) == 0:
+        raise ValidationError('Must be filled in.')
 
 
 def _validate_password(p):
@@ -16,9 +26,17 @@ def _validate_password(p):
 
 
 class UserCreateInputSchema(Schema):
+    name = fields.String(required=True, validate=_validate_name)
     email = fields.String(required=True)
     password = fields.String(required=True, validate=_validate_password)
+    confirm_password = fields.String(required=True)
+
+    @validates_schema
+    def validate_confirm_password(self, data, **_):
+        if data["password"] != data["confirm_password"]:
+            raise ValidationError("Strings don't match (password).")
 
 
 class UserOutputSchema(OutputSchema):
+    name = fields.String(required=True)
     email = fields.String(required=True)

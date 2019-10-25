@@ -11,16 +11,11 @@ from flask import (
     Blueprint,
     Response,
     request,
-    redirect,
-    url_for,
 )
 from flask_login import (
     login_required,
     login_user,
-    logout_user,
-    current_user,
 )
-from flask import session
 from xtcryptosignals.client.api.auth.models import Auth
 from xtcryptosignals.config import settings as s
 
@@ -38,10 +33,7 @@ def me():
 def signup():
     response = requests.post(
         url='{}signup'.format(s.SERVER_API_BASE_URL),
-        json=dict(
-            email=request.form.get('email'),
-            password=request.form.get('password'),
-        )
+        json=request.form.to_dict()
     )
 
     _json = response.json()
@@ -50,36 +42,3 @@ def signup():
         login_user(Auth(_json))
 
     return _json, response.status_code
-
-
-@bp.route('/login', methods=['POST'])
-def login():
-    response = requests.post(
-        url='{}login'.format(s.SERVER_API_BASE_URL),
-        json=dict(
-            email=request.form.get('email'),
-            password=request.form.get('password'),
-        )
-    )
-
-    _json = response.json()
-
-    if response.status_code == 200:
-        login_user(Auth(_json))
-
-    return _json, response.status_code
-
-
-@bp.route('/logout', methods=['GET'])
-@login_required
-def logout():
-    response = requests.post(
-        url='{}logout'.format(s.SERVER_API_BASE_URL),
-        headers=dict(Authorization=current_user.id)
-    )
-
-    if response.status_code == 200:
-        logout_user()
-        session.clear()
-
-    return redirect(url_for('ticker.index'))

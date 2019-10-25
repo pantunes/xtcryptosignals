@@ -14,14 +14,14 @@
           <label for="signup_confirm_password">Re-type Password</label>
           <input class="u-full-width" type="password" id="signup_confirm_password" name="confirm_password">
       </div>
+      <div class="row">
+          <label for="signup_nickname">Nickname</label>
+          <input class="u-full-width" type="text" id="signup_nickname" name="name">
+      </div>
       <input class="button-primary" type="button" value="Submit" onClick="(
           function() {
-              if ($('#signup_password').val() !== $('#signup_confirm_password').val()) {
-                  $.notify('Passwords must be exact.');
-                  return false
-              }
               $.post('/signup', $('#form_signup').serialize())
-                .done(function(msg) {
+                .done(function(response) {
                     $.notify('Welcome!', 'success');
                     $.modal.close();
                 })

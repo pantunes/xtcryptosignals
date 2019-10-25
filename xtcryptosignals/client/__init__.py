@@ -28,17 +28,18 @@ login_manager = LoginManager()
 
 
 def create_app():
-    from xtcryptosignals.client.api.auth import views
+    from xtcryptosignals.client.api.auth.views import bp as bp_auth
     from xtcryptosignals.client.api.common.views import bp as bp_common
     from xtcryptosignals.client.api.ticker.views import bp as bp_ticker
     from xtcryptosignals.client.api.contact.views import bp as bp_contact
     from xtcryptosignals.client.api.user.views import bp as bp_user
 
     bps = (
+        bp_auth,
+        bp_user,
         bp_ticker,
         bp_contact,
         bp_common,
-        bp_user,
     )
 
     for x in bps:
