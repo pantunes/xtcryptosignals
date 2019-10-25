@@ -18,6 +18,7 @@
                     $.modal.close();
                     $('#menu_login').html('My Account');
                     $('#menu_login_link').css('display', 'inline');
+                    $('#info').modal();
                 })
                 .fail(function(xhr, status, error) {
                     $.notify(JSON.parse(xhr.responseText).error);
