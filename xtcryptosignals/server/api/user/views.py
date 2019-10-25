@@ -34,6 +34,7 @@ class SignUpPost(Resource):
               in: body
               example:
                 {
+                    name: 'John Doe',
                     email: 'some@email.com',
                     password: 'S0m3_p4ssw0rd',
                 }

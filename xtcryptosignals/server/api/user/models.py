@@ -16,6 +16,7 @@ from xtcryptosignals.server.api.common.models import DocumentValidation
 
 
 class User(DocumentValidation):
+    name = StringField(required=True)
     email = EmailField(required=True, unique=True)
     password = StringField(required=True)
     metadata = DictField()

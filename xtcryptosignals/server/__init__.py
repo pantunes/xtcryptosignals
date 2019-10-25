@@ -60,9 +60,9 @@ def create_app():
     from xtcryptosignals.server.api.user.views import bp as bp_user
 
     bps = (
-        bp_contact,
         bp_auth,
         bp_user,
+        bp_contact,
     )
 
     for x in bps:

@@ -52,18 +52,33 @@
         </ul>
       </div>
     </li>
+{% set spaces = '&nbsp;'|safe * 10 %}
     <li class="navbar-item">
-      <a class="navbar-link" href="javascript:;" data-popover="#myAccountNavPopover">Account</a>
+      <a class="navbar-link" href="javascript:;" data-popover="#myAccountNavPopover" id="menu_login">{{ 'My Account' if current_user.is_authenticated else 'Account' }}</a>
       <div id="myAccountNavPopover" class="popover">
         <ul class="popover-list">
           <li class="popover-item">
-            <a class="popover-link" href="javascript:openModal('#login');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a class="popover-link" href="javascript:openModal('#login');">{{spaces}}Login{{spaces}}</a>
           </li>
           <li class="popover-item">
-            <a class="popover-link" href="javascript:openModal('#signup');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Signup&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a class="popover-link" href="javascript:openModal('#signup');">{{spaces}}Signup{{spaces}}</a>
           </li>
-          <li id="menu_login" class="popover-item" style="display: {{ 'inline' if current_user.is_authenticated else 'none' }}">
-            <a class="popover-link" href="/logout">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+          <li id="menu_login_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
+            <a class="popover-link" href="javascript:;" onClick="(
+              function() {
+                  $.get('/logout')
+                    .done(function(response) {
+                        $.notify('You are logged out!', 'success');
+                        $.modal.close();
+                        $('#menu_login').html('Account');
+                        $('#menu_login_link').css('display', 'none');
+                    })
+                    .fail(function(xhr, status, error) {
+
+                        $.notify(JSON.parse(xhr.responseText).error);
+                    });
+                  return false;
+              })(); return false;">Logout</a>
           </li>
         </ul>
       </div>

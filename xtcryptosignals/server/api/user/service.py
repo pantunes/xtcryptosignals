@@ -20,6 +20,8 @@ def create_user(data):
         data['password'].encode(), bcrypt.gensalt()
     )
 
+    del data['confirm_password']
+
     user = User(**data)
 
     try:

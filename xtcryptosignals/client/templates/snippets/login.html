@@ -13,10 +13,11 @@
       <input class="button-primary" type="button" value="Login" onClick="(
           function() {
               $.post('/login', $('#form_login').serialize())
-                .done(function(msg) {
+                .done(function(response) {
                     $.notify('Welcome!', 'success');
                     $.modal.close();
-                    $('#menu_login').css('display', 'inline');
+                    $('#menu_login').html('My Account');
+                    $('#menu_login_link').css('display', 'inline');
                 })
                 .fail(function(xhr, status, error) {
                     $.notify(JSON.parse(xhr.responseText).error);

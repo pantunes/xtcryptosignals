@@ -29,14 +29,17 @@
     <script type="text/javascript">
         $(document).ready(function() {
             if (window.location.hash === '#contact') {
-                $('#contact').modal(); return
+                $('#contact').modal();
             }
-            if (window.location.hash === '#login') {
-                $('#login').modal(); return
+            else if (window.location.hash === '#login') {
+                $('#login').modal();
             }
-            if (window.location.hash === '#signup') {
-                $('#signup').modal(); return
+            else if (window.location.hash === '#signup') {
+                $('#signup').modal();
             }
+            $('#contact, #login, #signup').on($.modal.AFTER_CLOSE, function(event, modal) {
+                location.hash = '';
+            });
         });
     </script>
     <!-- jQuery Modal -->

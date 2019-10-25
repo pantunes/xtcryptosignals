@@ -40,6 +40,9 @@ def user_auth():
 def _sanitize_errors(errors):
     _errors = []
     for k, v in errors.items():
+        if k == '_schema':
+            _errors += v
+            continue
         for x in v:
             _errors.append("{} ({}).".format(x[:-1], k))
     return '\n'.join(_errors)
