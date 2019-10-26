@@ -15,7 +15,7 @@ ROOT_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
 def test_exchanges():
     files = os.listdir(
-        os.path.join(ROOT_FOLDER, '../', '../', 'tasks', 'exchanges')
+        os.path.join(ROOT_FOLDER, '../', 'tasks', 'exchanges')
     )
     for filename in files:
         if filename[0] == '_':

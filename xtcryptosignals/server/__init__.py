@@ -9,6 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 from flask import Flask
 from flask_session import Session
 from flask_socketio import SocketIO
+from mongoengine import connect
 
 
 app = Flask(__name__)
@@ -41,6 +42,12 @@ def create_app():
 
     for x in bps:
         app.register_blueprint(x)
+
+    connect(
+        db=app.config['MONGODB_NAME'],
+        host=app.config['MONGODB_HOST'],
+        port=app.config['MONGODB_PORT']
+    )
 
     sess.init_app(app)
 

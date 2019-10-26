@@ -10,8 +10,7 @@ import eventlet
 from flask_socketio import Namespace
 from xtcryptosignals.server import socketio
 from xtcryptosignals.tasks import settings as s
-from xtcryptosignals.server.utils import use_mongodb
-from xtcryptosignals.tasks.models.history import get_ticker_data_from_namespace
+from xtcryptosignals.tasks.models.history import History
 
 
 eventlet.monkey_patch()
@@ -36,11 +35,10 @@ def on_general_disconnect():
 
 
 class TickerSocketIONamespace(Namespace):
-    @use_mongodb()
     def on_connect(self):
         global users_per_namespace
         users_per_namespace[self.namespace] += 1
-        rows = get_ticker_data_from_namespace(self.namespace)
+        rows = History.get_ticker_data_from_namespace(self.namespace)
         for row in rows:
             socketio.emit('ticker', row, namespace=self.namespace)
         socketio.emit('general', users_per_namespace, broadcast=True)

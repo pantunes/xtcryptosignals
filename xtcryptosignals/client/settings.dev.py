@@ -6,6 +6,6 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-SECRET_KEY = None
+SECRET_KEY = "483723]7"
 
 GA_TRACKING_ID = None
