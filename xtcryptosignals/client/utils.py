@@ -6,7 +6,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-from xtcryptosignals.config import settings as s
+from xtcryptosignals.tasks import settings as s
 from functools import wraps
 from flask import render_template
 

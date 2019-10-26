@@ -150,7 +150,7 @@ Options:
 
 ### Setup
 
-There is already an initial setup with some crypto-currencies (coins and tokens) that can be added or/and removed in [settings_exchanges.py](xtcryptosignals/config/settings_exchanges.py).
+There is already an initial setup with some crypto-currencies (coins and tokens) that can be added or/and removed in [settings_exchanges.py](xtcryptosignals/tasks/settings_exchanges.py).
 
 ```python
 BIBOX: {

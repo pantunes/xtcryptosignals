@@ -9,7 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 import eventlet
 from flask_socketio import Namespace
 from xtcryptosignals.server import socketio
-from xtcryptosignals.config import settings as s
+from xtcryptosignals.tasks import settings as s
 from xtcryptosignals.server.utils import use_mongodb
 from xtcryptosignals.tasks.models.history import get_ticker_data_from_namespace
 
