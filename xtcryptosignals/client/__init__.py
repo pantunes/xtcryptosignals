@@ -8,7 +8,6 @@ __email__ = "pjmlantunes@gmail.com"
 
 from flask import Flask
 from flask_login import LoginManager
-from xtcryptosignals.config import settings as s
 
 
 app = Flask(
@@ -17,11 +16,15 @@ app = Flask(
     # @Note: let nginx or other more resourceful WS serve static content
     static_folder='static',
 )
-app.config['TEMPLATES_AUTO_RELOAD'] = s.DEBUG
-app.jinja_env.auto_reload = s.DEBUG
 
-app.config['SECRET_KEY'] = s.SECRET_KEY
-app.config['PERMANENT_SESSION_LIFETIME'] = s.PERMANENT_SESSION_LIFETIME
+app.jinja_env.auto_reload = app.config['DEBUG']
+
+if app.config['ENV'] == "production":
+    app.config.from_object("xtcryptosignals.client.config.ConfigProduction")
+    app.config.from_pyfile('settings.prod.py')
+else:
+    app.config.from_object("xtcryptosignals.client.config.ConfigDevelopment")
+    app.config.from_pyfile('settings.dev.py')
 
 
 login_manager = LoginManager()

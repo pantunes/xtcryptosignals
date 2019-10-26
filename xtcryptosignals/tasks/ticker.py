@@ -13,8 +13,8 @@ from celery import states
 from billiard.context import Process
 from pymongo.errors import ServerSelectionTimeoutError
 from flask_socketio import SocketIO
-import xtcryptosignals.config.settings as s
-from xtcryptosignals.config.celeryconfig import BROKER_URL
+import xtcryptosignals.tasks.settings as s
+from xtcryptosignals.tasks.celeryconfig import BROKER_URL
 from xtcryptosignals.server.utils import use_mongodb
 from xtcryptosignals.tasks.utils import get_class
 from xtcryptosignals.tasks.models.ticker import Ticker as TickerModel
@@ -109,7 +109,12 @@ def _terminate_running_jobs(logger, jobs):
 
 
 @task(bind=True)
-@use_mongodb(connect=False)
+@use_mongodb(
+    db=s.MONGODB_NAME,
+    host=s.MONGODB_HOST,
+    port=s.MONGODB_PORT,
+    connect=False
+)
 def update(self):
 
     if TickerSettings.enable_socket_io:

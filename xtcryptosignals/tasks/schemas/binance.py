@@ -13,7 +13,7 @@ from marshmallow import (
     post_load
 )
 from xtcryptosignals.tasks.schemas.base import BaseSchema
-from xtcryptosignals.config import settings as s
+from xtcryptosignals.tasks import settings as s
 
 
 class Binance(BaseSchema):
