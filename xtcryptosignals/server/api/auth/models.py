@@ -12,7 +12,7 @@ from mongoengine import (
     BooleanField,
     IntField,
 )
-from xtcryptosignals.server.api.common.models import DocumentValidation
+from xtcryptosignals.common.models import DocumentValidation
 from xtcryptosignals.server.api.user.models import User
 
 

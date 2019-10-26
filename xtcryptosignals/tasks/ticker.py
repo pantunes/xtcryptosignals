@@ -15,7 +15,7 @@ from pymongo.errors import ServerSelectionTimeoutError
 from flask_socketio import SocketIO
 import xtcryptosignals.tasks.settings as s
 from xtcryptosignals.tasks.celeryconfig import BROKER_URL
-from xtcryptosignals.server.utils import use_mongodb
+from xtcryptosignals.common.utils import use_mongodb
 from xtcryptosignals.tasks.utils import get_class
 from xtcryptosignals.tasks.models.ticker import Ticker as TickerModel
 
@@ -30,7 +30,7 @@ def _get_log_level():
 
 
 def _process(
-        logger, socketio, exchange_class, schema_class, symbol, pairs
+    logger, socketio, exchange_class, schema_class, symbol, pairs
 ):
     ticker_kwargs = dict()
     if symbol:

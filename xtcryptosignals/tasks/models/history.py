@@ -7,17 +7,16 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from mongoengine import (
-    Document,
     StringField,
     DecimalField,
     IntField,
     ListField,
-    DateTimeField
 )
+from xtcryptosignals.common.models import DocumentValidation
 from xtcryptosignals.tasks import settings as s
 
 
-class History(Document):
+class History(DocumentValidation):
     symbol = StringField(required=True)
     source = StringField(required=True)
     ticker = StringField(required=True)
@@ -27,10 +26,7 @@ class History(Document):
     price_change = DecimalField(precision=2)
     number_trades_change = DecimalField(precision=2)
     volume_change = DecimalField(precision=2)
-    price_change_chart = ListField(
-        DecimalField(required=True, precision=2)
-    )
-    created_on = DateTimeField(required=True)
+    price_change_chart = ListField(DecimalField(required=True, precision=2))
 
     meta = {
         'abstract': True,
@@ -43,40 +39,37 @@ class History(Document):
         'ordering': ['-created_on'],
     }
 
-    def get_object(self, frequency):
-        item = dict(frequency=frequency)
-        for k in self._fields.keys():
-            if self[k] is None:
-                continue
-            if k == "id":
-                continue
-            if k in ['symbol', 'source', 'ticker', 'number_trades_24h']:
-                item[k] = self[k]
-                continue
-            if k in ['price', 'volume_24h', 'price_change',
-                     'number_trades_change', 'volume_change']:
-                item[k] = float(self[k])
-                continue
-            if k in ['created_on']:
-                item['updated_on'] = self[k].strftime('%Y-%m-%d %H:%M:%S')
+    def to_dict(self, frequency):
+        e = super(History, self).to_dict().copy()
+        for k in e:
+            if k in [
+                'price',
+                'volume_24h',
+                'price_change',
+                'number_trades_change',
+                'volume_change',
+            ]:
+                e[k] = float(self[k])
                 continue
             if k in ['price_change_chart']:
-                item[k] = [float(x) for x in self[k]]
+                e[k] = [float(x) for x in self[k]]
                 continue
-        return item
+        e['frequency'] = frequency
+        e['updated_on'] = e['created_on']
+        return e
 
-
-def get_ticker_data_from_namespace(namespace):
-    model = type('History{}'.format(namespace[1:]), (History,), {})
-    rows = []
-    for x in s.SYMBOLS_PER_EXCHANGE:
-        for exchange, items in x.items():
-            for symbol in [x[0]+x[1] for x in items['pairs']]:
-                row = model.objects(
-                    symbol=symbol,
-                    source=exchange
-                ).first()
-                if not row:
-                    continue
-                rows.append(row.get_object(frequency=namespace[1:]))
-    return rows
+    @staticmethod
+    def get_ticker_data_from_namespace(namespace):
+        model = type('History{}'.format(namespace[1:]), (History,), {})
+        rows = []
+        for x in s.SYMBOLS_PER_EXCHANGE:
+            for exchange, items in x.items():
+                for symbol in [x[0] + x[1] for x in items['pairs']]:
+                    row = model.objects(
+                        symbol=symbol,
+                        source=exchange
+                    ).first()
+                    if not row:
+                        continue
+                    rows.append(row.to_dict(frequency=namespace[1:]))
+        return rows

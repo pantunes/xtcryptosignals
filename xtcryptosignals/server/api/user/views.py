@@ -8,7 +8,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 from flask import Blueprint
 from flask_restful import Api, Resource
-from xtcryptosignals.server.utils import use_mongodb, validate_io
+from xtcryptosignals.server.utils import validate_io
 from xtcryptosignals.server.api.user import service
 from xtcryptosignals.server.api.user.schemas import (
     UserCreateInputSchema,
@@ -21,7 +21,6 @@ api = Api(bp)
 
 
 class SignUpPost(Resource):
-    @use_mongodb()
     @validate_io(schema_in=UserCreateInputSchema, schema_out=UserOutputSchema)
     def post(self, valid_data):
         """
