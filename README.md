@@ -91,7 +91,7 @@ Development:
 xt-ticker --enable-messaging
 
 # to test 1 tick
-xt-ticker --testing
+xt-ticker --test
 
 ```
 
@@ -134,7 +134,7 @@ Usage: xt-ticker [OPTIONS]
   configured crypto-currencies exchanges.
 
 Options:
-  --testing                       Execute 1 iteration for all configured coins
+  --test                          Execute 1 iteration for all configured coins
                                   and/or tokens without Celery. (Useful for
                                   testing purposes)
   --list-config [exchanges|currencies]

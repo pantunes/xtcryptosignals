@@ -20,15 +20,6 @@ from xtcryptosignals.tasks.utils import get_class
 from xtcryptosignals.tasks.models.ticker import Ticker as TickerModel
 
 
-class TickerSettings(object):
-    enable_socket_io = False
-    log_minimal = False
-
-
-def _get_log_level():
-    return logging.INFO if not TickerSettings.log_minimal else logging.ERROR
-
-
 def _process(
     logger, socketio, exchange_class, schema_class, symbol, pairs
 ):
@@ -72,10 +63,11 @@ def _process(
 
 def _get_24h_price_ticker_data(
         jobs, logger, exchange_class, schema_class,
-        symbol=None, pairs=None
+        symbol=None, pairs=None, *_, **kwargs
 ):
     socketio = None
-    if TickerSettings.enable_socket_io:
+
+    if kwargs['enable_messaging']:
         socketio = SocketIO(message_queue=BROKER_URL)
 
     symbol_or_pairs = '-'.join(symbol) if symbol else 'PAIRS'
@@ -115,10 +107,10 @@ def _terminate_running_jobs(logger, jobs):
     port=s.MONGODB_PORT,
     connect=False
 )
-def update(self):
+def update(self, *_, **kwargs):
 
-    if TickerSettings.enable_socket_io:
-        log_level = _get_log_level()
+    if kwargs['enable_messaging']:
+        log_level = logging.INFO if not kwargs['log_minimal'] else logging.ERROR
         logging.getLogger('engineio').setLevel(log_level)
         logging.getLogger('socketio').setLevel(log_level)
 
@@ -153,12 +145,12 @@ def update(self):
                     for coin, quote in pairs:
                         _get_24h_price_ticker_data(
                             jobs, logger, exchange_class, schema_class,
-                            symbol=[coin, quote]
+                            symbol=[coin, quote], **kwargs
                         )
                 else:
                     _get_24h_price_ticker_data(
                         jobs, logger, exchange_class, schema_class,
-                        pairs=pairs
+                        pairs=pairs, **kwargs
                     )
         for j in jobs:
             j['job'].join(timeout=j['timeout'])
@@ -170,12 +162,12 @@ def update(self):
         _terminate_running_jobs(logger, jobs)
 
 
-def test():
+def test(*_, **kwargs):
     logging.basicConfig(
         format='%(asctime)s %(levelname)s %(message)s',
         level=logging.INFO,
     )
     logging.info('Process 1 Tick')
     logging.info('Starting...')
-    update()
+    update(**kwargs)
     logging.info('Ending...')
