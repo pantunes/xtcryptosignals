@@ -22,9 +22,11 @@ class Config(object):
 class ConfigProduction(Config):
     DEBUG = False
 
+    TEMPLATES_AUTO_RELOAD = False
+
     SERVER_API_BASE_URL = 'https://api.xtcryptosignals.com/'
 
-    PERMANENT_SESSION_LIFETIME = timedelta(minutes=30)
+    PERMANENT_SESSION_LIFETIME = timedelta(days=1)
 
     SESSION_PROTECTION = 'strong'
 
@@ -34,8 +36,8 @@ class ConfigDevelopment(Config):
 
     TEMPLATES_AUTO_RELOAD = True
 
-    PERMANENT_SESSION_LIFETIME = timedelta(days=1)
-
     SERVER_API_BASE_URL = 'http://127.0.0.1:5000/'
+
+    PERMANENT_SESSION_LIFETIME = timedelta(minutes=30)
 
     SESSION_PROTECTION = 'basic'

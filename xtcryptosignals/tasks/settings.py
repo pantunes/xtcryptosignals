@@ -6,9 +6,16 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-MONGODB_NAME = 'XTC-Dev'
-MONGODB_HOST = 'localhost'
-MONGODB_PORT = 27017
+from environs import Env
+
+
+env = Env()
+env.read_env(env('SETTINGS_APP'), recurse=False)
+
+MONGODB_NAME = env.str('MONGODB_NAME')
+MONGODB_HOST = env.str('MONGODB_HOST')
+MONGODB_PORT = env.int('MONGODB_PORT')
+
 
 TICKER_SCHEDULE = 10  # executed each X seconds
 TIMEOUT_PER_SYMBOL_REQUEST = 2.0  # in seconds

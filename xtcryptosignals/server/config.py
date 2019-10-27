@@ -21,10 +21,6 @@ class Config(object):
 
     TESTING = False
 
-    MONGODB_HOST = 'localhost'
-
-    MONGODB_PORT = 27017
-
     BROKER_URL = 'redis://localhost:6379'
 
     SESSION_TYPE = 'redis'
@@ -39,15 +35,11 @@ class Config(object):
 class ConfigProduction(Config):
     DEBUG = False
 
-    MONGODB_NAME = 'XTC-Prod'
-
     SESSION_COOKIE_SECURE = True
 
 
 class ConfigDevelopment(Config):
     DEBUG = True
-
-    MONGODB_NAME = 'XTC-Dev'
 
     SESSION_COOKIE_SECURE = False
 
