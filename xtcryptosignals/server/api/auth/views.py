@@ -58,8 +58,7 @@ class LoginPost(Resource):
             416:
                 description: Error in output validation
         """
-        auth = service.login(data=valid_data)
-        return auth.to_dict()
+        return service.login(data=valid_data)
 
 
 class LogoutPost(Resource):
@@ -101,7 +100,7 @@ class AuthGet(Resource):
             401:
                 description: Unauthorized
         """
-        return auth.to_dict()
+        return auth
 
 
 api.add_resource(LoginPost, '/login')
