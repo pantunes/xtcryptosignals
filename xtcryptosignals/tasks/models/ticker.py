@@ -14,7 +14,10 @@ from mongoengine import (
     DateTimeField,
 )
 from mongoengine.queryset.visitor import Q
-from xtcryptosignals.common.models import DocumentValidation
+from xtcryptosignals.common.models import (
+    DocumentValidation,
+    _set_timestamp,
+)
 from xtcryptosignals.tasks import settings as s
 from xtcryptosignals.tasks.models.history import History
 from xtcryptosignals.tasks.utils import convert_to_seconds
@@ -117,26 +120,29 @@ class Ticker(DocumentValidation):
                     row, price_change_prepared
                 )
 
-            if not self._exists_row_offset(model, offset=x):
-                history_object = model(
-                    symbol=self['symbol'],
-                    source=self['source'],
-                    ticker=self['ticker'],
-                    price=self['price'],
-                    number_trades_24h=self['number_trades_24h'],
-                    volume_24h=self['volume_24h'],
-                    price_change=price_change_prepared,
-                    number_trades_change=_get_abs_zero(
-                        number_trades_change),
-                    volume_change=_get_abs_zero(volume_change),
-                    price_change_chart=price_change_chart,
-                    created_on=self['created_on'],
-                )
-                history_object.save()
+            history_object = model(
+                symbol=self['symbol'],
+                source=self['source'],
+                ticker=self['ticker'],
+                price=self['price'],
+                number_trades_24h=self['number_trades_24h'],
+                volume_24h=self['volume_24h'],
+                price_change=price_change_prepared,
+                number_trades_change=_get_abs_zero(
+                    number_trades_change),
+                volume_change=_get_abs_zero(volume_change),
+                price_change_chart=price_change_chart,
+            )
 
-                history_list_dicts.append(
-                    history_object.to_dict(frequency=x)
-                )
+            if not self._exists_row_offset(model, offset=x):
+                history_object.save()
+            else:
+                _set_timestamp(history_object)
+
+            # still emit this object ticker
+            history_list_dicts.append(
+                history_object.to_dict(frequency=x)
+            )
 
         super(Ticker, self).save(*args, **kwargs)
         return history_list_dicts
