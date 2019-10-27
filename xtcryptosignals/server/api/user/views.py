@@ -36,6 +36,7 @@ class SignUpPost(Resource):
                     name: 'John Doe',
                     email: 'some@email.com',
                     password: 'S0m3_p4ssw0rd',
+                    confirm_password: "S0m3_p4ssw0rd"
                 }
               required: true
         responses:
@@ -50,8 +51,7 @@ class SignUpPost(Resource):
             409:
                 description: User account e-mail address already exists
         """
-        user = service.create_user(data=valid_data)
-        return user.to_dict(), 201
+        return service.create_user(data=valid_data), 201
 
 
 api.add_resource(SignUpPost, '/signup')
