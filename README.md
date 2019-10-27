@@ -61,6 +61,8 @@ Running tests
 
 ```bash
 python setup.py test
+# or
+pytest
 ```
 
 ### Install from PyPi
@@ -85,7 +87,7 @@ pip install xtcryptosignals
 ## Ticker
 ### Start service
 
-Development:
+#### Development:
 
 ```bash
 xt-ticker --enable-messaging
@@ -95,7 +97,7 @@ xt-ticker --test
 
 ```
 
-Production
+#### Production:
 
 ```bash
 xt-ticker --enable-messaging --log-minimal
@@ -191,13 +193,13 @@ The Ticker service is highly performant as can take advantage of multi-processin
 ### RESTFul Server API
 ### Start service
 
-Development:
+#### Development:
 
 ```bash
 xt-server
 ```
 
-Production:
+#### Production:
 
 ```bash
 DEBUG=0 xt-server
@@ -207,13 +209,13 @@ DEBUG=0 xt-server
 ## Website
 ### Start service
 
-Development:
+#### Development:
 
 ```bash
 xt-client
 ```
 
-Production:
+#### Production:
 ```bash
 # if using default settings
 DEBUG=0 SERVER_API_BASE_URL=http://127.0.0.1:5000 GA_TRACKING_ID=UA-xxxxxxxxx-x xt-client --prod
