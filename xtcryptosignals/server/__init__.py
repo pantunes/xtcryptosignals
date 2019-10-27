@@ -16,10 +16,10 @@ app = Flask(__name__)
 
 if app.config['ENV'] == "production":
     app.config.from_object("xtcryptosignals.server.config.ConfigProduction")
-    app.config.from_pyfile('settings.prod.py')
 else:
     app.config.from_object("xtcryptosignals.server.config.ConfigDevelopment")
-    app.config.from_pyfile('settings.dev.py')
+
+app.config.from_envvar('SETTINGS_APP')
 
 
 sess = Session()
