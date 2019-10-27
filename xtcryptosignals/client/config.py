@@ -11,16 +11,22 @@ from datetime import timedelta
 
 class Config(object):
     IP_ADDRESS = '0.0.0.0'
+
     PORT = 8000
 
-    DEBUG = False
     TESTING = False
 
     SECRET_KEY = None
 
 
 class ConfigProduction(Config):
+    DEBUG = False
+
     SERVER_API_BASE_URL = 'https://api.xtcryptosignals.com/'
+
+    PERMANENT_SESSION_LIFETIME = timedelta(minutes=30)
+
+    SESSION_PROTECTION = 'strong'
 
 
 class ConfigDevelopment(Config):
@@ -31,3 +37,5 @@ class ConfigDevelopment(Config):
     PERMANENT_SESSION_LIFETIME = timedelta(days=1)
 
     SERVER_API_BASE_URL = 'http://127.0.0.1:5000/'
+
+    SESSION_PROTECTION = 'basic'

@@ -16,24 +16,29 @@ from xtcryptosignals import (
 
 class Config(object):
     IP_ADDRESS = '0.0.0.0'
+
     PORT = 5000
 
-    DEBUG = False
     TESTING = False
 
     MONGODB_HOST = 'localhost'
+
     MONGODB_PORT = 27017
 
     BROKER_URL = 'redis://localhost:6379'
 
     SESSION_TYPE = 'redis'
+
     SESSION_REDIS = Redis.from_url(BROKER_URL)
 
     SECRET_KEY = None
+
     CORS_ALLOWED_ORIGINS = None
 
 
 class ConfigProduction(Config):
+    DEBUG = False
+
     MONGODB_NAME = 'XTC-Prod'
 
     SESSION_COOKIE_SECURE = True
