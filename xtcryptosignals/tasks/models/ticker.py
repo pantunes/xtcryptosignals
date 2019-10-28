@@ -39,6 +39,54 @@ def _get_price_change_chart(row, price_change):
     return x
 
 
+def _set_history(_self):
+    _self.history_list_dicts = []
+    for x in s.HISTORY_FREQUENCY:
+        model = type('History{}'.format(x), (History,), {})
+
+        row = model.objects(
+            symbol=_self['symbol'],
+            source=_self['source']
+        ).first()
+
+        number_trades_change = None
+        price_change_prepared = None
+        volume_change = None
+        price_change_chart = []
+
+        if row:
+            price_change, number_trades_change, volume_change = \
+                _self._calculate_changes(row)
+            price_change_prepared = _get_abs_zero(price_change)
+            price_change_chart = _get_price_change_chart(
+                row, price_change_prepared
+            )
+
+        history_object = model(
+            symbol=_self['symbol'],
+            source=_self['source'],
+            ticker=_self['ticker'],
+            price=_self['price'],
+            number_trades_24h=_self['number_trades_24h'],
+            volume_24h=_self['volume_24h'],
+            price_change=price_change_prepared,
+            number_trades_change=_get_abs_zero(
+                number_trades_change),
+            volume_change=_get_abs_zero(volume_change),
+            price_change_chart=price_change_chart,
+        )
+
+        if not _self._exists_row_offset(model, offset=x):
+            history_object.save()
+        else:
+            _set_timestamp(history_object)
+
+        # still emit this object ticker
+        _self.history_list_dicts.append(
+            history_object.to_dict(frequency=x)
+        )
+
+
 class Ticker(DocumentValidation):
     symbol = StringField(required=True)
     source = StringField(required=True)
@@ -53,6 +101,8 @@ class Ticker(DocumentValidation):
     # dates
     opened_on = DateTimeField()
     closed_on = DateTimeField()
+
+    _pre_save_hooks = (_set_history,)
 
     meta = {
         'collection': 'ticker',
@@ -96,55 +146,6 @@ class Ticker(DocumentValidation):
             except ZeroDivisionError:
                 volume_change = 1.0
         return price_change, number_trades_change, volume_change
-
-    def save(self, *args, **kwargs):
-        self.history_list_dicts = []
-        for x in s.HISTORY_FREQUENCY:
-            model = type('History{}'.format(x), (History,), {})
-
-            row = model.objects(
-                symbol=self['symbol'],
-                source=self['source']
-            ).first()
-
-            number_trades_change = None
-            price_change_prepared = None
-            volume_change = None
-            price_change_chart = []
-
-            if row:
-                price_change, number_trades_change, volume_change = \
-                    self._calculate_changes(row)
-                price_change_prepared = _get_abs_zero(price_change)
-                price_change_chart = _get_price_change_chart(
-                    row, price_change_prepared
-                )
-
-            history_object = model(
-                symbol=self['symbol'],
-                source=self['source'],
-                ticker=self['ticker'],
-                price=self['price'],
-                number_trades_24h=self['number_trades_24h'],
-                volume_24h=self['volume_24h'],
-                price_change=price_change_prepared,
-                number_trades_change=_get_abs_zero(
-                    number_trades_change),
-                volume_change=_get_abs_zero(volume_change),
-                price_change_chart=price_change_chart,
-            )
-
-            if not self._exists_row_offset(model, offset=x):
-                history_object.save()
-            else:
-                _set_timestamp(history_object)
-
-            # still emit this object ticker
-            self.history_list_dicts.append(
-                history_object.to_dict(frequency=x)
-            )
-
-        super(Ticker, self).save(*args, **kwargs)
 
     history_list_dicts = []
 
