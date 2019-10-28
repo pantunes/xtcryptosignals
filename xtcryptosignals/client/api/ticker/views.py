@@ -14,7 +14,7 @@ from flask import (
     Blueprint,
     current_app,
 )
-from xtcryptosignals.tasks import settings as s
+from xtcryptosignals import settings as s
 from xtcryptosignals import __version__
 from xtcryptosignals.client.utils import (
     validate_args,
