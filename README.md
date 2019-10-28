@@ -39,7 +39,7 @@
 ## Installation
 
 ### Install from source
-Clone project repository
+Clone project repository:
 ```bash
 hg clone ssh://hg@bitbucket.org/pantunes/xtcryptosignals
 cd xtcryptosignals
@@ -57,12 +57,31 @@ pip install -e .
 ```
 (Dependencies will be installed automatically from [requirements.txt](requirements.txt))
 
-Running tests
+### Path to the setting file
+The following scripts should use the env var `SETTINGS_APP=<path to configuration>` inline or 
+executing `export SETTINGS_APP=<path to configuration>` before running any of the command line
+`xt-server`, `xt-client` or `xt-ticker`.  
 
+Configuration example to run with `xt-client`:
+```.env
+SECRET_KEY = "bRdzq6ZMQ;HGB3JWVxs&WQ4>6r{"
+GA_TRACKING_ID = 'UA-12341343-2'
+```
+
+Configuration example to run with `xt-server` or `xt-ticker`:
+```.env
+SECRET_KEY = "MfYfEeom6)EyhcKcFh@+WGx8hvhP/,K67hA6"
+CORS_ALLOWED_ORIGINS = ('https://mydomain.com',)
+MONGODB_HOST = 'localhost'
+MONGODB_PORT = 27017
+MONGODB_NAME = 'MyDatabaseName'
+```
+
+Running tests:
 ```bash
-python setup.py test
+SETTINGS_APP=`pwd`/server.dev.env python setup.py test
 # or
-pytest
+SETTINGS_APP=`pwd`/server.dev.env pytest
 ```
 
 ### Install from PyPi
@@ -90,22 +109,22 @@ pip install xtcryptosignals
 #### Development:
 
 ```bash
-xt-ticker --enable-messaging
+SETTINGS_APP=`pwd`/server.dev.env xt-ticker --enable-messaging
 
 # to test 1 tick
-xt-ticker --test
+SETTINGS_APP=`pwd`/server.dev.env xt-ticker --test
 
 ```
 
 #### Production:
 
 ```bash
-xt-ticker --enable-messaging --log-minimal
+SETTINGS_APP=`pwd`/server.prod.env xt-ticker --enable-messaging --log-minimal
 ```
 
 To get a list of supported exchanges:
 ```bash
-xt-ticker --list-config exchanges
+SETTINGS_APP=`pwd`/server.prod.env xt-ticker --list-config exchanges
 ```
 ```bash
 binance
@@ -125,7 +144,7 @@ bilaxy
 ```
 (Drop [me](mailto:pjmlantunes@gmail.com) an e-mail if you want support for a new exchange or please contribute to this project creating a pull request)
 
-Command line help
+Command line help:
 ```bash
 xt-ticker --help
 ```
@@ -196,13 +215,13 @@ The Ticker service is highly performant as can take advantage of multi-processin
 #### Development:
 
 ```bash
-xt-server
+FLASK_ENV=development SETTINGS_APP=`pwd`/config/client.dev.env xt-server
 ```
 
 #### Production:
 
 ```bash
-DEBUG=0 xt-server
+FLASK_ENV=production SETTINGS_APP=`pwd`/config/client.prod.env xt-server
 ```
 
 
@@ -212,16 +231,13 @@ DEBUG=0 xt-server
 #### Development:
 
 ```bash
-xt-client
+FLASK_ENV=development SETTINGS_APP=`pwd`/client.dev.env xt-client
 ```
 
 #### Production:
 ```bash
-# if using default settings
-DEBUG=0 SERVER_API_BASE_URL=http://127.0.0.1:5000 GA_TRACKING_ID=UA-xxxxxxxxx-x xt-client --production
+FLASK_ENV=production SETTINGS_APP=`pwd`/client.prod.env xt-client --production
 ```
-`SERVER_API_BASE_URL` should contain the public address where `xt-server` was started.  
-(all environment variables are optional)
 
 ## Run all services at once
 
