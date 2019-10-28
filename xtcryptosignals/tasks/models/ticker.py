@@ -98,7 +98,7 @@ class Ticker(DocumentValidation):
         return price_change, number_trades_change, volume_change
 
     def save(self, *args, **kwargs):
-        history_list_dicts = []
+        self.history_list_dicts = []
         for x in s.HISTORY_FREQUENCY:
             model = type('History{}'.format(x), (History,), {})
 
@@ -140,9 +140,13 @@ class Ticker(DocumentValidation):
                 _set_timestamp(history_object)
 
             # still emit this object ticker
-            history_list_dicts.append(
+            self.history_list_dicts.append(
                 history_object.to_dict(frequency=x)
             )
 
         super(Ticker, self).save(*args, **kwargs)
-        return history_list_dicts
+
+    history_list_dicts = []
+
+    def get_history(self):
+        return self.history_list_dicts

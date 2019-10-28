@@ -49,9 +49,9 @@ def _process(
             ticker = (ticker,)
         for x in ticker:
             ticker_model = TickerModel(**x)
-            history_dicts = ticker_model.save()
+            ticker_model.save()
             if socketio:
-                for h in history_dicts:
+                for h in ticker_model.get_history():
                     socketio.emit(
                         'ticker', h, namespace='/{}'.format(h['frequency'])
                     )
