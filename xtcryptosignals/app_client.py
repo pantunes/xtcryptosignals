@@ -7,7 +7,6 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import click
-from xtcryptosignals.config import settings as s
 from xtcryptosignals.prod.wsgi import start
 from xtcryptosignals.client import create_app
 
@@ -19,20 +18,20 @@ app = create_app()
     context_settings=dict(help_option_names=['-h', '--help'])
 )
 @click.option(
-    '--prod',
+    '--production',
     is_flag=True,
     help="Enable production setup mode",
 )
 @click.pass_context
-def main(ctx, prod):
+def main(ctx, production):
     """
     Start web client
     """
-    port = s.PORT_CLIENT
-    host = s.IP_ADDRESS
+    port = app.config['PORT']
+    host = app.config['IP_ADDRESS']
 
-    if prod:
+    if production:
         start(handler=app, host=host, port=port)
         ctx.exit()
 
-    app.run(debug=s.DEBUG, host=host, port=port)
+    app.run(debug=app.config['DEBUG'], host=host, port=port)

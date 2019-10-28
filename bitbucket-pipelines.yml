@@ -26,4 +26,4 @@ pipelines:
         caches:
           - pip
         script:
-          - python setup.py test
+          - SETTINGS_APP=`pwd`/config/server.dev.env python setup.py test

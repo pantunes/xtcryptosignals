@@ -8,14 +8,17 @@ __email__ = "pjmlantunes@gmail.com"
 
 from datetime import datetime, timedelta
 from mongoengine import (
-    Document,
     StringField,
     DecimalField,
     IntField,
     DateTimeField,
 )
 from mongoengine.queryset.visitor import Q
-from xtcryptosignals.config import settings as s
+from xtcryptosignals.common.models import (
+    DocumentValidation,
+    _set_timestamp,
+)
+from xtcryptosignals.tasks import settings as s
 from xtcryptosignals.tasks.models.history import History
 from xtcryptosignals.tasks.utils import convert_to_seconds
 
@@ -36,7 +39,55 @@ def _get_price_change_chart(row, price_change):
     return x
 
 
-class Ticker(Document):
+def _set_history(_self):
+    _self.history_list_dicts = []
+    for x in s.HISTORY_FREQUENCY:
+        model = type('History{}'.format(x), (History,), {})
+
+        row = model.objects(
+            symbol=_self['symbol'],
+            source=_self['source']
+        ).first()
+
+        number_trades_change = None
+        price_change_prepared = None
+        volume_change = None
+        price_change_chart = []
+
+        if row:
+            price_change, number_trades_change, volume_change = \
+                _self._calculate_changes(row)
+            price_change_prepared = _get_abs_zero(price_change)
+            price_change_chart = _get_price_change_chart(
+                row, price_change_prepared
+            )
+
+        history_object = model(
+            symbol=_self['symbol'],
+            source=_self['source'],
+            ticker=_self['ticker'],
+            price=_self['price'],
+            number_trades_24h=_self['number_trades_24h'],
+            volume_24h=_self['volume_24h'],
+            price_change=price_change_prepared,
+            number_trades_change=_get_abs_zero(
+                number_trades_change),
+            volume_change=_get_abs_zero(volume_change),
+            price_change_chart=price_change_chart,
+        )
+
+        if not _self._exists_row_offset(model, offset=x):
+            history_object.save()
+        else:
+            _set_timestamp(history_object)
+
+        # still emit this object ticker
+        _self.history_list_dicts.append(
+            history_object.to_dict(frequency=x)
+        )
+
+
+class Ticker(DocumentValidation):
     symbol = StringField(required=True)
     source = StringField(required=True)
     ticker = StringField(required=True)
@@ -50,7 +101,8 @@ class Ticker(Document):
     # dates
     opened_on = DateTimeField()
     closed_on = DateTimeField()
-    created_on = DateTimeField(required=True, default=datetime.utcnow)
+
+    _pre_save_hooks = (_set_history,)
 
     meta = {
         'collection': 'ticker',
@@ -95,50 +147,7 @@ class Ticker(Document):
                 volume_change = 1.0
         return price_change, number_trades_change, volume_change
 
-    def save(self, *args, **kwargs):
-        history_list_dicts = []
-        for x in s.HISTORY_FREQUENCY:
-            model = type('History{}'.format(x), (History,), {})
+    history_list_dicts = []
 
-            row = model.objects(
-                symbol=self['symbol'],
-                source=self['source']
-            ).first()
-
-            number_trades_change = None
-            price_change_prepared = None
-            volume_change = None
-            price_change_chart = []
-
-            if row:
-                price_change, number_trades_change, volume_change = \
-                    self._calculate_changes(row)
-                price_change_prepared = _get_abs_zero(price_change)
-                price_change_chart = _get_price_change_chart(
-                    row, price_change_prepared
-                )
-
-            history_object = model(
-                symbol=self['symbol'],
-                source=self['source'],
-                ticker=self['ticker'],
-                price=self['price'],
-                number_trades_24h=self['number_trades_24h'],
-                volume_24h=self['volume_24h'],
-                price_change=price_change_prepared,
-                number_trades_change=_get_abs_zero(
-                    number_trades_change),
-                volume_change=_get_abs_zero(volume_change),
-                price_change_chart=price_change_chart,
-                created_on=self['created_on'],
-            )
-
-            if not self._exists_row_offset(model, offset=x):
-                history_object.save()
-
-            history_list_dicts.append(
-                history_object.get_object(frequency=x)
-            )
-
-        super(Ticker, self).save(*args, **kwargs)
-        return history_list_dicts
+    def get_history(self):
+        return self.history_list_dicts

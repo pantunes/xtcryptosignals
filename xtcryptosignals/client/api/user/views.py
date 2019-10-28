@@ -11,13 +11,13 @@ from flask import (
     Blueprint,
     Response,
     request,
+    current_app,
 )
 from flask_login import (
     login_required,
     login_user,
 )
 from xtcryptosignals.client.api.auth.models import Auth
-from xtcryptosignals.config import settings as s
 
 
 bp = Blueprint('user', __name__)
@@ -32,7 +32,7 @@ def me():
 @bp.route('/signup', methods=['POST'])
 def signup():
     response = requests.post(
-        url='{}signup'.format(s.SERVER_API_BASE_URL),
+        url='{}signup'.format(current_app.config['SERVER_API_BASE_URL']),
         json=request.form.to_dict()
     )
 

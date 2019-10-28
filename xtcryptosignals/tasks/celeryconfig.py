@@ -6,10 +6,10 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import xtcryptosignals.config.settings as s
+import xtcryptosignals.tasks.settings as s
 
 
-CELERY_DEFAULT_QUEUE = 'xtcryptosignals'
+CELERY_DEFAULT_QUEUE = 'XTCryptoSignals'
 
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'

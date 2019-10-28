@@ -9,13 +9,13 @@ __email__ = "pjmlantunes@gmail.com"
 from flask import Blueprint
 from flask_restful import Api, Resource
 from xtcryptosignals.server.utils import (
-    use_mongodb,
     validate_io,
     user_auth,
 )
 from xtcryptosignals.server.api.auth import service
 from xtcryptosignals.server.api.auth.schemas import (
-    AuthInputSchema, AuthOutputSchema,
+    AuthInputSchema,
+    AuthOutputSchema,
 )
 
 
@@ -24,7 +24,6 @@ api = Api(bp)
 
 
 class LoginPost(Resource):
-    @use_mongodb()
     @validate_io(schema_in=AuthInputSchema, schema_out=AuthOutputSchema)
     def post(self, valid_data):
         """
@@ -59,12 +58,10 @@ class LoginPost(Resource):
             416:
                 description: Error in output validation
         """
-        auth = service.login(data=valid_data)
-        return auth.to_dict()
+        return service.login(data=valid_data)
 
 
 class LogoutPost(Resource):
-    @use_mongodb()
     @validate_io()
     @user_auth()
     def post(self, auth):
@@ -85,7 +82,6 @@ class LogoutPost(Resource):
 
 
 class AuthGet(Resource):
-    @use_mongodb()
     @validate_io(schema_out=AuthOutputSchema)
     @user_auth()
     def get(self, auth):
@@ -104,7 +100,7 @@ class AuthGet(Resource):
             401:
                 description: Unauthorized
         """
-        return auth.to_dict()
+        return auth
 
 
 api.add_resource(LoginPost, '/login')

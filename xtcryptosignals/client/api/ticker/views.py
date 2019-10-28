@@ -12,8 +12,9 @@ from flask import (
     request,
     render_template,
     Blueprint,
+    current_app,
 )
-from xtcryptosignals.config import settings as s
+from xtcryptosignals import settings as s
 from xtcryptosignals import __version__
 from xtcryptosignals.client.utils import (
     validate_args,
@@ -36,9 +37,9 @@ _COLUMN_ATTRIBUTES = [
 @bp.context_processor
 def server_api_base_url():
     data = dict(
-        server_api_base_url=s.SERVER_API_BASE_URL,
+        server_api_base_url=current_app.config['SERVER_API_BASE_URL'],
         version=__version__,
-        ga_tracking_id=s.GA_TRACKING_ID,
+        ga_tracking_id=current_app.config['GA_TRACKING_ID'],
         frequencies=s.HISTORY_FREQUENCY,
         frequency_lower=s.TICKER_SCHEDULE,
     )

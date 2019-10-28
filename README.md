@@ -61,6 +61,8 @@ Running tests
 
 ```bash
 python setup.py test
+# or
+pytest
 ```
 
 ### Install from PyPi
@@ -85,17 +87,17 @@ pip install xtcryptosignals
 ## Ticker
 ### Start service
 
-Development:
+#### Development:
 
 ```bash
 xt-ticker --enable-messaging
 
 # to test 1 tick
-xt-ticker --testing
+xt-ticker --test
 
 ```
 
-Production
+#### Production:
 
 ```bash
 xt-ticker --enable-messaging --log-minimal
@@ -134,7 +136,7 @@ Usage: xt-ticker [OPTIONS]
   configured crypto-currencies exchanges.
 
 Options:
-  --testing                       Execute 1 iteration for all configured coins
+  --test                          Execute 1 iteration for all configured coins
                                   and/or tokens without Celery. (Useful for
                                   testing purposes)
   --list-config [exchanges|currencies]
@@ -150,7 +152,7 @@ Options:
 
 ### Setup
 
-There is already an initial setup with some crypto-currencies (coins and tokens) that can be added or/and removed in [settings_exchanges.py](xtcryptosignals/config/settings_exchanges.py).
+There is already an initial setup with some crypto-currencies (coins and tokens) that can be added or/and removed in [settings_exchanges.py](xtcryptosignals/settings_exchanges.py).
 
 ```python
 BIBOX: {
@@ -177,7 +179,7 @@ UPHOLD: {
 }
 ```
 
-Initial setup to create dynamic MongoDB collections for data segmentation categorized by Exchanges pooling frequency in [settings.py](xtcryptosignals/config/settings.py).
+Initial setup to create dynamic MongoDB collections for data segmentation categorized by Exchanges pooling frequency in [settings.py](xtcryptosignals/settings.py).
 ```python
 HISTORY_FREQUENCY = (
     '10s', '30s', '1m', '10m', '30m', '1h', '2h', '3h', '4h', '12h', '1d', '4d', 
@@ -191,13 +193,13 @@ The Ticker service is highly performant as can take advantage of multi-processin
 ### RESTFul Server API
 ### Start service
 
-Development:
+#### Development:
 
 ```bash
 xt-server
 ```
 
-Production:
+#### Production:
 
 ```bash
 DEBUG=0 xt-server
@@ -207,16 +209,16 @@ DEBUG=0 xt-server
 ## Website
 ### Start service
 
-Development:
+#### Development:
 
 ```bash
 xt-client
 ```
 
-Production:
+#### Production:
 ```bash
 # if using default settings
-DEBUG=0 SERVER_API_BASE_URL=http://127.0.0.1:5000 GA_TRACKING_ID=UA-xxxxxxxxx-x xt-client --prod
+DEBUG=0 SERVER_API_BASE_URL=http://127.0.0.1:5000 GA_TRACKING_ID=UA-xxxxxxxxx-x xt-client --production
 ```
 `SERVER_API_BASE_URL` should contain the public address where `xt-server` was started.  
 (all environment variables are optional)

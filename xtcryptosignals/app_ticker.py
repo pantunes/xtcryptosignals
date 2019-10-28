@@ -7,17 +7,15 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import click
-from xtcryptosignals.config import settings as s
-from xtcryptosignals.tasks.ticker import (
-    TickerSettings, test, logging,
-)
+from xtcryptosignals.tasks import settings as s
+from xtcryptosignals.tasks import ticker
 
 
 @click.command(
     context_settings=dict(help_option_names=['-h', '--help'])
 )
 @click.option(
-    '--testing',
+    '--test',
     is_flag=True,
     help="Process 1 iteration for all configured "
          "coins and/or tokens."
@@ -45,7 +43,7 @@ from xtcryptosignals.tasks.ticker import (
     help="Show version."
 )
 @click.pass_context
-def main(ctx, testing, list_config, enable_messaging, log_minimal, version):
+def main(ctx, test, list_config, enable_messaging, log_minimal, version):
     """
     Use this tool to collect and broadcast data from configured coins
     or/and tokens from configured crypto-currencies exchanges.
@@ -58,8 +56,13 @@ def main(ctx, testing, list_config, enable_messaging, log_minimal, version):
             click.echo('\n'.join(s.EXCHANGES))
         ctx.exit()
 
-    if testing:
-        test()
+    beat_kwargs = dict(
+        enable_messaging=enable_messaging,
+        log_minimal=log_minimal,
+    )
+
+    if test:
+        ticker.test(**beat_kwargs)
         ctx.exit()
 
     if version:
@@ -67,17 +70,18 @@ def main(ctx, testing, list_config, enable_messaging, log_minimal, version):
         click.echo('{} {}'.format(__title__, __version__))
         ctx.exit()
 
-    TickerSettings.enable_socket_io = enable_messaging
-    TickerSettings.log_minimal = log_minimal
-
     from celery import current_app
     from celery.bin import worker
 
     app = current_app._get_current_object()
-    app.config_from_object('xtcryptosignals.config.celeryconfig')
+
+    app.config_from_object('xtcryptosignals.tasks.celeryconfig')
+
+    # updates beat config dynamically
+    app.conf.beat_schedule['ticker'].update(kwargs=beat_kwargs)
 
     worker = worker.worker(app=app)
     worker.run(
         beat=True,
-        loglevel=logging.INFO,
+        loglevel=ticker.logging.INFO,
     )

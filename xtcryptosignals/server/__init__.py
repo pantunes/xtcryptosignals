@@ -6,49 +6,24 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-from redis import Redis
 from flask import Flask
 from flask_session import Session
 from flask_socketio import SocketIO
-from xtcryptosignals import (
-    __title__,
-    __version__,
-    __description__,
-)
-from xtcryptosignals.config.celeryconfig import BROKER_URL
-import xtcryptosignals.config.settings as s
+from mongoengine import connect
 
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = s.SECRET_KEY
+if app.config['ENV'] == "production":
+    app.config.from_object("xtcryptosignals.server.config.ConfigProduction")
+else:
+    app.config.from_object("xtcryptosignals.server.config.ConfigDevelopment")
 
-app.config['SWAGGER'] = {
-    "info": {
-        "title": __title__,
-        "version": __version__,
-        "description": __description__,
-    },
-    "securityDefinitions": {
-        "Bearer": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header"
-        }
-    },
-    "specs": [
-        {
-            "endpoint": 'apispec_xtcryptosignals',
-            "route": '/apispec_xtcryptosignals.json',
-        }
-    ],
-}
-
-app.config['SESSION_TYPE'] = 'redis'
-app.config['SESSION_REDIS'] = Redis(host='localhost', port=6379)
+app.config.from_envvar('SETTINGS_APP')
 
 
 sess = Session()
+
 
 socketio = SocketIO()
 
@@ -68,12 +43,18 @@ def create_app():
     for x in bps:
         app.register_blueprint(x)
 
+    connect(
+        db=app.config['MONGODB_NAME'],
+        host=app.config['MONGODB_HOST'],
+        port=app.config['MONGODB_PORT']
+    )
+
     sess.init_app(app)
 
     socketio.init_app(
         app=app,
-        message_queue=BROKER_URL,
-        cors_allowed_origins=s.CORS_ALLOWED_ORIGINS,
+        message_queue=app.config['BROKER_URL'],
+        cors_allowed_origins=app.config['CORS_ALLOWED_ORIGINS']
     )
 
     return app
