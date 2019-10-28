@@ -16,36 +16,10 @@ MONGODB_NAME = env.str('MONGODB_NAME')
 MONGODB_HOST = env.str('MONGODB_HOST')
 MONGODB_PORT = env.int('MONGODB_PORT')
 
-
-TICKER_SCHEDULE = 10  # executed each X seconds
 TIMEOUT_PER_SYMBOL_REQUEST = 2.0  # in seconds
 TIMEOUT_PER_SYMBOLS_REQUEST = 5.0  # in seconds
 SYMBOL_FLOAT_PRECISION = 8
 PRICES_CHANGE_CHART_SIZE = 6
 
-# mongodb collections created during runtime
-HISTORY_FREQUENCY = (
-    str(TICKER_SCHEDULE) + 's', '30s', '1m', '10m', '30m',
-    '1h', '4h', '12h', '1d', '4d', '1w', '4w', '12w', '24w',
-    '1y',
-)
-
-# local settings
-from xtcryptosignals.tasks.settings_local import (
-    BINANCE_API_KEY,
-    BINANCE_API_SECRET,
-)  # noqa
-
-# exchanges settings
-from xtcryptosignals.tasks.settings_exchanges import (
-    EXCHANGES, SYMBOLS_PER_EXCHANGE,
-    BINANCE, BINANCE_DEX, UPHOLD, OKEX, IDEX, SWITCHEO, HOTBIT, BIBOX, OKCOIN,
-    BITHUMB, COINBENE, DCOIN, BITMAX, BILAXY,
-)  # noqa
-
-__all__ = [
-    'BINANCE_API_KEY', 'BINANCE_API_SECRET', 'EXCHANGES',
-    'SYMBOLS_PER_EXCHANGE', 'BINANCE', 'BINANCE_DEX', 'UPHOLD', 'OKEX', 'IDEX',
-    'SWITCHEO', 'HOTBIT', 'BIBOX', 'OKCOIN', 'BITHUMB', 'COINBENE', 'DCOIN',
-    'BITMAX', 'BILAXY',
-]
+from xtcryptosignals.settings import *  # noqa
+from xtcryptosignals.tasks.settings_local import *  # noqa
