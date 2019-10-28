@@ -79,9 +79,9 @@ MONGODB_NAME = 'MyDatabaseName'
 
 Running tests:
 ```bash
-SETTINGS_APP=`pwd`/server.dev.env python setup.py test
+SETTINGS_APP=server.dev.env python setup.py test
 # or
-SETTINGS_APP=`pwd`/server.dev.env pytest
+SETTINGS_APP=server.dev.env pytest
 ```
 
 ### Install from PyPi
@@ -109,22 +109,22 @@ pip install xtcryptosignals
 #### Development:
 
 ```bash
-SETTINGS_APP=`pwd`/server.dev.env xt-ticker --enable-messaging
+SETTINGS_APP=server.dev.env xt-ticker --enable-messaging
 
 # to test 1 tick
-SETTINGS_APP=`pwd`/server.dev.env xt-ticker --test
+SETTINGS_APP=server.dev.env xt-ticker --test
 
 ```
 
 #### Production:
 
 ```bash
-SETTINGS_APP=`pwd`/server.prod.env xt-ticker --enable-messaging --log-minimal
+SETTINGS_APP=server.prod.env xt-ticker --enable-messaging --log-minimal
 ```
 
 To get a list of supported exchanges:
 ```bash
-SETTINGS_APP=`pwd`/server.prod.env xt-ticker --list-config exchanges
+SETTINGS_APP=server.prod.env xt-ticker --list-config exchanges
 ```
 ```bash
 binance
@@ -215,13 +215,13 @@ The Ticker service is highly performant as can take advantage of multi-processin
 #### Development:
 
 ```bash
-FLASK_ENV=development SETTINGS_APP=`pwd`/config/client.dev.env xt-server
+FLASK_ENV=development SETTINGS_APP=client.dev.env xt-server
 ```
 
 #### Production:
 
 ```bash
-FLASK_ENV=production SETTINGS_APP=`pwd`/config/client.prod.env xt-server
+FLASK_ENV=production SETTINGS_APP=client.prod.env xt-server
 ```
 
 
@@ -231,12 +231,12 @@ FLASK_ENV=production SETTINGS_APP=`pwd`/config/client.prod.env xt-server
 #### Development:
 
 ```bash
-FLASK_ENV=development SETTINGS_APP=`pwd`/client.dev.env xt-client
+FLASK_ENV=development SETTINGS_APP=client.dev.env xt-client
 ```
 
 #### Production:
 ```bash
-FLASK_ENV=production SETTINGS_APP=`pwd`/client.prod.env xt-client --production
+FLASK_ENV=production SETTINGS_APP=client.prod.env xt-client --production
 ```
 
 ## Run all services at once
