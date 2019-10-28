@@ -218,7 +218,7 @@ xt-client
 #### Production:
 ```bash
 # if using default settings
-DEBUG=0 SERVER_API_BASE_URL=http://127.0.0.1:5000 GA_TRACKING_ID=UA-xxxxxxxxx-x xt-client --prod
+DEBUG=0 SERVER_API_BASE_URL=http://127.0.0.1:5000 GA_TRACKING_ID=UA-xxxxxxxxx-x xt-client --production
 ```
 `SERVER_API_BASE_URL` should contain the public address where `xt-server` was started.  
 (all environment variables are optional)
