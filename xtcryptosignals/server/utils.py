@@ -8,19 +8,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 from functools import wraps
 from flask import request
-from mongoengine import connect
-from xtcryptosignals.config import settings as s
 from xtcryptosignals.server.api.auth import service
-
-
-def use_mongodb(**config_params):
-    def decorator(f):
-        @wraps(f)
-        def wrapper(*args, **kwargs):
-            connect(s.MONGODB_NAME, **config_params)
-            return f(*args, **kwargs)
-        return wrapper
-    return decorator
 
 
 def user_auth():

@@ -17,3 +17,4 @@ gunicorn
 mongodb-migrations
 requests
 bcrypt
+environs

@@ -8,7 +8,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 from flask import Blueprint
 from flask_restful import Api, Resource
-from xtcryptosignals.server.utils import use_mongodb, validate_io
+from xtcryptosignals.server.utils import validate_io
 from xtcryptosignals.server.api.user import service
 from xtcryptosignals.server.api.user.schemas import (
     UserCreateInputSchema,
@@ -21,7 +21,6 @@ api = Api(bp)
 
 
 class SignUpPost(Resource):
-    @use_mongodb()
     @validate_io(schema_in=UserCreateInputSchema, schema_out=UserOutputSchema)
     def post(self, valid_data):
         """
@@ -37,6 +36,7 @@ class SignUpPost(Resource):
                     name: 'John Doe',
                     email: 'some@email.com',
                     password: 'S0m3_p4ssw0rd',
+                    confirm_password: "S0m3_p4ssw0rd"
                 }
               required: true
         responses:
@@ -51,8 +51,7 @@ class SignUpPost(Resource):
             409:
                 description: User account e-mail address already exists
         """
-        user = service.create_user(data=valid_data)
-        return user.to_dict(), 201
+        return service.create_user(data=valid_data), 201
 
 
 api.add_resource(SignUpPost, '/signup')

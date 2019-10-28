@@ -7,17 +7,19 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import requests
-from flask import Blueprint, request
+from flask import (
+    Blueprint,
+    request,
+)
 from flask_login import (
     login_required,
     login_user,
     logout_user,
     current_user,
 )
-from flask import session
+from flask import session, current_app
 from xtcryptosignals.client import login_manager
 from xtcryptosignals.client.api.auth.models import Auth
-from xtcryptosignals.config import settings as s
 
 
 bp = Blueprint('auth', __name__)
@@ -26,7 +28,7 @@ bp = Blueprint('auth', __name__)
 @login_manager.user_loader
 def load_user(token):
     response = requests.get(
-        url='{}auth'.format(s.SERVER_API_BASE_URL),
+        url='{}auth'.format(current_app.config['SERVER_API_BASE_URL']),
         headers=dict(Authorization=token)
     )
 
@@ -40,7 +42,7 @@ def load_user(token):
 @bp.route('/login', methods=['POST'])
 def login():
     response = requests.post(
-        url='{}login'.format(s.SERVER_API_BASE_URL),
+        url='{}login'.format(current_app.config['SERVER_API_BASE_URL']),
         json=request.form.to_dict()
     )
 
@@ -56,7 +58,7 @@ def login():
 @login_required
 def logout():
     response = requests.post(
-        url='{}logout'.format(s.SERVER_API_BASE_URL),
+        url='{}logout'.format(current_app.config['SERVER_API_BASE_URL']),
         headers=dict(Authorization=current_user.id)
     )
 

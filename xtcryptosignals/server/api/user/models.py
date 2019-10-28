@@ -12,7 +12,7 @@ from mongoengine import (
     DictField,
     EmailField,
 )
-from xtcryptosignals.server.api.common.models import DocumentValidation
+from xtcryptosignals.common.models import DocumentValidation
 
 
 class User(DocumentValidation):
