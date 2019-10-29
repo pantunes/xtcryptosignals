@@ -57,18 +57,20 @@ pip install -e .
 ```
 (Dependencies will be installed automatically from [requirements.txt](requirements.txt))
 
-### Path to the setting file
-The following scripts should use the env var `SETTINGS_APP=<path to configuration>` inline or 
+### Path to the settings file
+Before running `xt-server`, `xt-client`, `xt-ticker` and tests the env var `SETTINGS_APP`
+should be set to the path of its settings file.  
+This can be achieved inline `SETTINGS_APP=<path to configuration>` followed by the app cli or 
 executing `export SETTINGS_APP=<path to configuration>` before running any of the command line
-`xt-server`, `xt-client` or `xt-ticker`.  
+.  
 
-Configuration example to run with `xt-client`:
+Settings file example to run with `xt-client`:
 ```.env
 SECRET_KEY = "bRdzq6ZMQ;HGB3JWVxs&WQ4>6r{"
 GA_TRACKING_ID = 'UA-12341343-2'
 ```
 
-Configuration example to run with `xt-server` or `xt-ticker`:
+Settings file example to run with `xt-server` or `xt-ticker`:
 ```.env
 SECRET_KEY = "MfYfEeom6)EyhcKcFh@+WGx8hvhP/,K67hA6"
 CORS_ALLOWED_ORIGINS = ('https://mydomain.com',)
@@ -77,7 +79,7 @@ MONGODB_PORT = 27017
 MONGODB_NAME = 'MyDatabaseName'
 ```
 
-Running tests:
+Run tests:
 ```bash
 SETTINGS_APP=server.dev.env python setup.py test
 # or
