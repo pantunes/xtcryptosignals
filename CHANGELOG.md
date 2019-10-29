@@ -2,7 +2,7 @@
 All changes will be registered here per release.
 
 ## [0.1.9] - Current date
-Performed a code refactoring as the Project is getting more extensive.  
+Big code refactoring.  
 Added User Sessions.  
 Added Blueprints.  
 Added Marshmallows API UI.  
