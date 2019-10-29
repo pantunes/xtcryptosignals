@@ -66,13 +66,13 @@ executing `export SETTINGS_APP=<path to configuration>` before running any of th
 
 Example of `xt-client` settings file [client.dev.env](config/client.dev.env):
 ```bash
-SECRET_KEY="bRdzq6ZMQ;HGB3JWVxs&WQ4>6r{"
+SECRET_KEY='bRdzq6ZMQ;HGB3JWVxs&WQ4>6r{'
 GA_TRACKING_ID='UA-12341343-2'
 ```
 
 Example of `xt-server` or `xt-ticker` settings file [server.dev.env](config/server.dev.env):
 ```bash
-SECRET_KEY="MfYfEeom6)EyhcKcFh@+WGx8hvhP/,K67hA6"
+SECRET_KEY='MfYfEeom6)EyhcKcFh@+WGx8hvhP/,K67hA6'
 CORS_ALLOWED_ORIGINS=('https://mydomain.com',)
 MONGODB_HOST='localhost'
 MONGODB_PORT=27017
