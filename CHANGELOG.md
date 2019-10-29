@@ -5,7 +5,7 @@ All changes will be registered here per release.
 Big code refactoring.  
 Added User Sessions.  
 Added Blueprints.  
-Added Marshmallows API UI.  
+Added Python Marshmallow and Swagger API UI.  
 Code fixes and improvements.  
 
 ## [0.1.8] - 2019-10-16
