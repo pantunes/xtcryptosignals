@@ -65,13 +65,13 @@ executing `export SETTINGS_APP=<path to configuration>` before running any of th
 .  
 
 Settings file example to run with `xt-client`:
-```
+```bash
 SECRET_KEY="bRdzq6ZMQ;HGB3JWVxs&WQ4>6r{"
 GA_TRACKING_ID='UA-12341343-2'
 ```
 
 Settings file example to run with `xt-server` or `xt-ticker`:
-```.env
+```bash
 SECRET_KEY="MfYfEeom6)EyhcKcFh@+WGx8hvhP/,K67hA6"
 CORS_ALLOWED_ORIGINS=('https://mydomain.com',)
 MONGODB_HOST='localhost'
