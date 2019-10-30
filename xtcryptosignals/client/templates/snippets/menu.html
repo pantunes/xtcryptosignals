@@ -52,9 +52,9 @@
         </ul>
       </div>
     </li>
-{% set spaces = '&nbsp;'|safe * 10 %}
+{% set spaces = '&nbsp;'|safe * 7 %}
     <li class="navbar-item">
-      <a class="navbar-link" href="javascript:;" data-popover="#myAccountNavPopover" id="menu_login">{{ 'My Account' if current_user.is_authenticated else 'Account' }}</a>
+      <a class="navbar-link" href="javascript:;" data-popover="#myAccountNavPopover" id="menu_login">{{ 'My Area' if current_user.is_authenticated else 'Account' }}</a>
       <div id="myAccountNavPopover" class="popover">
         <ul class="popover-list">
           <li class="popover-item">

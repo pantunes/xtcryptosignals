@@ -15,7 +15,7 @@
               $.post('/login', $('#form_login').serialize())
                 .done(function(response) {
                     $.notify('Welcome!', 'success');
-                    $('#menu_login').html('My Account');
+                    $('#menu_login').html('My Area');
                     $('#menu_login_link').css('display', 'inline');
                     $.get('/info', function(data) {
                         $('#modal_info').html(data).modal();
