@@ -15,10 +15,11 @@
               $.post('/login', $('#form_login').serialize())
                 .done(function(response) {
                     $.notify('Welcome!', 'success');
-                    $.modal.close();
                     $('#menu_login').html('My Account');
                     $('#menu_login_link').css('display', 'inline');
-                    $('#info').modal();
+                    $.get('/info', function(data) {
+                        $('#modal_info').html(data).modal();
+                    });
                 })
                 .fail(function(xhr, status, error) {
                     $.notify(JSON.parse(xhr.responseText).error);
