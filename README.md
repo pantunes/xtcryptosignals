@@ -220,7 +220,7 @@ The Ticker service is highly performant as can take advantage of multi-processin
 FLASK_ENV=development SETTINGS_APP=client.dev.env xt-server
 ```
 
-##### Swagger implementation with API endpoints:  
+Swagger implementation with API endpoints:  
 ![screen-shot](xtcryptosignals/client/static/imgs/swagger.png)
 
 #### Production:
