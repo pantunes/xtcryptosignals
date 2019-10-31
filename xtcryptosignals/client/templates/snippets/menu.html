@@ -58,10 +58,10 @@
       <div id="myAccountNavPopover" class="popover">
         <ul class="popover-list">
           <li class="popover-item">
-            <a class="popover-link" href="javascript:openModal('#login');">{{spaces}}Login{{spaces}}</a>
+            <a class="popover-link" href="javascript:openModal('#modal_login');">{{spaces}}Login{{spaces}}</a>
           </li>
           <li class="popover-item">
-            <a class="popover-link" href="javascript:openModal('#signup');">{{spaces}}Signup{{spaces}}</a>
+            <a class="popover-link" href="javascript:openModal('#modal_signup');">{{spaces}}Signup{{spaces}}</a>
           </li>
           <li id="menu_login_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
             <a class="popover-link" href="javascript:;" onClick="(
