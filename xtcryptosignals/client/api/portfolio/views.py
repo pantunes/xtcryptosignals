@@ -15,17 +15,23 @@ from flask_login import (
     login_required,
 )
 from xtcryptosignals import __version__
+from xtcryptosignals.client.utils import (
+    get_pairs,
+    get_tokens,
+)
 
 
 bp = Blueprint('portfolio', __name__)
 
 
 @bp.context_processor
-def server_api_base_url():
+def before_request():
     return dict(
         server_api_base_url=current_app.config['SERVER_API_BASE_URL'],
         version=__version__,
         ga_tracking_id=current_app.config['GA_TRACKING_ID'],
+        pairs=get_pairs(),
+        tokens=get_tokens(),
     )
 
 
