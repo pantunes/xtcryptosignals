@@ -260,7 +260,7 @@ Options:
 
 ## Screenshots
 
-Open the browser with the URL http://127.0.0.1:8000
+Open the browser with the URL `http://127.0.0.1:8000`:
 
 **Home page** | **Ticker 10 seconds**
 :-------------------------:|:-------------------------:
