@@ -63,6 +63,9 @@
           <li class="popover-item">
             <a class="popover-link" href="javascript:open_modal('#modal_signup');">{{spaces}}Signup{{spaces}}</a>
           </li>
+          <li id="menu_portfolio_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
+            <a class="popover-link" href="/portfolio">Portfolio</a>
+          </li>
           <li id="menu_logout_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
             <a class="popover-link" href="javascript:;" onClick="(
               function() {
