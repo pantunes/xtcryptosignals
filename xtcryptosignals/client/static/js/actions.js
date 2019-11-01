@@ -1,9 +1,14 @@
+const menu_options = ['#menu_portfolio_link', '#menu_logout_link'];
+
 function login() {
     $.post('/login', $('#form_login').serialize())
     .done(function(response) {
         $.notify('Welcome!', 'success');
         $('#menu_login').html('My Area');
-        $('#menu_logout_link').css('display', 'inline');
+        let x;
+        for (x of menu_options) {
+            $(x).css('display', 'inline');
+        }
         $.get('/info', function(data) {
             $('#modal_info').html(data).modal();
         });
@@ -19,7 +24,10 @@ function logout() {
         $.notify('You are logged out!', 'success');
         $.modal.close();
         $('#menu_login').html('Account');
-        $('#menu_logout_link').css('display', 'none');
+        let x;
+        for (x of menu_options) {
+            $(x).css('display', 'none');
+        }
     })
     .fail(function(xhr, status, error) {
         $.notify(JSON.parse(xhr.responseText).error);

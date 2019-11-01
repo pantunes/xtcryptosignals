@@ -36,6 +36,7 @@ def create_app():
     from xtcryptosignals.client.api.ticker.views import bp as bp_ticker
     from xtcryptosignals.client.api.contact.views import bp as bp_contact
     from xtcryptosignals.client.api.user.views import bp as bp_user
+    from xtcryptosignals.client.api.portfolio.views import bp as bp_portfolio
 
     bps = (
         bp_auth,
@@ -43,6 +44,7 @@ def create_app():
         bp_ticker,
         bp_contact,
         bp_common,
+        bp_portfolio,
     )
 
     for x in bps:

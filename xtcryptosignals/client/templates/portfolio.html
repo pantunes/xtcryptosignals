@@ -1,0 +1,15 @@
+{% extends 'ticker.html' %}
+
+{% block title %}Portfolio{% endblock %}
+
+{% block include_scripts_top %}{% endblock %}
+
+{% block body %}
+
+{% with url='ticker_pair', params=dict(pair=pair) %}
+{% include 'snippets/menu.html' %}
+{% endwith %}
+
+
+
+{% endblock %}
