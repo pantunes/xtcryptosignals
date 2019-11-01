@@ -6,11 +6,8 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import random
 from copy import deepcopy
 from flask import (
-    request,
-    render_template,
     Blueprint,
     current_app,
 )
@@ -35,37 +32,15 @@ _COLUMN_ATTRIBUTES = [
 
 
 @bp.context_processor
-def server_api_base_url():
-    data = dict(
+def before_request():
+    return dict(
         server_api_base_url=current_app.config['SERVER_API_BASE_URL'],
         version=__version__,
         ga_tracking_id=current_app.config['GA_TRACKING_ID'],
         frequencies=s.HISTORY_FREQUENCY,
         frequency_lower=s.TICKER_SCHEDULE,
-    )
-    if request.path != '/':
-        data.update(
-            pairs=get_pairs(),
-            tokens=get_tokens(),
-        )
-    return data
-
-
-@bp.route('/')
-def index():
-    symbols_per_exchange = []
-    for x in s.SYMBOLS_PER_EXCHANGE:
-        for exchange, item in x.items():
-            if not item['pairs']:
-                continue
-            random_list = [x[0]+x[1] for x in item['pairs']]
-            random.shuffle(random_list)
-            symbols_per_exchange.append(
-                {exchange: random_list[:3]}
-            )
-    return render_template(
-        template_name_or_list='index.html',
-        symbols_per_exchange=symbols_per_exchange,
+        pairs=get_pairs(),
+        tokens=get_tokens(),
     )
 
 
