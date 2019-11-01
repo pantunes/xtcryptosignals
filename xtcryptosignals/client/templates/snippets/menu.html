@@ -58,27 +58,19 @@
       <div id="myAccountNavPopover" class="popover">
         <ul class="popover-list">
           <li class="popover-item">
-            <a class="popover-link" href="javascript:openModal('#modal_login');">{{spaces}}Login{{spaces}}</a>
+            <a class="popover-link" href="javascript:open_modal('#modal_login');">{{spaces}}Login{{spaces}}</a>
           </li>
           <li class="popover-item">
-            <a class="popover-link" href="javascript:openModal('#modal_signup');">{{spaces}}Signup{{spaces}}</a>
+            <a class="popover-link" href="javascript:open_modal('#modal_signup');">{{spaces}}Signup{{spaces}}</a>
           </li>
-          <li id="menu_login_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
+          <li id="menu_logout_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
             <a class="popover-link" href="javascript:;" onClick="(
               function() {
-                  $.get('/logout')
-                    .done(function(response) {
-                        $.notify('You are logged out!', 'success');
-                        $.modal.close();
-                        $('#menu_login').html('Account');
-                        $('#menu_login_link').css('display', 'none');
-                    })
-                    .fail(function(xhr, status, error) {
-
-                        $.notify(JSON.parse(xhr.responseText).error);
-                    });
-                  return false;
+                  logout(); return false;
               })(); return false;">Logout</a>
+          </li>
+          <li class="popover-item">
+            <a class="popover-link" href="javascript:open_modal('#modal_contact');">{{spaces}}Contact{{spaces}}</a>
           </li>
         </ul>
       </div>

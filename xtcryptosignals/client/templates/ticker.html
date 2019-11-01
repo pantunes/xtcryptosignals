@@ -5,15 +5,14 @@
 {% block include_scripts_top %}
 <script src="//code.highcharts.com/highcharts.js"></script>
 <script src="/static/js/site.js"></script>
+<script src="/static/js/modals.js"></script>
+<script src="/static/js/actions.js"></script>
 <script src="/static/js/sparkline.js"></script>
-
 <script type="text/javascript">
-    function openModal(x) {
-        $(x).modal();
-        location.hash = x.replace('modal_', '');
-    }
+  $(document).ready(function() {
+      setup_modals();
+  });
 </script>
-
 <script type="text/javascript">
     let timeleft = 1;
     setInterval(function() {

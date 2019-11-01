@@ -28,15 +28,17 @@ bp = Blueprint('user', __name__)
 @login_required
 def info():
     return Response('''<h5>Hey {name}! Welcome to XTCryptoSignals!</h5>
-    This is an Open-source software platform that is in constant development.
+    This is an Open-source software platform that is in continuous development.
     <br/><br/>
-    For now you've been already able to create your user account but there are 
-    no currently user features available.<br/><br/>
-    Those are being developed and tested and once they are stable they will be 
-    released.<br/><br/>
-    Return back to check it out or stay tuned for the next releases 
-    <a href="https://bitbucket.org/pantunes/xtcryptosignals">here</a>.'''.
-                    format(**current_user.user))
+    In case you are curious about further feature releases have a look 
+    <a href="https://bitbucket.org/pantunes/xtcryptosignals">here</a>.
+    <br/><br/>
+    We hope you like this platform experience and please drop us some 
+    <a href="javascript:open_modal('#modal_contact');">lines</a> in case 
+    of any question.
+    <br/><br/>
+    The XTCryptoSignals Team
+    '''.format(**current_user.user))
 
 
 @bp.route('/signup', methods=['POST'])

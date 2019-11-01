@@ -17,22 +17,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js" type="text/javascript"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            if (window.location.hash === '#contact') {
-                $('#modal_contact').modal();
-            }
-            else if (window.location.hash === '#login') {
-                $('#modal_login').modal();
-            }
-            else if (window.location.hash === '#signup') {
-                $('#modal_signup').modal();
-            }
-            $('#modal_contact, #modal_login, #modal_signup').on($.modal.AFTER_CLOSE, function(event, modal) {
-                location.hash = '';
-            });
-        });
-    </script>
     <!-- jQuery Modal -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <!-- /jQuery Modal -->

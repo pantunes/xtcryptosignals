@@ -12,19 +12,7 @@
       </div>
       <input class="button-primary" type="button" value="Login" onClick="(
           function() {
-              $.post('/login', $('#form_login').serialize())
-                .done(function(response) {
-                    $.notify('Welcome!', 'success');
-                    $('#menu_login').html('My Area');
-                    $('#menu_login_link').css('display', 'inline');
-                    $.get('/info', function(data) {
-                        $('#modal_info').html(data).modal();
-                    });
-                })
-                .fail(function(xhr, status, error) {
-                    $.notify(JSON.parse(xhr.responseText).error);
-                });
-              return false;
+            login(); return false;
         })(); return false;">
     </form>
 </div>
