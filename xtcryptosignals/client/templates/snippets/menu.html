@@ -39,19 +39,6 @@
         </ul>
       </div>
     </li>
-    <li class="navbar-item">
-      <a class="navbar-link" href="javascript:;" data-popover="#projectNavPopover">Project</a>
-      <div id="projectNavPopover" class="popover">
-        <ul class="popover-list">
-          <li class="popover-item">
-            <a class="popover-link" href="https://bitbucket.org/pantunes/xtcryptosignals">On Bitbucket</a>
-          </li>
-          <li class="popover-item">
-            <a class="popover-link" href="https://pypi.org/project/XTCryptoSignals/">On Pypi</a>
-          </li>
-        </ul>
-      </div>
-    </li>
 {% set spaces = '&nbsp;'|safe * 7 %}
     <li class="navbar-item">
       <a class="navbar-link" href="javascript:;" data-popover="#myAccountNavPopover" id="menu_login">{{ 'My Area' if current_user.is_authenticated else 'Account' }}</a>
@@ -64,7 +51,7 @@
             <a class="popover-link" href="javascript:open_modal('#modal_signup');">{{spaces}}Signup{{spaces}}</a>
           </li>
           <li id="menu_portfolio_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
-            <a class="popover-link" href="{{url_for('portfolio.portfolio', frequency=frequency)}}">Portfolio</a>
+            <a class="popover-link" href="{{url_for('portfolio.index', frequency=frequency)}}">Portfolio</a>
           </li>
           <li id="menu_logout_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
             <a class="popover-link" href="javascript:;" onClick="(
@@ -76,9 +63,15 @@
       </div>
     </li>
     <li class="navbar-item">
-      <a class="navbar-link" href="javascript:;" data-popover="#moreNavPopover">More</a>
+      <a class="navbar-link" href="javascript:;" data-popover="#moreNavPopover">About</a>
       <div id="moreNavPopover" class="popover">
         <ul class="popover-list">
+          <li class="popover-item">
+            <a class="popover-link" href="https://bitbucket.org/pantunes/xtcryptosignals">On Bitbucket</a>
+          </li>
+          <li class="popover-item">
+            <a class="popover-link" href="https://pypi.org/project/XTCryptoSignals">On Pypi</a>
+          </li>
           <li class="popover-item">
             <a class="popover-link" href="javascript:open_modal('#modal_contact');">Contact</a>
           </li>

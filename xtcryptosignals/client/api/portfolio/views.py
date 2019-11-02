@@ -14,6 +14,7 @@ from flask import (
 from flask_login import (
     login_required,
 )
+from xtcryptosignals import settings as s
 from xtcryptosignals import __version__
 from xtcryptosignals.client.utils import (
     get_pairs,
@@ -30,6 +31,7 @@ def before_request():
         server_api_base_url=current_app.config['SERVER_API_BASE_URL'],
         version=__version__,
         ga_tracking_id=current_app.config['GA_TRACKING_ID'],
+        frequencies=s.HISTORY_FREQUENCY,
         pairs=get_pairs(),
         tokens=get_tokens(),
     )
@@ -37,7 +39,7 @@ def before_request():
 
 @bp.route('/portfolio/<frequency>', methods=['GET'])
 @login_required
-def portfolio(frequency):
+def index(frequency):
     return render_template(
         template_name_or_list='portfolio.html',
         frequency=frequency,

@@ -26,7 +26,6 @@ def before_request():
         version=__version__,
         ga_tracking_id=current_app.config['GA_TRACKING_ID'],
         frequencies=s.HISTORY_FREQUENCY,
-        frequency_lower=s.TICKER_SCHEDULE,
     )
 
 

@@ -54,7 +54,7 @@ def create_app():
 
     login_manager.init_app(app)
 
-    login_manager.login_view = "ticker.index"
+    login_manager.login_view = "home.index"
     login_manager.session_protection = app.config['SESSION_PROTECTION']
 
     return app
