@@ -35,9 +35,10 @@ def before_request():
     )
 
 
-@bp.route('/portfolio', methods=['GET'])
+@bp.route('/portfolio/<frequency>', methods=['GET'])
 @login_required
-def info():
+def home(frequency):
     return render_template(
         template_name_or_list='portfolio.html',
+        frequency=frequency,
     )
