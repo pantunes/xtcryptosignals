@@ -8,9 +8,10 @@ __email__ = "pjmlantunes@gmail.com"
 
 from flask import Blueprint
 from flask import render_template
+from xtcryptosignals import settings as s
 
 
-bp = Blueprint('common', __name__)
+bp = Blueprint('errors', __name__)
 
 
 @bp.app_errorhandler(404)
@@ -19,3 +20,12 @@ def page_not_found(_):
         template_name_or_list='error.html',
         error='The URL is incorrect'
     ), 404
+
+
+@bp.route('/errors/logged-out')
+def logged_out():
+    return render_template(
+        template_name_or_list='error.html',
+        error='You have to login with your account to access this page.',
+        frequency=s.HISTORY_FREQUENCY[0],
+    ), 401
