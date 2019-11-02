@@ -47,7 +47,7 @@ def before_request():
 @validate_args()
 def ticker(frequency):
     return dict(
-        template_name_or_list='ticker.html',
+        template_name_or_list='ticker/ticker.html',
         symbols_per_exchange=s.SYMBOLS_PER_EXCHANGE,
         attributes=_COLUMN_ATTRIBUTES,
         frequency=frequency,
@@ -56,7 +56,7 @@ def ticker(frequency):
 
 @bp.route('/ticker/<pair>/<frequency>')
 @validate_args()
-def ticker_pair(pair, frequency):
+def pair_frequency(pair, frequency):
     x = deepcopy(s.SYMBOLS_PER_EXCHANGE)
     pair_not_found = True
     for idx, i in enumerate(s.SYMBOLS_PER_EXCHANGE):
@@ -70,7 +70,7 @@ def ticker_pair(pair, frequency):
     if pair_not_found:
         raise ValueError('Pair not found.')
     return dict(
-        template_name_or_list='ticker_pair.html',
+        template_name_or_list='ticker/pair_frequency.html',
         symbols_per_exchange=x,
         attributes=_COLUMN_ATTRIBUTES,
         frequency=frequency,
@@ -80,7 +80,7 @@ def ticker_pair(pair, frequency):
 
 @bp.route('/ticker/source/<token>/<frequency>')
 @validate_args()
-def ticker_token(token, frequency):
+def token_frequency(token, frequency):
     x = deepcopy(s.SYMBOLS_PER_EXCHANGE)
     token_not_found = True
     _token = token.upper()
@@ -94,7 +94,7 @@ def ticker_token(token, frequency):
     if token_not_found:
         raise ValueError('Token not found.')
     return dict(
-        template_name_or_list='ticker_token.html',
+        template_name_or_list='ticker/token_frequency.html',
         symbols_per_exchange=x,
         attributes=_COLUMN_ATTRIBUTES,
         frequency=frequency,

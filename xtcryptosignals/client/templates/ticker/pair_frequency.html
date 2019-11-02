@@ -1,19 +1,18 @@
-{% extends 'ticker.html' %}
+{% extends 'ticker/ticker.html' %}
 
 {% block title %}{{pair}} - {{frequency}}{% endblock %}
 
 {% block body %}
 
-{% with url='ticker_token', params=dict(token=token) %}
+{% with url='ticker.pair_frequency', params=dict(pair=pair) %}
 {% include 'snippets/menu.html' %}
 {% endwith %}
 
 <br/>
 <table class="u-max-full-width">
-    <caption><h3>{{token}} - {{frequency}}</h3></caption>
+    <caption><h3>{{pair}} - {{frequency}}</h3></caption>
     <thead>
         <tr>
-            <th>Pair</th>
             <th>Exchange</th>
             {% for att in attributes %}
             <th>{{att | replace(" On",  " On UTC") }}</th>
@@ -26,9 +25,6 @@
     {% if d['pairs']%}
         {% for c, r in d['pairs'] %}
         <tr>
-            <td style="width: 100px;">
-                <a href="/ticker/{{c}}{{r}}/{{frequency}}">{{c}}-{{r}}</a>
-            </td>
             <td style="width: 100px;">
                 <a href="/ticker/{{frequency}}#{{exchange.upper()}}">{{exchange.replace('_', ' ').upper()}}</a>
             </td>
@@ -49,13 +45,4 @@
 {% endfor %}
     </tbody>
 </table>
-{% endblock %}
-
-
-{% block include_extra_scripts_bottom %}
-<script type="text/javascript">
-    $(document).ready(function() {
-        $(".container").css("maxWidth", "1280px" );
-    });
-</script>
 {% endblock %}

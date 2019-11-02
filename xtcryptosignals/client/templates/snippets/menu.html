@@ -9,7 +9,7 @@
         <ul class="popover-list">
 {% for f in frequencies %}
           <li class="popover-item">
-            <a class="popover-link" href="{{url_for('ticker.'+url, frequency=f, **params)}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{f}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a class="popover-link" href="{{url_for(url, frequency=f, **params)}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{f}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
           </li>
 {% endfor %}
         </ul>
@@ -21,7 +21,7 @@
         <ul class="popover-list">
 {% for t in tokens %}
           <li class="popover-item">
-            <a class="popover-link" href="{{url_for('ticker.ticker_token', frequency=frequency, token=t)}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{t}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a class="popover-link" href="{{url_for('ticker.token_frequency', frequency=frequency, token=t)}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{t}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
           </li>
 {% endfor %}
         </ul>
@@ -33,7 +33,7 @@
         <ul class="popover-list">
 {% for p in pairs %}
           <li class="popover-item">
-            <a class="popover-link" href="{{url_for('ticker.ticker_pair', frequency=frequency, pair=p) if p != 'ALL' else url_for('ticker.ticker', frequency=frequency)}}">{{p}}</a>
+            <a class="popover-link" href="{{url_for('ticker.pair_frequency', frequency=frequency, pair=p) if p != 'ALL' else url_for('ticker.ticker', frequency=frequency)}}">{{p}}</a>
           </li>
 {% endfor %}
         </ul>

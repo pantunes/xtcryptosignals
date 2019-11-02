@@ -1,4 +1,4 @@
-{% extends 'ticker.html' %}
+{% extends 'ticker/ticker.html' %}
 
 {% block title %}Portfolio{% endblock %}
 
@@ -6,7 +6,7 @@
 
 {% block body %}
 
-{% with url='ticker_pair', params=dict(pair=pair) %}
+{% with url='ticker.ticker', params=dict() %}
 {% include 'snippets/menu.html' %}
 {% endwith %}
 
