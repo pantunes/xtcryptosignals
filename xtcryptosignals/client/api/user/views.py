@@ -18,6 +18,7 @@ from flask_login import (
     login_user,
     current_user,
 )
+from xtcryptosignals import settings as s
 from xtcryptosignals.client.api.auth.models import Auth
 
 
@@ -30,6 +31,10 @@ def info():
     return Response('''<h5>Hey {name}! Welcome to XTCryptoSignals!</h5>
     This is an Open-source software platform that is in continuous development.
     <br/><br/>
+    For now you can access your <a href="/portfolio/{frequency}">portfolio</a> 
+    page and manage your assets.
+    <br/>
+    <br/>
     In case you are curious about further feature releases have a look 
     <a href="https://bitbucket.org/pantunes/xtcryptosignals">here</a>.
     <br/><br/>
@@ -38,7 +43,7 @@ def info():
     of any question.
     <br/><br/>
     The XTCryptoSignals Team
-    '''.format(**current_user.user))
+    '''.format(frequency=s.HISTORY_FREQUENCY[0], **current_user.user))
 
 
 @bp.route('/signup', methods=['POST'])
