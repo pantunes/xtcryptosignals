@@ -6,8 +6,8 @@
 <div class="container">
     <section class="header">
         <img class="value-img" src="/static/imgs/not-found.png" />
-        <h5 class="title">Page is invalid - <small>{{error}}</small></h5>
-        <h6 class="title"><small>Press <a href="{{url_for('ticker.ticker', frequency=frequency)}}#login">here</a> to login in the platform.</small></h6>
+        <h5 class="title">Page is invalid - {{error}}</h5>
+        <h5 class="title"><small>Press <a href="{{url_for('ticker.ticker', frequency=frequency)}}#login">here</a> to login in the platform.</small></h5>
     </section>
 </div>
 {% endblock %}
