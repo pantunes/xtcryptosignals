@@ -8,7 +8,7 @@
 .navbar-right-item {
   position: relative;
   float: right;
-  margin-right: 0px;
+  margin-right: 0;
   margin-bottom: 0;
 }
 .navbar-countdown {
@@ -20,6 +20,7 @@
   line-height: 6.5rem;
   background-color: #FFFF00;
   color: #222;
+  padding: 2px;
 }
 .popover {
   left: -35%;
@@ -35,4 +36,7 @@
 .modal_error {
   font-size: 85%;
   color: red;
+}
+.row-tx-out {
+  background-color: #fff8f8;
 }

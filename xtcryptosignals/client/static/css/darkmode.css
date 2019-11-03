@@ -50,3 +50,7 @@
   color: #6c6c6c;
   background: #212224;
 }
+
+.darkmode--activated .row-tx-out {
+  background: #212224;
+}

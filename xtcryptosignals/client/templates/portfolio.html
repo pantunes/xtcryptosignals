@@ -12,6 +12,11 @@
 <div class="row">
     <div class="seven columns">
       <h5>My Transactions</h5>
+      <input class="button-primary" type="button" value="Add" onClick="(
+          function() {
+              alert('Add Tx!');
+              return false;
+        })(); return false;">
         <table class="u-full-width">
           <thead>
             <tr>
@@ -20,7 +25,6 @@
               <th>Paid</th>
               <th>Price per Unit</th>
               <th>Date</th>
-              <th>Type</th>
             </tr>
           </thead>
           <tbody>
@@ -30,7 +34,6 @@
               <td style="text-align: right;">10.84</td>
               <td style="text-align: right;">10840</td>
               <td >2019-10-29</td>
-              <td style="text-align: center;">In</td>
             </tr>
             <tr>
               <td>ETH</td>
@@ -38,7 +41,6 @@
               <td style="text-align: right;">1015.20</td>
               <td style="text-align: right;">184</td>
               <td>2019-10-16</td>
-              <td style="text-align: center;">In</td>
             </tr>
             <tr>
               <td>BTC</td>
@@ -46,7 +48,6 @@
               <td style="text-align: right;">10.84</td>
               <td style="text-align: right;">10840</td>
               <td>2019-10-12</td>
-              <td style="text-align: center;">In</td>
             </tr>
             <tr>
               <td>BTC</td>
@@ -54,15 +55,13 @@
               <td style="text-align: right;">10.84</td>
               <td style="text-align: right;">10840</td>
               <td>2019-08-20</td>
-              <td style="text-align: center;">In</td>
             </tr>
-            <tr>
+            <tr class="row-tx-out">
               <td>BTC</td>
-              <td style="text-align: right;">0.0001</td>
-              <td style="text-align: right;">10.84</td>
+              <td style="text-align: right;">0.00001</td>
+              <td style="text-align: right;">1.08</td>
               <td style="text-align: right;">10840</td>
               <td>2019-08-18</td>
-              <td style="text-align: center;">Out</td>
             </tr>
           </tbody>
         </table>
@@ -99,6 +98,11 @@
             </tr>
           </tbody>
         </table>
+        <input class="button-primary" type="button" value="Reset Portfolio" onClick="(
+          function() {
+              alert('Reset!');
+              return false;
+        })(); return false;">
     </div>
 </div>
 {% endblock %}
