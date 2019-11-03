@@ -9,17 +9,19 @@
 {% endwith %}
 
 <br/>
-<table class="u-max-full-width">
-    <caption><h3>{{pair}} - {{frequency}}</h3></caption>
-    <thead>
-        <tr>
-            <th>Exchange</th>
-            {% for att in attributes %}
-            <th>{{att | replace(" On",  " On UTC") }}</th>
-            {% endfor %}
-        </tr>
-    </thead>
-    <tbody>
+<div class="row">
+    <div class="twelve columns">
+        <table class="u-max-full-width">
+            <caption><h3>{{pair}} - {{frequency}}</h3></caption>
+            <thead>
+                <tr>
+                    <th>Exchange</th>
+{% for att in attributes %}
+                    <th>{{att | replace(" On",  " On UTC") }}</th>
+{% endfor %}
+                </tr>
+            </thead>
+            <tbody>
 {% for i in symbols_per_exchange %}
     {% for exchange, d in i.items() %}
     {% if d['pairs']%}
@@ -43,6 +45,8 @@
     {% endif %}
     {% endfor %}
 {% endfor %}
-    </tbody>
-</table>
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}
