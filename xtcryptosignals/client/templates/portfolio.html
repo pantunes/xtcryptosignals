@@ -11,98 +11,109 @@
 <br/><br/>
 <div class="row">
     <div class="seven columns">
-      <h5>My Transactions</h5>
-      <input class="button-primary" type="button" value="Add" onClick="(
+      <div style="float: left">
+        <h5>My Transactions</h5>
+      </div>
+      <div style="float: right">
+        <input class="button-primary" type="button" value="Add" onClick="(
           function() {
-              alert('Add Tx!');
-              return false;
-        })(); return false;">
-        <table class="u-full-width">
-          <thead>
-            <tr>
-              <th>Coin/Token</th>
-              <th>Units</th>
-              <th>Paid</th>
-              <th>Price per Unit</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>BTC</td>
-              <td style="text-align: right;">0.001</td>
-              <td style="text-align: right;">10.84</td>
-              <td style="text-align: right;">10840</td>
-              <td >2019-10-29</td>
-            </tr>
-            <tr>
-              <td>ETH</td>
-              <td style="text-align: right;">5.4</td>
-              <td style="text-align: right;">1015.20</td>
-              <td style="text-align: right;">184</td>
-              <td>2019-10-16</td>
-            </tr>
-            <tr>
-              <td>BTC</td>
-              <td style="text-align: right;">0.001</td>
-              <td style="text-align: right;">10.84</td>
-              <td style="text-align: right;">10840</td>
-              <td>2019-10-12</td>
-            </tr>
-            <tr>
-              <td>BTC</td>
-              <td style="text-align: right;">0.001</td>
-              <td style="text-align: right;">10.84</td>
-              <td style="text-align: right;">10840</td>
-              <td>2019-08-20</td>
-            </tr>
-            <tr class="row-tx-out">
-              <td>BTC</td>
-              <td style="text-align: right;">0.00001</td>
-              <td style="text-align: right;">1.08</td>
-              <td style="text-align: right;">10840</td>
-              <td>2019-08-18</td>
-            </tr>
-          </tbody>
-        </table>
-    </div>
-    <div class="five columns">
+            open_modal('#modal_transaction');
+            return false;
+          })(); return false;">
+      </div>
+      <table class="u-full-width">
+        <thead>
+          <tr>
+            <th>Coin/Token</th>
+            <th>Units</th>
+            <th>Paid</th>
+            <th>Price per Unit</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BTC</td>
+            <td style="text-align: right;">0.001</td>
+            <td style="text-align: right;">10.84</td>
+            <td style="text-align: right;">10840</td>
+            <td >2019-10-29</td>
+          </tr>
+          <tr>
+            <td>ETH</td>
+            <td style="text-align: right;">5.4</td>
+            <td style="text-align: right;">1015.20</td>
+            <td style="text-align: right;">184</td>
+            <td>2019-10-16</td>
+          </tr>
+          <tr>
+            <td>BTC</td>
+            <td style="text-align: right;">0.001</td>
+            <td style="text-align: right;">10.84</td>
+            <td style="text-align: right;">10840</td>
+            <td>2019-10-12</td>
+          </tr>
+          <tr>
+            <td>BTC</td>
+            <td style="text-align: right;">0.001</td>
+            <td style="text-align: right;">10.84</td>
+            <td style="text-align: right;">10840</td>
+            <td>2019-08-20</td>
+          </tr>
+          <tr class="row-tx-out">
+            <td>BTC</td>
+            <td style="text-align: right;">0.00001</td>
+            <td style="text-align: right;">1.08</td>
+            <td style="text-align: right;">10840</td>
+            <td>2019-08-18</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  <div class="five columns">
+      <div style="float: left">
         <h5>My Portfolio</h5>
-        <table class="u-full-width">
-          <thead>
-            <tr>
-              <th>Pair</th>
-              <th>Exchange</th>
-              <th>Current Price</th>
-              <th>Position</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>BTCUSDT</td>
-              <td>Binance</td>
-              <td style="text-align: right;">10230</td>
-              <td style="text-align: right; color: green">+10%</td>
-            </tr>
-            <tr>
-              <td>ETHUSDT</td>
-              <td>BitMax</td>
-              <td style="text-align: right;">188</td>
-              <td style="text-align: right; color: red">-2.32%</td>
-            </tr>
-            <tr>
-              <td>LTCUSDT</td>
-              <td>OKEx</td>
-              <td style="text-align: right;">10230</td>
-              <td style="text-align: right; color: red">-8.32%</td>
-            </tr>
-          </tbody>
-        </table>
-        <input class="button-primary" type="button" value="Reset Portfolio" onClick="(
-          function() {
-              alert('Reset!');
-              return false;
+      </div>
+      <div style="float: right">
+        <input class="button-primary" type="button" value="Reset" onClick="(
+        function() {
+            alert('Reset!');
+            return false;
         })(); return false;">
+      </div>
+      <table class="u-full-width">
+        <thead>
+          <tr>
+            <th>Pair</th>
+            <th>Exchange</th>
+            <th>Current Price</th>
+            <th>Position</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BTCUSDT</td>
+            <td>Binance</td>
+            <td style="text-align: right;"><span id="binance_btcusdt_price_10s">-</span></td>
+            <td style="text-align: right; color: green">-%</td>
+          </tr>
+          <tr>
+            <td>ETHUSDT</td>
+            <td>BitMax</td>
+            <td style="text-align: right;"><span id="binance_ethusdt_price_10s">-</span></td>
+            <td style="text-align: right; color: red">-%</td>
+          </tr>
+          <tr>
+            <td>LTCUSDT</td>
+            <td>OKEx</td>
+            <td style="text-align: right;"><span id="binance_ltcusdt_price_10s">-</span></td>
+            <td style="text-align: right; color: red">-%</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 </div>
+
+{% include 'modals/transaction.html' %}
+
 {% endblock %}

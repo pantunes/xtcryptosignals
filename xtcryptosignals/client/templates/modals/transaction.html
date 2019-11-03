@@ -1,0 +1,39 @@
+<!-- Transaction Modal -->
+<div id="modal_transaction" class="modal">
+    <h5>Add Transaction</h5>
+    <form id="form_transaction">
+      <div class="row">
+          <div class="four columns">
+              <label for="tx_coin_token">Coin/Token</label>
+              <select class="u-full-width" id="tx_coin_token" name="coin_token">
+                <option value="Option 1">BTC</option>
+                <option value="Option 2">ETH</option>
+                <option value="Option 3">LTC</option>
+              </select>
+          </div>
+          <div class="four columns">
+              <label for="tx_units">Units</label>
+              <input class="u-full-width" type="text" placeholder="0.0234" id="tx_units" name="units">
+          </div>
+          <div class="four columns">
+              <label for="tx_paid">Paid (USD $)</label>
+              <input class="u-full-width" type="text" placeholder="450" id="tx_paid" name="paid">
+          </div>
+      </div>
+      <div class="row">
+          <div class="four columns">
+              <label for="tx_date_time">Datetime</label>
+              <input class="u-full-width" type="text" id="tx_date_time" name="date_time">
+          </div>
+          <div class="four columns">
+              <label for="tx_price_per_unit">Price per Unit</label>
+              <input class="u-full-width" type="text" id="tx_price_per_unit" readonly>
+          </div>
+      </div>
+      <input class="button-primary" type="button" value="Add" onClick="(
+          function() {
+            return false;
+        })(); return false;">
+    </form>
+</div>
+<!-- /Transaction Modal -->

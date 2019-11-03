@@ -8,6 +8,10 @@ function setup_modals() {
     else if (window.location.hash === '#signup') {
         $('#modal_signup').modal();
     }
+    else if (window.location.hash === '#transaction') {
+        $('#modal_transaction').modal();
+    }
+
     $('#modal_contact, #modal_login, #modal_signup').on(
         $.modal.AFTER_CLOSE, function(event, modal) {
             location.hash = '';

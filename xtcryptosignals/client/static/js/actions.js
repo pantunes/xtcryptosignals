@@ -10,7 +10,8 @@ function login() {
             $(x).css('display', 'inline');
         }
         $.get('/info', function(data) {
-            $('#modal_info').html(data).modal();
+            $('#modal_info').modal();
+            $('#modal_info_text').html(data);
         });
     })
     .fail(function(xhr, status, error) {
