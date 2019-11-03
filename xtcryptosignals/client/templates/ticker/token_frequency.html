@@ -37,7 +37,7 @@
         {% for att in attributes %}
             {% set _id = "{}_{}{}_{}_{}".format(exchange.lower(), c.lower(), r.lower(), att.replace(' ', '_').lower(), frequency) %}
             {% if 'price_change_chart' != att.replace(' ', '_').lower() %}
-                <td style="text-align: right; width: 100px;">
+                <td style="text-align: right;">
                     <span id="{{_id}}" style="padding: 5px;">-</span>
                 </td>
             {% else %}
@@ -59,7 +59,7 @@
 {% block include_extra_scripts_bottom %}
 <script type="text/javascript">
     $(document).ready(function() {
-        $(".container").css("maxWidth", "1280px" );
+        $(".container").css("maxWidth", "2280px" );
     });
 </script>
 {% endblock %}
