@@ -28,7 +28,9 @@ bp = Blueprint('user', __name__)
 @bp.route('/info', methods=['GET'])
 @login_required
 def info():
-    return Response('''<h5>Hey {name}! Welcome to XTCryptoSignals!</h5>
+    return Response('''<h5>Welcome to XTCryptoSignals!</h5>
+    Hi {name},
+    <br/><br/>
     This is an Open-source software platform that is in continuous development.
     <br/><br/>
     For now you can access your <a href="/portfolio/{frequency}">portfolio</a> 
