@@ -7,11 +7,11 @@
     <!-- css -->
     <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Raleway:400,300,600' type="text/css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" type="text/css">
-    <link rel="stylesheet" href="/static/css/normalize.css" type="text/css">
-    <link rel="stylesheet" href="/static/css/skeleton.css" type="text/css">
-    <link rel="stylesheet" href="/static/css/darkmode.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/skeleton/normalize.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/skeleton/skeleton.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/skeleton/custom.css" type="text/css">
     <link rel="stylesheet" href="/static/css/custom.css" type="text/css">
-    <link rel="stylesheet" href="/static/css/custom2.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/darkmode.css" type="text/css">
     <!-- js -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.slim.js" type="text/javascript"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
@@ -28,8 +28,8 @@
 
     <body class="has-docked-nav">
         <div class="container">
-        {% block body %}{% endblock %}
-        {% block footer %}{% endblock %}
+{% block body %}{% endblock %}
+{% block footer %}{% endblock %}
         </div>
 
 {% include 'snippets/contact.html' %}
