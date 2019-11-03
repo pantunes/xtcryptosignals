@@ -1,0 +1,38 @@
+<!-- Contact Modal -->
+<div id="modal_contact" class="modal">
+    <h5>Contact</h5>
+    <form id="form_contact">
+      <div class="row">
+        <div class="six columns">
+          <label for="contact_email">Your e-mail address</label>
+          <input class="u-full-width" type="email" placeholder="you@mailbox.com" id="contact_email" name="email">
+        </div>
+        <div class="six columns">
+          <label for="contact_reason">Reason for contacting</label>
+          <select class="u-full-width" id="contact_reason" name="reason">
+            <option value="question">Question</option>
+            <option value="bug">Report a Bug</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="twelve columns">
+          <label for="contact_message">Message</label>
+          <textarea class="u-full-width" placeholder="e.g. How can I integrate this project in my servers?" id="contact_message" name="message"></textarea>
+          <input class="button-primary" type="button" value="Submit" onClick="(
+              function() {
+                  $.post('/contact', $('#form_contact').serialize())
+                    .done(function(response) {
+                        $.notify('Sent!', 'success');
+                        $.modal.close();
+                    })
+                    .fail(function(xhr, status, error) {
+                        $.notify(JSON.parse(xhr.responseText).error);
+                    });
+                  return false;
+            })(); return false;">
+        </div>
+      </div>
+    </form>
+</div>
+<!-- /Contact Modal -->

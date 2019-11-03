@@ -18,15 +18,15 @@ socket.on('general', function(json) {
   <a class="button button-primary" href="https://pypi.org/project/XTCryptoSignals">Install from Pypi</a>
   <div class="value-props row">
     <div class="four columns value-prop">
-      <img class="value-img" src="/static/imgs/ticker.png">
+      <img alt="Ticker" class="value-img" src="/static/imgs/ticker.png">
       Ticker - Data collection, Signals Service and Automatic Trading
     </div>
     <div class="four columns value-prop">
-      <img class="value-img" src="/static/imgs/server.png">
+      <img alt="Server API" class="value-img" src="/static/imgs/server.png">
       Server - RESTFul API
     </div>
     <div class="four columns value-prop">
-      <img class="value-img" src="/static/imgs/client.png">
+      <img alt="Website" class="value-img" src="/static/imgs/client.png">
       Client - Website
     </div>
   </div>
@@ -58,4 +58,12 @@ socket.on('general', function(json) {
   <small><b>ETH:</b> <a href="https://etherscan.io/address/0x2bda8e92B42AB005918E5A126E2bD7cC19Bf5fF6">0x2bda8e92B42AB005918E5A126E2bD7cC19Bf5fF6</a></small>
 </div>
 <br/>
+{% endblock %}
+
+{% block include_extra_scripts_bottom %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".container").css("maxWidth", "1024px" );
+    });
+</script>
 {% endblock %}
