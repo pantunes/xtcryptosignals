@@ -34,6 +34,7 @@ def before_request():
         frequencies=s.HISTORY_FREQUENCY,
         pairs=get_pairs(),
         tokens=get_tokens(),
+        attributes=['Price'],
     )
 
 
