@@ -100,3 +100,10 @@ def token_frequency(token, frequency):
         frequency=frequency,
         token=_token,
     )
+
+
+@bp.route('/ticker/tokens')
+def tokens():
+    return dict(
+        tokens=get_tokens()
+    )
