@@ -8,18 +8,7 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-      $('#modal_info').on(
-        $.modal.OPEN, function(event, modal) {
-            $.get('/info', function(data) {
-                $('#modal_info_text').html(data);
-            });
-        });
-  });
-</script>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-      setup_modals();
+      setup_modals()
   });
 </script>
 
