@@ -1,5 +1,6 @@
 function setup_modals() {
     const modals = ['#contact', '#login', '#signup', '#info', '#transaction'];
+
     let x;
     for (x of modals) {
         if (window.location.hash !== x) {
@@ -19,6 +20,7 @@ function setup_modals() {
                 $.modal.OPEN, function(event, modal) {
                     $.get('/ticker/tokens', function(data) {
                         let $dropdown = $('#tx_coin_token');
+                        $dropdown.empty();
                         $.each(data.tokens, function() {
                             $dropdown.append($("<option />").val(this).text(this));
                         });
@@ -36,6 +38,6 @@ function setup_modals() {
 }
 
 function open_modal(x) {
-    $(x).modal();
     location.hash = x.replace('modal_', '');
+    setup_modals();
 }
