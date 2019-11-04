@@ -3,7 +3,6 @@ const menu_options = ['#menu_portfolio_link', '#menu_logout_link'];
 function login() {
     $.post('/login', $('#form_login').serialize())
     .done(function(response) {
-        $.modal.close();
         $.notify('Welcome!', 'success');
         $('#menu_login').html('My Area');
         let x;
