@@ -14,6 +14,16 @@ function setup_modals() {
                         $('#modal_info_text').html(data);
                     });
                 });
+        } else if (x === '#transaction') {
+            $(m).on(
+                $.modal.OPEN, function(event, modal) {
+                    $.get('/ticker/tokens', function(data) {
+                        let $dropdown = $('#tx_coin_token');
+                        $.each(data.tokens, function() {
+                            $dropdown.append($("<option />").val(this).text(this));
+                        });
+                    });
+                });
         }
 
         $(m).on(
