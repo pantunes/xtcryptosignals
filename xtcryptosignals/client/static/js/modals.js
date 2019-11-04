@@ -1,21 +1,17 @@
 function setup_modals() {
-    if (window.location.hash === '#contact') {
-        $('#modal_contact').modal();
+    const modals = ['#contact', '#login', '#signup', '#info', '#transaction'];
+    let x;
+    for (x of modals) {
+        if (window.location.hash !== x) {
+            continue
+        }
+        let m = x.replace('#', '#modal_');
+        $(m).modal();
+        $(m).on(
+            $.modal.AFTER_CLOSE, function(event, modal) {
+                location.hash = '';
+        });
     }
-    else if (window.location.hash === '#login') {
-        $('#modal_login').modal();
-    }
-    else if (window.location.hash === '#signup') {
-        $('#modal_signup').modal();
-    }
-    else if (window.location.hash === '#transaction') {
-        $('#modal_transaction').modal();
-    }
-
-    $('#modal_contact, #modal_login, #modal_signup').on(
-        $.modal.AFTER_CLOSE, function(event, modal) {
-            location.hash = '';
-    });
 }
 
 function open_modal(x) {

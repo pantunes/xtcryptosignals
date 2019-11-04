@@ -9,10 +9,7 @@ function login() {
         for (x of menu_options) {
             $(x).css('display', 'inline');
         }
-        $.get('/info', function(data) {
-            $('#modal_info').modal();
-            $('#modal_info_text').html(data);
-        });
+        open_modal('#modal_info');
     })
     .fail(function(xhr, status, error) {
         $.notify(JSON.parse(xhr.responseText).error);
