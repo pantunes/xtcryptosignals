@@ -41,8 +41,8 @@ def info():
     <a href="https://bitbucket.org/pantunes/xtcryptosignals">here</a>.
     <br/><br/>
     We hope you like this platform experience and please drop us some 
-    <a href="javascript:open_modal('#modal_contact');">lines</a> in case 
-    of any question.
+    <a href="javascript:$.modal.close();open_modal('#modal_contact');">lines</a>
+     in case of any question.
     <br/><br/>
     The XTCryptoSignals Team
     '''.format(frequency=s.HISTORY_FREQUENCY[0], **current_user.user))
