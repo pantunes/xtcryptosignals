@@ -5,11 +5,24 @@
 {% block include_scripts_top %}
 <script src="//code.highcharts.com/highcharts.js"></script>
 <script src="/static/js/sparkline.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+      $('#modal_info').on(
+        $.modal.OPEN, function(event, modal) {
+            $.get('/info', function(data) {
+                $('#modal_info_text').html(data);
+            });
+        });
+  });
+</script>
+
 <script type="text/javascript">
   $(document).ready(function() {
       setup_modals();
   });
 </script>
+
 <script type="text/javascript">
     let timeleft = 1;
     setInterval(function() {
@@ -17,6 +30,7 @@
       timeleft += 1;
     }, 1000);
 </script>
+
 <script type="text/javascript">
     function isFloat(n) {
         return Number(n) === n && n % 1 !== 0;
@@ -79,6 +93,7 @@
         }
     });
 </script>
+
 <script type="text/javascript">
     function _equal(l1, l2) {
         if (l1.length !== l2.length) return false;

@@ -2,19 +2,6 @@
 
 {% block title %}Portfolio{% endblock %}
 
-{% block pre_include_scripts_top %}
-<script type="text/javascript">
-  $(document).ready(function() {
-      $('#modal_info').on(
-        $.modal.OPEN, function(event, modal) {
-            $.get('/info', function(data) {
-                $('#modal_info_text').html(data);
-            });
-        });
-  });
-</script>
-{% endblock %}
-
 {% block body %}
 
 {% with url='ticker.ticker', params=dict() %}
