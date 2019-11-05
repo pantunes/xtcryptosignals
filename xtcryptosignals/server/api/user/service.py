@@ -41,7 +41,7 @@ def get_user(data, authenticate=True):
     try:
         user = User.objects.get(email=data['email'])
     except DoesNotExist:
-        raise ValueError('User not found ({email}).'.format(**data), 404)
+        raise ValueError('Bad credentials.', 404)
     if authenticate:
         if not bcrypt.checkpw(
             data['password'].encode(), user.password.encode()
