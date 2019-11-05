@@ -11,8 +11,9 @@ from flask import (
     render_template,
     Blueprint,
     current_app,
+    g,
 )
-from xtcryptosignals import settings as s
+from xtcryptosignals.client import actions
 from xtcryptosignals import __version__
 
 
@@ -25,14 +26,14 @@ def before_request():
         server_api_base_url=current_app.config['SERVER_API_BASE_URL'],
         version=__version__,
         ga_tracking_id=current_app.config['GA_TRACKING_ID'],
-        frequencies=s.HISTORY_FREQUENCY,
+        frequencies=g.HISTORY_FREQUENCY,
     )
 
 
 @bp.route('/')
 def index():
     symbols_per_exchange = []
-    for x in s.SYMBOLS_PER_EXCHANGE:
+    for x in g.SYMBOLS_PER_EXCHANGE:
         for exchange, item in x.items():
             if not item['pairs']:
                 continue
@@ -45,3 +46,11 @@ def index():
         template_name_or_list='index.html',
         symbols_per_exchange=symbols_per_exchange,
     )
+
+
+def _before_request():
+    g.SYMBOLS_PER_EXCHANGE, _ = actions.get_symbols_per_exchange()
+    g.HISTORY_FREQUENCY, _ = actions.get_history_frequency()
+
+
+bp.before_request(_before_request)
