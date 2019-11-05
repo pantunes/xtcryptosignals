@@ -3,15 +3,17 @@ function open_modal(m) {
         return
     }
 
-    if (m === '#modal_info') {
-        $(m).on(
+    const _m = m.replace('#', '#modal_');
+
+    if (m === '#info') {
+        $(_m).on(
             $.modal.OPEN, function (event, modal) {
                 $.get('/info', function (data) {
                     $('#modal_info_text').html(data);
                 });
             });
-    } else if (m === '#modal_transaction') {
-        $(m).on(
+    } else if (m === '#transaction') {
+        $(_m).on(
             $.modal.OPEN, function (event, modal) {
                 $.get('/ticker/tokens', function (data) {
                     let $dropdown = $('#tx_coin_token');
@@ -23,11 +25,12 @@ function open_modal(m) {
             });
     }
 
-    $(m).on(
+    $(_m).on(
         $.modal.BEFORE_CLOSE, function (event, modal) {
             location.hash = '';
         });
 
-    $(m).modal();
+    $(_m).modal();
+
     location.hash = m;
 }

@@ -6,9 +6,13 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-from flask import Blueprint, abort
-from flask import render_template
-from xtcryptosignals import settings as s
+from flask import (
+    Blueprint,
+    abort,
+    render_template,
+    g,
+)
+from xtcryptosignals.client import actions
 
 
 bp = Blueprint('errors', __name__)
@@ -19,7 +23,7 @@ def unauthorized(_):
     return render_template(
         template_name_or_list='error.html',
         error='Unauthorized',
-        frequency=s.HISTORY_FREQUENCY[0]
+        frequency=g.HISTORY_FREQUENCY[0]
     ), 401
 
 
@@ -34,3 +38,10 @@ def page_not_found(_):
 @bp.route('/errors/logged-out')
 def logged_out():
     abort(401)
+
+
+def _before_request():
+    g.HISTORY_FREQUENCY, _ = actions.get_history_frequency()
+
+
+bp.before_request(_before_request)

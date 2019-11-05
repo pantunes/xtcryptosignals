@@ -6,16 +6,15 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-from xtcryptosignals import settings as s
 from functools import wraps
-from flask import render_template
+from flask import render_template, g
 
 
 def validate_args():
     def decorator(f):
         @wraps(f)
         def wrapper(*args, **kwargs):
-            if kwargs['frequency'] not in s.HISTORY_FREQUENCY:
+            if kwargs['frequency'] not in g.HISTORY_FREQUENCY:
                 return render_template(
                     'error.html', error='Frequency is incorrect'
                 ), 404
@@ -31,7 +30,7 @@ def validate_args():
 
 def get_pairs():
     pairs = set()
-    for i in s.SYMBOLS_PER_EXCHANGE:
+    for i in g.SYMBOLS_PER_EXCHANGE:
         for _, b in i.items():
             for c, d in b['pairs']:
                 pairs.add(c + d)
@@ -40,7 +39,7 @@ def get_pairs():
 
 def get_tokens():
     tokens = set()
-    for i in s.SYMBOLS_PER_EXCHANGE:
+    for i in g.SYMBOLS_PER_EXCHANGE:
         for _, b in i.items():
             for c, _ in b['pairs']:
                 tokens.add(c)

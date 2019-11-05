@@ -10,8 +10,9 @@ from copy import deepcopy
 from flask import (
     Blueprint,
     current_app,
+    g,
 )
-from xtcryptosignals import settings as s
+from xtcryptosignals.client import actions
 from xtcryptosignals import __version__
 from xtcryptosignals.client.utils import (
     validate_args,
@@ -37,7 +38,7 @@ def before_request():
         server_api_base_url=current_app.config['SERVER_API_BASE_URL'],
         version=__version__,
         ga_tracking_id=current_app.config['GA_TRACKING_ID'],
-        frequencies=s.HISTORY_FREQUENCY,
+        frequencies=g.HISTORY_FREQUENCY,
         pairs=get_pairs(),
         tokens=get_tokens(),
     )
@@ -48,7 +49,7 @@ def before_request():
 def ticker(frequency):
     return dict(
         template_name_or_list='ticker/ticker.html',
-        symbols_per_exchange=s.SYMBOLS_PER_EXCHANGE,
+        symbols_per_exchange=g.SYMBOLS_PER_EXCHANGE,
         attributes=_COLUMN_ATTRIBUTES,
         frequency=frequency,
     )
@@ -57,9 +58,9 @@ def ticker(frequency):
 @bp.route('/ticker/<pair>/<frequency>')
 @validate_args()
 def pair_frequency(pair, frequency):
-    x = deepcopy(s.SYMBOLS_PER_EXCHANGE)
+    x = deepcopy(g.SYMBOLS_PER_EXCHANGE)
     pair_not_found = True
-    for idx, i in enumerate(s.SYMBOLS_PER_EXCHANGE):
+    for idx, i in enumerate(g.SYMBOLS_PER_EXCHANGE):
         for a, b in i.items():
             x[idx][a]['pairs'] = []
             for c, d in b['pairs']:
@@ -81,10 +82,10 @@ def pair_frequency(pair, frequency):
 @bp.route('/ticker/source/<token>/<frequency>')
 @validate_args()
 def token_frequency(token, frequency):
-    x = deepcopy(s.SYMBOLS_PER_EXCHANGE)
+    x = deepcopy(g.SYMBOLS_PER_EXCHANGE)
     token_not_found = True
     _token = token.upper()
-    for idx, i in enumerate(s.SYMBOLS_PER_EXCHANGE):
+    for idx, i in enumerate(g.SYMBOLS_PER_EXCHANGE):
         for a, b in i.items():
             x[idx][a]['pairs'] = []
             for c, d in b['pairs']:
@@ -107,3 +108,11 @@ def tokens():
     return dict(
         tokens=get_tokens()
     )
+
+
+def _before_request():
+    g.SYMBOLS_PER_EXCHANGE, _ = actions.get_symbols_per_exchange()
+    g.HISTORY_FREQUENCY, _ = actions.get_history_frequency()
+
+
+bp.before_request(_before_request)

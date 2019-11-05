@@ -45,10 +45,10 @@
       <div id="myAccountNavPopover" class="popover">
         <ul class="popover-list">
           <li class="popover-item">
-            <a class="popover-link" href="javascript:open_modal('#modal_login');">{{spaces}}Login{{spaces}}</a>
+            <a class="popover-link" href="javascript:open_modal('#login');">{{spaces}}Login{{spaces}}</a>
           </li>
           <li class="popover-item">
-            <a class="popover-link" href="javascript:open_modal('#modal_signup');">{{spaces}}Signup{{spaces}}</a>
+            <a class="popover-link" href="javascript:open_modal('#signup');">{{spaces}}Signup{{spaces}}</a>
           </li>
           <li id="menu_portfolio_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
             <a class="popover-link" href="{{url_for('portfolio.index', frequency=frequency)}}">Portfolio</a>
@@ -73,7 +73,7 @@
             <a class="popover-link" href="https://pypi.org/project/XTCryptoSignals">On Pypi</a>
           </li>
           <li class="popover-item">
-            <a class="popover-link" href="javascript:open_modal('#modal_contact');">Contact</a>
+            <a class="popover-link" href="javascript:open_modal('#contact');">Contact</a>
           </li>
         </ul>
       </div>

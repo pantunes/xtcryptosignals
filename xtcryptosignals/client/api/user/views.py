@@ -12,13 +12,14 @@ from flask import (
     Response,
     request,
     current_app,
+    g,
 )
 from flask_login import (
     login_required,
     login_user,
     current_user,
 )
-from xtcryptosignals import settings as s
+from xtcryptosignals.client import actions
 from xtcryptosignals.client.api.auth.models import Auth
 
 
@@ -41,11 +42,11 @@ def info():
     <a href="https://bitbucket.org/pantunes/xtcryptosignals">here</a>.
     <br/><br/>
     We hope you like this platform experience and please drop us some 
-    <a href="javascript:open_modal('#modal_contact');">lines</a>
+    <a href="javascript:open_modal('#contact');">lines</a>
      in case of any question.
     <br/><br/>
     The XTCryptoSignals Team
-    '''.format(frequency=s.HISTORY_FREQUENCY[0], **current_user.user))
+    '''.format(frequency=g.HISTORY_FREQUENCY[0], **current_user.user))
 
 
 @bp.route('/signup', methods=['POST'])
@@ -61,3 +62,10 @@ def signup():
         login_user(Auth(_json))
 
     return _json, response.status_code
+
+
+def _before_request():
+    g.HISTORY_FREQUENCY, _ = actions.get_history_frequency()
+
+
+bp.before_request(_before_request)
