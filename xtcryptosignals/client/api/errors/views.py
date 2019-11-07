@@ -12,7 +12,7 @@ from flask import (
     render_template,
     g,
 )
-from xtcryptosignals.client import actions
+from xtcryptosignals.client import service
 
 
 bp = Blueprint('errors', __name__)
@@ -41,7 +41,7 @@ def logged_out():
 
 
 def _before_request():
-    g.HISTORY_FREQUENCY, _ = actions.get_history_frequency()
+    g.HISTORY_FREQUENCY, _ = service.get_history_frequency()
 
 
 bp.before_request(_before_request)

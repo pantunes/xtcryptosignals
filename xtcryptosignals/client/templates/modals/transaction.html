@@ -1,6 +1,10 @@
 <script type="text/javascript">
   $(function() {
-    $('#tx_date_time').datepicker({dateFormat: "dd/mm/yy"});
+    $('#tx_date_time').datepicker(
+        {dateFormat: "dd/mm/yy"}
+    ).datepicker(
+        "setDate", new Date()
+    );
   });
 </script>
 
@@ -13,6 +17,13 @@
               <label for="tx_coin_token">Coin/Token</label>
               <select class="u-full-width" id="tx_coin_token" name="coin_token"></select>
           </div>
+          <div class="four columns">&nbsp;</div>
+          <div class="four columns">
+              <label for="tx_date_time">Date</label>
+              <input class="u-full-width" type="text" id="tx_date_time" name="date_time">
+          </div>
+      </div>
+      <div class="row">
           <div class="four columns">
               <label for="tx_units">Units</label>
               <input class="u-full-width" type="text" placeholder="0.0234" id="tx_units" name="units">
@@ -20,12 +31,6 @@
           <div class="four columns">
               <label for="tx_paid">Paid (USD $)</label>
               <input class="u-full-width" type="text" placeholder="450" id="tx_paid" name="paid">
-          </div>
-      </div>
-      <div class="row">
-          <div class="four columns">
-              <label for="tx_date_time">Datetime</label>
-              <input class="u-full-width" type="text" id="tx_date_time" name="date_time">
           </div>
           <div class="four columns">
               <label for="tx_price_per_unit">Price per Unit</label>

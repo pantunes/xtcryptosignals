@@ -13,7 +13,7 @@ from flask_login import LoginManager
 app = Flask(
     import_name=__name__,
     template_folder='templates',
-    # @Note: let nginx or other more resourceful WS serve static content
+    # TODO @Note: let nginx or other more resourceful WS serve static content
     static_folder='static',
 )
 
@@ -38,6 +38,8 @@ def create_app():
     from xtcryptosignals.client.api.contact.views import bp as bp_contact
     from xtcryptosignals.client.api.user.views import bp as bp_user
     from xtcryptosignals.client.api.portfolio.views import bp as bp_portfolio
+    from xtcryptosignals.client.api.transaction.views import \
+        bp as bp_transaction
 
     bps = (
         bp_home,
@@ -47,6 +49,7 @@ def create_app():
         bp_contact,
         bp_errors,
         bp_portfolio,
+        bp_transaction,
     )
 
     for x in bps:

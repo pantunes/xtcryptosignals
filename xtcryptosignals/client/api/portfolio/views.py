@@ -15,7 +15,7 @@ from flask import (
 from flask_login import (
     login_required,
 )
-from xtcryptosignals.client import actions
+from xtcryptosignals.client import service
 from xtcryptosignals import __version__
 from xtcryptosignals.client.utils import (
     get_pairs,
@@ -41,16 +41,22 @@ def before_request():
 
 @bp.route('/portfolio/<frequency>', methods=['GET'])
 @login_required
-def index(frequency):
+def frequency(frequency):
     return render_template(
         template_name_or_list='portfolio.html',
         frequency=frequency,
     )
 
 
+@bp.route('/portfolio', methods=['GET'])
+@login_required
+def index():
+    return {'results': 'OK!'}
+
+
 def _before_request():
-    g.SYMBOLS_PER_EXCHANGE, _ = actions.get_symbols_per_exchange()
-    g.HISTORY_FREQUENCY, _ = actions.get_history_frequency()
+    g.SYMBOLS_PER_EXCHANGE, _ = service.get_symbols_per_exchange()
+    g.HISTORY_FREQUENCY, _ = service.get_history_frequency()
 
 
 bp.before_request(_before_request)
