@@ -19,7 +19,7 @@ from flask_login import (
     login_user,
     current_user,
 )
-from xtcryptosignals.client import actions
+from xtcryptosignals.client import service
 from xtcryptosignals.client.api.auth.models import Auth
 
 
@@ -65,7 +65,7 @@ def signup():
 
 
 def _before_request():
-    g.HISTORY_FREQUENCY, _ = actions.get_history_frequency()
+    g.HISTORY_FREQUENCY, _ = service.get_history_frequency()
 
 
 bp.before_request(_before_request)

@@ -19,6 +19,10 @@ function login() {
 function logout() {
     $.get('/logout')
     .done(function(response) {
+        if (window.location.pathname.includes('/portfolio/')) {
+            window.location.href = '/';
+            return
+        }
         $.notify('You are logged out!', 'success');
         $.modal.close();
         $('#menu_login').html('Account');
@@ -28,6 +32,7 @@ function logout() {
         }
     })
     .fail(function(xhr, status, error) {
+        console.log(xhr.responseText);
         $.notify(JSON.parse(xhr.responseText).error);
     });
 }

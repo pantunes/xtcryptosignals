@@ -13,7 +13,7 @@ from flask import (
     current_app,
     g,
 )
-from xtcryptosignals.client import actions
+from xtcryptosignals.client import service
 from xtcryptosignals import __version__
 
 
@@ -49,8 +49,8 @@ def index():
 
 
 def _before_request():
-    g.SYMBOLS_PER_EXCHANGE, _ = actions.get_symbols_per_exchange()
-    g.HISTORY_FREQUENCY, _ = actions.get_history_frequency()
+    g.SYMBOLS_PER_EXCHANGE, _ = service.get_symbols_per_exchange()
+    g.HISTORY_FREQUENCY, _ = service.get_history_frequency()
 
 
 bp.before_request(_before_request)

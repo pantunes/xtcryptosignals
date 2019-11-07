@@ -8,6 +8,17 @@
 {% include 'snippets/menu.html' %}
 {% endwith %}
 
+<script type="text/javascript">
+  $(document).ready(function() {
+      $.get('/transactions', function (data) {
+          alert(data.results);
+      });
+      $.get('/portfolio', function (data) {
+          alert(data.results);
+      });
+  });
+</script>
+
 <br/><br/>
 <div class="row">
     <div class="seven columns">
@@ -25,22 +36,25 @@
         <thead>
           <tr>
             <th>Coin/Token</th>
+            <th>Exchange</th>
             <th>Units</th>
-            <th>Paid</th>
+            <th>Paid (USD $)</th>
             <th>Price per Unit</th>
-            <th>Date</th>
+            <th>Added</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>BTC</td>
+            <td>Binance</td>
             <td style="text-align: right;">0.001</td>
             <td style="text-align: right;">10.84</td>
             <td style="text-align: right;">10840</td>
-            <td >2019-10-29</td>
+            <td>2019-10-29</td>
           </tr>
           <tr>
             <td>ETH</td>
+            <td>Bitmax</td>
             <td style="text-align: right;">5.4</td>
             <td style="text-align: right;">1015.20</td>
             <td style="text-align: right;">184</td>
@@ -48,6 +62,7 @@
           </tr>
           <tr>
             <td>BTC</td>
+            <td>Okex</td>
             <td style="text-align: right;">0.001</td>
             <td style="text-align: right;">10.84</td>
             <td style="text-align: right;">10840</td>
@@ -55,6 +70,7 @@
           </tr>
           <tr>
             <td>BTC</td>
+            <td>-</td>
             <td style="text-align: right;">0.001</td>
             <td style="text-align: right;">10.84</td>
             <td style="text-align: right;">10840</td>
@@ -62,6 +78,7 @@
           </tr>
           <tr class="row-tx-out">
             <td>BTC</td>
+            <td>Binance</td>
             <td style="text-align: right;">0.00001</td>
             <td style="text-align: right;">1.08</td>
             <td style="text-align: right;">10840</td>
@@ -86,7 +103,8 @@
           <tr>
             <th>Pair</th>
             <th>Exchange</th>
-            <th>Current Price</th>
+            <th>Price (USDT)</th>
+            <th>Assets</th>
             <th>Position</th>
           </tr>
         </thead>
@@ -95,19 +113,22 @@
             <td>BTCUSDT</td>
             <td>Binance</td>
             <td style="text-align: right;"><span id="binance_btcusdt_price_10s">-</span></td>
-            <td style="text-align: right; color: green">-%</td>
+            <td style="text-align: right;">1.2</td>
+            <td style="text-align: right; color: green">4%</td>
           </tr>
           <tr>
             <td>ETHUSDT</td>
-            <td>BitMax</td>
+            <td>Binance</td>
             <td style="text-align: right;"><span id="binance_ethusdt_price_10s">-</span></td>
-            <td style="text-align: right; color: red">-%</td>
+            <td style="text-align: right;">23</td>
+            <td style="text-align: right; color: red">-13%</td>
           </tr>
           <tr>
             <td>LTCUSDT</td>
-            <td>OKEx</td>
+            <td>Binance</td>
             <td style="text-align: right;"><span id="binance_ltcusdt_price_10s">-</span></td>
-            <td style="text-align: right; color: red">-%</td>
+            <td style="text-align: right;">54</td>
+            <td style="text-align: right; color: red">-40%</td>
           </tr>
         </tbody>
       </table>
