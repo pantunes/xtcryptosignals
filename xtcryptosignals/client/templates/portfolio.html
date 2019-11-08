@@ -4,7 +4,7 @@
 
 {% block body %}
 
-{% with url='ticker.ticker', params=dict() %}
+{% with url='portfolio.frequency', params=dict() %}
 {% include 'snippets/menu.html' %}
 {% endwith %}
 
@@ -47,11 +47,11 @@
           "<tr>" +
           "<td>" + key + "USD</td>" +
           "<td>Binance</td>" +
-          "<td style=\"text-align: right;\"><span id=\"binance_" + key.toLowerCase() + "usdt_price_10s\">-</span></td>" +
+          "<td style=\"text-align: right;\"><span id=\"binance_" + key.toLowerCase() + "usdt_price_{{frequency}}\">-</span></td>" +
           "<td style=\"text-align: right;\">" + value.total_units + "</td>" +
           "<td style=\"text-align: right;\">" + price_formatter.format(value.total_amount_paid) + "</td>" +
           "<td style=\"text-align: right;\">" + price_formatter.format(value.average_paid) +"</td>" +
-          "<td style=\"text-align: right;\"><span id=\"binance_" + key.toLowerCase() + "usdt_position_10s\">-</span></td>" +
+          "<td style=\"text-align: right;\"><span id=\"binance_" + key.toLowerCase() + "usdt_position_{{frequency}}\">-</span></td>" +
           "</tr>"
       );
     }
