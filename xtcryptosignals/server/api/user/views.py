@@ -27,7 +27,7 @@ class SignUpPost(Resource):
         User signup
         ---
         tags:
-            - Public
+            - User
         parameters:
             - name: payload
               in: body

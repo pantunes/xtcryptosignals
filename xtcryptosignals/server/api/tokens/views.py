@@ -23,7 +23,7 @@ class FrequencyGet(Resource):
         Gets configured History Frequency
         ---
         tags:
-            - Public
+            - Tokens
         responses:
             200:
                 description: Returns list successfully
@@ -38,7 +38,7 @@ class SymbolsGet(Resource):
         Gets configured Symbols per Exchange
         ---
         tags:
-            - Public
+            - Tokens
         responses:
             200:
                 description: Returns list successfully

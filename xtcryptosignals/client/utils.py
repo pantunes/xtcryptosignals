@@ -27,20 +27,3 @@ def validate_args():
         return wrapper
     return decorator
 
-
-def get_pairs():
-    pairs = set()
-    for i in g.SYMBOLS_PER_EXCHANGE:
-        for _, b in i.items():
-            for c, d in b['pairs']:
-                pairs.add(c + d)
-    return ['ALL'] + sorted(pairs)
-
-
-def get_tokens():
-    tokens = set()
-    for i in g.SYMBOLS_PER_EXCHANGE:
-        for _, b in i.items():
-            for c, _ in b['pairs']:
-                tokens.add(c)
-    return sorted(tokens)

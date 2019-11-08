@@ -62,6 +62,9 @@
             const color = (json.price_change > 0) ? "#e3ffe2" : "#ffe2e2";
             if (_attr === 'price') {
                 $(_id).effect("highlight", {color: color, queue: false}, 1100, "slow");
+                try {
+                    post_ticker_emit(_id, json)
+                } catch (e) {}
             }
             let suffix = '';
             if(['price_change', 'volume_change', 'number_trades_change'].indexOf(_attr) >= 0) {

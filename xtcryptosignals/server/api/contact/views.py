@@ -22,7 +22,7 @@ class ContactPost(Resource):
         Submit contact form data
         ---
         tags:
-            - Public
+            - User
         parameters:
             - in: formData
               name: email

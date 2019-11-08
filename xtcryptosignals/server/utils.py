@@ -66,6 +66,8 @@ def validate_io(
                 errors = schema_out().validate(data, many=many_out)
                 if errors:
                     return dict(error=_sanitize_errors(errors)), 416
+            if data is None:
+                data = dict(status='OK')
             return data, status or 200
         return wrapper
     return decorator

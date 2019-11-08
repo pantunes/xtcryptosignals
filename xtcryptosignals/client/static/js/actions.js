@@ -1,8 +1,7 @@
 const menu_options = ['#menu_portfolio_link', '#menu_logout_link'];
 
 function login() {
-    $.post('/login', $('#form_login').serialize())
-    .done(function(response) {
+    $.post('/login', $('#form_login').serialize()).done(function(response) {
         $.notify('Welcome!', 'success');
         $('#menu_login').html('My Area');
         let x;
@@ -17,8 +16,7 @@ function login() {
 }
 
 function logout() {
-    $.get('/logout')
-    .done(function(response) {
+    $.get('/logout').done(function(response) {
         if (window.location.pathname.includes('/portfolio/')) {
             window.location.href = '/';
             return
@@ -32,7 +30,24 @@ function logout() {
         }
     })
     .fail(function(xhr, status, error) {
-        console.log(xhr.responseText);
+        $.notify(JSON.parse(xhr.responseText).error);
+    });
+}
+
+function get_transactions(handler) {
+    $.get('/transactions').done(function(response) {
+        handler(response)
+    })
+    .fail(function(xhr, status, error) {
+        $.notify(JSON.parse(xhr.responseText).error);
+    });
+}
+
+function get_portfolio(handler) {
+    $.get('/portfolio').done(function(response) {
+        handler(response)
+    })
+    .fail(function(xhr, status, error) {
         $.notify(JSON.parse(xhr.responseText).error);
     });
 }
