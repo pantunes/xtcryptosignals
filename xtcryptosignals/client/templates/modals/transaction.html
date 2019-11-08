@@ -1,6 +1,6 @@
 <script type="text/javascript">
   $(function() {
-    $('#tx_date_time').datepicker(
+    $('#tx_added_on').datepicker(
         {dateFormat: "dd/mm/yy"}
     ).datepicker(
         "setDate", new Date()
@@ -19,8 +19,8 @@
           </div>
           <div class="four columns">&nbsp;</div>
           <div class="four columns">
-              <label for="tx_date_time">Date</label>
-              <input class="u-full-width" type="text" id="tx_date_time" name="date_time">
+              <label for="tx_added_on">Date</label>
+              <input class="u-full-width" type="text" id="tx_added_on" name="added_on">
           </div>
       </div>
       <div class="row">
@@ -29,8 +29,8 @@
               <input class="u-full-width" type="text" placeholder="0.0234" id="tx_units" name="units">
           </div>
           <div class="four columns">
-              <label for="tx_paid">Paid (USD $)</label>
-              <input class="u-full-width" type="text" placeholder="450" id="tx_paid" name="paid">
+              <label for="tx_amount_paid">Paid ($)</label>
+              <input class="u-full-width" type="text" placeholder="450" id="tx_amount_paid" name="amount_paid">
           </div>
           <div class="four columns">
               <label for="tx_price_per_unit">Price per Unit</label>
@@ -39,6 +39,16 @@
       </div>
       <input class="button-primary" type="button" value="Add" onClick="(
           function() {
+            $.post('/transaction/add', $('#form_transaction').serialize())
+                .done(function(response) {
+                    $.notify('Added Transaction!', 'success');
+                    $.modal.close();
+                    get_transactions(render_transactions);
+                    get_portfolio(render_portfolio);
+                })
+                .fail(function(xhr, status, error) {
+                    $.notify(JSON.parse(xhr.responseText).error);
+                });
             return false;
         })(); return false;">
     </form>

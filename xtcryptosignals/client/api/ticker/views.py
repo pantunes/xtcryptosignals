@@ -14,10 +14,10 @@ from flask import (
 )
 from xtcryptosignals.client import service
 from xtcryptosignals import __version__
-from xtcryptosignals.client.utils import (
-    validate_args,
+from xtcryptosignals.client.utils import validate_args
+from xtcryptosignals.common.utils import (
     get_pairs,
-    get_tokens,
+    get_coin_tokens,
 )
 
 
@@ -39,8 +39,8 @@ def before_request():
         version=__version__,
         ga_tracking_id=current_app.config['GA_TRACKING_ID'],
         frequencies=g.HISTORY_FREQUENCY,
-        pairs=get_pairs(),
-        tokens=get_tokens(),
+        pairs=get_pairs(g.SYMBOLS_PER_EXCHANGE),
+        tokens=get_coin_tokens(g.SYMBOLS_PER_EXCHANGE),
     )
 
 
@@ -106,7 +106,7 @@ def token_frequency(token, frequency):
 @bp.route('/ticker/tokens')
 def tokens():
     return dict(
-        tokens=get_tokens()
+        tokens=get_coin_tokens(g.SYMBOLS_PER_EXCHANGE)
     )
 
 

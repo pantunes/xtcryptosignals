@@ -9,85 +9,126 @@
 {% endwith %}
 
 <script type="text/javascript">
+  let setup = {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+    style: 'currency',
+    currency: 'USD',
+  };
+  const price_formatter = new Intl.NumberFormat('en-US', setup);
+</script>
+
+<script type="text/javascript">
+  function render_transactions(data) {
+    let $table = $('#table_transactions');
+    $table.find("tbody tr").remove();
+    $.each(data.results, function () {
+      $table.append(
+          "<tr>" +
+          "<td>" + this.coin_token + "</td>" +
+          "<td style=\"text-align: right;\">" + this.units + "</td>" +
+          "<td style=\"text-align: right;\">" + price_formatter.format(this.amount_paid) + "</td>" +
+          "<td style=\"text-align: right;\">" + price_formatter.format(1000) + "</td>" +
+          "<td>" + this.added_on + "</td>" +
+          "</tr>"
+      );
+    });
+  }
+</script>
+
+<script type="text/javascript">
+  let data_portf;
+  function render_portfolio(data) {
+    data_portf = data;
+    let $table = $('#table_portfolio');
+    $table.find("tbody tr").remove();
+    for (const [key, value] of Object.entries(data)) {
+      $table.append(
+          "<tr>" +
+          "<td>" + key + "USD</td>" +
+          "<td>Binance</td>" +
+          "<td style=\"text-align: right;\"><span id=\"binance_" + key.toLowerCase() + "usdt_price_10s\">-</span></td>" +
+          "<td style=\"text-align: right;\">" + value.total_units + "</td>" +
+          "<td style=\"text-align: right;\">" + price_formatter.format(value.total_amount_paid) + "</td>" +
+          "<td style=\"text-align: right;\">" + price_formatter.format(value.average_paid) +"</td>" +
+          "<td style=\"text-align: right;\"><span id=\"binance_" + key.toLowerCase() + "usdt_position_10s\">-</span></td>" +
+          "</tr>"
+      );
+    }
+  }
+</script>
+
+<script type="text/javascript">
+  function get_percent(x, y) {
+    if (x >= y) {
+      return 100 - ((y * 100) / x).toFixed(2)
+    }
+    return -(100 - ((x * 100) / y)).toFixed(2)
+  }
+</script>
+
+<script type="text/javascript">
+  function post_ticker_emit(id, json) {
+    if (json.source !== 'binance') {
+      return;
+    }
+    let symbol = data_portf[json.ticker];
+    if (symbol === undefined) {
+      return;
+    }
+
+    let _id = id.replace("_price_", "_position_")
+
+    let perc = get_percent(json.price, symbol.average_paid);
+
+    if (perc !== 0) {
+      $(_id).css("color", (perc > 0) ? "green" : "red")
+    } else {
+      $(_id).attr("class", "numeric_value");
+    }
+
+    $(_id).text(perc + '%');
+  }
+</script>
+
+<script type="text/javascript">
   $(document).ready(function() {
-      $.get('/transactions', function (data) {
-          alert(data.results);
-      });
-      $.get('/portfolio', function (data) {
-          alert(data.results);
-      });
+    get_transactions(render_transactions);
+    get_portfolio(render_portfolio);
   });
 </script>
 
 <br/><br/>
+
 <div class="row">
-    <div class="seven columns">
+    <div class="five columns">
       <div style="float: left">
         <h5>My Transactions</h5>
       </div>
       <div style="float: right">
-        <input class="button-primary" type="button" value="Add" onClick="(
+        <input class="button-primary" type="button" value="Add Tx" onClick="(
           function() {
             open_modal('#transaction');
             return false;
           })(); return false;">
       </div>
-      <table class="u-full-width">
+
+      <table class="u-full-width" id="table_transactions">
         <thead>
           <tr>
             <th>Coin/Token</th>
-            <th>Exchange</th>
             <th>Units</th>
-            <th>Paid (USD $)</th>
-            <th>Price per Unit</th>
-            <th>Added</th>
+            <th>Paid ($)</th>
+            <th>Price per Unit ($)</th>
+            <th>Added on</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>BTC</td>
-            <td>Binance</td>
-            <td style="text-align: right;">0.001</td>
-            <td style="text-align: right;">10.84</td>
-            <td style="text-align: right;">10840</td>
-            <td>2019-10-29</td>
-          </tr>
-          <tr>
-            <td>ETH</td>
-            <td>Bitmax</td>
-            <td style="text-align: right;">5.4</td>
-            <td style="text-align: right;">1015.20</td>
-            <td style="text-align: right;">184</td>
-            <td>2019-10-16</td>
-          </tr>
-          <tr>
-            <td>BTC</td>
-            <td>Okex</td>
-            <td style="text-align: right;">0.001</td>
-            <td style="text-align: right;">10.84</td>
-            <td style="text-align: right;">10840</td>
-            <td>2019-10-12</td>
-          </tr>
-          <tr>
-            <td>BTC</td>
-            <td>-</td>
-            <td style="text-align: right;">0.001</td>
-            <td style="text-align: right;">10.84</td>
-            <td style="text-align: right;">10840</td>
-            <td>2019-08-20</td>
-          </tr>
-          <tr class="row-tx-out">
-            <td>BTC</td>
-            <td>Binance</td>
-            <td style="text-align: right;">0.00001</td>
-            <td style="text-align: right;">1.08</td>
-            <td style="text-align: right;">10840</td>
-            <td>2019-08-18</td>
-          </tr>
-        </tbody>
+        <tbody></tbody>
       </table>
+
   </div>
-  <div class="five columns">
+
+  <div class="seven columns">
       <div style="float: left">
         <h5>My Portfolio</h5>
       </div>
@@ -98,40 +139,22 @@
             return false;
         })(); return false;">
       </div>
-      <table class="u-full-width">
+
+      <table class="u-full-width" id="table_portfolio">
         <thead>
           <tr>
             <th>Pair</th>
             <th>Exchange</th>
-            <th>Price (USDT)</th>
-            <th>Assets</th>
+            <th>Price ($)</th>
+            <th>Total Assets</th>
+            <th>Total Paid ($)</th>
+            <th>Avg Paid ($)</th>
             <th>Position</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>BTCUSDT</td>
-            <td>Binance</td>
-            <td style="text-align: right;"><span id="binance_btcusdt_price_10s">-</span></td>
-            <td style="text-align: right;">1.2</td>
-            <td style="text-align: right; color: green">4%</td>
-          </tr>
-          <tr>
-            <td>ETHUSDT</td>
-            <td>Binance</td>
-            <td style="text-align: right;"><span id="binance_ethusdt_price_10s">-</span></td>
-            <td style="text-align: right;">23</td>
-            <td style="text-align: right; color: red">-13%</td>
-          </tr>
-          <tr>
-            <td>LTCUSDT</td>
-            <td>Binance</td>
-            <td style="text-align: right;"><span id="binance_ltcusdt_price_10s">-</span></td>
-            <td style="text-align: right;">54</td>
-            <td style="text-align: right; color: red">-40%</td>
-          </tr>
-        </tbody>
+        <tbody></tbody>
       </table>
+
     </div>
 </div>
 
