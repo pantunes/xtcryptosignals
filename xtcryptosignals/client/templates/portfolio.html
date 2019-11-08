@@ -45,13 +45,13 @@
     for (const [key, value] of Object.entries(data)) {
       $table.append(
           "<tr>" +
-          "<td>" + key + "USD</td>" +
-          "<td>Binance</td>" +
-          "<td style=\"text-align: right;\"><span id=\"binance_" + key.toLowerCase() + "usdt_price_{{frequency}}\">-</span></td>" +
+          "<td>" + key + "USDT</td>" +
+          "<td>" + value.exchange +"</td>" +
+          "<td style=\"text-align: right;\"><span id=\"" + value.exchange.toLowerCase() + "_" + key.toLowerCase() + "usdt_price_{{frequency}}\">-</span></td>" +
           "<td style=\"text-align: right;\">" + value.total_units + "</td>" +
           "<td style=\"text-align: right;\">" + price_formatter.format(value.total_amount_paid) + "</td>" +
           "<td style=\"text-align: right;\">" + price_formatter.format(value.average_paid) +"</td>" +
-          "<td style=\"text-align: right;\"><span id=\"binance_" + key.toLowerCase() + "usdt_position_{{frequency}}\">-</span></td>" +
+          "<td style=\"text-align: right;\"><span id=\"" + value.exchange.toLowerCase() + "_" + key.toLowerCase() + "usdt_position_{{frequency}}\">-</span></td>" +
           "</tr>"
       );
     }
@@ -69,9 +69,9 @@
 
 <script type="text/javascript">
   function post_ticker_emit(id, json) {
-    if (json.source !== 'binance') {
-      return;
-    }
+    // if (json.source !== 'binance') {
+    //   return;
+    // }
     let symbol = data_portf[json.ticker];
     if (symbol === undefined) {
       return;
