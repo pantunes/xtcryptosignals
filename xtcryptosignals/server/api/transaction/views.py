@@ -41,8 +41,9 @@ class TransactionAdd(Resource):
                 {
                     coin_token: 'BTC',
                     units: 0.0234,
-                    amount_paid: 450,
+                    amount: 450,
                     added_on: 08/10/2019,
+                    in_or_out: 'in',
                 }
               required: true
         responses:

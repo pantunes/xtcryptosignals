@@ -16,12 +16,14 @@ from xtcryptosignals.server.api.common.schemas import OutputSchema
 class TransactionInputSchema(Schema):
     coin_token = fields.String(required=True)
     units = fields.Float(required=True)
-    amount_paid = fields.Float(required=True)
+    amount = fields.Float(required=True)
     added_on = fields.Date(required=True)
+    in_or_out = fields.String(required=True)
 
 
 class TransactionOutputSchema(OutputSchema):
     coin_token = fields.String(required=True)
     units = fields.Float(required=True)
-    amount_paid = fields.Float(required=True)
+    amount = fields.Float(required=True)
     added_on = fields.Date(required=True)
+    in_or_out = fields.String(required=True)

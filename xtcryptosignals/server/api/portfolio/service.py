@@ -11,7 +11,7 @@ from xtcryptosignals.common.utils import get_coin_tokens
 from xtcryptosignals.tasks import settings as s
 
 
-def get_preferred_exchange(coin_token):
+def get_preferred_exchange_for_coin_token(coin_token):
     for pref_exchange in s.EXCHANGES_OF_PREFERENCE:
         for x in s.SYMBOLS_PER_EXCHANGE:
             for exchange, items in x.items():
@@ -19,9 +19,7 @@ def get_preferred_exchange(coin_token):
                     for symbol in [x[0] + x[1] for x in items['pairs']]:
                         if symbol == coin_token + 'USDT':
                             return exchange.upper()
-    raise ValueError(
-        'Exchange of Preference not set to {}USDT'.format(coin_token)
-    )
+    return '-'
 
 
 def portfolio(auth):
@@ -29,24 +27,35 @@ def portfolio(auth):
 
     for coin_token in get_coin_tokens(s.SYMBOLS_PER_EXCHANGE):
 
-        total_units = Transaction.objects(
-            user=auth.user, coin_token=coin_token
+        total_units_in = Transaction.objects(
+            user=auth.user, coin_token=coin_token, in_or_out='in'
         ).sum('units')
 
-        if total_units == 0:
+        if total_units_in == 0:
             continue
 
-        total_amount_paid = Transaction.objects(
-            user=auth.user, coin_token=coin_token
-        ).sum('amount_paid')
+        total_units_out = Transaction.objects(
+            user=auth.user, coin_token=coin_token, in_or_out='out'
+        ).sum('units')
 
-        average_paid = total_amount_paid / total_units
+        total_amount_paid = Transaction.objects(
+            user=auth.user, coin_token=coin_token, in_or_out='in'
+        ).sum('amount')
+
+        total_amount_received = Transaction.objects(
+            user=auth.user, coin_token=coin_token, in_or_out='out'
+        ).sum('amount')
+
+        total_units = total_units_in - total_units_out
+        total_amount = total_amount_paid - total_amount_received
+
+        average_paid = total_amount / total_units
 
         _portfolio.update({
             coin_token: dict(
-                exchange=get_preferred_exchange(coin_token),
+                exchange=get_preferred_exchange_for_coin_token(coin_token),
                 total_units=total_units,
-                total_amount_paid=total_amount_paid,
+                total_amount=total_amount,
                 average_paid=average_paid,
             ),
         })

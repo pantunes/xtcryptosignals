@@ -29,12 +29,15 @@
               <input class="u-full-width" type="text" placeholder="0.0234" id="tx_units" name="units">
           </div>
           <div class="four columns">
-              <label for="tx_amount_paid">Paid ($)</label>
-              <input class="u-full-width" type="text" placeholder="450" id="tx_amount_paid" name="amount_paid">
+              <label for="tx_amount">Amount ($)</label>
+              <input class="u-full-width" type="text" placeholder="450" id="tx_amount" name="amount">
           </div>
           <div class="four columns">
-              <label for="tx_price_per_unit">Price per Unit</label>
-              <input class="u-full-width" type="text" id="tx_price_per_unit" readonly>
+              <label for="tx_in_or_out">Type</label>
+              <select class="u-full-width" id="tx_in_or_out" name="in_or_out">
+                  <option value="in">in</option>
+                  <option value="out">out</option>
+              </select>
           </div>
       </div>
       <input class="button-primary" type="button" value="Add" onClick="(
@@ -47,7 +50,7 @@
                     get_portfolio(render_portfolio);
                 })
                 .fail(function(xhr, status, error) {
-                    $.notify(JSON.parse(xhr.responseText).error);
+                    process_fail(xhr);
                 });
             return false;
         })(); return false;">
