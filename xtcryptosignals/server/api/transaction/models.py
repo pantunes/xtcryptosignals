@@ -23,9 +23,10 @@ class Transaction(DocumentValidation):
         required=True, choices=get_coin_tokens(s.SYMBOLS_PER_EXCHANGE)
     )
     units = DecimalField(required=True, precision=s.SYMBOL_FLOAT_PRECISION)
-    amount_paid = DecimalField(required=True)
-    user = ReferenceField(User, required=True, precision=2)
+    amount = DecimalField(required=True, precision=s.SYMBOL_FLOAT_PRECISION)
+    user = ReferenceField(User, required=True)
     added_on = DateField(required=True)
+    in_or_out = StringField(required=True, choices=('in', 'out',))
 
     meta = {
         'collection': 'transaction',

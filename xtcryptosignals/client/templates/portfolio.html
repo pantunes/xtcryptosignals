@@ -27,8 +27,9 @@
           "<tr>" +
           "<td>" + this.coin_token + "</td>" +
           "<td style=\"text-align: right;\">" + this.units + "</td>" +
-          "<td style=\"text-align: right;\">" + price_formatter.format(this.amount_paid) + "</td>" +
+          "<td style=\"text-align: right;\">" + price_formatter.format(this.amount) + "</td>" +
           "<td style=\"text-align: right;\">" + price_formatter.format(1000) + "</td>" +
+          "<td style=\"text-align: center;\">" + this.in_or_out + "</td>" +
           "<td>" + this.added_on + "</td>" +
           "</tr>"
       );
@@ -49,7 +50,7 @@
           "<td>" + value.exchange +"</td>" +
           "<td style=\"text-align: right;\"><span id=\"" + value.exchange.toLowerCase() + "_" + key.toLowerCase() + "usdt_price_{{frequency}}\">-</span></td>" +
           "<td style=\"text-align: right;\">" + value.total_units + "</td>" +
-          "<td style=\"text-align: right;\">" + price_formatter.format(value.total_amount_paid) + "</td>" +
+          "<td style=\"text-align: right;\">" + price_formatter.format(value.total_amount) + "</td>" +
           "<td style=\"text-align: right;\">" + price_formatter.format(value.average_paid) +"</td>" +
           "<td style=\"text-align: right;\"><span id=\"" + value.exchange.toLowerCase() + "_" + key.toLowerCase() + "usdt_position_{{frequency}}\">-</span></td>" +
           "</tr>"
@@ -61,7 +62,7 @@
 <script type="text/javascript">
   function get_percent(x, y) {
     if (x >= y) {
-      return 100 - ((y * 100) / x).toFixed(2)
+      return (100 - ((y * 100) / x)).toFixed(2)
     }
     return -(100 - ((x * 100) / y)).toFixed(2)
   }
@@ -69,9 +70,6 @@
 
 <script type="text/javascript">
   function post_ticker_emit(id, json) {
-    // if (json.source !== 'binance') {
-    //   return;
-    // }
     let symbol = data_portf[json.ticker];
     if (symbol === undefined) {
       return;
@@ -118,8 +116,9 @@
           <tr>
             <th>Coin/Token</th>
             <th>Units</th>
-            <th>Paid ($)</th>
-            <th>Price per Unit ($)</th>
+            <th>Paid</th>
+            <th>Unit Price</th>
+            <th>Type</th>
             <th>Added on</th>
           </tr>
         </thead>
@@ -145,10 +144,10 @@
           <tr>
             <th>Pair</th>
             <th>Exchange</th>
-            <th>Price ($)</th>
-            <th>Total Assets</th>
-            <th>Total Paid ($)</th>
-            <th>Avg Paid ($)</th>
+            <th>Price</th>
+            <th>Total Units</th>
+            <th>Total Paid</th>
+            <th>Unit Avg Paid</th>
             <th>Position</th>
           </tr>
         </thead>

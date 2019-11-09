@@ -11,7 +11,7 @@ function login() {
         open_modal('#info');
     })
     .fail(function(xhr, status, error) {
-        $.notify(JSON.parse(xhr.responseText).error);
+        process_fail(xhr);
     });
 }
 
@@ -30,7 +30,7 @@ function logout() {
         }
     })
     .fail(function(xhr, status, error) {
-        $.notify(JSON.parse(xhr.responseText).error);
+        process_fail(xhr);
     });
 }
 
@@ -39,7 +39,7 @@ function get_transactions(handler) {
         handler(response)
     })
     .fail(function(xhr, status, error) {
-        $.notify(JSON.parse(xhr.responseText).error);
+        process_fail(xhr);
     });
 }
 
@@ -48,6 +48,6 @@ function get_portfolio(handler) {
         handler(response)
     })
     .fail(function(xhr, status, error) {
-        $.notify(JSON.parse(xhr.responseText).error);
+        process_fail(xhr);
     });
 }

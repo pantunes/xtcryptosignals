@@ -4,12 +4,12 @@
   <ul class="navbar-list">
     <li class="navbar-item"><a class="navbar-link" href="/">Home</a></li>
     <li class="navbar-item">
-      <a class="navbar-link" href="javascript:;" data-popover="#tickerNavPopover">Tickers</a>
-      <div id="tickerNavPopover" class="popover">
+      <a class="navbar-link" href="javascript:;" data-popover="#pairsNavPopover">Pairs</a>
+      <div id="pairsNavPopover" class="popover">
         <ul class="popover-list">
-{% for f in frequencies %}
+{% for p in pairs %}
           <li class="popover-item">
-            <a class="popover-link" href="{{url_for(url, frequency=f, **params)}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{f}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a class="popover-link" href="{{url_for('ticker.pair_frequency', frequency=frequency, pair=p) if p != 'ALL' else url_for('ticker.ticker', frequency=frequency)}}">{{p}}</a>
           </li>
 {% endfor %}
         </ul>
@@ -28,12 +28,12 @@
       </div>
     </li>
     <li class="navbar-item">
-      <a class="navbar-link" href="javascript:;" data-popover="#pairsNavPopover">Pairs</a>
-      <div id="pairsNavPopover" class="popover">
+      <a class="navbar-link" href="javascript:;" data-popover="#tickerNavPopover">Tickers</a>
+      <div id="tickerNavPopover" class="popover">
         <ul class="popover-list">
-{% for p in pairs %}
+{% for f in frequencies %}
           <li class="popover-item">
-            <a class="popover-link" href="{{url_for('ticker.pair_frequency', frequency=frequency, pair=p) if p != 'ALL' else url_for('ticker.ticker', frequency=frequency)}}">{{p}}</a>
+            <a class="popover-link" href="{{url_for(url, frequency=f, **params)}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{f}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
           </li>
 {% endfor %}
         </ul>
