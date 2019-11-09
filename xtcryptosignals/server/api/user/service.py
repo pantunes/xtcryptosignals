@@ -30,10 +30,10 @@ def create_user(data):
         raise ValueError(
             'User account already exists ({email}).'.format(**data), 409
         )
-    except ValidationError:
-        raise ValueError(
-            'Invalid e-mail address ({email}).'.format(**data), 406
-        )
+    except ValidationError as err:
+        from xtcryptosignals.server.utils import _sanitize_errors_mongoengine
+        error = _sanitize_errors_mongoengine(err)
+        raise ValueError(error, 406)
     return user
 
 
