@@ -8,6 +8,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 from mongoengine.errors import ValidationError
 from xtcryptosignals.server.api.transaction.models import Transaction
+from xtcryptosignals.server.utils import _sanitize_errors_mongoengine
 
 
 def add_transaction(auth, data):
@@ -16,10 +17,9 @@ def add_transaction(auth, data):
     transaction = Transaction(**data)
     try:
         transaction.save()
-    except ValidationError:
-        raise ValueError(
-            'Coin/Token is invalid ({coin_token}).'.format(**data), 406
-        )
+    except ValidationError as err:
+        error = _sanitize_errors_mongoengine(err)
+        raise ValueError(error, 406)
 
 
 def transactions(auth):

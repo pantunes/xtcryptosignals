@@ -22,8 +22,12 @@ class Transaction(DocumentValidation):
     coin_token = StringField(
         required=True, choices=get_coin_tokens(s.SYMBOLS_PER_EXCHANGE)
     )
-    units = DecimalField(required=True, precision=s.SYMBOL_FLOAT_PRECISION)
-    amount = DecimalField(required=True, precision=s.SYMBOL_FLOAT_PRECISION)
+    units = DecimalField(
+        required=True, min_value=0, precision=s.SYMBOL_FLOAT_PRECISION
+    )
+    amount = DecimalField(
+        required=True, min_value=0, precision=s.SYMBOL_FLOAT_PRECISION
+    )
     user = ReferenceField(User, required=True)
     added_on = DateField(required=True)
     in_or_out = StringField(required=True, choices=('in', 'out',))
