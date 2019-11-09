@@ -252,11 +252,14 @@ xt-all --help
 ```
 
 ```bash
-Usage: xt-all [OPTIONS] [start|stop|restart]
+Usage: xt-all [OPTIONS] [copy-config-files|start|stop|restart]
 
 Options:
   -h, --help  Show this message and exit.
 ```
+For Production enviroment `xt-all copy-config-files` should be executed on first place 
+to copy default config files to the folder `/config`.  
+The configuration should be reviewed and changed.
 
 ## Screenshots
 
