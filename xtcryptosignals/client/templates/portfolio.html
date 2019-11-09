@@ -44,15 +44,16 @@
     let $table = $('#table_portfolio');
     $table.find("tbody tr").remove();
     for (const [key, value] of Object.entries(data)) {
+      let prefix_id = value.exchange.name + "_" + key.toLowerCase() + value.exchange.pair.toLowerCase();
       $table.append(
           "<tr>" +
-          "<td>" + key + "USDT</td>" +
-          "<td>" + value.exchange +"</td>" +
-          "<td style=\"text-align: right;\"><span id=\"" + value.exchange.toLowerCase() + "_" + key.toLowerCase() + "usdt_price_{{frequency}}\">-</span></td>" +
+          "<td>" + key + value.exchange.pair + "</td>" +
+          "<td>" + value.exchange.name +"</td>" +
+          "<td style=\"text-align: right;\"><span id=\"" + prefix_id + "_price_{{frequency}}\">-</span></td>" +
           "<td style=\"text-align: right;\">" + value.total_units + "</td>" +
           "<td style=\"text-align: right;\">" + price_formatter.format(value.total_amount) + "</td>" +
           "<td style=\"text-align: right;\">" + price_formatter.format(value.average_paid) +"</td>" +
-          "<td style=\"text-align: right;\"><span id=\"" + value.exchange.toLowerCase() + "_" + key.toLowerCase() + "usdt_position_{{frequency}}\">-</span></td>" +
+          "<td style=\"text-align: right;\"><span id=\"" + prefix_id + "_position_{{frequency}}\">-</span></td>" +
           "</tr>"
       );
     }
@@ -128,31 +129,31 @@
   </div>
 
   <div class="seven columns">
-      <div style="float: left">
-        <h5>My Portfolio</h5>
+    <div style="float: left;">
+      <h5>My Portfolio</h5>
+    </div>
+    <div style="float: right; width: 75%">
+      <div class="row example-grid docs-example">
+        <div class="four columns">Spent: <span class="bigger">$233,234,234</span></div>
+        <div class="four columns">Position: <span class="bigger">-23%</span></div>
+        <div class="four columns">Value: <span class="bigger">$150,000</span></div>
       </div>
-      <div style="float: right">
-        <input class="button-primary" type="button" value="Reset" onClick="(
-        function() {
-            alert('Reset!');
-            return false;
-        })(); return false;">
-      </div>
+    </div>
 
-      <table class="u-full-width" id="table_portfolio">
-        <thead>
-          <tr>
-            <th>Pair</th>
-            <th>Exchange</th>
-            <th>Price</th>
-            <th>Total Units</th>
-            <th>Total Paid</th>
-            <th>Unit Avg Paid</th>
-            <th>Position</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+    <table class="u-full-width" id="table_portfolio">
+      <thead>
+        <tr>
+          <th>Pair</th>
+          <th>Exchange</th>
+          <th>Price</th>
+          <th>Total Units</th>
+          <th>Total Paid</th>
+          <th>Unit Avg Paid</th>
+          <th>Position</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
 
     </div>
 </div>

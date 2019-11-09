@@ -29,7 +29,24 @@ EXCHANGES = [
     BILAXY,
 ]
 
-EXCHANGES_OF_PREFERENCE = (BINANCE, BITMAX, HOTBIT,)
+EXCHANGES_OF_REFERENCE = {
+    'BTC': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'ETH': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'LTO': {
+        'pair': 'USDT',
+        'name': BITMAX,
+    },
+    'IDEX': {
+        'pair': 'ETH',
+        'name': IDEX,
+    },
+}
 
 SYMBOLS_PER_EXCHANGE = list()
 

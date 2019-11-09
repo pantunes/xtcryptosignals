@@ -11,15 +11,8 @@ from xtcryptosignals.common.utils import get_coin_tokens
 from xtcryptosignals.tasks import settings as s
 
 
-def get_preferred_exchange_for_coin_token(coin_token):
-    for pref_exchange in s.EXCHANGES_OF_PREFERENCE:
-        for x in s.SYMBOLS_PER_EXCHANGE:
-            for exchange, items in x.items():
-                if exchange == pref_exchange:
-                    for symbol in [x[0] + x[1] for x in items['pairs']]:
-                        if symbol == coin_token + 'USDT':
-                            return exchange.upper()
-    return '-'
+def get_exchange_for(coin_token):
+    return s.EXCHANGES_OF_REFERENCE[coin_token]
 
 
 def portfolio(auth):
@@ -53,7 +46,7 @@ def portfolio(auth):
 
         _portfolio.update({
             coin_token: dict(
-                exchange=get_preferred_exchange_for_coin_token(coin_token),
+                exchange=get_exchange_for(coin_token),
                 total_units=total_units,
                 total_amount=total_amount,
                 average_paid=average_paid,
