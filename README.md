@@ -259,7 +259,8 @@ Options:
 ```
 For Production enviroment `xt-all copy-config-files` should be executed on first place 
 to copy default config files to the folder `/config`.  
-The configuration should be reviewed and changed.
+The configuration should be reviewed and changed, before running `xt-all start`
+to start all 3 services: `xt-server`, `xt-client` and `xt-ticker`.  
 
 ## Screenshots
 
