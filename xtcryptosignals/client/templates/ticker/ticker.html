@@ -36,6 +36,12 @@
                 continue
             }
             const _id = '#' + json.source + '_' + json.symbol.toLowerCase() + '_' + _attr + '_' + json.frequency;
+
+            if (_attr === 'price_change_chart') {
+                doChart($(_id), json.price_change_chart);
+                return
+            }
+
             if (_attr === 'price' || _attr === 'volume_24h') {
                 const precision = (val + "").split(".");
                 let frac_digits = 2;
@@ -54,18 +60,21 @@
                 }
                 const price_formatter = new Intl.NumberFormat('en-US', setup);
                 val = price_formatter.format(val)
+
+                const color = (json.price_change > 0) ? "#e3ffe2" : "#ffe2e2";
+                if (_attr === 'price') {
+                    $(_id).effect("highlight", {color: color, queue: false}, 1100, "slow");
+                    try {
+                        post_ticker_emit(_id, json)
+                    } catch (e) {}
+                }
+
             } else if (_attr === 'number_trades_24h') {
                 val = numeral(val).format('0,0');
             } else if (isFloat(json[_attr])) {
                 val = numeral(val).format('0,0.00');
             }
-            const color = (json.price_change > 0) ? "#e3ffe2" : "#ffe2e2";
-            if (_attr === 'price') {
-                $(_id).effect("highlight", {color: color, queue: false}, 1100, "slow");
-                try {
-                    post_ticker_emit(_id, json)
-                } catch (e) {}
-            }
+
             let suffix = '';
             if(['price_change', 'volume_change', 'number_trades_change'].indexOf(_attr) >= 0) {
                 if (json[_attr] !== 0) {
@@ -75,10 +84,7 @@
                 }
                 suffix = '%'
             }
-            if (_attr === 'price_change_chart') {
-                doChart($(_id), json.price_change_chart);
-                return
-            }
+
             if (_id.indexOf('#binance_btcusdt_price_') !== -1) {
                 timeleft = 1;
             }
