@@ -9,6 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 from marshmallow import (
     fields,
     pre_load,
+    post_load,
 )
 from xtcryptosignals.tasks.schemas.base import BaseSchema
 from xtcryptosignals.tasks import settings as s
@@ -25,4 +26,9 @@ class Hotbit(BaseSchema):
     @pre_load
     def pre_load(self, data):
         data['source'] = s.HOTBIT
+        return data
+
+    @post_load
+    def post_load(self, data):
+        super().post_load(data)
         return data

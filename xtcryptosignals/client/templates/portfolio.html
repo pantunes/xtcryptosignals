@@ -45,11 +45,15 @@
     $table.find("tbody tr").remove();
     for (const [key, value] of Object.entries(data)) {
       let prefix_id = value.exchange.name + "_" + key.toLowerCase() + value.exchange.pair.toLowerCase();
+      let sufix_id = 'price';
+      if (value.exchange.pair === 'ETH') {
+        sufix_id = 'price_usdt';
+      }
       $table.append(
           "<tr>" +
           "<td>" + key + value.exchange.pair + "</td>" +
-          "<td>" + value.exchange.name +"</td>" +
-          "<td style=\"text-align: right;\"><span id=\"" + prefix_id + "_price_{{frequency}}\">-</span></td>" +
+          "<td>" + value.exchange.name.toUpperCase() +"</td>" +
+          "<td style=\"text-align: right;\"><span id=\"" + prefix_id + "_" + sufix_id + "_{{frequency}}\">-</span></td>" +
           "<td style=\"text-align: right;\">" + value.total_units + "</td>" +
           "<td style=\"text-align: right;\">" + price_formatter.format(value.total_amount) + "</td>" +
           "<td style=\"text-align: right;\">" + price_formatter.format(value.average_paid) +"</td>" +
@@ -76,9 +80,13 @@
       return;
     }
 
-    let _id = id.replace("_price_", "_position_")
+    let price = json.price;
+    if (json['symbol'].substr(json['symbol'].length - 3) === 'ETH') {
+      price = json.price_usdt;
+    }
 
-    let perc = get_percent(json.price, symbol.average_paid);
+    let _id = id.replace("_price_", "_position_");
+    let perc = get_percent(price, symbol.average_paid);
 
     if (perc !== 0) {
       $(_id).css("color", (perc > 0) ? "green" : "red")
@@ -145,7 +153,7 @@
         <tr>
           <th>Pair</th>
           <th>Exchange</th>
-          <th>Price</th>
+          <th>Price (USDT)</th>
           <th>Total Units</th>
           <th>Total Paid</th>
           <th>Unit Avg Paid</th>
