@@ -18,6 +18,10 @@ from xtcryptosignals.common.utils import get_coin_tokens
 from xtcryptosignals.tasks import settings as s
 
 
+def _calculate_unit_price(_self):
+    _self.unit_price = _self.amount/_self.units
+
+
 class Transaction(DocumentValidation):
     coin_token = StringField(
         required=True, choices=get_coin_tokens(s.SYMBOLS_PER_EXCHANGE)
@@ -28,6 +32,9 @@ class Transaction(DocumentValidation):
     amount = DecimalField(
         required=True, min_value=0, precision=s.SYMBOL_FLOAT_PRECISION
     )
+    unit_price = DecimalField(
+        required=True, min_value=0, precision=s.SYMBOL_FLOAT_PRECISION
+    )
     user = ReferenceField(User, required=True)
     added_on = DateField(required=True)
     in_or_out = StringField(required=True, choices=('in', 'out',))
@@ -35,3 +42,5 @@ class Transaction(DocumentValidation):
     meta = {
         'collection': 'transaction',
     }
+
+    _pre_save_hooks = (_calculate_unit_price,)

@@ -38,6 +38,10 @@ EXCHANGES_OF_REFERENCE = {
         'pair': 'USDT',
         'name': BINANCE,
     },
+    'LTC': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
     'LTO': {
         'pair': 'USDT',
         'name': BITMAX,
