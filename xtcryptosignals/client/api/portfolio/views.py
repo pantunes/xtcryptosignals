@@ -37,7 +37,7 @@ def before_request():
         frequencies=g.HISTORY_FREQUENCY,
         pairs=get_pairs(g.SYMBOLS_PER_EXCHANGE),
         tokens=get_coin_tokens(g.SYMBOLS_PER_EXCHANGE),
-        attributes=['Price'],
+        attributes=['Price', 'Price USDT'],
     )
 
 

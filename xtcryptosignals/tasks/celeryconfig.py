@@ -6,7 +6,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import xtcryptosignals.tasks.settings as s
+from xtcryptosignals.tasks import settings as s
 
 
 CELERY_DEFAULT_QUEUE = 'XTCryptoSignals'
@@ -18,7 +18,7 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_IGNORE_RESULT = True
 CELERY_TIMEZONE = 'UTC'
 
-BROKER_URL = 'redis://localhost:6379'
+BROKER_URL = s.BROKER_URL
 
 CELERY_IMPORTS = (
     'xtcryptosignals.tasks.ticker',

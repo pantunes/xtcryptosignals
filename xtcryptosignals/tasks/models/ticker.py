@@ -76,6 +76,9 @@ def _set_history(_self):
             price_change_chart=price_change_chart,
         )
 
+        if 'price_usdt' in _self:
+            history_object.price_usdt = _self['price_usdt']
+
         if not _self._exists_row_offset(model, offset=x):
             history_object.save()
         else:
@@ -92,6 +95,7 @@ class Ticker(DocumentValidation):
     source = StringField(required=True)
     ticker = StringField(required=True)
     price = DecimalField(required=True, precision=s.SYMBOL_FLOAT_PRECISION)
+    price_usdt = DecimalField(precision=s.SYMBOL_FLOAT_PRECISION)
     # 24h
     price_change_24h = DecimalField(precision=s.SYMBOL_FLOAT_PRECISION)
     lowest_price_24h = DecimalField(precision=s.SYMBOL_FLOAT_PRECISION)

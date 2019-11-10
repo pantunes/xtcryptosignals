@@ -21,6 +21,7 @@ class History(DocumentValidation):
     source = StringField(required=True)
     ticker = StringField(required=True)
     price = DecimalField(required=True, precision=s.SYMBOL_FLOAT_PRECISION)
+    price_usdt = DecimalField(precision=s.SYMBOL_FLOAT_PRECISION)
     number_trades_24h = IntField()
     volume_24h = DecimalField(precision=s.SYMBOL_FLOAT_PRECISION)
     price_change = DecimalField(precision=2)
@@ -44,6 +45,7 @@ class History(DocumentValidation):
         for k in e:
             if k in [
                 'price',
+                'price_usdt',
                 'volume_24h',
                 'price_change',
                 'number_trades_change',
