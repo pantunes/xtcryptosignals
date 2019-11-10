@@ -16,8 +16,8 @@ def get_exchange_for(coin_token):
 
 
 def portfolio(auth):
-    _portfolio = dict()
-
+    _portfolio = dict(coin_tokens=dict())
+    _spent = 0
     for coin_token in get_coin_tokens(s.SYMBOLS_PER_EXCHANGE):
 
         total_units_in = Transaction.objects(
@@ -44,7 +44,7 @@ def portfolio(auth):
 
         average_paid = total_amount / total_units
 
-        _portfolio.update({
+        _portfolio['coin_tokens'].update({
             coin_token: dict(
                 exchange=get_exchange_for(coin_token),
                 total_units=total_units,
@@ -52,5 +52,11 @@ def portfolio(auth):
                 average_paid=average_paid,
             ),
         })
+
+        _spent += total_amount
+
+    _portfolio.update(
+        total_spent=_spent,
+    )
 
     return _portfolio

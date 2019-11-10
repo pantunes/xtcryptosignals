@@ -8,6 +8,8 @@
 {% include 'snippets/menu.html' %}
 {% endwith %}
 
+<link rel="stylesheet" href="/static/css/portfolio.css" type="text/css">
+
 <script type="text/javascript">
   let setup = {
     minimumFractionDigits: 0,
@@ -26,9 +28,9 @@
       $table.append(
           "<tr>" +
           "<td>" + this.coin_token + "</td>" +
-          "<td style=\"text-align: right;\">" + this.units + "</td>" +
-          "<td style=\"text-align: right;\">" + price_formatter.format(this.amount) + "</td>" +
-          "<td style=\"text-align: right;\">" + price_formatter.format(1000) + "</td>" +
+          "<td class='align-right'>" + this.units + "</td>" +
+          "<td class='align-right'>" + price_formatter.format(this.amount) + "</td>" +
+          "<td class='align-right'>" + price_formatter.format(this.unit_price) + "</td>" +
           "<td style=\"text-align: center;\">" + this.in_or_out + "</td>" +
           "<td>" + this.added_on + "</td>" +
           "</tr>"
@@ -43,7 +45,7 @@
     data_portf = data;
     let $table = $('#table_portfolio');
     $table.find("tbody tr").remove();
-    for (const [key, value] of Object.entries(data)) {
+    for (const [key, value] of Object.entries(data_portf.coin_tokens)) {
       let prefix_id = value.exchange.name + "_" + key.toLowerCase() + value.exchange.pair.toLowerCase();
       let sufix_id = 'price';
       if (value.exchange.pair === 'ETH') {
@@ -53,11 +55,11 @@
           "<tr>" +
           "<td>" + key + value.exchange.pair + "</td>" +
           "<td>" + value.exchange.name.toUpperCase() +"</td>" +
-          "<td style=\"text-align: right;\"><span id=\"" + prefix_id + "_" + sufix_id + "_{{frequency}}\">-</span></td>" +
-          "<td style=\"text-align: right;\">" + value.total_units + "</td>" +
-          "<td style=\"text-align: right;\">" + price_formatter.format(value.total_amount) + "</td>" +
-          "<td style=\"text-align: right;\">" + price_formatter.format(value.average_paid) +"</td>" +
-          "<td style=\"text-align: right;\"><span id=\"" + prefix_id + "_position_{{frequency}}\">-</span></td>" +
+          "<td class='align-right pf-current-price'><span id=\"" + prefix_id + "_" + sufix_id + "_{{frequency}}\">-</span></td>" +
+          "<td class='align-right pf-units'>" + value.total_units + "</td>" +
+          "<td class='align-right pf-total-paid'>" + price_formatter.format(value.total_amount) + "</td>" +
+          "<td class='align-right'>" + price_formatter.format(value.average_paid) +"</td>" +
+          "<td class='align-right'><span id=\"" + prefix_id + "_position_{{frequency}}\">-</span></td>" +
           "</tr>"
       );
     }
@@ -74,27 +76,70 @@
 </script>
 
 <script type="text/javascript">
-  function post_ticker_emit(id, json) {
-    let symbol = data_portf[json.ticker];
-    if (symbol === undefined) {
-      return;
+  function _calculate_and_set_total_value_and_position() {
+    let units_list = [];
+    $(".pf-units").each(function() {
+        let value = $(this).text().replace(',', '');
+        if(!isNaN(value) && value.length !== 0) {
+          units_list.push(value);
+        }
+    });
+    let current_price_list = [];
+    $(".pf-current-price").each(function() {
+        let value = $(this).text().replace(',', '');
+        if(!isNaN(value) && value.length !== 0) {
+          current_price_list.push(value);
+        }
+    });
+    if (units_list.length !== current_price_list.length) {
+      return
     }
+    const x = Array(units_list.length).fill().map(
+      (_, i) => current_price_list[i] * units_list[i]
+    );
+    $('#my_portfolio_total_value').text(
+      price_formatter.format(x.reduce((a, b) => a + b, 0))
+    );
+  }
 
+  const _prefix_non_eth = '_price_';
+  const _prefix_eth = '_price_usdt_';
+
+  function _calculate_and_set_position(id, json, symbol, total_spent) {
     let price = json.price;
-    if (json['symbol'].substr(json['symbol'].length - 3) === 'ETH') {
+    let p = _prefix_non_eth;
+    if(symbol.exchange.pair === 'ETH') {
       price = json.price_usdt;
+      p = _prefix_eth;
     }
-
-    let _id = id.replace("_price_", "_position_");
+    let _id = id.replace(p, "_position_");
     let perc = get_percent(price, symbol.average_paid);
-
     if (perc !== 0) {
       $(_id).css("color", (perc > 0) ? "green" : "red")
     } else {
       $(_id).attr("class", "numeric_value");
     }
-
     $(_id).text(perc + '%');
+    $('#my_portfolio_total_spent').text(price_formatter.format(total_spent));
+  }
+
+  function post_ticker_emit(id, json) {
+    const symbol = data_portf.coin_tokens[json.ticker];
+    const total_spent = data_portf.total_spent;
+    if (symbol === undefined) {
+      return;
+    }
+    if(symbol.exchange.name !== json.source) {
+      return;
+    }
+    if(symbol.exchange.pair !== json.symbol.substr(json.ticker.length)) {
+      return;
+    }
+    if(symbol.exchange.pair === 'ETH' && !id.includes(_prefix_eth)) {
+      return;
+    }
+    _calculate_and_set_position(id, json, symbol, total_spent);
+    _calculate_and_set_total_value_and_position();
   }
 </script>
 
@@ -123,7 +168,7 @@
       <table class="u-full-width" id="table_transactions">
         <thead>
           <tr>
-            <th>Coin/Token</th>
+            <th>Coin</th>
             <th>Units</th>
             <th>Paid</th>
             <th>Unit Price</th>
@@ -142,9 +187,9 @@
     </div>
     <div style="float: right; width: 75%">
       <div class="row example-grid docs-example">
-        <div class="four columns">Spent: <span class="bigger">$233,234,234</span></div>
-        <div class="four columns">Position: <span class="bigger">-23%</span></div>
-        <div class="four columns">Value: <span class="bigger">$150,000</span></div>
+        <div class="four columns">Spent: <span id='my_portfolio_total_spent' class="bigger">-</span></div>
+        <div class="four columns">Value: <span id='my_portfolio_total_value' class="bigger">-</span></div>
+        <div class="four columns">Position: <span class="bigger">-</span></div>
       </div>
     </div>
 
@@ -156,7 +201,7 @@
           <th>Price (USDT)</th>
           <th>Total Units</th>
           <th>Total Paid</th>
-          <th>Unit Avg Paid</th>
+          <th>Unit Avg. Paid</th>
           <th>Position</th>
         </tr>
       </thead>

@@ -25,5 +25,6 @@ class TransactionOutputSchema(OutputSchema):
     coin_token = fields.String(required=True)
     units = fields.Float(required=True)
     amount = fields.Float(required=True)
+    unit_price = fields.Float(required=True)
     added_on = fields.Date(required=True)
     in_or_out = fields.String(required=True)
