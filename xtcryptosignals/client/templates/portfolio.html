@@ -59,6 +59,7 @@
           "<td class='align-right pf-units'>" + value.total_units + "</td>" +
           "<td class='align-right pf-total-paid'>" + price_formatter.format(value.total_amount) + "</td>" +
           "<td class='align-right'>" + price_formatter.format(value.average_paid) +"</td>" +
+          "<td class='align-right'><span id=\"" + prefix_id + "_loss_{{frequency}}\">-</span></td>" +
           "<td class='align-right'><span id=\"" + prefix_id + "_position_{{frequency}}\">-</span></td>" +
           "</tr>"
       );
@@ -123,10 +124,17 @@
       price = json.price_usdt;
       p = _prefix_eth;
     }
+    // position
     let _id = id.replace(p, "_position_");
     let perc = get_percent(price, symbol.average_paid);
     set_style(_id, perc);
     $(_id).text(perc + '%');
+    // loss
+    _id = id.replace(p, "_loss_");
+    let diff = total_spent - symbol.average_paid;
+    set_style(_id, diff);
+    $(_id).text(price_formatter.format(diff));
+    // spent
     $('#my_portfolio_total_spent').text(price_formatter.format(total_spent));
   }
 
@@ -205,10 +213,11 @@
         <tr>
           <th>Pair</th>
           <th>Exchange</th>
-          <th>Price (USDT)</th>
+          <th>Ticker</th>
           <th>Total Units</th>
-          <th>Total Paid</th>
-          <th>Unit Avg. Paid</th>
+          <th>Paid</th>
+          <th>Unit Price</th>
+          <th>Loss</th>
           <th>Position</th>
         </tr>
       </thead>
