@@ -76,7 +76,7 @@
 </script>
 
 <script type="text/javascript">
-  function _calculate_and_set_total_value_and_position() {
+  function _set_total_value_and_position(total_spent) {
     let units_list = [];
     $(".pf-units").each(function() {
         let value = $(this).text().replace(',', '');
@@ -97,15 +97,15 @@
     const x = Array(units_list.length).fill().map(
       (_, i) => current_price_list[i] * units_list[i]
     );
-    $('#my_portfolio_total_value').text(
-      price_formatter.format(x.reduce((a, b) => a + b, 0))
-    );
+    const total_value = x.reduce((a, b) => a + b, 0);
+    $('#my_portfolio_total_value').text(price_formatter.format(total_value));
+    $('#my_portfolio_position').text(get_percent(total_value, total_spent) + '%');
   }
 
   const _prefix_non_eth = '_price_';
   const _prefix_eth = '_price_usdt_';
 
-  function _calculate_and_set_position(id, json, symbol, total_spent) {
+  function _set_position_per_row_and_total_spent(id, json, symbol, total_spent) {
     let price = json.price;
     let p = _prefix_non_eth;
     if(symbol.exchange.pair === 'ETH') {
@@ -138,8 +138,8 @@
     if(symbol.exchange.pair === 'ETH' && !id.includes(_prefix_eth)) {
       return;
     }
-    _calculate_and_set_position(id, json, symbol, total_spent);
-    _calculate_and_set_total_value_and_position();
+    _set_position_per_row_and_total_spent(id, json, symbol, total_spent);
+    _set_total_value_and_position(total_spent);
   }
 </script>
 
@@ -189,7 +189,7 @@
       <div class="row example-grid docs-example">
         <div class="four columns">Spent: <span id='my_portfolio_total_spent' class="bigger">-</span></div>
         <div class="four columns">Value: <span id='my_portfolio_total_value' class="bigger">-</span></div>
-        <div class="four columns">Position: <span class="bigger">-</span></div>
+        <div class="four columns">Position: <span id='my_portfolio_position' class="bigger">-</span></div>
       </div>
     </div>
 
