@@ -76,6 +76,14 @@
 </script>
 
 <script type="text/javascript">
+  function set_style(id, perc) {
+    if (perc !== 0) {
+      $(id).css("color", (perc > 0) ? "green" : "red")
+    } else {
+      $(id).attr("class", "numeric_value");
+    }
+  }
+
   function _set_total_value_and_position(total_spent) {
     let units_list = [];
     $(".pf-units").each(function() {
@@ -99,7 +107,10 @@
     );
     const total_value = x.reduce((a, b) => a + b, 0);
     $('#my_portfolio_total_value').text(price_formatter.format(total_value));
-    $('#my_portfolio_position').text(get_percent(total_value, total_spent) + '%');
+    let perc = get_percent(total_value, total_spent);
+    let _id = '#my_portfolio_position';
+    set_style(_id, perc);
+    $(_id).text(perc + '%');
   }
 
   const _prefix_non_eth = '_price_';
@@ -114,11 +125,7 @@
     }
     let _id = id.replace(p, "_position_");
     let perc = get_percent(price, symbol.average_paid);
-    if (perc !== 0) {
-      $(_id).css("color", (perc > 0) ? "green" : "red")
-    } else {
-      $(_id).attr("class", "numeric_value");
-    }
+    set_style(_id, perc);
     $(_id).text(perc + '%');
     $('#my_portfolio_total_spent').text(price_formatter.format(total_spent));
   }
