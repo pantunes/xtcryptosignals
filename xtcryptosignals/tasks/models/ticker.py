@@ -6,6 +6,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+import redis
 from datetime import datetime, timedelta
 from mongoengine import (
     StringField,
@@ -21,6 +22,9 @@ from xtcryptosignals.common.models import (
 from xtcryptosignals.tasks import settings as s
 from xtcryptosignals.tasks.models.history import History
 from xtcryptosignals.tasks.utils import convert_to_seconds
+
+
+red = redis.Redis.from_url(s.BROKER_URL)
 
 
 def _get_abs_zero(f):
@@ -39,14 +43,14 @@ def _get_price_change_chart(row, price_change):
     return x
 
 
-def _set_history(_self):
-    _self.history_list_dicts = []
+def _set_history(ticker):
+    ticker.history_list_dicts = []
     for x in s.HISTORY_FREQUENCY:
         model = type('History{}'.format(x), (History,), {})
 
         row = model.objects(
-            symbol=_self['symbol'],
-            source=_self['source']
+            symbol=ticker['symbol'],
+            source=ticker['source']
         ).first()
 
         number_trades_change = None
@@ -56,19 +60,19 @@ def _set_history(_self):
 
         if row:
             price_change, number_trades_change, volume_change = \
-                _self._calculate_changes(row)
+                ticker._calculate_changes(row)
             price_change_prepared = _get_abs_zero(price_change)
             price_change_chart = _get_price_change_chart(
                 row, price_change_prepared
             )
 
         history_object = model(
-            symbol=_self['symbol'],
-            source=_self['source'],
-            ticker=_self['ticker'],
-            price=_self['price'],
-            number_trades_24h=_self['number_trades_24h'],
-            volume_24h=_self['volume_24h'],
+            symbol=ticker['symbol'],
+            source=ticker['source'],
+            ticker=ticker['ticker'],
+            price=ticker['price'],
+            number_trades_24h=ticker['number_trades_24h'],
+            volume_24h=ticker['volume_24h'],
             price_change=price_change_prepared,
             number_trades_change=_get_abs_zero(
                 number_trades_change),
@@ -76,18 +80,24 @@ def _set_history(_self):
             price_change_chart=price_change_chart,
         )
 
-        if 'price_usdt' in _self:
-            history_object.price_usdt = _self['price_usdt']
+        if 'price_usdt' in ticker:
+            history_object.price_usdt = ticker['price_usdt']
 
-        if not _self._exists_row_offset(model, offset=x):
+        if not ticker._exists_row_offset(model, offset=x):
             history_object.save()
         else:
             _set_timestamp(history_object)
 
         # still emit this object ticker
-        _self.history_list_dicts.append(
+        ticker.history_list_dicts.append(
             history_object.to_dict(frequency=x)
         )
+
+
+def _save_ticker_in_redis(ticker):
+    row = ticker.to_dict()
+    k = '{source}_{symbol}'.format(**row).upper()
+    red.hmset(k, row)
 
 
 class Ticker(DocumentValidation):
@@ -106,7 +116,7 @@ class Ticker(DocumentValidation):
     opened_on = DateTimeField()
     closed_on = DateTimeField()
 
-    _pre_save_hooks = (_set_history,)
+    _pre_save_hooks = (_set_history, _save_ticker_in_redis,)
 
     meta = {
         'collection': 'ticker',
@@ -115,6 +125,27 @@ class Ticker(DocumentValidation):
         ],
         'ordering': ['-created_on'],
     }
+
+    def to_dict(self):
+        e = super(Ticker, self).to_dict().copy()
+        for k in e:
+            if k in (
+                'price',
+                'price_usdt',
+                'price_change_24h',
+                'lowest_price_24h',
+                'highest_price_24h',
+                'volume_24h',
+            ):
+                e[k] = float(self[k])
+                continue
+            if k in ('number_trades_24h',):
+                e[k] = int(self[k])
+                continue
+            if k in ('opened_on', 'closed_on',):
+                e[k] = self[k].strftime('%Y-%m-%d %H:%M:%S')
+                continue
+        return e
 
     def _exists_row_offset(self, model, offset):
         dt = datetime.utcnow() - timedelta(

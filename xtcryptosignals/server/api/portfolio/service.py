@@ -17,7 +17,7 @@ def get_exchange_for(coin_token):
 
 def portfolio(auth):
     _portfolio = dict(coin_tokens=dict())
-    _spent = 0
+    _total_paid = 0
     for coin_token in get_coin_tokens(s.SYMBOLS_PER_EXCHANGE):
 
         total_units_in = Transaction.objects(
@@ -53,10 +53,14 @@ def portfolio(auth):
             ),
         })
 
-        _spent += total_amount
+        _total_paid += total_amount
 
     _portfolio.update(
-        total_spent=_spent,
+        total_paid=_total_paid,
+        # # TODO
+        # total_value=12345,
+        # # TODO
+        # total_position=12345,
     )
 
     return _portfolio
