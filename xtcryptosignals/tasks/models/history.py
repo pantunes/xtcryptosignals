@@ -43,14 +43,14 @@ class History(DocumentValidation):
     def to_dict(self, frequency):
         e = super(History, self).to_dict().copy()
         for k in e:
-            if k in [
+            if k in (
                 'price',
                 'price_usdt',
                 'volume_24h',
                 'price_change',
                 'number_trades_change',
                 'volume_change',
-            ]:
+            ):
                 e[k] = float(self[k])
                 continue
             if k in ['price_change_chart']:

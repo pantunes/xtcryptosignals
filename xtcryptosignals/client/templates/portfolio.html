@@ -59,7 +59,7 @@
           "<td class='align-right pf-units'>" + value.total_units + "</td>" +
           "<td class='align-right pf-total-paid'>" + price_formatter.format(value.total_amount) + "</td>" +
           "<td class='align-right'>" + price_formatter.format(value.average_paid) +"</td>" +
-          "<td class='align-right'><span id=\"" + prefix_id + "_loss_{{frequency}}\">-</span></td>" +
+          "<td class='align-right'><span id=\"" + prefix_id + "_balance_{{frequency}}\">-</span></td>" +
           "<td class='align-right'><span id=\"" + prefix_id + "_position_{{frequency}}\">-</span></td>" +
           "</tr>"
       );
@@ -107,17 +107,23 @@
       (_, i) => current_price_list[i] * units_list[i]
     );
     const total_value = x.reduce((a, b) => a + b, 0);
-    $('#my_portfolio_total_value').text(price_formatter.format(total_value));
+    // total position
     let perc = get_percent(total_value, total_spent);
     let _id = '#my_portfolio_position';
     set_style(_id, perc);
     $(_id).text(perc + '%');
+    // total value
+    $('#my_portfolio_total_value').text(price_formatter.format(total_value));
+
+    return total_value
   }
 
   const _prefix_non_eth = '_price_';
   const _prefix_eth = '_price_usdt_';
 
-  function _set_position_per_row_and_total_spent(id, json, symbol, total_spent) {
+  function _set_position_and_balance_per_row_and_total_spent(
+    id, json, symbol, total_spent, total_value
+  ) {
     let price = json.price;
     let p = _prefix_non_eth;
     if(symbol.exchange.pair === 'ETH') {
@@ -129,18 +135,20 @@
     let perc = get_percent(price, symbol.average_paid);
     set_style(_id, perc);
     $(_id).text(perc + '%');
-    // loss
-    _id = id.replace(p, "_loss_");
-    let diff = total_spent - symbol.average_paid;
-    set_style(_id, diff);
-    $(_id).text(price_formatter.format(diff));
+    // balance
+    if(!isNaN(total_value) && total_value.length !== 0) {
+      _id = id.replace(p, "_balance_");
+      let diff = total_value - total_spent;
+      set_style(_id, diff);
+      $(_id).text(price_formatter.format(diff));
+    }
     // spent
     $('#my_portfolio_total_spent').text(price_formatter.format(total_spent));
   }
 
   function post_ticker_emit(id, json) {
     const symbol = data_portf.coin_tokens[json.ticker];
-    const total_spent = data_portf.total_spent;
+    const total_spent = data_portf.total_paid;
     if (symbol === undefined) {
       return;
     }
@@ -153,8 +161,10 @@
     if(symbol.exchange.pair === 'ETH' && !id.includes(_prefix_eth)) {
       return;
     }
-    _set_position_per_row_and_total_spent(id, json, symbol, total_spent);
-    _set_total_value_and_position(total_spent);
+    const total_value = _set_total_value_and_position(total_spent);
+    _set_position_and_balance_per_row_and_total_spent(
+      id, json, symbol, total_spent, total_value
+    );
   }
 </script>
 
@@ -202,7 +212,7 @@
     </div>
     <div style="float: right; width: 75%">
       <div class="row example-grid docs-example">
-        <div class="four columns">Spent: <span id='my_portfolio_total_spent' class="bigger">-</span></div>
+        <div class="four columns">Paid: <span id='my_portfolio_total_spent' class="bigger">-</span></div>
         <div class="four columns">Value: <span id='my_portfolio_total_value' class="bigger">-</span></div>
         <div class="four columns">Position: <span id='my_portfolio_position' class="bigger">-</span></div>
       </div>
@@ -216,8 +226,8 @@
           <th>Ticker</th>
           <th>Total Units</th>
           <th>Paid</th>
-          <th>Unit Price</th>
-          <th>Loss</th>
+          <th>Paid Unit</th>
+          <th>Balance</th>
           <th>Position</th>
         </tr>
       </thead>
