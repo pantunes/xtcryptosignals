@@ -19,7 +19,7 @@ def get_exchange_for(coin_token):
     return s.EXCHANGES_OF_REFERENCE[coin_token]
 
 
-def _get_total_position(x, y):
+def _get_percentage(x, y):
     if x >= y:
         t = (100 - ((y * 100) / x))
     else:
@@ -27,7 +27,7 @@ def _get_total_position(x, y):
     return round(t, 2)
 
 
-def _get_total_value(exchange, coin_token, total_units):
+def _get_current_price(exchange, coin_token):
     key = s.REDIS_KEY_TICKER.format(
         source=exchange['name'],
         symbol=coin_token + exchange['pair']
@@ -35,15 +35,15 @@ def _get_total_value(exchange, coin_token, total_units):
     price = float(red.get(key))
 
     if exchange['pair'] != 'USDT':
-        price_usdt = float(red.get(
-            s.REDIS_KEY_TICKER.format(
-                source=s.BINANCE,
-                symbol=exchange['pair'] + 'USDT'
-            )
-        ))
+        key = s.REDIS_KEY_TICKER.format(
+            source=s.BINANCE,
+            symbol=exchange['pair'] + 'USDT'
+        )
+        price_usdt = float(red.get(key))
+
         price = price * price_usdt
 
-    return total_units * price
+    return price
 
 
 def portfolio(auth):
@@ -78,23 +78,28 @@ def portfolio(auth):
 
         exchange = get_exchange_for(coin_token)
 
+        current_price = _get_current_price(exchange, coin_token)
+
         _portfolio['coin_tokens'].update({
             coin_token: dict(
                 exchange=exchange,
-                total_units=total_units,
-                total_amount=total_amount,
+                current_price=round(current_price, s.SYMBOL_FLOAT_PRECISION),
+                units=total_units,
+                amount=total_amount,
                 average_paid=average_paid,
+                balance=round((current_price - average_paid) * total_units, 2),
+                position=_get_percentage(current_price, average_paid),
             ),
         })
 
         total_paid += total_amount
 
-        total_value += _get_total_value(exchange, coin_token, total_units)
+        total_value += total_units * current_price
 
     _portfolio.update(
         total_paid=round(total_paid, 2),
         total_value=round(total_value, 2),
-        total_position=_get_total_position(total_value, total_paid),
+        total_position=_get_percentage(total_value, total_paid),
     )
 
     return _portfolio
