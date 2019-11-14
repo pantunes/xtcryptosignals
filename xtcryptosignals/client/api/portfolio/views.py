@@ -37,16 +37,16 @@ def before_request():
         frequencies=g.HISTORY_FREQUENCY,
         pairs=get_pairs(g.SYMBOLS_PER_EXCHANGE),
         tokens=get_coin_tokens(g.SYMBOLS_PER_EXCHANGE),
-        attributes=['Price', 'Price USDT'],
+        attributes=['Price USDT'],
     )
 
 
-@bp.route('/portfolio/<frequency>', methods=['GET'])
+@bp.route('/transactions/portfolio', methods=['GET'])
 @login_required
-def frequency(frequency):
+def transactions():
     return render_template(
-        template_name_or_list='portfolio.html',
-        frequency=frequency,
+        template_name_or_list='transactions-portfolio.html',
+        frequency=g.HISTORY_FREQUENCY[0],
     )
 
 
