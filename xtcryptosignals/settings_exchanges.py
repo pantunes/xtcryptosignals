@@ -58,6 +58,10 @@ EXCHANGES_OF_REFERENCE = {
         'pair': 'USDT',
         'name': BINANCE,
     },
+    'BTMX': {
+        'pair': 'USDT',
+        'name': BITMAX,
+    },
     'LTO': {
         'pair': 'USDT',
         'name': BITMAX,
@@ -172,6 +176,7 @@ SYMBOLS_PER_EXCHANGE.append({
             ('LTO', 'USDT'),
             ('LTO', 'BTC'),
             ('LTO', 'ETH'),
+            ('BTMX', 'USDT'),
         ],
         'single_request': True,
     }

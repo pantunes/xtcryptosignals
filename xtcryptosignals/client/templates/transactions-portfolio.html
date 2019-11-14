@@ -55,18 +55,26 @@
     $table.find("tbody tr").remove();
     for (const [key, value] of Object.entries(data_portf.coin_tokens)) {
       let prefix_id = value.exchange.name + "_" + key.toLowerCase() + value.exchange.pair.toLowerCase();
+      let balance_id = prefix_id + "_balance_{{frequency}}";
+      let position_id = prefix_id + "_position_{{frequency}}";
       $table.append(
           "<tr>" +
           "<td>" + key + value.exchange.pair + "</td>" +
-          "<td>" + value.exchange.name.toUpperCase() +"</td>" +
-          "<td class='align-right pf-current-price'><span id=\"" + prefix_id + _prefix_usdt + "{{frequency}}\">-</span></td>" +
-          "<td class='align-right pf-units'>" + value.total_units + "</td>" +
-          "<td class='align-right pf-total-paid'>" + price_formatter.format(value.total_amount) + "</td>" +
+          "<td>" + value.exchange.name.toUpperCase() + "</td>" +
+          "<td class='align-right pf-current-price'><span id=\"" + prefix_id + _prefix_usdt + "{{frequency}}\">" + value.current_price + "</span></td>" +
+          "<td class='align-right pf-units'>" + value.units + "</td>" +
+          "<td class='align-right pf-total-paid'>" + price_formatter.format(value.amount) + "</td>" +
           "<td class='align-right'>" + price_formatter.format(value.average_paid) +"</td>" +
-          "<td class='align-right'><span id=\"" + prefix_id + "_balance_{{frequency}}\">-</span></td>" +
-          "<td class='align-right'><span id=\"" + prefix_id + "_position_{{frequency}}\">-</span></td>" +
+          "<td class='align-right'><span id=\"" + balance_id + "\">-</span></td>" +
+          "<td class='align-right'><span id=\"" + position_id + "\">-</span></td>" +
           "</tr>"
       );
+      let _id = '#' + balance_id;
+      set_style(_id, value.balance);
+      $(_id).text(price_formatter.format(value.balance));
+      _id = '#' + position_id;
+      set_style(_id, value.position);
+      $(_id).text(value.position + '%');
     }
     $('#my_portfolio_total_spent').text(price_formatter.format(data.total_paid));
     $('#my_portfolio_total_value').text(price_formatter.format(data.total_value));
@@ -130,7 +138,7 @@
     $(_id).text(perc + '%');
     // balance per row
     _id = id.replace(_prefix_usdt, "_balance_");
-    let diff = (price - symbol.average_paid) * symbol.total_units;
+    let diff = (price - symbol.average_paid) * symbol.units;
     set_style(_id, diff);
     $(_id).text(price_formatter.format(diff));
   }
@@ -228,7 +236,7 @@
 {% block include_extra_scripts_bottom %}
 <script type="text/javascript">
     $(document).ready(function() {
-        $(".container").css("maxWidth", "1480px" );
+      $(".container").css("maxWidth", "1480px" );
     });
 </script>
 {% endblock %}
