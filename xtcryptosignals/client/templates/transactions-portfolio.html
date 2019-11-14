@@ -4,20 +4,20 @@
 
 {% block body %}
 
-{% with url='portfolio.frequency', params=dict() %}
+{% with url='ticker.ticker', params=dict() %}
 {% include 'snippets/menu.html' %}
 {% endwith %}
 
 <link rel="stylesheet" href="/static/css/portfolio.css" type="text/css">
 
 <script type="text/javascript">
-  let setup = {
+  let price_formatter_setup = {
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
     style: 'currency',
     currency: 'USD',
   };
-  const price_formatter = new Intl.NumberFormat('en-US', setup);
+  const price_formatter = new Intl.NumberFormat('en-US', price_formatter_setup);
 </script>
 
 <script type="text/javascript">
@@ -40,22 +40,26 @@
 </script>
 
 <script type="text/javascript">
+  function _set_total_position(tp) {
+    let _id = '#my_portfolio_total_position';
+    set_style(_id, tp);
+    $(_id).text(tp + '%');
+  }
+
+  const _prefix_usdt = '_price_usdt_';
   let data_portf;
+
   function render_portfolio(data) {
     data_portf = data;
     let $table = $('#table_portfolio');
     $table.find("tbody tr").remove();
     for (const [key, value] of Object.entries(data_portf.coin_tokens)) {
       let prefix_id = value.exchange.name + "_" + key.toLowerCase() + value.exchange.pair.toLowerCase();
-      let sufix_id = 'price';
-      if (value.exchange.pair === 'ETH') {
-        sufix_id = 'price_usdt';
-      }
       $table.append(
           "<tr>" +
           "<td>" + key + value.exchange.pair + "</td>" +
           "<td>" + value.exchange.name.toUpperCase() +"</td>" +
-          "<td class='align-right pf-current-price'><span id=\"" + prefix_id + "_" + sufix_id + "_{{frequency}}\">-</span></td>" +
+          "<td class='align-right pf-current-price'><span id=\"" + prefix_id + _prefix_usdt + "{{frequency}}\">-</span></td>" +
           "<td class='align-right pf-units'>" + value.total_units + "</td>" +
           "<td class='align-right pf-total-paid'>" + price_formatter.format(value.total_amount) + "</td>" +
           "<td class='align-right'>" + price_formatter.format(value.average_paid) +"</td>" +
@@ -64,6 +68,9 @@
           "</tr>"
       );
     }
+    $('#my_portfolio_total_spent').text(price_formatter.format(data.total_paid));
+    $('#my_portfolio_total_value').text(price_formatter.format(data.total_value));
+    _set_total_position(data.total_position);
   }
 </script>
 
@@ -109,46 +116,27 @@
     const total_value = x.reduce((a, b) => a + b, 0);
     // total position
     let perc = get_percent(total_value, total_spent);
-    let _id = '#my_portfolio_position';
-    set_style(_id, perc);
-    $(_id).text(perc + '%');
+    _set_total_position(perc);
     // total value
     $('#my_portfolio_total_value').text(price_formatter.format(total_value));
-
-    return total_value
   }
 
-  const _prefix_non_eth = '_price_';
-  const _prefix_eth = '_price_usdt_';
-
-  function _set_position_and_balance_per_row_and_total_spent(
-    id, json, symbol, total_spent, total_value
-  ) {
-    let price = json.price;
-    let p = _prefix_non_eth;
-    if(symbol.exchange.pair === 'ETH') {
-      price = json.price_usdt;
-      p = _prefix_eth;
-    }
-    // position
-    let _id = id.replace(p, "_position_");
+  function _set_position_and_balance_per_row(id, json, symbol) {
+    const price = json.price_usdt;
+    // position per row
+    let _id = id.replace(_prefix_usdt, "_position_");
     let perc = get_percent(price, symbol.average_paid);
     set_style(_id, perc);
     $(_id).text(perc + '%');
-    // balance
-    if(!isNaN(total_value) && total_value.length !== 0) {
-      _id = id.replace(p, "_balance_");
-      let diff = total_value - total_spent;
-      set_style(_id, diff);
-      $(_id).text(price_formatter.format(diff));
-    }
-    // spent
-    $('#my_portfolio_total_spent').text(price_formatter.format(total_spent));
+    // balance per row
+    _id = id.replace(_prefix_usdt, "_balance_");
+    let diff = (price - symbol.average_paid) * symbol.total_units;
+    set_style(_id, diff);
+    $(_id).text(price_formatter.format(diff));
   }
 
   function post_ticker_emit(id, json) {
     const symbol = data_portf.coin_tokens[json.ticker];
-    const total_spent = data_portf.total_paid;
     if (symbol === undefined) {
       return;
     }
@@ -158,13 +146,9 @@
     if(symbol.exchange.pair !== json.symbol.substr(json.ticker.length)) {
       return;
     }
-    if(symbol.exchange.pair === 'ETH' && !id.includes(_prefix_eth)) {
-      return;
-    }
-    const total_value = _set_total_value_and_position(total_spent);
-    _set_position_and_balance_per_row_and_total_spent(
-      id, json, symbol, total_spent, total_value
-    );
+    const total_spent = data_portf.total_paid;
+    _set_total_value_and_position(total_spent);
+    _set_position_and_balance_per_row(id, json, symbol);
   }
 </script>
 
@@ -214,7 +198,7 @@
       <div class="row example-grid docs-example">
         <div class="four columns">Paid: <span id='my_portfolio_total_spent' class="bigger">-</span></div>
         <div class="four columns">Value: <span id='my_portfolio_total_value' class="bigger">-</span></div>
-        <div class="four columns">Position: <span id='my_portfolio_position' class="bigger">-</span></div>
+        <div class="four columns">Position: <span id='my_portfolio_total_position' class="bigger">-</span></div>
       </div>
     </div>
 
@@ -239,4 +223,12 @@
 
 {% include 'modals/transaction.html' %}
 
+{% endblock %}
+
+{% block include_extra_scripts_bottom %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".container").css("maxWidth", "1480px" );
+    });
+</script>
 {% endblock %}

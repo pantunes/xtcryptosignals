@@ -42,6 +42,22 @@ EXCHANGES_OF_REFERENCE = {
         'pair': 'USDT',
         'name': BINANCE,
     },
+    'BNB': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'XRP': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'NANO': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'ONT': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
     'LTO': {
         'pair': 'USDT',
         'name': BITMAX,
@@ -49,6 +65,10 @@ EXCHANGES_OF_REFERENCE = {
     'IDEX': {
         'pair': 'ETH',
         'name': IDEX,
+    },
+    'LQD': {
+        'pair': 'ETH',
+        'name': BILAXY,
     },
 }
 
@@ -61,6 +81,10 @@ SYMBOLS_PER_EXCHANGE.append({
             ('BTC', 'USDT'),
             ('ETH', 'USDT'),
             ('LTC', 'USDT'),
+            ('BNB', 'USDT'),
+            ('XRP', 'USDT'),
+            ('NANO', 'USDT'),
+            ('ONT', 'USDT'),
         ]
     }
 })

@@ -22,15 +22,14 @@ class BaseSchema(Schema):
     price_usdt = fields.Float()
 
     def post_load(self, data):
-        # TODO: Improve
-        symbol = 'ETHUSDT'
-        _id = '{}_{}'.format(s.BINANCE, symbol)
-        if data['source'] == s.BINANCE and data['symbol'] == symbol:
-            red.set(_id, data['price'])
-            return data
-        elif data['symbol'][-3:] != 'ETH':
-            return data
-        ethusdt = red.get(_id)
-        if ethusdt:
-            data['price_usdt'] = data['price'] * float(ethusdt)
-        return data
+        data_symbol = data['symbol'][-3:]
+        if data_symbol in ('ETH', 'BTC'):
+            price = red.get(s.REDIS_KEY_TICKER.format(
+                source=s.BINANCE,
+                symbol=data_symbol + 'USDT'
+            ))
+            if not price:
+                return
+            data['price_usdt'] = data['price'] * float(price)
+        elif data['symbol'][-4:] == 'USDT':
+            data['price_usdt'] = data['price']

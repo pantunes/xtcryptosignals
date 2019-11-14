@@ -96,8 +96,7 @@ def _set_history(ticker):
 
 def _save_ticker_in_redis(ticker):
     row = ticker.to_dict()
-    k = '{source}_{symbol}'.format(**row).upper()
-    red.hmset(k, row)
+    red.set(s.REDIS_KEY_TICKER.format(**row), row['price'])
 
 
 class Ticker(DocumentValidation):

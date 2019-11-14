@@ -17,7 +17,7 @@ function login() {
 
 function logout() {
     $.get('/logout').done(function(response) {
-        if (window.location.pathname.includes('/portfolio/')) {
+        if (window.location.pathname === '/transactions/portfolio') {
             window.location.href = '/';
             return
         }

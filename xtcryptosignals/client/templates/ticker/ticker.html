@@ -42,14 +42,28 @@
                 return
             }
 
-            if (_attr === 'price' || _attr === 'price_usdt' || _attr === 'volume_24h') {
+            if (['price', 'price_usdt', 'volume_24h'].includes(_attr)) {
+
                 const precision = (val + "").split(".");
                 let frac_digits = 2;
-                if (_attr === 'price' || _attr === 'price_usdt') {
+
+                if (['price', 'price_usdt'].includes(_attr)) {
                     if (precision.length > 1) {
                         frac_digits = precision[1].length
                     }
+                    const color = (json.price_change > 0) ? "#e3ffe2" : "#ffe2e2";
+                    $(_id).effect("highlight", {
+                        color: color,
+                        queue: false
+                    }, 1100, "slow");
                 }
+
+                if (_attr === 'price_usdt') {
+                    try {
+                        post_ticker_emit(_id, json)
+                    } catch (e) {}
+                }
+
                 let setup = {
                     maximumFractionDigits: frac_digits
                 };
@@ -58,16 +72,9 @@
                     setup.style = 'currency';
                     setup.currency = 'USD'
                 }
+
                 const price_formatter = new Intl.NumberFormat('en-US', setup);
                 val = price_formatter.format(val)
-
-                const color = (json.price_change > 0) ? "#e3ffe2" : "#ffe2e2";
-                if (_attr === 'price' || _attr === 'price_usdt') {
-                    $(_id).effect("highlight", {color: color, queue: false}, 1100, "slow");
-                    try {
-                        post_ticker_emit(_id, json)
-                    } catch (e) {}
-                }
 
             } else if (_attr === 'number_trades_24h') {
                 val = numeral(val).format('0,0');

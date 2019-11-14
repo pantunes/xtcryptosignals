@@ -34,7 +34,7 @@ def info():
     <br/><br/>
     This is an Open-source software platform that is in continuous development.
     <br/><br/>
-    For now you can access your <a href="/portfolio/{frequency}">portfolio</a> 
+    For now you can access your <a href="/transactions/portfolio">portfolio</a> 
     page and manage your assets.
     <br/>
     <br/>
