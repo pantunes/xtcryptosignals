@@ -25,6 +25,7 @@
     function isFloat(n) {
         return Number(n) === n && n % 1 !== 0;
     }
+
     const socket = io.connect('{{server_api_base_url}}{{frequency}}');
     socket.on('ticker', function(json) {
         const is_usd = json['symbol'].substr(json['symbol'].length - 3) === 'USD';
