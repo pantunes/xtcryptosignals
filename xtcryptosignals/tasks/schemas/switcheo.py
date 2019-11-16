@@ -30,5 +30,6 @@ class Switcheo(BaseSchema):
 
     @post_load
     def post_load(self, data):
+        super().post_load(data)
         data['symbol'] = data['symbol'].replace('_', '')
         return data

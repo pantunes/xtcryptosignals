@@ -21,6 +21,7 @@ class History(DocumentValidation):
     source = StringField(required=True)
     ticker = StringField(required=True)
     price = DecimalField(required=True, precision=s.SYMBOL_FLOAT_PRECISION)
+    price_usdt = DecimalField(precision=s.SYMBOL_FLOAT_PRECISION)
     number_trades_24h = IntField()
     volume_24h = DecimalField(precision=s.SYMBOL_FLOAT_PRECISION)
     price_change = DecimalField(precision=2)
@@ -42,13 +43,14 @@ class History(DocumentValidation):
     def to_dict(self, frequency):
         e = super(History, self).to_dict().copy()
         for k in e:
-            if k in [
+            if k in (
                 'price',
+                'price_usdt',
                 'volume_24h',
                 'price_change',
                 'number_trades_change',
                 'volume_change',
-            ]:
+            ):
                 e[k] = float(self[k])
                 continue
             if k in ['price_change_chart']:

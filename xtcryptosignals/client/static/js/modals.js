@@ -1,20 +1,36 @@
-function setup_modals() {
-    if (window.location.hash === '#contact') {
-        $('#modal_contact').modal();
+function open_modal(m) {
+    if (m === '') {
+        return
     }
-    else if (window.location.hash === '#login') {
-        $('#modal_login').modal();
-    }
-    else if (window.location.hash === '#signup') {
-        $('#modal_signup').modal();
-    }
-    $('#modal_contact, #modal_login, #modal_signup').on(
-        $.modal.AFTER_CLOSE, function(event, modal) {
-            location.hash = '';
-    });
-}
 
-function open_modal(x) {
-    $(x).modal();
-    location.hash = x.replace('modal_', '');
+    const _m = m.replace('#', '#modal_');
+
+    if (m === '#info') {
+        $(_m).on(
+            $.modal.OPEN, function (event, modal) {
+                $.get('/info', function (data) {
+                    $('#modal_info_text').html(data);
+                });
+            });
+    } else if (m === '#transaction') {
+        $(_m).on(
+            $.modal.OPEN, function (event, modal) {
+                $.get('/ticker/tokens', function (data) {
+                    let $dropdown = $('#tx_coin_token');
+                    $dropdown.empty();
+                    $.each(data.tokens, function () {
+                        $dropdown.append($("<option />").val(this).text(this));
+                    });
+                });
+            });
+    }
+
+    $(_m).on(
+        $.modal.BEFORE_CLOSE, function (event, modal) {
+            location.hash = '';
+        });
+
+    $(_m).modal();
+
+    location.hash = m;
 }

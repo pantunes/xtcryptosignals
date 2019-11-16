@@ -25,7 +25,14 @@ def user_auth():
     return decorator
 
 
-def _sanitize_errors(errors):
+def _sanitize_errors_mongoengine(errors):
+    _errors = []
+    for k, v in errors.to_dict().items():
+        _errors.append("{} ({}).".format(v, k))
+    return '\n'.join(_errors)
+
+
+def _sanitize_errors_marshmallow(errors):
     _errors = []
     for k, v in errors.items():
         if k == '_schema':
@@ -49,7 +56,7 @@ def validate_io(
                     return dict(error='Invalid JSON payload.'), 402
                 data, errors = schema_in().load(_json, many=many_in)
                 if errors:
-                    return dict(error=_sanitize_errors(errors)), 400
+                    return dict(error=_sanitize_errors_marshmallow(errors)), 400
                 kwargs.update(valid_data=data)
             try:
                 data = f(*args, **kwargs)
@@ -62,10 +69,12 @@ def validate_io(
             if schema_out:
                 data, errors = schema_out().dump(data, many=many_out)
                 if errors:
-                    return dict(error=_sanitize_errors(errors)), 415
+                    return dict(error=_sanitize_errors_marshmallow(errors)), 415
                 errors = schema_out().validate(data, many=many_out)
                 if errors:
-                    return dict(error=_sanitize_errors(errors)), 416
+                    return dict(error=_sanitize_errors_marshmallow(errors)), 416
+            if data is None:
+                data = dict(status='OK')
             return data, status or 200
         return wrapper
     return decorator

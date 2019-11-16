@@ -1,27 +1,53 @@
+const menu_options = ['#menu_portfolio_link', '#menu_logout_link'];
+
 function login() {
-    $.post('/login', $('#form_login').serialize())
-    .done(function(response) {
+    $.post('/login', $('#form_login').serialize()).done(function(response) {
         $.notify('Welcome!', 'success');
         $('#menu_login').html('My Area');
-        $('#menu_logout_link').css('display', 'inline');
-        $.get('/info', function(data) {
-            $('#modal_info').html(data).modal();
-        });
+        let x;
+        for (x of menu_options) {
+            $(x).css('display', 'inline');
+        }
+        open_modal('#info');
     })
     .fail(function(xhr, status, error) {
-        $.notify(JSON.parse(xhr.responseText).error);
+        process_fail(xhr);
     });
 }
 
 function logout() {
-    $.get('/logout')
-    .done(function(response) {
+    $.get('/logout').done(function(response) {
+        if (window.location.pathname === '/transactions/portfolio') {
+            window.location.href = '/';
+            return
+        }
         $.notify('You are logged out!', 'success');
         $.modal.close();
         $('#menu_login').html('Account');
-        $('#menu_logout_link').css('display', 'none');
+        let x;
+        for (x of menu_options) {
+            $(x).css('display', 'none');
+        }
     })
     .fail(function(xhr, status, error) {
-        $.notify(JSON.parse(xhr.responseText).error);
+        process_fail(xhr);
+    });
+}
+
+function get_transactions(handler) {
+    $.get('/transactions').done(function(response) {
+        handler(response)
+    })
+    .fail(function(xhr, status, error) {
+        process_fail(xhr);
+    });
+}
+
+function get_portfolio(handler) {
+    $.get('/portfolio').done(function(response) {
+        handler(response)
+    })
+    .fail(function(xhr, status, error) {
+        process_fail(xhr);
     });
 }

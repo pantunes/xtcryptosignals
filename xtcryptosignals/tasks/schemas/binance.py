@@ -43,6 +43,7 @@ class Binance(BaseSchema):
 
     @post_load
     def post_load(self, data):
+        super().post_load(data)
         data['opened_on'] = data['opened_on'].utcnow()
         data['closed_on'] = data['closed_on'].utcnow()
         return data

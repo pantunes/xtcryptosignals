@@ -1,25 +1,27 @@
-{% extends 'ticker.html' %}
+{% extends 'ticker/ticker.html' %}
 
 {% block title %}{{pair}} - {{frequency}}{% endblock %}
 
 {% block body %}
 
-{% with url='ticker_pair', params=dict(pair=pair) %}
+{% with url='ticker.pair_frequency', params=dict(pair=pair) %}
 {% include 'snippets/menu.html' %}
 {% endwith %}
 
 <br/>
-<table class="u-max-full-width">
-    <caption><h3>{{pair}} - {{frequency}}</h3></caption>
-    <thead>
-        <tr>
-            <th>Exchange</th>
-            {% for att in attributes %}
-            <th>{{att | replace(" On",  " On UTC") }}</th>
-            {% endfor %}
-        </tr>
-    </thead>
-    <tbody>
+<div class="row">
+    <div class="twelve columns">
+        <table class="u-max-full-width">
+            <caption><h4>{{pair}} - {{frequency}}</h4></caption>
+            <thead>
+                <tr>
+                    <th>Exchange</th>
+{% for att in attributes %}
+                    <th>{{att | replace(" On",  " On UTC") }}</th>
+{% endfor %}
+                </tr>
+            </thead>
+            <tbody>
 {% for i in symbols_per_exchange %}
     {% for exchange, d in i.items() %}
     {% if d['pairs']%}
@@ -31,7 +33,7 @@
         {% for att in attributes %}
             {% set _id = "{}_{}{}_{}_{}".format(exchange.lower(), c.lower(), r.lower(), att.replace(' ', '_').lower(), frequency) %}
             {% if 'price_change_chart' != att.replace(' ', '_').lower() %}
-                <td style="text-align: right; width: 100px;">
+                <td style="text-align: right;">
                     <span id="{{_id}}" style="padding: 5px;">-</span>
                 </td>
             {% else %}
@@ -43,6 +45,8 @@
     {% endif %}
     {% endfor %}
 {% endfor %}
-    </tbody>
-</table>
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

@@ -1,0 +1,242 @@
+{% extends 'ticker/ticker.html' %}
+
+{% block title %}Portfolio{% endblock %}
+
+{% block body %}
+
+{% with url='ticker.ticker', params=dict() %}
+{% include 'snippets/menu.html' %}
+{% endwith %}
+
+<link rel="stylesheet" href="/static/css/portfolio.css" type="text/css">
+
+<script type="text/javascript">
+  let price_formatter_setup = {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+    style: 'currency',
+    currency: 'USD',
+  };
+  const price_formatter = new Intl.NumberFormat('en-US', price_formatter_setup);
+</script>
+
+<script type="text/javascript">
+  function render_transactions(data) {
+    let $table = $('#table_transactions');
+    $table.find("tbody tr").remove();
+    $.each(data.results, function () {
+      $table.append(
+          "<tr>" +
+          "<td>" + this.coin_token + "</td>" +
+          "<td class='align-right'>" + this.units + "</td>" +
+          "<td class='align-right'>" + price_formatter.format(this.amount) + "</td>" +
+          "<td class='align-right'>" + price_formatter.format(this.unit_price) + "</td>" +
+          "<td style=\"text-align: center;\">" + this.in_or_out + "</td>" +
+          "<td>" + this.added_on + "</td>" +
+          "</tr>"
+      );
+    });
+  }
+</script>
+
+<script type="text/javascript">
+  function _set_total_position(tp) {
+    let _id = '#my_portfolio_total_position';
+    set_style(_id, tp);
+    $(_id).text(tp + '%');
+  }
+
+  const _prefix_usdt = '_price_usdt_';
+  let data_portf;
+
+  function render_portfolio(data) {
+    data_portf = data;
+    let $table = $('#table_portfolio');
+    $table.find("tbody tr").remove();
+    for (const [key, value] of Object.entries(data_portf.coin_tokens)) {
+      let prefix_id = value.exchange.name + "_" + key.toLowerCase() + value.exchange.pair.toLowerCase();
+      let balance_id = prefix_id + "_balance_{{frequency}}";
+      let position_id = prefix_id + "_position_{{frequency}}";
+      $table.append(
+          "<tr>" +
+          "<td>" + key + value.exchange.pair + "</td>" +
+          "<td>" + value.exchange.name.toUpperCase() + "</td>" +
+          "<td class='align-right pf-current-price'><span id=\"" + prefix_id + _prefix_usdt + "{{frequency}}\">" + value.current_price + "</span></td>" +
+          "<td class='align-right pf-units'>" + value.units + "</td>" +
+          "<td class='align-right pf-total-paid'>" + price_formatter.format(value.amount) + "</td>" +
+          "<td class='align-right'>" + price_formatter.format(value.average_paid) +"</td>" +
+          "<td class='align-right'><span id=\"" + balance_id + "\">-</span></td>" +
+          "<td class='align-right'><span id=\"" + position_id + "\">-</span></td>" +
+          "</tr>"
+      );
+      let _id = '#' + balance_id;
+      set_style(_id, value.balance);
+      $(_id).text(price_formatter.format(value.balance));
+      _id = '#' + position_id;
+      set_style(_id, value.position);
+      $(_id).text(value.position + '%');
+    }
+    $('#my_portfolio_total_spent').text(price_formatter.format(data.total_paid));
+    $('#my_portfolio_total_value').text(price_formatter.format(data.total_value));
+    _set_total_position(data.total_position);
+  }
+</script>
+
+<script type="text/javascript">
+  function get_percent(x, y) {
+    if (x >= y) {
+      return (100 - ((y * 100) / x)).toFixed(2)
+    }
+    return -(100 - ((x * 100) / y)).toFixed(2)
+  }
+</script>
+
+<script type="text/javascript">
+  function set_style(id, perc) {
+    if (perc !== 0) {
+      $(id).css("color", (perc > 0) ? "green" : "red")
+    } else {
+      $(id).attr("class", "numeric_value");
+    }
+  }
+
+  function _set_total_value_and_position(total_spent) {
+    let units_list = [];
+    $(".pf-units").each(function() {
+        let value = $(this).text().replace(',', '');
+        if(!isNaN(value) && value.length !== 0) {
+          units_list.push(value);
+        }
+    });
+    let current_price_list = [];
+    $(".pf-current-price").each(function() {
+        let value = $(this).text().replace(',', '');
+        if(!isNaN(value) && value.length !== 0) {
+          current_price_list.push(value);
+        }
+    });
+    if (units_list.length !== current_price_list.length) {
+      return
+    }
+    const x = Array(units_list.length).fill().map(
+      (_, i) => current_price_list[i] * units_list[i]
+    );
+    const total_value = x.reduce((a, b) => a + b, 0);
+    // total position
+    let perc = get_percent(total_value, total_spent);
+    _set_total_position(perc);
+    // total value
+    $('#my_portfolio_total_value').text(price_formatter.format(total_value));
+  }
+
+  function _set_position_and_balance_per_row(id, json, symbol) {
+    const price = json.price_usdt;
+    // position per row
+    let _id = id.replace(_prefix_usdt, "_position_");
+    let perc = get_percent(price, symbol.average_paid);
+    set_style(_id, perc);
+    $(_id).text(perc + '%');
+    // balance per row
+    _id = id.replace(_prefix_usdt, "_balance_");
+    let diff = (price - symbol.average_paid) * symbol.units;
+    set_style(_id, diff);
+    $(_id).text(price_formatter.format(diff));
+  }
+
+  function post_ticker_emit(id, json) {
+    const symbol = data_portf.coin_tokens[json.ticker];
+    if (symbol === undefined) {
+      return;
+    }
+    if(symbol.exchange.name !== json.source) {
+      return;
+    }
+    if(symbol.exchange.pair !== json.symbol.substr(json.ticker.length)) {
+      return;
+    }
+    const total_spent = data_portf.total_paid;
+    _set_total_value_and_position(total_spent);
+    _set_position_and_balance_per_row(id, json, symbol);
+  }
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    get_transactions(render_transactions);
+    get_portfolio(render_portfolio);
+  });
+</script>
+
+<br/><br/>
+
+<div class="row">
+    <div class="five columns">
+      <div style="float: left">
+        <h5>My Transactions</h5>
+      </div>
+      <div style="float: right">
+        <input class="button-primary" type="button" value="Add Tx" onClick="(
+          function() {
+            open_modal('#transaction');
+            return false;
+          })(); return false;">
+      </div>
+
+      <table class="u-full-width" id="table_transactions">
+        <thead>
+          <tr>
+            <th>Coin</th>
+            <th>Units</th>
+            <th>Paid</th>
+            <th>Unit Price</th>
+            <th>Type</th>
+            <th>Added on</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+  </div>
+
+  <div class="seven columns">
+    <div style="float: left;">
+      <h5>My Portfolio</h5>
+    </div>
+    <div style="float: right; width: 75%">
+      <div class="row example-grid docs-example">
+        <div class="four columns">Paid: <span id='my_portfolio_total_spent' class="bigger">-</span></div>
+        <div class="four columns">Value: <span id='my_portfolio_total_value' class="bigger">-</span></div>
+        <div class="four columns">Position: <span id='my_portfolio_total_position' class="bigger">-</span></div>
+      </div>
+    </div>
+
+    <table class="u-full-width" id="table_portfolio">
+      <thead>
+        <tr>
+          <th>Pair</th>
+          <th>Exchange</th>
+          <th>Ticker</th>
+          <th>Total Units</th>
+          <th>Paid</th>
+          <th>Paid Unit</th>
+          <th>Balance</th>
+          <th>Position</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    </div>
+</div>
+
+{% include 'modals/transaction.html' %}
+
+{% endblock %}
+
+{% block include_extra_scripts_bottom %}
+<script type="text/javascript">
+    $(document).ready(function() {
+      $(".container").css("maxWidth", "1480px" );
+    });
+</script>
+{% endblock %}

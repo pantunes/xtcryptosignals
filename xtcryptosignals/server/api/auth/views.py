@@ -30,7 +30,7 @@ class LoginPost(Resource):
         User authenticates
         ---
         tags:
-            - Public
+            - Authentication
         parameters:
             - name: payload
               in: body
