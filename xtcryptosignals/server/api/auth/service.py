@@ -28,7 +28,7 @@ def login(data):
         auth = Auth.objects.get(user=user, active=True)
     except DoesNotExist:
         auth = Auth(user=user)
-    auth.token = secrets.token_hex(64)
+    auth.token = secrets.token_hex(128)
     try:
         auth.save()
     except NotUniqueError:

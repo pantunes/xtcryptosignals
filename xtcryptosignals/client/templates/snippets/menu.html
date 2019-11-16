@@ -4,12 +4,12 @@
   <ul class="navbar-list">
     <li class="navbar-item"><a class="navbar-link" href="/">Home</a></li>
     <li class="navbar-item">
-      <a class="navbar-link" href="javascript:;" data-popover="#tickerNavPopover">Tickers</a>
-      <div id="tickerNavPopover" class="popover">
+      <a class="navbar-link" href="javascript:;" data-popover="#pairsNavPopover">Pairs</a>
+      <div id="pairsNavPopover" class="popover">
         <ul class="popover-list">
-{% for f in frequencies %}
+{% for p in pairs %}
           <li class="popover-item">
-            <a class="popover-link" href="{{url_for('ticker.'+url, frequency=f, **params)}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{f}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a class="popover-link" href="{{url_for('ticker.pair_frequency', frequency=frequency, pair=p) if p != 'ALL' else url_for('ticker.ticker', frequency=frequency)}}">{{p}}</a>
           </li>
 {% endfor %}
         </ul>
@@ -21,34 +21,21 @@
         <ul class="popover-list">
 {% for t in tokens %}
           <li class="popover-item">
-            <a class="popover-link" href="{{url_for('ticker.ticker_token', frequency=frequency, token=t)}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{t}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a class="popover-link" href="{{url_for('ticker.token_frequency', frequency=frequency, token=t)}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{t}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
           </li>
 {% endfor %}
         </ul>
       </div>
     </li>
     <li class="navbar-item">
-      <a class="navbar-link" href="javascript:;" data-popover="#pairsNavPopover">Pairs</a>
-      <div id="pairsNavPopover" class="popover">
+      <a class="navbar-link" href="javascript:;" data-popover="#tickerNavPopover">Tickers</a>
+      <div id="tickerNavPopover" class="popover">
         <ul class="popover-list">
-{% for p in pairs %}
+{% for f in frequencies %}
           <li class="popover-item">
-            <a class="popover-link" href="{{url_for('ticker.ticker_pair', frequency=frequency, pair=p) if p != 'ALL' else url_for('ticker.ticker', frequency=frequency)}}">{{p}}</a>
+            <a class="popover-link" href="{{url_for(url, frequency=f, **params)}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{f}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
           </li>
 {% endfor %}
-        </ul>
-      </div>
-    </li>
-    <li class="navbar-item">
-      <a class="navbar-link" href="javascript:;" data-popover="#projectNavPopover">Project</a>
-      <div id="projectNavPopover" class="popover">
-        <ul class="popover-list">
-          <li class="popover-item">
-            <a class="popover-link" href="https://bitbucket.org/pantunes/xtcryptosignals">On Bitbucket</a>
-          </li>
-          <li class="popover-item">
-            <a class="popover-link" href="https://pypi.org/project/XTCryptoSignals/">On Pypi</a>
-          </li>
         </ul>
       </div>
     </li>
@@ -58,10 +45,13 @@
       <div id="myAccountNavPopover" class="popover">
         <ul class="popover-list">
           <li class="popover-item">
-            <a class="popover-link" href="javascript:open_modal('#modal_login');">{{spaces}}Login{{spaces}}</a>
+            <a class="popover-link" href="javascript:open_modal('#login');">{{spaces}}Login{{spaces}}</a>
           </li>
           <li class="popover-item">
-            <a class="popover-link" href="javascript:open_modal('#modal_signup');">{{spaces}}Signup{{spaces}}</a>
+            <a class="popover-link" href="javascript:open_modal('#signup');">{{spaces}}Signup{{spaces}}</a>
+          </li>
+          <li id="menu_portfolio_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
+            <a class="popover-link" href="{{url_for('portfolio.transactions')}}">Txs/Portfolio</a>
           </li>
           <li id="menu_logout_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
             <a class="popover-link" href="javascript:;" onClick="(
@@ -73,11 +63,17 @@
       </div>
     </li>
     <li class="navbar-item">
-      <a class="navbar-link" href="javascript:;" data-popover="#moreNavPopover">More</a>
+      <a class="navbar-link" href="javascript:;" data-popover="#moreNavPopover">About</a>
       <div id="moreNavPopover" class="popover">
         <ul class="popover-list">
           <li class="popover-item">
-            <a class="popover-link" href="javascript:open_modal('#modal_contact');">Contact</a>
+            <a class="popover-link" href="https://bitbucket.org/pantunes/xtcryptosignals">On Bitbucket</a>
+          </li>
+          <li class="popover-item">
+            <a class="popover-link" href="https://pypi.org/project/XTCryptoSignals">On Pypi</a>
+          </li>
+          <li class="popover-item">
+            <a class="popover-link" href="javascript:open_modal('#contact');">Contact</a>
           </li>
         </ul>
       </div>

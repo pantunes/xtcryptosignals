@@ -4,6 +4,7 @@ All changes will be registered here per release.
 ## [0.1.9] - Current date
 Big code refactoring.  
 Added User Sessions.  
+Added Transactions and Portfolio Management.  
 Added Blueprints.  
 Added Python Marshmallow and Swagger API UI.  
 Code fixes and improvements.  

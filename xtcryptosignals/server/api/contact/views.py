@@ -10,6 +10,7 @@ import os
 from datetime import datetime
 from flask import request, Blueprint
 from flask_restful import Api, Resource
+from xtcryptosignals.server.utils import validate_io
 
 
 bp = Blueprint('contact', __name__)
@@ -17,12 +18,13 @@ api = Api(bp)
 
 
 class ContactPost(Resource):
+    @validate_io()
     def post(self):
         """
         Submit contact form data
         ---
         tags:
-            - Public
+            - User
         parameters:
             - in: formData
               name: email
@@ -51,7 +53,6 @@ class ContactPost(Resource):
                     '\n', ' '
                 ))
             )
-        return dict(status='Ok')
 
 
 api.add_resource(ContactPost, '/contact')

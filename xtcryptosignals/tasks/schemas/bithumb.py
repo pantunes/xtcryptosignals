@@ -9,6 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 from marshmallow import (
     fields,
     pre_load,
+    post_load,
 )
 from xtcryptosignals.tasks.schemas.base import BaseSchema
 from xtcryptosignals.tasks import settings as s
@@ -31,4 +32,9 @@ class Bithumb(BaseSchema):
         data['source'] = s.BITHUMB
         data['units_traded'] = int(round(float(data['units_traded']), 0))
         data['fluctate_rate_1d'] = data['24H_fluctate_rate']
+        return data
+
+    @post_load
+    def post_load(self, data):
+        super().post_load(data)
         return data

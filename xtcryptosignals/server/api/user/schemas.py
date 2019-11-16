@@ -33,7 +33,7 @@ class UserCreateInputSchema(Schema):
 
     @validates_schema
     def validate_confirm_password(self, data, **_):
-        if data["password"] != data["confirm_password"]:
+        if data.get("password") != data.get("confirm_password"):
             raise ValidationError("Strings don't match (password).")
 
 

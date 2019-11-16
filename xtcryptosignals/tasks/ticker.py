@@ -13,11 +13,11 @@ from celery import states
 from billiard.context import Process
 from pymongo.errors import ServerSelectionTimeoutError
 from flask_socketio import SocketIO
-import xtcryptosignals.tasks.settings as s
+from xtcryptosignals.tasks import settings as s
 from xtcryptosignals.tasks.celeryconfig import BROKER_URL
 from xtcryptosignals.common.utils import use_mongodb
 from xtcryptosignals.tasks.utils import get_class
-from xtcryptosignals.tasks.models.ticker import Ticker as TickerModel
+from xtcryptosignals.tasks.models.ticker import Ticker
 
 
 def _process(
@@ -48,7 +48,7 @@ def _process(
         if not pairs:
             ticker = (ticker,)
         for x in ticker:
-            ticker_model = TickerModel(**x)
+            ticker_model = Ticker(**x)
             ticker_model.save()
             if socketio:
                 for h in ticker_model.get_history():

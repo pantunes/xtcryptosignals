@@ -21,6 +21,7 @@
 * [x] Build website (From Jan 2019)
 * [x] Add Gunicorn to make it production ready (March 2019)
 * [x] Building Unit, functional and end-to-end testing for existing and future features (From Jan 2019)
+* [x] User account creation, Session and Assets Management (From Oct 2019)
 * [ ] Setup notification rules for price range, price change, trading volume, price sentiment (From July 2019)
 * [ ] Implement e-mail and web browser push notifications signals (From Oct 2019)
 * [ ] Implement automatic trading (From 2020)
@@ -252,11 +253,15 @@ xt-all --help
 ```
 
 ```bash
-Usage: xt-all [OPTIONS] [start|stop|restart]
+Usage: xt-all [OPTIONS] [copy-config-files|start|stop|restart]
 
 Options:
   -h, --help  Show this message and exit.
 ```
+For Production enviroment `xt-all copy-config-files` should be executed on first place 
+to copy default config files to the folder `/config`.  
+The configuration should be reviewed and changed, before running `xt-all start`
+to start all 3 services: `xt-server`, `xt-client` and `xt-ticker`.  
 
 ## Screenshots
 

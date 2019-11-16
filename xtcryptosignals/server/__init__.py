@@ -33,11 +33,18 @@ def create_app():
     from xtcryptosignals.server.api.contact.views import bp as bp_contact
     from xtcryptosignals.server.api.auth.views import bp as bp_auth
     from xtcryptosignals.server.api.user.views import bp as bp_user
+    from xtcryptosignals.server.api.tokens.views import bp as bp_tokens
+    from xtcryptosignals.server.api.portfolio.views import bp as bp_portfolio
+    from xtcryptosignals.server.api.transaction.views import \
+        bp as bp_transaction
 
     bps = (
         bp_auth,
         bp_user,
         bp_contact,
+        bp_tokens,
+        bp_transaction,
+        bp_portfolio,
     )
 
     for x in bps:

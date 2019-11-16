@@ -12,6 +12,8 @@
 
 .darkmode--activated h2,
 .darkmode--activated h3,
+.darkmode--activated h4,
+.darkmode--activated h5,
 .darkmode--activated h6,
 .darkmode--activated th,
 .darkmode--activated .four,
@@ -46,5 +48,9 @@
 
 .darkmode--activated .modal {
   color: #6c6c6c;
+  background: #212224;
+}
+
+.darkmode--activated .row-tx-out {
   background: #212224;
 }

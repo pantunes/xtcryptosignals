@@ -1,0 +1,59 @@
+<script type="text/javascript">
+  $(function() {
+    $('#tx_added_on').datepicker(
+        {dateFormat: "mm/dd/yy"}
+    ).datepicker(
+        "setDate", new Date()
+    );
+  });
+</script>
+
+<!-- Transaction Modal -->
+<div id="modal_transaction" class="modal">
+    <h5>Add Transaction</h5>
+    <form id="form_transaction">
+      <div class="row">
+          <div class="four columns">
+              <label for="tx_coin_token">Coin/Token</label>
+              <select class="u-full-width" id="tx_coin_token" name="coin_token"></select>
+          </div>
+          <div class="four columns">&nbsp;</div>
+          <div class="four columns">
+              <label for="tx_added_on">Date</label>
+              <input class="u-full-width" type="text" id="tx_added_on" name="added_on">
+          </div>
+      </div>
+      <div class="row">
+          <div class="four columns">
+              <label for="tx_units">Units</label>
+              <input class="u-full-width" type="text" placeholder="0.0234" id="tx_units" name="units">
+          </div>
+          <div class="four columns">
+              <label for="tx_amount">Amount ($)</label>
+              <input class="u-full-width" type="text" placeholder="450" id="tx_amount" name="amount">
+          </div>
+          <div class="four columns">
+              <label for="tx_in_or_out">Type</label>
+              <select class="u-full-width" id="tx_in_or_out" name="in_or_out">
+                  <option value="in">in</option>
+                  <option value="out">out</option>
+              </select>
+          </div>
+      </div>
+      <input class="button-primary" type="button" value="Add" onClick="(
+          function() {
+            $.post('/transaction/add', $('#form_transaction').serialize())
+                .done(function(response) {
+                    $.notify('Added Transaction!', 'success');
+                    $.modal.close();
+                    get_transactions(render_transactions);
+                    get_portfolio(render_portfolio);
+                })
+                .fail(function(xhr, status, error) {
+                    process_fail(xhr);
+                });
+            return false;
+        })(); return false;">
+    </form>
+</div>
+<!-- /Transaction Modal -->

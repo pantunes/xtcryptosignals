@@ -21,5 +21,9 @@ TIMEOUT_PER_SYMBOLS_REQUEST = 5.0  # in seconds
 SYMBOL_FLOAT_PRECISION = 8
 PRICES_CHANGE_CHART_SIZE = 6
 
+BROKER_URL = 'redis://localhost:6379'
+
+REDIS_KEY_TICKER = '{source}_{symbol}_price'
+
 from xtcryptosignals.settings import *  # noqa
 from xtcryptosignals.tasks.settings_local import *  # noqa

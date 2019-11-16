@@ -29,6 +29,53 @@ EXCHANGES = [
     BILAXY,
 ]
 
+EXCHANGES_OF_REFERENCE = {
+    'BTC': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'ETH': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'LTC': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'BNB': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'XRP': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'NANO': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'ONT': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'BTMX': {
+        'pair': 'USDT',
+        'name': BITMAX,
+    },
+    'LTO': {
+        'pair': 'USDT',
+        'name': BITMAX,
+    },
+    'IDEX': {
+        'pair': 'ETH',
+        'name': IDEX,
+    },
+    'LQD': {
+        'pair': 'ETH',
+        'name': BILAXY,
+    },
+}
+
 SYMBOLS_PER_EXCHANGE = list()
 
 # Binance
@@ -38,6 +85,10 @@ SYMBOLS_PER_EXCHANGE.append({
             ('BTC', 'USDT'),
             ('ETH', 'USDT'),
             ('LTC', 'USDT'),
+            ('BNB', 'USDT'),
+            ('XRP', 'USDT'),
+            ('NANO', 'USDT'),
+            ('ONT', 'USDT'),
         ]
     }
 })
@@ -125,6 +176,7 @@ SYMBOLS_PER_EXCHANGE.append({
             ('LTO', 'USDT'),
             ('LTO', 'BTC'),
             ('LTO', 'ETH'),
+            ('BTMX', 'USDT'),
         ],
         'single_request': True,
     }

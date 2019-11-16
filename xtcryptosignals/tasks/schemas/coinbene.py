@@ -9,6 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 from marshmallow import (
     fields,
     pre_load,
+    post_load,
 )
 from xtcryptosignals.tasks.schemas.base import BaseSchema
 from xtcryptosignals.tasks import settings as s
@@ -28,4 +29,9 @@ class Coinbene(BaseSchema):
         data['high'] = data['24hrHigh']
         data['low'] = data['24hrLow']
         data['vol'] = float(data['24hrVol']) * float(data['last'])
+        return data
+
+    @post_load
+    def post_load(self, data):
+        super().post_load(data)
         return data

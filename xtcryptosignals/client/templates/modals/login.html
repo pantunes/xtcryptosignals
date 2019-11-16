@@ -1,0 +1,23 @@
+<!-- Login Modal -->
+<div id="modal_login" class="modal">
+    <h5>Login</h5>
+    <form id="form_login">
+      <div class="row">
+          <div class="twelve columns">
+              <label for="login_email">E-mail address</label>
+              <input class="u-full-width" type="email" placeholder="you@mailbox.com" id="login_email" name="email">
+          </div>
+      </div>
+      <div class="row">
+          <div class="twelve columns">
+              <label for="login_password">Password</label>
+              <input class="u-full-width" type="password" id="login_password" name="password">
+          </div>
+      </div>
+      <input class="button-primary" type="button" value="Login" onClick="(
+          function() {
+            login(); return false;
+        })(); return false;">
+    </form>
+</div>
+<!-- /Login Modal -->
