@@ -158,17 +158,6 @@ SYMBOLS_PER_EXCHANGE.append({
     }
 })
 
-# Uphold
-SYMBOLS_PER_EXCHANGE.append({
-    UPHOLD: {
-        'pairs': [
-            ('BTC', 'USD'),
-            ('ETH', 'USD'),
-            ('LTC', 'USD'),
-        ]
-    }
-})
-
 # Bitmax
 SYMBOLS_PER_EXCHANGE.append({
     BITMAX: {
@@ -205,6 +194,17 @@ SYMBOLS_PER_EXCHANGE.append({
             ('LQD', 'ETH'),
         ],
         'single_request': True,
+    }
+})
+
+# Uphold
+SYMBOLS_PER_EXCHANGE.append({
+    UPHOLD: {
+        'pairs': [
+            ('BTC', 'USD'),
+            ('ETH', 'USD'),
+            ('LTC', 'USD'),
+        ]
     }
 })
 
