@@ -6,11 +6,11 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import os
-from datetime import datetime
-from flask import request, Blueprint
+from flask import Blueprint
 from flask_restful import Api, Resource
 from xtcryptosignals.server.utils import validate_io
+from xtcryptosignals.server.api.contact import service
+from xtcryptosignals.server.api.contact.schemas import ContactInputSchema
 
 
 bp = Blueprint('contact', __name__)
@@ -18,8 +18,8 @@ api = Api(bp)
 
 
 class ContactPost(Resource):
-    @validate_io()
-    def post(self):
+    @validate_io(schema_in=ContactInputSchema, is_form=True)
+    def post(self, valid_data):
         """
         Submit contact form data
         ---
@@ -41,18 +41,12 @@ class ContactPost(Resource):
         responses:
             200:
                 description: Contact form was submitted successfully
+            400:
+                description: Error in input validation
+            402:
+                description: Invalid Form payload
         """
-        with open(os.path.join('/tmp', 'contact.csv'), 'a') as f:
-            f.write("{}\t{}\t{}\t{}\n".format(
-                str(datetime.utcnow()),
-                request.form.get('email', ''),
-                request.form.get('reason', ''),
-                request.form.get('message', '').replace(
-                    '\r\n', ' '
-                ).replace(
-                    '\n', ' '
-                ))
-            )
+        service.save_contact(data=valid_data)
 
 
 api.add_resource(ContactPost, '/contact')

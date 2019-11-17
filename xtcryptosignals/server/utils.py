@@ -44,17 +44,24 @@ def _sanitize_errors_marshmallow(errors):
 
 
 def validate_io(
-    schema_in=None, schema_out=None, many_in=False, many_out=False
+        schema_in=None,
+        schema_out=None,
+        many_in=False,
+        many_out=False,
+        is_form=False
 ):
     def decorator(f):
         @wraps(f)
         def wrapper(*args, **kwargs):
             if schema_in:
                 try:
-                    _json = request.get_json()
+                    if not is_form:
+                        payload = request.get_json()
+                    else:
+                        payload = request.form
                 except Exception:
-                    return dict(error='Invalid JSON payload.'), 402
-                data, errors = schema_in().load(_json, many=many_in)
+                    return dict(error='Invalid JSON/Form payload.'), 402
+                data, errors = schema_in().load(payload, many=many_in)
                 if errors:
                     return dict(error=_sanitize_errors_marshmallow(errors)), 400
                 kwargs.update(valid_data=data)

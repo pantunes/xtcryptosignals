@@ -33,11 +33,7 @@ class Auth(DocumentValidation):
     meta = {
         'collection': 'auth',
         'indexes': [{
-            'fields': (
-                'user',
-                'token',
-                'active',
-            ),
+            'fields': ('user', 'token', 'active',),
             'unique': True
         }]
     }
