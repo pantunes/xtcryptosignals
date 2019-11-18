@@ -15,6 +15,7 @@
             <caption><h4>{{pair}} - {{frequency}}</h4></caption>
             <thead>
                 <tr>
+                    <th>&nbsp;</th>
                     <th>Exchange</th>
 {% for att in attributes %}
                     <th>{{att | replace(" On",  " On UTC") }}</th>
@@ -27,6 +28,7 @@
     {% if d['pairs']%}
         {% for c, r in d['pairs'] %}
         <tr>
+            <td style="width: 32px; vertical-align: middle;"><img src="/static/imgs/logos/btc.png" alt="BTC"/></td>
             <td style="width: 100px;">
                 <a href="/ticker/{{frequency}}#{{exchange.upper()}}">{{exchange.replace('_', ' ').upper()}}</a>
             </td>

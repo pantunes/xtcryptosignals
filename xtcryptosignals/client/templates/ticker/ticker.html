@@ -162,6 +162,7 @@
                 <thead>
                     <tr>
                         <th>&nbsp;</th>
+                        <th>Pair</th>
                         {% for att in attributes %}
                         <th>{{att | replace(" On",  " On UTC") }}</th>
                         {% endfor %}
@@ -170,8 +171,9 @@
                 <tbody>
                     {% for c, r in d['pairs'] %}
                     <tr>
+                        <td style="width: 32px; vertical-align: middle;"><img src="/static/imgs/logos/{{c}}.png" alt="{{c}}"/></td>
                         <td style="width: 100px;">
-                            <a href="/ticker/{{c}}{{r}}/{{frequency}}">{{c}}-{{r}}</a>
+                            <a href="{{url_for('ticker.pair_frequency', frequency=frequency, pair=c+r)}}">{{c}}-{{r}}</a>
                         </td>
                         {% for att in attributes %}
                             {% set _id = "{}_{}{}_{}_{}".format(exchange.lower(), c.lower(), r.lower(), att.replace(' ', '_').lower(), frequency) %}

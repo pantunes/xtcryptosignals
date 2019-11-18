@@ -54,12 +54,13 @@
     let $table = $('#table_portfolio');
     $table.find("tbody tr").remove();
     for (const [key, value] of Object.entries(data_portf.coin_tokens)) {
-      let prefix_id = value.exchange.name + "_" + key.toLowerCase() + value.exchange.pair.toLowerCase();
-      let balance_id = prefix_id + "_balance_{{frequency}}";
-      let position_id = prefix_id + "_position_{{frequency}}";
+      const prefix_id = value.exchange.name + "_" + key.toLowerCase() + value.exchange.pair.toLowerCase();
+      const balance_id = prefix_id + "_balance_{{frequency}}";
+      const position_id = prefix_id + "_position_{{frequency}}";
+      const pair = key + "-" + value.exchange.pair;
       $table.append(
           "<tr>" +
-          "<td>" + key + value.exchange.pair + "</td>" +
+          "<td><a href='/ticker/" + pair.replace('-', '') + "/{{frequency}}'>" + pair + "</a></td>" +
           "<td>" + value.exchange.name.toUpperCase() + "</td>" +
           "<td class='align-right pf-current-price'><span id=\"" + prefix_id + _prefix_usdt + "{{frequency}}\">" + value.current_price + "</span></td>" +
           "<td class='align-right pf-units'>" + value.units + "</td>" +
