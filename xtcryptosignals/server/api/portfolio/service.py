@@ -83,10 +83,8 @@ def portfolio(auth):
         _portfolio['coin_tokens'].update({
             coin_token: dict(
                 exchange=exchange,
-                current_price=round(
-                    current_price, s.SYMBOL_FLOAT_PRECISION_SHORTER
-                ),
-                units=round(total_units, s.SYMBOL_FLOAT_PRECISION_SHORTER),
+                current_price=round(current_price, s.SYMBOL_FLOAT_PRECISION),
+                units=round(total_units, s.SYMBOL_FLOAT_PRECISION),
                 amount=total_amount,
                 average_paid=average_paid,
                 balance=round((current_price - average_paid) * total_units, 2),
