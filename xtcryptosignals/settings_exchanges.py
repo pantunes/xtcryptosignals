@@ -50,6 +50,10 @@ EXCHANGES_OF_REFERENCE = {
         'pair': 'USDT',
         'name': BINANCE,
     },
+    'XLM': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
     'XTZ': {
         'pair': 'USDT',
         'name': BINANCE,
@@ -91,6 +95,7 @@ SYMBOLS_PER_EXCHANGE.append({
             ('LTC', 'USDT'),
             ('BNB', 'USDT'),
             ('XRP', 'USDT'),
+            ('XLM', 'USDT'),
             ('XTZ', 'USDT'),
             ('NANO', 'USDT'),
             ('ONT', 'USDT'),
