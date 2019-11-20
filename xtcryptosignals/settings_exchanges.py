@@ -82,6 +82,10 @@ EXCHANGES_OF_REFERENCE = {
         'pair': 'ETH',
         'name': BILAXY,
     },
+    'CARD': {
+        'pair': 'ETH',
+        'name': HOTBIT,
+    },
 }
 
 SYMBOLS_PER_EXCHANGE = list()
@@ -190,6 +194,7 @@ SYMBOLS_PER_EXCHANGE.append({
             ('LTO', 'ETH'),
             ('LQD', 'ETH'),
             ('LQD', 'BTC'),
+            ('CARD', 'ETH'),
         ],
         'single_request': True,
     }
