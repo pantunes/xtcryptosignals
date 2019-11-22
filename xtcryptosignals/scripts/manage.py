@@ -25,8 +25,13 @@ SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 )
 def main(operation):
     if operation == 'copy-config-files':
-        for x in ('client.prod.env', 'server.prod.env',):
-            filepath_source = os.path.join(SCRIPT_PATH, '../../config', x)
+        for x in (
+                'client.prod.env',
+                'server.prod.env',
+                'client.dev.env',
+                'server.dev.env'
+        ):
+            filepath_source = os.path.join(SCRIPT_PATH, '../config', x)
             filepath_dest = os.path.join(os.getcwd(), 'config', x)
             try:
                 copyfile(filepath_source, filepath_dest)
