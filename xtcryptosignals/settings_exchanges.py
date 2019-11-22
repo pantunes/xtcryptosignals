@@ -29,64 +29,6 @@ EXCHANGES = [
     BILAXY,
 ]
 
-EXCHANGES_OF_REFERENCE = {
-    'BTC': {
-        'pair': 'USDT',
-        'name': BINANCE,
-    },
-    'ETH': {
-        'pair': 'USDT',
-        'name': BINANCE,
-    },
-    'LTC': {
-        'pair': 'USDT',
-        'name': BINANCE,
-    },
-    'BNB': {
-        'pair': 'USDT',
-        'name': BINANCE,
-    },
-    'XRP': {
-        'pair': 'USDT',
-        'name': BINANCE,
-    },
-    'XLM': {
-        'pair': 'USDT',
-        'name': BINANCE,
-    },
-    'XTZ': {
-        'pair': 'USDT',
-        'name': BINANCE,
-    },
-    'NANO': {
-        'pair': 'USDT',
-        'name': BINANCE,
-    },
-    'ONT': {
-        'pair': 'USDT',
-        'name': BINANCE,
-    },
-    'BTMX': {
-        'pair': 'USDT',
-        'name': BITMAX,
-    },
-    'LTO': {
-        'pair': 'USDT',
-        'name': BITMAX,
-    },
-    'IDEX': {
-        'pair': 'ETH',
-        'name': IDEX,
-    },
-    'LQD': {
-        'pair': 'ETH',
-        'name': BILAXY,
-    },
-    'CARD': {
-        'pair': 'ETH',
-        'name': HOTBIT,
-    },
-}
 
 SYMBOLS_PER_EXCHANGE = list()
 
@@ -240,3 +182,63 @@ SYMBOLS_PER_EXCHANGE.append({
         'single_request': True,
     }
 })
+
+
+EXCHANGES_OF_REFERENCE = {
+    'BTC': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'ETH': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'LTC': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'BNB': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'XRP': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'XLM': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'XTZ': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'NANO': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'ONT': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'BTMX': {
+        'pair': 'USDT',
+        'name': BITMAX,
+    },
+    'LTO': {
+        'pair': 'USDT',
+        'name': BITMAX,
+    },
+    'IDEX': {
+        'pair': 'ETH',
+        'name': IDEX,
+    },
+    'LQD': {
+        'pair': 'ETH',
+        'name': BILAXY,
+    },
+    'CARD': {
+        'pair': 'ETH',
+        'name': HOTBIT,
+    },
+}
