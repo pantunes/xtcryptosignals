@@ -15,7 +15,6 @@ def get_history_frequency():
         url='{}tokens/frequency'.format(
             current_app.config['SERVER_API_BASE_URL']
         ),
-        verify=False,
     )
     return response.json(), response.status_code
 
@@ -25,6 +24,5 @@ def get_symbols_per_exchange():
         url='{}tokens/symbols'.format(
             current_app.config['SERVER_API_BASE_URL']
         ),
-        verify=False,
     )
     return response.json(), response.status_code
