@@ -4,10 +4,10 @@
 
 {% block include_scripts_top %}
 <script type="text/javascript">
-var socket = io('{{server_api_base_url}}');
-socket.on('general', function(json) {
-  $("#active_users").html(json['/']);
-});
+  const socket = io('{{socket_base_url}}');
+  socket.on('general', function(json) {
+    $("#active_users").html(json['/']);
+  });
 </script>
 {% endblock %}
 
