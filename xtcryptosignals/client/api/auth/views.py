@@ -30,7 +30,6 @@ def load_user(token):
     response = requests.get(
         url='{}auth'.format(current_app.config['SERVER_API_BASE_URL']),
         headers=dict(Authorization=token),
-        verify=False,
     )
 
     if response.status_code != 200:
