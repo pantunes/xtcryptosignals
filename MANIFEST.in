@@ -7,4 +7,5 @@ include xtcryptosignals/client/templates/snippets/*.*
 include xtcryptosignals/client/static/css/*.*
 include xtcryptosignals/client/static/imgs/*.*
 include xtcryptosignals/client/static/imgs/readme/*.*
+include xtcryptosignals/client/static/imgs/logos/*.*
 include xtcryptosignals/client/static/js/*.*
