@@ -29,6 +29,7 @@ def index():
             current_app.config['SERVER_API_BASE_URL']
         ),
         headers=dict(Authorization=current_user.id),
+        verify=False,
     )
     return dict(results=response.json()), response.status_code
 
