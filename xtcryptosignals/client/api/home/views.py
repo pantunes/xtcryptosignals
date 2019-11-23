@@ -23,7 +23,7 @@ bp = Blueprint('home', __name__)
 @bp.context_processor
 def before_request():
     return dict(
-        server_api_base_url=current_app.config['SERVER_API_BASE_URL'],
+        socket_base_url=current_app.config['SOCKET_BASE_URL'],
         version=__version__,
         ga_tracking_id=current_app.config['GA_TRACKING_ID'],
         frequencies=g.HISTORY_FREQUENCY,
