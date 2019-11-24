@@ -1,7 +1,10 @@
 # Changelog
 All changes will be registered here per release.
 
-## [0.1.9] - Current date
+## [0.2.0] - Current date
+
+
+## [0.1.9] - 2019-11-23
 Big code refactoring.  
 Added User Sessions.  
 Added Transactions and Portfolio Management.  
