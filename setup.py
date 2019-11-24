@@ -34,12 +34,12 @@ setup(
     author_email=_CFG['__email__'],
     maintainer=_CFG['__author__'],
     maintainer_email=_CFG['__email__'],
-    description="Platform that collects crypto-currencies price "
+    description="Platform that collects cryptocurrencies price "
                 "data, fires alerts based on price sentiment and "
                 "performs automatic trading.",
     long_description=_LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
-    url="https://bitbucket.org/pantunes/xtcryptosignals",
+    url="https://xtcryptosignals.com",
     packages=find_packages(),
     setup_requires=['pytest-runner'],
     tests_require=['pytest'],
@@ -55,12 +55,12 @@ setup(
     install_requires=_REQUIREMENTS,
     zip_safe=False,
     keywords=[
-        'xtcryptosignals', 'api', 'bitcoin', 'ethereum', 'signals', 'trading',
-        'crypto signals', 'exchange', 'crypto',
+        'xtcryptosignals', 'api', 'cryptocurrency', 'bitcoin', 'ethereum',
+        'signals', 'trading', 'crypto signals', 'exchange', 'crypto',
     ],
     license=__license__,
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Intended Audience :: Financial and Insurance Industry',
         'Topic :: Software Development :: Libraries :: Python Modules',
