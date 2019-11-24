@@ -33,6 +33,8 @@ class DocumentValidation(Document):
         for hook in self._pre_save_hooks:
             hook(self)
         _set_timestamp(self)
+        if kwargs.get('temporary'):
+            return
         return super(DocumentValidation, self).save(*args, **kwargs)
 
     def to_dict(self, *args, **kwargs):

@@ -49,7 +49,7 @@ def _process(
             ticker = (ticker,)
         for x in ticker:
             ticker_model = Ticker(**x)
-            ticker_model.save()
+            ticker_model.save(temporary=not s.CREATE_MODEL_TICKER)
             if socketio:
                 for h in ticker_model.get_history():
                     socketio.emit(
