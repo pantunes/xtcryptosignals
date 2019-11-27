@@ -42,7 +42,10 @@ SYMBOLS_PER_EXCHANGE.append({
             ('BNB', 'USDT'),
             ('XRP', 'USDT'),
             ('XLM', 'USDT'),
+            ('XMR', 'USDT'),
+            ('ADA', 'USDT'),
             ('XTZ', 'USDT'),
+            ('VET', 'USDT'),
             ('NANO', 'USDT'),
             ('ONT', 'USDT'),
         ]
@@ -206,6 +209,18 @@ EXCHANGES_OF_REFERENCE = {
         'name': BINANCE,
     },
     'XLM': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'XMR': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'ADA': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'VET': {
         'pair': 'USDT',
         'name': BINANCE,
     },
