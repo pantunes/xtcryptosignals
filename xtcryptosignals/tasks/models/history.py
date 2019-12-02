@@ -32,8 +32,6 @@ class History(DocumentValidation):
     meta = {
         'abstract': True,
         'indexes': [
-            ("-created_on", ),
-            ("ticker", ),
             ("symbol", "source", ),
             ("symbol", "source", "-created_on", ),
         ],
