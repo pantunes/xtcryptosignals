@@ -45,10 +45,12 @@ SYMBOLS_PER_EXCHANGE.append({
             ('XMR', 'USDT'),
             ('ADA', 'USDT'),
             ('XTZ', 'USDT'),
+            ('ICX', 'USDT'),
             ('VET', 'USDT'),
             ('NANO', 'USDT'),
             ('ONT', 'USDT'),
-        ]
+        ],
+        'single_request': True,
     }
 })
 
@@ -221,6 +223,10 @@ EXCHANGES_OF_REFERENCE = {
         'name': BINANCE,
     },
     'VET': {
+        'pair': 'USDT',
+        'name': BINANCE,
+    },
+    'ICX': {
         'pair': 'USDT',
         'name': BINANCE,
     },
