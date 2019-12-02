@@ -42,15 +42,14 @@ SYMBOLS_PER_EXCHANGE.append({
             ('BNB', 'USDT'),
             ('XRP', 'USDT'),
             ('XLM', 'USDT'),
-            # ('XMR', 'USDT'),
-            # ('ADA', 'USDT'),
-            # ('XTZ', 'USDT'),
+            ('XMR', 'USDT'),
+            ('ADA', 'USDT'),
+            ('XTZ', 'USDT'),
             ('ICX', 'USDT'),
-            # ('VET', 'USDT'),
+            ('VET', 'USDT'),
             ('NANO', 'USDT'),
             ('ONT', 'USDT'),
         ],
-        # 'single_request': True,
     }
 })
 
