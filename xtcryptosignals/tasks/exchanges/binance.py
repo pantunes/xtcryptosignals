@@ -13,20 +13,31 @@ from binance.exceptions import BinanceAPIException
 
 class Binance:
     def __init__(self):
-        self.client = Client(
-            s.BINANCE_API_KEY, s.BINANCE_API_SECRET
-        )
+        self.client = Client(s.BINANCE_API_KEY, s.BINANCE_API_SECRET)
 
-    def get_ticker(self, symbol):
-        _symbol = ''.join(symbol)
+    def get_ticker(self, *_, **kwargs):
+        symbol = kwargs.get('symbol')
+        if symbol:
+            ticker_kwargs = dict(symbol=''.join(symbol))
+        else:
+            ticker_kwargs = dict()
+
         try:
-            item = self.client.get_ticker(symbol=_symbol)
-        except BinanceAPIException:
-            raise ValueError(
-                'Invalid Symbol: {}'.format(_symbol)
-            )
-        except Exception as err:
+            items_or_item = self.client.get_ticker(**ticker_kwargs)
+        except (BinanceAPIException, Exception) as err:
             raise ValueError(str(err))
 
-        item.update(ticker=symbol[0])
-        return item
+        if symbol:
+            item = items_or_item
+            item.update(ticker=symbol[0])
+            return item
+
+        items = list()
+        pairs = [x[0] + x[1] for x in kwargs['pairs']]
+        for item in items_or_item:
+            if item['symbol'] in pairs:
+                item.update(ticker=item['symbol'])
+                items.append(item)
+                if len(items) >= len(pairs):
+                    break
+        return items
