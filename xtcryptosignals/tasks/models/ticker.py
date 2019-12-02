@@ -14,7 +14,6 @@ from mongoengine import (
     IntField,
     DateTimeField,
 )
-from mongoengine.queryset.visitor import Q
 from xtcryptosignals.common.models import (
     DocumentValidation,
     _set_timestamp,
@@ -119,9 +118,6 @@ class Ticker(DocumentValidation):
 
     meta = {
         'collection': 'ticker',
-        'indexes': [
-            ("-created_on", ),
-        ],
         'ordering': ['-created_on'],
     }
 
@@ -151,9 +147,9 @@ class Ticker(DocumentValidation):
             seconds=convert_to_seconds(offset) - 1.0
         )
         return model.objects(
-            Q(symbol=self['symbol']) &
-            Q(source=self['source']) &
-            Q(created_on__gte=dt)
+            symbol=self['symbol'],
+            source=self['source'],
+            created_on__gte=dt
         ).first()
 
     def _calculate_changes(self, row):
