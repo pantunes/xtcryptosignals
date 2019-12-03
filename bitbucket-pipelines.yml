@@ -26,4 +26,4 @@ pipelines:
         caches:
           - pip
         script:
-          - SETTINGS_APP=`pwd`/config/server.dev.env python setup.py test
+          - SETTINGS_APP=xtcryptosignals/config/server.dev.env python setup.py test
