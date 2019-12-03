@@ -81,7 +81,4 @@ def main(ctx, test, list_config, enable_messaging, log_minimal, version):
     app.conf.beat_schedule['ticker'].update(kwargs=beat_kwargs)
 
     worker = worker.worker(app=app)
-    worker.run(
-        beat=True,
-        loglevel=ticker.logging.INFO,
-    )
+    worker.run(beat=True, loglevel=ticker.logging.INFO)
