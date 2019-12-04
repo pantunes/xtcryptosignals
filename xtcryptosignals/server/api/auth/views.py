@@ -15,6 +15,7 @@ from xtcryptosignals.server.utils import (
 from xtcryptosignals.server.api.auth import service
 from xtcryptosignals.server.api.auth.schemas import (
     AuthInputSchema,
+    AuthSubscriptionInputSchema,
     AuthOutputSchema,
 )
 
@@ -103,6 +104,29 @@ class AuthGet(Resource):
         return auth
 
 
+class SubscriptionPost(Resource):
+    @validate_io(schema_in=AuthSubscriptionInputSchema)
+    @user_auth()
+    def post(self, auth, valid_data):
+        """
+        Adds/Updates User's Subscription
+        ---
+        tags:
+            - Authentication
+        security:
+            - Bearer: []
+        responses:
+            200:
+                description: Subscription saved
+            400:
+                description: Error in input validation
+            401:
+                description: Unauthorized
+        """
+        service.subscription(auth=auth, data=valid_data)
+
+
 api.add_resource(LoginPost, '/login')
 api.add_resource(LogoutPost, '/logout')
 api.add_resource(AuthGet, '/auth')
+api.add_resource(SubscriptionPost, '/subscription')

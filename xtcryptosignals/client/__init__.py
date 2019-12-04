@@ -38,6 +38,8 @@ def create_app():
     from xtcryptosignals.client.api.contact.views import bp as bp_contact
     from xtcryptosignals.client.api.user.views import bp as bp_user
     from xtcryptosignals.client.api.portfolio.views import bp as bp_portfolio
+    from xtcryptosignals.client.api.notifications.views import \
+        bp as bp_notifications
     from xtcryptosignals.client.api.transaction.views import \
         bp as bp_transaction
 
@@ -49,6 +51,7 @@ def create_app():
         bp_contact,
         bp_errors,
         bp_portfolio,
+        bp_notifications,
         bp_transaction,
     )
 

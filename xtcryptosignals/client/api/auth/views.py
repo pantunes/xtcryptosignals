@@ -67,3 +67,14 @@ def logout():
         session.clear()
 
     return {}, response.status_code
+
+
+@bp.route('/subscription', methods=['POST'])
+@login_required
+def subscription():
+    response = requests.post(
+        url='{}subscription'.format(current_app.config['SERVER_API_BASE_URL']),
+        headers=dict(Authorization=current_user.id),
+        json=request.get_json()
+    )
+    return {}, response.status_code

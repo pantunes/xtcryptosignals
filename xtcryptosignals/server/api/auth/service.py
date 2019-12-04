@@ -39,3 +39,8 @@ def login(data):
 def logout(auth):
     auth.active = False
     auth.save()
+
+
+def subscription(auth, data):
+    auth.user.metadata.update(subscription=data)
+    auth.user.save()
