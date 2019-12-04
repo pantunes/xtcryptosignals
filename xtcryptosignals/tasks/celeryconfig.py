@@ -22,11 +22,16 @@ BROKER_URL = s.BROKER_URL
 
 CELERY_IMPORTS = (
     'xtcryptosignals.tasks.ticker',
+    'xtcryptosignals.tasks.notifications',
 )
 
 CELERYBEAT_SCHEDULE = {
     'ticker': {
         'task': 'xtcryptosignals.tasks.ticker.update',
+        'schedule': s.TICKER_SCHEDULE,
+    },
+    'notifications': {
+        'task': 'xtcryptosignals.tasks.notifications.update',
         'schedule': s.TICKER_SCHEDULE,
     }
 }

@@ -27,5 +27,8 @@ BROKER_URL = 'redis://localhost:6379'
 
 REDIS_KEY_TICKER = '{source}_{symbol}_price'
 
+VAPID_CLAIMS = env.str('VAPID_CLAIMS')
+VAPID_PRIVATE_KEY = env.str('VAPID_PRIVATE_KEY')
+
 from xtcryptosignals.settings import *  # noqa
 from xtcryptosignals.tasks.settings_local import *  # noqa

@@ -16,6 +16,11 @@ class AuthInputSchema(Schema):
     password = fields.String(required=True)
 
 
+class AuthSubscriptionInputSchema(Schema):
+    endpoint = fields.URL(required=True)
+    keys = fields.Dict(required=True)
+
+
 class AuthOutputSchema(OutputSchema):
     user = fields.Nested(UserOutputSchema, required=True)
     token = fields.String(required=True)
