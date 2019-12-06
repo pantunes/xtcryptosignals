@@ -35,7 +35,7 @@ def update(self):
                 subscription_info=subscription_information,
                 data=json.dumps(dict(
                     title='XTCryptoSignals',
-                    message='BTC is up 7%...',
+                    message='BTC is up 7%',
                     url='http://127.0.0.1:8000/ticker/BTCUSDT/10s',
                     icon='/static/imgs/logos/BTC.png',
                 )),

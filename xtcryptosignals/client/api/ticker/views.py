@@ -110,6 +110,13 @@ def tokens():
     )
 
 
+@bp.route('/ticker/frequencies')
+def frequencies():
+    return dict(
+        frequencies=g.HISTORY_FREQUENCY
+    )
+
+
 def _before_request():
     g.SYMBOLS_PER_EXCHANGE, _ = service.get_symbols_per_exchange()
     g.HISTORY_FREQUENCY, _ = service.get_history_frequency()

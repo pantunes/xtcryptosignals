@@ -43,3 +43,6 @@
 .bigger {
   font-size: large;
 }
+.align-right {
+    text-align: right;
+}
