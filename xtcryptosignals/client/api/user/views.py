@@ -26,6 +26,11 @@ from xtcryptosignals.client.api.auth.models import Auth
 bp = Blueprint('user', __name__)
 
 
+@bp.before_request
+def before_request():
+    g.HISTORY_FREQUENCY, _ = service.get_history_frequency()
+
+
 @bp.route('/info', methods=['GET'])
 @login_required
 def info():
@@ -62,10 +67,3 @@ def signup():
         login_user(Auth(_json))
 
     return _json, response.status_code
-
-
-def _before_request():
-    g.HISTORY_FREQUENCY, _ = service.get_history_frequency()
-
-
-bp.before_request(_before_request)

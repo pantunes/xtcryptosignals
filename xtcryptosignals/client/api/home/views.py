@@ -20,8 +20,14 @@ from xtcryptosignals import __version__
 bp = Blueprint('home', __name__)
 
 
-@bp.context_processor
+@bp.before_request
 def before_request():
+    g.SYMBOLS_PER_EXCHANGE, _ = service.get_symbols_per_exchange()
+    g.HISTORY_FREQUENCY, _ = service.get_history_frequency()
+
+
+@bp.context_processor
+def context_processor():
     return dict(
         socket_base_url=current_app.config['SOCKET_BASE_URL'],
         version=__version__,
@@ -46,11 +52,3 @@ def index():
         template_name_or_list='index.html',
         symbols_per_exchange=symbols_per_exchange,
     )
-
-
-def _before_request():
-    g.SYMBOLS_PER_EXCHANGE, _ = service.get_symbols_per_exchange()
-    g.HISTORY_FREQUENCY, _ = service.get_history_frequency()
-
-
-bp.before_request(_before_request)
