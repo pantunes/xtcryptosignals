@@ -30,7 +30,7 @@ bp = Blueprint('notification', __name__)
 
 
 @bp.context_processor
-def before_request():
+def context_processor():
     return dict(
         application_server_key=current_app.config['APPLICATION_SERVER_KEY'],
         socket_base_url=current_app.config['SOCKET_BASE_URL'],
@@ -45,6 +45,8 @@ def before_request():
 @bp.route('/notifications', methods=['GET'])
 @login_required
 def index():
+    g.SYMBOLS_PER_EXCHANGE, _ = service.get_symbols_per_exchange()
+    g.HISTORY_FREQUENCY, _ = service.get_history_frequency()
     return render_template(
         template_name_or_list='notification.html',
         frequency=g.HISTORY_FREQUENCY[0]
@@ -85,13 +87,4 @@ def rule_add():
         headers=dict(Authorization=current_user.id),
         json=request.form.to_dict()
     )
-
     return response.json(), response.status_code
-
-
-def _before_request():
-    g.SYMBOLS_PER_EXCHANGE, _ = service.get_symbols_per_exchange()
-    g.HISTORY_FREQUENCY, _ = service.get_history_frequency()
-
-
-bp.before_request(_before_request)

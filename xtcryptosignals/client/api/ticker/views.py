@@ -32,8 +32,14 @@ _COLUMN_ATTRIBUTES = [
 ]
 
 
-@bp.context_processor
+@bp.before_request
 def before_request():
+    g.SYMBOLS_PER_EXCHANGE, _ = service.get_symbols_per_exchange()
+    g.HISTORY_FREQUENCY, _ = service.get_history_frequency()
+
+
+@bp.context_processor
+def context_processor():
     return dict(
         socket_base_url=current_app.config['SOCKET_BASE_URL'],
         version=__version__,
@@ -105,21 +111,9 @@ def token_frequency(token, frequency):
 
 @bp.route('/ticker/tokens')
 def tokens():
-    return dict(
-        tokens=get_coin_tokens(g.SYMBOLS_PER_EXCHANGE)
-    )
+    return dict(tokens=get_coin_tokens(g.SYMBOLS_PER_EXCHANGE)), 200
 
 
 @bp.route('/ticker/frequencies')
 def frequencies():
-    return dict(
-        frequencies=g.HISTORY_FREQUENCY
-    )
-
-
-def _before_request():
-    g.SYMBOLS_PER_EXCHANGE, _ = service.get_symbols_per_exchange()
-    g.HISTORY_FREQUENCY, _ = service.get_history_frequency()
-
-
-bp.before_request(_before_request)
+    return dict(frequencies=g.HISTORY_FREQUENCY), 200

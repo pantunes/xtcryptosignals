@@ -35,13 +35,11 @@ def page_not_found(_):
     ), 404
 
 
-@bp.route('/errors/logged-out')
-def logged_out():
-    abort(401)
-
-
-def _before_request():
+@bp.before_request
+def before_request():
     g.HISTORY_FREQUENCY, _ = service.get_history_frequency()
 
 
-bp.before_request(_before_request)
+@bp.route('/errors/logged-out')
+def logged_out():
+    abort(401)
