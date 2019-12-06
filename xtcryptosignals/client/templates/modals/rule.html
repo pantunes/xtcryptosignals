@@ -1,0 +1,42 @@
+<!-- Rule Modal -->
+<div id="modal_rule" class="modal">
+    <h5>Add Rule</h5>
+    <form id="form_rule">
+      <div class="row">
+          <div class="three columns">
+              <label for="rule_coin_token">Coin/Token</label>
+              <select class="u-full-width" id="rule_coin_token" name="coin_token"></select>
+          </div>
+          <div class="three columns">
+              <label for="rule_metric">Metric</label>
+              <select class="u-full-width" id="rule_metric" name="metric">
+                  <option value="price">price</option>
+                  <option value="volume">volume</option>
+              </select>
+          </div>
+          <div class="three columns">
+              <label for="rule_interval">Interval</label>
+              <select class="u-full-width" id="rule_interval" name="interval"></select>
+          </div>
+          <div class="three columns">
+              <label for="rule_percentage">Perc. %</label>
+              <input class="u-full-width" type="text" placeholder="e.g. 4 or -4" id="rule_percentage" name="percentage">
+          </div>
+      </div>
+      <input class="button-primary" type="button" value="Add" onClick="(
+          function() {
+            $.post('/notifications/rule/add', $('#form_rule').serialize())
+                .done(function(response) {
+                    $.notify('Added Rule!', 'success');
+                    $.modal.close();
+                    get_notifications(render_notifications);
+                    get_rules(render_rules);
+                })
+                .fail(function(xhr, status, error) {
+                    process_fail(xhr);
+                });
+            return false;
+        })(); return false;">
+    </form>
+</div>
+<!-- /Rule Modal -->

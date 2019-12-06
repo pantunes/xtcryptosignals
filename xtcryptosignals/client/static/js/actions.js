@@ -1,4 +1,8 @@
-const menu_options = ['#menu_portfolio_link', '#menu_logout_link'];
+const menu_options = [
+    '#menu_portfolio_link',
+    '#menu_logout_link',
+    '#menu_notifications_link',
+];
 
 function login() {
     $.post('/login', $('#form_login').serialize()).done(function(response) {
@@ -45,6 +49,24 @@ function get_transactions(handler) {
 
 function get_portfolio(handler) {
     $.get('/portfolio').done(function(response) {
+        handler(response)
+    })
+    .fail(function(xhr, status, error) {
+        process_fail(xhr);
+    });
+}
+
+function get_notifications(handler) {
+    $.get('/notifications/list').done(function(response) {
+        handler(response)
+    })
+    .fail(function(xhr, status, error) {
+        process_fail(xhr);
+    });
+}
+
+function get_rules(handler) {
+    $.get('/notifications/rules').done(function(response) {
         handler(response)
     })
     .fail(function(xhr, status, error) {

@@ -35,6 +35,8 @@ def create_app():
     from xtcryptosignals.server.api.user.views import bp as bp_user
     from xtcryptosignals.server.api.tokens.views import bp as bp_tokens
     from xtcryptosignals.server.api.portfolio.views import bp as bp_portfolio
+    from xtcryptosignals.server.api.notification.views import \
+        bp as bp_notification
     from xtcryptosignals.server.api.transaction.views import \
         bp as bp_transaction
 
@@ -44,6 +46,7 @@ def create_app():
         bp_contact,
         bp_tokens,
         bp_transaction,
+        bp_notification,
         bp_portfolio,
     )
 

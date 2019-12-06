@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block title %}Notifications{% endblock %}
+
+{% block include_scripts_top %}
+<script src="/static/js/site.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+      open_modal(window.location.hash);
+  });
+</script>
+<script type="text/javascript">
+    if ('serviceWorker' in navigator && 'PushManager' in window) {
+      navigator.serviceWorker.register("{{ url_for('static', filename='js/service-worker.js')}}").then(
+        function (serviceWorkerRegistration) {
+          serviceWorkerRegistration.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: '{{application_server_key}}'
+          }).then(
+            function (pushSubscription) {
+              console.log(pushSubscription);
+              $.ajax({
+                url: '/subscription',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(pushSubscription),
+                dataType: 'json'
+              });
+            }, function (error) {
+              console.log('error = ' + error);
+            }
+          );
+        }
+      );
+    }
+</script>
+<script type="text/javascript">
+  function render_notifications(data) {
+
+  }
+</script>
+<script type="text/javascript">
+  function render_rules(data) {
+    let $table = $('#table_rules');
+    $table.find("tbody tr").remove();
+    $.each(data.results, function () {
+      $table.append(
+          "<tr>" +
+          "<td>" + this.coin_token + "</td>" +
+          "<td>" + this.metric + "</td>" +
+          "<td>" + this.interval + "</td>" +
+          "<td class='align-right'>" + this.percentage + "%</td>" +
+          "<td>" + this.created_on + "</td>" +
+          "</tr>"
+      );
+    });
+  }
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    get_notifications(render_notifications);
+    get_rules(render_rules);
+  });
+</script>
+{% endblock %}
+
+{% block body %}
+
+{% with url='ticker.ticker', params=dict() %}
+{% include 'snippets/menu.html' %}
+{% endwith %}
+
+<br/><br/>
+
+<div class="row">
+    <div class="six columns">
+      <div style="float: left">
+        <h5>My Rules</h5>
+      </div>
+      <div style="float: right">
+        <input class="button-primary" type="button" value="Add Rule" onClick="(
+          function() {
+            open_modal('#rule');
+            return false;
+          })(); return false;">
+      </div>
+
+      <table class="u-full-width" id="table_rules">
+        <thead>
+          <tr>
+            <th>Coin/Token</th>
+            <th>Metric</th>
+            <th>Interval</th>
+            <th>Perc. %</th>
+            <th>Added On</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+  </div>
+
+  <div class="six columns">
+    <div style="float: left;">
+      <h5>My Notifications</h5>
+    </div>
+
+    <table class="u-full-width" id="table_notifications">
+      <thead>
+        <tr>
+          <th>Notification</th>
+          <th>Sent On</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>BTC price is up 7% since 30 seconds ago</td><td>2019-12-05 10:00:20</td></tr>
+        <tr><td>ETH price is up 2% since 1 day ago</td><td>2019-12-05 13:12:57</td></tr>
+        <tr><td>XRP volume is down 2% since 10 day ago</td><td>2019-12-05 13:12:57</td></tr>
+        <tr><td>BTC price is up 12% since 1 month ago</td><td>2019-12-06 03:50:00</td></tr>
+      </tbody>
+    </table>
+
+    </div>
+</div>
+
+{% include 'modals/rule.html' %}
+
+{% endblock %}

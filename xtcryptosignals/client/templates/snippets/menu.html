@@ -54,7 +54,7 @@
             <a class="popover-link" href="{{url_for('portfolio.transactions')}}">Txs/Portfolio</a>
           </li>
           <li id="menu_notifications_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
-            <a class="popover-link" href="{{url_for('notifications.index')}}">Notifications</a>
+            <a class="popover-link" href="{{url_for('notification.index')}}">Notifications</a>
           </li>
           <li id="menu_logout_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
             <a class="popover-link" href="javascript:;" onClick="(

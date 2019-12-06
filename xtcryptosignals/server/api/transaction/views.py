@@ -55,10 +55,6 @@ class TransactionAdd(Resource):
                 description: Unauthorized
             402:
                 description: Invalid JSON payload
-            415:
-                description: Error in output pre-validation
-            416:
-                description: Error in output validation
         """
         return service.add_transaction(auth, data=valid_data), 201
 
