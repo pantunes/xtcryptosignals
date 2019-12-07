@@ -39,8 +39,8 @@ def info():
     <br/><br/>
     This is an Open-source software platform that is in continuous development.
     <br/><br/>
-    For now you can access your <a href="/transactions/portfolio">portfolio</a> 
-    page and manage your assets.
+    For now you can manage your <a href="/transactions/portfolio">portfolio</a> 
+    and set your <a href="/notifications">notification alerts</a>.
     <br/>
     <br/>
     In case you are curious about further feature releases have a look 

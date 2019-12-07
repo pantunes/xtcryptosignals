@@ -19,7 +19,6 @@
             applicationServerKey: '{{application_server_key}}'
           }).then(
             function (pushSubscription) {
-              console.log(pushSubscription);
               $.ajax({
                 url: '/subscription',
                 type: 'POST',
