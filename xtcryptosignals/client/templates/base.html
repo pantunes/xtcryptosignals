@@ -24,6 +24,7 @@
     <script src="/static/js/modals.js" type="text/javascript"></script>
     <script src="/static/js/actions.js" type="text/javascript"></script>
     <script src="/static/js/notify/styles/bootstrap.js" type="text/javascript"></script>
+
     <script type="text/javascript">
         function process_fail(xhr) {
             if (xhr.status === 401) {
@@ -33,6 +34,13 @@
             $.notify(JSON.parse(xhr.responseText).error);
         }
     </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            open_modal(window.location.hash);
+        });
+    </script>
+
 {% set logout_url = url_for('errors.logged_out') %}
 
 {% block include_scripts_top %}{% endblock %}

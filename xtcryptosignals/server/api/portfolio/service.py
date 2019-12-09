@@ -16,7 +16,7 @@ red = redis.Redis.from_url(s.BROKER_URL)
 
 
 def get_exchange_for(coin_token):
-    return s.EXCHANGES_OF_REFERENCE[coin_token]
+    return s.EXCHANGES_AND_PAIRS_OF_REFERENCE[coin_token]
 
 
 def _get_percentage(x, y):
