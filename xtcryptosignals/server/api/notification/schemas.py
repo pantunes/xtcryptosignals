@@ -21,7 +21,7 @@ class NotificationRuleAddInputSchema(Schema):
 
 
 class NotificationOutputSchema(OutputSchema):
-    txt = fields.String(required=True)
+    message = fields.String(required=True)
     created_on = fields.DateTime(required=True, format="%Y-%m-%d %H:%M:%S")
 
 

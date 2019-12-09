@@ -4,6 +4,16 @@ const menu_options = [
     '#menu_notifications_link',
 ];
 
+function signup() {
+    $.post('/signup', $('#form_signup').serialize()).done(function(response) {
+        $.notify('Signup completed!', 'success');
+        $.modal.close();
+    })
+    .fail(function(xhr, status, error) {
+        process_fail(xhr);
+    });
+}
+
 function login() {
     $.post('/login', $('#form_login').serialize()).done(function(response) {
         $.notify('Welcome!', 'success');

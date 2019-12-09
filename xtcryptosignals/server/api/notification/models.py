@@ -27,14 +27,15 @@ class NotificationRule(DocumentValidation):
     user = ReferenceField(User, required=True)
 
     meta = {
-        'collection': 'rule',
+        'collection': 'notification_rule',
     }
 
 
 class Notification(DocumentValidation):
-    txt = StringField(required=True)
+    message = StringField(required=True)
     user = ReferenceField(User, required=True)
 
     meta = {
         'collection': 'notification',
+        'ordering': ['-created_on'],
     }

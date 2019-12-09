@@ -35,6 +35,15 @@ def page_not_found(_):
     ), 404
 
 
+@bp.app_errorhandler(408)
+def unauthorized(_):
+    return render_template(
+        template_name_or_list='error.html',
+        error="You've been logged out.",
+        frequency=g.HISTORY_FREQUENCY[0]
+    ), 408
+
+
 @bp.before_request
 def before_request():
     g.HISTORY_FREQUENCY, _ = service.get_history_frequency()
@@ -42,4 +51,4 @@ def before_request():
 
 @bp.route('/errors/logged-out')
 def logged_out():
-    abort(401)
+    abort(408)

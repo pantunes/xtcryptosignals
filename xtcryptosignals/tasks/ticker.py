@@ -91,7 +91,7 @@ def _get_24h_price_ticker_data(
 
 
 def _terminate_running_jobs(logger, jobs):
-    logger.warning('Number of jobs: {}'.format(len(jobs)))
+    logger.warning('Number of jobs completed: {}'.format(len(jobs)))
     for j in jobs:
         if j['job'].is_alive():
             logger.warning('Exceeded timeout of {} seconds in {}'.format(

@@ -16,6 +16,8 @@ MONGODB_NAME = env.str('MONGODB_NAME')
 MONGODB_HOST = env.str('MONGODB_HOST')
 MONGODB_PORT = env.int('MONGODB_PORT')
 
+SERVER_ADDRESS = env.str('SERVER_ADDRESS')
+
 CREATE_MODEL_TICKER = env.bool('CREATE_MODEL_TICKER')
 
 TIMEOUT_PER_SYMBOL_REQUEST = 2.0  # in seconds
@@ -29,6 +31,8 @@ REDIS_KEY_TICKER = '{source}_{symbol}_price'
 
 VAPID_CLAIMS = env.str('VAPID_CLAIMS')
 VAPID_PRIVATE_KEY = env.str('VAPID_PRIVATE_KEY')
+
+STATIC_COINS_TOKENS_LOGOS_FOLDER = '/static/imgs/logos/'
 
 from xtcryptosignals.settings import *  # noqa
 from xtcryptosignals.tasks.settings_local import *  # noqa

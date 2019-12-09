@@ -20,15 +20,7 @@
       </div>
       <input class="button-primary" type="button" value="Submit" onClick="(
           function() {
-              $.post('/signup', $('#form_signup').serialize())
-                .done(function(response) {
-                    $.notify('Welcome!', 'success');
-                    $.modal.close();
-                })
-                .fail(function(xhr, status, error) {
-                    process_fail(xhr);
-                });
-              return false;
+              signup(); return false;
         })(); return false;">
     </form>
 </div>

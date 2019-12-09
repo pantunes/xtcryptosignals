@@ -188,7 +188,7 @@ SYMBOLS_PER_EXCHANGE.append({
 })
 
 
-EXCHANGES_OF_REFERENCE = {
+EXCHANGES_AND_PAIRS_OF_REFERENCE = {
     'BTC': {
         'pair': 'USDT',
         'name': BINANCE,
