@@ -23,7 +23,7 @@
               function() {
                   $.post('/contact', $('#form_contact').serialize())
                     .done(function(response) {
-                        $.notify('Sent!', 'success');
+                        $.notify('Sent! Thank you!', 'success');
                         $.modal.close();
                     })
                     .fail(function(xhr, status, error) {
