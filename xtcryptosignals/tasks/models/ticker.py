@@ -45,9 +45,9 @@ def _get_price_change_chart(row, price_change):
 def _set_history(ticker):
     ticker.history_list_dicts = []
     for x in s.HISTORY_FREQUENCY:
-        model = type('History{}'.format(x), (History,), {})
+        model_history = type('History{}'.format(x), (History,), {})
 
-        row = model.objects(
+        row = model_history.objects(
             symbol=ticker['symbol'],
             source=ticker['source']
         ).first()
@@ -65,7 +65,7 @@ def _set_history(ticker):
                 row, price_change_prepared
             )
 
-        history_object = model(
+        history_object = model_history(
             symbol=ticker['symbol'],
             source=ticker['source'],
             ticker=ticker['ticker'],
@@ -82,7 +82,7 @@ def _set_history(ticker):
         if 'price_usdt' in ticker:
             history_object.price_usdt = ticker['price_usdt']
 
-        if not ticker._exists_row_offset(model, offset=x):
+        if not ticker._exists_row_offset(model_history, offset=x):
             history_object.save()
         else:
             _set_timestamp(history_object)

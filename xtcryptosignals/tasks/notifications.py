@@ -39,8 +39,8 @@ def update(self):
     for notif in NotificationRule.objects():
         exchange_and_pair = s.EXCHANGES_AND_PAIRS_OF_REFERENCE[notif.coin_token]
 
-        model = type('History{}'.format(notif.interval), (History,), {})
-        row_history = model.objects(
+        model_history = type('History{}'.format(notif.interval), (History,), {})
+        row_history = model_history.objects(
             symbol=notif.coin_token+exchange_and_pair['pair'],
             source=exchange_and_pair['name']
         ).first()
@@ -51,7 +51,7 @@ def update(self):
         obj_history = row_history.to_dict(frequency=notif.interval)
 
         try:
-            obj_change = obj_history['{}_change'.format(notif.metric)]
+            obj_history_change = obj_history['{}_change'.format(notif.metric)]
         except KeyError:
             continue
 
@@ -61,35 +61,32 @@ def update(self):
             continue
 
         logger.warning('{} {} {}'.format(
-            obj_history['ticker'], notif.metric, obj_change)
+            obj_history['ticker'], notif.metric, obj_history_change)
         )
 
-        if price < 1:
-            message_templ = '{} {} is up {}% within {}. ' \
-                            'Current Price is {:,.4f} USDT.'
-        else:
-            message_templ = '{} {} is up {}% within {}. ' \
-                            'Current Price is {:,.2f} USDT.'
-
         if notif.percentage > 0.0:
-            if obj_change < notif.percentage:
+            if obj_history_change < notif.percentage:
                 continue
 
+            message_templ = '{} {} is up {}% within {}. ' \
+                            'Current Price is {:,.4f} USDT.'
             message = message_templ.format(
                 obj_history['ticker'],
                 notif.metric.capitalize(),
-                obj_change,
+                obj_history_change,
                 notif.interval,
                 price
             )
-        elif obj_change > notif.percentage:
+        elif obj_history_change > notif.percentage:
             continue
 
         else:
+            message_templ = '{} {} is down {}% within {}. ' \
+                            'Current Price is {:,.2f} USDT.'
             message = message_templ.format(
                 obj_history['ticker'],
                 notif.metric.capitalize(),
-                obj_change,
+                obj_history_change,
                 notif.interval,
                 price
             )

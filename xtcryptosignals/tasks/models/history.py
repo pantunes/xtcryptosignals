@@ -60,12 +60,12 @@ class History(DocumentValidation):
 
     @staticmethod
     def get_ticker_data_from_namespace(namespace):
-        model = type('History{}'.format(namespace[1:]), (History,), {})
+        model_history = type('History{}'.format(namespace[1:]), (History,), {})
         rows = []
         for x in s.SYMBOLS_PER_EXCHANGE:
             for exchange, items in x.items():
                 for symbol in [x[0] + x[1] for x in items['pairs']]:
-                    row = model.objects(
+                    row = model_history.objects(
                         symbol=symbol,
                         source=exchange
                     ).first()
