@@ -52,6 +52,7 @@
     $.each(data.results, function () {
       $table.append(
           "<tr>" +
+          "<td style='width: 32px; vertical-align: middle;'><img src='/static/imgs/logos/" + this.coin_token + ".png' alt='" + this.coin_token + "'/></td>" +
           "<td>" + this.coin_token + "</td>" +
           "<td>" + this.metric + "</td>" +
           "<td>" + this.interval + "</td>" +
@@ -88,7 +89,7 @@
 <div class="row">
     <div class="six columns">
       <div style="float: left">
-        <h5>My Rules</h5>
+        <h5>My Notifications Rules</h5>
       </div>
       <div style="float: right">
         <input class="button-primary" type="button" value="Add Rule" onClick="(
@@ -101,6 +102,7 @@
       <table class="u-full-width" id="table_rules">
         <thead>
           <tr>
+            <th>&nbsp;</th>
             <th>Coin/Token</th>
             <th>Metric</th>
             <th>Interval</th>
@@ -115,7 +117,7 @@
 
   <div class="six columns">
     <div style="float: left;">
-      <h5>My Notifications</h5>
+      <h5>My sent Notifications</h5>
     </div>
 
     <table class="u-full-width" id="table_notifications">

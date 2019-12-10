@@ -20,6 +20,11 @@ from xtcryptosignals.tasks.utils import get_class
 from xtcryptosignals.tasks.models.ticker import Ticker
 
 
+@use_mongodb(
+    db=s.MONGODB_NAME,
+    host=s.MONGODB_HOST,
+    port=s.MONGODB_PORT,
+)
 def _process(
     logger, socketio, exchange_class, schema_class, symbol, pairs
 ):
@@ -102,12 +107,6 @@ def _terminate_running_jobs(logger, jobs):
 
 
 @task(bind=True)
-@use_mongodb(
-    db=s.MONGODB_NAME,
-    host=s.MONGODB_HOST,
-    port=s.MONGODB_PORT,
-    connect=False
-)
 def update(self, *_, **kwargs):
 
     if kwargs['enable_messaging']:

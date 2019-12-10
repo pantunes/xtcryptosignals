@@ -31,7 +31,6 @@ red = redis.Redis.from_url(s.BROKER_URL)
     db=s.MONGODB_NAME,
     host=s.MONGODB_HOST,
     port=s.MONGODB_PORT,
-    connect=False
 )
 def update(self):
     logger = self.get_logger()
@@ -64,15 +63,21 @@ def update(self):
             obj_history['ticker'], notif.metric, obj_history_change)
         )
 
+        if price < 1:
+            message_templ = '{} {} is {} {}% within {}. ' \
+                            'Current Price is {:,.4f} USDT.'
+        else:
+            message_templ = '{} {} is {} {}% within {}. ' \
+                            'Current Price is {:,.2f} USDT.'
+
         if notif.percentage > 0.0:
             if obj_history_change < notif.percentage:
                 continue
 
-            message_templ = '{} {} is up {}% within {}. ' \
-                            'Current Price is {:,.4f} USDT.'
             message = message_templ.format(
                 obj_history['ticker'],
                 notif.metric.capitalize(),
+                'up',
                 obj_history_change,
                 notif.interval,
                 price
@@ -81,11 +86,10 @@ def update(self):
             continue
 
         else:
-            message_templ = '{} {} is down {}% within {}. ' \
-                            'Current Price is {:,.2f} USDT.'
             message = message_templ.format(
                 obj_history['ticker'],
                 notif.metric.capitalize(),
+                'down',
                 obj_history_change,
                 notif.interval,
                 price
