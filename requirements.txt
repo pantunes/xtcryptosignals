@@ -15,7 +15,6 @@ flasgger
 eventlet
 gunicorn
 mongodb-migrations
-requests
 bcrypt
 environs
 pywebpush
