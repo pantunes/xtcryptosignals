@@ -22,7 +22,7 @@
 * [x] Add Gunicorn to make it production ready (March 2019)
 * [x] Building Unit, functional and end-to-end testing for existing and future features (From Jan 2019)
 * [x] User account creation, Session and Assets Management (From Oct 2019)
-* [ ] Implement web push notification signals for price range, price change, trading volume, price sentiment, etc (From July 2019)
+* [x] Implement web push notification signals for price range, price change, trading volume, price sentiment, etc (From July 2019)
 * [ ] Implement automatic trading (From 2020)
 * [ ] Build iOS app (From 2020)
 
@@ -222,7 +222,7 @@ FLASK_ENV=development SETTINGS_APP=client.dev.env xt-server
 
 Swagger API endpoints accessible at `http://127.0.0.1:5000/apidocs`:    
 
-![screen-shot](xtcryptosignals/client/static/imgs/swagger.png)
+![screen-shot](xtcryptosignals/client/static/imgs/readme/swagger.png)
 
 #### Production:
 
@@ -266,14 +266,15 @@ to start all 3 services: `xt-server`, `xt-client` and `xt-ticker`.
 
 Open the browser with the URL `http://127.0.0.1:8000`:
 
-**Home page** | **Ticker 10 seconds**
+**Overview** | **Pairs**
 :-------------------------:|:-------------------------:
 ![screen-shot](xtcryptosignals/client/static/imgs/readme/1.png) | ![screen-shot](xtcryptosignals/client/static/imgs/readme/2.png)
-**Tickers** | **Pairs**
+**Coins/Tokens** | **Login**
 ![screen-shot](xtcryptosignals/client/static/imgs/readme/3.png) | ![screen-shot](xtcryptosignals/client/static/imgs/readme/4.png)
-**BTC-USDT in all Exchanges** | 
-![screen-shot](xtcryptosignals/client/static/imgs/readme/5.png) | 
-
+**Portfolio** | **Alerts Setup** 
+![screen-shot](xtcryptosignals/client/static/imgs/readme/5.png) | ![screen-shot](xtcryptosignals/client/static/imgs/readme/6.png) 
+**Web Push Notification** | 
+![screen-shot](xtcryptosignals/client/static/imgs/readme/7.png) |
 
 ## Team
 
