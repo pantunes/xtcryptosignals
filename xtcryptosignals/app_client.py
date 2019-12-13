@@ -18,20 +18,19 @@ app = create_app()
     context_settings=dict(help_option_names=['-h', '--help'])
 )
 @click.option(
-    '--production',
-    is_flag=True,
-    help="Enable production setup mode",
+    '--num-workers',
+    help='Enables Production environment with the given number of workers'
 )
 @click.pass_context
-def main(ctx, production):
+def main(ctx, num_workers):
     """
     Start web client
     """
     port = app.config['PORT']
     host = app.config['IP_ADDRESS']
 
-    if production:
-        start(handler=app, host=host, port=port, num_workers=2)
+    if num_workers:
+        start(handler=app, host=host, port=port, num_workers=num_workers)
         ctx.exit()
 
     app.run(debug=app.config['DEBUG'], host=host, port=port)

@@ -242,8 +242,9 @@ FLASK_ENV=development SETTINGS_APP=client.dev.env xt-client
 
 #### Production:
 ```bash
-FLASK_ENV=production SETTINGS_APP=client.prod.env xt-client --production
+FLASK_ENV=production SETTINGS_APP=client.prod.env xt-client --num-workers=N
 ```
+N corresponds to the number of workers to be spinned up.  
 
 ## Run all services at once
 
