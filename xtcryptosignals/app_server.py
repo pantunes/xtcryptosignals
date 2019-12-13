@@ -7,6 +7,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import os
+import click
 from flasgger import Swagger
 from mongodb_migrations.cli import MigrationManager
 from xtcryptosignals.server import create_app, socketio
@@ -25,7 +26,15 @@ migration_manager.config.mongo_migrations_path = os.path.join(
 migration_manager.config.metastore = '_migrations'
 
 
-def main():
+@click.command(
+    context_settings=dict(help_option_names=['-h', '--help'])
+)
+@click.option(
+    '--port', '-p',
+    default=app.config['PORT'],
+    help='The Server port to bind to'
+)
+def main(port):
     """
     Start RESTFul API and socketIO servers.
     """
@@ -38,5 +47,5 @@ def main():
         debug=app.config['DEBUG'],
         use_reloader=app.config['DEBUG'],
         host=app.config['IP_ADDRESS'],
-        port=app.config['PORT'],
+        port=port,
     )
