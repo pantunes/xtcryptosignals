@@ -31,7 +31,7 @@ def main(ctx, production):
     host = app.config['IP_ADDRESS']
 
     if production:
-        start(handler=app, host=host, port=port)
+        start(handler=app, host=host, port=port, num_workers=2)
         ctx.exit()
 
     app.run(debug=app.config['DEBUG'], host=host, port=port)

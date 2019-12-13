@@ -30,10 +30,10 @@ class WSGIGunicorn(gunicorn.app.base.BaseApplication):
         return self.application
 
 
-def start(handler, host, port, workers=None):
+def start(handler, host, port, num_workers=None):
     options = {
         'bind': '%s:%s' % (host, port),
-        'workers': workers or NUMBER_OF_WORKERS,
+        'workers': num_workers or NUMBER_OF_WORKERS,
     }
 
     WSGIGunicorn(handler, options).run()
