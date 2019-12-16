@@ -270,12 +270,12 @@ Open the browser with the URL `http://127.0.0.1:8000`:
 **Overview** | **Pairs**
 :-------------------------:|:-------------------------:
 ![screen-shot](xtcryptosignals/client/static/imgs/readme/1.png) | ![screen-shot](xtcryptosignals/client/static/imgs/readme/2.png)
-**Coins/Tokens** | **Login**
-![screen-shot](xtcryptosignals/client/static/imgs/readme/3.png) | ![screen-shot](xtcryptosignals/client/static/imgs/readme/4.png)
-**Portfolio** | **Alerts Setup** 
-![screen-shot](xtcryptosignals/client/static/imgs/readme/5.png) | ![screen-shot](xtcryptosignals/client/static/imgs/readme/6.png) 
-**Web Push Notification** | 
-![screen-shot](xtcryptosignals/client/static/imgs/readme/7.png) |
+**Coins/Tokens** | **Dark Theme** 
+![screen-shot](xtcryptosignals/client/static/imgs/readme/3.png) | ![screen-shot](xtcryptosignals/client/static/imgs/readme/8.png)
+**Login** | **Portfolio**
+![screen-shot](xtcryptosignals/client/static/imgs/readme/4.png) | ![screen-shot](xtcryptosignals/client/static/imgs/readme/5.png) 
+**Alerts Setup** | **Web Push Notification** | 
+![screen-shot](xtcryptosignals/client/static/imgs/readme/6.png) | ![screen-shot](xtcryptosignals/client/static/imgs/readme/7.png)
 
 ## Team
 
