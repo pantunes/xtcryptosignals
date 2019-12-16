@@ -2,7 +2,10 @@
 All changes will be registered here per release.
 
 ## [0.2.0] - Current date
+Added Alerts Management and Web Push Notifications.  
 Added VeChain, Monero, Cardano and Icon Ticker coins.
+Added CSRF client protection.  
+Code fixes and improvements.  
 
 ## [0.1.9] - 2019-11-23
 Big code refactoring.  
