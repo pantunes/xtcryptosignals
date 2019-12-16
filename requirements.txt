@@ -1,7 +1,6 @@
 python-binance
 redis
 celery
-marshmallow==2.20.5
 mongoengine
 requests
 switcheo
@@ -19,6 +18,6 @@ mongodb-migrations
 bcrypt
 environs
 pywebpush
-
-# library dependencies
+# versioned library dependencies
+marshmallow==2.20.5
 jsonschema==2.6.0
