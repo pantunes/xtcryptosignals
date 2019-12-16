@@ -27,7 +27,7 @@ with open(os.path.join(_ROOT_FOLDER, 'xtcryptosignals/__init__.py'), 'r') as f:
 
 
 setup(
-    python_requires='>=3.6',
+    python_requires='>=3.7',
     name=_CFG['__title__'],
     version=_CFG['__version__'],
     author=_CFG['__author__'],
@@ -60,7 +60,7 @@ setup(
     ],
     license=__license__,
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Intended Audience :: Financial and Insurance Industry',
         'Topic :: Software Development :: Libraries :: Python Modules',
@@ -68,7 +68,5 @@ setup(
         'Operating System :: OS Independent',
         'Natural Language :: English',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
     ],
 )
