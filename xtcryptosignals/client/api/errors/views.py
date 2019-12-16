@@ -12,10 +12,16 @@ from flask import (
     render_template,
     g,
 )
+from flask_wtf.csrf import CSRFError
 from xtcryptosignals.client import service
 
 
 bp = Blueprint('errors', __name__)
+
+
+@bp.app_errorhandler(CSRFError)
+def csrf_error(e):
+    return dict(error=e.description), 400
 
 
 @bp.app_errorhandler(401)

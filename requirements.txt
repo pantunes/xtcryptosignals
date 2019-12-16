@@ -11,6 +11,7 @@ flask-restful
 flask-session
 flask-socketio
 flask-login
+flask-wtf
 flasgger
 eventlet
 gunicorn

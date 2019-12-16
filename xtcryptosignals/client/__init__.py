@@ -8,6 +8,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 from flask import Flask
 from flask_login import LoginManager
+from flask_wtf.csrf import CSRFProtect
 
 
 app = Flask(
@@ -29,6 +30,8 @@ app.config.from_envvar('SETTINGS_APP')
 
 
 login_manager = LoginManager()
+
+csrf = CSRFProtect()
 
 
 def create_app():
@@ -63,5 +66,7 @@ def create_app():
 
     login_manager.login_view = "errors.logged_out"
     login_manager.session_protection = app.config['SESSION_PROTECTION']
+
+    csrf.init_app(app)
 
     return app
