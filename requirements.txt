@@ -21,3 +21,4 @@ pywebpush
 # versioned library dependencies
 marshmallow==2.20.5
 jsonschema==2.6.0
+mistune==0.8.4
