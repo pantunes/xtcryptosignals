@@ -20,7 +20,6 @@ pipelines:
           - pip
         script:
           - pip install --upgrade pip
-          - pip install mistune==0.8.4
           - pip install -r requirements.txt
     - step:
         name: Run Test cases
