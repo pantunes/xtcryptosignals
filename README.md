@@ -4,9 +4,15 @@
 
 * #### Ticker
 
-    * **Data collection** of crypto-currencies pairs such as BTC/USDT, ETH/BTC or any other pair that is supported by the Exchange API.
-    * A **Signals** service based on setup rules to send real-time alerts about price, price change, trading volume or market sentiment sending Web Push Notifications to the client browser (Firefox, Chrome).
+    * **Data collection** of crypto-currencies pairs such as BTC/USDT, ETH/BTC or 
+    any other pair that is supported by the Exchange API.
+    * A **Signals** service based on setup rules to send real-time alerts about 
+    price, price change, trading volume or market sentiment sending Web Push 
+    Notifications to the client browser (Firefox, Chrome).
     * **Automatic trading** *(in progress)*
+
+(Web Push Notifications are implemented with [ServiceWorker](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification) 
+that is compatible with the most known web browsers.)
 
 * #### RESTFul Server API
     * Restful interface that exposes API entry points to get desired crypto-currencies data.
@@ -145,7 +151,8 @@ dcoin
 bitmax
 bilaxy
 ```
-(Drop [me](mailto:pjmlantunes@gmail.com) an e-mail if you want support for a new exchange or please contribute to this project creating a pull request)
+(Drop [me](mailto:pjmlantunes@gmail.com) an e-mail if you want support for a new 
+exchange or please contribute to this project creating a pull request)
 
 Command line help:
 ```bash
@@ -174,7 +181,8 @@ Options:
 
 ### Setup
 
-There is already an initial setup with some crypto-currencies (coins and tokens) that can be added or/and removed in [settings_exchanges.py](xtcryptosignals/settings_exchanges.py).
+There is already an initial setup with some crypto-currencies (coins and tokens) 
+that can be added or/and removed in [settings_exchanges.py](xtcryptosignals/settings_exchanges.py).
 
 ```python
 BIBOX: {
@@ -201,7 +209,8 @@ UPHOLD: {
 }
 ```
 
-Initial setup to create dynamic MongoDB collections for data segmentation categorized by Exchanges pooling frequency in [settings.py](xtcryptosignals/settings.py).
+Initial setup to create dynamic MongoDB collections for data segmentation categorized 
+by Exchanges pooling frequency in [settings.py](xtcryptosignals/settings.py).
 ```python
 HISTORY_FREQUENCY = (
     '10s', '30s', '1m', '10m', '30m', '1h', '2h', '3h', '4h', '12h', '1d', '4d', 
@@ -306,4 +315,5 @@ Through the website [xtcryptosignals.com](https://xtcryptosignals.com/#contact).
 
 ## Acknowledgments
 
-Thanks to [Jetbrains](https://www.jetbrains.com/?from=xtcryptosignals) in order to support us with an Open Source license.
+Thanks to [Jetbrains](https://www.jetbrains.com/?from=xtcryptosignals) in order to 
+support us with an Open Source license.
