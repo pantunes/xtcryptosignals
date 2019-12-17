@@ -4,9 +4,9 @@
 
 * #### Ticker
 
-    * **Data collection** of crypto-currencies pairs such as BTC/USDT, ETH/BTC or any other pair that is supported by the Exchange API
-    * A **Signals** service based on setup rules to send real-time alerts about price, price change, trading volume or market sentiment through E-mail or Push Notifications to the browser or mobile app
-    * **Automatic trading**
+    * **Data collection** of crypto-currencies pairs such as BTC/USDT, ETH/BTC or any other pair that is supported by the Exchange API.
+    * A **Signals** service based on setup rules to send real-time alerts about price, price change, trading volume or market sentiment sending Web Push Notifications to the client browser (Firefox, Chrome).
+    * **Automatic trading** *(in progress)*
 
 * #### RESTFul Server API
     * Restful interface that exposes API entry points to get desired crypto-currencies data.
@@ -22,16 +22,17 @@
 * [x] Add Gunicorn to make it production ready (March 2019)
 * [x] Building Unit, functional and end-to-end testing for existing and future features (From Jan 2019)
 * [x] User account creation, Session and Assets Management (From Oct 2019)
-* [x] Implement web push notification signals for price range, price change, trading volume, price sentiment, etc (From July 2019)
+* [x] Implement web push notification signals for price range, price change, 
+trading volume, price sentiment, etc (From July 2019)
 * [ ] Implement automatic trading (From 2020)
-* [ ] Build iOS app (From 2020)
+* [ ] Build Mobile app (From 2020)
 
 
 ## Getting Started
 
 ### Pre-requisites
 
-* [Python >=3.6](https://www.python.org/downloads)
+* [Python >=3.7](https://www.python.org/downloads)
 * [Redis](https://redis.io/download)
 * [MongoDB](https://www.mongodb.com)
 
