@@ -296,7 +296,7 @@ This project is licensed under the [GNU](https://www.gnu.org/licenses/gpl-3.0.en
 
 ## Donation
 
-I've been building this open-source project on my free time. Feel free to get me a coffee :-)  
+This open-source project has been built on my free time. Feel free to get me a coffee :-)  
 BTC: [3QLhxkScrmzbKvUFyesxCkxMaPc7EB9SFK](https://www.blockchain.com/btc/address/3QLhxkScrmzbKvUFyesxCkxMaPc7EB9SFK)  
 ETH: [0x2bda8e92B42AB005918E5A126E2bD7cC19Bf5fF6](https://etherscan.io/address/0x2bda8e92B42AB005918E5A126E2bD7cC19Bf5fF6)  
 
