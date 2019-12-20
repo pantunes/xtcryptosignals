@@ -10,6 +10,7 @@ from mongoengine import (
     StringField,
     DecimalField,
     ReferenceField,
+    queryset_manager,
 )
 from xtcryptosignals.common.models import DocumentValidation
 from xtcryptosignals.server.api.user.models import User
@@ -28,6 +29,7 @@ class NotificationRule(DocumentValidation):
 
     meta = {
         'collection': 'notification_rule',
+        'ordering': ['coin_token', 'created_on'],
     }
 
 
@@ -39,3 +41,7 @@ class Notification(DocumentValidation):
         'collection': 'notification',
         'ordering': ['-created_on'],
     }
+
+    @queryset_manager
+    def objects(doc_cls, queryset):
+        return queryset[:30]
