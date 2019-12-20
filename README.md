@@ -38,7 +38,7 @@ trading volume, price sentiment, etc (From July 2019)
 
 ### Pre-requisites
 
-* [Python >=3.7](https://www.python.org/downloads)
+* [Python >= 3.7](https://www.python.org/downloads)
 * [Redis](https://redis.io/download)
 * [MongoDB](https://www.mongodb.com)
 

@@ -58,7 +58,7 @@ setup(
         'xtcryptosignals', 'api', 'cryptocurrency', 'bitcoin', 'ethereum',
         'signals', 'trading', 'crypto signals', 'exchange', 'crypto',
     ],
-    license=__license__,
+    license=_CFG['__license__'],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
