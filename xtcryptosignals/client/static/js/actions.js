@@ -4,6 +4,11 @@ const menu_options = [
     '#menu_notifications_link',
 ];
 
+const urls_logout_to_index = [
+    '/transactions/portfolio',
+    '/notifications',
+];
+
 function signup() {
     $.post('/signup', $('#form_signup').serialize()).done(function(response) {
         $.notify('Signup completed!', 'success');
@@ -31,7 +36,7 @@ function login() {
 
 function logout() {
     $.get('/logout').done(function(response) {
-        if (window.location.pathname === '/transactions/portfolio') {
+        if (urls_logout_to_index.includes(window.location.pathname)) {
             window.location.href = '/';
             return
         }
