@@ -71,9 +71,12 @@ function get_portfolio(handler) {
     });
 }
 
-function get_notifications(handler) {
-    $.get('/notifications/list').done(function(response) {
-        handler(response)
+function get_notifications(handler1, handler2=null, coin_token='ALL') {
+    $.get('/notifications/list?coin_token=' + coin_token).done(function(response) {
+        handler1(response);
+        if (handler2) {
+            handler2(response)
+        }
     })
     .fail(function(xhr, status, error) {
         process_fail(xhr);
