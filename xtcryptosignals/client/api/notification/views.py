@@ -61,6 +61,7 @@ def notifications():
             current_app.config['SERVER_API_BASE_URL']
         ),
         headers=dict(Authorization=current_user.id),
+        params=request.args,
     )
     return dict(results=response.json()), response.status_code
 

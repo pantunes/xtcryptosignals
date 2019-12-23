@@ -59,41 +59,39 @@ def update(self):
         except KeyError:
             continue
 
-        logger.warning('{} {} {}'.format(
+        logger.warning('{} {}_change {}'.format(
             obj_history['ticker'], notif.metric, obj_history_change)
         )
 
         if price < 1:
-            message_templ = '{} {} is {} {}% within {}. ' \
-                            'Current Price is {:,.4f} USDT.'
+            message_templ = '<a href="/ticker/source/{ticker}/10s">{ticker}' \
+                            '</a> {metric} is {direction} {change}% within ' \
+                            '{interval}. Current Price is {price:,.4f} USDT.'
         else:
-            message_templ = '{} {} is {} {}% within {}. ' \
-                            'Current Price is {:,.2f} USDT.'
+            message_templ = '<a href="/ticker/source/{ticker}/10s">{ticker}' \
+                            '</a> {metric} is {direction} {change}% within ' \
+                            '{interval}. Current Price is {price:,.2f} USDT.'
 
         if notif.percentage > 0.0:
             if obj_history_change < notif.percentage:
                 continue
 
-            message = message_templ.format(
-                obj_history['ticker'],
-                notif.metric.capitalize(),
-                'up',
-                obj_history_change,
-                notif.interval,
-                price
-            )
+            direction = 'up'
+
         elif obj_history_change > notif.percentage:
             continue
 
         else:
-            message = message_templ.format(
-                obj_history['ticker'],
-                notif.metric.capitalize(),
-                'down',
-                obj_history_change,
-                notif.interval,
-                price
-            )
+            direction = 'down'
+
+        message = message_templ.format(
+            ticker=obj_history['ticker'],
+            metric=notif.metric.capitalize(),
+            direction=direction,
+            change=obj_history_change,
+            interval=notif.interval,
+            price=price
+        )
 
         if red.get(message):
             continue
@@ -106,7 +104,17 @@ def update(self):
             )
         )
 
-        Notification(message=message, user=notif.user).save()
+        Notification(
+            coin_token=obj_history['ticker'],
+            message=message,
+            user=notif.user,
+        ).save()
+
+        message = message.replace(
+            '<a href="/ticker/source/{ticker}/10s">{ticker}</a>'.format(
+                ticker=obj_history['ticker']
+            ), obj_history['ticker']
+        )
 
         try:
             try:
