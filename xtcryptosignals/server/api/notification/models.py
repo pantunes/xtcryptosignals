@@ -34,6 +34,9 @@ class NotificationRule(DocumentValidation):
 
 
 class Notification(DocumentValidation):
+    coin_token = StringField(
+        required=True, choices=get_coin_tokens(s.SYMBOLS_PER_EXCHANGE)
+    )
     message = StringField(required=True)
     user = ReferenceField(User, required=True)
 

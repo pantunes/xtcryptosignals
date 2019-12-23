@@ -6,7 +6,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-from flask import Blueprint
+from flask import Blueprint, request
 from flask_restful import Api, Resource
 from xtcryptosignals.server.utils import (
     validate_io,
@@ -46,7 +46,7 @@ class NotificationRuleAdd(Resource):
 
 
 class NotificationsList(Resource):
-    @validate_io(schema_out=NotificationOutputSchema, many_out=True)
+    @validate_io(schema_out=NotificationOutputSchema)
     @user_auth()
     def get(self, auth):
         """
@@ -68,7 +68,12 @@ class NotificationsList(Resource):
             416:
                 description: Error in output validation
         """
-        return service.notifications(auth), 200
+        return dict(
+            notifications=service.notifications(
+                auth, coin_token=request.args.get('coin_token')
+            ),
+            coin_tokens=service.notification_coin_tokens(auth)
+        ), 200
 
 
 class NotificationsRulesList(Resource):

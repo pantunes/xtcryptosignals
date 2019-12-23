@@ -34,7 +34,7 @@
   function render_notifications(data) {
     let $table = $('#table_notifications');
     $table.find("tbody tr").remove();
-    $.each(data.results, function () {
+    $.each(data.results.notifications, function () {
       $table.append(
           "<tr>" +
           "<td>" + this.message + "</td>" +
@@ -65,8 +65,19 @@
 </script>
 
 <script type="text/javascript">
+  function render_coin_tokens(data) {
+    let $select = $('#select_coin_tokens');
+    $select.find("option").remove();
+    $select.append('<option value="ALL" selected="selected">All</option>');
+    $.each(data.results.coin_tokens, function () {
+      $select.append('<option value="' + this + '">' + this + '</option>');
+    });
+  }
+</script>
+
+<script type="text/javascript">
   $(document).ready(function() {
-    get_notifications(render_notifications);
+    get_notifications(render_notifications, render_coin_tokens);
     get_rules(render_rules);
   });
 </script>
@@ -92,7 +103,7 @@
         <h5>My Notifications Rules</h5>
       </div>
       <div style="float: right">
-        <input class="button-primary" type="button" value="Add Rule" onClick="(
+        <input class="button-primary" type="button" value="Add Rule" onclick="(
           function() {
             open_modal('#rule');
             return false;
@@ -118,6 +129,16 @@
   <div class="seven columns">
     <div style="float: left;">
       <h5>My last 30 Notifications</h5>
+    </div>
+    <div style="float: right">
+      <select id="select_coin_tokens" onchange="(
+        function() {
+          get_notifications(
+            render_notifications, null, $('#select_coin_tokens').val()
+          );
+          return false;
+        }
+      )(); return false;"></select>
     </div>
 
     <table class="u-full-width" id="table_notifications">
