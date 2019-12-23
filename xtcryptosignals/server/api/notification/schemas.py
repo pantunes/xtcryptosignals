@@ -20,9 +20,16 @@ class NotificationRuleAddInputSchema(Schema):
     percentage = fields.Float(required=True)
 
 
-class NotificationOutputSchema(OutputSchema):
+class NotificationsOutputSchema(OutputSchema):
     message = fields.String(required=True)
     created_on = fields.DateTime(required=True, format="%Y-%m-%d %H:%M:%S")
+
+
+class NotificationOutputSchema(Schema):
+    notifications = fields.Nested(
+        NotificationsOutputSchema, many=True, required=True
+    )
+    coin_tokens = fields.Raw(many=True, required=True)
 
 
 class NotificationRulesOutputSchema(OutputSchema):
