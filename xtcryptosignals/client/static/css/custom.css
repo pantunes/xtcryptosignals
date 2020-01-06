@@ -44,5 +44,11 @@
   font-size: large;
 }
 .align-right {
-    text-align: right;
+  text-align: right;
+}
+.positive {
+  background-color: #e6ffee;
+}
+.negative {
+  background-color: #ffe6e6;
 }

@@ -59,10 +59,6 @@ def update(self):
         except KeyError:
             continue
 
-        logger.warning('{} {}_change {}'.format(
-            obj_history['ticker'], notif.metric, obj_history_change)
-        )
-
         if price < 1:
             message_templ = '<a href="/ticker/source/{ticker}/10s">{ticker}' \
                             '</a> {metric} is {direction} {change}% within ' \
@@ -84,6 +80,14 @@ def update(self):
         else:
             direction = 'down'
 
+        logger.warning('{} {}_change {} {}% {}'.format(
+            obj_history['ticker'],
+            notif.metric,
+            direction,
+            obj_history_change,
+            notif.interval
+        ))
+
         message = message_templ.format(
             ticker=obj_history['ticker'],
             metric=notif.metric.capitalize(),
@@ -94,6 +98,7 @@ def update(self):
         )
 
         if red.get(message):
+            logger.warning('Already sent....')
             continue
 
         red.setex(
@@ -104,11 +109,15 @@ def update(self):
             )
         )
 
-        Notification(
+        notif_kwargs = dict(
             coin_token=obj_history['ticker'],
             message=message,
             user=notif.user,
-        ).save()
+        )
+        if notif.metric == 'price':
+            notif_kwargs.update(is_positive=(direction is 'up'))
+
+        Notification(**notif_kwargs).save()
 
         message = message.replace(
             '<a href="/ticker/source/{ticker}/10s">{ticker}</a>'.format(
@@ -118,6 +127,7 @@ def update(self):
 
         try:
             try:
+                logger.warning('Sending....')
                 webpush(
                     subscription_info=notif.user.metadata['subscription'],
                     data=json.dumps(dict(
@@ -143,6 +153,7 @@ def update(self):
                         extra.message
                     )
         except Exception as error:
+            logger.error('General Error: {}'.format(str(error)))
             self.update_state(state=states.FAILURE, meta=str(error))
             raise Ignore()
         finally:
