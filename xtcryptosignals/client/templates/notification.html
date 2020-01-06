@@ -35,10 +35,16 @@
     let $table = $('#table_notifications');
     $table.find("tbody tr").remove();
     $.each(data.results.notifications, function () {
+      let css = '';
+      if (this.is_positive === true) {
+        css = 'class="positive"'
+      } else if (this.is_positive === false) {
+        css = 'class="negative"'
+      }
       $table.append(
-          "<tr>" +
+          "<tr " + css + ">" +
           "<td>" + this.message + "</td>" +
-          "<td style='width: 140px'>" + this.created_on + "</td>" +
+          "<td style='width: 150px'>" + this.created_on + "</td>" +
           "</tr>"
       );
     });
@@ -57,7 +63,7 @@
           "<td>" + this.metric + "</td>" +
           "<td>" + this.interval + "</td>" +
           "<td class='align-right'>" + this.percentage + "%</td>" +
-          "<td style='width: 140px'>" + this.created_on + "</td>" +
+          "<td style='width: 150px'>" + this.created_on + "</td>" +
           "</tr>"
       );
     });
@@ -161,7 +167,7 @@
 {% block include_extra_scripts_bottom %}
 <script type="text/javascript">
     $(document).ready(function() {
-      $(".container").css("maxWidth", "1380px" );
+      $(".container").css("maxWidth", "1480px" );
     });
 </script>
 {% endblock %}

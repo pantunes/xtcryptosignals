@@ -8,6 +8,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 from mongoengine import (
     StringField,
+    BooleanField,
     DecimalField,
     ReferenceField,
     queryset_manager,
@@ -39,6 +40,7 @@ class Notification(DocumentValidation):
     )
     message = StringField(required=True)
     user = ReferenceField(User, required=True)
+    is_positive = BooleanField()
 
     meta = {
         'collection': 'notification',
