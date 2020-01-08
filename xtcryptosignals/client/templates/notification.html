@@ -43,7 +43,7 @@
       }
       $table.append(
           "<tr " + css + ">" +
-          "<td>" + this.message + "</td>" +
+          "<td style='padding-left: 8px'>" + this.message + "</td>" +
           "<td style='width: 150px'>" + this.created_on + "</td>" +
           "</tr>"
       );
@@ -162,12 +162,4 @@
 
 {% include 'modals/rule.html' %}
 
-{% endblock %}
-
-{% block include_extra_scripts_bottom %}
-<script type="text/javascript">
-    $(document).ready(function() {
-      $(".container").css("maxWidth", "1480px" );
-    });
-</script>
 {% endblock %}

@@ -36,10 +36,10 @@
             {% set _id = "{}_{}{}_{}_{}".format(exchange.lower(), c.lower(), r.lower(), att.replace(' ', '_').lower(), frequency) %}
             {% if 'price_change_chart' != att.replace(' ', '_').lower() %}
                 <td style="text-align: right;">
-                    <span id="{{_id}}" style="padding: 5px;">-</span>
+                    <span id="{{_id}}" style='padding-left: 8px'>-</span>
                 </td>
             {% else %}
-                <td id="{{_id}}" style="width: 140px;"/>
+                <td id="{{_id}}" style="width: 150px;"/>
             {% endif %}
         {% endfor %}
         </tr>
