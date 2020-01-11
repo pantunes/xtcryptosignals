@@ -8,6 +8,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 import json
 import redis
+import hashlib
 from datetime import timedelta
 from celery.task import task
 from celery.exceptions import Ignore
@@ -97,12 +98,16 @@ def update(self):
             price=price
         )
 
-        if red.get(message):
-            logger.warning('Already sent....')
+        key = '{}{}'.format(notif.user.pk, message)
+        hash_object = hashlib.md5(key.encode())
+        redis_key = hash_object.hexdigest()
+
+        if red.get(redis_key):
+            logger.warning('Already sent notif. to {}'.format(notif.user.pk))
             continue
 
         red.setex(
-            name=message,
+            name=redis_key,
             value=1,
             time=timedelta(
                 seconds=convert_to_seconds(notif.interval)
@@ -127,7 +132,7 @@ def update(self):
 
         try:
             try:
-                logger.warning('Sending....')
+                logger.warning('Sending notif. to {}'.format(notif.user.pk))
                 webpush(
                     subscription_info=notif.user.metadata['subscription'],
                     data=json.dumps(dict(

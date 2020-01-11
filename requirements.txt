@@ -17,6 +17,7 @@ mongodb-migrations
 bcrypt
 environs
 pywebpush
+python-socketio[client]
 # versioned library dependencies
 marshmallow==2.20.5
 jsonschema==2.6.0

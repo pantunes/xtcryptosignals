@@ -48,7 +48,7 @@ trading volume, price sentiment, etc (From July 2019)
 ### Install from source
 Clone project repository:
 ```bash
-hg clone ssh://hg@bitbucket.org/pantunes/xtcryptosignals
+git clone git@github.com:pantunes/xtcryptosignals.git
 cd xtcryptosignals
 ```
 
