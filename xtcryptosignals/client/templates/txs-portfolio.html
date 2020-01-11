@@ -29,6 +29,16 @@
 </script>
 
 <script type="text/javascript">
+  function get_units(units) {
+    let u = units;
+      if (u > 1) {
+        u = Number((u).toFixed(2));
+      }
+    return u
+  }
+</script>
+
+<script type="text/javascript">
   function render_transactions(data) {
     let $table = $('#table_transactions');
     $table.find("tbody tr").remove();
@@ -40,7 +50,7 @@
       $table.append(
           "<tr>" +
           "<td style='width: 32px; vertical-align: middle;'><img src='/static/imgs/logos/" + this.coin_token + ".png' alt='" + this.coin_token + "'/></td>" +
-          "<td class='align-right'>" + this.units + "</td>" +
+          "<td class='align-right'>" + get_units(this.units) + "</td>" +
           "<td class='align-right'>" + price_formatter.format(this.amount) + "</td>" +
           "<td class='align-right'>" + p.format(this.unit_price) + "</td>" +
           "<td style=\"text-align: center;\">" + this.in_or_out + "</td>" +
@@ -70,6 +80,7 @@
       const balance_id = prefix_id + "_balance_{{frequency}}";
       const position_id = prefix_id + "_position_{{frequency}}";
       const pair = key + "-" + value.exchange.pair;
+      const exchange = value.exchange.name.toUpperCase();
       let p = price_formatter;
       if (value.average_paid < 1) {
         p = price_formatter_low_values;
@@ -77,12 +88,11 @@
       $table.append(
           "<tr>" +
           "<td style='width: 32px; vertical-align: middle;'><img src='/static/imgs/logos/" + key + ".png' alt='" + key + "'/></td>" +
-          "<td><a href='/ticker/" + pair.replace('-', '') + "/{{frequency}}'>" + pair + "</a></td>" +
-          // "<td>" + value.exchange.name.toUpperCase() + "</td>" +
+          "<td><a href='/ticker/" + pair.replace('-', '') + "/{{frequency}}'>" + pair + "</a> (<a href=/ticker/10s#" + exchange + ">" + exchange + "</a>)</td>" +
           "<td class='align-right pf-current-price'><span id=\"" + prefix_id + _prefix_usdt + "{{frequency}}\">" + value.current_price + "</span></td>" +
-          "<td class='align-right pf-units'>" + value.units + "</td>" +
+          "<td class='align-right pf-units'>" + get_units(value.units) + "</td>" +
           "<td class='align-right pf-total-paid'>" + price_formatter.format(value.amount) + "</td>" +
-          "<td class='align-right'>" + p.format(value.average_paid) +"</td>" +
+          "<td class='align-right'>" + p.format(value.average_paid) + "</td>" +
           "<td class='align-right'><span id=\"" + balance_id + "\">-</span></td>" +
           "<td class='align-right'><span id=\"" + position_id + "\">-</span></td>" +
           "</tr>"
@@ -232,9 +242,8 @@
       <thead>
         <tr>
           <th>&nbsp;</th>
-          <th>Pair</th>
-<!--          <th>Exchange</th>-->
-          <th>Ticker</th>
+          <th>Pair & Exchange Ref.</th>
+          <th>Price USDT</th>
           <th>Total Units</th>
           <th>Paid</th>
           <th>Paid Unit</th>
@@ -250,12 +259,4 @@
 
 {% include 'modals/transaction.html' %}
 
-{% endblock %}
-
-{% block include_extra_scripts_bottom %}
-<script type="text/javascript">
-    $(document).ready(function() {
-      $(".container").css("maxWidth", "1480px" );
-    });
-</script>
 {% endblock %}

@@ -8,6 +8,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 import json
 import redis
+import hashlib
 from datetime import timedelta
 from celery.task import task
 from celery.exceptions import Ignore
@@ -59,10 +60,6 @@ def update(self):
         except KeyError:
             continue
 
-        logger.warning('{} {}_change {}'.format(
-            obj_history['ticker'], notif.metric, obj_history_change)
-        )
-
         if price < 1:
             message_templ = '<a href="/ticker/source/{ticker}/10s">{ticker}' \
                             '</a> {metric} is {direction} {change}% within ' \
@@ -84,6 +81,14 @@ def update(self):
         else:
             direction = 'down'
 
+        logger.warning('{} {}_change {} {}% {}'.format(
+            obj_history['ticker'],
+            notif.metric,
+            direction,
+            obj_history_change,
+            notif.interval
+        ))
+
         message = message_templ.format(
             ticker=obj_history['ticker'],
             metric=notif.metric.capitalize(),
@@ -93,22 +98,31 @@ def update(self):
             price=price
         )
 
-        if red.get(message):
+        key = '{}{}'.format(notif.user.pk, message)
+        hash_object = hashlib.md5(key.encode())
+        redis_key = hash_object.hexdigest()
+
+        if red.get(redis_key):
+            logger.warning('Already sent notif. to {}'.format(notif.user.pk))
             continue
 
         red.setex(
-            name=message,
+            name=redis_key,
             value=1,
             time=timedelta(
                 seconds=convert_to_seconds(notif.interval)
             )
         )
 
-        Notification(
+        notif_kwargs = dict(
             coin_token=obj_history['ticker'],
             message=message,
             user=notif.user,
-        ).save()
+        )
+        if notif.metric == 'price':
+            notif_kwargs.update(is_positive=(direction is 'up'))
+
+        Notification(**notif_kwargs).save()
 
         message = message.replace(
             '<a href="/ticker/source/{ticker}/10s">{ticker}</a>'.format(
@@ -118,6 +132,7 @@ def update(self):
 
         try:
             try:
+                logger.warning('Sending notif. to {}'.format(notif.user.pk))
                 webpush(
                     subscription_info=notif.user.metadata['subscription'],
                     data=json.dumps(dict(
@@ -143,6 +158,7 @@ def update(self):
                         extra.message
                     )
         except Exception as error:
+            logger.error('General Error: {}'.format(str(error)))
             self.update_state(state=states.FAILURE, meta=str(error))
             raise Ignore()
         finally:

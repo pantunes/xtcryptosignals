@@ -1,6 +1,6 @@
 /*skeleton custom.css overwriting*/
 .container {
-  max-width: 1320px;
+  max-width: 1480px;
 }
 .numeric_value {
   color: #000;
@@ -44,5 +44,11 @@
   font-size: large;
 }
 .align-right {
-    text-align: right;
+  text-align: right;
+}
+.positive {
+  background-color: #e6ffee;
+}
+.negative {
+  background-color: #ffe6e6;
 }

@@ -44,7 +44,7 @@ def info():
     <br/>
     <br/>
     In case you are curious about further feature releases have a look 
-    <a href="https://bitbucket.org/pantunes/xtcryptosignals">here</a>.
+    <a href="https://github.com/pantunes/xtcryptosignals">here</a>.
     <br/><br/>
     We hope you like this platform experience and please drop us some 
     <a href="javascript:open_modal('#contact');">lines</a>
