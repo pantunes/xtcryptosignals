@@ -303,12 +303,6 @@ This project is work in progress and when it comes to trading use it at your own
 This project is licensed under the [GNU](https://www.gnu.org/licenses/gpl-3.0.en.html) License.
 
 
-## Donation
-
-This open-source project has been built on my free time. Feel free to get me a coffee :-)  
-BTC: [3QLhxkScrmzbKvUFyesxCkxMaPc7EB9SFK](https://www.blockchain.com/btc/address/3QLhxkScrmzbKvUFyesxCkxMaPc7EB9SFK)  
-ETH: [0x2bda8e92B42AB005918E5A126E2bD7cC19Bf5fF6](https://etherscan.io/address/0x2bda8e92B42AB005918E5A126E2bD7cC19Bf5fF6)  
-
 ## Contact
 
 Through the website [xtcryptosignals.com](https://xtcryptosignals.com/#contact).  
