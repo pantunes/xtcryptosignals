@@ -99,7 +99,7 @@ def portfolio(auth):
                 units=round(total_units, s.SYMBOL_FLOAT_PRECISION),
                 amount=total_amount,
                 average_paid=average_paid,
-                balance=round((current_price - average_paid) * total_units, 2),
+                balance=round((current_price - average_paid) * total_units),
                 position=_get_percentage(current_price, average_paid),
             ),
         })
