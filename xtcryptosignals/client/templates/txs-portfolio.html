@@ -272,3 +272,11 @@
 {% include 'modals/transaction.html' %}
 
 {% endblock %}
+
+{% block include_extra_scripts_bottom %}
+<script type="text/javascript">
+    $(document).ready(function() {
+      $(".container").css("maxWidth", "1580px" );
+    });
+</script>
+{% endblock %}
