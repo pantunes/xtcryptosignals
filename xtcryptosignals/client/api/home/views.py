@@ -7,6 +7,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import random
+from datetime import datetime
 from flask import (
     render_template,
     Blueprint,
@@ -32,6 +33,7 @@ def context_processor():
         socket_base_url=current_app.config['SOCKET_BASE_URL'],
         version=__version__,
         ga_tracking_id=current_app.config['GA_TRACKING_ID'],
+        current_year=datetime.utcnow().year,
         frequencies=g.HISTORY_FREQUENCY,
     )
 

@@ -49,6 +49,15 @@ def _get_current_price(exchange, coin_token):
     return price
 
 
+def _set_share_per_coin_token(p):
+    total_paid = p['total_paid']
+
+    for coin_or_token, struct in p['coin_tokens'].items():
+        p['coin_tokens'][coin_or_token].update({
+            'share': round(struct['amount'] * 100 / total_paid, 2),
+        })
+
+
 def portfolio(auth):
     _portfolio = dict(coin_tokens=dict())
     total_paid = 0
@@ -99,10 +108,15 @@ def portfolio(auth):
 
         total_value += total_units * current_price
 
+    btc_price = _portfolio['coin_tokens']['BTC']['current_price']
+
     _portfolio.update(
         total_paid=round(total_paid, 2),
         total_value=round(total_value, 2),
         total_position=_get_percentage(total_value, total_paid),
+        total_in_btc=round(total_paid/btc_price, 2),
     )
+
+    _set_share_per_coin_token(_portfolio)
 
     return _portfolio

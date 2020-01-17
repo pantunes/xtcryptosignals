@@ -93,6 +93,7 @@
           "<td class='align-right pf-units'>" + get_units(value.units) + "</td>" +
           "<td class='align-right pf-total-paid'>" + price_formatter.format(value.amount) + "</td>" +
           "<td class='align-right'>" + p.format(value.average_paid) + "</td>" +
+          "<td class='align-right'>" + value.share + "%</span></td>" +
           "<td class='align-right'><span id=\"" + balance_id + "\">-</span></td>" +
           "<td class='align-right'><span id=\"" + position_id + "\">-</span></td>" +
           "</tr>"
@@ -106,6 +107,7 @@
     }
     $('#my_portfolio_total_spent').text(price_formatter.format(data.total_paid));
     $('#my_portfolio_total_value').text(price_formatter.format(data.total_value));
+    $('#my_portfolio_in_btc').text(Number((data.total_in_btc).toFixed(2)));
     _set_total_position(data.total_position);
   }
 </script>
@@ -128,7 +130,7 @@
     }
   }
 
-  function _set_total_value_and_position(total_spent) {
+  function _set_total_value_position_btc(total_spent, total_in_btc) {
     let units_list = [];
     $(".pf-units").each(function() {
         let value = $(this).text().replace(',', '');
@@ -155,6 +157,10 @@
     _set_total_position(perc);
     // total value
     $('#my_portfolio_total_value').text(price_formatter.format(total_value));
+    // in BTC
+    if (total_in_btc !== null) {
+        $('#my_portfolio_in_btc').text(Number((total_in_btc).toFixed(2)));
+    }
   }
 
   function _set_position_and_balance_per_row(id, json, symbol) {
@@ -183,7 +189,11 @@
       return;
     }
     const total_spent = data_portf.total_paid;
-    _set_total_value_and_position(total_spent);
+    let total_in_btc = null;
+    if (json['symbol'] === 'BTCUSDT') {
+        total_in_btc = total_spent / json['price']
+    }
+    _set_total_value_position_btc(total_spent, total_in_btc);
     _set_position_and_balance_per_row(id, json, symbol);
   }
 </script>
@@ -198,7 +208,7 @@
 <br/><br/>
 
 <div class="row">
-    <div class="five columns">
+    <div class="four columns">
       <div style="float: left">
         <h5>My Transactions</h5>
       </div>
@@ -216,7 +226,7 @@
             <th>&nbsp;</th>
             <th>Units</th>
             <th>Paid</th>
-            <th>Unit Price</th>
+            <th>Unit $</th>
             <th>Type</th>
             <th>Added on</th>
           </tr>
@@ -226,15 +236,16 @@
 
   </div>
 
-  <div class="seven columns">
+  <div class="eight columns">
     <div style="float: left;">
       <h5>My Portfolio</h5>
     </div>
     <div style="float: right; width: 75%">
       <div class="row example-grid docs-example">
-        <div class="four columns">Paid: <span id='my_portfolio_total_spent' class="bigger">-</span></div>
-        <div class="four columns">Value: <span id='my_portfolio_total_value' class="bigger">-</span></div>
-        <div class="four columns">Position: <span id='my_portfolio_total_position' class="bigger">-</span></div>
+        <div class="three columns">Paid: <span id='my_portfolio_total_spent' class="bigger">-</span></div>
+        <div class="three columns">Value: <span id='my_portfolio_total_value' class="bigger">-</span></div>
+        <div class="three columns">Position: <span id='my_portfolio_total_position' class="bigger">-</span></div>
+        <div class="three columns">BTC: <span id='my_portfolio_in_btc' class="bigger">-</span></div>
       </div>
     </div>
 
@@ -247,6 +258,7 @@
           <th>Total Units</th>
           <th>Paid</th>
           <th>Paid Unit</th>
+          <th>Share</th>
           <th>Balance</th>
           <th>Position</th>
         </tr>
@@ -259,4 +271,12 @@
 
 {% include 'modals/transaction.html' %}
 
+{% endblock %}
+
+{% block include_extra_scripts_bottom %}
+<script type="text/javascript">
+    $(document).ready(function() {
+      $(".container").css("maxWidth", "1580px" );
+    });
+</script>
 {% endblock %}
