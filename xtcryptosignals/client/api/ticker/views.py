@@ -7,6 +7,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from copy import deepcopy
+from datetime import datetime
 from flask import (
     Blueprint,
     current_app,
@@ -44,6 +45,7 @@ def context_processor():
         socket_base_url=current_app.config['SOCKET_BASE_URL'],
         version=__version__,
         ga_tracking_id=current_app.config['GA_TRACKING_ID'],
+        current_year=datetime.utcnow().year,
         frequencies=g.HISTORY_FREQUENCY,
         pairs=get_pairs(g.SYMBOLS_PER_EXCHANGE),
         tokens=get_coin_tokens(g.SYMBOLS_PER_EXCHANGE),

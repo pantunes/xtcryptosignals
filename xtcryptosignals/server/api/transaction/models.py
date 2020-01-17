@@ -41,6 +41,7 @@ class Transaction(DocumentValidation):
 
     meta = {
         'collection': 'transaction',
+        'ordering': ['-added_on'],
     }
 
     _pre_save_hooks = (_calculate_unit_price,)

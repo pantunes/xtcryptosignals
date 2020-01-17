@@ -5,7 +5,7 @@
 {% block include_scripts_top %}
 <script type="text/javascript">
   const socket = io('{{socket_base_url}}');
-  socket.on('general', function(json) {
+    socket.on('general', function(json) {
     $("#active_users").html(json['/']);
   });
 </script>
