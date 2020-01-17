@@ -25,7 +25,7 @@ from xtcryptosignals.tasks import ticker
     '--list-config',
     type=click.Choice(['exchanges', 'currencies']),
     help="List 'exchanges' or 'currencies' (coins or tokens) per exchange "
-         "that the tool currently supports."
+         "that are currently supported."
 )
 @click.option(
     '--enable-messaging',
