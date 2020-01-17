@@ -90,7 +90,13 @@ def portfolio(auth):
 
         exchange = get_exchange_for(coin_token)
 
-        current_price = _get_current_price(exchange, coin_token)
+        try:
+            current_price = _get_current_price(exchange, coin_token)
+        except TypeError:
+            # pair is not stored in Redis - most likely Exchange API is
+            # failing
+            # TODO: Still display this row in red in UI
+            continue
 
         _portfolio['coin_tokens'].update({
             coin_token: dict(
