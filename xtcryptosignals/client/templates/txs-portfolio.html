@@ -140,7 +140,7 @@
     }
   }
 
-  function _set_total_value_position_btc(total_spent, total_in_btc) {
+  function _set_total_value_position_btc(total_spent, btc_usdt_price) {
     let units_list = [];
     $(".pf-units").each(function() {
         let value = $(this).text().replace(',', '');
@@ -168,8 +168,8 @@
     // total value
     $('#my_portfolio_total_value').text(price_formatter_totals.format(total_value));
     // in BTC
-    if (total_in_btc !== null) {
-        $('#my_portfolio_in_btc').text(Number((total_in_btc).toFixed(2)));
+    if (btc_usdt_price !== null) {
+        $('#my_portfolio_in_btc').text(Number((total_value / btc_usdt_price).toFixed(2)));
     }
   }
 
@@ -199,11 +199,11 @@
       return;
     }
     const total_spent = data_portf.total_paid;
-    let total_in_btc = null;
+    let btc_usdt_price = null;
     if (json['symbol'] === 'BTCUSDT') {
-        total_in_btc = total_spent / json['price']
+        btc_usdt_price = json['price']
     }
-    _set_total_value_position_btc(total_spent, total_in_btc);
+    _set_total_value_position_btc(total_spent, btc_usdt_price);
     _set_position_and_balance_per_row(id, json, symbol);
   }
 </script>
@@ -265,7 +265,7 @@
           <th>&nbsp;</th>
           <th>Pair & Exch. Ref.</th>
           <th>Price USDT</th>
-          <th>Total Units</th>
+          <th>Units</th>
           <th>Paid</th>
           <th>Paid Unit</th>
           <th>Share</th>
