@@ -17,7 +17,7 @@
   letter-spacing: .2rem;
   margin-right: 55px;
   line-height: 6.5rem;
-  background-color: #FFFF00;
+  background-color: #e8e8e8;
   color: #222;
   padding: 2px;
 }
@@ -32,14 +32,14 @@
   color: white;
 }
 .fear-greed-red {
-  background-color: red;
+  background-color: #ff8080;
 }
 .fear-greed-yellow {
-  background-color: yellow;
+  background-color: #ffee80;
   color: #000;
 }
 .fear-greed-green {
-  background-color: green;
+  background-color: #ff8080;
 }
 .fear-greed-black {
   background-color: #000;
