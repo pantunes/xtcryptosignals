@@ -96,7 +96,7 @@
 
 <script type="text/javascript">
     function render_fg(data) {
-        const val = data[0].value;
+        const val = data.data[0].value;
         let txt = 'fear-greed-green';
         if (val < 40) {
             txt = 'fear-greed-red';
@@ -104,7 +104,7 @@
             txt = 'fear-greed-yellow';
         }
         $('.navbar-fear-greed').addClass(txt);
-        $('#update_ticker').text(data[0].value);
+        $('.navbar-fear-greed').text(val);
     }
 
     $(document).ready(function() {

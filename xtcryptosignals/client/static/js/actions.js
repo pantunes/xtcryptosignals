@@ -93,7 +93,7 @@ function get_rules(handler) {
 }
 
 function get_crypto_fear_greed_index(handler) {
-    $.get('https://api.alternative.me/fng').done(function(response) {
+    $.get('/parties/fear-and-greed-index').done(function(response) {
         handler(response)
     })
     .fail(function(xhr, status, error) {
