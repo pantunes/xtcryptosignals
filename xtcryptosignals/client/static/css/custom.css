@@ -19,7 +19,8 @@
   line-height: 6.5rem;
   background-color: #e8e8e8;
   color: #222;
-  padding: 2px;
+  padding: 6px;
+  border-radius: 40px;
 }
 .navbar-fear-greed {
   border-radius: 50%;
