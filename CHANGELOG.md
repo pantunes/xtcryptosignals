@@ -2,6 +2,7 @@
 All changes will be registered here per release.
 
 ## [0.2.1] - Current date
+Added Crypto Fear & Greed Index in UI
 Code fixes and improvements.  
 
 ## [0.2.0] - 2020-12-25
