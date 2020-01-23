@@ -85,8 +85,28 @@
       <a class="navbar-link" style="margin-right: 0;">XTCryptoSignals v{{version}}</a>
     </li>
     <li class="navbar-right-item">
-      <span class="navbar-countdown">(tickers updated <span id="update_ticker">-</span>s ago)</span>
+        <span class="navbar-fear-greed" title="Crypto Fear & Greed Index">--</span>
+    </li>
+    <li class="navbar-right-item">
+      <span class="navbar-countdown">tickers updated <span id="update_ticker">-</span>s ago</span>
     </li>
   </ul>
 </div>
 </nav>
+
+<script type="text/javascript">
+    function render_fg(data) {
+        const val = data.data[0].value;
+        let txt = 'fear-greed-green';
+        if (val < 40) {
+            txt = 'fear-greed-red';
+        } else if (val < 60) {
+            txt = 'fear-greed-yellow';
+        }
+        $('.navbar-fear-greed').addClass(txt).text(val);
+    }
+
+    $(document).ready(function() {
+        get_crypto_fear_greed_index(render_fg);
+    });
+</script>
