@@ -1,7 +1,10 @@
 # Changelog
 All changes will be registered here per release.
 
-## [0.2.0] - Current date
+## [0.2.1] - Current date
+Code fixes and improvements.  
+
+## [0.2.0] - 2020-12-25
 Added Alerts/Notifications Management and Web Push Notifications.
 Added Notifications Filtering.    
 Added VeChain, Monero, Cardano and Icon Ticker coins.
