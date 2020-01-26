@@ -9,14 +9,13 @@
 
 <script type="text/javascript">
     function render_data(data) {
-        console.log(data);
-        draw_chart_fear_and_greed(data)
+        draw_chart_fear_and_greed(data, '{{ frequency }}')
     }
 </script>
 
 <script type="text/javascript">
   $(document).ready(function() {
-        get_chart_cfgi_btc_data(render_data);
+        get_chart_cfgi_btc_data(render_data, '{{ frequency }}');
   });
 </script>
 

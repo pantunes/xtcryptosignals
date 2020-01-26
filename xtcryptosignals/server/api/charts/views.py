@@ -23,7 +23,7 @@ red = redis.Redis.from_url(s.BROKER_URL)
 
 class ChartFearAndGreedIndexAndBTC(Resource):
     @validate_io()
-    def get(self):
+    def get(self, frequency):
         """
         Returns Crypto Fear & Greed Index + BTC data
         ---
@@ -35,7 +35,7 @@ class ChartFearAndGreedIndexAndBTC(Resource):
             200:
                 description: Returns Crypto Fear & Greed Index + BTC data
         """
-        return service.get_chart_fear_and_greed_index_and_btc()
+        return service.get_chart_fear_and_greed_index_and_btc(frequency)
 
 
-api.add_resource(ChartFearAndGreedIndexAndBTC, '/charts/cfgi/btc')
+api.add_resource(ChartFearAndGreedIndexAndBTC, '/charts/cfgi/btc/<frequency>')

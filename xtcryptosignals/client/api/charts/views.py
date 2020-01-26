@@ -16,11 +16,12 @@ from flask import (
 bp = Blueprint('charts', __name__)
 
 
-@bp.route('/charts/cfgi/btc', methods=['GET'])
-def cfgi_btc():
+@bp.route('/charts/cfgi/btc/<frequency>', methods=['GET'])
+def cfgi_btc(frequency):
     response = requests.get(
-        url='{}charts/cfgi/btc'.format(
-            current_app.config['SERVER_API_BASE_URL']
+        url='{}charts/cfgi/btc/{}'.format(
+            current_app.config['SERVER_API_BASE_URL'],
+            frequency
         ),
     )
     return response.json(), response.status_code

@@ -1,10 +1,10 @@
-function draw_chart_fear_and_greed(data) {
+function draw_chart_fear_and_greed(data, frequency) {
     return Highcharts.chart('chart', {
         chart: {
             zoomType: 'x'
         },
         title: {
-            text: 'Fear & Greed Index vs BTC Price'
+            text: 'Fear & Greed Index vs BTC Price - ' + frequency
         },
         subtitle: {
             text: null

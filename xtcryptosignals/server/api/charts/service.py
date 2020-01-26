@@ -6,33 +6,30 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-from datetime import datetime, timedelta
 from xtcryptosignals.tasks.models.history import History
 from xtcryptosignals.tasks.models.cfgi import CFGI
 
 
-NUM_LAST_DAYS_HISTORY = 30
+NUM_OCCURRENCES = 30
 
 
-def get_chart_fear_and_greed_index_and_btc():
-    utcnow = datetime.utcnow()
-
-    days = [
-        (utcnow + timedelta(-x)).strftime("%Y-%m-%d")
-        for x in range(NUM_LAST_DAYS_HISTORY, 1, -1)
-    ]
-
-    model_history = type('History1d', (History,), {})
+def get_chart_fear_and_greed_index_and_btc(frequency):
+    model_history = type('History{}'.format(frequency), (History,), {})
     prices = model_history.objects(
         symbol='BTCUSDT',
         source='binance',
-    )[:NUM_LAST_DAYS_HISTORY]
+    )[:NUM_OCCURRENCES]
+
     btc_prices = {
         x.created_on.strftime("%Y-%m-%d"): int(x.price_usdt) for x in prices
     }
 
-    cfgi = CFGI.objects[:30]
-    cfgi_values = {x.added_on.strftime("%Y-%m-%d"): x.index for x in cfgi}
+    days = [x.created_on.strftime("%Y-%m-%d") for x in prices]
+    days.reverse()
+
+    cfgi_values = {
+        x.added_on.strftime("%Y-%m-%d"): x.index for x in CFGI.objects
+    }
 
     return dict(
         days=days,
