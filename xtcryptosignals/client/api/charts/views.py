@@ -13,13 +13,13 @@ from flask import (
 )
 
 
-bp = Blueprint('parties', __name__)
+bp = Blueprint('charts', __name__)
 
 
-@bp.route('/parties/cfgi', methods=['GET'])
-def cfgi():
+@bp.route('/charts/cfgi/btc', methods=['GET'])
+def cfgi_btc():
     response = requests.get(
-        url='{}parties/cfgi'.format(
+        url='{}charts/cfgi/btc'.format(
             current_app.config['SERVER_API_BASE_URL']
         ),
     )

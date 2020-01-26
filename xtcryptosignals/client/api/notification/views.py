@@ -33,8 +33,6 @@ bp = Blueprint('notification', __name__)
 @bp.context_processor
 def context_processor():
     return dict(
-        application_server_key=current_app.config['APPLICATION_SERVER_KEY'],
-        socket_base_url=current_app.config['SOCKET_BASE_URL'],
         version=__version__,
         ga_tracking_id=current_app.config['GA_TRACKING_ID'],
         current_year=datetime.utcnow().year,

@@ -6,6 +6,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+from celery.schedules import crontab
 from xtcryptosignals.tasks import settings as s
 
 
@@ -23,6 +24,7 @@ BROKER_URL = s.BROKER_URL
 CELERY_IMPORTS = (
     'xtcryptosignals.tasks.ticker',
     'xtcryptosignals.tasks.notifications',
+    'xtcryptosignals.tasks.cfgi',
 )
 
 CELERYBEAT_SCHEDULE = {
@@ -33,5 +35,9 @@ CELERYBEAT_SCHEDULE = {
     'notifications': {
         'task': 'xtcryptosignals.tasks.notifications.update',
         'schedule': s.TICKER_SCHEDULE,
+    },
+    'cfgi': {
+        'task': 'xtcryptosignals.tasks.cfgi.update',
+        'schedule': crontab(hour=5, minute=30),
     }
 }
