@@ -54,10 +54,10 @@ function open_modal(m) {
 
     $(_m).on(
         $.modal.BEFORE_CLOSE, function (event, modal) {
-            location.hash = '';
+            window.location.hash = '';
         });
 
     $(_m).modal();
 
-    location.hash = m;
+    window.location.hash = m;
 }

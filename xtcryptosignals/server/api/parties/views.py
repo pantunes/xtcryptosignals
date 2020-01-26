@@ -38,7 +38,7 @@ class FearAndGreedIndex(Resource):
         try:
             cfgi = int(red.get(s.REDIS_CFGI))
         except TypeError:
-            response = requests.get(url='https://api.alternative.me/fng')
+            response = requests.get(url=s.URL_CFGI)
             cfgi = response.json()['data'][0]['value']
         return dict(cfgi=cfgi)
 

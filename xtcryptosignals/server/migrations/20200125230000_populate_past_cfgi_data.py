@@ -15,9 +15,6 @@ from xtcryptosignals.tasks.models.cfgi import CFGI
 from xtcryptosignals.tasks import settings as s
 
 
-URL = 'https://api.alternative.me/fng/?limit=180'
-
-
 red = redis.Redis.from_url(s.BROKER_URL)
 
 
@@ -28,7 +25,7 @@ class Migration(BaseMigration):
         port=s.MONGODB_PORT,
     )
     def upgrade(self):
-        response = requests.get(url=URL)
+        response = requests.get(url='{}/?limit=180'.format(s.URL_CFGI))
         for i, x in enumerate(response.json()['data']):
             index = x['value']
             added_on = datetime.fromtimestamp(int(x['timestamp'])).date()

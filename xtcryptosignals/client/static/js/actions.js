@@ -103,7 +103,7 @@ function get_crypto_fear_greed_index(handler) {
 
 function get_chart_cfgi_btc_data(handler, frequency) {
     $.get('/charts/cfgi/btc/' + frequency).done(function(response) {
-        handler(response)
+        handler(response, frequency)
     })
     .fail(function(xhr, status, error) {
         process_fail(xhr);

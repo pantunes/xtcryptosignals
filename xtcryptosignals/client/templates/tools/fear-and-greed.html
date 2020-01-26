@@ -8,15 +8,19 @@
 <script src="/static/js/charts/fear-and-greed.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-    function render_data(data) {
-        draw_chart_fear_and_greed(data, '{{ frequency }}')
+    function render_data(data, frequency) {
+        draw_chart_fear_and_greed(data, frequency);
+        window.location.hash = frequency;
+        $('#container_buttons > button').removeClass('button-primary');
+        $('#' + frequency).addClass('button-primary')
     }
 </script>
 
 <script type="text/javascript">
-  $(document).ready(function() {
-        get_chart_cfgi_btc_data(render_data, '{{ frequency }}');
-  });
+    $(document).ready(function() {
+        const frequency = window.location.hash.replace('#', '');
+        get_chart_cfgi_btc_data(render_data, frequency);
+    });
 </script>
 
 <script type="text/javascript">
@@ -33,6 +37,15 @@
 {% endwith %}
 
 <br/><br/>
+
+<div id="container_buttons" style="text-align: center">
+    {% for cf in chart_frequencies %}
+    <button class="button-secondary" id='{{ cf }}' onclick="get_chart_cfgi_btc_data(render_data, '{{ cf }}');">{{ cf }}</button>
+    {% endfor %}
+</div>
+
+<br/>
+
 <div id="chart"></div>
 <br/>
 

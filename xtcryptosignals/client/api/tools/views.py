@@ -15,7 +15,6 @@ from flask import (
 )
 from xtcryptosignals.client import service
 from xtcryptosignals import __version__
-from xtcryptosignals.client.utils import validate_args
 from xtcryptosignals.common.utils import (
     get_pairs,
     get_coin_tokens,
@@ -43,10 +42,11 @@ def context_processor():
     )
 
 
-@bp.route('/tools/fear-and-greed/<frequency>')
-@validate_args()
-def fear_and_greed(frequency):
-    return dict(
+@bp.route('/tools/fear-and-greed')
+def fear_and_greed():
+    chart_frequencies = g.HISTORY_FREQUENCY[g.HISTORY_FREQUENCY.index('1d'):]
+    return render_template(
         template_name_or_list='tools/fear-and-greed.html',
-        frequency=frequency,
+        frequency='1d',
+        chart_frequencies=chart_frequencies,
     )

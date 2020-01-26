@@ -29,7 +29,7 @@ def update(self):
     logger = self.get_logger()
 
     try:
-        response = requests.get(url='https://api.alternative.me/fng')
+        response = requests.get(url=s.URL_CFGI)
         index = response.json()['data'][0]['value']
         CFGI(index=index).save()
         red.set(s.REDIS_CFGI, index)
