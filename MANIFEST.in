@@ -16,3 +16,4 @@ include xtcryptosignals/client/static/imgs/readme/*.*
 include xtcryptosignals/client/static/imgs/logos/*.*
 include xtcryptosignals/client/static/js/*.*
 include xtcryptosignals/client/static/js/notify/styles/*.*
+include xtcryptosignals/client/static/js/charts/*.*
