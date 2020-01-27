@@ -10,7 +10,6 @@ flask-session
 flask-socketio
 flask-login
 flask-wtf
-flasgger
 eventlet
 gunicorn
 mongodb-migrations
@@ -23,3 +22,4 @@ marshmallow==2.20.5
 jsonschema==2.6.0
 mistune==0.8.4
 switcheo==0.4.0
+flasgger==0.9.2
