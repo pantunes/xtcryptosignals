@@ -28,6 +28,9 @@ PRICES_CHANGE_CHART_SIZE = 6
 BROKER_URL = 'redis://localhost:6379'
 
 REDIS_KEY_TICKER = '{source}_{symbol}_price'
+REDIS_CFGI = 'cfgi'
+
+URL_CFGI = 'https://api.alternative.me/fng'
 
 VAPID_CLAIMS = env.str('VAPID_CLAIMS')
 VAPID_PRIVATE_KEY = env.str('VAPID_PRIVATE_KEY')

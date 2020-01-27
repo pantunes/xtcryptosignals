@@ -158,7 +158,7 @@ def update(self):
                         extra.message
                     )
         except Exception as error:
-            logger.error('General Error: {}'.format(str(error)))
+            logger.error('notifications error: {}'.format(str(error)))
             self.update_state(state=states.FAILURE, meta=str(error))
             raise Ignore()
         finally:

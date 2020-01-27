@@ -1,4 +1,4 @@
-const menu_options = [
+const menu_options_logged_in = [
     '#menu_portfolio_link',
     '#menu_logout_link',
     '#menu_notifications_link',
@@ -24,7 +24,7 @@ function login() {
         $.notify('Welcome!', 'success');
         $('#menu_login').html('My Area');
         let x;
-        for (x of menu_options) {
+        for (x of menu_options_logged_in) {
             $(x).css('display', 'inline');
         }
         open_modal('#info');
@@ -44,7 +44,7 @@ function logout() {
         $.modal.close();
         $('#menu_login').html('Account');
         let x;
-        for (x of menu_options) {
+        for (x of menu_options_logged_in) {
             $(x).css('display', 'none');
         }
     })
@@ -93,8 +93,17 @@ function get_rules(handler) {
 }
 
 function get_crypto_fear_greed_index(handler) {
-    $.get('/parties/fear-and-greed-index').done(function(response) {
+    $.get('/parties/cfgi').done(function(response) {
         handler(response)
+    })
+    .fail(function(xhr, status, error) {
+        process_fail(xhr);
+    });
+}
+
+function get_chart_cfgi_btc_data(handler, frequency) {
+    $.get('/charts/cfgi/btc/' + frequency).done(function(response) {
+        handler(response, frequency)
     })
     .fail(function(xhr, status, error) {
         process_fail(xhr);

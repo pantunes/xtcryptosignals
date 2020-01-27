@@ -120,7 +120,7 @@ def portfolio(auth):
         total_paid=round(total_paid, 2),
         total_value=round(total_value, 2),
         total_position=_get_percentage(total_value, total_paid),
-        total_in_btc=round(total_paid/btc_price, 2),
+        total_in_btc=round(total_value/btc_price, 2),
     )
 
     _set_share_per_coin_token(_portfolio)

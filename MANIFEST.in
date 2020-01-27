@@ -7,6 +7,7 @@ include xtcryptosignals/client/templates/*.*
 include xtcryptosignals/client/templates/snippets/*.*
 include xtcryptosignals/client/templates/modals/*.*
 include xtcryptosignals/client/templates/ticker/*.*
+include xtcryptosignals/client/templates/tools/*.*
 include xtcryptosignals/client/static/css/*.*
 include xtcryptosignals/client/static/css/skeleton/*.*
 include xtcryptosignals/client/static/css/notify/styles/*.*
@@ -15,3 +16,4 @@ include xtcryptosignals/client/static/imgs/readme/*.*
 include xtcryptosignals/client/static/imgs/logos/*.*
 include xtcryptosignals/client/static/js/*.*
 include xtcryptosignals/client/static/js/notify/styles/*.*
+include xtcryptosignals/client/static/js/charts/*.*
