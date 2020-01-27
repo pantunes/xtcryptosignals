@@ -20,6 +20,9 @@ class Config(object):
 
     SERVER_API_BASE_URL = 'http://127.0.0.1:5000/'
 
+    CFGI_MIN = '1d'
+    CFGI_MAX = '12w'
+
 
 class ConfigProduction(Config):
     DEBUG = False

@@ -44,9 +44,11 @@ def context_processor():
 
 @bp.route('/tools/fear-and-greed')
 def fear_and_greed():
-    chart_frequencies = g.HISTORY_FREQUENCY[g.HISTORY_FREQUENCY.index('1d'):]
+    _min = g.HISTORY_FREQUENCY.index(current_app.config['CFGI_MIN'])
+    _max = g.HISTORY_FREQUENCY.index(current_app.config['CFGI_MAX'])
+    chart_frequencies = g.HISTORY_FREQUENCY[_min:_max]
     return render_template(
         template_name_or_list='tools/fear-and-greed.html',
-        frequency='1d',
+        frequency=current_app.config['CFGI_MIN'],
         chart_frequencies=chart_frequencies,
     )
