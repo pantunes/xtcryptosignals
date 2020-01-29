@@ -1,6 +1,10 @@
+.darkmode--activated .darkmode-background {
+  background: #e0e0e0;
+}
+
 .darkmode--activated th,
 .darkmode--activated td {
-    border-bottom: 1px solid #505050;
+  border-bottom: 1px solid #505050;
 }
 
 .darkmode--activated td,
@@ -22,7 +26,9 @@
 }
 
 .darkmode--activated .navbar {
-  background: #161616;
+  background: #2b2b2b;
+  border-top: 1px solid #2b2b2b;
+  border-bottom: 1px solid #2b2b2b;
 }
 
 .darkmode--activated .navbar-countdown {
@@ -31,19 +37,27 @@
 
 .darkmode--activated .popover,
 .darkmode--activated .popover-link {
-  background: #161616;
+  background: #2b2b2b;
   color: #b3b3b3;
+  border: 1px solid #2b2b2b;
+}
+
+.darkmode--activated select,
+.darkmode--activated input  {
+  color: #6c6c6c;
+  background: #1f1f1f;
 }
 
 .darkmode--activated .popover-link:hover {
   color: #fff;
-  background: #a6a6a6;
+  background: #1f1f1f;
+  border: 1px solid #1f1f1f;
 }
 
-.darkmode--activated .popover-link:hover,
 .darkmode--activated .popover-item:first-child,
 .darkmode--activated .popover-link:hover:after {
-  border-bottom-color: #fff;
+  border: 0;
+  border-bottom-color: #2b2b2b;
 }
 
 .darkmode--activated .modal {
@@ -53,4 +67,15 @@
 
 .darkmode--activated .row-tx-out {
   background: #212224;
+}
+
+.darkmode--activated .button.button-primary,
+.darkmode--activated input[type="button"].button-primary {
+  color: #FFF;
+  background-color: #248dad;
+  border-color: #248dad;
+}
+
+.darkmode--activated a {
+  color: #248dad;
 }
