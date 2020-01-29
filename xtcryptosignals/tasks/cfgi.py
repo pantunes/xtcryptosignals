@@ -8,6 +8,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 import redis
 import requests
+from datetime import datetime
 from celery.task import task
 from celery.exceptions import Ignore
 from celery import states
@@ -30,8 +31,11 @@ def update(self):
 
     try:
         response = requests.get(url=s.URL_CFGI)
-        index = response.json()['data'][0]['value']
-        CFGI(index=index).save()
+        x = response.json()['data'][0]
+        index = x['value']
+        added_on = datetime.fromtimestamp(int(x['timestamp'])).date()
+        kwargs = dict(index=index, added_on=added_on)
+        CFGI(**kwargs).save()
         red.set(s.REDIS_CFGI, index)
     except Exception as error:
         logger.error('cfgi error: {}'.format(str(error)))
