@@ -1,5 +1,5 @@
 .darkmode--activated .darkmode-background {
-  background: #e0e0e0;
+  background-color: #e0e0e0;
 }
 
 .darkmode--activated th,
@@ -22,36 +22,37 @@
 .darkmode--activated th,
 .darkmode--activated .four,
 .darkmode--activated .title {
-  color: #6c6c6c;
+  color: #828282;
 }
 
 .darkmode--activated .navbar {
-  background: #2b2b2b;
+  background-color: #2b2b2b;
   border-top: 1px solid #2b2b2b;
   border-bottom: 1px solid #2b2b2b;
 }
 
 .darkmode--activated .navbar-countdown {
-  background: #999;
+  background-color: #999;
 }
 
 .darkmode--activated .popover,
 .darkmode--activated .popover-link {
-  background: #2b2b2b;
+  background-color: #2b2b2b;
   color: #b3b3b3;
   border: 1px solid #2b2b2b;
 }
 
 .darkmode--activated select,
-.darkmode--activated input  {
-  color: #6c6c6c;
-  background: #1f1f1f;
+.darkmode--activated input,
+.darkmode--activated textarea {
+  color: #828282;
+  background-color: #2b2b2b;
 }
 
 .darkmode--activated .popover-link:hover {
   color: #fff;
-  background: #1f1f1f;
-  border: 1px solid #1f1f1f;
+  background-color: #2b2b2b;
+  border: 1px solid #2b2b2b;
 }
 
 .darkmode--activated .popover-item:first-child,
@@ -62,18 +63,31 @@
 
 .darkmode--activated .modal {
   color: #6c6c6c;
-  background: #212224;
+  background-color: #212224;
 }
 
 .darkmode--activated .row-tx-out {
-  background: #212224;
+  background-color: #212224;
 }
 
 .darkmode--activated .button.button-primary,
 .darkmode--activated input[type="button"].button-primary {
-  color: #FFF;
+  color: #e0e0e0;
   background-color: #248dad;
   border-color: #248dad;
+}
+
+.darkmode--activated .button.button-secondary,
+.darkmode--activated input[type="button"].button-secondary {
+  color: #e0e0e0;
+  background-color: #364a50;
+  border-color: #364a50;
+}
+
+.darkmode--activated #balances > div {
+  color: #e0e0e0;
+  background-color: #2b2b2b;
+  border-color: #364a50;
 }
 
 .darkmode--activated a {

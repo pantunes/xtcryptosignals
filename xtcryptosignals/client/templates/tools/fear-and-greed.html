@@ -11,8 +11,8 @@
     function render_data(data, frequency) {
         draw_chart_fear_and_greed(data, frequency);
         window.location.hash = frequency;
-        $('#container_buttons > button').removeClass('button-primary');
-        $('#' + frequency).addClass('button-primary')
+        $('#container_buttons > button').removeClass('button-primary').addClass('button-secondary');
+        $('#' + frequency).removeClass('button-secondary').addClass('button-primary')
     }
 </script>
 
