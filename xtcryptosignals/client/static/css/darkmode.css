@@ -80,7 +80,7 @@
 .darkmode--activated .button.button-secondary,
 .darkmode--activated input[type="button"].button-secondary {
   color: #e0e0e0;
-  background-color: #364a50;
+  background-color: #2b2b2b;
   border-color: #364a50;
 }
 

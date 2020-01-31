@@ -20,10 +20,9 @@
   background-color: #e8e8e8;
   color: #222;
   padding: 6px;
-  border-radius: 40px;
+  border-radius: 10px;
 }
 .navbar-fear-greed {
-  border-radius: 20px;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: .2rem;
@@ -31,12 +30,13 @@
   line-height: 6.5rem;
   padding: 8px;
   color: white;
+  border-radius: 10px;
 }
 .fear-greed-red {
   background-color: #ff8080;
 }
 .fear-greed-yellow {
-  background-color: #ffee80;
+  background-color: rgba(217, 205, 134, 0.92);
   color: #000;
 }
 .fear-greed-green {
