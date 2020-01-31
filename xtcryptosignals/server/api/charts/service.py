@@ -37,7 +37,7 @@ def get_chart_fear_and_greed_index_and_btc(frequency):
         try:
             cfgi.append(cfgi_values[x])
         except KeyError:
-            pass
+            cfgi.append(None)
 
     return dict(
         days=days,
