@@ -93,3 +93,10 @@
 .darkmode--activated a {
   color: #248dad;
 }
+
+.darkmode--activated .positive {
+  background-color: #3c453f;
+}
+.darkmode--activated .negative {
+  background-color:  #2b1f1f;
+}

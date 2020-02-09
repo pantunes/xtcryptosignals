@@ -137,14 +137,17 @@
       <h5>My last 30 Notifications</h5>
     </div>
     <div style="float: right">
-      <select id="select_coin_tokens" onchange="(
-        function() {
-          get_notifications(
-            render_notifications, null, $('#select_coin_tokens').val()
-          );
-          return false;
-        }
-      )(); return false;"></select>
+        <label for="select_coin_tokens">
+            <select id="select_coin_tokens" onchange="(
+                function() {
+                  get_notifications(
+                    render_notifications, null, $('#select_coin_tokens').val()
+                  );
+                  return false;
+                }
+              )(); return false;">
+            </select>
+        </label>
     </div>
 
     <table class="u-full-width" id="table_notifications">
