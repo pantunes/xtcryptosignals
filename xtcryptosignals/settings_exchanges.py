@@ -49,6 +49,9 @@ SYMBOLS_PER_EXCHANGE.append({
             ('VET', 'USDT'),
             ('NANO', 'USDT'),
             ('ONT', 'USDT'),
+            ('LTO', 'USDT'),
+            ('LTO', 'BTC'),
+            ('LTO', 'BNB'),
         ],
     }
 })
@@ -247,7 +250,7 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
     },
     'LTO': {
         'pair': 'USDT',
-        'name': BITMAX,
+        'name': BINANCE,
     },
     'IDEX': {
         'pair': 'ETH',
