@@ -40,6 +40,7 @@ class FearAndGreedIndex(Resource):
         except TypeError:
             response = requests.get(url=s.URL_CFGI)
             cfgi = response.json()['data'][0]['value']
+            red.set(s.REDIS_CFGI, cfgi)
         return dict(cfgi=cfgi)
 
 
