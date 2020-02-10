@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -13,7 +15,7 @@ from xtcryptosignals.server.api.contact import service
 from xtcryptosignals.server.api.contact.schemas import ContactInputSchema
 
 
-bp = Blueprint('contact', __name__)
+bp = Blueprint("contact", __name__)
 api = Api(bp)
 
 
@@ -49,4 +51,4 @@ class ContactPost(Resource):
         service.save_contact(data=valid_data)
 
 
-api.add_resource(ContactPost, '/contact')
+api.add_resource(ContactPost, "/contact")

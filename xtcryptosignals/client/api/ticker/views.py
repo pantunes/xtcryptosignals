@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -22,14 +24,18 @@ from xtcryptosignals.common.utils import (
 )
 
 
-bp = Blueprint('ticker', __name__)
+bp = Blueprint("ticker", __name__)
 
 
 _COLUMN_ATTRIBUTES = [
-    'Price', 'Price Change', 'Volume 24h',
-    'Volume Change', 'Number Trades 24h',
-    'Number Trades Change', 'Updated On',
-    'Price Change Chart',
+    "Price",
+    "Price Change",
+    "Volume 24h",
+    "Volume Change",
+    "Number Trades 24h",
+    "Number Trades Change",
+    "Updated On",
+    "Price Change Chart",
 ]
 
 
@@ -42,9 +48,9 @@ def before_request():
 @bp.context_processor
 def context_processor():
     return dict(
-        socket_base_url=current_app.config['SOCKET_BASE_URL'],
+        socket_base_url=current_app.config["SOCKET_BASE_URL"],
         version=__version__,
-        ga_tracking_id=current_app.config['GA_TRACKING_ID'],
+        ga_tracking_id=current_app.config["GA_TRACKING_ID"],
         current_year=datetime.utcnow().year,
         frequencies=g.HISTORY_FREQUENCY,
         pairs=get_pairs(g.SYMBOLS_PER_EXCHANGE),
@@ -52,34 +58,34 @@ def context_processor():
     )
 
 
-@bp.route('/ticker/<frequency>')
+@bp.route("/ticker/<frequency>")
 @validate_args()
 def ticker(frequency):
     return dict(
-        template_name_or_list='ticker/ticker.html',
+        template_name_or_list="ticker/ticker.html",
         symbols_per_exchange=g.SYMBOLS_PER_EXCHANGE,
         attributes=_COLUMN_ATTRIBUTES,
         frequency=frequency,
     )
 
 
-@bp.route('/ticker/<pair>/<frequency>')
+@bp.route("/ticker/<pair>/<frequency>")
 @validate_args()
 def pair_frequency(pair, frequency):
     x = deepcopy(g.SYMBOLS_PER_EXCHANGE)
     pair_not_found = True
     for idx, i in enumerate(g.SYMBOLS_PER_EXCHANGE):
         for a, b in i.items():
-            x[idx][a]['pairs'] = []
-            for c, d in b['pairs']:
+            x[idx][a]["pairs"] = []
+            for c, d in b["pairs"]:
                 if c + d == pair.upper():
                     pair_not_found = False
-                    x[idx][a]['pairs'] = [(c, d)]
+                    x[idx][a]["pairs"] = [(c, d)]
                     break
     if pair_not_found:
-        raise ValueError('Pair not found.')
+        raise ValueError("Pair not found.")
     return dict(
-        template_name_or_list='ticker/pair_frequency.html',
+        template_name_or_list="ticker/pair_frequency.html",
         symbols_per_exchange=x,
         attributes=_COLUMN_ATTRIBUTES,
         frequency=frequency,
@@ -87,7 +93,7 @@ def pair_frequency(pair, frequency):
     )
 
 
-@bp.route('/ticker/source/<token>/<frequency>')
+@bp.route("/ticker/source/<token>/<frequency>")
 @validate_args()
 def token_frequency(token, frequency):
     x = deepcopy(g.SYMBOLS_PER_EXCHANGE)
@@ -95,15 +101,15 @@ def token_frequency(token, frequency):
     _token = token.upper()
     for idx, i in enumerate(g.SYMBOLS_PER_EXCHANGE):
         for a, b in i.items():
-            x[idx][a]['pairs'] = []
-            for c, d in b['pairs']:
+            x[idx][a]["pairs"] = []
+            for c, d in b["pairs"]:
                 if c == _token:
                     token_not_found = False
-                    x[idx][a]['pairs'].append((c, d))
+                    x[idx][a]["pairs"].append((c, d))
     if token_not_found:
-        raise ValueError('Token not found.')
+        raise ValueError("Token not found.")
     return dict(
-        template_name_or_list='ticker/token_frequency.html',
+        template_name_or_list="ticker/token_frequency.html",
         symbols_per_exchange=x,
         attributes=_COLUMN_ATTRIBUTES,
         frequency=frequency,
@@ -111,11 +117,11 @@ def token_frequency(token, frequency):
     )
 
 
-@bp.route('/ticker/tokens')
+@bp.route("/ticker/tokens")
 def tokens():
     return dict(tokens=get_coin_tokens(g.SYMBOLS_PER_EXCHANGE)), 200
 
 
-@bp.route('/ticker/frequencies')
+@bp.route("/ticker/frequencies")
 def frequencies():
     return dict(frequencies=g.HISTORY_FREQUENCY), 200

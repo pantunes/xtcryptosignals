@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -27,13 +29,13 @@ def add_notification_rule(auth, data):
 
 def notifications(auth, coin_token):
     kwargs = dict(user=auth.user)
-    if coin_token != 'ALL':
+    if coin_token != "ALL":
         kwargs.update(coin_token=coin_token)
     return Notification.objects(**kwargs)
 
 
 def notification_coin_tokens(auth):
-    return Notification.objects(user=auth.user).distinct('coin_token')
+    return Notification.objects(user=auth.user).distinct("coin_token")
 
 
 def notification_rules(auth):

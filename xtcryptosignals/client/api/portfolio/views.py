@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -26,7 +28,7 @@ from xtcryptosignals.common.utils import (
 )
 
 
-bp = Blueprint('portfolio', __name__)
+bp = Blueprint("portfolio", __name__)
 
 
 @bp.before_request
@@ -38,33 +40,30 @@ def before_request():
 @bp.context_processor
 def context_processor():
     return dict(
-        socket_base_url=current_app.config['SOCKET_BASE_URL'],
+        socket_base_url=current_app.config["SOCKET_BASE_URL"],
         version=__version__,
-        ga_tracking_id=current_app.config['GA_TRACKING_ID'],
+        ga_tracking_id=current_app.config["GA_TRACKING_ID"],
         current_year=datetime.utcnow().year,
         frequencies=g.HISTORY_FREQUENCY,
         pairs=get_pairs(g.SYMBOLS_PER_EXCHANGE),
         tokens=get_coin_tokens(g.SYMBOLS_PER_EXCHANGE),
-        attributes=['Price USDT'],
+        attributes=["Price USDT"],
     )
 
 
-@bp.route('/transactions/portfolio', methods=['GET'])
+@bp.route("/transactions/portfolio", methods=["GET"])
 @login_required
 def transactions():
     return render_template(
-        template_name_or_list='txs-portfolio.html',
-        frequency=g.HISTORY_FREQUENCY[0],
+        template_name_or_list="txs-portfolio.html", frequency=g.HISTORY_FREQUENCY[0],
     )
 
 
-@bp.route('/portfolio', methods=['GET'])
+@bp.route("/portfolio", methods=["GET"])
 @login_required
 def index():
     response = requests.get(
-        url='{}portfolio'.format(
-            current_app.config['SERVER_API_BASE_URL']
-        ),
+        url="{}portfolio".format(current_app.config["SERVER_API_BASE_URL"]),
         headers=dict(Authorization=current_user.id),
     )
     return response.json(), response.status_code

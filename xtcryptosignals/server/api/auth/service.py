@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -16,14 +18,14 @@ def get_auth_with_token(token):
     try:
         auth = Auth.objects.get(token=token, active=True)
     except DoesNotExist:
-        raise ValueError('Session is invalid.', 401)
+        raise ValueError("Session is invalid.", 401)
     return auth
 
 
 def login(data):
     user = get_user(data)
     if not user.active:
-        raise ValueError('User account needs to be activated.', 403)
+        raise ValueError("User account needs to be activated.", 403)
     try:
         auth = Auth.objects.get(user=user, active=True)
     except DoesNotExist:
@@ -32,7 +34,7 @@ def login(data):
     try:
         auth.save()
     except NotUniqueError:
-        raise ValueError('Session token is not unique.', 412)
+        raise ValueError("Session token is not unique.", 412)
     return auth
 
 

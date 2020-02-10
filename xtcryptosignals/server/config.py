@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -15,15 +17,15 @@ from xtcryptosignals import (
 
 
 class Config(object):
-    IP_ADDRESS = '0.0.0.0'
+    IP_ADDRESS = "0.0.0.0"
 
     PORT = 5000
 
     TESTING = False
 
-    BROKER_URL = 'redis://localhost:6379'
+    BROKER_URL = "redis://localhost:6379"
 
-    SESSION_TYPE = 'redis'
+    SESSION_TYPE = "redis"
 
     SESSION_REDIS = Redis.from_url(BROKER_URL)
 
@@ -50,16 +52,12 @@ class ConfigDevelopment(Config):
             "description": __description__,
         },
         "securityDefinitions": {
-            "Bearer": {
-                "type": "apiKey",
-                "name": "Authorization",
-                "in": "header"
-            }
+            "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}
         },
         "specs": [
             {
-                "endpoint": 'apispec_xtcryptosignals',
-                "route": '/apispec_xtcryptosignals.json',
+                "endpoint": "apispec_xtcryptosignals",
+                "route": "/apispec_xtcryptosignals.json",
             }
         ],
     }

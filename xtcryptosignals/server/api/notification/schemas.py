@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -27,9 +29,7 @@ class NotificationsOutputSchema(OutputSchema):
 
 
 class NotificationOutputSchema(Schema):
-    notifications = fields.Nested(
-        NotificationsOutputSchema, many=True, required=True
-    )
+    notifications = fields.Nested(NotificationsOutputSchema, many=True, required=True)
     coin_tokens = fields.Raw(many=True, required=True)
 
 

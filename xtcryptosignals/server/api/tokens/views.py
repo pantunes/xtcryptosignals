@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -12,7 +14,7 @@ from xtcryptosignals.server.utils import validate_io
 from xtcryptosignals.tasks import settings as s
 
 
-bp = Blueprint('tokens', __name__)
+bp = Blueprint("tokens", __name__)
 api = Api(bp)
 
 
@@ -46,5 +48,5 @@ class SymbolsGet(Resource):
         return s.SYMBOLS_PER_EXCHANGE, 200
 
 
-api.add_resource(FrequencyGet, '/tokens/frequency')
-api.add_resource(SymbolsGet, '/tokens/symbols')
+api.add_resource(FrequencyGet, "/tokens/frequency")
+api.add_resource(SymbolsGet, "/tokens/symbols")

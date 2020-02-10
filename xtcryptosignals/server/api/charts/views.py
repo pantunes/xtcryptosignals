@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -14,7 +16,7 @@ from xtcryptosignals.server.api.charts import service
 from xtcryptosignals.tasks import settings as s
 
 
-bp = Blueprint('charts', __name__)
+bp = Blueprint("charts", __name__)
 api = Api(bp)
 
 
@@ -38,4 +40,4 @@ class ChartFearAndGreedIndexAndBTC(Resource):
         return service.get_chart_fear_and_greed_index_and_btc(frequency)
 
 
-api.add_resource(ChartFearAndGreedIndexAndBTC, '/charts/cfgi/btc/<frequency>')
+api.add_resource(ChartFearAndGreedIndexAndBTC, "/charts/cfgi/btc/<frequency>")
