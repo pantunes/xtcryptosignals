@@ -146,7 +146,8 @@ def update(self):
                                 s.SERVER_ADDRESS, **obj_history
                             ),
                             icon="{}{ticker}.png".format(
-                                s.STATIC_COINS_TOKENS_LOGOS_FOLDER, **obj_history
+                                s.STATIC_COINS_TOKENS_LOGOS_FOLDER,
+                                **obj_history
                             ),
                         )
                     ),

@@ -13,7 +13,9 @@ import requests
 
 class Okex:
     def __init__(self):
-        self.base_url = "https://www.okex.com/api/spot/v3/" "instruments/{}/ticker"
+        self.base_url = (
+            "https://www.okex.com/api/spot/v3/" "instruments/{}/ticker"
+        )
 
     def get_ticker(self, symbol):
         _symbol = "-".join(symbol)

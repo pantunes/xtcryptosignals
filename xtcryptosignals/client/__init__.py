@@ -44,8 +44,12 @@ def create_app():
     from xtcryptosignals.client.api.contact.views import bp as bp_contact
     from xtcryptosignals.client.api.user.views import bp as bp_user
     from xtcryptosignals.client.api.portfolio.views import bp as bp_portfolio
-    from xtcryptosignals.client.api.notification.views import bp as bp_notification
-    from xtcryptosignals.client.api.transaction.views import bp as bp_transaction
+    from xtcryptosignals.client.api.notification.views import (
+        bp as bp_notification,
+    )
+    from xtcryptosignals.client.api.transaction.views import (
+        bp as bp_transaction,
+    )
     from xtcryptosignals.client.api.parties.views import bp as bp_parties
     from xtcryptosignals.client.api.charts.views import bp as bp_charts
     from xtcryptosignals.client.api.tools.views import bp as bp_tools

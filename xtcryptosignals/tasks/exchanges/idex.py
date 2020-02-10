@@ -20,7 +20,9 @@ class Idex:
             self.base_url, json={"market": "_".join(reversed(symbol))}
         )
         if request.status_code != 200:
-            raise ValueError("Error connecting IDEX on URL: {}".format(self.base_url))
+            raise ValueError(
+                "Error connecting IDEX on URL: {}".format(self.base_url)
+            )
         item = request.json()
         item.update(symbol="".join(symbol), ticker=symbol[0])
         return item

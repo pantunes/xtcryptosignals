@@ -52,7 +52,11 @@ class ConfigDevelopment(Config):
             "description": __description__,
         },
         "securityDefinitions": {
-            "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}
+            "Bearer": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header",
+            }
         },
         "specs": [
             {

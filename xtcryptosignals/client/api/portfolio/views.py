@@ -55,7 +55,8 @@ def context_processor():
 @login_required
 def transactions():
     return render_template(
-        template_name_or_list="txs-portfolio.html", frequency=g.HISTORY_FREQUENCY[0],
+        template_name_or_list="txs-portfolio.html",
+        frequency=g.HISTORY_FREQUENCY[0],
     )
 
 

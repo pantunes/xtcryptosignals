@@ -51,5 +51,6 @@ def index():
             random.shuffle(random_list)
             symbols_per_exchange.append({exchange: random_list[:3]})
     return render_template(
-        template_name_or_list="index.html", symbols_per_exchange=symbols_per_exchange,
+        template_name_or_list="index.html",
+        symbols_per_exchange=symbols_per_exchange,
     )

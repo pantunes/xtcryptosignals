@@ -30,7 +30,10 @@ migration_manager.config.metastore = "_migrations"
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.option(
-    "--port", "-p", default=app.config["PORT"], help="The Server port to bind to"
+    "--port",
+    "-p",
+    default=app.config["PORT"],
+    help="The Server port to bind to",
 )
 def main(port):
     """

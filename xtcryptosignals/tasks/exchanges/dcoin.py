@@ -18,7 +18,9 @@ class Dcoin:
     def get_ticker(self, pairs):
         request = requests.get(self.base_url)
         if request.status_code != 200:
-            raise ValueError("Error connecting Dcoin on URL: {}".format(self.base_url))
+            raise ValueError(
+                "Error connecting Dcoin on URL: {}".format(self.base_url)
+            )
         response = request.json()
         _pairs = ["_".join(x).lower() for x in pairs]
         counter = 0

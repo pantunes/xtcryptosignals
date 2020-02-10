@@ -51,7 +51,8 @@ def index():
     g.SYMBOLS_PER_EXCHANGE, _ = service.get_symbols_per_exchange()
     g.HISTORY_FREQUENCY, _ = service.get_history_frequency()
     return render_template(
-        template_name_or_list="notification.html", frequency=g.HISTORY_FREQUENCY[0]
+        template_name_or_list="notification.html",
+        frequency=g.HISTORY_FREQUENCY[0],
     )
 
 
@@ -70,7 +71,9 @@ def notifications():
 @login_required
 def rules():
     response = requests.get(
-        url="{}notifications/rules".format(current_app.config["SERVER_API_BASE_URL"]),
+        url="{}notifications/rules".format(
+            current_app.config["SERVER_API_BASE_URL"]
+        ),
         headers=dict(Authorization=current_user.id),
     )
     return dict(results=response.json()), response.status_code

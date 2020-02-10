@@ -53,7 +53,9 @@ def main(ctx, test, list_config, enable_messaging, log_minimal, version):
             click.echo("\n".join(s.EXCHANGES))
         ctx.exit()
 
-    beat_kwargs = dict(enable_messaging=enable_messaging, log_minimal=log_minimal,)
+    beat_kwargs = dict(
+        enable_messaging=enable_messaging, log_minimal=log_minimal,
+    )
 
     if test:
         ticker.test(**beat_kwargs)

@@ -33,7 +33,10 @@ class History(DocumentValidation):
 
     meta = {
         "abstract": True,
-        "indexes": [("symbol", "source",), ("symbol", "source", "-created_on",),],
+        "indexes": [
+            ("symbol", "source",),
+            ("symbol", "source", "-created_on",),
+        ],
         "ordering": ["-created_on"],
     }
 
@@ -64,7 +67,9 @@ class History(DocumentValidation):
         for x in s.SYMBOLS_PER_EXCHANGE:
             for exchange, items in x.items():
                 for symbol in [x[0] + x[1] for x in items["pairs"]]:
-                    row = model_history.objects(symbol=symbol, source=exchange).first()
+                    row = model_history.objects(
+                        symbol=symbol, source=exchange
+                    ).first()
                     if not row:
                         continue
                     rows.append(row.to_dict(frequency=namespace[1:]))

@@ -32,14 +32,18 @@ def _process(logger, socketio, exchange_class, schema_class, symbol, pairs):
     elif pairs:
         ticker_kwargs.update(pairs=pairs)
     else:
-        logger.error("{}: Not either a symbol or pair".format(exchange_class.__name__))
+        logger.error(
+            "{}: Not either a symbol or pair".format(exchange_class.__name__)
+        )
     try:
         ticker_data = exchange_class().get_ticker(**ticker_kwargs)
     except ValueError as err:
         logger.error(err)
         return
 
-    ticker, errors = schema_class(strict=True, many=symbol is None).load(ticker_data)
+    ticker, errors = schema_class(strict=True, many=symbol is None).load(
+        ticker_data
+    )
     assert errors == {}, errors
 
     try:
@@ -50,13 +54,22 @@ def _process(logger, socketio, exchange_class, schema_class, symbol, pairs):
             ticker_model.save(temporary=not s.CREATE_MODEL_TICKER)
             if socketio:
                 for h in ticker_model.get_history():
-                    socketio.emit("ticker", h, namespace="/{}".format(h["frequency"]))
+                    socketio.emit(
+                        "ticker", h, namespace="/{}".format(h["frequency"])
+                    )
     except ServerSelectionTimeoutError as error:
         logger.error("{}: {}".format(exchange_class.__name__, error))
 
 
 def _get_24h_price_ticker_data(
-    jobs, logger, exchange_class, schema_class, symbol=None, pairs=None, *_, **kwargs
+    jobs,
+    logger,
+    exchange_class,
+    schema_class,
+    symbol=None,
+    pairs=None,
+    *_,
+    **kwargs
 ):
     socketio = None
 
@@ -114,7 +127,8 @@ def update(self, *_, **kwargs):
                     continue
                 try:
                     exchange_class = get_class(
-                        folder="xtcryptosignals.tasks.exchanges", module=exchange
+                        folder="xtcryptosignals.tasks.exchanges",
+                        module=exchange,
                     )
                 except ModuleNotFoundError as err:
                     logger.error(err)

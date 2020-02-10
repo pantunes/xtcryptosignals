@@ -21,14 +21,18 @@ def get_chart_fear_and_greed_index_and_btc(frequency):
         :NUM_OCCURRENCES
     ]
 
-    btc_prices = {x.created_on.strftime("%Y-%m-%d"): int(x.price_usdt) for x in prices}
+    btc_prices = {
+        x.created_on.strftime("%Y-%m-%d"): int(x.price_usdt) for x in prices
+    }
 
     days = [x.created_on.strftime("%Y-%m-%d") for x in prices]
     days.reverse()
 
     cfgi_values = {
         x.added_on.strftime("%Y-%m-%d"): x.index
-        for x in CFGI.objects[: (NUM_OCCURRENCES * 12)]  # CFGI_MAX=12w in client
+        for x in CFGI.objects[
+            : (NUM_OCCURRENCES * 12)
+        ]  # CFGI_MAX=12w in client
     }
 
     cfgi = list()

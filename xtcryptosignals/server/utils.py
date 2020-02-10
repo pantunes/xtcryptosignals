@@ -48,7 +48,11 @@ def _sanitize_errors_marshmallow(errors):
 
 
 def validate_io(
-    schema_in=None, schema_out=None, many_in=False, many_out=False, is_form=False
+    schema_in=None,
+    schema_out=None,
+    many_in=False,
+    many_out=False,
+    is_form=False,
 ):
     def decorator(f):
         @wraps(f)
