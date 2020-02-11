@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -16,9 +18,9 @@ class Binance:
         self.client = Client(s.BINANCE_API_KEY, s.BINANCE_API_SECRET)
 
     def get_ticker(self, *_, **kwargs):
-        symbol = kwargs.get('symbol')
+        symbol = kwargs.get("symbol")
         if symbol:
-            ticker_kwargs = dict(symbol=''.join(symbol))
+            ticker_kwargs = dict(symbol="".join(symbol))
         else:
             ticker_kwargs = dict()
 
@@ -33,10 +35,10 @@ class Binance:
             return item
 
         items = list()
-        pairs = [x[0] + x[1] for x in kwargs['pairs']]
+        pairs = [x[0] + x[1] for x in kwargs["pairs"]]
         for item in items_or_item:
-            if item['symbol'] in pairs:
-                item.update(ticker=item['symbol'])
+            if item["symbol"] in pairs:
+                item.update(ticker=item["symbol"])
                 items.append(item)
                 if len(items) >= len(pairs):
                     break

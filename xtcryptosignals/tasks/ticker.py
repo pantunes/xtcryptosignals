@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -21,13 +23,9 @@ from xtcryptosignals.tasks.models.ticker import Ticker
 
 
 @use_mongodb(
-    db=s.MONGODB_NAME,
-    host=s.MONGODB_HOST,
-    port=s.MONGODB_PORT,
+    db=s.MONGODB_NAME, host=s.MONGODB_HOST, port=s.MONGODB_PORT,
 )
-def _process(
-    logger, socketio, exchange_class, schema_class, symbol, pairs
-):
+def _process(logger, socketio, exchange_class, schema_class, symbol, pairs):
     ticker_kwargs = dict()
     if symbol:
         ticker_kwargs.update(symbol=symbol)
@@ -35,7 +33,7 @@ def _process(
         ticker_kwargs.update(pairs=pairs)
     else:
         logger.error(
-            '{}: Not either a symbol or pair'.format(exchange_class.__name__)
+            "{}: Not either a symbol or pair".format(exchange_class.__name__)
         )
     try:
         ticker_data = exchange_class().get_ticker(**ticker_kwargs)
@@ -43,10 +41,9 @@ def _process(
         logger.error(err)
         return
 
-    ticker, errors = schema_class(
-        strict=True,
-        many=symbol is None
-    ).load(ticker_data)
+    ticker, errors = schema_class(strict=True, many=symbol is None).load(
+        ticker_data
+    )
     assert errors == {}, errors
 
     try:
@@ -58,61 +55,65 @@ def _process(
             if socketio:
                 for h in ticker_model.get_history():
                     socketio.emit(
-                        'ticker', h, namespace='/{}'.format(h['frequency'])
+                        "ticker", h, namespace="/{}".format(h["frequency"])
                     )
     except ServerSelectionTimeoutError as error:
-        logger.error(
-            '{}: {}'.format(exchange_class.__name__, error)
-        )
+        logger.error("{}: {}".format(exchange_class.__name__, error))
 
 
 def _get_24h_price_ticker_data(
-        jobs, logger, exchange_class, schema_class,
-        symbol=None, pairs=None, *_, **kwargs
+    jobs,
+    logger,
+    exchange_class,
+    schema_class,
+    symbol=None,
+    pairs=None,
+    *_,
+    **kwargs
 ):
     socketio = None
 
-    if kwargs['enable_messaging']:
+    if kwargs["enable_messaging"]:
         socketio = SocketIO(message_queue=BROKER_URL)
 
-    symbol_or_pairs = '-'.join(symbol) if symbol else 'PAIRS'
+    symbol_or_pairs = "-".join(symbol) if symbol else "PAIRS"
 
     p = Process(
-        name='{} {}'.format(exchange_class.__name__, symbol_or_pairs),
+        name="{} {}".format(exchange_class.__name__, symbol_or_pairs),
         target=_process,
-        args=(
-            logger, socketio, exchange_class,
-            schema_class, symbol, pairs,
-        )
+        args=(logger, socketio, exchange_class, schema_class, symbol, pairs,),
     )
     jobs.append(
         dict(
             job=p,
             timeout=s.TIMEOUT_PER_SYMBOL_REQUEST
-            if symbol else s.TIMEOUT_PER_SYMBOLS_REQUEST
+            if symbol
+            else s.TIMEOUT_PER_SYMBOLS_REQUEST,
         )
     )
     p.start()
 
 
 def _terminate_running_jobs(logger, jobs):
-    logger.warning('Number of jobs completed: {}'.format(len(jobs)))
+    logger.warning("Number of jobs completed: {}".format(len(jobs)))
     for j in jobs:
-        if j['job'].is_alive():
-            logger.warning('Exceeded timeout of {} seconds in {}'.format(
-                j['timeout'], j['job'].name)
+        if j["job"].is_alive():
+            logger.warning(
+                "Exceeded timeout of {} seconds in {}".format(
+                    j["timeout"], j["job"].name
+                )
             )
-            j['job'].terminate()
-            j['job'].join()
+            j["job"].terminate()
+            j["job"].join()
 
 
 @task(bind=True)
 def update(self, *_, **kwargs):
 
-    if kwargs['enable_messaging']:
-        log_level = logging.INFO if not kwargs['log_minimal'] else logging.ERROR
-        logging.getLogger('engineio').setLevel(log_level)
-        logging.getLogger('socketio').setLevel(log_level)
+    if kwargs["enable_messaging"]:
+        log_level = logging.INFO if not kwargs["log_minimal"] else logging.ERROR
+        logging.getLogger("engineio").setLevel(log_level)
+        logging.getLogger("socketio").setLevel(log_level)
 
     jobs = []
     logger = self.get_logger()
@@ -120,43 +121,50 @@ def update(self, *_, **kwargs):
     try:
         for row in s.SYMBOLS_PER_EXCHANGE:
             for exchange, data in row.items():
-                pairs = data['pairs']
+                pairs = data["pairs"]
                 if not pairs:
-                    logger.info('No pairs for {}'.format(exchange))
+                    logger.info("No pairs for {}".format(exchange))
                     continue
                 try:
                     exchange_class = get_class(
-                        folder='xtcryptosignals.tasks.exchanges',
-                        module=exchange
+                        folder="xtcryptosignals.tasks.exchanges",
+                        module=exchange,
                     )
                 except ModuleNotFoundError as err:
                     logger.error(err)
                     continue
                 try:
                     schema_class = get_class(
-                        folder='xtcryptosignals.tasks.schemas',
-                        module=exchange
+                        folder="xtcryptosignals.tasks.schemas", module=exchange
                     )
                 except ModuleNotFoundError as err:
                     logger.error(err)
                     continue
-                single_request = data.get('single_request')
+                single_request = data.get("single_request")
                 if not single_request:
                     for coin, quote in pairs:
                         _get_24h_price_ticker_data(
-                            jobs, logger, exchange_class, schema_class,
-                            symbol=[coin, quote], **kwargs
+                            jobs,
+                            logger,
+                            exchange_class,
+                            schema_class,
+                            symbol=[coin, quote],
+                            **kwargs
                         )
                 else:
                     _get_24h_price_ticker_data(
-                        jobs, logger, exchange_class, schema_class,
-                        pairs=pairs, **kwargs
+                        jobs,
+                        logger,
+                        exchange_class,
+                        schema_class,
+                        pairs=pairs,
+                        **kwargs
                     )
         for j in jobs:
-            j['job'].join(timeout=j['timeout'])
+            j["job"].join(timeout=j["timeout"])
     except ValueError as error:
         _terminate_running_jobs(logger, jobs)
-        logger.error('ticker error: {}'.format(str(error)))
+        logger.error("ticker error: {}".format(str(error)))
         self.update_state(state=states.FAILURE, meta=str(error))
         raise Ignore()
     finally:
@@ -165,10 +173,9 @@ def update(self, *_, **kwargs):
 
 def test(*_, **kwargs):
     logging.basicConfig(
-        format='%(asctime)s %(levelname)s %(message)s',
-        level=logging.INFO,
+        format="%(asctime)s %(levelname)s %(message)s", level=logging.INFO,
     )
-    logging.info('Process 1 Tick')
-    logging.info('Starting...')
+    logging.info("Process 1 Tick")
+    logging.info("Starting...")
     update(**kwargs)
-    logging.info('Ending...')
+    logging.info("Ending...")

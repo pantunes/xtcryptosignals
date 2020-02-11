@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -15,7 +17,7 @@ from xtcryptosignals.server.utils import (
 from xtcryptosignals.server.api.portfolio import service
 
 
-bp = Blueprint('portfolio', __name__)
+bp = Blueprint("portfolio", __name__)
 api = Api(bp)
 
 
@@ -41,4 +43,4 @@ class Portfolio(Resource):
         return service.portfolio(auth), 200
 
 
-api.add_resource(Portfolio, '/portfolio')
+api.add_resource(Portfolio, "/portfolio")

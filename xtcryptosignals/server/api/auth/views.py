@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -20,7 +22,7 @@ from xtcryptosignals.server.api.auth.schemas import (
 )
 
 
-bp = Blueprint('auth', __name__)
+bp = Blueprint("auth", __name__)
 api = Api(bp)
 
 
@@ -126,7 +128,7 @@ class SubscriptionPost(Resource):
         service.subscription(auth=auth, data=valid_data)
 
 
-api.add_resource(LoginPost, '/login')
-api.add_resource(LogoutPost, '/logout')
-api.add_resource(AuthGet, '/auth')
-api.add_resource(SubscriptionPost, '/subscription')
+api.add_resource(LoginPost, "/login")
+api.add_resource(LogoutPost, "/logout")
+api.add_resource(AuthGet, "/auth")
+api.add_resource(SubscriptionPost, "/subscription")

@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -31,17 +33,14 @@ class Auth(DocumentValidation):
     _pre_save_hooks = (_increment_num_logins,)
 
     meta = {
-        'collection': 'auth',
-        'indexes': [{
-            'fields': ('user', 'token', 'active',),
-            'unique': True
-        }]
+        "collection": "auth",
+        "indexes": [{"fields": ("user", "token", "active",), "unique": True}],
     }
 
     def to_dict(self):
         e = super(Auth, self).to_dict()
         for k in self._fields.keys():
-            if k == 'user':
+            if k == "user":
                 e[k] = self[k].to_dict()
                 continue
         return e

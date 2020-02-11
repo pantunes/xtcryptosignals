@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -16,7 +18,7 @@ from xtcryptosignals.server.api.user.schemas import (
 )
 
 
-bp = Blueprint('user', __name__)
+bp = Blueprint("user", __name__)
 api = Api(bp)
 
 
@@ -54,4 +56,4 @@ class SignUpPost(Resource):
         return service.create_user(data=valid_data), 201
 
 
-api.add_resource(SignUpPost, '/signup')
+api.add_resource(SignUpPost, "/signup")

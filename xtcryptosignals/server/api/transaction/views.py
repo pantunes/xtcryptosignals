@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -19,7 +21,7 @@ from xtcryptosignals.server.api.transaction.schemas import (
 )
 
 
-bp = Blueprint('transaction', __name__)
+bp = Blueprint("transaction", __name__)
 api = Api(bp)
 
 
@@ -81,5 +83,5 @@ class Transactions(Resource):
         return service.transactions(auth), 200
 
 
-api.add_resource(TransactionAdd, '/transaction/add')
-api.add_resource(Transactions, '/transactions')
+api.add_resource(TransactionAdd, "/transaction/add")
+api.add_resource(Transactions, "/transactions")

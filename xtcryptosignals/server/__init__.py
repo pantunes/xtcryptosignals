@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -14,12 +16,12 @@ from mongoengine import connect
 
 app = Flask(__name__)
 
-if app.config['ENV'] == "production":
+if app.config["ENV"] == "production":
     app.config.from_object("xtcryptosignals.server.config.ConfigProduction")
 else:
     app.config.from_object("xtcryptosignals.server.config.ConfigDevelopment")
 
-app.config.from_envvar('SETTINGS_APP')
+app.config.from_envvar("SETTINGS_APP")
 
 
 sess = Session()
@@ -37,10 +39,12 @@ def create_app():
     from xtcryptosignals.server.api.portfolio.views import bp as bp_portfolio
     from xtcryptosignals.server.api.parties.views import bp as bp_parties
     from xtcryptosignals.server.api.charts.views import bp as bp_charts
-    from xtcryptosignals.server.api.notification.views import \
-        bp as bp_notification
-    from xtcryptosignals.server.api.transaction.views import \
-        bp as bp_transaction
+    from xtcryptosignals.server.api.notification.views import (
+        bp as bp_notification,
+    )
+    from xtcryptosignals.server.api.transaction.views import (
+        bp as bp_transaction,
+    )
 
     bps = (
         bp_auth,
@@ -58,17 +62,17 @@ def create_app():
         app.register_blueprint(x)
 
     connect(
-        db=app.config['MONGODB_NAME'],
-        host=app.config['MONGODB_HOST'],
-        port=app.config['MONGODB_PORT']
+        db=app.config["MONGODB_NAME"],
+        host=app.config["MONGODB_HOST"],
+        port=app.config["MONGODB_PORT"],
     )
 
     sess.init_app(app)
 
     socketio.init_app(
         app=app,
-        message_queue=app.config['BROKER_URL'],
-        cors_allowed_origins=app.config['CORS_ALLOWED_ORIGINS']
+        message_queue=app.config["BROKER_URL"],
+        cors_allowed_origins=app.config["CORS_ALLOWED_ORIGINS"],
     )
 
     return app

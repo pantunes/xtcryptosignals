@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -19,7 +21,7 @@ from xtcryptosignals.server.api.notification.schemas import (
     NotificationRulesOutputSchema,
 )
 
-bp = Blueprint('notification', __name__)
+bp = Blueprint("notification", __name__)
 api = Api(bp)
 
 
@@ -68,12 +70,15 @@ class NotificationsList(Resource):
             416:
                 description: Error in output validation
         """
-        return dict(
-            notifications=service.notifications(
-                auth, coin_token=request.args.get('coin_token')
+        return (
+            dict(
+                notifications=service.notifications(
+                    auth, coin_token=request.args.get("coin_token")
+                ),
+                coin_tokens=service.notification_coin_tokens(auth),
             ),
-            coin_tokens=service.notification_coin_tokens(auth)
-        ), 200
+            200,
+        )
 
 
 class NotificationsRulesList(Resource):
@@ -102,6 +107,6 @@ class NotificationsRulesList(Resource):
         return service.notification_rules(auth), 200
 
 
-api.add_resource(NotificationRuleAdd, '/notifications/rule/add')
-api.add_resource(NotificationsList, '/notifications')
-api.add_resource(NotificationsRulesList, '/notifications/rules')
+api.add_resource(NotificationRuleAdd, "/notifications/rule/add")
+api.add_resource(NotificationsList, "/notifications")
+api.add_resource(NotificationsRulesList, "/notifications/rules")

@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -13,20 +15,20 @@ from flask_wtf.csrf import CSRFProtect
 
 app = Flask(
     import_name=__name__,
-    template_folder='templates',
+    template_folder="templates",
     # TODO @Note: let nginx or other more resourceful Load Balancer
     # serve static content within this folder.
-    static_folder='static',
+    static_folder="static",
 )
 
-app.jinja_env.auto_reload = app.config['DEBUG']
+app.jinja_env.auto_reload = app.config["DEBUG"]
 
-if app.config['ENV'] == "production":
+if app.config["ENV"] == "production":
     app.config.from_object("xtcryptosignals.client.config.ConfigProduction")
 else:
     app.config.from_object("xtcryptosignals.client.config.ConfigDevelopment")
 
-app.config.from_envvar('SETTINGS_APP')
+app.config.from_envvar("SETTINGS_APP")
 
 
 login_manager = LoginManager()
@@ -42,14 +44,14 @@ def create_app():
     from xtcryptosignals.client.api.contact.views import bp as bp_contact
     from xtcryptosignals.client.api.user.views import bp as bp_user
     from xtcryptosignals.client.api.portfolio.views import bp as bp_portfolio
-    from xtcryptosignals.client.api.notification.views import \
-        bp as bp_notification
-    from xtcryptosignals.client.api.transaction.views import \
-        bp as bp_transaction
-    from xtcryptosignals.client.api.parties.views import \
-        bp as bp_parties
-    from xtcryptosignals.client.api.charts.views import \
-        bp as bp_charts
+    from xtcryptosignals.client.api.notification.views import (
+        bp as bp_notification,
+    )
+    from xtcryptosignals.client.api.transaction.views import (
+        bp as bp_transaction,
+    )
+    from xtcryptosignals.client.api.parties.views import bp as bp_parties
+    from xtcryptosignals.client.api.charts.views import bp as bp_charts
     from xtcryptosignals.client.api.tools.views import bp as bp_tools
 
     bps = (
@@ -73,7 +75,7 @@ def create_app():
     login_manager.init_app(app)
 
     login_manager.login_view = "errors.logged_out"
-    login_manager.session_protection = app.config['SESSION_PROTECTION']
+    login_manager.session_protection = app.config["SESSION_PROTECTION"]
 
     csrf.init_app(app)
 

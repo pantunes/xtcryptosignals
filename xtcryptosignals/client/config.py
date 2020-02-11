@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -10,7 +12,7 @@ from datetime import timedelta
 
 
 class Config(object):
-    IP_ADDRESS = '0.0.0.0'
+    IP_ADDRESS = "0.0.0.0"
 
     PORT = 8000
 
@@ -18,10 +20,10 @@ class Config(object):
 
     SECRET_KEY = None
 
-    SERVER_API_BASE_URL = 'http://127.0.0.1:5000/'
+    SERVER_API_BASE_URL = "http://127.0.0.1:5000/"
 
-    CFGI_MIN = '1d'
-    CFGI_MAX = '12w'
+    CFGI_MIN = "1d"
+    CFGI_MAX = "12w"
 
 
 class ConfigProduction(Config):
@@ -31,7 +33,7 @@ class ConfigProduction(Config):
 
     PERMANENT_SESSION_LIFETIME = timedelta(days=1)
 
-    SESSION_PROTECTION = 'strong'
+    SESSION_PROTECTION = "strong"
 
 
 class ConfigDevelopment(Config):
@@ -41,4 +43,4 @@ class ConfigDevelopment(Config):
 
     PERMANENT_SESSION_LIFETIME = timedelta(minutes=30)
 
-    SESSION_PROTECTION = 'basic'
+    SESSION_PROTECTION = "basic"

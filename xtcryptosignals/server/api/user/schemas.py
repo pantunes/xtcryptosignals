@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -17,12 +19,12 @@ from xtcryptosignals.server.api.common.schemas import OutputSchema
 
 def _validate_name(n):
     if len(n.strip()) == 0:
-        raise ValidationError('Must be filled in.')
+        raise ValidationError("Must be filled in.")
 
 
 def _validate_password(p):
     if not (8 <= len(p) <= 64):
-        raise ValidationError('Length must be between 8 and 64 chars.')
+        raise ValidationError("Length must be between 8 and 64 chars.")
 
 
 class UserCreateInputSchema(Schema):

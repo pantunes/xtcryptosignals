@@ -1,6 +1,8 @@
 __author__ = "Paulo Antunes"
 __copyright__ = "Copyright 2018, XTCryptoSignals"
-__credits__ = ["Paulo Antunes", ]
+__credits__ = [
+    "Paulo Antunes",
+]
 __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
@@ -19,7 +21,7 @@ from xtcryptosignals.tasks import settings as s
 
 
 def _calculate_unit_price(_self):
-    _self.unit_price = _self.amount/_self.units
+    _self.unit_price = _self.amount / _self.units
 
 
 class Transaction(DocumentValidation):
@@ -37,11 +39,11 @@ class Transaction(DocumentValidation):
     )
     user = ReferenceField(User, required=True)
     added_on = DateField(required=True)
-    in_or_out = StringField(required=True, choices=('in', 'out',))
+    in_or_out = StringField(required=True, choices=("in", "out",))
 
     meta = {
-        'collection': 'transaction',
-        'ordering': ['-added_on'],
+        "collection": "transaction",
+        "ordering": ["-added_on"],
     }
 
     _pre_save_hooks = (_calculate_unit_price,)
