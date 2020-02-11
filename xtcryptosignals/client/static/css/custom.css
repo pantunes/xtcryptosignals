@@ -1,4 +1,12 @@
 /*skeleton custom.css overwriting*/
+
+/* Larger than phone */
+@media (min-width: 550px) {
+  .header {
+    margin-top: 12rem;
+  }
+}
+
 .container {
   max-width: 1480px;
 }
