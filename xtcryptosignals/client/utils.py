@@ -19,7 +19,8 @@ def validate_args():
             if kwargs["frequency"] not in g.HISTORY_FREQUENCY:
                 return (
                     render_template(
-                        "error.html", error="Frequency is incorrect"
+                        template_name_or_list="error.html",
+                        error="Frequency is incorrect",
                     ),
                     404,
                 )

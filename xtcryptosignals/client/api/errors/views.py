@@ -42,7 +42,7 @@ def unauthorized(_):
 def page_not_found(_):
     return (
         render_template(
-            template_name_or_list="error.html", error="The URL is incorrect"
+            template_name_or_list="error.html", error="The URL is incorrect",
         ),
         404,
     )
@@ -53,7 +53,7 @@ def unauthorized(_):
     return (
         render_template(
             template_name_or_list="error.html",
-            error="You've been logged out.",
+            error="You've been logged out",
             frequency=g.HISTORY_FREQUENCY[0],
         ),
         408,
