@@ -15,6 +15,7 @@ gunicorn
 mongodb-migrations
 bcrypt
 environs
+black
 pywebpush
 python-socketio[client]
 # versioned library dependencies
