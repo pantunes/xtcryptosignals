@@ -18,11 +18,11 @@ class Binance:
         self.client = Client(s.BINANCE_API_KEY, s.BINANCE_API_SECRET)
 
     def get_ticker(self, *_, **kwargs):
+        ticker_kwargs = dict()
+
         symbol = kwargs.get("symbol")
         if symbol:
             ticker_kwargs = dict(symbol="".join(symbol))
-        else:
-            ticker_kwargs = dict()
 
         try:
             items_or_item = self.client.get_ticker(**ticker_kwargs)
