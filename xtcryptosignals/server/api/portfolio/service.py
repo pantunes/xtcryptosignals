@@ -84,6 +84,10 @@ def portfolio(auth):
         ).sum("amount")
 
         total_units = total_units_in - total_units_out
+
+        if total_units == 0:
+            continue
+
         total_amount = total_amount_paid - total_amount_received
 
         average_paid = total_amount / total_units
