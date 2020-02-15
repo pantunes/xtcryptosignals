@@ -99,7 +99,7 @@ function create_chart_coin_or_token(formatter, num_formatter, data, coin_or_toke
                     ]
                 },
                 marker: {
-                    radius: 2
+                    enable: false
                 },
                 lineWidth: 1,
                 states: {
@@ -108,6 +108,11 @@ function create_chart_coin_or_token(formatter, num_formatter, data, coin_or_toke
                     }
                 },
                 threshold: null
+            },
+            line: {
+                marker: {
+                    enable: false
+                },
             }
         },
         series: [{
