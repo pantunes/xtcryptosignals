@@ -7,8 +7,7 @@ __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
-import pytz
-from datetime import datetime
+
 from xtcryptosignals.tasks.models.history import History
 from xtcryptosignals.tasks.models.cfgi import CFGI
 from xtcryptosignals.tasks import settings as s
@@ -55,19 +54,17 @@ def get_chart_coin_or_token_frequency(coin_or_token, frequency):
     model_history = type("History{}".format(frequency), (History,), {})
     rows = model_history.objects(
         symbol=coin_or_token + ref_pair, source=ref_exchange,
-    )[:200]
+    )[:100]
 
     prices = list()
     volumes = list()
     num_trades = list()
 
-    for x in rows:
-        created_on_utc = x.created_on.replace(tzinfo=pytz.UTC)
-        created_on_utc_ts = datetime.timestamp(created_on_utc) * 1000
-
-        prices.append([created_on_utc_ts, float(x.price_usdt)])
-        volumes.append([created_on_utc_ts, float(x.volume_24h)])
-        num_trades.append([created_on_utc_ts, float(x.number_trades_24h)])
+    for row in rows:
+        obj = row.to_dict(frequency=frequency)
+        prices.append([obj["created_on_ts"], obj['price_usdt']])
+        volumes.append([obj["created_on_ts"], obj['volume_24h']])
+        num_trades.append([obj["created_on_ts"], obj['number_trades_24h']])
 
     prices.reverse()
     volumes.reverse()

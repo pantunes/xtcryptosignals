@@ -15,23 +15,11 @@ let price_formatter_setup = {
     currency: 'USD',
 };
 const price_formatter = new Intl.NumberFormat('en-US', price_formatter_setup);
-
-let price_formatter_setup_low_values = {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 4,
-    style: 'currency',
-    currency: 'USD',
-};
-const price_formatter_low_values = new Intl.NumberFormat('en-US', price_formatter_setup_low_values);
 </script>
 
 <script type="text/javascript">
     function render_data(data, frequency) {
-        let formatter = price_formatter;
-        if (data.prices[0][1] < 1) {
-            formatter = price_formatter_low_values;
-        }
-        create_chart_fear_and_greed(formatter, data, frequency);
+        create_chart_fear_and_greed(price_formatter, data, frequency);
         window.location.hash = frequency;
         $('#container_buttons > button').removeClass('button-primary').addClass('button-secondary');
         $('#' + frequency).removeClass('button-secondary').addClass('button-primary')

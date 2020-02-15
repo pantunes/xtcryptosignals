@@ -62,11 +62,11 @@ function post_ticker_emit(id, json) {
     if (json['symbol'] !== "{{ coin_or_token }}USDT") {
         return;
     }
-    const ts = Date.parse(json['created_on']);
     for (let i in charts) {
-        charts[i].series[0].addPoint([ts, json['price']], true, true);
-        charts[i].series[1].addPoint([ts, json['volume_24h']], true, true);
-        charts[i].series[2].addPoint([ts, json['number_trades_24h']], true, true);
+        charts[i].series[0].addPoint([json['created_on_ts'], json['price']], false, true);
+        charts[i].series[1].addPoint([json['created_on_ts'], json['volume_24h']], false, true);
+        charts[i].series[2].addPoint([json['created_on_ts'], json['number_trades_24h']], false, true);
+        charts[i].redraw();
     }
 }
 </script>
@@ -76,11 +76,8 @@ function post_ticker_emit(id, json) {
 <div class="row">
 
 {% for f in frequencies %}
-{% if loop.index % 2 %}
-</div><div class="row">
-{% endif %}
-<div class="six columns"><div id="chart_{{ coin_or_token }}{{ f }}"></div></div>
-<br/>
+<div class="twelve columns"><div id="chart_{{ coin_or_token }}{{ f }}"></div>
+<br/><br/>
 {% endfor %}
 
 </div>
