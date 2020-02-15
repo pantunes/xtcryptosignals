@@ -50,9 +50,9 @@ class DocumentValidation(Document):
                 continue
             if k in ("created_on", "modified_on",):
                 e[k] = self[k].strftime("%Y-%m-%d %H:%M:%S")
-                e[k+"_ts"] = datetime.timestamp(
-                    self[k].replace(tzinfo=pytz.UTC)
-                ) * 1000
+                e[k + "_ts"] = (
+                    datetime.timestamp(self[k].replace(tzinfo=pytz.UTC)) * 1000
+                )
                 continue
             e[k] = self[k]
         del e["_cls"]

@@ -62,9 +62,9 @@ def get_chart_coin_or_token_frequency(coin_or_token, frequency):
 
     for row in rows:
         obj = row.to_dict(frequency=frequency)
-        prices.append([obj["created_on_ts"], obj['price_usdt']])
-        volumes.append([obj["created_on_ts"], obj['volume_24h']])
-        num_trades.append([obj["created_on_ts"], obj['number_trades_24h']])
+        prices.append([obj["created_on_ts"], obj["price_usdt"]])
+        volumes.append([obj["created_on_ts"], obj["volume_24h"]])
+        num_trades.append([obj["created_on_ts"], obj["number_trades_24h"]])
 
     prices.reverse()
     volumes.reverse()
