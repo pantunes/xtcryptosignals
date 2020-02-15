@@ -121,7 +121,10 @@ function create_chart_coin_or_token(formatter, num_formatter, data, coin_or_toke
             data: data.prices,
             tooltip: {
                 valuePrefix: '$'
-            }
+            },
+            marker: {
+                enabled: false,
+            },
         }, {
             name: coin_or_token + ' Volume',
             type: 'line',
@@ -129,13 +132,19 @@ function create_chart_coin_or_token(formatter, num_formatter, data, coin_or_toke
             data: data.volumes,
             tooltip: {
                 valueSuffix: '$'
-            }
+            },
+            marker: {
+                enabled: false,
+            },
         }, {
             name: coin_or_token + ' Number of Trades',
             type: 'line',
             color: Highcharts.getOptions().colors[3],
             yAxis: 2,
             data: data.num_trades,
+            marker: {
+                enabled: false,
+            },
         }]
     });
 }
