@@ -131,7 +131,7 @@ function create_chart_coin_or_token(formatter, num_formatter, data, coin_or_toke
             yAxis: 1,
             data: data.volumes,
             tooltip: {
-                valueSuffix: '$'
+                valuePrefix: '$'
             },
             marker: {
                 enabled: false,
