@@ -1,18 +1,10 @@
-function create_chart_fear_and_greed(formatter, data, frequency) {
-    let price_formatter_setup = {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 2,
-        style: 'currency',
-        currency: 'USD',
-    };
-    const price_formatter = new Intl.NumberFormat('en-US', price_formatter_setup);
-
-    return Highcharts.chart('chart', {
+function create_chart_coin_or_token(formatter, num_formatter, data, coin_or_token, frequency) {
+      return Highcharts.chart('chart_' + coin_or_token + frequency, {
         chart: {
             zoomType: 'x'
         },
         title: {
-            text: 'Fear & Greed Index vs BTC Price - ' + frequency
+            text: coin_or_token + ' Price - ' + frequency
         },
         subtitle: {
             text: document.ontouchstart === undefined ?
@@ -22,17 +14,19 @@ function create_chart_fear_and_greed(formatter, data, frequency) {
             enabled: false
         },
         xAxis: [{
-            categories: data.days,
-            crosshair: true
+            type: 'datetime',
+            title: {
+                text: 'Datetime (UTC)'
+            }
         }],
         yAxis: [{
             labels: {
                 format: '${value}',
-                style: {
+                 style: {
                     color: Highcharts.getOptions().colors[0]
                 },
                 formatter: function() {
-                    return price_formatter.format(this.value);
+                    return formatter.format(this.value);
                 }
             },
             title: {
@@ -41,32 +35,46 @@ function create_chart_fear_and_greed(formatter, data, frequency) {
                     color: Highcharts.getOptions().colors[0]
                 },
                 formatter: function() {
-                    return price_formatter.format(this.value);
+                    return formatter.format(this.value);
                 }
             }
         }, {
-            title: {
-                text: 'Percentage',
-            },
             labels: {
-                format: '{value}%',
+                format: '${value}',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                },
+                formatter: function() {
+                    return formatter.format(this.value);
+                }
             },
-            max: 100,
+            title: {
+                text: 'Volume (USD)',
+            },
+            opposite: true
+        }, {
+            labels: {
+                format: '{value}',
+                style: {
+                    color: Highcharts.getOptions().colors[3]
+                },
+                formatter: function() {
+                    return num_formatter.format(this.value);
+                }
+            },
+            title: {
+                text: 'Number of Trades',
+                style: {
+                    color: Highcharts.getOptions().colors[3]
+                }
+            },
             opposite: true
         }],
         tooltip: {
-            shared: true
+            shared: true,
         },
         legend: {
-            layout: 'vertical',
-            align: 'left',
-            x: 120,
-            verticalAlign: 'top',
-            y: 100,
-            floating: true,
-            backgroundColor:
-                Highcharts.defaultOptions.legend.backgroundColor || // theme
-                'rgba(255,255,255,0.25)'
+            enabled: false
         },
         plotOptions: {
             area: {
@@ -83,18 +91,6 @@ function create_chart_fear_and_greed(formatter, data, frequency) {
                     ]
                 },
                 marker: {
-                    radius: 1
-                },
-                lineWidth: 1,
-                states: {
-                    hover: {
-                        lineWidth: 1
-                    }
-                },
-                threshold: null
-            },
-            line: {
-                marker: {
                     radius: 2
                 },
                 lineWidth: 1,
@@ -107,21 +103,26 @@ function create_chart_fear_and_greed(formatter, data, frequency) {
             }
         },
         series: [{
-            name: 'BTC Price',
+            name: coin_or_token + ' Price',
             type: 'area',
-            data: data.BTC,
+            data: data.prices,
             tooltip: {
                 valuePrefix: '$'
             }
-
         }, {
-            name: 'Fear & Greed Index',
+            name: coin_or_token + ' Volume',
             type: 'line',
             yAxis: 1,
-            data: data.cfgi,
+            data: data.volumes,
             tooltip: {
-                valueSuffix: '%'
+                valueSuffix: '$'
             }
+        }, {
+            name: coin_or_token + ' Number of Trades',
+            type: 'line',
+            color: Highcharts.getOptions().colors[3],
+            yAxis: 2,
+            data: data.num_trades,
         }]
     });
 }

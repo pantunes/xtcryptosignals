@@ -93,17 +93,16 @@ def pair_frequency(pair, frequency):
     )
 
 
-@bp.route("/ticker/source/<token>/<frequency>")
+@bp.route("/ticker/source/<coin_or_token>/<frequency>")
 @validate_args()
-def token_frequency(token, frequency):
+def token_frequency(coin_or_token, frequency):
     x = deepcopy(g.SYMBOLS_PER_EXCHANGE)
     token_not_found = True
-    _token = token.upper()
     for idx, i in enumerate(g.SYMBOLS_PER_EXCHANGE):
         for a, b in i.items():
             x[idx][a]["pairs"] = []
             for c, d in b["pairs"]:
-                if c == _token:
+                if c == coin_or_token:
                     token_not_found = False
                     x[idx][a]["pairs"].append((c, d))
     if token_not_found:
@@ -113,7 +112,7 @@ def token_frequency(token, frequency):
         symbols_per_exchange=x,
         attributes=_COLUMN_ATTRIBUTES,
         frequency=frequency,
-        token=_token,
+        coin_or_token=coin_or_token,
     )
 
 

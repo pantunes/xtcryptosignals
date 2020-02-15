@@ -54,3 +54,16 @@ def fear_and_greed():
         frequency=current_app.config["CFGI_MIN"],
         chart_frequencies=chart_frequencies,
     )
+
+
+@bp.route("/tools/coin-or-token/<coin_or_token>/data")
+def coin_or_token_frequency(coin_or_token):
+    return render_template(
+        template_name_or_list="tools/coin_token_data.html",
+        socket_base_url=current_app.config["SOCKET_BASE_URL"],
+        frequency=g.HISTORY_FREQUENCY[0],
+        # TODO: Make a setting
+        frequencies=["10s", "30m", "1h", "4h", "1d", "4w"],
+        attributes=["Price USDT"],
+        coin_or_token=coin_or_token,
+    )

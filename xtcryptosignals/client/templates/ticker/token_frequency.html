@@ -4,7 +4,7 @@
 
 {% block body %}
 
-{% with url='ticker.token_frequency', params=dict(token=token) %}
+{% with url_ticker='ticker.token_frequency', params=dict(coin_or_token=coin_or_token) %}
 {% include 'snippets/menu.html' %}
 {% endwith %}
 

@@ -22,7 +22,7 @@
         <ul class="popover-list">
 {% for t in tokens %}
           <li class="popover-item">
-            <a class="popover-link" href="{{url_for('ticker.token_frequency', frequency=frequency, token=t)}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{t}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a class="popover-link" href="{{url_for('ticker.token_frequency', frequency=frequency, coin_or_token=t)}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{t}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
           </li>
 {% endfor %}
         </ul>
@@ -34,7 +34,7 @@
         <ul class="popover-list">
 {% for f in frequencies %}
           <li class="popover-item">
-            <a class="popover-link" href="{{url_for(url, frequency=f, **params)}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{f}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a class="popover-link" href="{{url_for(url_ticker, frequency=f, **params)}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{f}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
           </li>
 {% endfor %}
         </ul>
@@ -72,6 +72,9 @@
         <ul class="popover-list">
           <li class="popover-item">
             <a class="popover-link" href="{{url_for('tools.fear_and_greed')}}#1d">Fear & Greed</a>
+          </li>
+          <li class="popover-item">
+            <a class="popover-link" href="{{url_for('tools.coin_or_token_frequency', coin_or_token='BTC')}}">Coin/Token Data</a>
           </li>
         </ul>
       </div>
