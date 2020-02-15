@@ -41,7 +41,7 @@ const num_formatter = new Intl.NumberFormat('en-US', num_formatter_setup);
         if (data.prices[0][1] < 1) {
             formatter = price_formatter_low_values;
         }
-        chart = create_chart_coin_or_token(formatter, num_formatter, data, coin_or_token, frequency);
+        let chart = create_chart_coin_or_token(formatter, num_formatter, data, coin_or_token, frequency);
         charts.push(chart);
     }
 </script>

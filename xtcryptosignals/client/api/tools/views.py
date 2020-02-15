@@ -62,8 +62,8 @@ def coin_or_token_frequency(coin_or_token):
         template_name_or_list="tools/coin_token_data.html",
         socket_base_url=current_app.config["SOCKET_BASE_URL"],
         frequency=g.HISTORY_FREQUENCY[0],
-        # TODO: Make a setting
-        frequencies=["10s", "1m", "10m", "30m", "1h", "4h"],
+        # TODO: Make this is setting
+        frequencies=["10s", "1m", "10m", "30m", "1h", "4h", "12h", "1d"],
         attributes=["Price USDT"],
         coin_or_token=coin_or_token,
     )
