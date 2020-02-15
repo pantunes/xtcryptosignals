@@ -74,7 +74,15 @@ function create_chart_coin_or_token(formatter, num_formatter, data, coin_or_toke
             shared: true,
         },
         legend: {
-            enabled: false
+            layout: 'vertical',
+            align: 'left',
+            x: 120,
+            verticalAlign: 'top',
+            y: 100,
+            floating: true,
+            backgroundColor:
+                Highcharts.defaultOptions.legend.backgroundColor || // theme
+                'rgba(255,255,255,0.25)'
         },
         plotOptions: {
             area: {
