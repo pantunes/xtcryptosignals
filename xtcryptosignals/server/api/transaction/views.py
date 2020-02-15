@@ -80,7 +80,7 @@ class Transactions(Resource):
             401:
                 description: Unauthorized
         """
-        return service.transactions(auth), 200
+        return service.transactions(auth)
 
 
 api.add_resource(TransactionAdd, "/transaction/add")

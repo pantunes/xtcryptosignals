@@ -61,7 +61,8 @@ $(document).ready(function() {
 });
 
   function resize() {
-    $body.removeClass('has-docked-nav')
+    // TODO:
+    // $body.removeClass('has-docked-nav')
     navOffsetTop = $nav.offset().top
     onScroll()
   }

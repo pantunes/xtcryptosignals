@@ -27,7 +27,7 @@ class ChartFearAndGreedIndexAndBTC(Resource):
     @validate_io()
     def get(self, frequency):
         """
-        Returns Crypto Fear & Greed Index + BTC data
+        Crypto Fear & Greed Index + BTC data
         ---
         tags:
             - Charts
@@ -35,9 +35,30 @@ class ChartFearAndGreedIndexAndBTC(Resource):
             - Bearer: []
         responses:
             200:
-                description: Returns Crypto Fear & Greed Index + BTC data
+                description: Returns list of Crypto Fear & Greed Index \
+                + BTC chart data format
         """
         return service.get_chart_fear_and_greed_index_and_btc(frequency)
 
 
-api.add_resource(ChartFearAndGreedIndexAndBTC, "/charts/cfgi/btc/<frequency>")
+class ChartCoinTokenFrequency(Resource):
+    @validate_io()
+    def get(self, coin_or_token, frequency):
+        """
+        Coin / Token chart data format
+        ---
+        tags:
+            - Charts
+        security:
+            - Bearer: []
+        responses:
+            200:
+                description: Returns list of Coin / Token chart data format
+        """
+        return service.get_chart_coin_or_token_frequency(
+            coin_or_token, frequency
+        )
+
+
+api.add_resource(ChartFearAndGreedIndexAndBTC, "/charts/cfgi/BTC/<frequency>")
+api.add_resource(ChartCoinTokenFrequency, "/charts/<coin_or_token>/<frequency>")

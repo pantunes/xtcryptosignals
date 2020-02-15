@@ -102,8 +102,17 @@ function get_crypto_fear_greed_index(handler) {
 }
 
 function get_chart_cfgi_btc_data(handler, frequency) {
-    $.get('/charts/cfgi/btc/' + frequency).done(function(response) {
+    $.get('/charts/cfgi/BTC/' + frequency).done(function(response) {
         handler(response, frequency)
+    })
+    .fail(function(xhr, status, error) {
+        process_fail(xhr);
+    });
+}
+
+function get_chart_coin_or_token_data(handler, coin_or_token, frequency) {
+    $.get('/charts/' + coin_or_token + '/' + frequency).done(function(response) {
+        handler(response, coin_or_token, frequency)
     })
     .fail(function(xhr, status, error) {
         process_fail(xhr);

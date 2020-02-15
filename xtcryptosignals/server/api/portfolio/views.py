@@ -40,7 +40,7 @@ class Portfolio(Resource):
             401:
                 description: Unauthorized
         """
-        return service.portfolio(auth), 200
+        return service.portfolio(auth)
 
 
 api.add_resource(Portfolio, "/portfolio")

@@ -1,0 +1,87 @@
+{% extends 'ticker/ticker.html' %}
+
+{% block title %}Coin / Token Data{% endblock %}
+
+{% block body %}
+
+{% with url_ticker='ticker.ticker', params=dict() %}
+{% include 'snippets/menu.html' %}
+{% endwith %}
+
+<script src="/static/js/charts/coin_or_token.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+let price_formatter_setup = {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+    style: 'currency',
+    currency: 'USD',
+};
+const price_formatter = new Intl.NumberFormat('en-US', price_formatter_setup);
+
+let price_formatter_setup_low_values = {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 4,
+    style: 'currency',
+    currency: 'USD',
+};
+const price_formatter_low_values = new Intl.NumberFormat('en-US', price_formatter_setup_low_values);
+
+let num_formatter_setup = {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+};
+const num_formatter = new Intl.NumberFormat('en-US', num_formatter_setup);
+</script>
+
+<script type="text/javascript">
+    let charts=[];
+    function render_data(data, coin_or_token, frequency) {
+        let formatter = price_formatter;
+        if (data.prices[0][1] < 1) {
+            formatter = price_formatter_low_values;
+        }
+        let chart = create_chart_coin_or_token(formatter, num_formatter, data, coin_or_token, frequency);
+        charts.push(chart);
+    }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        const fs = {{ frequencies|safe }};
+        for (let i in fs) {
+            get_chart_coin_or_token_data(render_data, '{{ coin_or_token }}', fs[i]);
+        }
+    });
+</script>
+
+<script type="text/javascript">
+function post_ticker_emit(id, json) {
+    if (json['source'] !== "binance") {
+        return;
+    }
+    if (json['symbol'] !== "{{ coin_or_token }}USDT") {
+        return;
+    }
+    for (let i in charts) {
+        charts[i].series[0].addPoint([json['created_on_ts'], json['price']], false, true);
+        charts[i].series[1].addPoint([json['created_on_ts'], json['volume_24h']], false, true);
+        charts[i].series[2].addPoint([json['created_on_ts'], json['number_trades_24h']], false, true);
+        charts[i].redraw();
+    }
+}
+</script>
+
+<br/><br/>
+
+<div class="row">
+
+{% for f in frequencies %}
+<div class="twelve columns"><div id="chart_{{ coin_or_token }}{{ f }}"></div><br/><br/></div>
+{% endfor %}
+
+</div>
+
+* All charts data extracted from Binance
+
+{% endblock %}

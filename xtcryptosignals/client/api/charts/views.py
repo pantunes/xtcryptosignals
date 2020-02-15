@@ -18,11 +18,21 @@ from flask import (
 bp = Blueprint("charts", __name__)
 
 
-@bp.route("/charts/cfgi/btc/<frequency>", methods=["GET"])
+@bp.route("/charts/cfgi/BTC/<frequency>", methods=["GET"])
 def cfgi_btc(frequency):
     response = requests.get(
-        url="{}charts/cfgi/btc/{}".format(
+        url="{}charts/cfgi/BTC/{}".format(
             current_app.config["SERVER_API_BASE_URL"], frequency
+        ),
+    )
+    return response.json(), response.status_code
+
+
+@bp.route("/charts/<coin_or_token>/<frequency>", methods=["GET"])
+def coin_or_token_frequency(coin_or_token, frequency):
+    response = requests.get(
+        url="{}charts/{}/{}".format(
+            current_app.config["SERVER_API_BASE_URL"], coin_or_token, frequency
         ),
     )
     return response.json(), response.status_code
