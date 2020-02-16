@@ -64,9 +64,9 @@ function post_ticker_emit(id, json) {
         return;
     }
     for (let i in charts) {
-        charts[i].series[0].addPoint([json['created_on_ts'], json['price']], false, true);
-        charts[i].series[1].addPoint([json['created_on_ts'], json['volume_24h']], false, true);
-        charts[i].series[2].addPoint([json['created_on_ts'], json['number_trades_24h']], false, true);
+        charts[i].series[0].addPoint([json['created_on_ts'], json['price']], false, false);
+        charts[i].series[1].addPoint([json['created_on_ts'], json['volume_24h']], false, false);
+        charts[i].series[2].addPoint([json['created_on_ts'], json['number_trades_24h']], false, false);
         charts[i].redraw();
     }
 }
