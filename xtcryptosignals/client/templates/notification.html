@@ -57,8 +57,9 @@
     $table.find("tbody tr").remove();
     $.each(data.results, function () {
       $table.append(
-          "<tr>" +
-          "<td style='width: 32px; vertical-align: middle;'><img src='/static/imgs/logos/" + this.coin_token + ".png' alt='" + this.coin_token + "'/></td>" +
+          "<tr id='" + this._id + "' style='cursor: pointer;'>" +
+          "<td style='width: 32px; vertical-align: middle;'>" +
+          "<img src='/static/imgs/logos/" + this.coin_token + ".png' alt='" + this.coin_token + "'/></td>" +
           // "<td>" + this.coin_token + "</td>" +
           "<td>" + this.metric + "</td>" +
           "<td>" + this.interval + "</td>" +
@@ -93,6 +94,13 @@
       $(".navbar-countdown").hide();
     });
 </script>
+
+<script type="text/javascript">
+    $(document).on("click", "#table_rules tr", function(e) {
+        open_modal('#rule', this.id);
+    });
+</script>
+
 {% endblock %}
 
 {% block body %}
@@ -138,6 +146,7 @@
     </div>
     <div style="float: right">
         <label for="select_coin_tokens">
+            Coin or Token:
             <select id="select_coin_tokens" onchange="(
                 function() {
                   get_notifications(

@@ -43,6 +43,7 @@ _COLUMN_ATTRIBUTES = [
 def before_request():
     g.SYMBOLS_PER_EXCHANGE, _ = service.get_symbols_per_exchange()
     g.HISTORY_FREQUENCY, _ = service.get_history_frequency()
+    g.COINS_OR_TOKENS_REFERENCE, _ = service.get_coins_or_tokens_reference()
 
 
 @bp.context_processor
@@ -97,22 +98,23 @@ def pair_frequency(pair, frequency):
 @validate_args()
 def token_frequency(coin_or_token, frequency):
     x = deepcopy(g.SYMBOLS_PER_EXCHANGE)
-    token_not_found = True
+    coin_or_token_404 = True
     for idx, i in enumerate(g.SYMBOLS_PER_EXCHANGE):
         for a, b in i.items():
             x[idx][a]["pairs"] = []
             for c, d in b["pairs"]:
                 if c == coin_or_token:
-                    token_not_found = False
+                    coin_or_token_404 = False
                     x[idx][a]["pairs"].append((c, d))
-    if token_not_found:
-        raise ValueError("Token not found.")
+    if coin_or_token_404:
+        raise ValueError("Coin/Token not found.")
     return dict(
         template_name_or_list="ticker/token_frequency.html",
         symbols_per_exchange=x,
-        attributes=_COLUMN_ATTRIBUTES,
+        attributes=["Price USDT"] + _COLUMN_ATTRIBUTES,
         frequency=frequency,
         coin_or_token=coin_or_token,
+        reference=g.COINS_OR_TOKENS_REFERENCE[coin_or_token],
     )
 
 

@@ -16,9 +16,9 @@ from xtcryptosignals.server.utils import (
 )
 from xtcryptosignals.server.api.notification import service
 from xtcryptosignals.server.api.notification.schemas import (
-    NotificationRuleAddInputSchema,
+    NotificationRuleInputSchema,
     NotificationOutputSchema,
-    NotificationRulesOutputSchema,
+    NotificationRuleOutputSchema,
 )
 
 bp = Blueprint("notification", __name__)
@@ -26,7 +26,7 @@ api = Api(bp)
 
 
 class NotificationRuleAdd(Resource):
-    @validate_io(schema_in=NotificationRuleAddInputSchema)
+    @validate_io(schema_in=NotificationRuleInputSchema)
     @user_auth()
     def post(self, auth, valid_data):
         """
@@ -45,6 +45,74 @@ class NotificationRuleAdd(Resource):
                 description: Unauthorized
         """
         return service.add_notification_rule(auth, data=valid_data), 201
+
+
+class NotificationRuleEdit(Resource):
+    @validate_io(schema_in=NotificationRuleInputSchema)
+    @user_auth()
+    def put(self, notification_id, auth, valid_data):
+        """
+        Edit Notification Rule
+        ---
+        tags:
+            - Notifications
+        security:
+            - Bearer: []
+        responses:
+            200:
+                description: Changed Rule
+            400:
+                description: Error in session validation
+            401:
+                description: Unauthorized
+        """
+        return service.edit_notification_rule(
+            auth, notification_id, data=valid_data
+        ), 200
+
+
+class NotificationRuleGet(Resource):
+    @validate_io(schema_out=NotificationRuleOutputSchema)
+    @user_auth()
+    def get(self, notification_id, auth):
+        """
+        Get Notification Rule
+        ---
+        tags:
+            - Notifications
+        security:
+            - Bearer: []
+        responses:
+            200:
+                description: Changed Rule
+            400:
+                description: Error in session validation
+            401:
+                description: Unauthorized
+        """
+        return service.get_notification_rule(auth, notification_id), 200
+
+
+class NotificationRuleDelete(Resource):
+    @validate_io()
+    @user_auth()
+    def delete(self, notification_id, auth):
+        """
+        Delete Notification Rule
+        ---
+        tags:
+            - Notifications
+        security:
+            - Bearer: []
+        responses:
+            204:
+                description: Deleted Rule
+            400:
+                description: Error in session validation
+            401:
+                description: Unauthorized
+        """
+        return service.delete_notification_rule(auth, notification_id), 204
 
 
 class NotificationsList(Resource):
@@ -82,7 +150,7 @@ class NotificationsList(Resource):
 
 
 class NotificationsRulesList(Resource):
-    @validate_io(schema_out=NotificationRulesOutputSchema, many_out=True)
+    @validate_io(schema_out=NotificationRuleOutputSchema, many_out=True)
     @user_auth()
     def get(self, auth):
         """
@@ -108,5 +176,12 @@ class NotificationsRulesList(Resource):
 
 
 api.add_resource(NotificationRuleAdd, "/notifications/rule/add")
+api.add_resource(
+    NotificationRuleEdit, "/notifications/rule/<notification_id>"
+)
+api.add_resource(NotificationRuleGet, "/notifications/rule/<notification_id>")
+api.add_resource(
+    NotificationRuleDelete, "/notifications/rule/<notification_id>"
+)
 api.add_resource(NotificationsList, "/notifications")
 api.add_resource(NotificationsRulesList, "/notifications/rules")

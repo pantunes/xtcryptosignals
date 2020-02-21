@@ -8,7 +8,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-from mongoengine.errors import ValidationError
+from mongoengine.errors import ValidationError, DoesNotExist
 from xtcryptosignals.server.api.notification.models import (
     Notification,
     NotificationRule,
@@ -25,6 +25,46 @@ def add_notification_rule(auth, data):
     except ValidationError as err:
         error = _sanitize_errors_mongoengine(err)
         raise ValueError(error, 406)
+
+
+def edit_notification_rule(auth, notification_id, data):
+    data.update(user=auth.user)
+
+    try:
+        notification_rule = NotificationRule.objects.get(
+            pk=notification_id, user=auth.user
+        )
+    except DoesNotExist:
+        raise ValueError("This record does not exist.", 406)
+
+    try:
+        notification_rule.update(**data)
+    except ValidationError as err:
+        error = _sanitize_errors_mongoengine(err)
+        raise ValueError(error, 406)
+    # TODO: workaround for now, save() is our high-level entry point
+    notification_rule.save()
+
+
+def get_notification_rule(auth, notification_id):
+    try:
+        notification_rule = NotificationRule.objects.get(
+            pk=notification_id, user=auth.user
+        )
+    except DoesNotExist:
+        raise ValueError("This record does not exist.", 406)
+    return notification_rule
+
+
+def delete_notification_rule(auth, notification_id):
+    try:
+        notification_rule = NotificationRule.objects.get(
+            pk=notification_id, user=auth.user
+        )
+    except DoesNotExist:
+        raise ValueError("This record does not exist.", 406)
+
+    notification_rule.delete()
 
 
 def notifications(auth, coin_token):

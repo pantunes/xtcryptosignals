@@ -1,10 +1,14 @@
 # Changelog
 All changes will be registered here per release.
 
-## [0.3.0] - Current date
-Added Crypto Fear & Greed Index in UI.    
+## [0.4.0] - Current date
+WIP
+
+## [0.3.0] - 2020-02-17
+Added Crypto Fear & Greed Index and its chart in UI.  
 Added new LTO Network Token Binance pairs.  
-Added Charts per Token USD pair.  
+Added Hedera Hashgraph Token Binance pairs.  
+Added Charts in Tools and per Coin or Token.  
 Code fixes and improvements.  
 
 ## [0.2.0] - 2020-12-25

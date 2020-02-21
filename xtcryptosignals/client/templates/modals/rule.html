@@ -1,6 +1,61 @@
 <!-- Rule Modal -->
+
+<script type="text/javascript">
+function modal_rule_form_add() {
+    $.post('/notifications/rule/add', $('#form_rule').serialize())
+        .done(function (response) {
+            $.notify('Added Rule!', 'success');
+            $.modal.close();
+            get_notifications(render_notifications);
+            get_rules(render_rules);
+        })
+        .fail(function (xhr, status, error) {
+            process_fail(xhr);
+        });
+}
+</script>
+
+<script type="text/javascript">
+function modal_rule_form_edit(id, data) {
+    $("#rule_coin_token").val(data["coin_token"]);
+    $("#rule_metric").val(data["metric"]);
+    $("#rule_interval").val(data["interval"]);
+    $("#rule_percentage").val(data["percentage"]);
+
+    return function() {
+        $.post('/notifications/rule/' + id + '/edit', $('#form_rule').serialize())
+            .done(function (response) {
+                $.notify('Changed Rule!', 'success');
+                $.modal.close();
+                get_notifications(render_notifications);
+                get_rules(render_rules);
+            })
+            .fail(function (xhr, status, error) {
+                process_fail(xhr);
+            });
+    }
+}
+</script>
+
+<script type="text/javascript">
+function modal_rule_form_delete(id) {
+    return function() {
+        $.post('/notifications/rule/' + id + '/delete')
+            .done(function (response) {
+                $.notify('Deleted Rule!', 'success');
+                $.modal.close();
+                get_notifications(render_notifications);
+                get_rules(render_rules);
+            })
+            .fail(function (xhr, status, error) {
+                process_fail(xhr);
+            });
+    }
+}
+</script>
+
 <div id="modal_rule" class="modal">
-    <h5>Add Rule</h5>
+    <h5>-</h5>
     <form id="form_rule">
       <div class="row">
           <div class="three columns">
@@ -23,20 +78,21 @@
               <input class="u-full-width" type="text" placeholder="e.g. 4 or -4" id="rule_percentage" name="percentage">
           </div>
       </div>
-      <input class="button-primary" type="button" value="Add" onClick="(
+      <button id="submit_form" class="button-primary" onClick="(
           function() {
-            $.post('/notifications/rule/add', $('#form_rule').serialize())
-                .done(function(response) {
-                    $.notify('Added Rule!', 'success');
-                    $.modal.close();
-                    get_notifications(render_notifications);
-                    get_rules(render_rules);
-                })
-                .fail(function(xhr, status, error) {
-                    process_fail(xhr);
-                });
+            modal_rule_form_edit_handler();
             return false;
-        })(); return false;">
+        })(); return false;">-</button>
+      <div id="form_button_delete" style="float:right; display: none;">
+          <button id="form_delete" class="button-secondary" onClick="(
+              function() {
+                const r = confirm('Are you sure you want to delete this rule?');
+                if (r) {
+                    modal_rule_form_delete_handler();
+                }
+                return false;
+            })(); return false;">Delete</button>
+      </div>
     </form>
 </div>
 <!-- /Rule Modal -->

@@ -47,7 +47,7 @@ def get_chart_fear_and_greed_index_and_btc(frequency):
 
 
 def get_chart_coin_or_token_frequency(coin_or_token, frequency):
-    ref = s.EXCHANGES_AND_PAIRS_OF_REFERENCE["BTC"]
+    ref = s.EXCHANGES_AND_PAIRS_OF_REFERENCE[coin_or_token]
     ref_pair = ref["pair"]
     ref_exchange = ref["name"]
 
@@ -64,7 +64,7 @@ def get_chart_coin_or_token_frequency(coin_or_token, frequency):
         obj = row.to_dict(frequency=frequency)
         prices.append([obj["created_on_ts"], obj["price_usdt"]])
         volumes.append([obj["created_on_ts"], obj["volume_24h"]])
-        num_trades.append([obj["created_on_ts"], obj["number_trades_24h"]])
+        num_trades.append([obj["created_on_ts"], obj.get("number_trades_24h")])
 
     prices.reverse()
     volumes.reverse()

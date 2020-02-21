@@ -8,18 +8,11 @@
 <script src="/static/js/charts/fear-and-greed.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-let price_formatter_setup = {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 2,
-    style: 'currency',
-    currency: 'USD',
-};
-const price_formatter = new Intl.NumberFormat('en-US', price_formatter_setup);
-</script>
-
-<script type="text/javascript">
+    let charts=[];
     function render_data(data, frequency) {
-        create_chart_fear_and_greed(price_formatter, data, frequency);
+        let chart = create_chart_fear_and_greed(price_formatter, data, frequency);
+        charts.push(chart);
+        setChartTheme();
         window.location.hash = frequency;
         $('#container_buttons > button').removeClass('button-primary').addClass('button-secondary');
         $('#' + frequency).removeClass('button-secondary').addClass('button-primary')

@@ -1,5 +1,7 @@
-function create_chart_coin_or_token(formatter, num_formatter, data, coin_or_token, frequency) {
-      return Highcharts.chart('chart_' + coin_or_token + frequency, {
+function create_chart_coin_or_token(
+    chart_id, price_formatter, price_volume_formatter, num_formatter, data, coin_or_token, frequency
+) {
+      return Highcharts.chart(chart_id, {
         chart: {
             zoomType: 'x'
         },
@@ -26,7 +28,7 @@ function create_chart_coin_or_token(formatter, num_formatter, data, coin_or_toke
                     color: Highcharts.getOptions().colors[0]
                 },
                 formatter: function() {
-                    return formatter.format(this.value);
+                    return price_formatter.format(this.value);
                 }
             },
             title: {
@@ -35,7 +37,7 @@ function create_chart_coin_or_token(formatter, num_formatter, data, coin_or_toke
                     color: Highcharts.getOptions().colors[0]
                 },
                 formatter: function() {
-                    return formatter.format(this.value);
+                    return price_formatter.format(this.value);
                 }
             }
         }, {
@@ -45,7 +47,7 @@ function create_chart_coin_or_token(formatter, num_formatter, data, coin_or_toke
                     color: Highcharts.getOptions().colors[1]
                 },
                 formatter: function() {
-                    return formatter.format(this.value);
+                    return price_formatter.format(this.value);
                 }
             },
             title: {
@@ -120,7 +122,11 @@ function create_chart_coin_or_token(formatter, num_formatter, data, coin_or_toke
             type: 'area',
             data: data.prices,
             tooltip: {
-                valuePrefix: '$'
+                valuePrefix: '$',
+                pointFormatter: function() {
+                    return '<span style="color:' + this.color + '">\u25CF</span> ' +
+                        this.series.name + ': <b>' + price_formatter.format(this.y) + '</b><br/>';
+                }
             },
             marker: {
                 enabled: false,
@@ -131,7 +137,11 @@ function create_chart_coin_or_token(formatter, num_formatter, data, coin_or_toke
             yAxis: 1,
             data: data.volumes,
             tooltip: {
-                valuePrefix: '$'
+                valuePrefix: '$',
+                pointFormatter: function() {
+                    return '<span style="color:' + this.color + '">\u25CF</span> ' +
+                        this.series.name + ': <b>' + price_volume_formatter.format(this.y) + '</b><br/>';
+                }
             },
             marker: {
                 enabled: false,
@@ -142,6 +152,12 @@ function create_chart_coin_or_token(formatter, num_formatter, data, coin_or_toke
             color: Highcharts.getOptions().colors[3],
             yAxis: 2,
             data: data.num_trades,
+            tooltip: {
+                pointFormatter: function() {
+                    return '<span style="color:' + this.color + '">\u25CF</span> ' +
+                        this.series.name + ': <b>' + num_formatter.format(this.y) + '</b><br/>';
+                }
+            },
             marker: {
                 enabled: false,
             },

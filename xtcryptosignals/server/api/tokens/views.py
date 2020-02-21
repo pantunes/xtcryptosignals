@@ -48,5 +48,21 @@ class SymbolsGet(Resource):
         return s.SYMBOLS_PER_EXCHANGE, 200
 
 
+class CoinsOrTokensReferenceGet(Resource):
+    @validate_io()
+    def get(self):
+        """
+        Gets Coins or Tokens Reference
+        ---
+        tags:
+            - Tokens
+        responses:
+            200:
+                description: Returns list successfully
+        """
+        return s.EXCHANGES_AND_PAIRS_OF_REFERENCE, 200
+
+
 api.add_resource(FrequencyGet, "/tokens/frequency")
 api.add_resource(SymbolsGet, "/tokens/symbols")
+api.add_resource(CoinsOrTokensReferenceGet, "/tokens/reference")

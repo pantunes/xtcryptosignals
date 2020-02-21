@@ -54,6 +54,16 @@
         });
     </script>
 
+    <script type="text/javascript">
+        let price_formatter_setup = {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 2,
+            style: 'currency',
+            currency: 'USD',
+        };
+        const price_formatter = new Intl.NumberFormat('en-US', price_formatter_setup);
+    </script>
+
 {% set logout_url = url_for('errors.logged_out') %}
 
 {% block include_scripts_top %}{% endblock %}
@@ -81,6 +91,8 @@
         <!-- Dark Mode -->
         <script type="text/javascript">
             const options = {
+                bottom: '64px', // default: '32px'
+                right: '64px', // default: 'unset'
                 time: '0.0s', // default: '0.3s'
                 saveInCookies: true, // default: true,
                 label: '🌓', // default: ''
@@ -90,6 +102,36 @@
             darkmode.showWidget();
         </script>
         <!-- /Dark Mode -->
+
+        <script type="text/javascript">
+            function setChartTheme() {
+                if (typeof charts !== 'undefined') {
+                    for (let i in charts) {
+                        let g_color = '#fff';
+                        let t_color = '#000';
+                        if (darkmode.isActivated()) {
+                            g_color = '#2b2b2b';
+                            t_color = '#6c6c6c';
+                        }
+                        const chart_options = {
+                            ...charts[i].userOptions.chart,
+                            ...{backgroundColor: g_color},
+                        };
+                        const title_options = {
+                            ...charts[i].userOptions.title,
+                            ...{style: {color: t_color}},
+                        };
+                        charts[i].update(
+                            { chart: chart_options, title: title_options }
+                        )
+                    }
+                }
+            }
+
+            $('.darkmode-toggle').on('click', function() {
+                setChartTheme()
+            });
+        </script>
 
 {% if ga_tracking_id %}
         <!-- Global site tag (gtag.js) - Google Analytics -->

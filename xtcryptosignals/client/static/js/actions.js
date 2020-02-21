@@ -23,8 +23,7 @@ function login() {
     $.post('/login', $('#form_login').serialize()).done(function(response) {
         $.notify('Welcome!', 'success');
         $('#menu_login').html('My Area');
-        let x;
-        for (x of menu_options_logged_in) {
+        for (let x of menu_options_logged_in) {
             $(x).css('display', 'inline');
         }
         open_modal('#info');
@@ -43,8 +42,7 @@ function logout() {
         $.notify('You are logged out!', 'success');
         $.modal.close();
         $('#menu_login').html('Account');
-        let x;
-        for (x of menu_options_logged_in) {
+        for (let x of menu_options_logged_in) {
             $(x).css('display', 'none');
         }
     })

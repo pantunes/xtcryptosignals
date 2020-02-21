@@ -15,7 +15,7 @@ from marshmallow import (
 from xtcryptosignals.server.api.common.schemas import OutputSchema
 
 
-class NotificationRuleAddInputSchema(Schema):
+class NotificationRuleInputSchema(Schema):
     coin_token = fields.String(required=True)
     metric = fields.String(required=True)
     interval = fields.String(required=True)
@@ -35,7 +35,7 @@ class NotificationOutputSchema(Schema):
     coin_tokens = fields.Raw(many=True, required=True)
 
 
-class NotificationRulesOutputSchema(OutputSchema):
+class NotificationRuleOutputSchema(OutputSchema):
     coin_token = fields.String(required=True)
     metric = fields.String(required=True)
     interval = fields.String(required=True)
