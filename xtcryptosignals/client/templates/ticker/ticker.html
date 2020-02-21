@@ -137,6 +137,66 @@
         });
     }
 </script>
+
+<script type="text/javascript">
+let price_formatter_setup_low_values = {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 4,
+    style: 'currency',
+    currency: 'USD',
+};
+const price_formatter_low_values = new Intl.NumberFormat('en-US', price_formatter_setup_low_values);
+
+let price_volume_formatter_setup = {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+    style: 'currency',
+    currency: 'USD',
+};
+const price_volume_formatter = new Intl.NumberFormat('en-US', price_volume_formatter_setup);
+
+let num_formatter_setup = {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+};
+const num_formatter = new Intl.NumberFormat('en-US', num_formatter_setup);
+</script>
+
+<script type="text/javascript">
+let charts=[];
+function render_data_charts(data, coin_or_token, frequency) {
+    let cur_formatter = price_formatter;
+    if (data.prices[0][1] < 1) {
+        cur_formatter = price_formatter_low_values;
+    }
+    const chart_id = 'chart_' + coin_or_token + frequency;
+    let chart = create_chart_coin_or_token(
+        chart_id, cur_formatter, price_volume_formatter,
+        num_formatter, data, coin_or_token, frequency,
+    );
+    charts.push(chart);
+    setChartTheme();
+    $('#row_'+chart_id).show();
+}
+</script>
+
+<script type="text/javascript">
+function _post_ticker_emit(id, json, reference_name, reference_pair, coin_or_token) {
+    if (json['source'] !== reference_name) {
+        return;
+    }
+    if (json['symbol'] !== coin_or_token + reference_pair) {
+        return;
+    }
+    for (let i in charts) {
+        charts[i].series[0].addPoint([json['created_on_ts'], json['price']], false, false);
+        charts[i].series[1].addPoint([json['created_on_ts'], json['volume_24h']], false, false);
+        charts[i].series[2].addPoint([json['created_on_ts'], json['number_trades_24h']], false, false);
+        charts[i].redraw();
+    }
+}
+</script>
+
 {% endblock %}
 
 {% block body %}

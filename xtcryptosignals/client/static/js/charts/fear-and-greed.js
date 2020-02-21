@@ -1,12 +1,4 @@
-function create_chart_fear_and_greed(formatter, data, frequency) {
-    let price_formatter_setup = {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 2,
-        style: 'currency',
-        currency: 'USD',
-    };
-    const price_formatter = new Intl.NumberFormat('en-US', price_formatter_setup);
-
+function create_chart_fear_and_greed(price_formatter, data, frequency) {
     return Highcharts.chart('chart', {
         chart: {
             zoomType: 'x'
@@ -111,8 +103,12 @@ function create_chart_fear_and_greed(formatter, data, frequency) {
             type: 'area',
             data: data.BTC,
             tooltip: {
-                valuePrefix: '$'
-            }
+                valuePrefix: '$',
+                pointFormatter: function() {
+                    return '<span style="color:' + this.color + '">\u25CF</span> ' +
+                        this.series.name + ': <b>' + price_formatter.format(this.y) + '</b><br/>';
+                }
+            },
 
         }, {
             name: 'Fear & Greed Index',

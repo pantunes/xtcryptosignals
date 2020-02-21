@@ -9,36 +9,6 @@
 {% endwith %}
 
 <script type="text/javascript">
-  let price_formatter_setup = {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 2,
-    style: 'currency',
-    currency: 'USD',
-  };
-  const price_formatter = new Intl.NumberFormat('en-US', price_formatter_setup);
-
-  let price_formatter_setup_low_values = {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 4,
-    style: 'currency',
-    currency: 'USD',
-  };
-  const price_formatter_low_values = new Intl.NumberFormat(
-    'en-US', price_formatter_setup_low_values
-  );
-
-  let price_formatter_setup_totals = {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-    style: 'currency',
-    currency: 'USD',
-  };
-  const price_formatter_totals = new Intl.NumberFormat(
-      'en-US', price_formatter_setup_totals
-  );
-</script>
-
-<script type="text/javascript">
   function get_units(units) {
     let u = units;
       if (u > 1) {
@@ -115,8 +85,8 @@
       set_style(_id, value.position);
       $(_id).text(value.position + '%');
     }
-    $('#my_portfolio_total_spent').text(price_formatter_totals.format(data.total_paid));
-    $('#my_portfolio_total_value').text(price_formatter_totals.format(data.total_value));
+    $('#my_portfolio_total_spent').text(price_volume_formatter.format(data.total_paid));
+    $('#my_portfolio_total_value').text(price_volume_formatter.format(data.total_value));
     $('#my_portfolio_in_btc').text(Number((data.total_in_btc).toFixed(2)));
     _set_total_position(data.total_position);
   }
@@ -166,7 +136,7 @@
     let perc = get_percent(total_value, total_spent);
     _set_total_position(perc);
     // total value
-    $('#my_portfolio_total_value').text(price_formatter_totals.format(total_value));
+    $('#my_portfolio_total_value').text(price_volume_formatter.format(total_value));
     // in BTC
     if (btc_usdt_price !== null) {
         $('#my_portfolio_in_btc').text(Number((total_value / btc_usdt_price).toFixed(2)));
@@ -184,7 +154,7 @@
     _id = id.replace(_prefix_usdt, "_balance_");
     let diff = (price - symbol.average_paid) * symbol.units;
     set_style(_id, diff);
-    $(_id).text(price_formatter_totals.format(diff));
+    $(_id).text(price_volume_formatter.format(diff));
   }
 
   function post_ticker_emit(id, json) {
