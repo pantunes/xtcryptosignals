@@ -43,7 +43,7 @@
 
 <div id="container_buttons" style="text-align: center">
     {% for cf in chart_frequencies %}
-    <button class="button-secondary" id='{{ cf }}' onclick="get_chart_cfgi_btc_data(render_data, '{{ cf }}');">{{ cf }}</button>
+    <button class="button-secondary" id='{{ cf }}' onclick="charts=[]; get_chart_cfgi_btc_data(render_data, '{{ cf }}'); return false;">{{ cf }}</button>
     {% endfor %}
 </div>
 
