@@ -9,6 +9,7 @@ Added Crypto Fear & Greed Index and its chart in UI.
 Added new LTO Network Token Binance pairs.  
 Added Hedera Hashgraph Token Binance pairs.  
 Added Charts in Tools and per Coin or Token.  
+Added Progress Bar for all XHR Requests.  
 Code fixes and improvements.  
 
 ## [0.2.0] - 2020-12-25
