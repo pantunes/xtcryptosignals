@@ -18,8 +18,14 @@ CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_ACCEPT_CONTENT = ["json"]
 
+CELERY_ALWAYS_EAGER = CELERY_EAGER_PROPAGATES_EXCEPTIONS = False
+
 CELERY_IGNORE_RESULT = True
 CELERY_TIMEZONE = "UTC"
+
+# Number of child processes created by main worker process, defaults to the
+# number of CPUs available in the machine
+#CELERYD_CONCURRENCY = 2
 
 BROKER_URL = s.BROKER_URL
 
