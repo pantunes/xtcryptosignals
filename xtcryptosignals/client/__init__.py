@@ -25,8 +25,12 @@ app.jinja_env.auto_reload = app.config["DEBUG"]
 
 if app.config["ENV"] == "production":
     app.config.from_object("xtcryptosignals.client.config.ConfigProduction")
-else:
+elif app.config["ENV"] == "development":
     app.config.from_object("xtcryptosignals.client.config.ConfigDevelopment")
+elif app.config["ENV"] == "docker":
+    app.config.from_object("xtcryptosignals.client.config.ConfigDocker")
+else:
+    raise ValueError('Unknown FLASK_ENV')
 
 app.config.from_envvar("SETTINGS_APP")
 

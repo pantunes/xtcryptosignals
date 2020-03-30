@@ -18,8 +18,12 @@ app = Flask(__name__)
 
 if app.config["ENV"] == "production":
     app.config.from_object("xtcryptosignals.server.config.ConfigProduction")
-else:
+elif app.config["ENV"] == "development":
     app.config.from_object("xtcryptosignals.server.config.ConfigDevelopment")
+elif app.config["ENV"] == "docker":
+    app.config.from_object("xtcryptosignals.client.config.ConfigDocker")
+else:
+    raise ValueError('Unknown FLASK_ENV')
 
 app.config.from_envvar("SETTINGS_APP")
 

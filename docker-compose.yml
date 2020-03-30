@@ -8,8 +8,8 @@ services:
       dockerfile: docker/Dockerfile
     command: xt-server --port 5000
     environment:
-      - FLASK_ENV=development
-      - SETTINGS_APP=/xtcryptosignals/xtcryptosignals/config/server.dev.env
+      - FLASK_ENV=docker
+      - SETTINGS_APP=/xtcryptosignals/xtcryptosignals/config/server.docker.env
     ports:
       - "127.0.0.1:5000:5000"
     depends_on:
@@ -25,8 +25,8 @@ services:
       dockerfile: docker/Dockerfile
     command: xt-server --port 5001
     environment:
-      - FLASK_ENV=development
-      - SETTINGS_APP=/xtcryptosignals/xtcryptosignals/config/server.dev.env
+      - FLASK_ENV=docker
+      - SETTINGS_APP=/xtcryptosignals/xtcryptosignals/config/server.docker.env
     ports:
       - "127.0.0.1:5001:5001"
     depends_on:
@@ -42,7 +42,7 @@ services:
       dockerfile: docker/Dockerfile
     command: xt-ticker --enable-messaging --log-minimal
     environment:
-      - SETTINGS_APP=/xtcryptosignals/xtcryptosignals/config/server.dev.env
+      - SETTINGS_APP=/xtcryptosignals/xtcryptosignals/config/server.docker.env
     depends_on:
       - db
       - redis
@@ -56,7 +56,7 @@ services:
       dockerfile: docker/Dockerfile
     command: xt-client --num-workers 2
     environment:
-      - FLASK_ENV=development
+      - FLASK_ENV=docker
       - SETTINGS_APP=/xtcryptosignals/xtcryptosignals/config/client.dev.env
     ports:
       - "127.0.0.1:8000:8000"

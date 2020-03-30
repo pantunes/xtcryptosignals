@@ -23,7 +23,7 @@ class Config(object):
 
     TESTING = False
 
-    BROKER_URL = "redis://172.19.10.6:6379"
+    BROKER_URL = "redis://localhost:6379"
 
     SESSION_TYPE = "redis"
 
@@ -65,3 +65,7 @@ class ConfigDevelopment(Config):
             }
         ],
     }
+
+
+class ConfigDocker(ConfigDevelopment):
+    BROKER_URL = "redis://172.19.10.6:6379"

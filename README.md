@@ -258,6 +258,7 @@ N corresponds to the number of workers to be spinned up.
 
 ## Run all services at once
 
+#### Embed command line:
 ```bash
 xt-all --help
 ```
@@ -272,6 +273,11 @@ For Production enviroment `xt-all copy-config-files` should be executed on first
 to copy default config files to the folder `/config`.  
 The configuration should be reviewed and changed, before running `xt-all start`
 to start all 3 services: `xt-server`, `xt-client` and `xt-ticker`.  
+
+#### Docker Compose:
+```bash
+docker-compose up
+```
 
 ## Screenshots
 
@@ -291,7 +297,7 @@ Open the browser with the URL `http://127.0.0.1:8000`:
 
 * Paulo Antunes
 
-anyone else interested?
+* you?
 
 ## Disclaimer
 
