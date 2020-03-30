@@ -25,7 +25,7 @@ CELERY_TIMEZONE = "UTC"
 
 # Number of child processes created by main worker process, defaults to the
 # number of CPUs available in the machine
-#CELERYD_CONCURRENCY = 2
+# CELERYD_CONCURRENCY = 2
 
 BROKER_URL = s.BROKER_URL
 

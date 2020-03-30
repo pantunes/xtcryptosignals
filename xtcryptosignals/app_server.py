@@ -21,6 +21,7 @@ app = create_app()
 migration_manager = MigrationManager()
 
 migration_manager.config.mongo_database = app.config["MONGODB_NAME"]
+migration_manager.config.mongo_host = app.config["MONGODB_HOST"]
 migration_manager.config.mongo_port = app.config["MONGODB_PORT"]
 migration_manager.config.mongo_migrations_path = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "server", "migrations"

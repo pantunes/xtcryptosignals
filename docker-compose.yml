@@ -1,0 +1,94 @@
+version: '3'
+
+services:
+
+  server_1:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: xt-server --port 5000
+    environment:
+      - FLASK_ENV=development
+      - SETTINGS_APP=/xtcryptosignals/xtcryptosignals/config/server.dev.env
+    ports:
+      - "127.0.0.1:5000:5000"
+    depends_on:
+      - db
+      - redis
+    networks:
+      backend:
+        ipv4_address: 172.19.10.2
+
+  server_2:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: xt-server --port 5001
+    environment:
+      - FLASK_ENV=development
+      - SETTINGS_APP=/xtcryptosignals/xtcryptosignals/config/server.dev.env
+    ports:
+      - "127.0.0.1:5001:5001"
+    depends_on:
+      - db
+      - redis
+    networks:
+      backend:
+        ipv4_address: 172.19.10.3
+
+  ticker:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: xt-ticker --enable-messaging --log-minimal
+    environment:
+      - SETTINGS_APP=/xtcryptosignals/xtcryptosignals/config/server.dev.env
+    depends_on:
+      - db
+      - redis
+    networks:
+      backend:
+        ipv4_address: 172.19.10.4
+
+  client:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: xt-client --num-workers 2
+    environment:
+      - FLASK_ENV=development
+      - SETTINGS_APP=/xtcryptosignals/xtcryptosignals/config/client.dev.env
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      - db
+    networks:
+      backend:
+        ipv4_address: 172.19.10.5
+
+  db:
+    build:
+      context: .
+      dockerfile: docker/db.Dockerfile
+    restart: always
+    volumes:
+      - ~/data:/data/db
+    ports:
+      - "127.0.0.1:27017:27017"
+    networks:
+      backend:
+        ipv4_address: 172.19.10.10
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "127.0.0.1:6379:6379"
+    networks:
+      backend:
+        ipv4_address: 172.19.10.6
+
+networks:
+  backend:
+    ipam:
+      config:
+        - subnet: 172.19.10.0/24

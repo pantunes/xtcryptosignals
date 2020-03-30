@@ -20,7 +20,7 @@ class Config(object):
 
     SECRET_KEY = None
 
-    SERVER_API_BASE_URL = "http://127.0.0.1:5000/"
+    SERVER_API_BASE_URL = "http://172.19.10.2:5000/"
 
     CFGI_MIN = "1d"
     CFGI_MAX = "12w"
