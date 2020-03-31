@@ -5,11 +5,8 @@ services:
   server_1:
     build:
       context: .
-      dockerfile: docker/Dockerfile
+      dockerfile: docker/server.Dockerfile
     command: xt-server --port 5000
-    environment:
-      - FLASK_ENV=docker
-      - SETTINGS_APP=/xtcryptosignals/xtcryptosignals/config/server.docker.env
     ports:
       - "127.0.0.1:5000:5000"
     depends_on:
@@ -22,11 +19,8 @@ services:
   server_2:
     build:
       context: .
-      dockerfile: docker/Dockerfile
+      dockerfile: docker/server.Dockerfile
     command: xt-server --port 5001
-    environment:
-      - FLASK_ENV=docker
-      - SETTINGS_APP=/xtcryptosignals/xtcryptosignals/config/server.docker.env
     ports:
       - "127.0.0.1:5001:5001"
     depends_on:

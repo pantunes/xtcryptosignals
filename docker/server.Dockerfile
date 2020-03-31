@@ -19,7 +19,7 @@ RUN pip install -e .
 EXPOSE 5000 5001 5002
 
 ENV FLASK_ENV=docker
-ENV SETTINGS_APP=`pwd`/xtcryptosignals/config/server.docker.env
+ENV SETTINGS_APP=/xtcryptosignals/xtcryptosignals/config/server.docker.env
 
 CMD xt-server --port 5000
 CMD xt-server --port 5001

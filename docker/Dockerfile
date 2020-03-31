@@ -15,3 +15,6 @@ ADD ./ ./
 
 RUN pip install -r requirements.txt
 RUN pip install -e .
+
+ENV FLASK_ENV=docker
+ENV SETTINGS_APP=/xtcryptosignals/xtcryptosignals/config/server.docker.env
