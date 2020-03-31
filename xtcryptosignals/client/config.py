@@ -44,3 +44,7 @@ class ConfigDevelopment(Config):
     PERMANENT_SESSION_LIFETIME = timedelta(minutes=30)
 
     SESSION_PROTECTION = "basic"
+
+
+class ConfigDocker(ConfigDevelopment):
+    SERVER_API_BASE_URL = "http://172.19.10.2:5000/"

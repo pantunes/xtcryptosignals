@@ -65,3 +65,7 @@ class ConfigDevelopment(Config):
             }
         ],
     }
+
+
+class ConfigDocker(ConfigDevelopment):
+    BROKER_URL = "redis://172.19.10.6:6379"
