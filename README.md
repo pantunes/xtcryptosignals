@@ -30,6 +30,7 @@ that is compatible with the most known web browsers.)
 * [x] User account creation, Session and Assets Management (From Oct 2019)
 * [x] Implement web push notification signals for price range, price change, 
 trading volume, price sentiment, etc (From July 2019)
+* [ ] Implement Telegram bot to broadcast notifications (From 2020)
 * [ ] Implement automatic trading (From 2020)
 * [ ] Build Mobile app (From 2020)
 
