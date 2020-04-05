@@ -6,8 +6,8 @@ const menu_options_logged_in = [
 ];
 
 const urls_logout_to_index = [
-    '/transactions/portfolio',
-    '/portfolio/portfolio',
+    '/transactions',
+    '/portfolio',
     '/notifications',
 ];
 
@@ -54,7 +54,7 @@ function logout() {
 }
 
 function get_transactions(handler) {
-    $.get('/transactions').done(function(response) {
+    $.get('/transactions/list').done(function(response) {
         handler(response)
     })
     .fail(function(xhr, status, error) {
@@ -63,7 +63,7 @@ function get_transactions(handler) {
 }
 
 function get_portfolio(handler) {
-    $.get('/portfolio').done(function(response) {
+    $.get('/portfolio/list').done(function(response) {
         handler(response)
     })
     .fail(function(xhr, status, error) {

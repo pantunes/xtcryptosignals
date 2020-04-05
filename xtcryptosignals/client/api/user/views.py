@@ -42,7 +42,7 @@ def info():
     <br/><br/>
     This is an Open-source software platform that is in continuous development.
     <br/><br/>
-    For now you can manage your <a href="/portfolio/portfolio">portfolio</a> 
+    For now you can manage your <a href="/portfolio">portfolio</a> 
     and set your <a href="/notifications">notification alerts</a>.
     <br/>
     <br/>

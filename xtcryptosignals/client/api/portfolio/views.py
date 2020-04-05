@@ -51,27 +51,18 @@ def context_processor():
     )
 
 
-@bp.route("/portfolio/transactions", methods=["GET"])
+@bp.route("/portfolio", methods=["GET"])
 @login_required
-def transactions():
-    return render_template(
-        template_name_or_list="transactions.html",
-        frequency=g.HISTORY_FREQUENCY[0],
-    )
-
-
-@bp.route("/portfolio/portfolio", methods=["GET"])
-@login_required
-def portfolio():
+def index():
     return render_template(
         template_name_or_list="portfolio.html",
         frequency=g.HISTORY_FREQUENCY[0],
     )
 
 
-@bp.route("/portfolio", methods=["GET"])
+@bp.route("/portfolio/list", methods=["GET"])
 @login_required
-def index():
+def _list():
     response = requests.get(
         url="{}portfolio".format(current_app.config["SERVER_API_BASE_URL"]),
         headers=dict(Authorization=current_user.id),
