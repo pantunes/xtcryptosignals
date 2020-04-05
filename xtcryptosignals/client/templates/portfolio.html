@@ -19,29 +19,6 @@
 </script>
 
 <script type="text/javascript">
-  function render_transactions(data) {
-    let $table = $('#table_transactions');
-    $table.find("tbody tr").remove();
-    $.each(data.results, function () {
-      let p = price_formatter;
-      if (this.unit_price < 1) {
-        p = price_formatter_low_values;
-      }
-      $table.append(
-          "<tr>" +
-          "<td style='width: 32px; vertical-align: middle;'><img src='/static/imgs/logos/" + this.coin_token + ".png' alt='" + this.coin_token + "'/></td>" +
-          "<td class='align-right'>" + get_units(this.units) + "</td>" +
-          "<td class='align-right'>" + price_formatter.format(this.amount) + "</td>" +
-          "<td class='align-right'>" + p.format(this.unit_price) + "</td>" +
-          "<td style=\"text-align: center;\">" + this.in_or_out + "</td>" +
-          "<td>" + this.added_on + "</td>" +
-          "</tr>"
-      );
-    });
-  }
-</script>
-
-<script type="text/javascript">
   function _set_total_position(tp) {
     let _id = '#my_portfolio_total_position';
     set_style(_id, tp);
@@ -180,7 +157,6 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    get_transactions(render_transactions);
     get_portfolio(render_portfolio);
   });
 </script>
@@ -188,35 +164,8 @@
 <br/><br/>
 
 <div class="row">
-    <div class="five columns">
-      <div style="float: left">
-        <h5>My Transactions</h5>
-      </div>
-      <div style="float: right">
-        <input class="button-primary" type="button" value="Add Tx" onClick="(
-          function() {
-            open_modal('#transaction');
-            return false;
-          })(); return false;">
-      </div>
 
-      <table class="u-full-width" id="table_transactions">
-        <thead>
-          <tr>
-            <th>&nbsp;</th>
-            <th>Units</th>
-            <th>In/Out $</th>
-            <th>Unit $</th>
-            <th>Type</th>
-            <th>Added on</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-
-  </div>
-
-  <div class="seven columns">
+  <div class="twelve columns">
     <div style="float: left;">
       <h5>My Portfolio</h5>
     </div>
@@ -233,11 +182,11 @@
       <thead>
         <tr>
           <th>&nbsp;</th>
-          <th>Pair & Exch. Ref.</th>
-          <th>Price USDT</th>
+          <th>Pair</th>
+          <th>Price</th>
           <th>Units</th>
           <th>Paid</th>
-          <th>Paid Unit</th>
+          <th>Unit</th>
           <th>Share</th>
           <th>Balance</th>
           <th>Position</th>
@@ -248,7 +197,5 @@
 
     </div>
 </div>
-
-{% include 'modals/transaction.html' %}
 
 {% endblock %}

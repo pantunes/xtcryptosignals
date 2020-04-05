@@ -42,12 +42,11 @@
       </div>
       <input class="button-primary" type="button" value="Add" onClick="(
           function() {
-            $.post('/transaction/add', $('#form_transaction').serialize())
+            $.post('/transactions/add', $('#form_transaction').serialize())
                 .done(function(response) {
                     $.notify('Added Transaction!', 'success');
                     $.modal.close();
                     get_transactions(render_transactions);
-                    get_portfolio(render_portfolio);
                 })
                 .fail(function(xhr, status, error) {
                     process_fail(xhr);

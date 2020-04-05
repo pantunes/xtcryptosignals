@@ -6,9 +6,28 @@
     margin-top: 12rem;
   }
 }
-
+@media (min-width: 750px) {
+  .navbar-link {
+    font-size: 10px;
+  }
+  .popover-item:first-child .popover-link:before {
+    border-width: 10px;
+    margin-left: -10px;
+  }
+}
+@media (min-width: 550px) {
+  .container {
+    width: 90%;
+  }
+}
+input[type="button"] {
+  font-size: 10px;
+}
+body {
+  font-size: 1.3em;
+}
 .container {
-  max-width: 1480px;
+  max-width: none;
 }
 .numeric_value {
   color: #000;
@@ -20,18 +39,18 @@
   margin-bottom: 0;
 }
 .navbar-countdown {
-  font-size: 11px;
+  font-size: 9px;
   font-weight: 600;
   letter-spacing: .2rem;
   margin-right: 55px;
   line-height: 6.5rem;
-  background-color: #e8e8e8;
-  color: #222;
+  background-color: #fafafa;
+  color: #ccc;
   padding: 6px;
   border-radius: 10px;
 }
 .navbar-fear-greed {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: .2rem;
   margin-right: 55px;
@@ -69,7 +88,7 @@
   background-color: #fff8f8;
 }
 .bigger {
-  font-size: large;
+  font-size: 120%;
 }
 .align-right {
   text-align: right;

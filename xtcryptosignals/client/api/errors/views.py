@@ -16,6 +16,7 @@ from flask import (
 )
 from flask_wtf.csrf import CSRFError
 from xtcryptosignals.client import service
+from xtcryptosignals import __version__
 
 
 bp = Blueprint("errors", __name__)
@@ -30,6 +31,7 @@ def csrf_error(e):
 def unauthorized(_):
     return (
         render_template(
+            version=__version__,
             template_name_or_list="error.html",
             error="Unauthorized",
             frequency=g.HISTORY_FREQUENCY[0],
@@ -42,7 +44,9 @@ def unauthorized(_):
 def page_not_found(_):
     return (
         render_template(
-            template_name_or_list="error.html", error="The URL is incorrect",
+            version=__version__,
+            template_name_or_list="error.html",
+            error="The URL is incorrect",
         ),
         404,
     )
@@ -52,6 +56,7 @@ def page_not_found(_):
 def unauthorized(_):
     return (
         render_template(
+            version=__version__,
             template_name_or_list="error.html",
             error="You've been logged out",
             frequency=g.HISTORY_FREQUENCY[0],

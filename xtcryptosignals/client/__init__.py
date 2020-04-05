@@ -30,7 +30,7 @@ elif app.config["ENV"] == "development":
 elif app.config["ENV"] == "docker":
     app.config.from_object("xtcryptosignals.client.config.ConfigDocker")
 else:
-    raise ValueError('Unknown FLASK_ENV')
+    raise ValueError("Unknown FLASK_ENV")
 
 app.config.from_envvar("SETTINGS_APP")
 
@@ -44,14 +44,14 @@ def create_app():
     from xtcryptosignals.client.api.home.views import bp as bp_home
     from xtcryptosignals.client.api.auth.views import bp as bp_auth
     from xtcryptosignals.client.api.errors.views import bp as bp_errors
-    from xtcryptosignals.client.api.ticker.views import bp as bp_ticker
+    from xtcryptosignals.client.api.tickers.views import bp as bp_ticker
     from xtcryptosignals.client.api.contact.views import bp as bp_contact
     from xtcryptosignals.client.api.user.views import bp as bp_user
     from xtcryptosignals.client.api.portfolio.views import bp as bp_portfolio
-    from xtcryptosignals.client.api.notification.views import (
+    from xtcryptosignals.client.api.notifications.views import (
         bp as bp_notification,
     )
-    from xtcryptosignals.client.api.transaction.views import (
+    from xtcryptosignals.client.api.transactions.views import (
         bp as bp_transaction,
     )
     from xtcryptosignals.client.api.parties.views import bp as bp_parties

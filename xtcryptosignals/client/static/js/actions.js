@@ -1,17 +1,19 @@
 const menu_options_logged_in = [
     '#menu_portfolio_link',
+    '#menu_transactions_link',
     '#menu_logout_link',
     '#menu_notifications_link',
 ];
 
 const urls_logout_to_index = [
-    '/transactions/portfolio',
+    '/transactions',
+    '/portfolio',
     '/notifications',
 ];
 
 function signup() {
     $.post('/signup', $('#form_signup').serialize()).done(function(response) {
-        $.notify('Signup completed!', 'success');
+        $.notify('Signup completed! You are ready to login!', 'success');
         $.modal.close();
     })
     .fail(function(xhr, status, error) {
@@ -52,7 +54,7 @@ function logout() {
 }
 
 function get_transactions(handler) {
-    $.get('/transactions').done(function(response) {
+    $.get('/transactions/list').done(function(response) {
         handler(response)
     })
     .fail(function(xhr, status, error) {
@@ -61,7 +63,7 @@ function get_transactions(handler) {
 }
 
 function get_portfolio(handler) {
-    $.get('/portfolio').done(function(response) {
+    $.get('/portfolio/list').done(function(response) {
         handler(response)
     })
     .fail(function(xhr, status, error) {

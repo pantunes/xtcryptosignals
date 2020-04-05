@@ -9,7 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from mongoengine.errors import ValidationError
-from xtcryptosignals.server.api.transaction.models import Transaction
+from xtcryptosignals.server.api.transactions.models import Transaction
 from xtcryptosignals.server.utils import _sanitize_errors_mongoengine
 
 

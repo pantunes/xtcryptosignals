@@ -14,8 +14,8 @@ from xtcryptosignals.server.utils import (
     validate_io,
     user_auth,
 )
-from xtcryptosignals.server.api.notification import service
-from xtcryptosignals.server.api.notification.schemas import (
+from xtcryptosignals.server.api.notifications import service
+from xtcryptosignals.server.api.notifications.schemas import (
     NotificationRuleInputSchema,
     NotificationOutputSchema,
     NotificationRuleOutputSchema,
@@ -66,9 +66,12 @@ class NotificationRuleEdit(Resource):
             401:
                 description: Unauthorized
         """
-        return service.edit_notification_rule(
-            auth, notification_id, data=valid_data
-        ), 200
+        return (
+            service.edit_notification_rule(
+                auth, notification_id, data=valid_data
+            ),
+            200,
+        )
 
 
 class NotificationRuleGet(Resource):
@@ -176,9 +179,7 @@ class NotificationsRulesList(Resource):
 
 
 api.add_resource(NotificationRuleAdd, "/notifications/rule/add")
-api.add_resource(
-    NotificationRuleEdit, "/notifications/rule/<notification_id>"
-)
+api.add_resource(NotificationRuleEdit, "/notifications/rule/<notification_id>")
 api.add_resource(NotificationRuleGet, "/notifications/rule/<notification_id>")
 api.add_resource(
     NotificationRuleDelete, "/notifications/rule/<notification_id>"
