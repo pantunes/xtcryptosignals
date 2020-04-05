@@ -11,7 +11,7 @@ const urls_logout_to_index = [
 
 function signup() {
     $.post('/signup', $('#form_signup').serialize()).done(function(response) {
-        $.notify('Signup completed!', 'success');
+        $.notify('Signup completed! You are ready to login!', 'success');
         $.modal.close();
     })
     .fail(function(xhr, status, error) {
