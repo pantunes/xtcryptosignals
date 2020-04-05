@@ -47,7 +47,6 @@
                     $.notify('Added Transaction!', 'success');
                     $.modal.close();
                     get_transactions(render_transactions);
-                    get_portfolio(render_portfolio);
                 })
                 .fail(function(xhr, status, error) {
                     process_fail(xhr);
