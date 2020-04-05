@@ -14,8 +14,8 @@ from xtcryptosignals.server.utils import (
     validate_io,
     user_auth,
 )
-from xtcryptosignals.server.api.transaction import service
-from xtcryptosignals.server.api.transaction.schemas import (
+from xtcryptosignals.server.api.transactions import service
+from xtcryptosignals.server.api.transactions.schemas import (
     TransactionInputSchema,
     TransactionOutputSchema,
 )

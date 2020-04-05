@@ -35,7 +35,7 @@ socketio = SocketIO()
 
 
 def create_app():
-    from xtcryptosignals.server.api.ticker import views
+    from xtcryptosignals.server.api.tickers import views
     from xtcryptosignals.server.api.contact.views import bp as bp_contact
     from xtcryptosignals.server.api.auth.views import bp as bp_auth
     from xtcryptosignals.server.api.user.views import bp as bp_user
@@ -43,10 +43,10 @@ def create_app():
     from xtcryptosignals.server.api.portfolio.views import bp as bp_portfolio
     from xtcryptosignals.server.api.parties.views import bp as bp_parties
     from xtcryptosignals.server.api.charts.views import bp as bp_charts
-    from xtcryptosignals.server.api.notification.views import (
+    from xtcryptosignals.server.api.notifications.views import (
         bp as bp_notification,
     )
-    from xtcryptosignals.server.api.transaction.views import (
+    from xtcryptosignals.server.api.transactions.views import (
         bp as bp_transaction,
     )
 

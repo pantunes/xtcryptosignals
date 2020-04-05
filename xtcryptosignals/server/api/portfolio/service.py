@@ -9,7 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import redis
-from xtcryptosignals.server.api.transaction.models import Transaction
+from xtcryptosignals.server.api.transactions.models import Transaction
 from xtcryptosignals.common.utils import get_coin_tokens
 from xtcryptosignals.tasks import settings as s
 

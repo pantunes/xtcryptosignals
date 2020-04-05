@@ -19,7 +19,7 @@ from pywebpush import webpush, WebPushException
 from xtcryptosignals.tasks import settings as s
 from xtcryptosignals.common.utils import use_mongodb
 from xtcryptosignals.tasks.utils import convert_to_seconds
-from xtcryptosignals.server.api.notification.models import (
+from xtcryptosignals.server.api.notifications.models import (
     NotificationRule,
     Notification,
 )

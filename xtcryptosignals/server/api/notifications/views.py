@@ -14,8 +14,8 @@ from xtcryptosignals.server.utils import (
     validate_io,
     user_auth,
 )
-from xtcryptosignals.server.api.notification import service
-from xtcryptosignals.server.api.notification.schemas import (
+from xtcryptosignals.server.api.notifications import service
+from xtcryptosignals.server.api.notifications.schemas import (
     NotificationRuleInputSchema,
     NotificationOutputSchema,
     NotificationRuleOutputSchema,
