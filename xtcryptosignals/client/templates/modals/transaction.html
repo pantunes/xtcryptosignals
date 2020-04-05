@@ -42,7 +42,7 @@
       </div>
       <input class="button-primary" type="button" value="Add" onClick="(
           function() {
-            $.post('/transaction/add', $('#form_transaction').serialize())
+            $.post('/transactions/add', $('#form_transaction').serialize())
                 .done(function(response) {
                     $.notify('Added Transaction!', 'success');
                     $.modal.close();

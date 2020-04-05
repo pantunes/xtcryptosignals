@@ -33,11 +33,11 @@ def index():
     return dict(results=response.json()), response.status_code
 
 
-@bp.route("/transaction/add", methods=["POST"])
+@bp.route("/transactions/add", methods=["POST"])
 @login_required
 def add():
     response = requests.post(
-        url="{}transaction/add".format(
+        url="{}transactions/add".format(
             current_app.config["SERVER_API_BASE_URL"]
         ),
         headers=dict(Authorization=current_user.id),

@@ -83,5 +83,5 @@ class Transactions(Resource):
         return service.transactions(auth)
 
 
-api.add_resource(TransactionAdd, "/transaction/add")
+api.add_resource(TransactionAdd, "/transactions/add")
 api.add_resource(Transactions, "/transactions")

@@ -1,11 +1,13 @@
 const menu_options_logged_in = [
     '#menu_portfolio_link',
+    '#menu_transactions_link',
     '#menu_logout_link',
     '#menu_notifications_link',
 ];
 
 const urls_logout_to_index = [
     '/transactions/portfolio',
+    '/portfolio/portfolio',
     '/notifications',
 ];
 
