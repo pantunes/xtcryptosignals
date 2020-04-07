@@ -1,3 +1,7 @@
+.darkmode-layer, .darkmode-toggle {
+  z-index: 500;
+}
+
 .darkmode--activated .darkmode-background {
   background-color: #e0e0e0;
 }
