@@ -113,10 +113,10 @@
 
 <div class="row">
     <div class="five columns">
-      <div style="float: left">
+      <div class="u-pull-left">
         <h5>My Notifications Rules</h5>
       </div>
-      <div style="float: right">
+      <div class="u-pull-right">
         <input class="button-primary" type="button" value="Add Rule" onclick="(
           function() {
             open_modal('#rule');
@@ -131,7 +131,7 @@
             <!--<th>Coin/Token</th>-->
             <th>Metric</th>
             <th>Interval</th>
-            <th>Perc. %</th>
+            <th>%</th>
             <th>Added On UTC</th>
           </tr>
         </thead>
@@ -141,10 +141,10 @@
   </div>
 
   <div class="seven columns">
-    <div style="float: left;">
+    <div class="u-pull-left">
       <h5>My last 30 Notifications</h5>
     </div>
-    <div style="float: right">
+    <div class="u-pull-right">
         <label for="select_coin_tokens">
             Coin or Token:
             <select id="select_coin_tokens" onchange="(
@@ -169,7 +169,7 @@
       <tbody></tbody>
     </table>
 
-    </div>
+  </div>
 </div>
 
 {% include 'modals/rule.html' %}

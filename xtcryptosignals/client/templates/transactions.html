@@ -49,13 +49,13 @@
 
 <br/><br/>
 
-<div class="row">
+<div class="row u-pull-left">
 
     <div class="six columns">
-      <div style="float: left">
+      <div class="u-pull-left">
         <h5>My Transactions</h5>
       </div>
-      <div style="float: right">
+      <div class="u-pull-right">
         <input class="button-primary" type="button" value="Add Tx" onClick="(
           function() {
             open_modal('#transaction');
@@ -63,7 +63,7 @@
           })(); return false;">
       </div>
 
-      <table class="u-full-width" id="table_transactions">
+      <table id="table_transactions">
         <thead>
           <tr>
             <th>&nbsp;</th>
@@ -78,7 +78,6 @@
       </table>
 
   </div>
-
 </div>
 
 {% include 'modals/transaction.html' %}
