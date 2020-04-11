@@ -15,10 +15,13 @@ function create_chart_coin_or_token(
         credits: {
             enabled: false
         },
+        time: {
+            timezone: moment.tz.guess(true)
+        },
         xAxis: [{
             type: 'datetime',
             title: {
-                text: 'Datetime (UTC)'
+                text: `Datetime (${moment.tz.guess(true)})`
             }
         }],
         yAxis: [{
