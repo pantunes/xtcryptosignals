@@ -87,6 +87,10 @@
                 suffix = '%'
             }
 
+            if(['updated_on'].indexOf(_attr) >= 0) {
+                val = moment(moment.utc(val).toDate()).local().fromNow();
+            }
+
             if (_id.indexOf('#binance_btcusdt_price_') !== -1) {
                 timeleft = 1;
             }
@@ -218,7 +222,7 @@ function _post_ticker_emit(id, json, reference_name, reference_pair, coin_or_tok
                         <th>&nbsp;</th>
                         <th>Pair</th>
                         {% for att in attributes %}
-                        <th>{{att | replace(" On",  " On UTC") }}</th>
+                        <th>{{ att }}</th>
                         {% endfor %}
                     </tr>
                 </thead>
@@ -236,7 +240,7 @@ function _post_ticker_emit(id, json, reference_name, reference_pair, coin_or_tok
                                     <span id="{{_id}}" style='padding-left: 8px'>-</span>
                                 </td>
                             {% else %}
-                                <td id="{{_id}}" style="width: 150px;"/>
+                                <td id="{{_id}}" style="width: 150px;"></td>
                             {% endif %}
                         {% endfor %}
                     </tr>

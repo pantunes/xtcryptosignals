@@ -11,19 +11,19 @@
 <br/>
 <div class="row">
     <div class="twelve columns">
-    <table class="u-full-width">
-        <caption><h5>{{ coin_or_token }} - {{frequency}}</h5></caption>
-        <thead>
-            <tr>
-                <th>&nbsp;</th>
-                <th>Pair</th>
-                <th>Exchange</th>
+        <table class="u-full-width">
+            <caption><h5>{{ coin_or_token }} - {{frequency}}</h5></caption>
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Pair</th>
+                    <th>Exchange</th>
 {% for att in attributes if att != 'Price USDT' %}
-                <th>{{att | replace(" On",  " On UTC") }}</th>
+                <th>{{ att }}</th>
 {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
+                </tr>
+            </thead>
+            <tbody>
 {% for i in symbols_per_exchange %}
     {% for exchange, d in i.items() %}
     {% if d['pairs']%}
@@ -40,7 +40,7 @@
                     <span id="{{_id}}" style='padding-left: 8px'>-</span>
                 </td>
             {% else %}
-                <td id="{{_id}}" style="width: 150px;"/>
+                <td id="{{_id}}" style="width: 150px;"></td>
             {% endif %}
         {% endfor %}
         </tr>

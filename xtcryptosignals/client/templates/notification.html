@@ -44,7 +44,7 @@
       $table.append(
           "<tr " + css + ">" +
           "<td style='padding-left: 8px'>" + this.message + "</td>" +
-          "<td style='width: 150px'>" + this.created_on + "</td>" +
+          "<td style='width: 150px'>" + moment(moment.utc(this.created_on).toDate()).local().fromNow() + "</td>" +
           "</tr>"
       );
     });
@@ -60,11 +60,10 @@
           "<tr id='" + this._id + "' style='cursor: pointer;'>" +
           "<td style='width: 32px; vertical-align: middle;'>" +
           "<img src='/static/imgs/logos/" + this.coin_token + ".png' alt='" + this.coin_token + "'/></td>" +
-          // "<td>" + this.coin_token + "</td>" +
           "<td>" + this.metric + "</td>" +
           "<td>" + this.interval + "</td>" +
           "<td class='align-right'>" + this.percentage + "%</td>" +
-          "<td style='width: 150px'>" + this.created_on + "</td>" +
+          "<td style='width: 150px'>" + moment(moment.utc(this.created_on).toDate()).local().fromNow() + "</td>" +
           "</tr>"
       );
     });
@@ -128,11 +127,10 @@
         <thead>
           <tr>
             <th>&nbsp;</th>
-            <!--<th>Coin/Token</th>-->
             <th>Metric</th>
             <th>Interval</th>
             <th>%</th>
-            <th>Added On UTC</th>
+            <th>Added On</th>
           </tr>
         </thead>
         <tbody></tbody>
@@ -163,7 +161,7 @@
       <thead>
         <tr>
           <th>Notification</th>
-          <th>Sent On UTC</th>
+          <th>Sent On</th>
         </tr>
       </thead>
       <tbody></tbody>
