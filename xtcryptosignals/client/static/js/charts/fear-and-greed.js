@@ -13,6 +13,9 @@ function create_chart_fear_and_greed(price_formatter, data, frequency) {
         credits: {
             enabled: false
         },
+        time: {
+            timezone: moment.tz.guess(true)
+        },
         xAxis: [{
             categories: data.days,
             crosshair: true
