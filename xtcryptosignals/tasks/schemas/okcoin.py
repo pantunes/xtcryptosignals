@@ -17,9 +17,9 @@ class Okcoin(BaseSchema):
     symbol = fields.Str(required=True)
     source = fields.Str(required=True)
     last = fields.Float(required=True, attribute="price")
-    vol = fields.Float(required=True, attribute="volume_24h")
-    high = fields.Float(required=True, attribute="highest_price_24h")
-    low = fields.Float(required=True, attribute="lowest_price_24h")
+    quote_volume_24h = fields.Float(required=True, attribute="volume_24h")
+    high_24h = fields.Float(required=True, attribute="highest_price_24h")
+    low_24h = fields.Float(required=True, attribute="lowest_price_24h")
 
     @pre_load
     def pre_load(self, data):
@@ -29,6 +29,4 @@ class Okcoin(BaseSchema):
     @post_load
     def post_load(self, data):
         super().post_load(data)
-        data["symbol"] = data["symbol"].replace("_", "")
-        data["volume_24h"] = data["volume_24h"] * data["price"]
         return data
