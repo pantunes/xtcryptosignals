@@ -6,7 +6,7 @@ function create_chart_coin_or_token(
             zoomType: 'x'
         },
         title: {
-            text: coin_or_token + ' Price - ' + frequency
+            text: `${coin_or_token} Price - ${frequency}`
         },
         subtitle: {
             text: document.ontouchstart === undefined ?

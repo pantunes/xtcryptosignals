@@ -63,7 +63,7 @@ $(document).ready(function() {
 
 <script type="text/javascript">
 function post_ticker_emit(id, json) {
-    _post_ticker_emit(
+    _post_and_get_ticker_emit(
         id, json, '{{ reference["name"] }}', '{{ reference["pair"] }}', '{{ coin_or_token }}'
     );
 }

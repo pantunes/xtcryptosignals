@@ -99,3 +99,21 @@ body {
 .negative {
   background-color: #ffe6e6;
 }
+.custom-grid .column,
+.custom-grid .columns {
+  background-color: #fafafa;
+  text-align: center;
+  font-size: 1rem;
+  text-transform: uppercase;
+  height: 20px;
+  line-height: 20px;
+  font-weight: 600;
+  letter-spacing: .1rem;
+}
+.custom-grid-without-subtitles .column,
+.custom-grid-without-subtitles .columns {
+  border-radius: 4px;
+  height: 30px;
+  line-height: 30px;
+  margin-bottom: .75rem;
+}

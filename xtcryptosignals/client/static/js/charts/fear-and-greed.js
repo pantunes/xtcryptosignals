@@ -4,7 +4,7 @@ function create_chart_fear_and_greed(price_formatter, data, frequency) {
             zoomType: 'x'
         },
         title: {
-            text: 'Fear & Greed Index vs BTC Price - ' + frequency
+            text: `Fear & Greed Index vs BTC Price - ${frequency}`
         },
         subtitle: {
             text: document.ontouchstart === undefined ?
