@@ -38,14 +38,7 @@
             }
 
             if (['price', 'price_usdt', 'volume_24h'].includes(_attr)) {
-
-                const precision = (val + "").split(".");
-                let frac_digits = 2;
-
                 if (['price', 'price_usdt'].includes(_attr)) {
-                    if (precision.length > 1) {
-                        frac_digits = precision[1].length
-                    }
                     const color = (json.price_change > 0) ? "#e3ffe2" : "#ffe2e2";
                     $(_id).effect("highlight", {
                         color: color,
@@ -59,17 +52,11 @@
                     } catch (e) {}
                 }
 
-                let setup = {
-                    maximumFractionDigits: frac_digits
-                };
-                if (is_usd) {
-                    setup.minimumFractionDigits = frac_digits;
-                    setup.style = 'currency';
-                    setup.currency = 'USD'
+                let p = price_formatter;
+                if (this.unit_price < 1) {
+                    p = price_formatter_low_values;
                 }
-
-                const price_formatter = new Intl.NumberFormat('en-US', setup);
-                val = price_formatter.format(val)
+                val = p.format(val)
 
             } else if (_attr === 'number_trades_24h') {
                 val = numeral(val).format('0,0');
@@ -185,7 +172,7 @@ function render_data_charts(data, coin_or_token, frequency) {
 </script>
 
 <script type="text/javascript">
-function _post_ticker_emit(id, json, reference_name, reference_pair, coin_or_token) {
+function _post_and_get_ticker_emit(id, json, reference_name, reference_pair, coin_or_token) {
     if (json['source'] !== reference_name) {
         return;
     }
@@ -198,6 +185,7 @@ function _post_ticker_emit(id, json, reference_name, reference_pair, coin_or_tok
         charts[i].series[2].addPoint([json['created_on_ts'], json['number_trades_24h']], false, false);
         charts[i].redraw();
     }
+    return json
 }
 </script>
 

@@ -23,9 +23,14 @@
 
 <script type="text/javascript">
 function post_ticker_emit(id, json) {
-    _post_ticker_emit(
+    const ticker = _post_and_get_ticker_emit(
         id, json, '{{ reference["name"] }}', '{{ reference["pair"] }}', '{{ coin_or_token }}'
     );
+    if (ticker !== undefined) {
+        for (const x of ['price', 'price_change', 'volume_change', 'number_trades_change']) {
+            $(`#${x}`).html(json[x]);
+        }
+    }
 }
 </script>
 
@@ -51,17 +56,26 @@ $('#select_coin_or_token').on('change', function() {
 </script>
 
 <div class="row">
-
+    <div class="custom-grid">
+        <div class="four columns"><span class="bigger">$<span id="price">-</span> (%<span id="price_change">-</span>)</span></div>
+        <div class="two columns"><span class="bigger">%<span id="volume_change">-</span></span></div>
+        <div class="three columns"><span class="bigger">%<span id="number_trades_change">-</span></span></div>
+    </div>
+    <div class="custom-grid">
+        <div class="four columns">Price (Price change)</div>
+        <div class="two columns">Volume change</div>
+        <div class="three columns">Number of trades change</div>
+    </div>
+</div>
+<div class="row">
 {% for f in frequencies_charts %}
-<div class="twelve columns" id="row_chart_{{ coin_or_token }}{{ f }}" style="display: none;">
-    <div id="chart_{{ coin_or_token }}{{ f }}"></div>
-    <p class="highcharts-description" style="font-size:small">
-        <b>Source:</b> {{ reference['name']|capitalize }}, <b>Pair:</b> {{ coin_or_token }}/{{ reference['pair'] }}
-    </p>
-    <br/><br/>
-</div>
+    <div class="twelve columns" id="row_chart_{{ coin_or_token }}{{ f }}" style="display: none;">
+        <div id="chart_{{ coin_or_token }}{{ f }}"></div>
+        <p class="highcharts-description" style="font-size:small">
+            <b>Source:</b> {{ reference['name']|capitalize }}, <b>Pair:</b> {{ coin_or_token }}/{{ reference['pair'] }}
+        </p>
+        <br/><br/>
+    </div>
 {% endfor %}
-
 </div>
-
 {% endblock %}
