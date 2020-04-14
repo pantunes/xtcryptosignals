@@ -53,7 +53,7 @@
                 }
 
                 let p = price_formatter;
-                if (this.unit_price < 1) {
+                if (val < 1) {
                     p = price_formatter_low_values;
                 }
                 val = p.format(val)
@@ -132,7 +132,7 @@
 <script type="text/javascript">
 let price_formatter_setup_low_values = {
     minimumFractionDigits: 0,
-    maximumFractionDigits: 4,
+    maximumFractionDigits: 8,
     style: 'currency',
     currency: 'USD',
 };
@@ -156,13 +156,13 @@ const num_formatter = new Intl.NumberFormat('en-US', num_formatter_setup);
 <script type="text/javascript">
 let charts=[];
 function render_data_charts(data, coin_or_token, frequency) {
-    let cur_formatter = price_formatter;
+    let p = price_formatter;
     if (data.prices[0][1] < 1) {
-        cur_formatter = price_formatter_low_values;
+        p = price_formatter_low_values;
     }
     const chart_id = 'chart_' + coin_or_token + frequency;
     let chart = create_chart_coin_or_token(
-        chart_id, cur_formatter, price_volume_formatter,
+        chart_id, p, price_volume_formatter,
         num_formatter, data, coin_or_token, frequency,
     );
     charts.push(chart);
