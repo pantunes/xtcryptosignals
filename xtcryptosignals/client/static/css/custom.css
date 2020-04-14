@@ -47,7 +47,7 @@ body {
   background-color: #fafafa;
   color: #ccc;
   padding: 6px;
-  border-radius: 10px;
+  border-radius: 4px;
 }
 .navbar-fear-greed {
   font-size: 10px;
@@ -57,7 +57,7 @@ body {
   line-height: 6.5rem;
   padding: 8px;
   color: white;
-  border-radius: 10px;
+  border-radius: 4px;
 }
 .fear-greed-red {
   background-color: #ff8080;
@@ -101,6 +101,7 @@ body {
 }
 .custom-grid .column,
 .custom-grid .columns {
+  border-radius: 4px;
   background-color: #fafafa;
   text-align: center;
   font-size: 1rem;
