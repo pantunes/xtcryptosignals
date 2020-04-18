@@ -118,3 +118,14 @@ function get_chart_coin_or_token_data(handler, coin_or_token, frequency) {
         process_fail(xhr);
     });
 }
+
+function captcha() {
+    $.get('/parties/captcha', function (data) {
+        document.getElementById('login_image_captcha').setAttribute(
+            'src', `data:image/png;base64,${data['captcha']}`
+        );
+        document.getElementById('signup_image_captcha').setAttribute(
+            'src', `data:image/png;base64,${data['captcha']}`
+        );
+    });
+}

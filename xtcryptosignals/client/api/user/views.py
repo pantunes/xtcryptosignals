@@ -14,6 +14,7 @@ from flask import (
     Response,
     request,
     current_app,
+    session,
     g,
 )
 from flask_login import (
@@ -62,9 +63,14 @@ def info():
 
 @bp.route("/signup", methods=["POST"])
 def signup():
+    form_data = request.form.to_dict()
+
+    if form_data['captcha'] != session['captcha']:
+        return dict(error="Bad Captcha."), 404
+
     response = requests.post(
         url="{}signup".format(current_app.config["SERVER_API_BASE_URL"]),
-        json=request.form.to_dict(),
+        json=form_data,
     )
 
     _json = response.json()
