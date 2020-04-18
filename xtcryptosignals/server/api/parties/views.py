@@ -27,7 +27,7 @@ class FearAndGreedIndex(Resource):
     @validate_io()
     def get(self):
         """
-        Returns Crypto Fear & Greed Index
+        Crypto Fear & Greed Index
         ---
         tags:
             - Parties

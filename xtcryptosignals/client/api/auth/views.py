@@ -12,6 +12,8 @@ import requests
 from flask import (
     Blueprint,
     request,
+    session,
+    current_app,
 )
 from flask_login import (
     login_required,
@@ -19,7 +21,6 @@ from flask_login import (
     logout_user,
     current_user,
 )
-from flask import session, current_app
 from xtcryptosignals.client import login_manager
 from xtcryptosignals.client.api.auth.models import Auth
 
@@ -43,9 +44,14 @@ def load_user(token):
 
 @bp.route("/login", methods=["POST"])
 def login():
+    form_data = request.form.to_dict()
+
+    if form_data['captcha'] != session['captcha']:
+        return dict(error="Bad credentials."), 404
+
     response = requests.post(
         url="{}login".format(current_app.config["SERVER_API_BASE_URL"]),
-        json=request.form.to_dict(),
+        json=form_data,
     )
 
     _json = response.json()

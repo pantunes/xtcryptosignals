@@ -18,6 +18,12 @@
           <label for="signup_nickname">Nickname</label>
           <input class="u-full-width" type="text" id="signup_nickname" name="name">
       </div>
+      <div class="row">
+          <label for="signup_captcha">Captcha</label>
+          <img alt="Captcha" id="signup_image_captcha" src=""><br/>
+          <a href="javascript:captcha();">Refresh</a>
+          <input class="u-full-width" placeholder="Write the generated string above" type="text" id="signup_captcha" name="captcha">
+      </div>
       <input class="button-primary" type="button" value="Submit" onClick="(
           function() {
               signup(); return false;

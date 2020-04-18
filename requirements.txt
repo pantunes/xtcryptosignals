@@ -16,6 +16,8 @@ mongodb-migrations
 bcrypt
 environs
 pywebpush
+captcha
+
 # versioned library dependencies
 marshmallow==2.20.5
 jsonschema==2.6.0
