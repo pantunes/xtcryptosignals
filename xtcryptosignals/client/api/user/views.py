@@ -65,7 +65,10 @@ def info():
 def signup():
     form_data = request.form.to_dict()
 
-    if form_data['captcha'] != session['captcha']:
+    try:
+        if form_data['captcha'] != session['captcha']:
+            return dict(error="Bad Captcha."), 404
+    except KeyError:
         return dict(error="Bad Captcha."), 404
 
     response = requests.post(

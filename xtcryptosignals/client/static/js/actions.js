@@ -120,12 +120,12 @@ function get_chart_coin_or_token_data(handler, coin_or_token, frequency) {
 }
 
 function captcha() {
-    $.get('/parties/captcha', function (data) {
-        document.getElementById('login_image_captcha').setAttribute(
-            'src', `data:image/png;base64,${data['captcha']}`
-        );
-        document.getElementById('signup_image_captcha').setAttribute(
-            'src', `data:image/png;base64,${data['captcha']}`
-        );
-    });
+    const _captcha_ids = ['login_image_captcha', 'signup_image_captcha'];
+    for (const x of _captcha_ids) {
+        $.get('/parties/captcha', function (data) {
+            document.getElementById(x).setAttribute(
+                'src', `data:image/png;base64,${data['captcha']}`
+            );
+        });
+    }
 }
