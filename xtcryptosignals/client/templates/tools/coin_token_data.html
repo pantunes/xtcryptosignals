@@ -28,7 +28,11 @@ function post_ticker_emit(id, json) {
     );
     if (ticker !== undefined) {
         for (const x of ['price', 'price_change', 'volume_change', 'number_trades_change']) {
-            $(`#${x}`).html(json[x]);
+            let val = json[x]
+            if (x === 'price') {
+                val = price_formatter.format(json[x])
+            }
+            $(`#${x}`).html(val);
         }
     }
 }
@@ -57,7 +61,7 @@ $('#select_coin_or_token').on('change', function() {
 
 <div class="row">
     <div class="custom-grid">
-        <div class="four columns"><span class="bigger">$<span id="price">-</span> (%<span id="price_change">-</span>)</span></div>
+        <div class="four columns"><span class="bigger"><span id="price">-</span> (%<span id="price_change">-</span>)</span></div>
         <div class="two columns"><span class="bigger">%<span id="volume_change">-</span></span></div>
         <div class="three columns"><span class="bigger">%<span id="number_trades_change">-</span></span></div>
     </div>
