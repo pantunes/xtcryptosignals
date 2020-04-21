@@ -17,7 +17,9 @@ bcrypt
 environs
 pywebpush
 captcha
-
+wikipedia-api
+beautifulsoup4
+millify
 # versioned library dependencies
 marshmallow==2.20.5
 jsonschema==2.6.0

@@ -21,6 +21,8 @@ from xtcryptosignals.client.utils import validate_args
 from xtcryptosignals.common.utils import (
     get_pairs,
     get_coin_tokens,
+    get_wikipedia_summary,
+    get_twitter_num_followers,
 )
 
 
@@ -44,6 +46,7 @@ def before_request():
     g.SYMBOLS_PER_EXCHANGE, _ = service.get_symbols_per_exchange()
     g.HISTORY_FREQUENCY, _ = service.get_history_frequency()
     g.COINS_OR_TOKENS_REFERENCE, _ = service.get_coins_or_tokens_reference()
+    g.PROJECT, _ = service.get_projects()
 
 
 @bp.context_processor
@@ -108,12 +111,18 @@ def token_frequency(coin_or_token, frequency):
                     x[idx][a]["pairs"].append((c, d))
     if coin_or_token_404:
         raise ValueError("Coin/Token not found.")
+    project = g.PROJECT[coin_or_token]
+    project.update(
+        description=get_wikipedia_summary(project["wikipedia"]),
+        num_followers=get_twitter_num_followers(project["twitter"]),
+    )
     return dict(
         template_name_or_list="ticker/token_frequency.html",
         symbols_per_exchange=x,
         attributes=["Price USDT"] + _COLUMN_ATTRIBUTES,
         frequency=frequency,
         coin_or_token=coin_or_token,
+        project=project,
         reference=g.COINS_OR_TOKENS_REFERENCE[coin_or_token],
     )
 

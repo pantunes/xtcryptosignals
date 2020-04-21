@@ -50,6 +50,8 @@ from xtcryptosignals.settings_exchanges import (
     BILAXY,
 )  # noqa
 
+from xtcryptosignals.settings_projects import PROJECTS  # noqa
+
 __all__ = [
     "EXCHANGES",
     "SYMBOLS_PER_EXCHANGE",
@@ -70,4 +72,5 @@ __all__ = [
     "BILAXY",
     "TICKER_SCHEDULE",
     "HISTORY_FREQUENCY",
+    "PROJECTS",
 ]

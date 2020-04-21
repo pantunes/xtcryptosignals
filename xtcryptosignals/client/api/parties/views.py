@@ -33,13 +33,16 @@ def cfgi():
 
 @bp.route("/parties/captcha", methods=["GET"])
 def captcha():
-    val = ''.join(
-        [random.choice(
-            string.ascii_lowercase + string.digits) for _ in range(6)])
+    val = "".join(
+        [
+            random.choice(string.ascii_lowercase + string.digits)
+            for _ in range(6)
+        ]
+    )
 
     image = ImageCaptcha()
     _captcha = image.generate(val)
 
-    session['captcha'] = val
+    session["captcha"] = val
 
     return dict(captcha=base64.b64encode(_captcha.getvalue()).decode()), 201
