@@ -63,22 +63,6 @@ class CoinsOrTokensReferenceGet(Resource):
         return s.EXCHANGES_AND_PAIRS_OF_REFERENCE, 200
 
 
-class ProjectsGet(Resource):
-    @validate_io()
-    def get(self):
-        """
-        Gets Projects details
-        ---
-        tags:
-            - Tokens
-        responses:
-            200:
-                description: Returns list successfully
-        """
-        return s.PROJECTS, 200
-
-
 api.add_resource(FrequencyGet, "/tokens/frequency")
 api.add_resource(SymbolsGet, "/tokens/symbols")
 api.add_resource(CoinsOrTokensReferenceGet, "/tokens/reference")
-api.add_resource(ProjectsGet, "/tokens/projects")

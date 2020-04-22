@@ -7,119 +7,139 @@ __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
+
+from mongodb_migrations.base import BaseMigration
+from xtcryptosignals.common.utils import use_mongodb
+from xtcryptosignals.server.api.projects.models import Project
+from xtcryptosignals.tasks import settings as s
+
+
 PROJECTS = dict(
     ADA=dict(
         name="Cardano",
-        url="https://www.cardano.org",
+        website="https://www.cardano.org",
         twitter="https://twitter.com/cardano",
         wikipedia=None,
     ),
     BNB=dict(
         name="Binance",
-        url="https://binance.com",
+        website="https://binance.com",
         twitter="https://twitter.com/binance",
         wikipedia="https://en.wikipedia.org/wiki/Binance",
     ),
     BTC=dict(
         name="Bitcoin",
-        url="https://bitcoin.org",
+        website="https://bitcoin.org",
         twitter="https://twitter.com/Bitcoin",
         wikipedia="https://en.wikipedia.org/wiki/Bitcoin",
     ),
     BTMX=dict(
         name="Bitmax",
-        url="https://bitmax.io",
+        website="https://bitmax.io",
         twitter="https://twitter.com/BitMax_Official",
         wikipedia=None,
     ),
     CARD=dict(
         name="Cardstack",
-        url="https://cardstack.com",
+        website="https://cardstack.com",
         twitter="https://twitter.com/cardstack",
         wikipedia=None,
     ),
     ETH=dict(
         name="Ethereum",
-        url="https://ethereum.org",
+        website="https://ethereum.org",
         twitter="https://twitter.com/Ethereum",
         wikipedia="https://en.wikipedia.org/wiki/Ethereum",
     ),
     HBAR=dict(
         name="Hedera Hashgraph",
-        url="https://www.hedera.com",
+        website="https://www.hedera.com",
         twitter="https://twitter.com/hashgraph",
         wikipedia="https://en.wikipedia.org/wiki/Hashgraph",
     ),
     ICX=dict(
         name="Icon",
-        url="https://icon.foundation",
+        website="https://icon.foundation",
         twitter="https://twitter.com/helloiconworld",
         wikipedia=None,
     ),
     IDEX=dict(
         name="IDEX",
-        url="https://idex.market",
+        website="https://idex.market",
         twitter="https://twitter.com/idexio",
         wikipedia=None,
     ),
     LQD=dict(
         name="Liquidity Network",
-        url="https://liquidity.network",
+        website="https://liquidity.network",
         twitter="https://twitter.com/liquiditynet",
         wikipedia=None,
     ),
     LTC=dict(
         name="Litecoin",
-        url="https://litecoin.org",
+        website="https://litecoin.org",
         twitter="https://twitter.com/litecoin",
         wikipedia="https://en.wikipedia.org/wiki/Litecoin",
     ),
     LTO=dict(
         name="LTO Network",
-        url="https://www.ltonetwork.com",
+        website="https://www.ltonetwork.com",
         twitter="https://twitter.com/LTOnetwork",
         wikipedia=None,
     ),
     NANO=dict(
         name="Nano",
-        url="https://nano.org",
+        website="https://nano.org",
         twitter="https://twitter.com/nano",
         wikipedia="https://en.wikipedia.org/wiki/Nano_(cryptocurrency)",
     ),
     ONT=dict(
         name="Ontology",
-        url="https://ont.io",
+        website="https://ont.io",
         twitter="https://twitter.com/OntologyNetwork",
         wikipedia=None,
     ),
     VET=dict(
         name="VeChain",
-        url="https://www.vechain.org",
+        website="https://www.vechain.org",
         twitter="https://twitter.com/vechainofficial",
         wikipedia="https://en.wikipedia.org/wiki/Ven_(currency)",
     ),
     XLM=dict(
         name="Stellar",
-        url="https://www.stellar.org",
+        website="https://www.stellar.org",
         twitter="https://twitter.com/stellarorg",
         wikipedia="https://en.wikipedia.org/wiki/Stellar_(payment_network)",
     ),
     XMR=dict(
         name="Monero",
-        url="https://www.getmonero.org",
+        website="https://www.getmonero.org",
         twitter="https://twitter.com/monero",
         wikipedia="https://en.wikipedia.org/wiki/Monero_(cryptocurrency)",
     ),
     XRP=dict(
         name="Ripple",
-        url="https://ripple.com",
+        website="https://ripple.com",
         twitter="https://twitter.com/Ripple",
         wikipedia="https://en.wikipedia.org/wiki/Ripple_(payment_protocol)",
     ),
     XTZ=dict(
         name="Tezos",
-        url="https://tezos.com",
+        website="https://tezos.com",
         twitter="https://twitter.com/tezos",
         wikipedia="https://en.wikipedia.org/wiki/Tezos",
     ),
 )
+
+
+class Migration(BaseMigration):
+    @use_mongodb(
+        db=s.MONGODB_NAME, host=s.MONGODB_HOST, port=s.MONGODB_PORT,
+    )
+    def upgrade(self):
+        for k, v in PROJECTS.items():
+            Project(**{**{"coin_or_token": k}, **v}).save()
+            print(f"Adding Project: {k}")
+
+    def downgrade(self):
+        pass

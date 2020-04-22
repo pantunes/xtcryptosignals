@@ -49,6 +49,7 @@ def create_app():
     from xtcryptosignals.server.api.transactions.views import (
         bp as bp_transaction,
     )
+    from xtcryptosignals.server.api.projects.views import bp as bp_projects
 
     bps = (
         bp_auth,
@@ -60,6 +61,7 @@ def create_app():
         bp_portfolio,
         bp_parties,
         bp_charts,
+        bp_projects,
     )
 
     for x in bps:

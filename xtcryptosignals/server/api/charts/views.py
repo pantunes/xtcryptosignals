@@ -33,6 +33,10 @@ class ChartFearAndGreedIndexAndBTC(Resource):
             - Charts
         security:
             - Bearer: []
+        parameters:
+            - name: frequency
+              in: path
+              required: true
         responses:
             200:
                 description: Returns list of Crypto Fear & Greed Index \
@@ -51,6 +55,10 @@ class ChartCoinTokenFrequency(Resource):
             - Charts
         security:
             - Bearer: []
+        parameters:
+            - name: frequency
+              in: path
+              required: true
         responses:
             200:
                 description: Returns list of Coin / Token chart data format

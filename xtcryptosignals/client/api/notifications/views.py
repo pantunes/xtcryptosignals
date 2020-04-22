@@ -92,12 +92,12 @@ def rule_add():
     return response.json(), response.status_code
 
 
-@bp.route("/notifications/rule/<notification_id>/edit", methods=["POST"])
+@bp.route("/notifications/rule/<notification>/edit", methods=["POST"])
 @login_required
-def rule_edit(notification_id):
+def rule_edit(notification):
     response = requests.put(
         url="{}notifications/rule/{}".format(
-            current_app.config["SERVER_API_BASE_URL"], notification_id
+            current_app.config["SERVER_API_BASE_URL"], notification
         ),
         headers=dict(Authorization=current_user.id),
         json=request.form.to_dict(),
@@ -105,12 +105,12 @@ def rule_edit(notification_id):
     return response.json(), response.status_code
 
 
-@bp.route("/notifications/rule/<notification_id>/delete", methods=["POST"])
+@bp.route("/notifications/rule/<notification>/delete", methods=["POST"])
 @login_required
-def rule_delete(notification_id):
+def rule_delete(notification):
     response = requests.delete(
         url="{}notifications/rule/{}".format(
-            current_app.config["SERVER_API_BASE_URL"], notification_id
+            current_app.config["SERVER_API_BASE_URL"], notification
         ),
         headers=dict(Authorization=current_user.id),
         json=request.form.to_dict(),
@@ -118,12 +118,12 @@ def rule_delete(notification_id):
     return {}, response.status_code
 
 
-@bp.route("/notifications/rule/<notification_id>", methods=["GET"])
+@bp.route("/notifications/rule/<notification>", methods=["GET"])
 @login_required
-def rule_get(notification_id):
+def rule_get(notification):
     response = requests.get(
         url="{}notifications/rule/{}".format(
-            current_app.config["SERVER_API_BASE_URL"], notification_id
+            current_app.config["SERVER_API_BASE_URL"], notification
         ),
         headers=dict(Authorization=current_user.id),
         json=request.form.to_dict(),

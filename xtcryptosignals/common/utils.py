@@ -8,10 +8,6 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import requests
-import wikipediaapi
-from millify import millify
-from bs4 import BeautifulSoup
 from functools import wraps
 from mongoengine import connect
 
@@ -44,26 +40,3 @@ def get_coin_tokens(symbols_per_exchange):
             for c, _ in b["pairs"]:
                 tokens.add(c)
     return sorted(tokens)
-
-
-def get_wikipedia_summary(url):
-    if url is None:
-        return
-    wiki_wiki = wikipediaapi.Wikipedia("en")
-    page_py = wiki_wiki.page(url.rsplit("/", 1)[-1])
-    p = page_py.summary[0:1000]
-    return p[: p.rfind(". ") + 1]
-
-
-def get_twitter_num_followers(url):
-    req = requests.get(url)
-    soup = BeautifulSoup(req.content, "html.parser")
-    try:
-        return millify(
-            soup.find(href=f"/{url.rsplit('/', 1)[-1]}/followers").find(
-                attrs={"class": "ProfileNav-value"}
-            )["data-count"],
-            precision=2,
-        )
-    except AttributeError:
-        return "?"
