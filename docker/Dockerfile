@@ -2,6 +2,16 @@ FROM python:3.7.2-alpine3.8
 
 RUN python -m pip install --upgrade pip
 RUN apk add --no-cache \
+    zlib \
+    libjpeg-turbo-dev \
+    libpng-dev \
+    freetype-dev \
+    lcms2-dev \
+    libwebp-dev \
+    harfbuzz-dev \
+    fribidi-dev \
+    tcl-dev \
+    tk-dev \
     openssl-dev \
     libffi-dev \
     gcc \
