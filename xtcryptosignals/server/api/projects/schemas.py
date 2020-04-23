@@ -14,8 +14,9 @@ from xtcryptosignals.server.api.common.schemas import OutputSchema
 
 
 class ProjectsOutputSchema(OutputSchema):
-    coin_or_token = fields.String(required=True)
     name = fields.String(required=True)
+    coin_or_token = fields.String(required=True)
+    summary = fields.String(allow_none=True)
     website = fields.String(required=True)
     twitter = fields.String(required=True)
     wikipedia = fields.String(allow_none=True)
