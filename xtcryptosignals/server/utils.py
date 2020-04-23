@@ -11,6 +11,7 @@ __email__ = "pjmlantunes@gmail.com"
 from functools import wraps
 from flask import request
 from xtcryptosignals.server.api.auth import service
+from xtcryptosignals.tasks import settings as s
 
 
 def user_auth():
@@ -57,6 +58,9 @@ def validate_io(
     def decorator(f):
         @wraps(f)
         def wrapper(*args, **kwargs):
+            if "frequency" in kwargs and \
+                    kwargs["frequency"] not in s.HISTORY_FREQUENCY:
+                return dict(error="Frequency is incorrect."), 400
             if schema_in:
                 try:
                     if not is_form:
