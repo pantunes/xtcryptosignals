@@ -99,6 +99,10 @@
   color: #248dad;
 }
 
+.darkmode--activated #summary {
+  color: #b3b3b3;
+}
+
 .darkmode--activated .positive {
   background-color: #282b29;
 }
