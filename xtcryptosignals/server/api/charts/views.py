@@ -33,10 +33,16 @@ class ChartFearAndGreedIndexAndBTC(Resource):
             - Charts
         security:
             - Bearer: []
+        parameters:
+            - name: frequency
+              in: path
+              required: true
         responses:
             200:
                 description: Returns list of Crypto Fear & Greed Index \
                 + BTC chart data format
+            400:
+                description: Error in input validation
         """
         return service.get_chart_fear_and_greed_index_and_btc(frequency)
 
@@ -51,9 +57,15 @@ class ChartCoinTokenFrequency(Resource):
             - Charts
         security:
             - Bearer: []
+        parameters:
+            - name: frequency
+              in: path
+              required: true
         responses:
             200:
                 description: Returns list of Coin / Token chart data format
+            400:
+                description: Error in input validation
         """
         return service.get_chart_coin_or_token_frequency(
             coin_or_token, frequency

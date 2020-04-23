@@ -41,7 +41,7 @@ def info():
         """<h5>Welcome to XTCryptoSignals!</h5>
     Hi {name},
     <br/><br/>
-    This is an Open-source software platform that is in continuous development.
+    This is an <code>open-source</code> software platform that is in continuous development.
     <br/><br/>
     For now you can manage your <a href="/portfolio">portfolio</a> 
     and set your <a href="/notifications">notification alerts</a>.
@@ -66,7 +66,7 @@ def signup():
     form_data = request.form.to_dict()
 
     try:
-        if form_data['captcha'] != session['captcha']:
+        if form_data["captcha"] != session["captcha"]:
             return dict(error="Bad Captcha."), 404
     except KeyError:
         return dict(error="Bad Captcha."), 404

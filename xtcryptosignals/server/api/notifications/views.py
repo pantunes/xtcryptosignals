@@ -50,7 +50,7 @@ class NotificationRuleAdd(Resource):
 class NotificationRuleEdit(Resource):
     @validate_io(schema_in=NotificationRuleInputSchema)
     @user_auth()
-    def put(self, notification_id, auth, valid_data):
+    def put(self, notification, auth, valid_data):
         """
         Edit Notification Rule
         ---
@@ -58,6 +58,10 @@ class NotificationRuleEdit(Resource):
             - Notifications
         security:
             - Bearer: []
+        parameters:
+            - name: notification
+              in: path
+              required: true
         responses:
             200:
                 description: Changed Rule
@@ -68,7 +72,7 @@ class NotificationRuleEdit(Resource):
         """
         return (
             service.edit_notification_rule(
-                auth, notification_id, data=valid_data
+                auth, notification, data=valid_data
             ),
             200,
         )
@@ -77,7 +81,7 @@ class NotificationRuleEdit(Resource):
 class NotificationRuleGet(Resource):
     @validate_io(schema_out=NotificationRuleOutputSchema)
     @user_auth()
-    def get(self, notification_id, auth):
+    def get(self, notification, auth):
         """
         Get Notification Rule
         ---
@@ -85,6 +89,10 @@ class NotificationRuleGet(Resource):
             - Notifications
         security:
             - Bearer: []
+        parameters:
+            - name: notification
+              in: path
+              required: true
         responses:
             200:
                 description: Changed Rule
@@ -93,13 +101,13 @@ class NotificationRuleGet(Resource):
             401:
                 description: Unauthorized
         """
-        return service.get_notification_rule(auth, notification_id), 200
+        return service.get_notification_rule(auth, notification), 200
 
 
 class NotificationRuleDelete(Resource):
     @validate_io()
     @user_auth()
-    def delete(self, notification_id, auth):
+    def delete(self, notification, auth):
         """
         Delete Notification Rule
         ---
@@ -107,6 +115,10 @@ class NotificationRuleDelete(Resource):
             - Notifications
         security:
             - Bearer: []
+        parameters:
+            - name: notification
+              in: path
+              required: true
         responses:
             204:
                 description: Deleted Rule
@@ -115,7 +127,7 @@ class NotificationRuleDelete(Resource):
             401:
                 description: Unauthorized
         """
-        return service.delete_notification_rule(auth, notification_id), 204
+        return service.delete_notification_rule(auth, notification), 204
 
 
 class NotificationsList(Resource):
@@ -179,10 +191,10 @@ class NotificationsRulesList(Resource):
 
 
 api.add_resource(NotificationRuleAdd, "/notifications/rule/add")
-api.add_resource(NotificationRuleEdit, "/notifications/rule/<notification_id>")
-api.add_resource(NotificationRuleGet, "/notifications/rule/<notification_id>")
+api.add_resource(NotificationRuleEdit, "/notifications/rule/<notification>")
+api.add_resource(NotificationRuleGet, "/notifications/rule/<notification>")
 api.add_resource(
-    NotificationRuleDelete, "/notifications/rule/<notification_id>"
+    NotificationRuleDelete, "/notifications/rule/<notification>"
 )
 api.add_resource(NotificationsList, "/notifications")
 api.add_resource(NotificationsRulesList, "/notifications/rules")

@@ -33,6 +33,7 @@ CELERY_IMPORTS = (
     "xtcryptosignals.tasks.ticker",
     "xtcryptosignals.tasks.notifications",
     "xtcryptosignals.tasks.cfgi",
+    "xtcryptosignals.tasks.project",
 )
 
 CELERYBEAT_SCHEDULE = {
@@ -47,5 +48,9 @@ CELERYBEAT_SCHEDULE = {
     "cfgi": {
         "task": "xtcryptosignals.tasks.cfgi.update",
         "schedule": crontab(hour=5, minute=30),
+    },
+    "project": {
+        "task": "xtcryptosignals.tasks.project.update",
+        "schedule": crontab(hour=23, minute=59),
     },
 }

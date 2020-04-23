@@ -26,7 +26,7 @@ class Portfolio(Resource):
     @user_auth()
     def get(self, auth):
         """
-        Returns User's Portfolio
+        User's Portfolio
         ---
         tags:
             - Portfolio

@@ -47,7 +47,7 @@ def login():
     form_data = request.form.to_dict()
 
     try:
-        if form_data['captcha'] != session['captcha']:
+        if form_data["captcha"] != session["captcha"]:
             return dict(error="Bad credentials."), 404
     except KeyError:
         return dict(error="Bad credentials."), 404

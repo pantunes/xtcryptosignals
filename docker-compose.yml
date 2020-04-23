@@ -5,8 +5,9 @@ services:
   server_1:
     build:
       context: .
-      dockerfile: docker/server.Dockerfile
-    command: xt-server --port 5000
+      dockerfile: docker/Dockerfile
+    command: bash -c "mongodb-migrate --url mongodb://172.19.10.10:27017/XTC-Dev --migrations /xtcryptosignals/xtcryptosignals/server/migrations/
+      && xt-server --port 5000"
     ports:
       - "127.0.0.1:5000:5000"
     depends_on:
@@ -19,13 +20,14 @@ services:
   server_2:
     build:
       context: .
-      dockerfile: docker/server.Dockerfile
+      dockerfile: docker/Dockerfile
     command: xt-server --port 5001
     ports:
       - "127.0.0.1:5001:5001"
     depends_on:
       - db
       - redis
+      - server_1
     networks:
       backend:
         ipv4_address: 172.19.10.3
@@ -40,6 +42,7 @@ services:
     depends_on:
       - db
       - redis
+      - server_1
     networks:
       backend:
         ipv4_address: 172.19.10.4
@@ -54,8 +57,6 @@ services:
       - SETTINGS_APP=/xtcryptosignals/xtcryptosignals/config/client.dev.env
     ports:
       - "127.0.0.1:8000:8000"
-    depends_on:
-      - db
     networks:
       backend:
         ipv4_address: 172.19.10.5

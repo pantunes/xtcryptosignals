@@ -108,12 +108,17 @@ def token_frequency(coin_or_token, frequency):
                     x[idx][a]["pairs"].append((c, d))
     if coin_or_token_404:
         raise ValueError("Coin/Token not found.")
+    projects, _ = service.get_projects()
+    project = [x for x in projects if x["coin_or_token"] == coin_or_token][0]
+    project_twitter, _ = service.get_project_last_twitter(project["_id"])
     return dict(
         template_name_or_list="ticker/token_frequency.html",
         symbols_per_exchange=x,
         attributes=["Price USDT"] + _COLUMN_ATTRIBUTES,
         frequency=frequency,
         coin_or_token=coin_or_token,
+        project=project,
+        project_twitter=project_twitter,
         reference=g.COINS_OR_TOKENS_REFERENCE[coin_or_token],
     )
 

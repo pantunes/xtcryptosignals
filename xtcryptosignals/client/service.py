@@ -37,3 +37,19 @@ def get_coins_or_tokens_reference():
         ),
     )
     return response.json(), response.status_code
+
+
+def get_projects():
+    response = requests.get(
+        url="{}projects".format(current_app.config["SERVER_API_BASE_URL"]),
+    )
+    return response.json(), response.status_code
+
+
+def get_project_last_twitter(project):
+    response = requests.get(
+        url="{}projects/twitter/{}".format(
+            current_app.config["SERVER_API_BASE_URL"], project
+        ),
+    )
+    return response.json(), response.status_code

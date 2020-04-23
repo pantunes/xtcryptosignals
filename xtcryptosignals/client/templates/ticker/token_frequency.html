@@ -9,6 +9,29 @@
 {% endwith %}
 
 <br/>
+
+<div id="summary">
+    <div class="row">
+      <h5>{{ project.name.upper() }} <small>({{ coin_or_token }})</small></h5>
+    {% if project.summary %}
+        {{ project.summary|replace('. ', '.<br/>')|replace(project.name + ' ', '<code>' + project.name + '</code> ')|safe }} <a href="{{ project.wikipedia }}">[+]</a>
+    {% else %}
+        (no summary available)
+    {% endif %}
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="six columns">
+          <ul>
+            <li><strong>Website</strong>: <a href="{{ project.website }}">{{ project.website|replace("https://", "") }}</a></li>
+              <li><strong>Twitter</strong>: <a href="{{ project.twitter }}">{{ project.twitter|replace("https://", "") }}</a> {{ project_twitter.num_followers|default("?", true) }} followers</li>
+          </ul>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="twelve columns">
         <table class="u-full-width">
