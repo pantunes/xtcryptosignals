@@ -20,6 +20,8 @@ captcha
 wikipedia-api
 beautifulsoup4
 millify
+py-etherscan-api
+cfscrape
 # versioned library dependencies
 marshmallow==2.20.5
 jsonschema==2.6.0
