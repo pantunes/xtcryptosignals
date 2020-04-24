@@ -37,6 +37,8 @@ URL_CFGI = "https://api.alternative.me/fng"
 VAPID_CLAIMS = env.str("VAPID_CLAIMS")
 VAPID_PRIVATE_KEY = env.str("VAPID_PRIVATE_KEY")
 
+ETHERSCAN_API_KEY = env.str("ETHERSCAN_API_KEY")
+
 STATIC_COINS_TOKENS_LOGOS_FOLDER = "/static/imgs/logos/"
 
 from xtcryptosignals.settings import *  # noqa
