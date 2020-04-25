@@ -22,7 +22,7 @@ class Hotbit:
                 "Error connecting Hotbit on URL: {}".format(self.base_url)
             )
         response = request.json()
-        rows = list()
+        rows = []
         for x in pairs:
             _symbol = "".join(x)
             item = response[_symbol]

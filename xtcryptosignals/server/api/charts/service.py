@@ -43,7 +43,7 @@ def get_chart_fear_and_greed_index_and_btc(frequency):
         ]  # CFGI_MAX=12w in client
     }
 
-    cfgi = list()
+    cfgi = []
     for x in days:
         try:
             cfgi.append(cfgi_values[x])
@@ -63,9 +63,9 @@ def get_chart_coin_or_token_frequency(coin_or_token, frequency):
         symbol=coin_or_token + ref_pair, source=ref_exchange,
     )[:100]
 
-    prices = list()
-    volumes = list()
-    num_trades = list()
+    prices = []
+    volumes = []
+    num_trades = []
 
     for row in rows:
         obj = row.to_dict(frequency=frequency)
@@ -93,14 +93,14 @@ def get_chart_tether_btc():
         symbol=coin + ref_pair, source=ref_exchange,
     )[:100]
 
-    price_btc = list()
+    price_btc = []
 
     for row in rows:
         obj = row.to_dict(frequency=frequency)
         price_btc.append([obj["created_on_ts"], obj["price_usdt"]])
 
-    tether_max_supply_erc20 = list()
-    tether_num_hodlers_erc20 = list()
+    tether_max_supply_erc20 = []
+    tether_num_hodlers_erc20 = []
 
     for row in Tether.objects:
         obj = row.to_dict()

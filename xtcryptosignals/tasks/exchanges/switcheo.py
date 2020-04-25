@@ -19,7 +19,7 @@ class Switcheo:
         _pairs = [x[0] + "_" + x[1] for x in pairs]
         _last_24h = self.client.get_last_24_hours()
         _last_prices = self.client.get_last_price()
-        rows = list()
+        rows = []
         for x in _last_24h:
             if x["pair"] not in _pairs:
                 continue

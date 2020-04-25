@@ -28,7 +28,7 @@ class Bilaxy:
                 _pairs[y].append(x)
             except KeyError:
                 _pairs[y] = [x]
-        rows = list()
+        rows = []
         url_template = "https://api.bilaxy.com/v1/ticker?symbol={}"
         for x, y in _pairs.items():
             for z in response[x]:

@@ -43,7 +43,7 @@ EXCHANGES = [
 ]
 
 
-SYMBOLS_PER_EXCHANGE = list()
+SYMBOLS_PER_EXCHANGE = []
 
 # Binance
 SYMBOLS_PER_EXCHANGE.append(

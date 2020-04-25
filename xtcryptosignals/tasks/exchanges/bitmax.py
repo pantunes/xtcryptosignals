@@ -24,7 +24,7 @@ class Bitmax:
         response = request.json()
         _pairs = ["/".join(x) for x in pairs]
         counter = 0
-        rows = list()
+        rows = []
         for x in response:
             if counter == len(_pairs):
                 break

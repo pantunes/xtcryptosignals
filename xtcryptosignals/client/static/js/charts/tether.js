@@ -119,7 +119,7 @@ function create_chart_tether(price_formatter, num_formatter, data) {
             }
         },
         series: [{
-            name: 'BTC USD Price',
+            name: 'BTC Price',
             type: 'area',
             data: data.prices_btc,
             tooltip: {
