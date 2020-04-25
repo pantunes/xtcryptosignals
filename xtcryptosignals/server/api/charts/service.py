@@ -8,6 +8,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+from datetime import datetime
 from xtcryptosignals.tasks.models.history import History
 from xtcryptosignals.tasks.models.cfgi import CFGI
 from xtcryptosignals.tasks.models.tether import Tether
@@ -80,6 +81,17 @@ def get_chart_coin_or_token_frequency(coin_or_token, frequency):
     return dict(prices=prices, volumes=volumes, num_trades=num_trades,)
 
 
+def _normalize_ts(ts):
+    return (
+        datetime.timestamp(
+            datetime.fromtimestamp(ts / 1000).replace(
+                minute=0, second=0, microsecond=0
+            )
+        )
+        * 1000
+    )
+
+
 def get_chart_tether_btc():
     coin = "BTC"
     frequency = "1h"
@@ -97,7 +109,9 @@ def get_chart_tether_btc():
 
     for row in rows:
         obj = row.to_dict(frequency=frequency)
-        price_btc.append([obj["created_on_ts"], obj["price_usdt"]])
+        price_btc.append(
+            [_normalize_ts(obj["created_on_ts"]), obj["price_usdt"],]
+        )
 
     tether_max_supply_erc20 = []
     tether_num_hodlers_erc20 = []
@@ -105,10 +119,10 @@ def get_chart_tether_btc():
     for row in Tether.objects:
         obj = row.to_dict()
         tether_max_supply_erc20.append(
-            [obj["created_on_ts"], obj["total_supply_eth"]]
+            [_normalize_ts(obj["created_on_ts"]), obj["total_supply_eth"],]
         )
         tether_num_hodlers_erc20.append(
-            [obj["created_on_ts"], obj["num_holders_eth"]]
+            [_normalize_ts(obj["created_on_ts"]), obj["num_holders_eth"],]
         )
 
     price_btc.reverse()
