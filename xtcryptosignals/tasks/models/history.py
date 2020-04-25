@@ -41,7 +41,7 @@ class History(DocumentValidation):
     }
 
     def to_dict(self, frequency):
-        e = super(History, self).to_dict().copy()
+        e = super().to_dict().copy()
         for k in e:
             if k in (
                 "price",

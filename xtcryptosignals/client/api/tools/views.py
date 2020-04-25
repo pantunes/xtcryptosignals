@@ -60,11 +60,18 @@ def fear_and_greed():
 @bp.route("/tools/coin-or-token/<coin_or_token>/data")
 def coin_or_token_frequency(coin_or_token):
     return render_template(
-        template_name_or_list="tools/coin_token_data.html",
+        template_name_or_list="tools/coin-token-data.html",
         socket_base_url=current_app.config["SOCKET_BASE_URL"],
         frequency=g.HISTORY_FREQUENCY[0],
         frequencies_charts=["10s", "1m", "10m", "30m", "1h", "4h", "12h", "1d"],
         attributes=["Price USDT"],
         coin_or_token=coin_or_token,
         reference=g.COINS_OR_TOKENS_REFERENCE[coin_or_token],
+    )
+
+
+@bp.route("/tools/tether/BTC/data")
+def tether_btc():
+    return render_template(
+        template_name_or_list="tools/tether-btc-data.html", frequency="1h",
     )

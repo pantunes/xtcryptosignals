@@ -29,7 +29,7 @@ class BinanceDex:
             for x in response
         }
 
-        rows = list()
+        rows = []
         for x in pairs:
             _symbol = "".join(x)
             item = _pairs[_symbol]

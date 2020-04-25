@@ -34,7 +34,7 @@ class Binance:
             item.update(ticker=symbol[0])
             return item
 
-        items = list()
+        items = []
         pairs = [x[0] + x[1] for x in kwargs["pairs"]]
         for item in items_or_item:
             if item["symbol"] in pairs:

@@ -56,6 +56,6 @@ CELERYBEAT_SCHEDULE = {
     },
     "tether": {
         "task": "xtcryptosignals.tasks.tether.update",
-        "schedule": crontab(hour="*", minute=1)
+        "schedule": crontab(hour="*", minute=1),
     },
 }

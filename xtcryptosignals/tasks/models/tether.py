@@ -24,3 +24,11 @@ class Tether(DocumentValidation):
         "indexes": [("-created_on",),],
         "ordering": ["-created_on"],
     }
+
+    def to_dict(self):
+        e = super().to_dict()
+        for k in self._fields.keys():
+            if k == "total_supply_eth":
+                e[k] = float(self[k])
+                continue
+        return e

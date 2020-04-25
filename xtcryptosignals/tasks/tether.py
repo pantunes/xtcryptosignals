@@ -28,10 +28,12 @@ def _get_tether_num_holders():
     soup = BeautifulSoup(scraper.get(URL).content, "html.parser")
     try:
         return int(
-            soup.find(
-                id="ContentPlaceHolder1_tr_tokenHolders"
-            ).find_all('div')[-1].string.replace('.', '').replace(',', '').
-            replace('addresses', '').strip()
+            soup.find(id="ContentPlaceHolder1_tr_tokenHolders")
+            .find_all("div")[-1]
+            .string.replace(".", "")
+            .replace(",", "")
+            .replace("addresses", "")
+            .strip()
         )
     except AttributeError:
         return
@@ -47,11 +49,11 @@ def update(self):
     try:
         api = Tokens(
             contract_address=TETHER_CONTRACT_ADDRESS,
-            api_key=s.ETHERSCAN_API_KEY
+            api_key=s.ETHERSCAN_API_KEY,
         )
         Tether(
-            total_supply_eth=int(api.get_total_supply())/10**6,
-            num_holders_eth=_get_tether_num_holders()
+            total_supply_eth=int(api.get_total_supply()) / 10 ** 6,
+            num_holders_eth=_get_tether_num_holders(),
         ).save()
 
     except Exception as error:

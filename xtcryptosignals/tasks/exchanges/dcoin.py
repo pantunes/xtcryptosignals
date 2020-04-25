@@ -24,7 +24,7 @@ class Dcoin:
         response = request.json()
         _pairs = ["_".join(x).lower() for x in pairs]
         counter = 0
-        rows = list()
+        rows = []
         for x in response["ticker"]:
             if counter == len(_pairs):
                 break
