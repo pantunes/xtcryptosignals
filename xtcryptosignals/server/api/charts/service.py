@@ -99,22 +99,22 @@ def get_chart_tether_btc():
         obj = row.to_dict(frequency=frequency)
         price_btc.append([obj["created_on_ts"], obj["price_usdt"]])
 
-    tether_max_supply_eth = list()
-    tether_num_hodlers_eth = list()
+    tether_max_supply_erc20 = list()
+    tether_num_hodlers_erc20 = list()
 
     for row in Tether.objects:
         obj = row.to_dict()
-        tether_max_supply_eth.append(
+        tether_max_supply_erc20.append(
             [obj["created_on_ts"], obj["total_supply_eth"]])
-        tether_num_hodlers_eth.append(
+        tether_num_hodlers_erc20.append(
             [obj["created_on_ts"], obj["num_holders_eth"]])
 
     price_btc.reverse()
-    tether_max_supply_eth.reverse()
-    tether_num_hodlers_eth.reverse()
+    tether_max_supply_erc20.reverse()
+    tether_num_hodlers_erc20.reverse()
 
     return dict(
-        tether_max_supply_eth=tether_max_supply_eth,
-        tether_num_hodlers_eth=tether_num_hodlers_eth,
+        tether_max_supply_erc20=tether_max_supply_erc20,
+        tether_num_hodlers_erc20=tether_num_hodlers_erc20,
         prices_btc=price_btc,
     )

@@ -136,12 +136,12 @@ function create_chart_tether(price_formatter, num_formatter, data) {
             name: 'Tether Max Supply (ERC-20)',
             type: 'line',
             yAxis: 1,
-            data: data.tether_max_supply_eth,
+            data: data.tether_max_supply_erc20,
             tooltip: {
                 valuePrefix: '$',
                 pointFormatter: function() {
                     return '<span style="color:' + this.color + '">\u25CF</span> ' +
-                        this.series.name + ': <b>' + price_volume_formatter.format(this.y) + '</b><br/>';
+                        this.series.name + ': <b>' + price_formatter.format(this.y) + '</b><br/>';
                 }
             },
             marker: {
@@ -152,7 +152,7 @@ function create_chart_tether(price_formatter, num_formatter, data) {
             type: 'line',
             color: Highcharts.getOptions().colors[3],
             yAxis: 2,
-            data: data.tether_num_hodlers_eth,
+            data: data.tether_num_hodlers_erc20,
             tooltip: {
                 pointFormatter: function() {
                     return '<span style="color:' + this.color + '">\u25CF</span> ' +
