@@ -73,6 +73,5 @@ def coin_or_token_frequency(coin_or_token):
 @bp.route("/tools/tether/BTC/data")
 def tether_btc():
     return render_template(
-        template_name_or_list="tools/tether-btc-data.html",
-        frequency='1h',
+        template_name_or_list="tools/tether-btc-data.html", frequency="1h",
     )

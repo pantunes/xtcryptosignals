@@ -25,9 +25,9 @@ def get_chart_fear_and_greed_index_and_btc(frequency):
     ref_exchange = ref["name"]
 
     model_history = type("History{}".format(frequency), (History,), {})
-    rows = model_history.objects(
-        symbol=coin + ref_pair, source=ref_exchange,
-    )[:NUM_OCCURRENCES]
+    rows = model_history.objects(symbol=coin + ref_pair, source=ref_exchange,)[
+        :NUM_OCCURRENCES
+    ]
 
     btc_prices = {
         x.created_on.strftime("%Y-%m-%d"): int(x.price_usdt) for x in rows
@@ -82,16 +82,16 @@ def get_chart_coin_or_token_frequency(coin_or_token, frequency):
 
 def get_chart_tether_btc():
     coin = "BTC"
-    frequency = '1h'
+    frequency = "1h"
 
     ref = s.EXCHANGES_AND_PAIRS_OF_REFERENCE[coin]
     ref_pair = ref["pair"]
     ref_exchange = ref["name"]
 
     model_history = type("History{}".format(frequency), (History,), {})
-    rows = model_history.objects(
-        symbol=coin + ref_pair, source=ref_exchange,
-    )[:100]
+    rows = model_history.objects(symbol=coin + ref_pair, source=ref_exchange,)[
+        :100
+    ]
 
     price_btc = []
 
@@ -105,9 +105,11 @@ def get_chart_tether_btc():
     for row in Tether.objects:
         obj = row.to_dict()
         tether_max_supply_erc20.append(
-            [obj["created_on_ts"], obj["total_supply_eth"]])
+            [obj["created_on_ts"], obj["total_supply_eth"]]
+        )
         tether_num_hodlers_erc20.append(
-            [obj["created_on_ts"], obj["num_holders_eth"]])
+            [obj["created_on_ts"], obj["num_holders_eth"]]
+        )
 
     price_btc.reverse()
     tether_max_supply_erc20.reverse()

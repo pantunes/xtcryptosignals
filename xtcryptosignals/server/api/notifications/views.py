@@ -71,9 +71,7 @@ class NotificationRuleEdit(Resource):
                 description: Unauthorized
         """
         return (
-            service.edit_notification_rule(
-                auth, notification, data=valid_data
-            ),
+            service.edit_notification_rule(auth, notification, data=valid_data),
             200,
         )
 
@@ -193,8 +191,6 @@ class NotificationsRulesList(Resource):
 api.add_resource(NotificationRuleAdd, "/notifications/rule/add")
 api.add_resource(NotificationRuleEdit, "/notifications/rule/<notification>")
 api.add_resource(NotificationRuleGet, "/notifications/rule/<notification>")
-api.add_resource(
-    NotificationRuleDelete, "/notifications/rule/<notification>"
-)
+api.add_resource(NotificationRuleDelete, "/notifications/rule/<notification>")
 api.add_resource(NotificationsList, "/notifications")
 api.add_resource(NotificationsRulesList, "/notifications/rules")
