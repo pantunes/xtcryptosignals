@@ -33,7 +33,7 @@ function create_chart_tether(price_formatter, num_formatter, data) {
                 }
             },
             title: {
-                text: 'BTC Price (USD)',
+                text: 'Price (USD)',
                 style: {
                     color: Highcharts.getOptions().colors[0]
                 },
