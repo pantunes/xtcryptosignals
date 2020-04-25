@@ -38,13 +38,15 @@ def before_request():
 @login_required
 def info():
     return Response(
-        """<h5>Welcome to XTCryptoSignals!</h5>
+        """<h5>Welcome to <code>XTCryptoSignals</code>!</h5>
     Hi {name},
     <br/><br/>
-    This is an <code>open-source</code> software platform that is in continuous development.
+    This is an open-source software platform that is in 
+    continuous development.
     <br/><br/>
     For now you can manage your <a href="/portfolio">portfolio</a> 
-    and set your <a href="/notifications">notification alerts</a>.
+    adding your <a href="/transactions">transactions</a> and set your 
+    <a href="/notifications">notification alerts</a>.
     <br/>
     <br/>
     In case you are curious about further feature releases have a look 
@@ -54,7 +56,7 @@ def info():
     <a href="javascript:open_modal('#contact');">lines</a>
      in case of any question.
     <br/><br/>
-    The XTCryptoSignals Team
+    The <code>XTCryptoSignals</code> Team
     """.format(
             frequency=g.HISTORY_FREQUENCY[0], **current_user.user
         )

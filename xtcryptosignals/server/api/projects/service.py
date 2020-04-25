@@ -8,10 +8,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-from mongoengine.errors import (
-    ValidationError,
-    DoesNotExist,
-)
+from mongoengine.errors import ValidationError
 from xtcryptosignals.server.api.projects.models import Project
 from xtcryptosignals.tasks.models.project_twitter import ProjectTwitter
 
@@ -22,8 +19,9 @@ def projects():
 
 def project_twitter(project):
     try:
-        return ProjectTwitter.objects.get(project=project)
+        row = ProjectTwitter.objects(project=project).first()
+        if not row:
+            raise ValueError("Project does not exist or no twitter data", 404)
     except ValidationError:
         raise ValueError("Invalid Project", 406)
-    except DoesNotExist:
-        raise ValueError("Project does not exist", 404)
+    return row
