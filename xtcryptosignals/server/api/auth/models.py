@@ -38,7 +38,7 @@ class Auth(DocumentValidation):
     }
 
     def to_dict(self):
-        e = super(Auth, self).to_dict()
+        e = super().to_dict()
         for k in self._fields.keys():
             if k == "user":
                 e[k] = self[k].to_dict()

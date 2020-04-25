@@ -58,6 +58,9 @@ class ChartCoinTokenFrequency(Resource):
         security:
             - Bearer: []
         parameters:
+            - name: coin_or_token
+              in: path
+              required: true
             - name: frequency
               in: path
               required: true
@@ -72,5 +75,25 @@ class ChartCoinTokenFrequency(Resource):
         )
 
 
+class ChartTetherBTC(Resource):
+    @validate_io()
+    def get(self):
+        """
+        Tether + BTC chart data format
+        ---
+        tags:
+            - Charts
+        security:
+            - Bearer: []
+        responses:
+            200:
+                description: Returns list Tether + BTC chart data format
+            400:
+                description: Error in input validation
+        """
+        return service.get_chart_tether_btc()
+
+
 api.add_resource(ChartFearAndGreedIndexAndBTC, "/charts/cfgi/BTC/<frequency>")
 api.add_resource(ChartCoinTokenFrequency, "/charts/<coin_or_token>/<frequency>")
+api.add_resource(ChartTetherBTC, "/charts/tether/BTC")

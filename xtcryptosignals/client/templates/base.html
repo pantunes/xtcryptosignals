@@ -72,6 +72,12 @@
             currency: 'USD',
         };
         const price_formatter = new Intl.NumberFormat('en-US', price_formatter_setup);
+
+        let num_formatter_setup = {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+        };
+        const num_formatter = new Intl.NumberFormat('en-US', num_formatter_setup);
     </script>
 
 {% set logout_url = url_for('errors.logged_out') %}

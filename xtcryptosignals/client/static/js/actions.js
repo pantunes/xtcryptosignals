@@ -110,6 +110,15 @@ function get_chart_cfgi_btc_data(handler, frequency) {
     });
 }
 
+function get_chart_tether_btc_data(handler) {
+    $.get('/charts/tether/BTC').done(function(response) {
+        handler(response)
+    })
+    .fail(function(xhr, status, error) {
+        process_fail(xhr);
+    });
+}
+
 function get_chart_coin_or_token_data(handler, coin_or_token, frequency) {
     $.get('/charts/' + coin_or_token + '/' + frequency).done(function(response) {
         handler(response, coin_or_token, frequency)
