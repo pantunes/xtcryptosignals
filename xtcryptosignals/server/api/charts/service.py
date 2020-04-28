@@ -18,16 +18,22 @@ from xtcryptosignals.tasks import settings as s
 NUM_OCCURRENCES = 30  # CFGI_MIN=1d in client
 
 
-def get_chart_fear_and_greed_index_and_btc(frequency):
-    coin_or_token = "BTC"
+def _get_exchange_pair_reference(coin_or_token):
+    try:
+        return s.EXCHANGES_AND_PAIRS_OF_REFERENCE[coin_or_token]
+    except KeyError:
+        raise ValueError("Coin/Token is incorrect.")
 
-    ref = s.EXCHANGES_AND_PAIRS_OF_REFERENCE[coin_or_token]
-    ref_pair = ref["pair"]
-    ref_exchange = ref["name"]
+
+def get_chart_fear_and_greed_index(frequency, coin_or_token):
+    try:
+        ref = _get_exchange_pair_reference(coin_or_token)
+    except ValueError as err:
+        return dict(error=str(err)), 400
 
     model_history = type("History{}".format(frequency), (History,), {})
     rows = model_history.objects(
-        symbol=coin_or_token + ref_pair, source=ref_exchange,
+        symbol=coin_or_token + ref["pair"], source=ref["name"],
     )[:NUM_OCCURRENCES]
 
     btc_prices = {
@@ -55,13 +61,14 @@ def get_chart_fear_and_greed_index_and_btc(frequency):
 
 
 def get_chart_coin_or_token_frequency(coin_or_token, frequency):
-    ref = s.EXCHANGES_AND_PAIRS_OF_REFERENCE[coin_or_token]
-    ref_pair = ref["pair"]
-    ref_exchange = ref["name"]
+    try:
+        ref = _get_exchange_pair_reference(coin_or_token)
+    except ValueError as err:
+        return dict(error=str(err)), 400
 
     model_history = type("History{}".format(frequency), (History,), {})
     rows = model_history.objects(
-        symbol=coin_or_token + ref_pair, source=ref_exchange,
+        symbol=coin_or_token + ref["pair"], source=ref["name"],
     )[:100]
 
     prices = []
@@ -94,13 +101,14 @@ def _normalize_ts(ts, frequency):
 
 
 def get_chart_tether_btc(coin_or_token, frequency):
-    ref = s.EXCHANGES_AND_PAIRS_OF_REFERENCE[coin_or_token]
-    ref_pair = ref["pair"]
-    ref_exchange = ref["name"]
+    try:
+        ref = _get_exchange_pair_reference(coin_or_token)
+    except ValueError as err:
+        return dict(error=str(err)), 400
 
     model_history = type("History{}".format(frequency), (History,), {})
     rows = model_history.objects(
-        symbol=coin_or_token + ref_pair, source=ref_exchange,
+        symbol=coin_or_token + ref["pair"], source=ref["name"],
     )[:NUM_OCCURRENCES]
 
     btc_prices = {}
@@ -128,11 +136,11 @@ def get_chart_tether_btc(coin_or_token, frequency):
         try:
             tether_max_supply_erc20.append([x, tether[x][0]])
         except KeyError:
-            tether_max_supply_erc20.append(None)
+            pass
         try:
             tether_num_hodlers_erc20.append([x, tether[x][1]])
         except KeyError:
-            tether_num_hodlers_erc20.append(None)
+            pass
 
     return dict(
         tether_max_supply_erc20=tether_max_supply_erc20,

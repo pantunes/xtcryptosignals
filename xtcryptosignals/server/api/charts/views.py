@@ -27,7 +27,7 @@ class ChartFearAndGreedIndexAndBTC(Resource):
     @validate_io()
     def get(self, frequency):
         """
-        Crypto Fear & Greed Index + BTC data
+        Crypto Fear & Greed Index + Coin/Token data
         ---
         tags:
             - Charts
@@ -47,14 +47,16 @@ class ChartFearAndGreedIndexAndBTC(Resource):
         if frequency not in ("1d", "4d", "1w", "4w",):
             return dict(error="Frequency is incorrect."), 400
 
-        return service.get_chart_fear_and_greed_index_and_btc(frequency)
+        return service.get_chart_fear_and_greed_index(
+            coin_or_token='BTC', frequency=frequency,
+        )
 
 
 class ChartCoinTokenFrequency(Resource):
     @validate_io()
     def get(self, coin_or_token, frequency):
         """
-        Coin / Token chart data format
+        Coin/Token chart data format
         ---
         tags:
             - Charts
@@ -74,7 +76,7 @@ class ChartCoinTokenFrequency(Resource):
                 description: Error in input validation
         """
         return service.get_chart_coin_or_token_frequency(
-            coin_or_token, frequency
+            coin_or_token=coin_or_token, frequency=frequency,
         )
 
 
@@ -82,7 +84,7 @@ class ChartTetherBTC(Resource):
     @validate_io()
     def get(self, frequency):
         """
-        Tether + BTC chart data format
+        Tether + Coin/Token chart data format
         ---
         tags:
             - Charts
