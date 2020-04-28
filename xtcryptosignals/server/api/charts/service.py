@@ -19,23 +19,20 @@ NUM_OCCURRENCES = 30  # CFGI_MIN=1d in client
 
 
 def get_chart_fear_and_greed_index_and_btc(frequency):
-    coin = "BTC"
+    coin_or_token = "BTC"
 
-    ref = s.EXCHANGES_AND_PAIRS_OF_REFERENCE[coin]
+    ref = s.EXCHANGES_AND_PAIRS_OF_REFERENCE[coin_or_token]
     ref_pair = ref["pair"]
     ref_exchange = ref["name"]
 
     model_history = type("History{}".format(frequency), (History,), {})
-    rows = model_history.objects(symbol=coin + ref_pair, source=ref_exchange,)[
-        :NUM_OCCURRENCES
-    ]
+    rows = model_history.objects(
+        symbol=coin_or_token + ref_pair, source=ref_exchange,
+    )[:NUM_OCCURRENCES]
 
     btc_prices = {
         x.created_on.strftime("%Y-%m-%d"): int(x.price_usdt) for x in rows
     }
-
-    days = [x.created_on.strftime("%Y-%m-%d") for x in rows]
-    days.reverse()
 
     cfgi_values = {
         x.added_on.strftime("%Y-%m-%d"): x.index
@@ -43,6 +40,9 @@ def get_chart_fear_and_greed_index_and_btc(frequency):
             : (NUM_OCCURRENCES * 12)
         ]  # CFGI_MAX=12w in client
     }
+
+    days = list(btc_prices.keys())
+    days.reverse()
 
     cfgi = []
     for x in days:
@@ -81,56 +81,61 @@ def get_chart_coin_or_token_frequency(coin_or_token, frequency):
     return dict(prices=prices, volumes=volumes, num_trades=num_trades,)
 
 
-def _normalize_ts(ts):
+def _normalize_ts(ts, frequency):
+    if frequency == "1h":
+        kwargs = dict(minute=0, second=0, microsecond=0)
+    else:
+        kwargs = dict(hour=0, minute=0, second=0, microsecond=0)
+    # return str(datetime.fromtimestamp(ts / 1000).replace(**kwargs))
     return (
-        datetime.timestamp(
-            datetime.fromtimestamp(ts / 1000).replace(
-                minute=0, second=0, microsecond=0
-            )
-        )
+        datetime.timestamp(datetime.fromtimestamp(ts / 1000).replace(**kwargs))
         * 1000
     )
 
 
-def get_chart_tether_btc():
-    coin = "BTC"
-    frequency = "1h"
-
-    ref = s.EXCHANGES_AND_PAIRS_OF_REFERENCE[coin]
+def get_chart_tether_btc(coin_or_token, frequency):
+    ref = s.EXCHANGES_AND_PAIRS_OF_REFERENCE[coin_or_token]
     ref_pair = ref["pair"]
     ref_exchange = ref["name"]
 
     model_history = type("History{}".format(frequency), (History,), {})
-    rows = model_history.objects(symbol=coin + ref_pair, source=ref_exchange,)[
-        :100
-    ]
+    rows = model_history.objects(
+        symbol=coin_or_token + ref_pair, source=ref_exchange,
+    )[:NUM_OCCURRENCES]
 
-    price_btc = []
-
+    btc_prices = {}
     for row in rows:
         obj = row.to_dict(frequency=frequency)
-        price_btc.append(
-            [_normalize_ts(obj["created_on_ts"]), obj["price_usdt"],]
+        btc_prices[_normalize_ts(obj["created_on_ts"], frequency)] = obj[
+            "price_usdt"
+        ]
+
+    tether = {}
+    for row in Tether.objects[: (NUM_OCCURRENCES * 8 * 12)]:
+        obj = row.to_dict()
+        ts = _normalize_ts(obj["created_on_ts"], frequency)
+        tether[ts] = (
+            obj["total_supply_eth"],
+            obj["num_holders_eth"],
         )
+
+    days = list(btc_prices.keys())
+    days.reverse()
 
     tether_max_supply_erc20 = []
     tether_num_hodlers_erc20 = []
-
-    for row in Tether.objects:
-        obj = row.to_dict()
-        tether_max_supply_erc20.append(
-            [_normalize_ts(obj["created_on_ts"]), obj["total_supply_eth"],]
-        )
-        tether_num_hodlers_erc20.append(
-            [_normalize_ts(obj["created_on_ts"]), obj["num_holders_eth"],]
-        )
-
-    price_btc.reverse()
-    tether_max_supply_erc20.reverse()
-    tether_num_hodlers_erc20.reverse()
+    for x in days:
+        try:
+            tether_max_supply_erc20.append([x, tether[x][0]])
+        except KeyError:
+            tether_max_supply_erc20.append(None)
+        try:
+            tether_num_hodlers_erc20.append([x, tether[x][1]])
+        except KeyError:
+            tether_num_hodlers_erc20.append(None)
 
     return dict(
         tether_max_supply_erc20=tether_max_supply_erc20,
         tether_num_hodlers_erc20=tether_num_hodlers_erc20,
-        prices_btc=price_btc,
+        prices=[[x, btc_prices[x]] for x in days],
     )

@@ -38,11 +38,11 @@ def coin_or_token_frequency(coin_or_token, frequency):
     return response.json(), response.status_code
 
 
-@bp.route("/charts/tether/BTC", methods=["GET"])
-def tether_btc():
+@bp.route("/charts/tether/<coin_or_token>/<frequency>", methods=["GET"])
+def tether_btc(coin_or_token, frequency):
     response = requests.get(
-        url="{}charts/tether/BTC".format(
-            current_app.config["SERVER_API_BASE_URL"]
+        url="{}charts/tether/{}/{}".format(
+            current_app.config["SERVER_API_BASE_URL"], coin_or_token, frequency
         ),
     )
     return response.json(), response.status_code

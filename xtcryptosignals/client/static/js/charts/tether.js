@@ -1,10 +1,12 @@
-function create_chart_tether(price_formatter, num_formatter, data) {
-      return Highcharts.chart('chart', {
+function create_chart_tether(
+    chart_id, price_formatter, num_formatter, data, coin_or_token, frequency
+) {
+      return Highcharts.chart(chart_id, {
         chart: {
             zoomType: 'x'
         },
         title: {
-            text: `Tether / BTC 1h`
+            text: `Tether / ${coin_or_token} ${frequency}`
         },
         subtitle: {
             text: document.ontouchstart === undefined ?
@@ -119,9 +121,9 @@ function create_chart_tether(price_formatter, num_formatter, data) {
             }
         },
         series: [{
-            name: 'BTC Price',
+            name: `${coin_or_token} Price`,
             type: 'area',
-            data: data.prices_btc,
+            data: data.prices,
             tooltip: {
                 valuePrefix: '$',
                 pointFormatter: function() {

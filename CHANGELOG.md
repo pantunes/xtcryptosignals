@@ -2,6 +2,8 @@
 All changes will be registered here per release.
 
 ## [0.5.0] - Current date
+Added Chart showing Project Twitter's data.  
+Added Chart showing Tether data.  
 Code fixes and improvements.
 
 ## [0.4.0] - 2020-04-19

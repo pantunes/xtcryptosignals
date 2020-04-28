@@ -44,6 +44,9 @@ class ChartFearAndGreedIndexAndBTC(Resource):
             400:
                 description: Error in input validation
         """
+        if frequency not in ("1d", "4d", "1w", "4w",):
+            return dict(error="Frequency is incorrect."), 400
+
         return service.get_chart_fear_and_greed_index_and_btc(frequency)
 
 
@@ -77,7 +80,7 @@ class ChartCoinTokenFrequency(Resource):
 
 class ChartTetherBTC(Resource):
     @validate_io()
-    def get(self):
+    def get(self, frequency):
         """
         Tether + BTC chart data format
         ---
@@ -85,15 +88,24 @@ class ChartTetherBTC(Resource):
             - Charts
         security:
             - Bearer: []
+        parameters:
+            - name: frequency
+              in: path
+              required: true
         responses:
             200:
                 description: Returns list Tether + BTC chart data format
             400:
                 description: Error in input validation
         """
-        return service.get_chart_tether_btc()
+        if frequency not in ("1h", "1d", "4d", "1w", "4w",):
+            return dict(error="Frequency is incorrect."), 400
+
+        return service.get_chart_tether_btc(
+            coin_or_token="BTC", frequency=frequency,
+        )
 
 
 api.add_resource(ChartFearAndGreedIndexAndBTC, "/charts/cfgi/BTC/<frequency>")
 api.add_resource(ChartCoinTokenFrequency, "/charts/<coin_or_token>/<frequency>")
-api.add_resource(ChartTetherBTC, "/charts/tether/BTC")
+api.add_resource(ChartTetherBTC, "/charts/tether/BTC/<frequency>")

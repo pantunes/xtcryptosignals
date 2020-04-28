@@ -21,6 +21,7 @@ from xtcryptosignals.common.utils import (
     get_pairs,
     get_coin_tokens,
 )
+from xtcryptosignals.client.utils import validate_args
 
 
 bp = Blueprint("tools", __name__)
@@ -70,8 +71,16 @@ def coin_or_token_frequency(coin_or_token):
     )
 
 
-@bp.route("/tools/tether/BTC/data")
-def tether_btc():
-    return render_template(
-        template_name_or_list="tools/tether-btc-data.html", frequency="1h",
+@bp.route("/tools/tether/<coin_or_token>/data")
+@validate_args()
+def tether(coin_or_token):
+    if coin_or_token != "BTC":
+        raise ValueError(
+            "Coin/Token not supported for now, for this Tether Chart."
+        )
+    return dict(
+        template_name_or_list="tools/tether-data.html",
+        frequencies_charts=["1h", "1d", "4d", "1w", "4w"],
+        coin_or_token=coin_or_token,
+        reference=g.COINS_OR_TOKENS_REFERENCE[coin_or_token],
     )

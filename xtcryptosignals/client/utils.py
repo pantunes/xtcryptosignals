@@ -16,7 +16,10 @@ def validate_args():
     def decorator(f):
         @wraps(f)
         def wrapper(*args, **kwargs):
-            if kwargs["frequency"] not in g.HISTORY_FREQUENCY:
+            if (
+                "frequency" in kwargs
+                and kwargs["frequency"] not in g.HISTORY_FREQUENCY
+            ):
                 return (
                     render_template(
                         template_name_or_list="error.html",
