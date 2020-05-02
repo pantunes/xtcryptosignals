@@ -128,6 +128,15 @@ function get_chart_tether_data(handler, coin_or_token, frequency) {
     });
 }
 
+function get_chart_twitter_data(handler) {
+    $.get('/charts/twitter').done(function(response) {
+        handler(response)
+    })
+    .fail(function(xhr, status, error) {
+        process_fail(xhr);
+    });
+}
+
 function captcha() {
     const _captcha_ids = ['login_image_captcha', 'signup_image_captcha'];
     for (const x of _captcha_ids) {

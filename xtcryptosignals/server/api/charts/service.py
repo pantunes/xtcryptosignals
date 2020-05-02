@@ -12,6 +12,8 @@ from datetime import datetime
 from xtcryptosignals.tasks.models.history import History
 from xtcryptosignals.tasks.models.cfgi import CFGI
 from xtcryptosignals.tasks.models.tether import Tether
+from xtcryptosignals.tasks.models.project_twitter import ProjectTwitter
+from xtcryptosignals.server.api.projects.models import Project
 from xtcryptosignals.tasks import settings as s
 
 
@@ -147,3 +149,26 @@ def get_chart_tether_btc(coin_or_token, frequency):
         tether_num_hodlers_erc20=tether_num_hodlers_erc20,
         prices=[[x, btc_prices[x]] for x in days],
     )
+
+
+def get_chart_twitter():
+    projects_twitter = {}
+    days = {}
+    for p in Project.objects:
+        project_name = f"{p.name.replace(' ', '_')}_{p.coin_or_token}"
+        for t in ProjectTwitter.objects(project=p)[:30]:
+            if not t:
+                continue
+            if project_name not in projects_twitter:
+                projects_twitter[project_name] = []
+            projects_twitter[project_name].append(t.num_followers)
+            days[str(t.added_on)] = 1
+        if not any(projects_twitter[project_name]):
+            del projects_twitter[project_name]
+        else:
+            projects_twitter[project_name].reverse()
+
+    _days = list(days.keys())
+    _days.reverse()
+
+    return dict(days=_days, projects_twitter=projects_twitter)
