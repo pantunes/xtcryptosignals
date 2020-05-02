@@ -4,7 +4,7 @@ function create_chart_twitter(chart_id, pt) {
             zoomType: 'x'
         },
         title: {
-            text: `${pt}`
+            text: `Twitter ${pt} 1d`
         },
         subtitle: {
             text: document.ontouchstart === undefined ?
