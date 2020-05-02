@@ -22,6 +22,7 @@ from xtcryptosignals.common.utils import (
     get_coin_tokens,
 )
 from xtcryptosignals.client.utils import validate_args
+from xtcryptosignals.client.api.charts.views import twitter as _twitter
 
 
 bp = Blueprint("tools", __name__)
@@ -58,10 +59,10 @@ def fear_and_greed():
     )
 
 
-@bp.route("/tools/coin-or-token/<coin_or_token>/data")
+@bp.route("/tools/coin-or-token/<coin_or_token>")
 def coin_or_token_frequency(coin_or_token):
     return render_template(
-        template_name_or_list="tools/coin-token-data.html",
+        template_name_or_list="tools/coin-token.html",
         socket_base_url=current_app.config["SOCKET_BASE_URL"],
         frequency=g.HISTORY_FREQUENCY[0],
         frequencies_charts=["10s", "1m", "10m", "30m", "1h", "4h", "12h", "1d"],
@@ -71,16 +72,27 @@ def coin_or_token_frequency(coin_or_token):
     )
 
 
-@bp.route("/tools/tether/<coin_or_token>/data")
+@bp.route("/tools/tether/<coin_or_token>")
 @validate_args()
 def tether(coin_or_token):
     if coin_or_token != "BTC":
-        raise ValueError(
-            "Coin/Token not supported for now, for this Tether Chart."
-        )
+        raise ValueError("Coin/Token not supported for now.")
     return dict(
-        template_name_or_list="tools/tether-data.html",
+        template_name_or_list="tools/tether.html",
+        frequency=g.HISTORY_FREQUENCY[0],
         frequencies_charts=["1h", "1d", "4d", "1w", "4w"],
         coin_or_token=coin_or_token,
         reference=g.COINS_OR_TOKENS_REFERENCE[coin_or_token],
+    )
+
+
+@bp.route("/tools/twitter/<frequency>")
+@validate_args()
+def twitter(frequency):
+    if frequency != "1d":
+        raise ValueError("Frequency not supported for now.")
+    return dict(
+        template_name_or_list="tools/twitter.html",
+        frequency=g.HISTORY_FREQUENCY[0],
+        projects_twitter=list(_twitter()[0]['projects_twitter'].keys()),
     )

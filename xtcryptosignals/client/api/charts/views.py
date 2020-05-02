@@ -46,3 +46,13 @@ def tether_btc(coin_or_token, frequency):
         ),
     )
     return response.json(), response.status_code
+
+
+@bp.route("/charts/twitter", methods=["GET"])
+def twitter():
+    response = requests.get(
+        url="{}charts/twitter".format(
+            current_app.config["SERVER_API_BASE_URL"]
+        ),
+    )
+    return response.json(), response.status_code

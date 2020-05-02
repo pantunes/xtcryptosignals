@@ -208,7 +208,7 @@ function _post_and_get_ticker_emit(id, json, reference_name, reference_pair, coi
 {% block body %}
 
 {% with url_ticker='ticker.ticker', params=dict() %}
-{% include 'snippets/menu.html' %}
+{% include 'menu.html' %}
 {% endwith %}
 
 {% for i in symbols_per_exchange %}

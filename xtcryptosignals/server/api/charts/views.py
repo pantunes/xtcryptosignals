@@ -108,6 +108,26 @@ class ChartTetherBTC(Resource):
         )
 
 
+class ChartTwitter(Resource):
+    @validate_io()
+    def get(self):
+        """
+        Twitter chart data format
+        ---
+        tags:
+            - Charts
+        security:
+            - Bearer: []
+        responses:
+            200:
+                description: Returns list Twitter chart data format
+            400:
+                description: Error in input validation
+        """
+        return service.get_chart_twitter()
+
+
 api.add_resource(ChartFearAndGreedIndexAndBTC, "/charts/cfgi/BTC/<frequency>")
 api.add_resource(ChartCoinTokenFrequency, "/charts/<coin_or_token>/<frequency>")
 api.add_resource(ChartTetherBTC, "/charts/tether/BTC/<frequency>")
+api.add_resource(ChartTwitter, "/charts/twitter")
