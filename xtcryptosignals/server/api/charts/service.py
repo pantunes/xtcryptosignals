@@ -95,7 +95,6 @@ def _normalize_ts(ts, frequency):
         kwargs = dict(minute=0, second=0, microsecond=0)
     else:
         kwargs = dict(hour=0, minute=0, second=0, microsecond=0)
-    # return str(datetime.fromtimestamp(ts / 1000).replace(**kwargs))
     return (
         datetime.timestamp(datetime.fromtimestamp(ts / 1000).replace(**kwargs))
         * 1000
@@ -153,7 +152,7 @@ def get_chart_tether_btc(coin_or_token, frequency):
 
 def get_chart_twitter():
     projects_twitter = {}
-    days = {}
+
     for p in Project.objects:
         project_name = f"{p.name.replace(' ', '_')}_{p.coin_or_token}"
         for t in ProjectTwitter.objects(project=p)[:30]:
@@ -161,14 +160,16 @@ def get_chart_twitter():
                 continue
             if project_name not in projects_twitter:
                 projects_twitter[project_name] = []
-            projects_twitter[project_name].append(t.num_followers)
-            days[str(t.added_on)] = 1
+            obj = t.to_dict()
+            try:
+                projects_twitter[project_name].append(
+                    [_normalize_ts(obj["created_on_ts"], '1d'), obj['num_followers']]
+                )
+            except KeyError:
+                pass
         if not any(projects_twitter[project_name]):
             del projects_twitter[project_name]
         else:
             projects_twitter[project_name].reverse()
 
-    _days = list(days.keys())
-    _days.reverse()
-
-    return dict(days=_days, projects_twitter=projects_twitter)
+    return dict(projects_twitter=projects_twitter)

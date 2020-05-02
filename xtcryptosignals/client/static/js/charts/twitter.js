@@ -1,34 +1,59 @@
-function create_chart_twitter(chart_id, pt, days) {
+function create_chart_twitter(chart_id, pt) {
       return Highcharts.chart(chart_id, {
         chart: {
-            type: 'area'
+            zoomType: 'x'
         },
         title: {
-            text: pt.replace('_', ' (') + ')'
+            text: `${pt}`
         },
-        credits: {
+        subtitle: {
+            text: document.ontouchstart === undefined ?
+                'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+        },
+          credits: {
             enabled: false
         },
-        xAxis: {
-            categories: days,
+        time: {
+            timezone: moment.tz.guess(true)
         },
+        xAxis: [{
+            type: 'datetime',
+            title: {
+                text: `Date (${moment.tz.guess(true)})`
+            }
+        }],
         yAxis: {
             title: {
-                text: 'Number of Followers'
-            },
+                text: 'Number of followers'
+            }
         },
-        tooltip: {
-            shared: true,
+        legend: {
+            enabled: false
         },
         plotOptions: {
             area: {
-                stacking: 'normal',
-                lineColor: '#666666',
-                lineWidth: 1,
+                fillColor: {
+                    linearGradient: {
+                        x1: 0,
+                        y1: 0,
+                        x2: 0,
+                        y2: 1
+                    },
+                    stops: [
+                        [0, Highcharts.getOptions().colors[0]],
+                        [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    ]
+                },
                 marker: {
-                    lineWidth: 1,
-                    lineColor: '#666666'
-                }
+                    radius: 2
+                },
+                lineWidth: 1,
+                states: {
+                    hover: {
+                        lineWidth: 1
+                    }
+                },
+                threshold: null
             }
         },
     });

@@ -19,11 +19,11 @@
         const projects_twitter = data.projects_twitter;
         for (const pt in projects_twitter) {
             const chart_id = `chart_${pt}`
-            let chart = create_chart_twitter(chart_id, pt, data.days);
+            let chart = create_chart_twitter(chart_id, pt);
             chart.addSeries({
+                type: 'area',
                 name: pt,
                 data: projects_twitter[pt],
-                marker: {enabled: false},
             }, true);
             charts.push(chart);
             setChartTheme();
@@ -47,12 +47,12 @@
 
 <br/>
 
-<div class="row">
 {% for p in projects_twitter %}
-    <div class="twelve columns" id="row_chart_{{ p }}" style="display: none;">
+<div class="{{ loop.cycle('_row', 'row') }}">
+    <div class="six columns" id="row_chart_{{ p }}" style="display: none;">
         <div id="chart_{{ p }}"></div>
     </div>
-{% endfor %}
 </div>
+{% endfor %}
 
 {% endblock %}
