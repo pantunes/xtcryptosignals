@@ -163,7 +163,10 @@ def get_chart_twitter():
             obj = t.to_dict()
             try:
                 projects_twitter[project_name].append(
-                    [_normalize_ts(obj["created_on_ts"], '1d'), obj['num_followers']]
+                    [
+                        _normalize_ts(obj["created_on_ts"], "1d"),
+                        obj["num_followers"],
+                    ]
                 )
             except KeyError:
                 pass

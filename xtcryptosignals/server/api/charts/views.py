@@ -48,7 +48,7 @@ class ChartFearAndGreedIndexAndBTC(Resource):
             return dict(error="Frequency is incorrect."), 400
 
         return service.get_chart_fear_and_greed_index(
-            coin_or_token='BTC', frequency=frequency,
+            coin_or_token="BTC", frequency=frequency,
         )
 
 

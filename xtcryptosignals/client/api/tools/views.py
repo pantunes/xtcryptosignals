@@ -94,5 +94,5 @@ def twitter(frequency):
     return dict(
         template_name_or_list="tools/twitter.html",
         frequency=g.HISTORY_FREQUENCY[0],
-        projects_twitter=list(_twitter()[0]['projects_twitter'].keys()),
+        projects_twitter=list(_twitter()[0]["projects_twitter"].keys()),
     )
