@@ -9,8 +9,8 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import click
-from xtcryptosignals.tasks import settings as s
 from xtcryptosignals.tasks import ticker
+from xtcryptosignals.tasks import settings as s
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -66,6 +66,10 @@ def main(ctx, test, list_config, enable_messaging, log_minimal, version):
 
         click.echo("{} {}".format(__title__, __version__))
         ctx.exit()
+
+    # pre-cache all needed data
+    from xtcryptosignals.tasks.caching import prepare_cache
+    prepare_cache()
 
     from celery import current_app
     from celery.bin import worker

@@ -29,6 +29,8 @@ HISTORY_FREQUENCY = (
     "1y",
 )
 
+PRICE_CHANGE_FREQUENCIES = ("1h", "1d", "1w", "4w",)
+
 # exchanges settings
 from xtcryptosignals.settings_exchanges import (
     EXCHANGES,
@@ -70,4 +72,5 @@ __all__ = [
     "BILAXY",
     "TICKER_SCHEDULE",
     "HISTORY_FREQUENCY",
+    "PRICE_CHANGE_FREQUENCIES",
 ]

@@ -9,8 +9,8 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from marshmallow import pre_load
-from xtcryptosignals.tasks import settings as s
 from xtcryptosignals.tasks.schemas.binance import Binance
+from xtcryptosignals.tasks import settings as s
 
 
 class BinanceDex(Binance):

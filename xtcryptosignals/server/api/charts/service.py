@@ -155,11 +155,10 @@ def get_chart_twitter():
 
     for p in Project.objects:
         project_name = f"{p.name.replace(' ', '_')}_{p.coin_or_token}"
+        projects_twitter[project_name] = []
         for t in ProjectTwitter.objects(project=p)[:30]:
             if not t:
                 continue
-            if project_name not in projects_twitter:
-                projects_twitter[project_name] = []
             obj = t.to_dict()
             try:
                 projects_twitter[project_name].append(

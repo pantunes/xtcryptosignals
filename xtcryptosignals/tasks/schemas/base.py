@@ -25,7 +25,9 @@ class BaseSchema(Schema):
         if data_symbol in ("ETH", "BTC"):
             price = red.get(
                 s.REDIS_KEY_TICKER.format(
-                    source=s.BINANCE, symbol=data_symbol + "USDT"
+                    source=s.BINANCE,
+                    symbol=data_symbol + "USDT",
+                    frequency=s.HISTORY_FREQUENCY[0],
                 )
             )
             if not price:
