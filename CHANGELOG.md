@@ -2,9 +2,11 @@
 All changes will be registered here per release.
 
 ## [0.5.0] - Current date
+Added Projects Coin or Token Wikipedia summary info with Twitter number of followers.  
 Added Chart showing Project Twitter's data.  
 Added Chart showing Tether data.  
-Code fixes and improvements.
+Added Price change (10s, 1h, 1d, 1w, 4w) to lists.  
+Code fixes and improvements.  
 
 ## [0.4.0] - 2020-04-19
 Increased Coin/Token `Price Change Chart` from 6 to 12 points.  

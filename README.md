@@ -112,6 +112,11 @@ Install package:
 pip install xtcryptosignals
 ```
 
+### Run database migrations
+It will populate some collections with data:
+```bash
+FLASK_ENV=development SETTINGS_APP=server.dev.env mongodb-migrate --url mongodb://127.0.0.1:27017/XTC-Dev --migrations xtcryptosignals/server/migrations/
+```
 
 ## Ticker
 ### Start service
