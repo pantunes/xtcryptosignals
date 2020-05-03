@@ -15,16 +15,14 @@ from celery import states
 from billiard.context import Process
 from pymongo.errors import ServerSelectionTimeoutError
 from flask_socketio import SocketIO
-from xtcryptosignals.tasks import settings as s
 from xtcryptosignals.tasks.celeryconfig import BROKER_URL
 from xtcryptosignals.common.utils import use_mongodb
 from xtcryptosignals.tasks.utils import get_class
 from xtcryptosignals.tasks.models.ticker import Ticker
+from xtcryptosignals.tasks import settings as s
 
 
-@use_mongodb(
-    db=s.MONGODB_NAME, host=s.MONGODB_HOST, port=s.MONGODB_PORT,
-)
+@use_mongodb(db=s.MONGODB_NAME, host=s.MONGODB_HOST, port=s.MONGODB_PORT)
 def _process(logger, socketio, exchange_class, schema_class, symbol, pairs):
     ticker_kwargs = dict()
     if symbol:

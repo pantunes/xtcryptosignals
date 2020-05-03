@@ -17,9 +17,9 @@
                 <tr>
                     <th>&nbsp;</th>
                     <th>Exchange</th>
-{% for att in attributes %}
-                    <th>{{ att }}</th>
-{% endfor %}
+                    {% for _, att in attributes.items() %}
+                        <th style="text-align: right;">{{ att }}</th>
+                    {% endfor %}
                 </tr>
             </thead>
             <tbody>
@@ -32,14 +32,14 @@
             <td style="width: 100px;">
                 <a href="/ticker/{{frequency}}#{{exchange.upper()}}">{{exchange.replace('_', ' ').upper()}}</a>
             </td>
-        {% for att in attributes %}
-            {% set _id = "{}_{}{}_{}_{}".format(exchange.lower(), c.lower(), r.lower(), att.replace(' ', '_').lower(), frequency) %}
-            {% if 'price_change_chart' != att.replace(' ', '_').lower() %}
+        {% for att, _ in attributes.items() %}
+            {% set _id = "{}_{}{}_{}_{}".format(exchange.lower(), c.lower(), r.lower(), att, frequency) %}
+            {% if 'price_change_chart' != att %}
                 <td style="text-align: right;">
                     <span id="{{_id}}" style='padding-left: 8px'>-</span>
                 </td>
             {% else %}
-                <td id="{{_id}}" style="width: 150px;"/>
+                <td id="{{_id}}" style="width: 120px;"></td>
             {% endif %}
         {% endfor %}
         </tr>

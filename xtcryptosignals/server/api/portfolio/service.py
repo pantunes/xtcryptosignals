@@ -34,13 +34,17 @@ def _get_percentage(x, y):
 
 def _get_current_price(exchange, coin_token):
     key = s.REDIS_KEY_TICKER.format(
-        source=exchange["name"], symbol=coin_token + exchange["pair"]
+        source=exchange["name"],
+        symbol=coin_token + exchange["pair"],
+        frequency=s.HISTORY_FREQUENCY[0],
     )
     price = float(red.get(key))
 
     if exchange["pair"] != "USDT":
         key = s.REDIS_KEY_TICKER.format(
-            source=s.BINANCE, symbol=exchange["pair"] + "USDT"
+            source=s.BINANCE,
+            symbol=exchange["pair"] + "USDT",
+            frequency=s.HISTORY_FREQUENCY[0],
         )
         price_usdt = float(red.get(key))
 

@@ -133,9 +133,7 @@ PROJECTS = dict(
 
 
 class Migration(BaseMigration):
-    @use_mongodb(
-        db=s.MONGODB_NAME, host=s.MONGODB_HOST, port=s.MONGODB_PORT,
-    )
+    @use_mongodb(db=s.MONGODB_NAME, host=s.MONGODB_HOST, port=s.MONGODB_PORT)
     def upgrade(self):
         for k, v in PROJECTS.items():
             Project(**{**{"coin_or_token": k}, **v}).save()

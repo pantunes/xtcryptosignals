@@ -78,6 +78,14 @@
             maximumFractionDigits: 0,
         };
         const num_formatter = new Intl.NumberFormat('en-US', num_formatter_setup);
+
+        let price_formatter_setup_low_values = {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 8,
+            style: 'currency',
+            currency: 'USD',
+        };
+        const price_formatter_low_values = new Intl.NumberFormat('en-US', price_formatter_setup_low_values);
     </script>
 
 {% set logout_url = url_for('errors.logged_out') %}

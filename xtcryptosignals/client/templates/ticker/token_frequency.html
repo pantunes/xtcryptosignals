@@ -41,9 +41,9 @@
                     <th>&nbsp;</th>
                     <th>Pair</th>
                     <th>Exchange</th>
-{% for att in attributes if att != 'Price USDT' %}
-                <th>{{ att }}</th>
-{% endfor %}
+                    {% for _i, att in attributes.items() if _i != 'price_usdt' %}
+                        <th style="text-align: right;">{{ att }}</th>
+                    {% endfor %}
                 </tr>
             </thead>
             <tbody>
@@ -56,14 +56,14 @@
             <td style="width: 100px;"><a href="{{url_for('ticker.pair_frequency', frequency=frequency, pair=c+r)}}">{{c}}-{{r}}</a></td>
             <td style="width: 100px;"><a href="{{url_for('ticker.ticker', frequency=frequency)}}#{{exchange.upper()}}">{{exchange.replace('_', ' ').upper()}}</a>
             </td>
-        {% for att in attributes if att != 'Price USDT' %}
-            {% set _id = "{}_{}{}_{}_{}".format(exchange.lower(), c.lower(), r.lower(), att.replace(' ', '_').lower(), frequency) %}
-            {% if 'price_change_chart' != att.replace(' ', '_').lower() %}
+        {% for _i, att in attributes.items() if _i != 'price_usdt' %}
+            {% set _id = "{}_{}{}_{}_{}".format(exchange.lower(), c.lower(), r.lower(), att, frequency) %}
+            {% if 'price_change_chart' != att %}
                 <td style="text-align: right;">
                     <span id="{{_id}}" style='padding-left: 8px'>-</span>
                 </td>
             {% else %}
-                <td id="{{_id}}" style="width: 150px;"></td>
+                <td id="{{_id}}" style="width: 120px;"></td>
             {% endif %}
         {% endfor %}
         </tr>

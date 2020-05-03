@@ -41,9 +41,8 @@
     const socket = io.connect('{{socket_base_url}}{{frequency}}');
     socket.on('ticker', function(json) {
         const is_usd = json['symbol'].substr(json['symbol'].length - 3) === 'USD';
-        const list = {{attributes|safe}}
-        for (let i = 0; i < list.length; i++) {
-            let _attr = list[i].split(' ').join('_').toLowerCase();
+        const _dict = {{attributes|safe}}
+        for (let _attr in _dict) {
             let val = json[_attr];
             if (val == null) {
                 continue
@@ -51,13 +50,13 @@
             const _id = '#' + json.source + '_' + json.symbol.toLowerCase() + '_' + _attr + '_' + json.frequency;
 
             if (_attr === 'price_change_chart') {
-                doChart($(_id), json.price_change_chart);
+                doChart($(_id), json[_attr]);
                 return
             }
 
             if (['price', 'price_usdt', 'volume_24h'].includes(_attr)) {
                 if (['price', 'price_usdt'].includes(_attr)) {
-                    const color = (json.price_change > 0) ? "#e3ffe2" : "#ffe2e2";
+                    const color = (json['price_change'] > 0) ? "#e3ffe2" : "#ffe2e2";
                     $(_id).effect("highlight", {
                         color: color,
                         queue: false
@@ -79,7 +78,9 @@
             }
 
             let suffix = '';
-            if(['price_change', 'volume_change', 'number_trades_change'].indexOf(_attr) >= 0) {
+            if(['price_change', 'volume_change', 'number_trades_change',
+                'price_change_1h', 'price_change_1d', 'price_change_1w',
+                'price_change_4w'].indexOf(_attr) >= 0) {
                 if (json[_attr] !== 0) {
                     $(_id).css("color", (json[_attr] > 0) ? "green" : "red")
                 } else {
@@ -144,14 +145,6 @@
 </script>
 
 <script type="text/javascript">
-let price_formatter_setup_low_values = {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 8,
-    style: 'currency',
-    currency: 'USD',
-};
-const price_formatter_low_values = new Intl.NumberFormat('en-US', price_formatter_setup_low_values);
-
 let num_formatter_setup_low_values = {
     minimumFractionDigits: 0,
     maximumFractionDigits: 8,
@@ -223,8 +216,8 @@ function _post_and_get_ticker_emit(id, json, reference_name, reference_pair, coi
                     <tr>
                         <th>&nbsp;</th>
                         <th>Pair</th>
-                        {% for att in attributes %}
-                        <th>{{ att }}</th>
+                        {% for _, att in attributes.items() %}
+                            <th style="text-align: right;">{{ att }}</th>
                         {% endfor %}
                     </tr>
                 </thead>
@@ -235,14 +228,14 @@ function _post_and_get_ticker_emit(id, json, reference_name, reference_pair, coi
                         <td style="width: 100px;">
                             <a href="{{url_for('ticker.pair_frequency', frequency=frequency, pair=c+r)}}">{{c}}-{{r}}</a>
                         </td>
-                        {% for att in attributes %}
-                            {% set _id = "{}_{}{}_{}_{}".format(exchange.lower(), c.lower(), r.lower(), att.replace(' ', '_').lower(), frequency) %}
-                            {% if 'price_change_chart' != att.replace(' ', '_').lower() %}
+                        {% for att, _ in attributes.items() %}
+                            {% set _id = "{}_{}{}_{}_{}".format(exchange.lower(), c.lower(), r.lower(), att, frequency) %}
+                            {% if 'price_change_chart' != att %}
                                 <td style="text-align: right;">
                                     <span id="{{_id}}" style='padding-left: 8px'>-</span>
                                 </td>
                             {% else %}
-                                <td id="{{_id}}" style="width: 150px;"></td>
+                                <td id="{{_id}}" style="width: 120px;"></td>
                             {% endif %}
                         {% endfor %}
                     </tr>

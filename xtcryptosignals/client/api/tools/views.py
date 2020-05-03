@@ -66,7 +66,7 @@ def coin_or_token_frequency(coin_or_token):
         socket_base_url=current_app.config["SOCKET_BASE_URL"],
         frequency=g.HISTORY_FREQUENCY[0],
         frequencies_charts=["10s", "1m", "10m", "30m", "1h", "4h", "12h", "1d"],
-        attributes=["Price USDT"],
+        attributes={"price_usdt": "Price USDT"},
         coin_or_token=coin_or_token,
         reference=g.COINS_OR_TOKENS_REFERENCE[coin_or_token],
     )

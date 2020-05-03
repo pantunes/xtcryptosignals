@@ -36,7 +36,6 @@ app.config.from_envvar("SETTINGS_APP")
 
 
 login_manager = LoginManager()
-
 csrf = CSRFProtect()
 
 

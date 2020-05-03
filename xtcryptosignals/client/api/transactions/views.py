@@ -48,7 +48,7 @@ def context_processor():
         frequencies=g.HISTORY_FREQUENCY,
         pairs=get_pairs(g.SYMBOLS_PER_EXCHANGE),
         tokens=get_coin_tokens(g.SYMBOLS_PER_EXCHANGE),
-        attributes=["Price USDT"],
+        attributes={"price_usdt": "Price USDT"},
     )
 
 

@@ -29,7 +29,7 @@ TIMEOUT_PER_SYMBOLS_REQUEST = 5.0  # in seconds
 SYMBOL_FLOAT_PRECISION = 8
 PRICES_CHANGE_CHART_SIZE = 12
 
-REDIS_KEY_TICKER = "{source}_{symbol}_price"
+REDIS_KEY_TICKER = "{source}_{symbol}_{frequency}_price"
 REDIS_CFGI = "cfgi"
 
 URL_CFGI = "https://api.alternative.me/fng"

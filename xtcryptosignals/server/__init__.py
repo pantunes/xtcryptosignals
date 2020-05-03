@@ -29,8 +29,6 @@ app.config.from_envvar("SETTINGS_APP")
 
 
 sess = Session()
-
-
 socketio = SocketIO()
 
 
