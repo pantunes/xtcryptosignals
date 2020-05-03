@@ -17,17 +17,21 @@
     let charts=[];
     function render_data(data) {
         const projects_twitter = data.projects_twitter;
+        let i = 0
         for (const pt in projects_twitter) {
-            const chart_id = `chart_${pt}`
-            let chart = create_chart_twitter(chart_id, pt);
-            chart.addSeries({
-                type: 'area',
-                name: pt,
-                data: projects_twitter[pt],
-            }, true);
-            charts.push(chart);
-            setChartTheme();
-            $(`#row_${chart_id}`).show();
+            setTimeout(function () {
+                const chart_id = `chart_${pt}`
+                let chart = create_chart_twitter(chart_id, pt);
+                chart.addSeries({
+                    type: 'area',
+                    name: pt,
+                    data: projects_twitter[pt],
+                }, true);
+                charts.push(chart);
+                setChartTheme();
+                $(`#row_${chart_id}`).show();
+            }, i * 500);
+            i++
         }
     }
 </script>
