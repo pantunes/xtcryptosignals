@@ -27,16 +27,22 @@ from xtcryptosignals.common.utils import (
 bp = Blueprint("ticker", __name__)
 
 
-_COLUMN_ATTRIBUTES = [
-    "Price",
-    "Price Change",
-    "Volume 24h",
-    "Volume Change",
-    "Number Trades 24h",
-    "Number Trades Change",
-    "Updated On",
-    "Price Change Chart",
-]
+_COLUMN_ATTRIBUTES = {
+    "price": "Price",
+    "price_change": "Price Change",
+    # PRICE_CHANGE_FREQUENCIES
+    "price_change_1h": "1h",
+    "price_change_1d": "1d",
+    "price_change_1w": "1w",
+    "price_change_4w": "4w",
+    # /PRICE_CHANGE_FREQUENCIES
+    "volume_24h": "Volume 24h",
+    "volume_change": "Volume Change",
+    "number_trades_24h": "Number Trades 24h",
+    "number_trades_change": "Number Trades Change",
+    "updated_on": "Updated On",
+    "price_change_chart": "Price Change Chart",
+}
 
 
 @bp.before_request
@@ -109,12 +115,14 @@ def token_frequency(coin_or_token, frequency):
     if coin_or_token_404:
         raise ValueError("Coin/Token not found.")
     projects, _ = service.get_projects()
+    if not projects:
+        raise ValueError("There are no Projects.")
     project = [x for x in projects if x["coin_or_token"] == coin_or_token][0]
     project_twitter, _ = service.get_project_last_twitter(project["_id"])
     return dict(
         template_name_or_list="ticker/token_frequency.html",
         symbols_per_exchange=x,
-        attributes=["Price USDT"] + _COLUMN_ATTRIBUTES,
+        attributes={**{"price_usdt": "Price USDT"}, **_COLUMN_ATTRIBUTES},
         frequency=frequency,
         coin_or_token=coin_or_token,
         project=project,

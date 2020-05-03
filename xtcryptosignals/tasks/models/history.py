@@ -8,6 +8,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+import redis
 from mongoengine import (
     StringField,
     DecimalField,
@@ -16,6 +17,9 @@ from mongoengine import (
 )
 from xtcryptosignals.common.models import DocumentValidation
 from xtcryptosignals.tasks import settings as s
+
+
+red = redis.Redis.from_url(s.BROKER_URL)
 
 
 class History(DocumentValidation):
@@ -58,6 +62,20 @@ class History(DocumentValidation):
                 continue
         e["frequency"] = frequency
         e["updated_on"] = e["created_on"]
+
+        for x in s.PRICE_CHANGE_FREQUENCIES:
+            key = s.REDIS_KEY_TICKER.format(
+                source=self.source,
+                symbol=self.symbol,
+                frequency=x,
+            )
+            try:
+                price_change = float(red.get(key))
+                pc = round((float(self.price) - price_change) / price_change, 1)
+                # return 0.0 if -0.0
+                e[f"price_change_{x}"] = (pc * 100) + 0.0
+            except TypeError:
+                e[f"price_change_{x}"] = None
         return e
 
     @staticmethod

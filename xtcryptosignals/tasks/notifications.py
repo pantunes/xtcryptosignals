@@ -16,7 +16,6 @@ from celery.task import task
 from celery.exceptions import Ignore
 from celery import states
 from pywebpush import webpush, WebPushException
-from xtcryptosignals.tasks import settings as s
 from xtcryptosignals.common.utils import use_mongodb
 from xtcryptosignals.tasks.utils import convert_to_seconds
 from xtcryptosignals.server.api.notifications.models import (
@@ -24,15 +23,14 @@ from xtcryptosignals.server.api.notifications.models import (
     Notification,
 )
 from xtcryptosignals.tasks.models.history import History
+from xtcryptosignals.tasks import settings as s
 
 
 red = redis.Redis.from_url(s.BROKER_URL)
 
 
 @task(bind=True)
-@use_mongodb(
-    db=s.MONGODB_NAME, host=s.MONGODB_HOST, port=s.MONGODB_PORT,
-)
+@use_mongodb(db=s.MONGODB_NAME, host=s.MONGODB_HOST, port=s.MONGODB_PORT)
 def update(self):
     logger = self.get_logger()
 

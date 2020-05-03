@@ -20,9 +20,9 @@ from xtcryptosignals.common.models import (
     DocumentValidation,
     _set_timestamp,
 )
-from xtcryptosignals.tasks import settings as s
 from xtcryptosignals.tasks.models.history import History
 from xtcryptosignals.tasks.utils import convert_to_seconds
+from xtcryptosignals.tasks import settings as s
 
 
 red = redis.Redis.from_url(s.BROKER_URL)
@@ -86,17 +86,15 @@ def _set_history(ticker):
             history_object.price_usdt = ticker["price_usdt"]
 
         if not ticker._exists_row_offset(model_history, offset=x):
+            row = ticker.to_dict()
+            key = s.REDIS_KEY_TICKER.format(**row, frequency=x)
+            red.set(key, row["price"])
             history_object.save()
         else:
             _set_timestamp(history_object)
 
         # still emit this object ticker
         ticker.history_list_dicts.append(history_object.to_dict(frequency=x))
-
-
-def _save_ticker_in_redis(ticker):
-    row = ticker.to_dict()
-    red.set(s.REDIS_KEY_TICKER.format(**row), row["price"])
 
 
 class Ticker(DocumentValidation):
@@ -117,7 +115,6 @@ class Ticker(DocumentValidation):
 
     _pre_save_hooks = (
         _set_history,
-        _save_ticker_in_redis,
     )
 
     meta = {

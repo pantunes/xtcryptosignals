@@ -9,7 +9,6 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import redis
-import requests
 from flask import Blueprint
 from flask_restful import Api, Resource
 from xtcryptosignals.server.utils import validate_io
@@ -37,13 +36,7 @@ class FearAndGreedIndex(Resource):
             200:
                 description: Returns Crypto Fear & Greed Index
         """
-        try:
-            cfgi = int(red.get(s.REDIS_CFGI))
-        except TypeError:
-            response = requests.get(url=s.URL_CFGI)
-            cfgi = response.json()["data"][0]["value"]
-            red.set(s.REDIS_CFGI, cfgi)
-        return dict(cfgi=cfgi)
+        return dict(cfgi=int(red.get(s.REDIS_CFGI)))
 
 
 api.add_resource(FearAndGreedIndex, "/parties/cfgi")
