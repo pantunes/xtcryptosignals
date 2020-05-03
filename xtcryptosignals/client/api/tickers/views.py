@@ -29,7 +29,7 @@ bp = Blueprint("ticker", __name__)
 
 _COLUMN_ATTRIBUTES = {
     "price": "Price",
-    "price_change": "Price Change",
+    "price_change": "10s",
     # PRICE_CHANGE_FREQUENCIES
     "price_change_1h": "1h",
     "price_change_1d": "1d",
@@ -37,9 +37,9 @@ _COLUMN_ATTRIBUTES = {
     "price_change_4w": "4w",
     # /PRICE_CHANGE_FREQUENCIES
     "volume_24h": "Volume 24h",
-    "volume_change": "Volume Change",
-    "number_trades_24h": "Number Trades 24h",
-    "number_trades_change": "Number Trades Change",
+    "volume_change": "Change",
+    "number_trades_24h": "Num. Trades",
+    "number_trades_change": "Change",
     "updated_on": "Updated On",
     "price_change_chart": "Price Change Chart",
 }
