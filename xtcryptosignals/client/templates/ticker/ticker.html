@@ -189,9 +189,13 @@ function _post_and_get_ticker_emit(id, json, reference_name, reference_pair, coi
         return;
     }
     for (let i in charts) {
-        charts[i].series[0].addPoint([json['created_on_ts'], json['price']], false, false);
-        charts[i].series[1].addPoint([json['created_on_ts'], json['volume_24h']], false, false);
-        charts[i].series[2].addPoint([json['created_on_ts'], json['number_trades_24h']], false, false);
+        let shift = false
+        if (charts[i].series[0].data.length > 30) {
+            shift = true
+        }
+        charts[i].series[0].addPoint([json['created_on_ts'], json['price']], false, shift);
+        charts[i].series[1].addPoint([json['created_on_ts'], json['volume_24h']], false, shift);
+        charts[i].series[2].addPoint([json['created_on_ts'], json['number_trades_24h']], false, shift);
         charts[i].redraw();
     }
     return json

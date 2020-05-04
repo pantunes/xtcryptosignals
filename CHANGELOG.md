@@ -1,6 +1,9 @@
 # Changelog
 All changes will be registered here per release.
 
+## [0.6.0] - Current date
+Code fixes and improvements.
+
 ## [0.5.0] - 2020-05-04
 Added Projects Coin or Token Wikipedia summary info with Twitter number of followers.  
 Added Chart showing Project Twitter's data.  
