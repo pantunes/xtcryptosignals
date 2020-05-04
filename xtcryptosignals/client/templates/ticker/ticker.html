@@ -71,8 +71,10 @@
 
                 val = _get_formatter(val, is_usd).format(val)
 
-            } else if (_attr === 'number_trades_24h') {
+            } else if (['number_trades_24h'].includes(_attr)) {
                 val = numeral(val).format('0,0');
+            } else if (['price_change_1h', 'price_change_1d', 'price_change_1w', 'price_change_4w'].includes(_attr)) {
+                val = numeral(val).format('0,0.0');
             } else if (isFloat(json[_attr])) {
                 val = numeral(val).format('0,0.00');
             }
@@ -81,7 +83,7 @@
             if(['price_change', 'volume_change', 'number_trades_change',
                 'price_change_1h', 'price_change_1d', 'price_change_1w',
                 'price_change_4w'].indexOf(_attr) >= 0) {
-                if (json[_attr] !== 0) {
+                if (json[_attr] !== 0.0) {
                     $(_id).css("color", (json[_attr] > 0) ? "green" : "red")
                 } else {
                     $(_id).attr("class", "numeric_value");

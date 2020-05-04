@@ -69,6 +69,7 @@ def main(ctx, test, list_config, enable_messaging, log_minimal, version):
 
     # pre-cache all needed data
     from xtcryptosignals.tasks.caching import prepare_cache
+
     prepare_cache()
 
     from celery import current_app

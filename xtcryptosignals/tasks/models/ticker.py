@@ -113,9 +113,7 @@ class Ticker(DocumentValidation):
     opened_on = DateTimeField()
     closed_on = DateTimeField()
 
-    _pre_save_hooks = (
-        _set_history,
-    )
+    _pre_save_hooks = (_set_history,)
 
     meta = {
         "collection": "ticker",

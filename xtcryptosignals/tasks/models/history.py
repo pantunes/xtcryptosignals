@@ -65,15 +65,13 @@ class History(DocumentValidation):
 
         for x in s.PRICE_CHANGE_FREQUENCIES:
             key = s.REDIS_KEY_TICKER.format(
-                source=self.source,
-                symbol=self.symbol,
-                frequency=x,
+                source=self.source, symbol=self.symbol, frequency=x,
             )
             try:
                 price_change = float(red.get(key))
-                pc = round((float(self.price) - price_change) / price_change, 1)
+                pc = (float(self.price) - price_change) / price_change
                 # return 0.0 if -0.0
-                e[f"price_change_{x}"] = (pc * 100) + 0.0
+                e[f"price_change_{x}"] = round((pc * 100) + 0.0, 2)
             except TypeError:
                 e[f"price_change_{x}"] = None
         return e
