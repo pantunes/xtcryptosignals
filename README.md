@@ -298,9 +298,9 @@ Open the browser with the URL `http://127.0.0.1:8000`:
 ![screen-shot](xtcryptosignals/client/static/imgs/readme/4.png) | ![screen-shot](xtcryptosignals/client/static/imgs/readme/5.png) 
 **Alerts Setup** | **Web Push Notification** | 
 ![screen-shot](xtcryptosignals/client/static/imgs/readme/6.png) | ![screen-shot](xtcryptosignals/client/static/imgs/readme/7.png)
-**Chart** | **Chart** | 
+**Twitter Chart** | **Crypto Fear & Greed Index Chart** | 
 ![screen-shot](xtcryptosignals/client/static/imgs/readme/12.png) | ![screen-shot](xtcryptosignals/client/static/imgs/readme/9.png)
-**Chart** | **Chart** | 
+**Tether Chart** | **Coin / Token Chart** | 
 ![screen-shot](xtcryptosignals/client/static/imgs/readme/10.png) | ![screen-shot](xtcryptosignals/client/static/imgs/readme/11.png)
 
 ## Team
