@@ -25,6 +25,8 @@ users_per_namespace.update({"/": 0})
 @socketio.on("connect")
 def on_general_connect():
     global users_per_namespace
+
+    socketio.emit("connect")
     users_per_namespace["/"] += 1
     socketio.emit("general", users_per_namespace, broadcast=True)
 
@@ -32,6 +34,8 @@ def on_general_connect():
 @socketio.on("disconnect")
 def on_general_disconnect():
     global users_per_namespace
+
+    socketio.emit("disconnect")
     users_per_namespace["/"] -= 1
     socketio.emit("general", users_per_namespace, broadcast=True)
 
@@ -39,6 +43,7 @@ def on_general_disconnect():
 class TickerSocketIONamespace(Namespace):
     def on_connect(self):
         global users_per_namespace
+
         users_per_namespace[self.namespace] += 1
         rows = History.get_ticker_data_from_namespace(self.namespace)
         for row in rows:
@@ -47,6 +52,7 @@ class TickerSocketIONamespace(Namespace):
 
     def on_disconnect(self):
         global users_per_namespace
+
         users_per_namespace[self.namespace] -= 1
         socketio.emit("general", users_per_namespace, broadcast=True)
 

@@ -38,7 +38,7 @@
         return p
     }
 
-    const socket = io.connect('{{socket_base_url}}{{frequency}}');
+    const socket = io('{{socket_base_url}}{{frequency}}');
     socket.on('ticker', function(json) {
         const is_usd = json['symbol'].substr(json['symbol'].length - 3) === 'USD';
         const _dict = {{attributes|safe}}
@@ -188,9 +188,10 @@ function _post_and_get_ticker_emit(id, json, reference_name, reference_pair, coi
     if (json['symbol'] !== coin_or_token + reference_pair) {
         return;
     }
+    let _id = `chart_${coin_or_token}10s`
     for (let i in charts) {
         let shift = false
-        if (charts[i].series[0].data.length > 30) {
+        if (_id === charts[i].renderTo.id && charts[i].series[0].data.length > 30) {
             shift = true
         }
         charts[i].series[0].addPoint([json['created_on_ts'], json['price']], false, shift);
