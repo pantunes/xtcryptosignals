@@ -16,9 +16,9 @@ from xtcryptosignals.common.models import DocumentValidation
 
 
 class Project(DocumentValidation):
-    name = StringField(required=True)
+    name = StringField(required=True, unique=True)
     summary = StringField()
-    coin_or_token = StringField(required=True)
+    coin_or_token = StringField(required=True, unique=True)
     website = URLField(required=True)
     twitter = URLField(required=True)
     wikipedia = URLField()

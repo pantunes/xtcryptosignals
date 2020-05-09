@@ -9,30 +9,23 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        get_chart_twitter_data(render_data);
+        const fs = {{ projects_twitter|safe }};
+        for (let i in fs) {
+            setTimeout(function () {
+                get_chart_twitter_data(render_data, fs[i], '{{ twitter_frequency }}');
+            }, i * 500);
+        }
     });
 </script>
 
 <script type="text/javascript">
     let charts=[];
-    function render_data(data) {
-        const projects_twitter = data.projects_twitter;
-        let i = 0
-        for (const pt in projects_twitter) {
-            setTimeout(function () {
-                const chart_id = `chart_${pt}`
-                let chart = create_chart_twitter(chart_id, pt);
-                chart.addSeries({
-                    type: 'area',
-                    name: pt,
-                    data: projects_twitter[pt],
-                }, true, true);
-                charts.push(chart);
-                setChartTheme();
-                $(`#row_${chart_id}`).show();
-            }, i * 500);
-            i++
-        }
+    function render_data(data, project, frequency) {
+        const chart_id = `chart_${project}`;
+        let chart = create_chart_twitter(chart_id, data, frequency);
+        charts.push(chart);
+        setChartTheme();
+        $('#row_'+chart_id).show();
     }
 </script>
 
@@ -41,6 +34,7 @@
         $(".navbar-countdown").hide();
     });
 </script>
+
 {% endblock %}
 
 {% block body %}

@@ -52,6 +52,7 @@ SYMBOLS_PER_EXCHANGE.append(
             "pairs": [
                 ("BTC", "USDT"),
                 ("ETH", "USDT"),
+                ("ETH", "BTC"),
                 ("LTC", "USDT"),
                 ("BNB", "USDT"),
                 ("XRP", "USDT"),

@@ -110,7 +110,7 @@ class ChartTetherBTC(Resource):
 
 class ChartTwitter(Resource):
     @validate_io()
-    def get(self):
+    def get(self, project, frequency):
         """
         Twitter chart data format
         ---
@@ -118,16 +118,30 @@ class ChartTwitter(Resource):
             - Charts
         security:
             - Bearer: []
+        parameters:
+            - name: project
+              in: path
+              required: true
+            - name: frequency
+              in: path
+              required: true
         responses:
             200:
                 description: Returns list Twitter chart data format
             400:
                 description: Error in input validation
+            404:
+                description: Project not found
+            405:
+                description: Project is invalid
         """
-        return service.get_chart_twitter()
+        if frequency not in ("1d",):
+            return dict(error="Frequency is incorrect."), 400
+
+        return service.get_chart_twitter(project=project, frequency=frequency)
 
 
 api.add_resource(ChartFearAndGreedIndexAndBTC, "/charts/cfgi/BTC/<frequency>")
 api.add_resource(ChartCoinTokenFrequency, "/charts/<coin_or_token>/<frequency>")
 api.add_resource(ChartTetherBTC, "/charts/tether/BTC/<frequency>")
-api.add_resource(ChartTwitter, "/charts/twitter")
+api.add_resource(ChartTwitter, "/charts/twitter/<project>/<frequency>")

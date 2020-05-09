@@ -128,9 +128,9 @@ function get_chart_tether_data(handler, coin_or_token, frequency) {
     });
 }
 
-function get_chart_twitter_data(handler) {
-    $.get('/charts/twitter').done(function(response) {
-        handler(response)
+function get_chart_twitter_data(handler, project, frequency) {
+    $.get('/charts/twitter/' + project + '/' + frequency).done(function(response) {
+        handler(response, project, frequency)
     })
     .fail(function(xhr, status, error) {
         process_fail(xhr);

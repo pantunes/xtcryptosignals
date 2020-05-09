@@ -1,10 +1,10 @@
-function create_chart_twitter(chart_id, pt) {
+function create_chart_twitter(chart_id, data, frequency) {
       return Highcharts.chart(chart_id, {
         chart: {
             zoomType: 'x'
         },
         title: {
-            text: `Twitter ${pt} 1d`
+            text: `Twitter ${data.project.name} / ${data.project.coin_or_token} ${frequency}`
         },
         subtitle: {
             text: document.ontouchstart === undefined ?
@@ -56,5 +56,19 @@ function create_chart_twitter(chart_id, pt) {
                 threshold: null
             }
         },
+        series: [{
+            name: `Number of Followers`,
+            type: 'area',
+            data: data.num_followers,
+            tooltip: {
+                pointFormatter: function() {
+                    return '<span style="color:' + this.color + '">\u25CF</span> ' +
+                        this.series.name + ': <b>' + num_formatter.format(this.y) + '</b><br/>';
+                }
+            },
+            marker: {
+                enabled: false,
+            },
+        }]
     });
 }
