@@ -2,9 +2,10 @@
 All changes will be registered here per release.
 
 ## [0.6.0] - Current date
-Added exchange:
+Added the following exchanges:
 
 * Bitstamp
+* Kucoin
 
 Code fixes and improvements.  
 

@@ -8,5 +8,11 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-BINANCE_API_KEY = ""  # Add Personal Binance API KEY
-BINANCE_API_SECRET = ""  # Add Personal Binance API SECRET
+# Add the following Personal Exchange keys in order to be able to Trade
+
+BINANCE_API_KEY = ""
+BINANCE_API_SECRET = ""
+
+KUCOIN_API_KEY = ""
+KUCOIN_API_SECRET = ""
+KUCOIN_API_PASSPHRASE = ""
