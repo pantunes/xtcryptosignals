@@ -24,6 +24,7 @@ DCOIN = "dcoin"
 BITMAX = "bitmax"
 BILAXY = "bilaxy"
 BITSTAMP = "bitstamp"
+KUCOIN = "kucoin"
 
 
 EXCHANGES = [
@@ -42,6 +43,7 @@ EXCHANGES = [
     BITMAX,
     BILAXY,
     BITSTAMP,
+    KUCOIN,
 ]
 
 
@@ -85,6 +87,11 @@ SYMBOLS_PER_EXCHANGE.append(
 # OKEx
 SYMBOLS_PER_EXCHANGE.append(
     {OKEX: {"pairs": [("BTC", "USDT"), ("ETH", "USDT"), ("LTC", "USDT"),]}}
+)
+
+# Kucoin
+SYMBOLS_PER_EXCHANGE.append(
+    {KUCOIN: {"pairs": [("BTC", "USDT"), ("ETH", "USDT"),]}}
 )
 
 # BIBOX
