@@ -44,16 +44,16 @@
 
 <br/>
 
+<div class="row">
 {% for f in frequencies_charts %}
-<div class="{{ loop.cycle('_row', 'row') }}">
-    <div class="six columns" id="row_chart_{{ coin_or_token }}{{ f }}" style="display: none;">
+    <div class="twelve columns" id="row_chart_{{ coin_or_token }}{{ f }}" style="display: none;">
         <div id="chart_{{ coin_or_token }}{{ f }}"></div>
         <p class="highcharts-description" style="font-size:small">
             <b>Source:</b> {{ reference['name']|capitalize }}, <b>Pair:</b> {{ coin_or_token }}/{{ reference['pair'] }}
         </p>
         <br/><br/>
     </div>
-</div>
 {% endfor %}
+</div>
 
 {% endblock %}
