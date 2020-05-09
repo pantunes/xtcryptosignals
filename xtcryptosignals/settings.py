@@ -57,6 +57,7 @@ from xtcryptosignals.settings_exchanges import (
     BILAXY,
     BITSTAMP,
     KUCOIN,
+    COINBASE_PRO,
 )  # noqa
 
 __all__ = [
@@ -79,6 +80,7 @@ __all__ = [
     "BILAXY",
     "BITSTAMP",
     "KUCOIN",
+    "COINBASE_PRO",
     "TICKER_SCHEDULE",
     "HISTORY_FREQUENCY",
     "PRICE_CHANGE_FREQUENCIES",

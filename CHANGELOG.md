@@ -6,6 +6,7 @@ Added the following exchanges:
 
 * Bitstamp
 * Kucoin
+* Coinbase Pro
 
 Code fixes and improvements.  
 
