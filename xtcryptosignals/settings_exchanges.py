@@ -23,6 +23,7 @@ COINBENE = "coinbene"
 DCOIN = "dcoin"
 BITMAX = "bitmax"
 BILAXY = "bilaxy"
+BITSTAMP = "bitstamp"
 
 
 EXCHANGES = [
@@ -40,6 +41,7 @@ EXCHANGES = [
     DCOIN,
     BITMAX,
     BILAXY,
+    BITSTAMP,
 ]
 
 
@@ -75,9 +77,9 @@ SYMBOLS_PER_EXCHANGE.append(
     }
 )
 
-# Binance DEX
+# Bitstamp
 SYMBOLS_PER_EXCHANGE.append(
-    {BINANCE_DEX: {"pairs": [("LTO", "BNB"),], "single_request": True,}}
+    {BITSTAMP: {"pairs": [("BTC", "USD"), ("ETH", "USD"),]}}
 )
 
 # OKEx
@@ -85,24 +87,9 @@ SYMBOLS_PER_EXCHANGE.append(
     {OKEX: {"pairs": [("BTC", "USDT"), ("ETH", "USDT"), ("LTC", "USDT"),]}}
 )
 
-# IDEX
-SYMBOLS_PER_EXCHANGE.append(
-    {IDEX: {"pairs": [("LTO", "ETH"), ("LQD", "ETH"), ("IDEX", "ETH"),]}}
-)
-
 # BIBOX
 SYMBOLS_PER_EXCHANGE.append(
     {BIBOX: {"pairs": [("BTC", "USDT"), ("ETH", "USDT"), ("LTC", "USDT"),]}}
-)
-
-# OKCoin
-SYMBOLS_PER_EXCHANGE.append(
-    {OKCOIN: {"pairs": [("BTC", "USD"), ("ETH", "USD"), ("LTC", "USD"),]}}
-)
-
-# Coinbene
-SYMBOLS_PER_EXCHANGE.append(
-    {COINBENE: {"pairs": [("BTC", "USDT"), ("ETH", "USDT"), ("LTC", "USDT"),]}}
 )
 
 # Bitmax
@@ -118,6 +105,21 @@ SYMBOLS_PER_EXCHANGE.append(
             "single_request": True,
         }
     }
+)
+
+# IDEX
+SYMBOLS_PER_EXCHANGE.append(
+    {IDEX: {"pairs": [("LTO", "ETH"), ("LQD", "ETH"), ("IDEX", "ETH"),]}}
+)
+
+# OKCoin
+SYMBOLS_PER_EXCHANGE.append(
+    {OKCOIN: {"pairs": [("BTC", "USD"), ("ETH", "USD"), ("LTC", "USD"),]}}
+)
+
+# Coinbene
+SYMBOLS_PER_EXCHANGE.append(
+    {COINBENE: {"pairs": [("BTC", "USDT"), ("ETH", "USDT"), ("LTC", "USDT"),]}}
 )
 
 # Hotbit
@@ -150,6 +152,11 @@ SYMBOLS_PER_EXCHANGE.append(
 # Uphold
 SYMBOLS_PER_EXCHANGE.append(
     {UPHOLD: {"pairs": [("BTC", "USD"), ("ETH", "USD"), ("LTC", "USD"),]}}
+)
+
+# Binance DEX
+SYMBOLS_PER_EXCHANGE.append(
+    {BINANCE_DEX: {"pairs": [("LTO", "BNB"),], "single_request": True,}}
 )
 
 # DCoin

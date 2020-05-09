@@ -55,6 +55,7 @@ from xtcryptosignals.settings_exchanges import (
     DCOIN,
     BITMAX,
     BILAXY,
+    BITSTAMP,
 )  # noqa
 
 __all__ = [
@@ -75,6 +76,7 @@ __all__ = [
     "DCOIN",
     "BITMAX",
     "BILAXY",
+    "BITSTAMP",
     "TICKER_SCHEDULE",
     "HISTORY_FREQUENCY",
     "PRICE_CHANGE_FREQUENCIES",

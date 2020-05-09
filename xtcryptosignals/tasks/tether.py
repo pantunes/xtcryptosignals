@@ -20,6 +20,7 @@ from xtcryptosignals.tasks import settings as s
 
 
 TETHER_CONTRACT_ADDRESS = "0xdac17f958d2ee523a2206206994597c13d831ec7"
+
 URL = f"https://etherscan.io/token/{TETHER_CONTRACT_ADDRESS}"
 
 
