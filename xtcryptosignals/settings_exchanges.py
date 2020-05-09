@@ -55,6 +55,7 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("ETH", "BTC"),
                 ("LTC", "USDT"),
                 ("BNB", "USDT"),
+                ("BNB", "BTC"),
                 ("XRP", "USDT"),
                 ("XLM", "USDT"),
                 ("XMR", "USDT"),
