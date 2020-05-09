@@ -25,6 +25,7 @@ BITMAX = "bitmax"
 BILAXY = "bilaxy"
 BITSTAMP = "bitstamp"
 KUCOIN = "kucoin"
+COINBASE_PRO = "coinbase_pro"
 
 
 EXCHANGES = [
@@ -44,6 +45,7 @@ EXCHANGES = [
     BILAXY,
     BITSTAMP,
     KUCOIN,
+    COINBASE_PRO,
 ]
 
 
@@ -87,6 +89,11 @@ SYMBOLS_PER_EXCHANGE.append(
 # OKEx
 SYMBOLS_PER_EXCHANGE.append(
     {OKEX: {"pairs": [("BTC", "USDT"), ("ETH", "USDT"), ("LTC", "USDT"),]}}
+)
+
+# Coinbase Pro
+SYMBOLS_PER_EXCHANGE.append(
+    {COINBASE_PRO: {"pairs": [("BTC", "USD"), ("ETH", "USD"),]}}
 )
 
 # Kucoin
