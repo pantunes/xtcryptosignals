@@ -207,7 +207,7 @@ function _post_and_get_ticker_emit(id, json, reference_name, reference_pair, coi
 
 {% block body %}
 
-{% with url_ticker='ticker.ticker', params=dict() %}
+{% with url_ticker='ticker.ticker', params={} %}
 {% include 'menu.html' %}
 {% endwith %}
 
@@ -231,7 +231,7 @@ function _post_and_get_ticker_emit(id, json, reference_name, reference_pair, coi
                 <tbody>
                     {% for c, r in d['pairs'] %}
                     <tr>
-                        <td style="width: 32px; vertical-align: middle;"><img src="/static/imgs/logos/{{c}}.png" alt="{{c}}"/></td>
+                        <td style="width: 32px; vertical-align: middle;"><a href="{{url_for('ticker.token_frequency', coin_or_token=c, frequency=frequency)}}"><img src="/static/imgs/logos/{{c}}.png" alt="{{c}}"/></a></td>
                         <td style="width: 100px;">
                             <a href="{{url_for('ticker.pair_frequency', frequency=frequency, pair=c+r)}}">{{c}}-{{r}}</a>
                         </td>

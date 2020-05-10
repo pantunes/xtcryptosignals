@@ -18,7 +18,7 @@ class Binance:
         self.client = Client(s.BINANCE_API_KEY, s.BINANCE_API_SECRET)
 
     def get_ticker(self, *_, **kwargs):
-        ticker_kwargs = dict()
+        ticker_kwargs = {}
 
         symbol = kwargs.get("symbol")
         if symbol:

@@ -24,7 +24,7 @@ from xtcryptosignals.tasks import settings as s
 
 @use_mongodb(db=s.MONGODB_NAME, host=s.MONGODB_HOST, port=s.MONGODB_PORT)
 def _process(logger, socketio, exchange_class, schema_class, symbol, pairs):
-    ticker_kwargs = dict()
+    ticker_kwargs = {}
     if symbol:
         ticker_kwargs.update(symbol=symbol)
     elif pairs:

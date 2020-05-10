@@ -22,7 +22,7 @@ class Bilaxy:
                 "Error connecting Bilaxy on URL: {}".format(self.base_url)
             )
         response = request.json()["dataMap"]
-        _pairs = dict()
+        _pairs = {}
         for x, y in pairs:
             try:
                 _pairs[y].append(x)

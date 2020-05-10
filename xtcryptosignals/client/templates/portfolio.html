@@ -4,7 +4,7 @@
 
 {% block body %}
 
-{% with url_ticker='ticker.ticker', params=dict() %}
+{% with url_ticker='ticker.ticker', params={} %}
 {% include 'menu.html' %}
 {% endwith %}
 
@@ -44,7 +44,7 @@
       }
       $table.append(
           "<tr>" +
-          "<td style='width: 32px; vertical-align: middle;'><img src='/static/imgs/logos/" + key + ".png' alt='" + key + "'/></td>" +
+          "<td style='width: 32px; vertical-align: middle;'><a href=\"/ticker/source/" + key + "/{{frequency}}\"><img src='/static/imgs/logos/" + key + ".png' alt='" + key + "'/></a></td>" +
           "<td><a href='/ticker/" + pair.replace('-', '') + "/{{frequency}}'>" + pair + "</a> | <small><a href=/ticker/10s#" + exchange + ">" + exchange + "</a></small></td>" +
           "<td class='align-right pf-current-price'><span id=\"" + prefix_id + _prefix_usdt + "{{frequency}}\">" + value.current_price + "</span></td>" +
           "<td class='align-right pf-units'>" + get_units(value.units) + "</td>" +

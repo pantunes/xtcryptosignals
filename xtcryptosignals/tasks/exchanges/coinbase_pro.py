@@ -19,7 +19,7 @@ class CoinbasePro:
         )
 
     def get_ticker(self, symbol):
-        item = dict()
+        item = {}
 
         for i in range(2):
             url = self.base_urls[i].format(*symbol)
