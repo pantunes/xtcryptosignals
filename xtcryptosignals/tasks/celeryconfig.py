@@ -49,7 +49,7 @@ CELERYBEAT_SCHEDULE = {
     },
     "order_book": {
         "task": "xtcryptosignals.tasks.order_book.update",
-        "kwargs": dict(coin_or_token="BTC", pair="BTCUSDT"),
+        "kwargs": dict(pairs=(("BTC", "BTCUSDT"), ("ETH", "ETHUSDT"))),
         "schedule": 3.0,
     },
     "cfgi": {

@@ -21,25 +21,28 @@ socketio = SocketIO(message_queue=BROKER_URL)
 
 
 @task(bind=True)
-def update(self, coin_or_token, pair):
+def update(self, pairs):
     logger = self.get_logger()
 
     try:
         client = Client(s.BINANCE_API_KEY, s.BINANCE_API_SECRET)
 
-        order_book = client.get_order_book(symbol=pair)
+        for coin_or_token, pair in pairs:
+            order_book = client.get_order_book(symbol=pair)
 
-        _order_book = {}
-        for x in ('bids', 'asks',):
-            _order_book[x] = []
-            accrued = 0.0
-            for n in order_book[x]:
-                accrued += float(n[1])
-                _order_book[x].append([float(n[0]), float(accrued)])
+            _order_book = {}
+            for k, o in (('bids', True), ('asks', False),):
+                _order_book[k] = []
+                accrued = 0.0
+                for n1, n2 in sorted(order_book[k], reverse=o):
+                    accrued += float(n2)
+                    _order_book[k].append([float(n1), float(accrued)])
 
-        socketio.emit(
-            "order_book", _order_book, namespace=f"/order_book/{coin_or_token}"
-        )
+            socketio.emit(
+                "order_book",
+                _order_book,
+                namespace=f"/order_book/{coin_or_token}"
+            )
     except ValueError as error:
         logger.error("order_book error: {}".format(str(error)))
         self.update_state(state=states.FAILURE, meta=str(error))
