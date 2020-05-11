@@ -156,6 +156,7 @@ function render_data_charts(data, coin_or_token, frequency) {
     charts.push(chart);
     setChartTheme([chart]);
     $('#row_'+chart_id).show();
+    chart.hideLoading();
 }
 </script>
 

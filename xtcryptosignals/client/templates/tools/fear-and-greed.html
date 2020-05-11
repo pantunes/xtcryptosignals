@@ -16,6 +16,7 @@
         window.location.hash = frequency;
         $('#container_buttons > button').removeClass('button-primary').addClass('button-secondary');
         $('#' + frequency).removeClass('button-secondary').addClass('button-primary')
+        chart.hideLoading();
     }
 </script>
 

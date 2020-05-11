@@ -3,7 +3,12 @@ function create_chart_coin_or_token(
 ) {
       return Highcharts.chart(chart_id, {
         chart: {
-            zoomType: 'x'
+            zoomType: 'x',
+            events: {
+                load: function() {
+                    this.showLoading();
+                }
+            }
         },
         title: {
             text: `${coin_or_token} Price - ${frequency}`

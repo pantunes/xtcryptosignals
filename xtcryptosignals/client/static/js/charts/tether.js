@@ -3,7 +3,12 @@ function create_chart_tether(
 ) {
       return Highcharts.chart(chart_id, {
         chart: {
-            zoomType: 'x'
+            zoomType: 'x',
+            events: {
+                load: function() {
+                    this.showLoading();
+                }
+            }
         },
         title: {
             text: `Tether / ${coin_or_token} ${frequency}`

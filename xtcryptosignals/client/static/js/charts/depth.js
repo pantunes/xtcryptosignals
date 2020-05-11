@@ -2,7 +2,12 @@ function create_chart_depth(chart_id, coin_or_token) {
     return Highcharts.chart(chart_id, {
         chart: {
             type: 'area',
-            zoomType: 'xy'
+            zoomType: 'xy',
+            events: {
+                load: function() {
+                    this.showLoading();
+                }
+            }
         },
         title: {
             text: `${coin_or_token} Market Depth`
