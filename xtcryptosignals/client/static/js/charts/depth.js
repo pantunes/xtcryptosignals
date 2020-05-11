@@ -9,7 +9,7 @@ function create_chart_depth(chart_id, coin_or_token) {
         },
         subtitle: {
             text: document.ontouchstart === undefined ?
-                'Click in the plot area to zoom in' : 'Pinch the chart to zoom in'
+                'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
         },
         credits: {
             enabled: false
@@ -71,9 +71,11 @@ function create_chart_depth(chart_id, coin_or_token) {
         },
         series: [{
             name: 'Bids',
+            data: [],
             color: '#03a7a8'
         }, {
             name: 'Asks',
+            data: [],
             color: '#fc5857'
         }]
     });
