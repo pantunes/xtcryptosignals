@@ -38,10 +38,7 @@
       const position_id = prefix_id + "_position_{{frequency}}";
       const pair = key + "-" + value.exchange.pair;
       const exchange = value.exchange.name.toUpperCase();
-      let p = price_formatter;
-      if (value.average_paid < 1) {
-        p = price_formatter_low_values;
-      }
+      const p = _get_formatter(value.average_paid, false)
       $table.append(
           "<tr>" +
           "<td style='width: 32px; vertical-align: middle;'><a href=\"/ticker/source/" + key + "/{{frequency}}\"><img src='/static/imgs/logos/" + key + ".png' alt='" + key + "'/></a></td>" +

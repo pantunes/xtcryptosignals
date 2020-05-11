@@ -35,6 +35,7 @@ CELERY_IMPORTS = (
     "xtcryptosignals.tasks.cfgi",
     "xtcryptosignals.tasks.project",
     "xtcryptosignals.tasks.tether",
+    "xtcryptosignals.tasks.order_book",
 )
 
 CELERYBEAT_SCHEDULE = {
@@ -45,6 +46,11 @@ CELERYBEAT_SCHEDULE = {
     "notifications": {
         "task": "xtcryptosignals.tasks.notifications.update",
         "schedule": s.TICKER_SCHEDULE,
+    },
+    "order_book": {
+        "task": "xtcryptosignals.tasks.order_book.update",
+        "kwargs": dict(coin_or_token="BTC", pair="BTCUSDT"),
+        "schedule": 3.0,
     },
     "cfgi": {
         "task": "xtcryptosignals.tasks.cfgi.update",

@@ -20,24 +20,6 @@
         return Number(n) === n && n % 1 !== 0;
     }
 
-    function _get_formatter(val, is_usd) {
-        let p;
-        if (val < 1) {
-            if (is_usd) {
-                p = price_formatter_low_values;
-            } else {
-                p = num_formatter_low_values;
-            }
-        } else {
-            if (is_usd) {
-                p = price_formatter;
-            } else {
-                p = num_formatter;
-            }
-        }
-        return p
-    }
-
     const socket = io('{{socket_base_url}}{{frequency}}');
     socket.on('ticker', function(json) {
         const is_usd = json['symbol'].substr(json['symbol'].length - 3) === 'USD';
@@ -165,17 +147,14 @@ const price_volume_formatter = new Intl.NumberFormat('en-US', price_volume_forma
 <script type="text/javascript">
 let charts=[];
 function render_data_charts(data, coin_or_token, frequency) {
-    let p = price_formatter;
-    if (data.prices[0][1] < 1) {
-        p = price_formatter_low_values;
-    }
+    const p = _get_formatter(data.prices[0][1], false)
     const chart_id = 'chart_' + coin_or_token + frequency;
     let chart = create_chart_coin_or_token(
         chart_id, p, price_volume_formatter,
         num_formatter, data, coin_or_token, frequency,
     );
     charts.push(chart);
-    setChartTheme();
+    setChartTheme([chart]);
     $('#row_'+chart_id).show();
 }
 </script>
@@ -190,6 +169,10 @@ function _post_and_get_ticker_emit(id, json, reference_name, reference_pair, coi
     }
     let _id = `chart_${coin_or_token}10s`
     for (let i in charts) {
+        {#TODO: Improve#}
+        if (charts[i].renderTo.id.indexOf('_depth_') !== -1) {
+            continue
+        }
         let shift = false
         if (_id === charts[i].renderTo.id && charts[i].series[0].data.length > 30) {
             shift = true
@@ -231,7 +214,11 @@ function _post_and_get_ticker_emit(id, json, reference_name, reference_pair, coi
                 <tbody>
                     {% for c, r in d['pairs'] %}
                     <tr>
-                        <td style="width: 32px; vertical-align: middle;"><a href="{{url_for('ticker.token_frequency', coin_or_token=c, frequency=frequency)}}"><img src="/static/imgs/logos/{{c}}.png" alt="{{c}}"/></a></td>
+                        <td style="width: 32px; vertical-align: middle;">
+                            <a href="{{url_for('ticker.token_frequency', coin_or_token=c, frequency=frequency)}}">
+                                <img src="/static/imgs/logos/{{c}}.png" alt="{{c}}"/>
+                            </a>
+                        </td>
                         <td style="width: 100px;">
                             <a href="{{url_for('ticker.pair_frequency', frequency=frequency, pair=c+r)}}">{{c}}-{{r}}</a>
                         </td>

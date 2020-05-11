@@ -77,10 +77,12 @@
 </div>
 
 <script src="/static/js/charts/coin-or-token.js" type="text/javascript"></script>
+<script src="/static/js/charts/depth.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
     get_chart_coin_or_token_data(render_data_charts, '{{ coin_or_token }}', '{{ frequency }}');
+    render_data_depth_chart('{{ coin_or_token }}');
 });
 </script>
 
@@ -92,11 +94,43 @@ function post_ticker_emit(id, json) {
 }
 </script>
 
+<script type="text/javascript">
+let chart;
+function render_data_depth_chart(coin_or_token) {
+    const chart_id = `chart_depth_${coin_or_token}`
+    chart = create_chart_depth(chart_id, coin_or_token);
+    charts.push(chart);
+    setChartTheme([chart]);
+    $('#row_' + chart_id).show();
+}
+</script>
+
 <br/><br/>
 
 <div class="row">
     <div class="twelve columns" id="row_chart_{{ coin_or_token }}{{ frequency }}" style="display: none;">
         <div id="chart_{{ coin_or_token }}{{ frequency }}"></div>
+        <p class="highcharts-description" style="font-size:small">
+            <b>Source:</b> {{ reference['name']|capitalize }}, <b>Pair:</b> {{ coin_or_token }}/{{ reference['pair'] }}
+        </p>
+        <br/><br/>
+    </div>
+</div>
+
+<br/>
+
+<script type="text/javascript">
+    const socket2 = io('{{socket_base_url}}order_book/{{ coin_or_token }}');
+    socket2.on('order_book', function(json) {
+        chart.series[0].setData(json.bids, false);
+        chart.series[1].setData(json.asks, false);
+        chart.redraw();
+    })
+</script>
+
+<div class="row">
+    <div class="twelve columns" id="row_chart_depth_{{ coin_or_token }}" style="display: none;">
+        <div id="chart_depth_{{ coin_or_token }}" style="min-width: 310px; max-width: 1040px; height: 400px; margin: 0 auto;"></div>
         <p class="highcharts-description" style="font-size:small">
             <b>Source:</b> {{ reference['name']|capitalize }}, <b>Pair:</b> {{ coin_or_token }}/{{ reference['pair'] }}
         </p>
