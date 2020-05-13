@@ -15,7 +15,7 @@ class CoinbasePro:
     def __init__(self):
         self.base_urls = (
             "https://api.pro.coinbase.com/products/{0}-{1}/stats",
-            "https://api.pro.coinbase.com/products/{0}-{1}/ticker"
+            "https://api.pro.coinbase.com/products/{0}-{1}/ticker",
         )
 
     def get_ticker(self, symbol):
@@ -27,7 +27,8 @@ class CoinbasePro:
             request = requests.get(url)
             if request.status_code != 200:
                 raise ValueError(
-                    "Error connecting CoinbasePro on URL: {}".format(url))
+                    "Error connecting CoinbasePro on URL: {}".format(url)
+                )
             item.update(request.json())
 
         item.update(symbol="".join(symbol), ticker=symbol[0])

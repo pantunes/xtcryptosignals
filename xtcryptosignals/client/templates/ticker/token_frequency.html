@@ -121,7 +121,7 @@ function render_data_depth_chart(coin_or_token) {
 <br/>
 
 <script type="text/javascript">
-    const socket2 = io('{{socket_base_url}}order_book/{{ coin_or_token }}');
+    const socket2 = io('{{socket_base_url}}order_book/{{ coin_or_token }}USDT');
     socket2.on('order_book', function(json) {
         chart.series[0].setData(json.bids, false);
         chart.series[1].setData(json.asks, false);

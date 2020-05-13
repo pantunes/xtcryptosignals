@@ -47,11 +47,6 @@ CELERYBEAT_SCHEDULE = {
         "task": "xtcryptosignals.tasks.notifications.update",
         "schedule": s.TICKER_SCHEDULE,
     },
-    "order_book": {
-        "task": "xtcryptosignals.tasks.order_book.update",
-        "kwargs": dict(pairs=(("BTC", "BTCUSDT"), ("ETH", "ETHUSDT"))),
-        "schedule": 3.0,
-    },
     "cfgi": {
         "task": "xtcryptosignals.tasks.cfgi.update",
         "schedule": crontab(hour=5, minute=30),
@@ -63,5 +58,9 @@ CELERYBEAT_SCHEDULE = {
     "tether": {
         "task": "xtcryptosignals.tasks.tether.update",
         "schedule": crontab(hour="*", minute=1),
+    },
+    "order_book": {
+        "task": "xtcryptosignals.tasks.order_book.update",
+        "schedule": s.ORDER_BOOK,
     },
 }

@@ -113,8 +113,8 @@ def update(self, *_, **kwargs):
         logging.getLogger("engineio").setLevel(log_level)
         logging.getLogger("socketio").setLevel(log_level)
 
-    jobs = []
     logger = self.get_logger()
+    jobs = []
 
     try:
         for row in s.SYMBOLS_PER_EXCHANGE:
