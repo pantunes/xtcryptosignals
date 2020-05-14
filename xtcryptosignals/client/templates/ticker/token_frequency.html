@@ -98,11 +98,10 @@ function post_ticker_emit(id, json) {
 let chart;
 function render_data_depth_chart(coin_or_token) {
     const chart_id = `chart_depth_${coin_or_token}`
-    chart = create_chart_depth(chart_id, coin_or_token);
+    chart = create_chart_depth(chart_id, num_formatter, coin_or_token);
     charts.push(chart);
     setChartTheme([chart]);
     $('#row_' + chart_id).show();
-    chart.hideLoading();
 }
 </script>
 
@@ -125,6 +124,7 @@ function render_data_depth_chart(coin_or_token) {
     socket2.on('order_book', function(json) {
         chart.series[0].setData(json.bids, false);
         chart.series[1].setData(json.asks, false);
+        chart.hideLoading();
         chart.redraw();
     })
 </script>

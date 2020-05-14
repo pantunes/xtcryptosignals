@@ -1,4 +1,4 @@
-function create_chart_depth(chart_id, coin_or_token) {
+function create_chart_depth(chart_id, num_formatter, coin_or_token) {
     return Highcharts.chart(chart_id, {
         chart: {
             type: 'area',
@@ -71,16 +71,18 @@ function create_chart_depth(chart_id, coin_or_token) {
             }
         },
         tooltip: {
-            headerFormat: '<span style="font-size=10px;">Price: {point.key} USDT</span><br/>',
-            valueDecimals: 2
+            formatter: function() {
+                return '<span style="color:' + this.color + '">\u25CF</span> ' +
+                    this.series.name + ': <b>' + num_formatter.format(this.y) + ' ' + coin_or_token + '</b><br/>' +
+                    '<span style="color:' + this.color + '">\u25CF</span> ' +
+                    'Price: <b>' + num_formatter.format(this.x) + ' USDT</b><br/>';
+            }
         },
         series: [{
             name: 'Bids',
-            data: [],
             color: '#03a7a8'
         }, {
             name: 'Asks',
-            data: [],
             color: '#fc5857'
         }]
     });

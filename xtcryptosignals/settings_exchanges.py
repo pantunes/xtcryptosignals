@@ -201,3 +201,5 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
     "LQD": {"pair": "ETH", "name": BILAXY,},
     "CARD": {"pair": "ETH", "name": HOTBIT,},
 }
+
+# Checks EXCHANGES_AND_PAIRS_OF_REFERENCE against SYMBOLS_PER_EXCHANGE
