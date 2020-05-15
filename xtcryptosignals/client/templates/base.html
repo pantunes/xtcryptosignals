@@ -87,6 +87,12 @@
         };
         const price_formatter_low_values = new Intl.NumberFormat('en-US', price_formatter_setup_low_values);
 
+        let num_formatter_setup_low_values = {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 8,
+        };
+        const num_formatter_low_values = new Intl.NumberFormat('en-US', num_formatter_setup_low_values);
+
         function _get_formatter(val, is_usd) {
             let p;
             if (val < 1) {
