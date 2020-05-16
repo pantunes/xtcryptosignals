@@ -14,7 +14,7 @@ function create_chart_depth(chart_id, num_formatter, coin_or_token) {
         },
         subtitle: {
             text: document.ontouchstart === undefined ?
-                'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+                'Click and drag an area in the plot area to zoom in' : 'Pinch the chart to zoom in'
         },
         credits: {
             enabled: false
@@ -38,13 +38,15 @@ function create_chart_depth(chart_id, num_formatter, coin_or_token) {
         yAxis: [{
             lineWidth: 1,
             gridLineWidth: 1,
-            title: null,
             tickWidth: 1,
             tickLength: 5,
             tickPosition: 'inside',
             labels: {
                 align: 'left',
                 x: 8
+            },
+            title: {
+                text: `Number ${coin_or_token}s`
             }
         }, {
             opposite: true,

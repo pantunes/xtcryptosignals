@@ -120,22 +120,65 @@ function render_data_depth_chart(coin_or_token) {
 <br/>
 
 <script type="text/javascript">
-    const socket2 = io('{{socket_base_url}}order_book/{{ coin_or_token }}USDT');
-    socket2.on('order_book', function(json) {
+    function reload_chart(json) {
         chart.series[0].setData(json.bids, false);
         chart.series[1].setData(json.asks, false);
         chart.hideLoading();
         chart.redraw();
+    }
+
+    function reload_orders(json) {
+        for (const j of [["asks", '#fff2f0', true], ["bids", '#f0fff3', false]]) {
+
+            $(`#orders_${j[0]} > tr`).remove();
+
+            let list = json[j[0]]
+            if (j[2]) {
+                list.reverse()
+            }
+
+            for (const v of list) {
+                $(`#orders_${j[0]} tbody`).after(
+                    '<tr>' +
+                    '<td style="text-align: right; background-color: ' + j[1] + '; padding-left: 10px;">' + price_formatter.format(v[0]) + '</td>' +
+                    '<td style="text-align: right; background-color: ' + j[1] + '; padding-right: 10px;">' + num_formatter_low_values.format(v[1]) + '</td>' +
+                    '</tr>'
+                );
+            }
+        }
+    }
+
+    const socket2 = io('{{socket_base_url}}order_book/{{ coin_or_token }}USDT');
+    socket2.on('order_book', function(json) {
+        reload_chart(json)
+        reload_orders(json)
     })
 </script>
 
 <div class="row">
     <div class="twelve columns" id="row_chart_depth_{{ coin_or_token }}" style="display: none;">
-        <div id="chart_depth_{{ coin_or_token }}" style="min-width: 310px; max-width: 1040px; height: 400px; margin: 0 auto;"></div>
+        <div id="chart_depth_{{ coin_or_token }}" style="min-width: 310px; max-width: 1048px; height: 560px; margin: 0 auto;"></div>
         <p class="highcharts-description" style="font-size:small">
             <b>Source:</b> {{ reference['name']|capitalize }}, <b>Pair:</b> {{ coin_or_token }}/{{ reference['pair'] }}
         </p>
         <br/><br/>
+    </div>
+</div>
+
+<div class="row">
+    <div class="two columns">
+        <table id="orders_bids">
+            <caption><h6>Bids</h6></caption>
+            <thead><tr><th style="text-align: right">Price</th><th style="text-align: right">Total</th></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="two columns">
+        <table id="orders_asks">
+            <caption><h6>Asks</h6></caption>
+            <thead><tr><th style="text-align: right">Price</th><th style="text-align: right">Total</th></thead>
+            <tbody></tbody>
+        </table>
     </div>
 </div>
 
