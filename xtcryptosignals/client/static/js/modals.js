@@ -25,7 +25,7 @@ function open_modal(m, id=undefined) {
             $(_m).off($.modal.OPEN)
         });
 
-    } else if (m === '#login' || m === '#signup') {
+    } else if (m === '#login' || m === '#signup' || m === '#contact') {
         $(_m).on($.modal.OPEN, function (event, modal) {
             captcha();
             $(_m).off($.modal.OPEN)

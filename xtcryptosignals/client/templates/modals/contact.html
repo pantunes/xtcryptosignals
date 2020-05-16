@@ -19,6 +19,12 @@
         <div class="twelve columns">
           <label for="contact_message">Message</label>
           <textarea class="u-full-width" placeholder="e.g. How can I integrate this project in my servers?" id="contact_message" name="message"></textarea>
+          <div class="row">
+            <label for="login_captcha">Captcha</label>
+            <img alt="Captcha" id="login_image_captcha" src=""><br/>
+            <a href="javascript:captcha();">Refresh</a>
+            <input class="u-full-width" placeholder="Write the generated string above" type="text" id="login_captcha" name="captcha">
+          </div>
           <input class="button-primary" type="button" value="Submit" onClick="(
               function() {
                   $.post('/contact', $('#form_contact').serialize())
