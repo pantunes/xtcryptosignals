@@ -139,11 +139,11 @@ function get_chart_twitter_data(handler, project, frequency) {
 
 function captcha() {
     const _captcha_ids = ['login_image_captcha', 'signup_image_captcha'];
-    for (const x of _captcha_ids) {
         $.get('/parties/captcha', function (data) {
-            document.getElementById(x).setAttribute(
-                'src', `data:image/png;base64,${data['captcha']}`
-            );
+            for (const x of _captcha_ids) {
+                document.getElementById(x).setAttribute(
+                    'src', `data:image/png;base64,${data['captcha']}`
+                );
+            }
         });
-    }
 }
