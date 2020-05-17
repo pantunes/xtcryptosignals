@@ -144,13 +144,21 @@ function render_data_depth_chart(coin_or_token) {
                 list.reverse()
             }
 
+            let f1 = null, f2 = null, f3 = null, f4 = null;
+
             for (const v of list) {
-                let col1 = price_formatter.format(v[0])
-                let
-                    col2 = num_formatter_low_values.format(v[1])
+                if (f1 === null) {
+                    f1 = _get_formatter(v[0], true)
+                    f2 = _get_formatter(v[1], false)
+                    f3 = _get_formatter(v[1], true)
+                    f4 = _get_formatter(v[2], false)
+                }
+                let col1 = f1.format(v[0])
+                let col2 = f2.format(v[1])
+
                 if (j[0].includes("intervals_")) {
-                    col1 = price_formatter.format(v[0]) + '-' + price_formatter.format(v[1])
-                    col2 = num_formatter_low_values.format(v[2])
+                    col1 = f1.format(v[0]) + ' - ' + f3.format(v[1])
+                    col2 = f4.format(v[2])
                 }
 
                 $(`#orders_${j[0]} tbody`).after(
@@ -211,18 +219,20 @@ function render_data_depth_chart(coin_or_token) {
     </div>
     <div class="three columns">
         <table id="orders_intervals_bids_cumulative">
-            <caption><h6>Accrued Intervals Bids</h6></caption>
+            <caption><h6>Accrued Bids Interval</h6></caption>
             <thead><tr><th style="text-align: right">Price</th><th style="text-align: right">Total</th></thead>
             <tbody></tbody>
         </table>
     </div>
     <div class="three columns">
         <table id="orders_intervals_asks_cumulative">
-            <caption><h6>Accrued Intervals Asks</h6></caption>
+            <caption><h6>Accrued Asks Interval</h6></caption>
             <thead><tr><th style="text-align: right">Price</th><th style="text-align: right">Total</th></thead>
             <tbody></tbody>
         </table>
     </div>
 </div>
+
+<b>Source:</b> {{ reference['name']|capitalize }}, <b>Pair:</b> {{ coin_or_token }}/{{ reference['pair'] }}
 
 {% endblock %}
