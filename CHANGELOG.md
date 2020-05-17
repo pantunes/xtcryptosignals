@@ -1,13 +1,16 @@
 # Changelog
 All changes will be registered here per release.
 
-## [0.6.0] - Current date
+## [0.0.7] - Current date
+
+## [0.6.0] - 2020-05-17
 Added the following exchanges:
 
 * Bitstamp
 * Kucoin
 * Coinbase Pro
 
+Added Market Depth for all Binance Pairs.  
 Code fixes and improvements.  
 
 ## [0.5.0] - 2020-05-04
