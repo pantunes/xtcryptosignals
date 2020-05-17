@@ -25,7 +25,7 @@ socketio = SocketIO(message_queue=BROKER_URL)
 def _get_intervals(_order_book):
     n = 10
     _intervals = []
-    for x in [_order_book[i:i + n] for i in range(0, len(_order_book), n)]:
+    for x in [_order_book[i : i + n] for i in range(0, len(_order_book), n)]:
         _intervals.append([x[0][0], x[-1][0], x[-1][-1]])
     return _intervals
 
@@ -54,7 +54,10 @@ def _process(logger, symbol):
 
     _order_book["bids"] = [x for x in reversed(_order_book["bids"])]
 
-    for x in ("asks_cumulative", "bids_cumulative",):
+    for x in (
+        "asks_cumulative",
+        "bids_cumulative",
+    ):
         _order_book["intervals_" + x] = _get_intervals(_order_book[x])
 
     _order_book["bids_cumulative"] = [
