@@ -26,9 +26,7 @@ def _get_intervals(_order_book):
     n = 10
     _intervals = []
     for x in [_order_book[i:i + n] for i in range(0, len(_order_book), n)]:
-        first = x[0]
-        last = x[-1]
-        _intervals.append([first[0], last[0], last[-1]])
+        _intervals.append([x[0][0], x[-1][0], x[-1][-1]])
     return _intervals
 
 
