@@ -77,10 +77,12 @@
 </div>
 
 <script src="/static/js/charts/coin-or-token.js" type="text/javascript"></script>
+<script src="/static/js/charts/depth.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
     get_chart_coin_or_token_data(render_data_charts, '{{ coin_or_token }}', '{{ frequency }}');
+    render_data_depth_chart('{{ coin_or_token }}');
 });
 </script>
 
@@ -89,6 +91,17 @@ function post_ticker_emit(id, json) {
     _post_and_get_ticker_emit(
         id, json, '{{ reference["name"] }}', '{{ reference["pair"] }}', '{{ coin_or_token }}'
     );
+}
+</script>
+
+<script type="text/javascript">
+let chart;
+function render_data_depth_chart(coin_or_token) {
+    const chart_id = `chart_depth_${coin_or_token}`
+    chart = create_chart_depth(chart_id, num_formatter, coin_or_token);
+    charts.push(chart);
+    setChartTheme([chart]);
+    $('#row_' + chart_id).show();
 }
 </script>
 
@@ -101,6 +114,114 @@ function post_ticker_emit(id, json) {
             <b>Source:</b> {{ reference['name']|capitalize }}, <b>Pair:</b> {{ coin_or_token }}/{{ reference['pair'] }}
         </p>
         <br/><br/>
+    </div>
+</div>
+
+<br/>
+
+<script type="text/javascript">
+    function reload_chart(json) {
+        chart.series[0].setData(json.bids_cumulative, false);
+        chart.series[1].setData(json.asks_cumulative, false);
+        chart.hideLoading();
+        chart.redraw();
+    }
+
+    function reload_orders(json) {
+        for (const j of [
+            ["asks", '#fff2f0', true],
+            ["bids", '#f0fff3', false],
+            ["asks_cumulative", '#fff2f0', true],
+            ["bids_cumulative", '#f0fff3', false],
+            ["intervals_asks_cumulative", '#fff2f0', true],
+            ["intervals_bids_cumulative", '#f0fff3', true],
+        ]) {
+
+            $(`#orders_${j[0]} > tr`).remove();
+
+            let list = json[j[0]]
+            if (j[2]) {
+                list.reverse()
+            }
+
+            for (const v of list) {
+                let col1 = price_formatter.format(v[0])
+                let
+                    col2 = num_formatter_low_values.format(v[1])
+                if (j[0].includes("intervals_")) {
+                    col1 = price_formatter.format(v[0]) + '-' + price_formatter.format(v[1])
+                    col2 = num_formatter_low_values.format(v[2])
+                }
+
+                $(`#orders_${j[0]} tbody`).after(
+                    '<tr>' +
+                    '<td style="text-align: right; background-color: ' + j[1] + '; padding-left: 10px;">' + col1 + '</td>' +
+                    '<td style="text-align: right; background-color: ' + j[1] + '; padding-right: 10px;">' + col2 + '</td>' +
+                    '</tr>'
+                );
+            }
+        }
+    }
+
+    const socket2 = io('{{socket_base_url}}order_book/{{ coin_or_token }}USDT');
+    socket2.on('order_book', function(json) {
+        reload_chart(json)
+        reload_orders(json)
+    })
+</script>
+
+<div class="row">
+    <div class="twelve columns" id="row_chart_depth_{{ coin_or_token }}" style="display: none;">
+        <div id="chart_depth_{{ coin_or_token }}" style="min-width: 310px; max-width: 1048px; height: 560px; margin: 0 auto;"></div>
+        <p class="highcharts-description" style="font-size:small">
+            <b>Source:</b> {{ reference['name']|capitalize }}, <b>Pair:</b> {{ coin_or_token }}/{{ reference['pair'] }}
+        </p>
+        <br/><br/>
+    </div>
+</div>
+
+<div class="row">
+    <div class="two columns">
+        <table id="orders_bids">
+            <caption><h6>Bids</h6></caption>
+            <thead><tr><th style="text-align: right">Price</th><th style="text-align: right">Total</th></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="two columns">
+        <table id="orders_asks">
+            <caption><h6>Asks</h6></caption>
+            <thead><tr><th style="text-align: right">Price</th><th style="text-align: right">Total</th></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="two columns">
+        <table id="orders_bids_cumulative">
+            <caption><h6>Accrued Bids</h6></caption>
+            <thead><tr><th style="text-align: right">Price</th><th style="text-align: right">Total</th></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="two columns">
+        <table id="orders_asks_cumulative">
+            <caption><h6>Accrued Asks</h6></caption>
+            <thead><tr><th style="text-align: right">Price</th><th style="text-align: right">Total</th></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="three columns">
+        <table id="orders_intervals_bids_cumulative">
+            <caption><h6>Accrued Intervals Bids</h6></caption>
+            <thead><tr><th style="text-align: right">Price</th><th style="text-align: right">Total</th></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="three columns">
+        <table id="orders_intervals_asks_cumulative">
+            <caption><h6>Accrued Intervals Asks</h6></caption>
+            <thead><tr><th style="text-align: right">Price</th><th style="text-align: right">Total</th></thead>
+            <tbody></tbody>
+        </table>
     </div>
 </div>
 

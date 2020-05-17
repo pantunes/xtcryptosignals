@@ -100,14 +100,14 @@ def twitter(frequency):
 
     projects_twitter = []
     for p in projects:
-        project_last_twitter, _ = service.get_project_last_twitter(p['_id'])
-        if not project_last_twitter['num_followers']:
+        project_last_twitter, _ = service.get_project_last_twitter(p["_id"])
+        if not project_last_twitter["num_followers"]:
             continue
-        projects_twitter.append(p['_id'])
+        projects_twitter.append(p["_id"])
 
     return dict(
         template_name_or_list="tools/twitter.html",
         frequency=g.HISTORY_FREQUENCY[0],
-        twitter_frequency='1d',
+        twitter_frequency="1d",
         projects_twitter=projects_twitter,
     )

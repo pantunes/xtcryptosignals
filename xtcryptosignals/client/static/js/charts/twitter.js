@@ -1,7 +1,12 @@
 function create_chart_twitter(chart_id, data, frequency) {
       return Highcharts.chart(chart_id, {
         chart: {
-            zoomType: 'x'
+            zoomType: 'x',
+            events: {
+                load: function() {
+                    this.showLoading();
+                }
+            }
         },
         title: {
             text: `Twitter ${data.project.name} / ${data.project.coin_or_token} ${frequency}`

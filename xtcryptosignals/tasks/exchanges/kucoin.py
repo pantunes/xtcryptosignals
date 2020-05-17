@@ -15,7 +15,9 @@ from xtcryptosignals.tasks import settings as s
 
 class Kucoin:
     def __init__(self):
-        self.client = Client(s.KUCOIN_API_KEY, s.KUCOIN_API_SECRET, s.KUCOIN_API_PASSPHRASE)
+        self.client = Client(
+            s.KUCOIN_API_KEY, s.KUCOIN_API_SECRET, s.KUCOIN_API_PASSPHRASE
+        )
 
     def get_ticker(self, symbol):
         _symbol = "-".join(symbol)

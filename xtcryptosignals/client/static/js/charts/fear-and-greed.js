@@ -1,7 +1,12 @@
 function create_chart_fear_and_greed(price_formatter, data, frequency) {
     return Highcharts.chart('chart', {
         chart: {
-            zoomType: 'x'
+            zoomType: 'x',
+            events: {
+                load: function() {
+                    this.showLoading();
+                }
+            }
         },
         title: {
             text: `Crypto Fear & Greed Index vs BTC Price - ${frequency}`

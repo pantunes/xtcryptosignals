@@ -67,11 +67,6 @@ def main(ctx, test, list_config, enable_messaging, log_minimal, version):
         click.echo("{} {}".format(__title__, __version__))
         ctx.exit()
 
-    # pre-cache all needed data
-    from xtcryptosignals.tasks.caching import prepare_cache
-
-    prepare_cache()
-
     from celery import current_app
     from celery.bin import worker
 
@@ -80,7 +75,13 @@ def main(ctx, test, list_config, enable_messaging, log_minimal, version):
     app.config_from_object("xtcryptosignals.tasks.celeryconfig")
 
     # updates beat config dynamically
-    app.conf.beat_schedule["ticker"].update(kwargs=beat_kwargs)
+    if "ticker" in app.conf.beat_schedule:
+        from xtcryptosignals.tasks.caching import prepare_cache
+
+        # pre-cache all needed data
+        prepare_cache()
+
+        app.conf.beat_schedule["ticker"].update(kwargs=beat_kwargs)
 
     worker = worker.worker(app=app)
     worker.run(beat=True, loglevel=ticker.logging.INFO)

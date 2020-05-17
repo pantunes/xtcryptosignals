@@ -12,10 +12,11 @@
     function render_data(data, frequency) {
         let chart = create_chart_fear_and_greed(price_formatter, data, frequency);
         charts.push(chart);
-        setChartTheme();
+        setChartTheme([chart]);
         window.location.hash = frequency;
         $('#container_buttons > button').removeClass('button-primary').addClass('button-secondary');
         $('#' + frequency).removeClass('button-secondary').addClass('button-primary')
+        chart.hideLoading();
     }
 </script>
 

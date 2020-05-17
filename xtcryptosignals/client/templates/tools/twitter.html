@@ -24,8 +24,9 @@
         const chart_id = `chart_${project}`;
         let chart = create_chart_twitter(chart_id, data, frequency);
         charts.push(chart);
-        setChartTheme();
+        setChartTheme([chart]);
         $('#row_'+chart_id).show();
+        chart.hideLoading();
     }
 </script>
 

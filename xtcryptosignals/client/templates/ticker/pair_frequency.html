@@ -28,7 +28,11 @@
     {% if d['pairs']%}
         {% for c, r in d['pairs'] %}
         <tr>
-            <td style="width: 32px; vertical-align: middle;"><a href="{{url_for('ticker.token_frequency', coin_or_token=c, frequency=frequency)}}"><img src="/static/imgs/logos/{{c}}.png" alt="{{c}}"/></a></td>
+            <td style="width: 32px; vertical-align: middle;">
+                <a href="{{url_for('ticker.token_frequency', coin_or_token=c, frequency=frequency)}}">
+                    <img src="/static/imgs/logos/{{c}}.png" alt="{{c}}"/>
+                </a>
+            </td>
             <td style="width: 100px;">
                 <a href="/ticker/{{frequency}}#{{exchange.upper()}}">{{exchange.replace('_', ' ').upper()}}</a>
             </td>

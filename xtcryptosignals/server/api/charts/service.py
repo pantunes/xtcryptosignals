@@ -162,14 +162,10 @@ def get_chart_twitter(project, frequency):
     num_followers = []
     for t in ProjectTwitter.objects(project=project)[:30]:
         obj = t.to_dict()
-        num_followers.append([
-            _normalize_ts(obj["created_on_ts"], "1d"),
-            obj["num_followers"],
-        ])
+        num_followers.append(
+            [_normalize_ts(obj["created_on_ts"], "1d"), obj["num_followers"],]
+        )
 
     num_followers.reverse()
 
-    return dict(
-        project=project.to_dict(),
-        num_followers=num_followers,
-    )
+    return dict(project=project.to_dict(), num_followers=num_followers,)

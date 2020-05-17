@@ -24,8 +24,9 @@
         const chart_id = 'chart_' + coin_or_token + frequency;
         let chart = create_chart_tether(chart_id, price_formatter, num_formatter, data, coin_or_token, frequency);
         charts.push(chart);
-        setChartTheme();
+        setChartTheme([chart]);
         $('#row_'+chart_id).show();
+        chart.hideLoading();
     }
 </script>
 
