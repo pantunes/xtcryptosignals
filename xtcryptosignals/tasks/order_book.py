@@ -22,12 +22,27 @@ from xtcryptosignals.tasks import settings as s
 socketio = SocketIO(message_queue=BROKER_URL)
 
 
+def _get_intervals(_order_book):
+    n = 10
+    _intervals = []
+    for x in [_order_book[i:i + n] for i in range(0, len(_order_book), n)]:
+        first = x[0]
+        last = x[-1]
+        _intervals.append([first[0], last[0], last[-1]])
+    return _intervals
+
+
 def _process(logger, symbol):
     client = Client(s.BINANCE_API_KEY, s.BINANCE_API_SECRET)
 
     order_book = client.get_order_book(symbol=symbol)
 
-    _order_book = {"asks": [], "bids": []}
+    _order_book = {
+        "asks": [],
+        "bids": [],
+        "asks_cumulative": [],
+        "bids_cumulative": [],
+    }
 
     for k, o in (
         ("asks", False),
@@ -35,10 +50,18 @@ def _process(logger, symbol):
     ):
         accrued = 0.0
         for n1, n2 in sorted(order_book[k], reverse=o):
+            _order_book[k].append([float(n1), float(n2)])
             accrued += float(n2)
-            _order_book[k].append([float(n1), float(accrued)])
+            _order_book[k + "_cumulative"].append([float(n1), float(accrued)])
 
     _order_book["bids"] = [x for x in reversed(_order_book["bids"])]
+
+    for x in ("asks_cumulative", "bids_cumulative",):
+        _order_book["intervals_" + x] = _get_intervals(_order_book[x])
+
+    _order_book["bids_cumulative"] = [
+        x for x in reversed(_order_book["bids_cumulative"])
+    ]
 
     socketio.emit("order_book", _order_book, namespace=f"/order_book/{symbol}")
 
