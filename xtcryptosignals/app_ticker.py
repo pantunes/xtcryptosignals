@@ -13,6 +13,23 @@ from xtcryptosignals.tasks import ticker
 from xtcryptosignals.tasks import settings as s
 
 
+def _prepare_celery_beat(app, *_, **kwargs):
+    # enable single tasks
+    if kwargs["enable_market_depth"]:
+        for k in app.conf.beat_schedule.copy():
+            if k != "order_book":
+                del app.conf.beat_schedule[k]
+
+    # updates beat config dynamically
+    if "ticker" in app.conf.beat_schedule:
+        from xtcryptosignals.tasks.caching import prepare_cache
+
+        # pre-cache all needed data
+        prepare_cache()
+
+        app.conf.beat_schedule["ticker"].update(kwargs=kwargs["beat_kwargs"])
+
+
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.option(
     "--test",
@@ -37,9 +54,22 @@ from xtcryptosignals.tasks import settings as s
     is_flag=True,
     help="Only log errors and important warnings in stdout.",
 )
+@click.option(
+    "--enable-market-depth",
+    is_flag=True,
+    help="Only enable Task Market Depth.",
+)
 @click.option("--version", is_flag=True, help="Show version.")
 @click.pass_context
-def main(ctx, test, list_config, enable_messaging, log_minimal, version):
+def main(
+    ctx,
+    test,
+    list_config,
+    enable_messaging,
+    log_minimal,
+    enable_market_depth,
+    version,
+):
     """
     Use this tool to collect and broadcast data from configured coins
     or/and tokens from configured crypto-currencies exchanges.
@@ -74,14 +104,9 @@ def main(ctx, test, list_config, enable_messaging, log_minimal, version):
 
     app.config_from_object("xtcryptosignals.tasks.celeryconfig")
 
-    # updates beat config dynamically
-    if "ticker" in app.conf.beat_schedule:
-        from xtcryptosignals.tasks.caching import prepare_cache
-
-        # pre-cache all needed data
-        prepare_cache()
-
-        app.conf.beat_schedule["ticker"].update(kwargs=beat_kwargs)
+    _prepare_celery_beat(
+        app, beat_kwargs=beat_kwargs, enable_market_depth=enable_market_depth
+    )
 
     worker = worker.worker(app=app)
     worker.run(beat=True, loglevel=ticker.logging.INFO)
