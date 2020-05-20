@@ -32,9 +32,9 @@ def _prepare_celery_beat(app, *_, **kwargs):
 def _prepare_queue(app, task, queue):
     app.conf.task_routes = {}
     for t in task:
-        app.conf.task_routes.update({
-            f"xtcryptosignals.tasks.{t}.update": {"queue": queue}
-        })
+        app.conf.task_routes.update(
+            {f"xtcryptosignals.tasks.{t}.update": {"queue": queue}}
+        )
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
