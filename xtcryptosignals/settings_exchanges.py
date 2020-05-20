@@ -202,4 +202,6 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
     "CARD": {"pair": "ETH", "name": HOTBIT,},
 }
 
+# TODO
 # Checks EXCHANGES_AND_PAIRS_OF_REFERENCE against SYMBOLS_PER_EXCHANGE
+# to make sure all pairs have an Exchange of reference
