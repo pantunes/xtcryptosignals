@@ -1,6 +1,4 @@
-function create_chart_tether(
-    chart_id, price_formatter, num_formatter, data, coin_or_token, frequency
-) {
+function create_chart_tether(chart_id, num_formatter, data, coin_or_token, quote, frequency) {
       return Highcharts.chart(chart_id, {
         chart: {
             zoomType: 'x',
@@ -11,7 +9,7 @@ function create_chart_tether(
             }
         },
         title: {
-            text: `Tether / ${coin_or_token} ${frequency}`
+            text: `Tether (ERC-20) / ${coin_or_token} ${frequency}`
         },
         subtitle: {
             text: document.ontouchstart === undefined ?
@@ -31,40 +29,37 @@ function create_chart_tether(
         }],
         yAxis: [{
             labels: {
-                format: '${value}',
                  style: {
                     color: Highcharts.getOptions().colors[0]
                 },
                 formatter: function() {
-                    return price_formatter.format(this.value);
+                    return num_formatter.format(this.value);
                 }
             },
             title: {
-                text: 'Price (USD)',
+                text: `Price (${quote})`,
                 style: {
                     color: Highcharts.getOptions().colors[0]
                 },
                 formatter: function() {
-                    return price_formatter.format(this.value);
+                    return num_formatter.format(this.value);
                 }
             }
         }, {
             labels: {
-                format: '${value}',
                 style: {
                     color: Highcharts.getOptions().colors[1]
                 },
                 formatter: function() {
-                    return price_formatter.format(this.value);
+                    return num_formatter.format(this.value);
                 }
             },
             title: {
-                text: 'Tether Max Supply (ERC-20)',
+                text: `Max. Supply (${quote})`,
             },
             opposite: true
         }, {
             labels: {
-                format: '{value}',
                 style: {
                     color: Highcharts.getOptions().colors[3]
                 },
@@ -73,7 +68,7 @@ function create_chart_tether(
                 }
             },
             title: {
-                text: 'Tether Number of Hodlers (ERC-20)',
+                text: 'Number of Hodlers',
                 style: {
                     color: Highcharts.getOptions().colors[3]
                 }
@@ -130,32 +125,30 @@ function create_chart_tether(
             type: 'area',
             data: data.prices,
             tooltip: {
-                valuePrefix: '$',
                 pointFormatter: function() {
                     return '<span style="color:' + this.color + '">\u25CF</span> ' +
-                        this.series.name + ': <b>' + price_formatter.format(this.y) + '</b><br/>';
+                        this.series.name + ': <b>' + num_formatter.format(this.y)  + ' USDT</b><br/>';
                 }
             },
             marker: {
                 enabled: false,
             },
         }, {
-            name: 'Tether Max Supply (ERC-20)',
+            name: `Max. Supply (${quote})`,
             type: 'line',
             yAxis: 1,
             data: data.tether_max_supply_erc20,
             tooltip: {
-                valuePrefix: '$',
                 pointFormatter: function() {
                     return '<span style="color:' + this.color + '">\u25CF</span> ' +
-                        this.series.name + ': <b>' + price_formatter.format(this.y) + '</b><br/>';
+                        this.series.name + ': <b>' + num_formatter.format(this.y)  + ' USDT</b><br/>';
                 }
             },
             marker: {
                 enabled: false,
             },
         }, {
-            name: 'Tether Number of Hodlers (ERC-20)',
+            name: 'Number of Hodlers',
             type: 'line',
             color: Highcharts.getOptions().colors[3],
             yAxis: 2,

@@ -2,14 +2,15 @@
 
 **XTCryptoSignals** is a Python library that includes the following 3 services:
 
-* #### Ticker
+* #### Tasks
 
     * **Data collection** of crypto-currencies pairs such as BTC/USDT, ETH/BTC or 
     any other pair that is supported by the Exchange API.
     * A **Signals** service based on setup rules to send real-time alerts about 
     price, price change, trading volume or market sentiment sending Web Push 
     Notifications to the client browser (Firefox, Chrome).
-    * **Automatic trading** *(in progress)*
+    * **Market Depth**, **Content** and **Data** fetching Tasks.
+    * **Automatic trading** *(in progress)*.
 
 (Web Push Notifications are implemented with [ServiceWorker](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification) 
 that is compatible with the most known web browsers.)
@@ -66,7 +67,7 @@ pip install -e .
 (Dependencies will be installed automatically from [requirements.txt](requirements.txt))
 
 ### Path to the settings file
-Before running `xt-server`, `xt-client`, `xt-ticker` and tests the env var `SETTINGS_APP`
+Before running `xt-server`, `xt-client`, `xt-tasks` and tests the env var `SETTINGS_APP`
 should be set to the path of its settings file.  
 This can be achieved inline `SETTINGS_APP=<path to configuration>` followed by the app cli or 
 executing `export SETTINGS_APP=<path to configuration>` before running any of the command line
@@ -78,7 +79,7 @@ SECRET_KEY='bRdzq6ZMQ;HGB3JWVxs&WQ4>6r{'
 GA_TRACKING_ID='UA-12341343-2'
 ```
 
-Example of `xt-server` or `xt-ticker` settings file [server.dev.env](xtcryptosignals/config/server.dev.env):
+Example of `xt-server` or `xt-tasks` settings file [server.dev.env](xtcryptosignals/config/server.dev.env):
 ```bash
 SECRET_KEY='MfYfEeom6)EyhcKcFh@+WGx8hvhP/,K67hA6'
 CORS_ALLOWED_ORIGINS=('https://mydomain.com',)
@@ -112,34 +113,45 @@ Install package:
 pip install xtcryptosignals
 ```
 
-### Run database migrations
+#### Run database migrations
 It will populate some collections with data:
 ```bash
 FLASK_ENV=development SETTINGS_APP=server.dev.env mongodb-migrate --url mongodb://127.0.0.1:27017/XTC-Dev --migrations xtcryptosignals/server/migrations/
 ```
 
-## Ticker
+### Install from docker-compose
+Clone project repository:
+```bash
+git clone https://github.com/pantunes/xtcryptosignals.git
+cd xtcryptosignals
+```
+Create multi-container Docker Applications:
+```bash
+docker-compose up
+```
+
+## Tasks
 ### Start service
 
 #### Development:
 
 ```bash
-SETTINGS_APP=server.dev.env xt-ticker --enable-messaging
+SETTINGS_APP=server.dev.env xt-tasks
 
 # to test 1 tick
-SETTINGS_APP=server.dev.env xt-ticker --test
+SETTINGS_APP=server.dev.env xt-tasks --test
 
 ```
 
 #### Production:
 
 ```bash
-SETTINGS_APP=server.prod.env xt-ticker --enable-messaging --log-minimal
+SETTINGS_APP=server.prod.env xt-tasks --log-ticker-minimal
 ```
 
 To get a list of supported exchanges:
 ```bash
-SETTINGS_APP=server.prod.env xt-ticker --list-config exchanges
+SETTINGS_APP=server.prod.env xt-tasks --list-config exchanges
 ```
 ```bash
 binance
@@ -156,31 +168,40 @@ coinbene
 dcoin
 bitmax
 bilaxy
+bitstamp
+kucoin
+coinbase_pro
 ```
 (Drop [me](mailto:pjmlantunes@gmail.com) an e-mail if you want support for a new 
 exchange or please contribute to this project creating a pull request)
 
 Command line help:
 ```bash
-xt-ticker --help
+xt-tasks --help
 ```
 ```bash
-Usage: xt-ticker [OPTIONS]
+Usage: xt-tasks [OPTIONS]
 
-  Use this tool to collect data from configured coins or/and tokens from
-  configured crypto-currencies exchanges.
+  Use this tool to start all or part of the tasks.
 
 Options:
-  --test                          Execute 1 iteration for all configured coins
-                                  and/or tokens without Celery. (Useful for
-                                  testing purposes)
+  --test                          Process 1 iteration for all configured coins
+                                  and/or tokens. (Useful for testing purposes)
+
   --list-config [exchanges|currencies]
                                   List 'exchanges' or 'currencies' (coins or
-                                  tokens) per exchange that the tool currently
-                                  supports.
-  --enable-messaging              Enable real-time crypto data message broadcasting.
-  --log-minimal                   Only log errors and important warnings in
-                                  stdout.
+                                  tokens) per exchange that are currently
+                                  supported.
+
+  -t, --task [ticker|notifications|order_book]
+                                  Task to be executed. If this parameter is
+                                  omitted all tasks will be started
+
+  -q, --queue TEXT                Queue name to execute indicated tasks.
+  --disable-ticker-messaging      Disable ticker message broadcasting.
+  --log-ticker-minimal            Only log ticker errors and important
+                                  warnings in stdout.
+
   --version                       Show version.
   -h, --help                      Show this message and exit.
 ```
@@ -278,7 +299,7 @@ Options:
 For Production enviroment `xt-all copy-config-files` should be executed on first place 
 to copy default config files to the folder `/config`.  
 The configuration should be reviewed and changed, before running `xt-all start`
-to start all 3 services: `xt-server`, `xt-client` and `xt-ticker`.  
+to start all 3 services: `xt-server`, `xt-client` and `xt-tasks`.  
 
 #### Docker Compose:
 ```bash

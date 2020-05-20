@@ -57,6 +57,7 @@ def fear_and_greed():
         template_name_or_list="tools/fear-and-greed.html",
         frequency=current_app.config["CFGI_MIN"],
         chart_frequencies=chart_frequencies,
+        quote="USDT",
     )
 
 
@@ -100,8 +101,8 @@ def twitter(frequency):
 
     projects_twitter = []
     for p in projects:
-        project_last_twitter, _ = service.get_project_last_twitter(p["_id"])
-        if not project_last_twitter["num_followers"]:
+        project_last_tweet, _ = service.get_project_last_tweet(p["_id"])
+        if project_last_tweet.get("num_followers") is None:
             continue
         projects_twitter.append(p["_id"])
 

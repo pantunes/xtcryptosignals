@@ -114,3 +114,7 @@
   border: 1px solid #6c6c6c;
   background: #2b2b2b;
 }
+
+.darkmode--activated .market-depth-orders {
+  background-color: #2b2b2b;
+}

@@ -15,7 +15,9 @@
         const fs = {{ frequencies_charts|safe }};
         for (let i in fs) {
             setTimeout(function () {
-                get_chart_coin_or_token_data(render_data_charts, '{{ coin_or_token }}', fs[i]);
+                get_chart_coin_or_token_data(
+                    render_data_charts, '{{ coin_or_token }}', "{{ reference['pair'] }}", fs[i]
+                );
             }, i * 500);
         }
     });
@@ -27,10 +29,11 @@ function post_ticker_emit(id, json) {
         id, json, '{{ reference["name"] }}', '{{ reference["pair"] }}', '{{ coin_or_token }}'
     );
     if (ticker !== undefined) {
-        for (const x of ['price', 'price_change', 'volume_change', 'number_trades_change']) {
+        for (const x of ['price_usdt', 'price_change', 'volume_change', 'number_trades_change']) {
             let val = json[x]
-            if (x === 'price') {
-                val = price_formatter.format(json[x])
+            if (x === 'price_usdt') {
+                const p = _get_formatter(json[x], false)
+                val = p.format(json[x])
             }
             $(`#${x}`).html(val);
         }
@@ -61,7 +64,7 @@ $('#select_coin_or_token').on('change', function() {
 
 <div class="row">
     <div class="custom-grid">
-        <div class="four columns"><span class="bigger"><span id="price">-</span> (%<span id="price_change">-</span>)</span></div>
+        <div class="four columns"><span class="bigger"><span id="price_usdt">-</span> USDT (%<span id="price_change">-</span>)</span></div>
         <div class="two columns"><span class="bigger">%<span id="volume_change">-</span></span></div>
         <div class="three columns"><span class="bigger">%<span id="number_trades_change">-</span></span></div>
     </div>

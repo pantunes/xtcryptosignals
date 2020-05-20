@@ -16,13 +16,11 @@ from mongoengine import connect
 
 app = Flask(__name__)
 
-if app.config["ENV"] == "production":
-    app.config.from_object("xtcryptosignals.server.config.ConfigProduction")
-elif app.config["ENV"] == "development":
-    app.config.from_object("xtcryptosignals.server.config.ConfigDevelopment")
-elif app.config["ENV"] == "docker":
-    app.config.from_object("xtcryptosignals.client.config.ConfigDocker")
-else:
+try:
+    app.config.from_object(
+        f"xtcryptosignals.server.config.Config{app.config['ENV'].title()}"
+    )
+except ImportError:
     raise ValueError("Unknown FLASK_ENV")
 
 app.config.from_envvar("SETTINGS_APP")

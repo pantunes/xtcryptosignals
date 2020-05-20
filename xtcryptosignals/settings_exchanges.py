@@ -26,6 +26,7 @@ BILAXY = "bilaxy"
 BITSTAMP = "bitstamp"
 KUCOIN = "kucoin"
 COINBASE_PRO = "coinbase_pro"
+LIQUID = "liquid"
 
 
 EXCHANGES = [
@@ -46,6 +47,7 @@ EXCHANGES = [
     BITSTAMP,
     KUCOIN,
     COINBASE_PRO,
+    LIQUID,
 ]
 
 
@@ -131,6 +133,11 @@ SYMBOLS_PER_EXCHANGE.append(
     {OKCOIN: {"pairs": [("BTC", "USD"), ("ETH", "USD"), ("LTC", "USD"),]}}
 )
 
+# LIQUID
+SYMBOLS_PER_EXCHANGE.append(
+    {LIQUID: {"pairs": [("EWT", "BTC"), ("EWT", "ETH"),]}}
+)
+
 # Coinbene
 SYMBOLS_PER_EXCHANGE.append(
     {COINBENE: {"pairs": [("BTC", "USDT"), ("ETH", "USDT"), ("LTC", "USDT"),]}}
@@ -200,6 +207,9 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
     "IDEX": {"pair": "ETH", "name": IDEX,},
     "LQD": {"pair": "ETH", "name": BILAXY,},
     "CARD": {"pair": "ETH", "name": HOTBIT,},
+    "EWT": {"pair": "ETH", "name": LIQUID,},
 }
 
+# TODO
 # Checks EXCHANGES_AND_PAIRS_OF_REFERENCE against SYMBOLS_PER_EXCHANGE
+# to make sure all pairs have an Exchange of reference

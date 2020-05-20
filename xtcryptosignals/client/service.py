@@ -46,7 +46,7 @@ def get_projects():
     return response.json(), response.status_code
 
 
-def get_project_last_twitter(project):
+def get_project_last_tweet(project):
     response = requests.get(
         url="{}projects/twitter/{}".format(
             current_app.config["SERVER_API_BASE_URL"], project

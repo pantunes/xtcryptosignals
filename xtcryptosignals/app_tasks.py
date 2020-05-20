@@ -13,12 +13,11 @@ from xtcryptosignals.tasks import ticker
 from xtcryptosignals.tasks import settings as s
 
 
-def _prepare_celery_beat(app, *_, **kwargs):
+def _prepare_celery_beat(app, *_, tasks, **kwargs):
     # enable single tasks
-    if kwargs["enable_market_depth"]:
-        for k in app.conf.beat_schedule.copy():
-            if k != "order_book":
-                del app.conf.beat_schedule[k]
+    for k in app.conf.beat_schedule.copy():
+        if k not in tasks:
+            del app.conf.beat_schedule[k]
 
     # updates beat config dynamically
     if "ticker" in app.conf.beat_schedule:
@@ -30,13 +29,30 @@ def _prepare_celery_beat(app, *_, **kwargs):
         app.conf.beat_schedule["ticker"].update(kwargs=kwargs["beat_kwargs"])
 
 
+def _prepare_queue(app, tasks, queue):
+    app.conf.task_routes = {}
+    for t in tasks:
+        app.conf.task_routes.update(
+            {f"xtcryptosignals.tasks.{t}.update": {"queue": queue}}
+        )
+
+
+_list_of_tasks = [
+    "cfgi",
+    "project",
+    "tether",
+    "ticker",
+    "notifications",
+    "order_book",
+]
+
+
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.option(
     "--test",
     is_flag=True,
     help="Process 1 iteration for all configured "
-    "coins and/or tokens."
-    "(Useful for testing purposes)",
+    "coins and/or tokens. (Useful for testing purposes)",
 )
 @click.option(
     "--list-config",
@@ -45,19 +61,32 @@ def _prepare_celery_beat(app, *_, **kwargs):
     "that are currently supported.",
 )
 @click.option(
-    "--enable-messaging",
-    is_flag=True,
-    help="Enable real-time crypto data message broadcasting.",
+    "-t",
+    "--task",
+    type=click.Choice(_list_of_tasks, case_sensitive=False),
+    default=_list_of_tasks,
+    multiple=True,
+    help="Task to be executed. If this parameter is omitted all "
+    "tasks will be started",
 )
 @click.option(
-    "--log-minimal",
-    is_flag=True,
-    help="Only log errors and important warnings in stdout.",
+    "-q",
+    "--queue",
+    type=str,
+    default="celery",
+    help="Queue name to execute indicated tasks.",
 )
 @click.option(
-    "--enable-market-depth",
+    "--disable-ticker-messaging",
     is_flag=True,
-    help="Only enable Task Market Depth.",
+    default=False,
+    help="Disable ticker message broadcasting.",
+)
+@click.option(
+    "--log-ticker-minimal",
+    is_flag=True,
+    default=False,
+    help="Only log ticker errors and important warnings in stdout.",
 )
 @click.option("--version", is_flag=True, help="Show version.")
 @click.pass_context
@@ -65,14 +94,14 @@ def main(
     ctx,
     test,
     list_config,
-    enable_messaging,
-    log_minimal,
-    enable_market_depth,
+    disable_ticker_messaging,
+    log_ticker_minimal,
+    task,
+    queue,
     version,
 ):
     """
-    Use this tool to collect and broadcast data from configured coins
-    or/and tokens from configured crypto-currencies exchanges.
+    Use this tool to start all or part of the tasks.
     """
     if list_config:
         if list_config == "currencies":
@@ -84,7 +113,8 @@ def main(
         ctx.exit()
 
     beat_kwargs = dict(
-        enable_messaging=enable_messaging, log_minimal=log_minimal,
+        disable_ticker_messaging=disable_ticker_messaging,
+        log_ticker_minimal=log_ticker_minimal,
     )
 
     if test:
@@ -104,9 +134,16 @@ def main(
 
     app.config_from_object("xtcryptosignals.tasks.celeryconfig")
 
-    _prepare_celery_beat(
-        app, beat_kwargs=beat_kwargs, enable_market_depth=enable_market_depth
-    )
+    # tasks passed by argument or default
+    tasks = list(task)
+
+    _prepare_celery_beat(app, tasks=tasks, beat_kwargs=beat_kwargs)
+    _prepare_queue(app, tasks=tasks, queue=queue)
 
     worker = worker.worker(app=app)
-    worker.run(beat=True, loglevel=ticker.logging.INFO)
+    worker.run(
+        beat=True,
+        queues=[queue],
+        schedule_filename=f"celerybeat-schedule-{queue}.db",
+        loglevel=ticker.logging.INFO,
+    )

@@ -141,7 +141,7 @@ def update(self):
                             title="XTCryptoSignals",
                             message=message,
                             url="{}/ticker/{symbol}/{frequency}".format(
-                                s.SERVER_ADDRESS, **obj_history
+                                s.WEBSITE_ADDRESS, **obj_history
                             ),
                             icon="{}{ticker}.png".format(
                                 s.STATIC_COINS_TOKENS_LOGOS_FOLDER,

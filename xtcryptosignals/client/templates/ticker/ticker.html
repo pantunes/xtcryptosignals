@@ -140,12 +140,12 @@ const price_volume_formatter = new Intl.NumberFormat('en-US', price_volume_forma
 
 <script type="text/javascript">
 let charts=[];
-function render_data_charts(data, coin_or_token, frequency) {
-    const p = _get_formatter(data.prices[0][1], false)
+function render_data_charts(data, coin_or_token, quote, frequency) {
+    const dyn_formatter = _get_formatter(data.prices[0][1], false)
     const chart_id = 'chart_' + coin_or_token + frequency;
     let chart = create_chart_coin_or_token(
-        chart_id, p, price_volume_formatter,
-        num_formatter, data, coin_or_token, frequency,
+        chart_id, dyn_formatter, price_volume_formatter,
+        num_formatter, data, coin_or_token, quote, frequency,
     );
     charts.push(chart);
     setChartTheme([chart]);
@@ -172,7 +172,7 @@ function _post_and_get_ticker_emit(id, json, reference_name, reference_pair, coi
         if (_id === charts[i].renderTo.id && charts[i].series[0].data.length > 30) {
             shift = true
         }
-        charts[i].series[0].addPoint([json['created_on_ts'], json['price']], false, shift);
+        charts[i].series[0].addPoint([json['created_on_ts'], json['price_usdt']], false, shift);
         charts[i].series[1].addPoint([json['created_on_ts'], json['volume_24h']], false, shift);
         charts[i].series[2].addPoint([json['created_on_ts'], json['number_trades_24h']], false, shift);
         charts[i].redraw();
