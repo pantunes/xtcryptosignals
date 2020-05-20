@@ -15,10 +15,9 @@ from xtcryptosignals.tasks import settings as s
 
 def _prepare_celery_beat(app, *_, **kwargs):
     # enable single tasks
-    if kwargs["enable_market_depth"]:
-        for k in app.conf.beat_schedule.copy():
-            if k != "order_book":
-                del app.conf.beat_schedule[k]
+    for k in app.conf.beat_schedule.copy():
+        if k not in list(kwargs["task"]) + ["cfgi", "project", "tether"]:
+            del app.conf.beat_schedule[k]
 
     # updates beat config dynamically
     if "ticker" in app.conf.beat_schedule:
@@ -28,6 +27,14 @@ def _prepare_celery_beat(app, *_, **kwargs):
         prepare_cache()
 
         app.conf.beat_schedule["ticker"].update(kwargs=kwargs["beat_kwargs"])
+
+
+def _prepare_queue(app, task, queue):
+    app.conf.task_routes = {}
+    for t in task:
+        app.conf.task_routes.update({
+            f"xtcryptosignals.tasks.{t}.update": {"queue": queue}
+        })
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -47,7 +54,7 @@ def _prepare_celery_beat(app, *_, **kwargs):
 @click.option(
     "--enable-messaging",
     is_flag=True,
-    help="Enable real-time crypto data message broadcasting.",
+    help="Enable real-time crypto data message broadcasting through socket.io.",
 )
 @click.option(
     "--log-minimal",
@@ -55,20 +62,26 @@ def _prepare_celery_beat(app, *_, **kwargs):
     help="Only log errors and important warnings in stdout.",
 )
 @click.option(
-    "--enable-market-depth",
-    is_flag=True,
-    help="Only enable Task Market Depth.",
+    "-t",
+    "--task",
+    type=click.Choice(
+        ["ticker", "notifications", "order_book"], case_sensitive=False
+    ),
+    default=["ticker", "notifications", "order_book"],
+    multiple=True,
+    help="List of Tasks to be executed.",
+)
+@click.option(
+    "-q",
+    "--queue",
+    type=str,
+    default="celery",
+    help="Queue to execute indicated Tasks.",
 )
 @click.option("--version", is_flag=True, help="Show version.")
 @click.pass_context
 def main(
-    ctx,
-    test,
-    list_config,
-    enable_messaging,
-    log_minimal,
-    enable_market_depth,
-    version,
+    ctx, test, list_config, enable_messaging, log_minimal, task, queue, version,
 ):
     """
     Use this tool to collect and broadcast data from configured coins
@@ -104,9 +117,8 @@ def main(
 
     app.config_from_object("xtcryptosignals.tasks.celeryconfig")
 
-    _prepare_celery_beat(
-        app, beat_kwargs=beat_kwargs, enable_market_depth=enable_market_depth
-    )
+    _prepare_celery_beat(app, beat_kwargs=beat_kwargs, task=task)
+    _prepare_queue(app, task=task, queue=queue)
 
     worker = worker.worker(app=app)
-    worker.run(beat=True, loglevel=ticker.logging.INFO)
+    worker.run(beat=True, queues=[queue], loglevel=ticker.logging.INFO)

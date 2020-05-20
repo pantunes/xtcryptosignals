@@ -24,7 +24,7 @@ def prepare_cache():
     response = requests.get(url=s.URL_CFGI)
     cfgi = response.json()["data"][0]["value"]
     red.set(s.REDIS_CFGI, cfgi)
-    print(f"Cached CFGI: {cfgi}")
+    print(f"Caching CFGI: {cfgi}")
 
     # cache last price per History Model
     for f in s.HISTORY_FREQUENCY:
@@ -36,8 +36,9 @@ def prepare_cache():
                         symbol=symbol, source=exchange
                     ).first()
                     if not row:
+                        print(f"No need to Cache, db is empty")
                         continue
                     row = row.to_dict(frequency=f)
                     key = s.REDIS_KEY_TICKER.format(**row)
                     red.set(key, row["price"])
-                    print(f"Cached {key}: {row['price']}")
+                    print(f"Caching {key}: {row['price']}")
