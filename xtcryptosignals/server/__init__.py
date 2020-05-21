@@ -21,7 +21,7 @@ if app.config["ENV"] == "production":
 elif app.config["ENV"] == "development":
     app.config.from_object("xtcryptosignals.server.config.ConfigDevelopment")
 elif app.config["ENV"] == "docker":
-    app.config.from_object("xtcryptosignals.client.config.ConfigDocker")
+    app.config.from_object("xtcryptosignals.server.config.ConfigDocker")
 else:
     raise ValueError("Unknown FLASK_ENV")
 

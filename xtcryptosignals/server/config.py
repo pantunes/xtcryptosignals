@@ -24,10 +24,9 @@ class Config(object):
     TESTING = False
 
     BROKER_URL = "redis://localhost:6379"
+    SESSION_REDIS = Redis.from_url(BROKER_URL)
 
     SESSION_TYPE = "redis"
-
-    SESSION_REDIS = Redis.from_url(BROKER_URL)
 
     SECRET_KEY = None
 
@@ -69,3 +68,4 @@ class ConfigDevelopment(Config):
 
 class ConfigDocker(ConfigDevelopment):
     BROKER_URL = "redis://172.19.10.6:6379"
+    SESSION_REDIS = Redis.from_url(BROKER_URL)
