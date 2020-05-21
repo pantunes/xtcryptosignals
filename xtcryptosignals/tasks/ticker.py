@@ -107,7 +107,6 @@ def _terminate_running_jobs(logger, jobs):
 
 @task(bind=True)
 def update(self, *_, **kwargs):
-
     if kwargs["enable_messaging"]:
         log_level = logging.INFO if not kwargs["log_minimal"] else logging.ERROR
         logging.getLogger("engineio").setLevel(log_level)
