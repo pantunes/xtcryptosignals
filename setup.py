@@ -48,7 +48,7 @@ setup(
     include_package_data=True,
     entry_points={
         "console_scripts": [
-            "xt-ticker=xtcryptosignals.app_ticker:main",
+            "xt-tasks=xtcryptosignals.app_tasks:main",
             "xt-server=xtcryptosignals.app_server:main",
             "xt-client=xtcryptosignals.app_client:main",
             "xt-all=xtcryptosignals.scripts.manage:main",
