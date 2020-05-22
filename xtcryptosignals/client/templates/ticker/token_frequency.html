@@ -128,19 +128,24 @@ function render_data_depth_chart(coin_or_token) {
     }
 
     function reload_orders(json) {
+        const red = '#f7f7f7'
+        const red_bar = '#ffd2c9'
+        const green = '#f7f7f7'
+        const green_bar = '#d6edda'
+
         for (const j of [
-            ["asks", '#fff2f0', true],
-            ["bids", '#f0fff3', false],
-            ["asks_cumulative", '#fff2f0', true],
-            ["bids_cumulative", '#f0fff3', false],
-            ["intervals_asks_cumulative", '#fff2f0', true],
-            ["intervals_bids_cumulative", '#f0fff3', true],
+            ["asks", red,  red_bar, true],
+            ["bids", green, green_bar, false],
+            ["asks_cumulative", red, red_bar, true],
+            ["bids_cumulative", green, green_bar, false],
+            ["intervals_asks_cumulative", red, red_bar, true],
+            ["intervals_bids_cumulative", green, green_bar, true],
         ]) {
 
             $(`#orders_${j[0]} > tr`).remove();
 
             let list = json[j[0]]
-            if (j[2]) {
+            if (j[3]) {
                 list.reverse()
             }
 
@@ -155,17 +160,20 @@ function render_data_depth_chart(coin_or_token) {
                 }
                 let col1 = f1.format(v[0])
                 let col2 = f2.format(v[1])
+                let col3 = v[2]
 
                 if (j[0].includes("intervals_")) {
                     col1 = f1.format(v[0]) + ' - ' + f3.format(v[1])
                     col2 = f4.format(v[2])
+                    col3 = v[3]
                 }
 
                 $(`#orders_${j[0]} tbody`).after(
                     '<tr>' +
-                    '<td style="text-align: right; background-color: ' + j[1] + '; padding-left: 10px;">' + col1 + '</td>' +
-                    '<td style="text-align: right; background-color: ' + j[1] + '; padding-right: 10px;">' + col2 + '</td>' +
-                    '</tr>'
+                    '<td style="text-align: right; background-color: ' + j[1] + ';">' + col1 + '</td>' +
+                    '<td style="text-align: right; background-color: ' + j[1] + ';">' +
+                    '<div style="background-color: ' + j[2] + '; width: ' + col3 + '%;">' + col2 + '</div>' +
+                    '</td></tr>'
                 );
             }
         }
@@ -190,44 +198,44 @@ function render_data_depth_chart(coin_or_token) {
 
 <div class="row">
     <div class="two columns">
-        <table id="orders_bids">
+        <table id="orders_bids" class="market-depth-orders">
             <caption><h6>Bids</h6></caption>
-            <thead><tr><th style="text-align: right">Price</th><th style="text-align: right">Total</th></thead>
+            <thead><tr><th style="text-align: right">Price</th><th>Total</th></thead>
             <tbody></tbody>
         </table>
     </div>
     <div class="two columns">
-        <table id="orders_asks">
+        <table id="orders_asks" class="market-depth-orders">
             <caption><h6>Asks</h6></caption>
-            <thead><tr><th style="text-align: right">Price</th><th style="text-align: right">Total</th></thead>
+            <thead><tr><th style="text-align: right">Price</th><th>Total</th></thead>
             <tbody></tbody>
         </table>
     </div>
     <div class="two columns">
-        <table id="orders_bids_cumulative">
+        <table id="orders_bids_cumulative" class="market-depth-orders">
             <caption><h6>Accrued Bids</h6></caption>
-            <thead><tr><th style="text-align: right">Price</th><th style="text-align: right">Total</th></thead>
+            <thead><tr><th style="text-align: right">Price</th><th>Total</th></thead>
             <tbody></tbody>
         </table>
     </div>
     <div class="two columns">
-        <table id="orders_asks_cumulative">
+        <table id="orders_asks_cumulative" class="market-depth-orders">
             <caption><h6>Accrued Asks</h6></caption>
-            <thead><tr><th style="text-align: right">Price</th><th style="text-align: right">Total</th></thead>
+            <thead><tr><th style="text-align: right">Price</th><th>Total</th></thead>
             <tbody></tbody>
         </table>
     </div>
     <div class="three columns">
-        <table id="orders_intervals_bids_cumulative">
+        <table id="orders_intervals_bids_cumulative" class="market-depth-orders">
             <caption><h6>Accrued Bids Interval</h6></caption>
-            <thead><tr><th style="text-align: right">Price</th><th style="text-align: right">Total</th></thead>
+            <thead><tr><th style="text-align: right">Price</th><th>Total</th></thead>
             <tbody></tbody>
         </table>
     </div>
     <div class="three columns">
-        <table id="orders_intervals_asks_cumulative">
+        <table id="orders_intervals_asks_cumulative" class="market-depth-orders">
             <caption><h6>Accrued Asks Interval</h6></caption>
-            <thead><tr><th style="text-align: right">Price</th><th style="text-align: right">Total</th></thead>
+            <thead><tr><th style="text-align: right">Price</th><th>Total</th></thead>
             <tbody></tbody>
         </table>
     </div>

@@ -9,7 +9,7 @@
     * A **Signals** service based on setup rules to send real-time alerts about 
     price, price change, trading volume or market sentiment sending Web Push 
     Notifications to the client browser (Firefox, Chrome).
-    * Market Depth, Content and Data fetching Tasks.
+    * **Market Depth**, **Content** and **Data** fetching Tasks.
     * **Automatic trading** *(in progress)*.
 
 (Web Push Notifications are implemented with [ServiceWorker](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification) 
@@ -120,7 +120,12 @@ FLASK_ENV=development SETTINGS_APP=server.dev.env mongodb-migrate --url mongodb:
 ```
 
 ### Install from docker-compose
-Clone this repository and simply run:
+Clone project repository:
+```bash
+git clone https://github.com/pantunes/xtcryptosignals.git
+cd xtcryptosignals
+```
+Create multi-container Docker Applications:
 ```bash
 docker-compose up
 ```
