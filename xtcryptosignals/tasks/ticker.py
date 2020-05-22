@@ -71,7 +71,7 @@ def _get_24h_price_ticker_data(
 ):
     socketio = None
 
-    if kwargs["enable_messaging"]:
+    if not kwargs["disable_ticker_messaging"]:
         socketio = SocketIO(message_queue=BROKER_URL)
 
     symbol_or_pairs = "-".join(symbol) if symbol else "PAIRS"
@@ -107,8 +107,10 @@ def _terminate_running_jobs(logger, jobs):
 
 @task(bind=True)
 def update(self, *_, **kwargs):
-    if kwargs["enable_messaging"]:
-        log_level = logging.INFO if not kwargs["log_minimal"] else logging.ERROR
+    if not kwargs["disable_ticker_messaging"]:
+        log_level = (
+            logging.INFO if not kwargs["log_ticker_minimal"] else logging.ERROR
+        )
         logging.getLogger("engineio").setLevel(log_level)
         logging.getLogger("socketio").setLevel(log_level)
 

@@ -36,7 +36,7 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
-    command: xt-ticker --enable-messaging --log-minimal
+    command: xt-tasks --log-ticker-minimal
     environment:
       - SETTINGS_APP=/xtcryptosignals/xtcryptosignals/config/server.docker.env
     depends_on:

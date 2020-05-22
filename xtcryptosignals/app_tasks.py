@@ -51,16 +51,6 @@ def _prepare_queue(app, task, queue):
     "that are currently supported.",
 )
 @click.option(
-    "--enable-messaging",
-    is_flag=True,
-    help="Enable real-time crypto data message broadcasting through socket.io.",
-)
-@click.option(
-    "--log-minimal",
-    is_flag=True,
-    help="Only log errors and important warnings in stdout.",
-)
-@click.option(
     "-t",
     "--task",
     type=click.Choice(
@@ -68,23 +58,42 @@ def _prepare_queue(app, task, queue):
     ),
     default=["ticker", "notifications", "order_book"],
     multiple=True,
-    help="List of Tasks to be executed.",
+    help="Task to be executed. If this parameter is omitted all "
+    "tasks will be started",
 )
 @click.option(
     "-q",
     "--queue",
     type=str,
     default="celery",
-    help="Queue to execute indicated Tasks.",
+    help="Queue name to execute indicated tasks.",
+)
+@click.option(
+    "--disable-ticker-messaging",
+    is_flag=True,
+    default=False,
+    help="Disable ticker message broadcasting.",
+)
+@click.option(
+    "--log-ticker-minimal",
+    is_flag=True,
+    default=False,
+    help="Only log ticker errors and important warnings in stdout.",
 )
 @click.option("--version", is_flag=True, help="Show version.")
 @click.pass_context
 def main(
-    ctx, test, list_config, enable_messaging, log_minimal, task, queue, version,
+    ctx,
+    test,
+    list_config,
+    disable_ticker_messaging,
+    log_ticker_minimal,
+    task,
+    queue,
+    version,
 ):
     """
-    Use this tool to collect and broadcast data from configured coins
-    or/and tokens from configured crypto-currencies exchanges.
+    Use this tool to start all or part of the tasks.
     """
     if list_config:
         if list_config == "currencies":
@@ -96,7 +105,8 @@ def main(
         ctx.exit()
 
     beat_kwargs = dict(
-        enable_messaging=enable_messaging, log_minimal=log_minimal,
+        disable_ticker_messaging=disable_ticker_messaging,
+        log_ticker_minimal=log_ticker_minimal,
     )
 
     if test:
