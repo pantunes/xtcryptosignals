@@ -121,4 +121,9 @@ def main(
     _prepare_queue(app, task=task, queue=queue)
 
     worker = worker.worker(app=app)
-    worker.run(beat=True, queues=[queue], loglevel=ticker.logging.INFO)
+    worker.run(
+        beat=True,
+        queues=[queue],
+        schedule_filename=f"celerybeat-schedule-{queue}.db",
+        loglevel=ticker.logging.INFO,
+    )
