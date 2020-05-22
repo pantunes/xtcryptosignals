@@ -162,6 +162,9 @@ coinbene
 dcoin
 bitmax
 bilaxy
+bitstamp
+kucoin
+coinbase_pro
 ```
 (Drop [me](mailto:pjmlantunes@gmail.com) an e-mail if you want support for a new 
 exchange or please contribute to this project creating a pull request)
@@ -177,16 +180,23 @@ Usage: xt-ticker [OPTIONS]
   configured crypto-currencies exchanges.
 
 Options:
-  --test                          Execute 1 iteration for all configured coins
-                                  and/or tokens without Celery. (Useful for
-                                  testing purposes)
+  --test                          Process 1 iteration for all configured coins
+                                  and/or tokens.(Useful for testing purposes)
+
   --list-config [exchanges|currencies]
                                   List 'exchanges' or 'currencies' (coins or
-                                  tokens) per exchange that the tool currently
-                                  supports.
-  --enable-messaging              Enable real-time crypto data message broadcasting.
+                                  tokens) per exchange that are currently
+                                  supported.
+
+  --enable-messaging              Enable real-time crypto data message
+                                  broadcasting through socket.io.
+
   --log-minimal                   Only log errors and important warnings in
                                   stdout.
+
+  -t, --task [ticker|notifications|order_book]
+                                  List of Tasks to be executed.
+  -q, --queue TEXT                Queue to execute indicated Tasks.
   --version                       Show version.
   -h, --help                      Show this message and exit.
 ```

@@ -42,8 +42,7 @@ def _prepare_queue(app, task, queue):
     "--test",
     is_flag=True,
     help="Process 1 iteration for all configured "
-    "coins and/or tokens."
-    "(Useful for testing purposes)",
+    "coins and/or tokens. (Useful for testing purposes)",
 )
 @click.option(
     "--list-config",
