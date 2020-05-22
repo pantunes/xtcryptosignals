@@ -22,11 +22,12 @@ from xtcryptosignals.tasks import settings as s
 socketio = SocketIO(message_queue=BROKER_URL)
 
 
-def _get_intervals(_order_book):
+def _get_intervals(name, _order_book):
     n = 10
     _intervals = []
+    a, b = (0, -1) if name == "asks_cumulative" else (-1, 0)
     for x in [_order_book[i : i + n] for i in range(0, len(_order_book), n)]:
-        _intervals.append([x[0][0], x[-1][0], x[-1][-1]])
+        _intervals.append([x[a][0], x[b][0], x[-1][-1]])
     return _intervals
 
 
@@ -58,7 +59,7 @@ def _process(logger, symbol):
         "asks_cumulative",
         "bids_cumulative",
     ):
-        _order_book["intervals_" + x] = _get_intervals(_order_book[x])
+        _order_book["intervals_" + x] = _get_intervals(x, _order_book[x])
 
     _order_book["bids_cumulative"] = [
         x for x in reversed(_order_book["bids_cumulative"])
