@@ -118,3 +118,8 @@ body {
   line-height: 30px;
   margin-bottom: .75rem;
 }
+
+table.market-depth-orders th,
+table.market-depth-orders tr {
+  width: 220px;
+}
