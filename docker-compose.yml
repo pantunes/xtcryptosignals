@@ -2,7 +2,7 @@ version: '3'
 
 services:
 
-  server_1:
+  server_backend:
     build:
       context: .
       dockerfile: docker/Dockerfile
@@ -17,7 +17,7 @@ services:
       backend:
         ipv4_address: 172.19.10.2
 
-  server_2:
+  server_socketio:
     build:
       context: .
       dockerfile: docker/Dockerfile
@@ -27,7 +27,7 @@ services:
     depends_on:
       - db
       - redis
-      - server_1
+      - server_backend
     networks:
       backend:
         ipv4_address: 172.19.10.3
@@ -42,7 +42,7 @@ services:
     depends_on:
       - db
       - redis
-      - server_1
+      - server_backend
     networks:
       backend:
         ipv4_address: 172.19.10.4
@@ -54,7 +54,7 @@ services:
     command: xt-client --num-workers 2
     environment:
       - FLASK_ENV=docker
-      - SETTINGS_APP=/xtcryptosignals/xtcryptosignals/config/client.dev.env
+      - SETTINGS_APP=/xtcryptosignals/xtcryptosignals/config/client.docker.env
     ports:
       - "127.0.0.1:8000:8000"
     networks:
