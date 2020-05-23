@@ -13,10 +13,10 @@ from xtcryptosignals.tasks import ticker
 from xtcryptosignals.tasks import settings as s
 
 
-def _prepare_celery_beat(app, *_, **kwargs):
+def _prepare_celery_beat(app, *_, tasks, **kwargs):
     # enable single tasks
     for k in app.conf.beat_schedule.copy():
-        if k not in list(kwargs["task"]) + ["cfgi", "project", "tether"]:
+        if k not in tasks:
             del app.conf.beat_schedule[k]
 
     # updates beat config dynamically
@@ -29,9 +29,9 @@ def _prepare_celery_beat(app, *_, **kwargs):
         app.conf.beat_schedule["ticker"].update(kwargs=kwargs["beat_kwargs"])
 
 
-def _prepare_queue(app, task, queue):
+def _prepare_queue(app, tasks, queue):
     app.conf.task_routes = {}
-    for t in task:
+    for t in tasks:
         app.conf.task_routes.update(
             {f"xtcryptosignals.tasks.{t}.update": {"queue": queue}}
         )
@@ -126,8 +126,11 @@ def main(
 
     app.config_from_object("xtcryptosignals.tasks.celeryconfig")
 
-    _prepare_celery_beat(app, beat_kwargs=beat_kwargs, task=task)
-    _prepare_queue(app, task=task, queue=queue)
+    # tasks passed by arg + mandatory tasks
+    tasks = list(task) + ["cfgi", "project", "tether"]
+
+    _prepare_celery_beat(app, tasks=tasks, beat_kwargs=beat_kwargs)
+    _prepare_queue(app, tasks=tasks, queue=queue)
 
     worker = worker.worker(app=app)
     worker.run(
