@@ -101,27 +101,27 @@ function get_crypto_fear_greed_index(handler) {
     });
 }
 
-function get_chart_cfgi_btc_data(handler, frequency) {
+function get_chart_cfgi_btc_data(handler, quote, frequency) {
     $.get('/charts/cfgi/BTC/' + frequency).done(function(response) {
-        handler(response, frequency)
+        handler(response, quote, frequency)
     })
     .fail(function(xhr, status, error) {
         process_fail(xhr);
     });
 }
 
-function get_chart_coin_or_token_data(handler, coin_or_token, frequency) {
+function get_chart_coin_or_token_data(handler, coin_or_token, quote, frequency) {
     $.get('/charts/' + coin_or_token + '/' + frequency).done(function(response) {
-        handler(response, coin_or_token, frequency)
+        handler(response, coin_or_token, quote, frequency)
     })
     .fail(function(xhr, status, error) {
         process_fail(xhr);
     });
 }
 
-function get_chart_tether_data(handler, coin_or_token, frequency) {
+function get_chart_tether_data(handler, coin_or_token, quote, frequency) {
     $.get('/charts/tether/' + coin_or_token + '/' + frequency).done(function(response) {
-        handler(response, coin_or_token, frequency)
+        handler(response, coin_or_token, quote, frequency)
     })
     .fail(function(xhr, status, error) {
         process_fail(xhr);

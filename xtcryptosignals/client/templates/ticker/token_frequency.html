@@ -81,7 +81,9 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    get_chart_coin_or_token_data(render_data_charts, '{{ coin_or_token }}', '{{ frequency }}');
+    get_chart_coin_or_token_data(
+        render_data_charts, '{{ coin_or_token }}', "{{ reference['pair'] }}", '{{ frequency }}'
+    );
     render_data_depth_chart('{{ coin_or_token }}');
 });
 </script>

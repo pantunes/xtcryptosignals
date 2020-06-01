@@ -1,5 +1,5 @@
 function create_chart_coin_or_token(
-    chart_id, price_formatter, price_volume_formatter, num_formatter, data, coin_or_token, frequency
+    chart_id, dyn_formatter, price_volume_formatter, num_formatter, data, coin_or_token, quote, frequency
 ) {
       return Highcharts.chart(chart_id, {
         chart: {
@@ -31,35 +31,34 @@ function create_chart_coin_or_token(
         }],
         yAxis: [{
             labels: {
-                format: '${value}',
                  style: {
                     color: Highcharts.getOptions().colors[0]
                 },
                 formatter: function() {
-                    return price_formatter.format(this.value);
+                    return dyn_formatter.format(this.value);
                 }
             },
             title: {
-                text: 'Price (USD)',
+                text: 'Price (USDT)',
                 style: {
                     color: Highcharts.getOptions().colors[0]
                 },
                 formatter: function() {
-                    return price_formatter.format(this.value);
+                    return dyn_formatter.format(this.value);
                 }
             }
         }, {
             labels: {
-                format: '${value}',
+                format: '{value}' + quote,
                 style: {
                     color: Highcharts.getOptions().colors[1]
                 },
                 formatter: function() {
-                    return price_formatter.format(this.value);
+                    return dyn_formatter.format(this.value);
                 }
             },
             title: {
-                text: 'Volume (USD)',
+                text: `${coin_or_token} Volume (${quote})`,
             },
             opposite: true
         }, {
@@ -73,7 +72,7 @@ function create_chart_coin_or_token(
                 }
             },
             title: {
-                text: 'Number of Trades',
+                text: coin_or_token + ' Number of Trades',
                 style: {
                     color: Highcharts.getOptions().colors[3]
                 }
@@ -130,10 +129,9 @@ function create_chart_coin_or_token(
             type: 'area',
             data: data.prices,
             tooltip: {
-                valuePrefix: '$',
                 pointFormatter: function() {
                     return '<span style="color:' + this.color + '">\u25CF</span> ' +
-                        this.series.name + ': <b>' + price_formatter.format(this.y) + '</b><br/>';
+                        this.series.name + ': <b>' + dyn_formatter.format(this.y)  + ' USDT</b><br/>';
                 }
             },
             marker: {
@@ -145,10 +143,9 @@ function create_chart_coin_or_token(
             yAxis: 1,
             data: data.volumes,
             tooltip: {
-                valuePrefix: '$',
                 pointFormatter: function() {
                     return '<span style="color:' + this.color + '">\u25CF</span> ' +
-                        this.series.name + ': <b>' + price_volume_formatter.format(this.y) + '</b><br/>';
+                        this.series.name + ': <b>' + num_formatter.format(this.y) + ' ' + quote + '</b><br/>';
                 }
             },
             marker: {

@@ -12,7 +12,9 @@
         const fs = {{ frequencies_charts|safe }};
         for (let i in fs) {
             setTimeout(function () {
-                get_chart_tether_data(render_data, '{{ coin_or_token }}', fs[i]);
+                get_chart_tether_data(
+                    render_data, '{{ coin_or_token }}', '{{ reference["pair"] }}', fs[i]
+                );
             }, i * 500);
         }
     });
@@ -20,9 +22,11 @@
 
 <script type="text/javascript">
     let charts=[];
-    function render_data(data, coin_or_token, frequency) {
+    function render_data(data, coin_or_token, quote, frequency) {
         const chart_id = 'chart_' + coin_or_token + frequency;
-        let chart = create_chart_tether(chart_id, price_formatter, num_formatter, data, coin_or_token, frequency);
+        let chart = create_chart_tether(
+            chart_id, num_formatter, data, coin_or_token, quote, frequency
+        );
         charts.push(chart);
         setChartTheme([chart]);
         $('#row_'+chart_id).show();

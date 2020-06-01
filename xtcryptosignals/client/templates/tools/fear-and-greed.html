@@ -9,8 +9,8 @@
 
 <script type="text/javascript">
     let charts=[];
-    function render_data(data, frequency) {
-        let chart = create_chart_fear_and_greed(price_formatter, data, frequency);
+    function render_data(data, quote, frequency) {
+        let chart = create_chart_fear_and_greed(data, quote, frequency);
         charts.push(chart);
         setChartTheme([chart]);
         window.location.hash = frequency;
@@ -23,7 +23,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         const frequency = window.location.hash.replace('#', '');
-        get_chart_cfgi_btc_data(render_data, frequency);
+        get_chart_cfgi_btc_data(render_data, "{{ quote }}", frequency);
     });
 </script>
 
@@ -44,7 +44,7 @@
 
 <div id="container_buttons" style="text-align: center">
     {% for cf in chart_frequencies %}
-    <button class="button-secondary" id='{{ cf }}' onclick="charts=[]; get_chart_cfgi_btc_data(render_data, '{{ cf }}'); return false;">{{ cf }}</button>
+    <button class="button-secondary" id='{{ cf }}' onclick="charts=[]; get_chart_cfgi_btc_data(render_data, '{{ quote }}', '{{ cf }}'); return false;">{{ cf }}</button>
     {% endfor %}
 </div>
 

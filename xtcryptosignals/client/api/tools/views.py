@@ -57,6 +57,7 @@ def fear_and_greed():
         template_name_or_list="tools/fear-and-greed.html",
         frequency=current_app.config["CFGI_MIN"],
         chart_frequencies=chart_frequencies,
+        quote="USDT",
     )
 
 

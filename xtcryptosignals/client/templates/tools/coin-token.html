@@ -15,7 +15,9 @@
         const fs = {{ frequencies_charts|safe }};
         for (let i in fs) {
             setTimeout(function () {
-                get_chart_coin_or_token_data(render_data_charts, '{{ coin_or_token }}', fs[i]);
+                get_chart_coin_or_token_data(
+                    render_data_charts, '{{ coin_or_token }}', "{{ reference['pair'] }}", fs[i]
+                );
             }, i * 500);
         }
     });

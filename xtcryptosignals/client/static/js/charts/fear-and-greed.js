@@ -1,4 +1,4 @@
-function create_chart_fear_and_greed(price_formatter, data, frequency) {
+function create_chart_fear_and_greed(data, quote, frequency) {
     return Highcharts.chart('chart', {
         chart: {
             zoomType: 'x',
@@ -27,21 +27,20 @@ function create_chart_fear_and_greed(price_formatter, data, frequency) {
         }],
         yAxis: [{
             labels: {
-                format: '${value}',
                 style: {
                     color: Highcharts.getOptions().colors[0]
                 },
                 formatter: function() {
-                    return price_formatter.format(this.value);
+                    return num_formatter.format(this.value);
                 }
             },
             title: {
-                text: 'Price (USD)',
+                text: `Price (${quote})`,
                 style: {
                     color: Highcharts.getOptions().colors[0]
                 },
                 formatter: function() {
-                    return price_formatter.format(this.value);
+                    return num_formatter.format(this.value);
                 }
             }
         }, {
@@ -111,10 +110,9 @@ function create_chart_fear_and_greed(price_formatter, data, frequency) {
             type: 'area',
             data: data.BTC,
             tooltip: {
-                valuePrefix: '$',
                 pointFormatter: function() {
                     return '<span style="color:' + this.color + '">\u25CF</span> ' +
-                        this.series.name + ': <b>' + price_formatter.format(this.y) + '</b><br/>';
+                        this.series.name + ': <b>' + num_formatter.format(this.y) + ' ' + quote + '</b><br/>';
                 }
             },
 
