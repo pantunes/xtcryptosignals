@@ -58,6 +58,7 @@ from xtcryptosignals.settings_exchanges import (
     BITSTAMP,
     KUCOIN,
     COINBASE_PRO,
+    LIQUID,
 )  # noqa
 
 __all__ = [
@@ -84,4 +85,5 @@ __all__ = [
     "TICKER_SCHEDULE",
     "HISTORY_FREQUENCY",
     "PRICE_CHANGE_FREQUENCIES",
+    "LIQUID",
 ]
