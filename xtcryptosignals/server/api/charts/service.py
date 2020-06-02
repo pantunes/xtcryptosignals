@@ -9,6 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from datetime import datetime
+from mongoengine import Q
 from mongoengine.errors import DoesNotExist, ValidationError
 from xtcryptosignals.tasks.models.history import History
 from xtcryptosignals.tasks.models.cfgi import CFGI
@@ -160,9 +161,9 @@ def get_chart_twitter(project, frequency):
         raise ValueError("Project is invalid.", 405)
 
     num_followers = []
-    for pt in ProjectTwitter.objects(project=project, num_followers__ne="")[
-        :30
-    ]:
+    for pt in ProjectTwitter.objects(
+        Q(project=project) & Q(num_followers__exists=True)
+    )[:30]:
         obj = pt.to_dict()
         num_followers.append(
             [_normalize_ts(obj["created_on_ts"], "1d"), obj["num_followers"],]
