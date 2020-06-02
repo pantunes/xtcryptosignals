@@ -19,7 +19,9 @@ def projects():
 
 def project_twitter(project):
     try:
-        row = ProjectTwitter.objects(project=project).first()
+        row = ProjectTwitter.objects(
+            project=project, num_followers__ne=""
+        ).first()
         if not row:
             raise ValueError("Project does not exist or no twitter data", 404)
     except ValidationError:

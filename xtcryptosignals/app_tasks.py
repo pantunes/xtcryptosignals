@@ -37,6 +37,16 @@ def _prepare_queue(app, tasks, queue):
         )
 
 
+_list_of_tasks = [
+    "cfgi",
+    "project",
+    "tether",
+    "ticker",
+    "notifications",
+    "order_book",
+]
+
+
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.option(
     "--test",
@@ -53,10 +63,8 @@ def _prepare_queue(app, tasks, queue):
 @click.option(
     "-t",
     "--task",
-    type=click.Choice(
-        ["ticker", "notifications", "order_book"], case_sensitive=False
-    ),
-    default=["ticker", "notifications", "order_book"],
+    type=click.Choice(_list_of_tasks, case_sensitive=False),
+    default=_list_of_tasks,
     multiple=True,
     help="Task to be executed. If this parameter is omitted all "
     "tasks will be started",
@@ -126,8 +134,8 @@ def main(
 
     app.config_from_object("xtcryptosignals.tasks.celeryconfig")
 
-    # tasks passed by arg + mandatory tasks
-    tasks = list(task) + ["cfgi", "project", "tether"]
+    # tasks passed by argument or default
+    tasks = list(task)
 
     _prepare_celery_beat(app, tasks=tasks, beat_kwargs=beat_kwargs)
     _prepare_queue(app, tasks=tasks, queue=queue)

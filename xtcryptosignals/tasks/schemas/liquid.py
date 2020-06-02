@@ -27,7 +27,9 @@ class Liquid(BaseSchema):
     @pre_load
     def pre_load(self, data):
         data["source"] = s.LIQUID
-        data["volume_24h"] = float(data["volume_24h"]) * float(data["last_traded_price"])
+        data["volume_24h"] = float(data["volume_24h"]) * float(
+            data["last_traded_price"]
+        )
         return data
 
     @post_load

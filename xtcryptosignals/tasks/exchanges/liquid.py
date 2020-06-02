@@ -18,7 +18,7 @@ class Liquid:
 
     def get_ticker(self, symbol):
         _symbol = "".join(symbol)
-        mapping = {'EWTBTC': 553, 'EWTETH': 554}
+        mapping = {"EWTBTC": 553, "EWTETH": 554}
         url = self.base_url.format(mapping[_symbol])
         try:
             request = requests.get(url)

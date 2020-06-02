@@ -48,15 +48,18 @@ def update(self):
 
     try:
         for p in Project.objects:
-            if p["wikipedia"]:
-                p.summary = _get_wikipedia_summary(p["wikipedia"])
-            p.save()
-            if p["twitter"]:
-                ProjectTwitter(
+
+            if p.wikipedia:
+                p.summary = _get_wikipedia_summary(p.wikipedia)
+                p.save()
+
+            if p.twitter:
+                pt = ProjectTwitter(
                     project=p,
-                    num_followers=_get_twitter_num_followers(p["twitter"]),
+                    num_followers=_get_twitter_num_followers(p.twitter),
                     added_on=date.today(),
-                ).save()
+                )
+                pt.save()
     except Exception as error:
         logger.error("twitter error: {}".format(str(error)))
         self.update_state(state=states.FAILURE, meta=str(error))
