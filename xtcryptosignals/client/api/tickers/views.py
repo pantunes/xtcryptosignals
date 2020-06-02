@@ -118,7 +118,7 @@ def token_frequency(coin_or_token, frequency):
     if not projects:
         raise ValueError("There are no Projects.")
     project = [x for x in projects if x["coin_or_token"] == coin_or_token][0]
-    project_twitter, _ = service.get_project_last_twitter(project["_id"])
+    project_twitter, _ = service.get_project_last_tweet(project["_id"])
     return dict(
         template_name_or_list="ticker/token_frequency.html",
         symbols_per_exchange=x,

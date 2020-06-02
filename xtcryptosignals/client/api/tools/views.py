@@ -101,9 +101,7 @@ def twitter(frequency):
 
     projects_twitter = []
     for p in projects:
-        project_last_twitter, _ = service.get_project_last_twitter(p["_id"])
-        if not project_last_twitter["num_followers"]:
-            continue
+        project_last_twitter, _ = service.get_project_last_tweet(p["_id"])
         projects_twitter.append(p["_id"])
 
     return dict(
