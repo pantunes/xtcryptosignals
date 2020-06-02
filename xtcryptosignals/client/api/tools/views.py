@@ -102,7 +102,7 @@ def twitter(frequency):
     projects_twitter = []
     for p in projects:
         project_last_tweet, _ = service.get_project_last_tweet(p["_id"])
-        if not project_last_tweet["num_followers"]:
+        if project_last_tweet.get("num_followers") is None:
             continue
         projects_twitter.append(p["_id"])
 
