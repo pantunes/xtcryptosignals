@@ -10,7 +10,6 @@ __email__ = "pjmlantunes@gmail.com"
 
 import requests
 import wikipediaapi
-from bs4 import BeautifulSoup
 from datetime import date
 from celery.task import task
 from celery.exceptions import Ignore
@@ -22,16 +21,14 @@ from xtcryptosignals.tasks import settings as s
 
 
 def _get_twitter_num_followers(url):
-    req = requests.get(url)
-    soup = BeautifulSoup(req.content, "html.parser")
-    try:
-        return int(
-            soup.find(href=f"/{url.rsplit('/', 1)[-1]}/followers").find(
-                attrs={"class": "ProfileNav-value"}
-            )["data-count"]
-        )
-    except AttributeError:
+    _url = (
+        f"https://cdn.syndication.twimg.com/widgets/"
+        f"followbutton/info.json?screen_names={url.rsplit('/', 1)[-1]}"
+    )
+    response = requests.get(_url)
+    if response.status_code != 200:
         return
+    return response.json()[0]["followers_count"]
 
 
 def _get_wikipedia_summary(url):
