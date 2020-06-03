@@ -193,7 +193,7 @@ Options:
                                   tokens) per exchange that are currently
                                   supported.
 
-  -t, --task [ticker|notifications|order_book]
+  -t, --task [cfgi|project|tether|ticker|notifications|order_book]
                                   Task to be executed. If this parameter is
                                   omitted all tasks will be started
 
