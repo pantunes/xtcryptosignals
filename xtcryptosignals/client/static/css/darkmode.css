@@ -115,6 +115,9 @@
   background: #2b2b2b;
 }
 
-.darkmode--activated .market-depth-orders {
+.darkmode--activated .market-depth-orders-row-green {
+  background-color: #2b2b2b;
+}
+.darkmode--activated .market-depth-orders-row-red {
   background-color: #2b2b2b;
 }

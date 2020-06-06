@@ -119,7 +119,21 @@ body {
   margin-bottom: .75rem;
 }
 
+table.market-depth-orders {
+  border-collapse: separate;
+}
 table.market-depth-orders th,
 table.market-depth-orders tr {
   width: 220px;
+}
+table.market-depth-orders td {
+  text-align: right;
+  padding: 10px;
+}
+
+.market-depth-orders-row-green {
+  background-color: #f7f7f7;
+}
+.market-depth-orders-row-red {
+  background-color: #f7f7f7;
 }
