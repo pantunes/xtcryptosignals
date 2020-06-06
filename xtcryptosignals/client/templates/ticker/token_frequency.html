@@ -130,9 +130,9 @@ function render_data_depth_chart(coin_or_token) {
     }
 
     function reload_orders(json) {
-        const red = '#f7f7f7'
+        const red = 'market-depth-orders-row-red'
         const red_bar = '#ffd2c9'
-        const green = '#f7f7f7'
+        const green = 'market-depth-orders-row-green'
         const green_bar = '#d6edda'
 
         for (const j of [
@@ -155,9 +155,9 @@ function render_data_depth_chart(coin_or_token) {
 
             for (const v of list) {
                 if (f1 === null) {
-                    f1 = _get_formatter(v[0], true)
+                    f1 = _get_formatter(v[0], false)
                     f2 = _get_formatter(v[1], false)
-                    f3 = _get_formatter(v[1], true)
+                    f3 = _get_formatter(v[1], false)
                     f4 = _get_formatter(v[2], false)
                 }
                 let col1 = f1.format(v[0])
@@ -172,8 +172,8 @@ function render_data_depth_chart(coin_or_token) {
 
                 $(`#orders_${j[0]} tbody`).after(
                     '<tr>' +
-                    '<td style="text-align: right; background-color: ' + j[1] + ';">' + col1 + '</td>' +
-                    '<td style="text-align: right; background-color: ' + j[1] + ';">' +
+                    '<td class="' + j[1] + '">' + col1 + '</td>' +
+                    '<td class="' + j[1] + '">' +
                     '<div style="background-color: ' + j[2] + '; width: ' + col3 + '%;">' + col2 + '</div>' +
                     '</td></tr>'
                 );
