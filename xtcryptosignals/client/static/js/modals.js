@@ -5,6 +5,11 @@ function open_modal(m, id=undefined) {
 
     const _m = m.replace('#', '#modal_');
 
+    const input_selector = `${_m} :input`
+
+    // disable input elements by default
+    $(input_selector).prop("disabled", true);
+
     if (m === '#info') {
         $(_m).on($.modal.OPEN, function (event, modal) {
             $.get('/info', function (data) {
@@ -101,4 +106,7 @@ function open_modal(m, id=undefined) {
     $(_m).modal();
 
     window.location.hash = m;
+
+    // enable input elements
+    $(input_selector).prop("disabled", false);
 }
