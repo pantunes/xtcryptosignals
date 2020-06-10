@@ -35,6 +35,9 @@ class ConfigProduction(Config):
 
     SESSION_PROTECTION = "strong"
 
+    SESSION_COOKIE_SECURE = True
+    REMEMBER_COOKIE_SECURE = True
+
 
 class ConfigDevelopment(Config):
     DEBUG = True
@@ -44,6 +47,9 @@ class ConfigDevelopment(Config):
     PERMANENT_SESSION_LIFETIME = timedelta(minutes=30)
 
     SESSION_PROTECTION = "basic"
+
+    SESSION_COOKIE_SECURE = False
+    REMEMBER_COOKIE_SECURE = False
 
 
 class ConfigDocker(ConfigDevelopment):

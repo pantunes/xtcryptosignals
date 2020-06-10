@@ -36,13 +36,9 @@ class Config(object):
 class ConfigProduction(Config):
     DEBUG = False
 
-    SESSION_COOKIE_SECURE = True
-
 
 class ConfigDevelopment(Config):
     DEBUG = True
-
-    SESSION_COOKIE_SECURE = False
 
     SWAGGER = {
         "info": {
