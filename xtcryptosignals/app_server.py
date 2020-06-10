@@ -9,7 +9,6 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import click
-from flasgger import Swagger
 from xtcryptosignals.server import create_app, socketio
 
 
@@ -27,8 +26,6 @@ def main(port):
     """
     Start RESTFul API and socketIO servers.
     """
-    Swagger(app)
-
     socketio.run(
         app=app,
         debug=app.config["DEBUG"],

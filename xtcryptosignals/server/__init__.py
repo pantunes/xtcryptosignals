@@ -11,6 +11,7 @@ __email__ = "pjmlantunes@gmail.com"
 from flask import Flask
 from flask_session import Session
 from flask_socketio import SocketIO
+from flasgger import Swagger
 from mongoengine import connect
 
 
@@ -76,5 +77,8 @@ def create_app():
         message_queue=app.config["BROKER_URL"],
         cors_allowed_origins=app.config["CORS_ALLOWED_ORIGINS"],
     )
+
+    if app.config["SWAGGER"]:
+        Swagger(app)
 
     return app

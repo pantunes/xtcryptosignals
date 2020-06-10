@@ -32,6 +32,8 @@ class Config(object):
 
     CORS_ALLOWED_ORIGINS = None
 
+    SWAGGER = None
+
 
 class ConfigProduction(Config):
     DEBUG = False
