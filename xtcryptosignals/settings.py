@@ -65,6 +65,10 @@ __all__ = [
     "EXCHANGES",
     "SYMBOLS_PER_EXCHANGE",
     "EXCHANGES_AND_PAIRS_OF_REFERENCE",
+    "TICKER_SCHEDULE",
+    "HISTORY_FREQUENCY",
+    "PRICE_CHANGE_FREQUENCIES",
+    # exchanges
     "BINANCE",
     "BINANCE_DEX",
     "UPHOLD",
@@ -82,8 +86,5 @@ __all__ = [
     "BITSTAMP",
     "KUCOIN",
     "COINBASE_PRO",
-    "TICKER_SCHEDULE",
-    "HISTORY_FREQUENCY",
-    "PRICE_CHANGE_FREQUENCIES",
     "LIQUID",
 ]

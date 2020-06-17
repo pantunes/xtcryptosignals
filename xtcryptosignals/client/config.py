@@ -23,7 +23,7 @@ class Config(object):
     SERVER_API_BASE_URL = "http://127.0.0.1:5000/"
 
     SESSION_COOKIE_HTTPONLY = True
-    SESSION_COOKIE_SAMESITE = 'Lax'
+    SESSION_COOKIE_SAMESITE = "Lax"
 
     CFGI_MIN = "1d"
     CFGI_MAX = "12w"

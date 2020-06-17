@@ -210,6 +210,10 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
     "EWT": {"pair": "ETH", "name": LIQUID,},
 }
 
-# TODO
-# Checks EXCHANGES_AND_PAIRS_OF_REFERENCE against SYMBOLS_PER_EXCHANGE
-# to make sure all pairs have an Exchange of reference
+# Check to make sure that ALL configured symbols must have an
+# exchange and pair referenced
+from xtcryptosignals.common.utils import get_coin_tokens  # noqa: E402
+
+assert sorted(get_coin_tokens(SYMBOLS_PER_EXCHANGE)) == sorted(
+    list(EXCHANGES_AND_PAIRS_OF_REFERENCE.keys())
+)

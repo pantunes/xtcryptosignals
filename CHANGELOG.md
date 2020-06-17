@@ -4,7 +4,7 @@ All changes will be registered here per release.
 ## [0.7.0] - Current date
 Improvements in Market Depth UI.  
 Add exchange Liquid and EWT Token.  
-`xt-tasks` service can now be execute the Tasks passed by argument and possible to setup different Celery Queues.  
+`xt-tasks` service can now run the Tasks passed by argument and possible to setup different Celery Queues.  
 Code fixes and improvements.  
 
 ## [0.6.0] - 2020-05-17
