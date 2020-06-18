@@ -5,6 +5,7 @@ All changes will be registered here per release.
 Improvements in Market Depth UI.  
 Add exchange Liquid and EWT Token.  
 `xt-tasks` service can now run the Tasks passed by argument and possible to setup different Celery Queues.  
+Added `KNC`, `LEND` and `REN` Projects/Tokens.
 Code fixes and improvements.  
 
 ## [0.6.0] - 2020-05-17

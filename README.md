@@ -175,6 +175,8 @@ coinbase_pro
 (Drop [me](mailto:pjmlantunes@gmail.com) an e-mail if you want support for a new 
 exchange or please contribute to this project creating a pull request)
 
+Example of a Pull Request to [Add Kyber Netork, Aave and Ren Projects/Tokens](https://github.com/pantunes/xtcryptosignals/commit/95e1ec9cda86e5b457343163068ad164f8df81aa).
+
 Command line help:
 ```bash
 xt-tasks --help
