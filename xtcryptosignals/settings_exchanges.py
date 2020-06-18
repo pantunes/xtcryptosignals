@@ -78,6 +78,12 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("LTO", "USDT"),
                 ("LTO", "BTC"),
                 ("LTO", "BNB"),
+                ("REN", "USDT"),
+                ("REN", "BTC"),
+                ("KNC", "USDT"),
+                ("KNC", "BTC"),
+                ("LEND", "USDT"),
+                ("LEND", "BTC"),
             ],
         }
     }
@@ -204,6 +210,9 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
     "HBAR": {"pair": "USDT", "name": BINANCE,},
     "BTMX": {"pair": "USDT", "name": BITMAX,},
     "LTO": {"pair": "USDT", "name": BINANCE,},
+    "KNC": {"pair": "USDT", "name": BINANCE,},
+    "LEND": {"pair": "USDT", "name": BINANCE,},
+    "REN": {"pair": "USDT", "name": BINANCE,},
     "IDEX": {"pair": "ETH", "name": IDEX,},
     "LQD": {"pair": "ETH", "name": BILAXY,},
     "CARD": {"pair": "ETH", "name": HOTBIT,},
