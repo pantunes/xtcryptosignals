@@ -8,21 +8,15 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import requests
+from idex.client import Client
+from xtcryptosignals.tasks import settings as s
 
 
 class Idex:
     def __init__(self):
-        self.base_url = "https://api.idex.market/returnTicker"
+        self.client = Client(s.IDEX_API_KEY, s.IDEX_ADDRESS, s.IDEX_PRIVATE_KEY)
 
     def get_ticker(self, symbol):
-        request = requests.post(
-            self.base_url, json={"market": "_".join(reversed(symbol))}
-        )
-        if request.status_code != 200:
-            raise ValueError(
-                "Error connecting IDEX on URL: {}".format(self.base_url)
-            )
-        item = request.json()
+        item = self.client.get_ticker("_".join(reversed(symbol)))
         item.update(symbol="".join(symbol), ticker=symbol[0])
         return item

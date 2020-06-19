@@ -14,29 +14,67 @@ from celery import states
 from billiard.context import Process
 from flask_socketio import SocketIO
 from xtcryptosignals.tasks.celeryconfig import BROKER_URL
-from binance.client import Client
+from binance.client import Client as BinanceClient
+from idex.client import Client as IdexClient
 from xtcryptosignals.tasks.ticker import _terminate_running_jobs
 from xtcryptosignals.tasks import settings as s
+
+
+ORDER_BOOK_BINANCE_LIMIT = 100
+ORDER_BOOK_BINANCE_OFFSET = int(ORDER_BOOK_BINANCE_LIMIT / 10)
+
+ORDER_BOOK_IDEX_LIMIT = 100
+ORDER_BOOK_IDEX_OFFSET = int(ORDER_BOOK_IDEX_LIMIT / 10)
 
 
 socketio = SocketIO(message_queue=BROKER_URL)
 
 
-def _get_intervals(k, _order_book, totals):
-    n = 10
+def _get_intervals(k, _order_book, totals, offset):
     _intervals = []
     a, b = (0, -1) if k == "asks" else (-1, 0)
-    for x in [_order_book[i : i + n] for i in range(0, len(_order_book), n)]:
+    for x in [
+        _order_book[i : i + offset] for i in range(0, len(_order_book), offset)
+    ]:
         v = x[-1][-2]
         _intervals.append([x[a][0], x[b][0], v, int((v / totals[k]) * 100)])
     return _intervals
 
 
-def _process(logger, symbol):
-    client = Client(s.BINANCE_API_KEY, s.BINANCE_API_SECRET)
+def _process_idex(_, symbol):
+    client = IdexClient(s.IDEX_API_KEY, s.IDEX_ADDRESS, s.IDEX_PRIVATE_KEY)
 
-    order_book = client.get_order_book(symbol=symbol)
+    order_book = client.get_order_book(
+        market="_".join(reversed(symbol)), count=100
+    )
 
+    _order_book = {
+        "asks": [],
+        "bids": [],
+    }
+
+    for x in (
+        "asks",
+        "bids",
+    ):
+        for xx in order_book[x]:
+            _order_book[x].append([xx["price"], xx["amount"]])
+
+    _process("{}{}".format(*symbol), _order_book, offset=ORDER_BOOK_IDEX_OFFSET)
+
+
+def _process_binance(_, symbol):
+    client = BinanceClient(s.BINANCE_API_KEY, s.BINANCE_API_SECRET)
+
+    _symbol = "{}{}".format(*symbol)
+    order_book = client.get_order_book(
+        symbol=_symbol, limit=ORDER_BOOK_BINANCE_LIMIT
+    )
+
+    _process(_symbol, order_book, offset=ORDER_BOOK_BINANCE_OFFSET)
+
+
+def _process(symbol, order_book, offset):
     _order_book = {
         "asks": [],
         "bids": [],
@@ -74,7 +112,7 @@ def _process(logger, symbol):
     ):
         xx = f"{x}_cumulative"
         _order_book[f"intervals_{xx}"] = _get_intervals(
-            x, _order_book[xx], totals
+            x, _order_book[xx], totals, offset=offset
         )
 
     _order_book["bids_cumulative"] = [
@@ -90,19 +128,28 @@ def update(self):
     jobs = []
 
     try:
-        for coin_or_token, quote in s.SYMBOLS_PER_EXCHANGE[0][s.BINANCE][
-            "pairs"
-        ]:
-            symbol = coin_or_token + quote
+        for exchange, i in (
+            (s.BINANCE, 0),
+            (s.IDEX, 7),
+        ):
 
-            p = Process(name=symbol, target=_process, args=(logger, symbol,),)
+            for coin_or_token, quote in s.SYMBOLS_PER_EXCHANGE[i][exchange][
+                "pairs"
+            ]:
+                _method = globals()[f"_process_{exchange}"]
 
-            jobs.append(dict(job=p, timeout=s.ORDER_BOOK))
+                p = Process(
+                    name=f"{coin_or_token}-{quote}",
+                    target=_method,
+                    args=(logger, (coin_or_token, quote,),),
+                )
 
-            p.start()
+                jobs.append(dict(job=p, timeout=s.ORDER_BOOK))
 
-        for j in jobs:
-            j["job"].join(timeout=j["timeout"])
+                p.start()
+
+            for j in jobs:
+                j["job"].join(timeout=j["timeout"])
 
     except Exception as error:
         _terminate_running_jobs(logger, jobs)
