@@ -20,7 +20,7 @@ from xtcryptosignals.tasks.ticker import _terminate_running_jobs
 from xtcryptosignals.tasks import settings as s
 
 
-ORDER_BOOK_BINANCE_LIMIT = 500
+ORDER_BOOK_BINANCE_LIMIT = 100
 ORDER_BOOK_BINANCE_OFFSET = int(ORDER_BOOK_BINANCE_LIMIT / 10)
 
 ORDER_BOOK_IDEX_LIMIT = 100
