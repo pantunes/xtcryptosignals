@@ -72,7 +72,7 @@ class History(DocumentValidation):
                 pc = (float(self.price) - price_change) / price_change
                 # return 0.0 if -0.0
                 e[f"price_change_{x}"] = round((pc * 100) + 0.0, 2)
-            except TypeError:
+            except (TypeError, ZeroDivisionError):
                 e[f"price_change_{x}"] = None
         return e
 
