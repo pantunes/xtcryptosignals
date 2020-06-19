@@ -9,4 +9,4 @@ __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
-__version__ = "0.7.0-rc"
+__version__ = "0.7.0"
