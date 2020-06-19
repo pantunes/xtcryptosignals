@@ -129,7 +129,7 @@ def update(self):
 
     try:
         for exchange, i in (
-            # (s.BINANCE, 0),
+            (s.BINANCE, 0),
             (s.IDEX, 7),
         ):
 
