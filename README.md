@@ -351,6 +351,6 @@ This project is licensed under the [GNU](https://www.gnu.org/licenses/gpl-3.0.en
 Through the website [xtcryptosignals.com](https://xtcryptosignals.com/#contact).  
 
 ## Acknowledgments
-
+![Jetbrains](xtcryptosignals/client/static/imgs/readme/jetbrains.png)  
 Thanks to [Jetbrains](https://www.jetbrains.com/?from=xtcryptosignals) in order to 
 support us with an Open Source license.
