@@ -188,11 +188,13 @@ function render_data_depth_chart(coin_or_token) {
     })
 </script>
 
+{% if reference['market_depth'] %}
+
 <div class="row">
     <div class="twelve columns" id="row_chart_depth_{{ coin_or_token }}" style="display: none;">
         <div id="chart_depth_{{ coin_or_token }}" style="min-width: 310px; max-width: 1048px; height: 560px; margin: 0 auto;"></div>
         <p class="highcharts-description" style="font-size:small">
-            <b>Source:</b> {{ reference['name']|capitalize }}, <b>Pair:</b> {{ coin_or_token }}/{{ reference['pair'] }}
+            <b>Source:</b> {{ reference['market_depth']|capitalize }}, <b>Pair:</b> {{ coin_or_token }}/{{ reference['pair'] }}
         </p>
         <br/><br/>
     </div>
@@ -244,5 +246,7 @@ function render_data_depth_chart(coin_or_token) {
 </div>
 
 <b>Source:</b> {{ reference['name']|capitalize }}, <b>Pair:</b> {{ coin_or_token }}/{{ reference['pair'] }}
+
+{% endif %}
 
 {% endblock %}
