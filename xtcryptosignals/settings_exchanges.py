@@ -131,7 +131,16 @@ SYMBOLS_PER_EXCHANGE.append(
 
 # IDEX
 SYMBOLS_PER_EXCHANGE.append(
-    {IDEX: {"pairs": [("LTO", "ETH"), ("LQD", "ETH"), ("IDEX", "ETH"),]}}
+    {
+        IDEX: {
+            "pairs": [
+                ("LTO", "ETH"),
+                ("LQD", "ETH"),
+                ("IDEX", "ETH"),
+                ("CARD", "ETH"),
+            ]
+        }
+    }
 )
 
 # OKCoin

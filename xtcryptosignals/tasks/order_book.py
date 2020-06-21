@@ -128,28 +128,28 @@ def update(self):
     jobs = []
 
     try:
-        for exchange, i in (
-            (s.BINANCE, 0),
-            (s.IDEX, 7),
-        ):
+        for coin_or_token, struct in s.EXCHANGES_AND_PAIRS_OF_REFERENCE.items():
 
-            for coin_or_token, quote in s.SYMBOLS_PER_EXCHANGE[i][exchange][
-                "pairs"
-            ]:
-                _method = globals()[f"_process_{exchange}"]
+            quote = struct["pair"]
+            if "market_depth" not in struct:
+                continue
 
-                p = Process(
-                    name=f"{coin_or_token}-{quote}",
-                    target=_method,
-                    args=(logger, (coin_or_token, quote,),),
-                )
+            exchange = struct["market_depth"]
 
-                jobs.append(dict(job=p, timeout=s.ORDER_BOOK))
+            _method = globals()[f"_process_{exchange}"]
 
-                p.start()
+            p = Process(
+                name=f"{coin_or_token}-{quote}",
+                target=_method,
+                args=(logger, (coin_or_token, quote,),),
+            )
 
-            for j in jobs:
-                j["job"].join(timeout=j["timeout"])
+            jobs.append(dict(job=p, timeout=s.ORDER_BOOK))
+
+            p.start()
+
+        for j in jobs:
+            j["job"].join(timeout=j["timeout"])
 
     except Exception as error:
         _terminate_running_jobs(logger, jobs)
