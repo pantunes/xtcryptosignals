@@ -82,9 +82,9 @@
 <script type="text/javascript">
 $(document).ready(function() {
     get_chart_coin_or_token_data(
-        render_data_charts, '{{ coin_or_token }}', "{{ reference['pair'] }}", '{{ frequency }}'
+        render_data_charts, '{{ coin_or_token }}', '{{ reference['pair'] }}', '{{ frequency }}'
     );
-    render_data_depth_chart('{{ coin_or_token }}');
+    render_data_depth_chart('{{ coin_or_token }}', '{{ reference['pair'] }}');
 });
 </script>
 
@@ -98,9 +98,9 @@ function post_ticker_emit(id, json) {
 
 <script type="text/javascript">
 let chart;
-function render_data_depth_chart(coin_or_token) {
+function render_data_depth_chart(coin_or_token, quote) {
     const chart_id = `chart_depth_${coin_or_token}`
-    chart = create_chart_depth(chart_id, num_formatter, coin_or_token);
+    chart = create_chart_depth(chart_id, num_formatter_low_values, coin_or_token, quote);
     charts.push(chart);
     setChartTheme([chart]);
     $('#row_' + chart_id).show();

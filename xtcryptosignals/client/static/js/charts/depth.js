@@ -1,4 +1,4 @@
-function create_chart_depth(chart_id, num_formatter, coin_or_token) {
+function create_chart_depth(chart_id, num_formatter, coin_or_token, quote) {
     return Highcharts.chart(chart_id, {
         chart: {
             type: 'area',
@@ -32,7 +32,7 @@ function create_chart_depth(chart_id, num_formatter, coin_or_token) {
                 }
             }],
             title: {
-                text: 'Price (USDT)'
+                text: `Price (${quote})`
             }
         },
         yAxis: [{
@@ -77,7 +77,7 @@ function create_chart_depth(chart_id, num_formatter, coin_or_token) {
                 return '<span style="color:' + this.color + '">\u25CF</span> ' +
                     this.series.name + ': <b>' + num_formatter.format(this.y) + ' ' + coin_or_token + '</b><br/>' +
                     '<span style="color:' + this.color + '">\u25CF</span> ' +
-                    'Price: <b>' + num_formatter.format(this.x) + ' USDT</b><br/>';
+                    'Price: <b>' + num_formatter.format(this.x) + ' ' + quote + '</b><br/>';
             }
         },
         series: [{
