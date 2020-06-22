@@ -90,9 +90,12 @@ $(document).ready(function() {
 
 <script type="text/javascript">
 function post_ticker_emit(id, json) {
-    _post_and_get_ticker_emit(
+    const ticker = _post_and_get_ticker_emit(
         id, json, '{{ reference["name"] }}', '{{ reference["pair"] }}', '{{ coin_or_token }}'
     );
+    if (ticker !== undefined) {
+        document.title = `${json["price"]} ${json["symbol"]} - XTCryptoSignals`;
+    }
 }
 </script>
 
