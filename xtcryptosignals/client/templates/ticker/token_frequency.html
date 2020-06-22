@@ -94,7 +94,9 @@ function post_ticker_emit(id, json) {
         id, json, '{{ reference["name"] }}', '{{ reference["pair"] }}', '{{ coin_or_token }}'
     );
     if (ticker !== undefined) {
-        document.title = `${json["price"]} ${json["symbol"]} - XTCryptoSignals`;
+        const p = _get_formatter(json["price"], false)
+        const val = p.format(json["price"])
+        document.title = `${val} ${json["symbol"]} - XTCryptoSignals`;
     }
 }
 </script>
