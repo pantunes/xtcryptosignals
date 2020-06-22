@@ -130,10 +130,10 @@ def update(self):
     try:
         for coin_or_token, struct in s.EXCHANGES_AND_PAIRS_OF_REFERENCE.items():
 
-            quote = struct["pair"]
             if "market_depth" not in struct:
                 continue
 
+            quote = struct["pair"]
             exchange = struct["market_depth"]
 
             _method = globals()[f"_process_{exchange}"]
