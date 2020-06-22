@@ -34,6 +34,7 @@ function post_ticker_emit(id, json) {
             if (x === 'price_usdt') {
                 const p = _get_formatter(json[x], false)
                 val = p.format(json[x])
+                document.title = `${val} ${json["symbol"]} - XTCryptoSignals`;
             }
             $(`#${x}`).html(val);
         }
