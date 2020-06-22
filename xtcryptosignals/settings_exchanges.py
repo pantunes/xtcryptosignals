@@ -77,7 +77,6 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("HBAR", "BTC"),
                 ("LTO", "USDT"),
                 ("LTO", "BTC"),
-                ("LTO", "BNB"),
                 ("FTM", "USDT"),
                 ("FTM", "BTC"),
                 ("REN", "USDT"),
