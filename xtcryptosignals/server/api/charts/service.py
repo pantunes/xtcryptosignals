@@ -89,7 +89,9 @@ def get_chart_coin_or_token_frequency(coin_or_token, frequency):
     volumes.reverse()
     num_trades.reverse()
 
-    return dict(prices=prices, volumes=volumes, num_trades=num_trades,)
+    return dict(
+        prices=prices, volumes=volumes, num_trades=num_trades, quote="USDT"
+    )
 
 
 def _normalize_ts(ts, frequency):

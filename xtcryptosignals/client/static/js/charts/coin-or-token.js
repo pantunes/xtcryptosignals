@@ -1,6 +1,12 @@
 function create_chart_coin_or_token(
     chart_id, dyn_formatter, price_volume_formatter, num_formatter, data, coin_or_token, quote, frequency
 ) {
+
+      let titleTxt = `Price (${data["quote"]})`
+      if (data["quote"] !== quote) {
+          titleTxt = `Price (converted to ${data["quote"]})`
+      }
+
       return Highcharts.chart(chart_id, {
         chart: {
             zoomType: 'x',
@@ -39,7 +45,7 @@ function create_chart_coin_or_token(
                 }
             },
             title: {
-                text: 'Price (USDT)',
+                text: titleTxt,
                 style: {
                     color: Highcharts.getOptions().colors[0]
                 },
@@ -49,7 +55,7 @@ function create_chart_coin_or_token(
             }
         }, {
             labels: {
-                format: '{value}' + quote,
+                format: '{value}' + data["quote"],
                 style: {
                     color: Highcharts.getOptions().colors[1]
                 },
@@ -131,7 +137,7 @@ function create_chart_coin_or_token(
             tooltip: {
                 pointFormatter: function() {
                     return '<span style="color:' + this.color + '">\u25CF</span> ' +
-                        this.series.name + ': <b>' + dyn_formatter.format(this.y)  + ' USDT</b><br/>';
+                        this.series.name + ': <b>' + dyn_formatter.format(this.y)  + ' ' + data["quote"] + '</b><br/>';
                 }
             },
             marker: {
