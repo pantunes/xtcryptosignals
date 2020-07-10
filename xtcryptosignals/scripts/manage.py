@@ -30,6 +30,8 @@ def main(operation):
             "server.prod.env",
             "client.dev.env",
             "server.dev.env",
+            "client.docker.env",
+            "server.docker.env",
         ):
             filepath_source = os.path.join(SCRIPT_PATH, "../config", x)
             filepath_dest = os.path.join(os.getcwd(), "config", x)
