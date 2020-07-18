@@ -56,6 +56,7 @@ def before_request():
 def context_processor():
     return dict(
         socket_base_url=current_app.config["SOCKET_BASE_URL"],
+        socket_path=current_app.config["SOCKET_PATH"],
         version=__version__,
         ga_tracking_id=current_app.config["GA_TRACKING_ID"],
         current_year=datetime.utcnow().year,

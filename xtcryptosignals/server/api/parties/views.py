@@ -36,7 +36,10 @@ class FearAndGreedIndex(Resource):
             200:
                 description: Returns Crypto Fear & Greed Index
         """
-        return dict(cfgi=int(red.get(s.REDIS_CFGI)))
+        try:
+            return dict(cfgi=int(red.get(s.REDIS_CFGI)))
+        except TypeError:
+            pass
 
 
 api.add_resource(FearAndGreedIndex, "/parties/cfgi")

@@ -28,7 +28,7 @@ app.config.from_envvar("SETTINGS_APP")
 
 
 sess = Session()
-socketio = SocketIO()
+socketio = SocketIO(path=app.config["SOCKET_PATH"])
 
 
 def create_app():

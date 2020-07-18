@@ -186,7 +186,11 @@ function render_data_depth_chart(coin_or_token, quote) {
         }
     }
 
-    const socket2 = io('{{socket_base_url}}order_book/{{ coin_or_token }}{{ reference['pair'] }}');
+    let socket2_options = {}
+    if ("/socket.io" !== "{{ socket_path }}") {
+        socket2_options = {forceNew: true, path: '{{ socket_path }}'}
+    }
+    const socket2 = io('{{socket_base_url}}order_book/{{ coin_or_token }}{{ reference['pair'] }}', socket2_options);
     socket2.on('order_book', function(json) {
         reload_chart(json)
         reload_orders(json)
