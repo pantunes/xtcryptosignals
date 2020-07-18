@@ -186,7 +186,7 @@ function render_data_depth_chart(coin_or_token, quote) {
         }
     }
 
-    const socket2 = io('{{socket_base_url}}order_book/{{ coin_or_token }}{{ reference['pair'] }}');
+    const socket2 = io('{{socket_books_url}}order_book/{{ coin_or_token }}{{ reference['pair'] }}');
     socket2.on('order_book', function(json) {
         reload_chart(json)
         reload_orders(json)
