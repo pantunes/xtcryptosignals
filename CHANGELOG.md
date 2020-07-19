@@ -2,8 +2,9 @@
 All changes will be registered here per release.
 
 ## [0.8.0] - Current date
-Add `Fantom` Project and `FTM` Token.  
-Add `Chainlink` Project and `LINK` Token.  
+Added `Fantom` Project and `FTM` Token.  
+Added `Chainlink` Project and `LINK` Token.  
+Added nginx configuration examples.  
 
 ## [0.7.0] - 2020-06-19
 Improvements in Market Depth UI.  
