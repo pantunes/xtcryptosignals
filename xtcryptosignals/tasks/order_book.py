@@ -144,7 +144,7 @@ def update(self):
                 args=(logger, (coin_or_token, quote,),),
             )
 
-            jobs.append(dict(job=p, timeout=s.ORDER_BOOK))
+            jobs.append(dict(job=p, timeout=s.TIMEOUT_ORDER_BOOK))
 
             p.start()
 

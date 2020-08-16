@@ -61,6 +61,6 @@ CELERYBEAT_SCHEDULE = {
     },
     "order_book": {
         "task": "xtcryptosignals.tasks.order_book.update",
-        "schedule": s.ORDER_BOOK,
+        "schedule": s.ORDER_BOOK_SCHEDULE,
     },
 }

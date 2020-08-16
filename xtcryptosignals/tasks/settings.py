@@ -24,9 +24,8 @@ BROKER_URL = env.str("BROKER_URL")
 
 CREATE_MODEL_TICKER = env.bool("CREATE_MODEL_TICKER")
 
-TIMEOUT_PER_SYMBOL_REQUEST = 2.0  # in seconds
-TIMEOUT_PER_SYMBOLS_REQUEST = 5.0  # in seconds
-ORDER_BOOK = 3.0  # in seconds
+ORDER_BOOK_SCHEDULE = 3.0  # executed each X seconds
+TIMEOUT_ORDER_BOOK = ORDER_BOOK_SCHEDULE * 0.8
 
 SYMBOL_FLOAT_PRECISION = 8
 PRICES_CHANGE_CHART_SIZE = 12
@@ -45,3 +44,6 @@ STATIC_COINS_TOKENS_LOGOS_FOLDER = "/static/imgs/logos/"
 
 from xtcryptosignals.settings import *  # noqa
 from xtcryptosignals.tasks.settings_local import *  # noqa
+
+TIMEOUT_PER_SYMBOL_REQUEST = TICKER_SCHEDULE * 0.4
+TIMEOUT_PER_SYMBOLS_REQUEST = TICKER_SCHEDULE * 0.8
