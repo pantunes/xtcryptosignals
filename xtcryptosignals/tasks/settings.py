@@ -40,6 +40,9 @@ VAPID_PRIVATE_KEY = env.str("VAPID_PRIVATE_KEY")
 
 ETHERSCAN_API_KEY = env.str("ETHERSCAN_API_KEY")
 
+TELEGRAM_BOT_TOKEN = env.str("TELEGRAM_BOT_TOKEN")
+TELEGRAM_GROUP_CHAT_ID = env.str("TELEGRAM_GROUP_CHAT_ID")
+
 STATIC_COINS_TOKENS_LOGOS_FOLDER = "/static/imgs/logos/"
 
 from xtcryptosignals.settings import *  # noqa

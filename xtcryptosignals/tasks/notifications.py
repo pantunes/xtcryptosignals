@@ -11,6 +11,7 @@ __email__ = "pjmlantunes@gmail.com"
 import json
 import redis
 import hashlib
+import telegram
 from datetime import timedelta
 from celery.task import task
 from celery.exceptions import Ignore
@@ -133,7 +134,9 @@ def update(self):
 
         try:
             try:
-                logger.warning("Sending notif. to {}".format(notif.user.pk))
+                logger.warning(
+                    "Sending web notification to {}".format(notif.user.pk)
+                )
                 webpush(
                     subscription_info=notif.user.metadata["subscription"],
                     data=json.dumps(
@@ -162,7 +165,22 @@ def update(self):
                         extra.message,
                     )
         except Exception as error:
-            logger.error("notifications error: {}".format(str(error)))
+            logger.error("web notification error: {}".format(str(error)))
+            self.update_state(state=states.FAILURE, meta=str(error))
+            raise Ignore()
+        finally:
+            pass
+
+        try:
+            logger.warning("Sending telegram notification")
+            bot = telegram.Bot(token=s.TELEGRAM_BOT_TOKEN)
+            bot.send_message(
+                chat_id=s.TELEGRAM_GROUP_CHAT_ID,
+                text=message,
+                parse_mode=telegram.ParseMode.HTML,
+            )
+        except Exception as error:
+            logger.error("telegram notification error: {}".format(str(error)))
             self.update_state(state=states.FAILURE, meta=str(error))
             raise Ignore()
         finally:

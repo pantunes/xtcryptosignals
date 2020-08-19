@@ -2,6 +2,7 @@
 All changes will be registered here per release.
 
 ## [0.8.0] - Current date
+Added Telegram alerts.  
 Added `Fantom` Project and `FTM` Token.  
 Added `Chainlink` Project and `LINK` Token.  
 Added nginx configuration examples.  

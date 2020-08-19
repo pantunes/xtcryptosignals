@@ -24,6 +24,7 @@ cfscrape
 python-binance
 python-kucoin
 python-idex
+python-telegram-bot
 # versioned library dependencies
 pycryptodome==3.7.0
 marshmallow==2.20.5
