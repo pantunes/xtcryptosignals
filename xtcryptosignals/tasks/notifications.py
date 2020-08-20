@@ -30,6 +30,8 @@ from xtcryptosignals.tasks import settings as s
 
 red = redis.Redis.from_url(s.BROKER_URL)
 
+PATH_LOGOS = f"{os.path.dirname(os.path.realpath(__file__))}/../client/static/imgs/logos/"
+
 
 @task(bind=True)
 @use_mongodb(db=s.MONGODB_NAME, host=s.MONGODB_HOST, port=s.MONGODB_PORT)
@@ -181,8 +183,7 @@ def update(self):
             logger.warning("Sending telegram notification")
             bot = telegram.Bot(token=s.TELEGRAM_BOT_TOKEN)
             with open(
-                f"{os.path.realpath(__file__)}/../client/static/imgs/logos/{obj_history['ticker']}.png",
-                "rb",
+                f"{PATH_LOGOS}{obj_history['ticker']}.png", "rb",
             ) as photo:
                 bot.send_photo(
                     chat_id=s.TELEGRAM_GROUP_CHAT_ID,
