@@ -8,6 +8,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+import os
 import json
 import redis
 import hashlib
@@ -94,7 +95,7 @@ def update(self):
             )
         )
 
-        message = message_templ.format(
+        message_web = message_templ.format(
             ticker=obj_history["ticker"],
             metric=notif.metric.capitalize(),
             direction=direction,
@@ -103,12 +104,14 @@ def update(self):
             price=price,
         )
 
-        key = "{}{}".format(notif.user.pk, message)
+        key = "{}{}".format(notif.user.pk, message_web)
         hash_object = hashlib.md5(key.encode())
         redis_key = hash_object.hexdigest()
 
         if red.get(redis_key):
-            logger.warning("Already sent notif. to {}".format(notif.user.pk))
+            logger.warning(
+                "Already sent notifications to {}".format(notif.user.pk)
+            )
             continue
 
         red.setex(
@@ -117,15 +120,17 @@ def update(self):
             time=timedelta(seconds=convert_to_seconds(notif.interval)),
         )
 
-        notif_kwargs = dict(
-            coin_token=obj_history["ticker"], message=message, user=notif.user,
+        notification_kwargs = dict(
+            coin_token=obj_history["ticker"],
+            message=message_web,
+            user=notif.user,
         )
         if notif.metric == "price":
-            notif_kwargs.update(is_positive=(direction is "up"))
+            notification_kwargs.update(is_positive=(direction is "up"))
 
-        Notification(**notif_kwargs).save()
+        Notification(**notification_kwargs).save()
 
-        message = message.replace(
+        message_web_notification = message_web.replace(
             '<a href="/ticker/source/{ticker}/10s">{ticker}</a>'.format(
                 ticker=obj_history["ticker"]
             ),
@@ -142,13 +147,13 @@ def update(self):
                     data=json.dumps(
                         dict(
                             title="XTCryptoSignals",
-                            message=message,
+                            message=message_web_notification,
                             url="{}/ticker/{symbol}/{frequency}".format(
                                 s.WEBSITE_ADDRESS, **obj_history
                             ),
                             icon="{}{ticker}.png".format(
                                 s.STATIC_COINS_TOKENS_LOGOS_FOLDER,
-                                **obj_history
+                                **obj_history,
                             ),
                         )
                     ),
@@ -171,14 +176,20 @@ def update(self):
         finally:
             pass
 
+        heart = "💚" if direction is "up" else "❤️"
         try:
             logger.warning("Sending telegram notification")
             bot = telegram.Bot(token=s.TELEGRAM_BOT_TOKEN)
-            bot.send_message(
-                chat_id=s.TELEGRAM_GROUP_CHAT_ID,
-                text=message,
-                parse_mode=telegram.ParseMode.HTML,
-            )
+            with open(
+                f"{os.path.realpath(__file__)}/../client/static/imgs/logos/{obj_history['ticker']}.png",
+                "rb",
+            ) as photo:
+                bot.send_photo(
+                    chat_id=s.TELEGRAM_GROUP_CHAT_ID,
+                    photo=photo,
+                    caption=f"{heart} {message_web}",
+                    parse_mode=telegram.ParseMode.HTML,
+                )
         except Exception as error:
             logger.error("telegram notification error: {}".format(str(error)))
             self.update_state(state=states.FAILURE, meta=str(error))
