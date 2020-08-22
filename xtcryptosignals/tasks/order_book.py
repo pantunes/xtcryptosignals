@@ -152,7 +152,6 @@ def update(self):
             j["job"].join(timeout=j["timeout"])
 
     except Exception as error:
-        _terminate_running_jobs(logger, jobs)
         logger.error("order_book error: {}".format(str(error)))
         self.update_state(state=states.FAILURE, meta=str(error))
         raise Ignore()
