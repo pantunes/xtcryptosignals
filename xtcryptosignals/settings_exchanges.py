@@ -124,7 +124,6 @@ SYMBOLS_PER_EXCHANGE.append(
             "pairs": [
                 ("LTO", "USDT"),
                 ("LTO", "BTC"),
-                ("LTO", "ETH"),
                 ("BTMX", "USDT"),
             ],
             "single_request": True,
