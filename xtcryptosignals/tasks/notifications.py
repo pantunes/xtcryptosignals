@@ -135,8 +135,7 @@ def update(self):
 
         message_push_notification = message_web.replace(
             '<a href="{domain}/ticker/source/{ticker}/10s">{ticker}</a>'.format(
-                domain=s.WEBSITE_ADDRESS,
-                ticker=obj_history["ticker"]
+                domain=s.WEBSITE_ADDRESS, ticker=obj_history["ticker"]
             ),
             obj_history["ticker"],
         )
@@ -177,8 +176,6 @@ def update(self):
             logger.error("web notification error: {}".format(str(error)))
             self.update_state(state=states.FAILURE, meta=str(error))
             raise Ignore()
-        finally:
-            pass
 
         heart = "💚" if direction is "up" else "❤️"
         try:
@@ -197,5 +194,3 @@ def update(self):
             logger.error("telegram notification error: {}".format(str(error)))
             self.update_state(state=states.FAILURE, meta=str(error))
             raise Ignore()
-        finally:
-            pass

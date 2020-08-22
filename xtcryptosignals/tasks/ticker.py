@@ -19,6 +19,7 @@ from xtcryptosignals.tasks.celeryconfig import BROKER_URL
 from xtcryptosignals.common.utils import use_mongodb
 from xtcryptosignals.tasks.utils import get_class
 from xtcryptosignals.tasks.models.ticker import Ticker
+from xtcryptosignals.tasks.utils import _end_slow_jobs
 from xtcryptosignals.tasks import settings as s
 
 
@@ -81,28 +82,8 @@ def _get_24h_price_ticker_data(
         target=_process,
         args=(logger, socketio, exchange_class, schema_class, symbol, pairs,),
     )
-    jobs.append(
-        dict(
-            job=p,
-            timeout=s.TIMEOUT_PER_SYMBOL_REQUEST
-            if symbol
-            else s.TIMEOUT_PER_SYMBOLS_REQUEST,
-        )
-    )
+    jobs.append(dict(job=p,))
     p.start()
-
-
-def _terminate_running_jobs(logger, jobs):
-    logger.warning("Number of jobs completed: {}".format(len(jobs)))
-    for j in jobs:
-        if j["job"].is_alive():
-            logger.warning(
-                "Exceeded timeout of {} seconds in {}".format(
-                    j["timeout"], j["job"].name
-                )
-            )
-            j["job"].terminate()
-            j["job"].join()
 
 
 @task(bind=True)
@@ -160,16 +141,13 @@ def update(self, *_, **kwargs):
                         **kwargs
                     )
 
-        for j in jobs:
-            j["job"].join(timeout=j["timeout"])
-
     except Exception as error:
-        _terminate_running_jobs(logger, jobs)
+        _end_slow_jobs(logger, jobs, timeout=s.TIMEOUT_TASK)
         logger.error("ticker error: {}".format(str(error)))
         self.update_state(state=states.FAILURE, meta=str(error))
         raise Ignore()
-    finally:
-        _terminate_running_jobs(logger, jobs)
+
+    _end_slow_jobs(logger, jobs, timeout=s.TIMEOUT_TASK)
 
 
 def test(*_, **kwargs):

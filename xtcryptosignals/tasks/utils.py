@@ -8,6 +8,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+import time
 from importlib import import_module
 
 
@@ -42,3 +43,26 @@ def convert_to_seconds(x):
     if _t == "y":
         return year
     raise ValueError("Undefined item: {}".format(x))
+
+
+def _end_slow_jobs(logger, jobs, timeout):
+    logger.warning("Number of jobs added: {}".format(len(jobs)))
+
+    start = time.time()
+
+    while time.time() - start <= timeout:
+        if not any(p.is_alive() for p in jobs):
+            # All the processes are done, break now.
+            break
+
+        time.sleep(0.1)
+    else:
+        for j in jobs:
+            if j["job"].is_alive():
+                logger.warning(
+                    "Exceeded timeout of {} seconds in {}".format(
+                        timeout, j["job"].name
+                    )
+                )
+                j["job"].terminate()
+                j["job"].join()
