@@ -64,13 +64,13 @@ def update(self):
 
         if price < 1:
             message_templ = (
-                '<a href="/ticker/source/{ticker}/10s">{ticker}'
+                '<a href="{domain}/ticker/source/{ticker}/10s">{ticker}'
                 "</a> {metric} is {direction} {change}% within "
                 "{interval}. Current Price is {price:,.4f} USDT."
             )
         else:
             message_templ = (
-                '<a href="/ticker/source/{ticker}/10s">{ticker}'
+                '<a href="{domain}/ticker/source/{ticker}/10s">{ticker}'
                 "</a> {metric} is {direction} {change}% within "
                 "{interval}. Current Price is {price:,.2f} USDT."
             )
@@ -98,6 +98,7 @@ def update(self):
         )
 
         message_web = message_templ.format(
+            domain=s.WEBSITE_ADDRESS,
             ticker=obj_history["ticker"],
             metric=notif.metric.capitalize(),
             direction=direction,
@@ -132,8 +133,9 @@ def update(self):
 
         Notification(**notification_kwargs).save()
 
-        message_web_notification = message_web.replace(
-            '<a href="/ticker/source/{ticker}/10s">{ticker}</a>'.format(
+        message_push_notification = message_web.replace(
+            '<a href="{domain}/ticker/source/{ticker}/10s">{ticker}</a>'.format(
+                domain=s.WEBSITE_ADDRESS,
                 ticker=obj_history["ticker"]
             ),
             obj_history["ticker"],
@@ -149,7 +151,7 @@ def update(self):
                     data=json.dumps(
                         dict(
                             title="XTCryptoSignals",
-                            message=message_web_notification,
+                            message=message_push_notification,
                             url="{}/ticker/{symbol}/{frequency}".format(
                                 s.WEBSITE_ADDRESS, **obj_history
                             ),
