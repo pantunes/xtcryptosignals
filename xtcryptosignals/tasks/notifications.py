@@ -183,7 +183,7 @@ def update(self):
             logger.warning("Sending telegram notification")
             bot = telegram.Bot(token=s.TELEGRAM_BOT_TOKEN)
             with open(
-                f"{PATH_LOGOS}{obj_history['ticker']}.png", "rb",
+                f"{PATH_LOGOS}{obj_history['ticker']}@128.png", "rb",
             ) as photo:
                 bot.send_photo(
                     chat_id=s.TELEGRAM_GROUP_CHAT_ID,
