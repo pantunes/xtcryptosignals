@@ -143,16 +143,13 @@ def update(self):
                 target=_method,
                 args=(logger, (coin_or_token, quote,),),
             )
-
             jobs.append(dict(job=p, timeout=s.TIMEOUT_ORDER_BOOK))
-
             p.start()
 
         for j in jobs:
             j["job"].join(timeout=j["timeout"])
 
     except Exception as error:
-        _terminate_running_jobs(logger, jobs)
         logger.error("order_book error: {}".format(str(error)))
         self.update_state(state=states.FAILURE, meta=str(error))
         raise Ignore()
