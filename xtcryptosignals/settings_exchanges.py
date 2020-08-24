@@ -109,7 +109,7 @@ SYMBOLS_PER_EXCHANGE.append(
 
 # Kucoin
 SYMBOLS_PER_EXCHANGE.append(
-    {KUCOIN: {"pairs": [("BTC", "USDT"), ("ETH", "USDT"),]}}
+    {KUCOIN: {"pairs": [("BTC", "USDT"), ("ETH", "USDT"), ("EWT", "BTC"),]}}
 )
 
 # BIBOX
@@ -121,11 +121,7 @@ SYMBOLS_PER_EXCHANGE.append(
 SYMBOLS_PER_EXCHANGE.append(
     {
         BITMAX: {
-            "pairs": [
-                ("LTO", "USDT"),
-                ("LTO", "BTC"),
-                ("BTMX", "USDT"),
-            ],
+            "pairs": [("LTO", "USDT"), ("LTO", "BTC"), ("BTMX", "USDT"),],
             "single_request": True,
         }
     }

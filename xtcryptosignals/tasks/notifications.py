@@ -135,8 +135,7 @@ def update(self):
 
         message_push_notification = message_web.replace(
             '<a href="{domain}/ticker/source/{ticker}/10s">{ticker}</a>'.format(
-                domain=s.WEBSITE_ADDRESS,
-                ticker=obj_history["ticker"]
+                domain=s.WEBSITE_ADDRESS, ticker=obj_history["ticker"]
             ),
             obj_history["ticker"],
         )
