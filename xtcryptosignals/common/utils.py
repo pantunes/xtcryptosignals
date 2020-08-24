@@ -9,7 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from functools import wraps
-from mongoengine import connect
+from mongoengine import connect, disconnect
 
 
 def use_mongodb(**config_params):
@@ -17,7 +17,8 @@ def use_mongodb(**config_params):
         @wraps(f)
         def wrapper(*args, **kwargs):
             connect(**config_params)
-            return f(*args, **kwargs)
+            f(*args, **kwargs)
+            disconnect()
 
         return wrapper
 
