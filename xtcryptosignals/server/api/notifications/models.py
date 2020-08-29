@@ -32,6 +32,12 @@ class NotificationRule(DocumentValidation):
 
     meta = {
         "collection": "notification_rule",
+        "indexes": [
+            {
+                "fields": ("metric", "interval", "percentage", "user",),
+                "unique": True,
+            }
+        ],
         "ordering": ["coin_token", "created_on"],
     }
 
