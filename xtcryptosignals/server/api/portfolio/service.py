@@ -9,6 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import redis
+import json
 from xtcryptosignals.server.api.transactions.models import Transaction
 from xtcryptosignals.common.utils import get_coin_tokens
 from xtcryptosignals.tasks import settings as s
@@ -38,7 +39,9 @@ def _get_current_price(exchange, coin_token):
         symbol=coin_token + exchange["pair"],
         frequency=s.HISTORY_FREQUENCY[0],
     )
-    price = float(red.get(key))
+    ser_row = red.get(key)
+    deser_row = json.loads(ser_row)
+    price = float(deser_row["price"])
 
     if exchange["pair"] != "USDT":
         key = s.REDIS_KEY_TICKER.format(
@@ -46,7 +49,9 @@ def _get_current_price(exchange, coin_token):
             symbol=exchange["pair"] + "USDT",
             frequency=s.HISTORY_FREQUENCY[0],
         )
-        price_usdt = float(red.get(key))
+        ser_row = red.get(key)
+        deser_row = json.loads(ser_row)
+        price_usdt = float(deser_row["price"])
 
         price = price * price_usdt
 

@@ -42,7 +42,7 @@ def _get_wikipedia_summary(url):
 @use_mongodb(db=s.MONGODB_NAME, host=s.MONGODB_HOST, port=s.MONGODB_PORT)
 def update(self):
     logger = self.get_logger()
-
+    today = date.today()
     try:
         for p in Project.objects:
 
@@ -54,7 +54,7 @@ def update(self):
                 pt = ProjectTwitter(
                     project=p,
                     num_followers=_get_twitter_num_followers(p.twitter),
-                    added_on=date.today(),
+                    added_on=today,
                 )
                 pt.save()
     except Exception as error:

@@ -9,6 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import redis
+import json
 from datetime import datetime, timedelta
 from mongoengine import (
     StringField,
@@ -86,10 +87,11 @@ def _set_history(ticker):
             history_object.price_usdt = ticker["price_usdt"]
 
         if not ticker._exists_row_offset(model_history, offset=x):
-            row = ticker.to_dict()
-            key = s.REDIS_KEY_TICKER.format(**row, frequency=x)
-            red.set(key, row["price"])
             history_object.save()
+            row = history_object.to_dict(frequency=x)
+            key = s.REDIS_KEY_TICKER.format(**row)
+            ser_row = json.dumps(row)
+            red.set(key, ser_row)
         else:
             _set_timestamp(history_object)
 
