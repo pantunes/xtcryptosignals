@@ -38,8 +38,7 @@ class History(DocumentValidation):
     meta = {
         "abstract": True,
         "indexes": [
-            ("symbol", "source",),
-            ("symbol", "source", "-created_on",),
+            {"fields": ("symbol", "source", "-created_on",), "unique": True}
         ],
         "ordering": ["-created_on"],
     }
