@@ -38,7 +38,13 @@ class NotificationRule(DocumentValidation):
                 "unique": True,
             }
         ],
-        "ordering": ["coin_token", "created_on"],
+        "ordering": [
+            "coin_token",
+            "metric",
+            "interval",
+            "percentage",
+            "created_on",
+        ],
     }
 
 
