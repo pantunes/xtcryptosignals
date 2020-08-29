@@ -9,6 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import redis
+import json
 from mongoengine import (
     StringField,
     DecimalField,
@@ -67,7 +68,8 @@ class History(DocumentValidation):
                 source=self.source, symbol=self.symbol, frequency=x,
             )
             try:
-                price_change = float(red.get(key))
+                deser_row = json.loads(red.get(key))
+                price_change = float(deser_row["price"])
                 pc = (float(self.price) - price_change) / price_change
                 # return 0.0 if -0.0
                 e[f"price_change_{x}"] = round((pc * 100) + 0.0, 2)
@@ -77,15 +79,16 @@ class History(DocumentValidation):
 
     @staticmethod
     def get_ticker_data_from_namespace(namespace):
-        model_history = type("History{}".format(namespace[1:]), (History,), {})
         rows = []
         for x in s.SYMBOLS_PER_EXCHANGE:
             for exchange, items in x.items():
                 for symbol in [x[0] + x[1] for x in items["pairs"]]:
-                    row = model_history.objects(
-                        symbol=symbol, source=exchange
-                    ).first()
-                    if not row:
+                    key = s.REDIS_KEY_TICKER.format(
+                        source=exchange, symbol=symbol, frequency=namespace[1:],
+                    )
+                    ser_row = red.get(key)
+                    if not ser_row:
                         continue
-                    rows.append(row.to_dict(frequency=namespace[1:]))
+                    deser_row = json.loads(ser_row)
+                    rows.append(deser_row)
         return rows

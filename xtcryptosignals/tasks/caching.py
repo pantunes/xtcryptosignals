@@ -9,6 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import redis
+import json
 import requests
 from xtcryptosignals.common.utils import use_mongodb
 from xtcryptosignals.tasks.models.history import History
@@ -40,5 +41,6 @@ def prepare_cache():
                         continue
                     row = row.to_dict(frequency=f)
                     key = s.REDIS_KEY_TICKER.format(**row)
-                    red.set(key, row["price"])
+                    ser_row = json.dumps(row)
+                    red.set(key, ser_row)
                     print(f"Caching {key}: {row['price']}")
