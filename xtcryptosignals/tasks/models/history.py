@@ -68,7 +68,8 @@ class History(DocumentValidation):
                 source=self.source, symbol=self.symbol, frequency=x,
             )
             try:
-                deser_row = json.loads(red.get(key))
+                ser_row = red.get(key)
+                deser_row = json.loads(ser_row)
                 price_change = float(deser_row["price"])
                 pc = (float(self.price) - price_change) / price_change
                 # return 0.0 if -0.0

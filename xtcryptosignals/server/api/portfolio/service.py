@@ -24,10 +24,7 @@ def get_exchange_for(coin_token):
 
 def _get_percentage(x, y):
     try:
-        if x >= y:
-            t = 100 - ((y * 100) / x)
-        else:
-            t = -(100 - ((x * 100) / y))
+        t = -(100 - ((x * 100) / y))
         return round(t, 2)
     except ZeroDivisionError:
         return 0.0
