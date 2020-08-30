@@ -1,14 +1,17 @@
 # Changelog
 All changes will be registered here per release.
 
-## [0.8.0] - Current date
+## [0.8.2] - Current date
+Code fixes and improvements. 
+
+## [0.8.1] - 2020-08-23
 Added Telegram alerts.  
 Added `Fantom` Project and `FTM` Token.  
 Added `Chainlink` Project and `LINK` Token.  
 Added nginx configuration examples.  
 Code fixes and improvements. 
 
-## [0.7.0] - 2020-06-19
+## [0.7.0] - 2020-06-20
 Improvements in Market Depth UI.  
 Add exchange `Liquid` and `EWT` Token.  
 `xt-tasks` service can now run the Tasks passed by argument and possible to setup different Celery Queues.  
