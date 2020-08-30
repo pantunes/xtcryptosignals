@@ -34,7 +34,13 @@ class NotificationRule(DocumentValidation):
         "collection": "notification_rule",
         "indexes": [
             {
-                "fields": ("metric", "interval", "percentage", "user",),
+                "fields": (
+                    "coin_token",
+                    "metric",
+                    "interval",
+                    "percentage",
+                    "user",
+                ),
                 "unique": True,
             }
         ],
