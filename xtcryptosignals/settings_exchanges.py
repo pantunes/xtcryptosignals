@@ -201,30 +201,122 @@ SYMBOLS_PER_EXCHANGE.append({SWITCHEO: {"pairs": [], "single_request": True,}})
 
 
 EXCHANGES_AND_PAIRS_OF_REFERENCE = {
-    "BTC": {"pair": "USDT", "name": BINANCE, "market_depth": BINANCE},
-    "ETH": {"pair": "USDT", "name": BINANCE, "market_depth": BINANCE},
-    "LTC": {"pair": "USDT", "name": BINANCE, "market_depth": BINANCE},
-    "BNB": {"pair": "USDT", "name": BINANCE, "market_depth": BINANCE},
-    "XRP": {"pair": "USDT", "name": BINANCE, "market_depth": BINANCE},
-    "XLM": {"pair": "USDT", "name": BINANCE, "market_depth": BINANCE},
-    "XMR": {"pair": "USDT", "name": BINANCE, "market_depth": BINANCE},
-    "ADA": {"pair": "USDT", "name": BINANCE, "market_depth": BINANCE},
-    "VET": {"pair": "USDT", "name": BINANCE, "market_depth": BINANCE},
-    "ICX": {"pair": "USDT", "name": BINANCE, "market_depth": BINANCE},
-    "XTZ": {"pair": "USDT", "name": BINANCE, "market_depth": BINANCE},
-    "NANO": {"pair": "USDT", "name": BINANCE, "market_depth": BINANCE},
-    "ONT": {"pair": "USDT", "name": BINANCE, "market_depth": BINANCE},
-    "LINK": {"pair": "USDT", "name": BINANCE, "market_depth": BINANCE},
-    "HBAR": {"pair": "USDT", "name": BINANCE, "market_depth": BINANCE},
+    "BTC": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+    },
+    "ETH": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
+    "LTC": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+    },
+    "BNB": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+    },
+    "XRP": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+    },
+    "XLM": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+    },
+    "XMR": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+    },
+    "ADA": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+    },
+    "VET": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+    },
+    "ICX": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+    },
+    "XTZ": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+    },
+    "NANO": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+    },
+    "ONT": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+    },
+    "LINK": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
+    "HBAR": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
     "BTMX": {"pair": "USDT", "name": BITMAX,},
-    "LTO": {"pair": "USDT", "name": BINANCE, "market_depth": BINANCE},
-    "FTM": {"pair": "USDT", "name": BINANCE, "market_depth": BINANCE},
-    "KNC": {"pair": "USDT", "name": BINANCE, "market_depth": BINANCE},
-    "LEND": {"pair": "USDT", "name": BINANCE, "market_depth": BINANCE},
-    "REN": {"pair": "USDT", "name": BINANCE, "market_depth": BINANCE},
-    "IDEX": {"pair": "ETH", "name": IDEX, "market_depth": IDEX},
-    "LQD": {"pair": "ETH", "name": BILAXY, "market_depth": IDEX},
-    "CARD": {"pair": "ETH", "name": HOTBIT, "market_depth": IDEX},
+    "LTO": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
+    "FTM": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
+    "KNC": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
+    "LEND": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
+    "REN": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
+    "IDEX": {
+        "pair": "ETH",
+        "name": IDEX,
+        "market_depth": {"exchange": IDEX, "pairs": ["ETH"]},
+    },
+    "LQD": {
+        "pair": "ETH",
+        "name": BILAXY,
+        "market_depth": {"exchange": IDEX, "pairs": ["ETH"]},
+    },
+    "CARD": {
+        "pair": "ETH",
+        "name": HOTBIT,
+        "market_depth": {"exchange": IDEX, "pairs": ["ETH"]},
+    },
     "EWT": {"pair": "ETH", "name": LIQUID,},
 }
 
