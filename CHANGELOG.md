@@ -2,6 +2,7 @@
 All changes will be registered here per release.
 
 ## [0.8.2] - Current date
+Added possibility of having N Market depth Charts per Coin/Token page through configuration.  
 Code fixes and improvements. 
 
 ## [0.8.1] - 2020-08-23
