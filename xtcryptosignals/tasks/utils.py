@@ -42,3 +42,16 @@ def convert_to_seconds(x):
     if _t == "y":
         return year
     raise ValueError("Undefined item: {}".format(x))
+
+
+def terminate_running_jobs(logger, jobs):
+    logger.warning("Number of jobs completed: {}".format(len(jobs)))
+    for j in jobs:
+        if j["job"].is_alive():
+            logger.warning(
+                "Exceeded timeout of {} seconds in {}".format(
+                    j["timeout"], j["job"].name
+                )
+            )
+            j["job"].terminate()
+            j["job"].join()

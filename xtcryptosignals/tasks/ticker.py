@@ -17,7 +17,10 @@ from pymongo.errors import ServerSelectionTimeoutError
 from flask_socketio import SocketIO
 from xtcryptosignals.tasks.celeryconfig import BROKER_URL
 from xtcryptosignals.common.utils import use_mongodb
-from xtcryptosignals.tasks.utils import get_class
+from xtcryptosignals.tasks.utils import (
+    get_class,
+    terminate_running_jobs,
+)
 from xtcryptosignals.tasks.models.ticker import Ticker
 from xtcryptosignals.tasks import settings as s
 
@@ -92,19 +95,6 @@ def _get_24h_price_ticker_data(
     p.start()
 
 
-def _terminate_running_jobs(logger, jobs):
-    logger.warning("Number of jobs completed: {}".format(len(jobs)))
-    for j in jobs:
-        if j["job"].is_alive():
-            logger.warning(
-                "Exceeded timeout of {} seconds in {}".format(
-                    j["timeout"], j["job"].name
-                )
-            )
-            j["job"].terminate()
-            j["job"].join()
-
-
 @task(bind=True)
 def update(self, *_, **kwargs):
     if not kwargs["disable_ticker_messaging"]:
@@ -168,7 +158,7 @@ def update(self, *_, **kwargs):
         self.update_state(state=states.FAILURE, meta=str(error))
         raise Ignore()
     finally:
-        _terminate_running_jobs(logger, jobs)
+        terminate_running_jobs(logger, jobs)
 
 
 def test(*_, **kwargs):

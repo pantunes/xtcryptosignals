@@ -16,7 +16,7 @@ from flask_socketio import SocketIO
 from xtcryptosignals.tasks.celeryconfig import BROKER_URL
 from binance.client import Client as BinanceClient
 from idex.client import Client as IdexClient
-from xtcryptosignals.tasks.ticker import _terminate_running_jobs
+from xtcryptosignals.tasks.utils import terminate_running_jobs
 from xtcryptosignals.tasks import settings as s
 
 
@@ -133,18 +133,20 @@ def update(self):
             if "market_depth" not in struct:
                 continue
 
-            quote = struct["pair"]
-            exchange = struct["market_depth"]
+            md = struct["market_depth"]
+            quotes = md["pairs"]
+            exchange = md["exchange"]
 
             _method = globals()[f"_process_{exchange}"]
 
-            p = Process(
-                name=f"{coin_or_token}-{quote}",
-                target=_method,
-                args=(logger, (coin_or_token, quote,),),
-            )
-            jobs.append(dict(job=p, timeout=s.TIMEOUT_ORDER_BOOK))
-            p.start()
+            for quote in quotes:
+                p = Process(
+                    name=f"{coin_or_token}-{quote}",
+                    target=_method,
+                    args=(logger, (coin_or_token, quote,),),
+                )
+                jobs.append(dict(job=p, timeout=s.TIMEOUT_ORDER_BOOK))
+                p.start()
 
         for j in jobs:
             j["job"].join(timeout=j["timeout"])
@@ -154,4 +156,4 @@ def update(self):
         self.update_state(state=states.FAILURE, meta=str(error))
         raise Ignore()
     finally:
-        _terminate_running_jobs(logger, jobs)
+        terminate_running_jobs(logger, jobs)

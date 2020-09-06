@@ -46,7 +46,7 @@ function create_chart_depth(chart_id, num_formatter, coin_or_token, quote) {
                 x: 8
             },
             title: {
-                text: `Number ${coin_or_token}s`
+                text: `Number ${coin_or_token}`
             }
         }, {
             opposite: true,
