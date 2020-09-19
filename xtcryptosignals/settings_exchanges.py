@@ -87,6 +87,8 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("KNC", "BTC"),
                 ("LEND", "USDT"),
                 ("LEND", "BTC"),
+                ("UNI", "USDT"),
+                ("UNI", "BTC"),
             ],
         }
     }
@@ -298,6 +300,11 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "REN": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
+    "UNI": {
         "pair": "USDT",
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
