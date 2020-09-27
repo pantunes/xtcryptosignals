@@ -111,7 +111,16 @@ SYMBOLS_PER_EXCHANGE.append(
 
 # Kucoin
 SYMBOLS_PER_EXCHANGE.append(
-    {KUCOIN: {"pairs": [("BTC", "USDT"), ("ETH", "USDT"), ("EWT", "BTC"),]}}
+    {
+        KUCOIN: {
+            "pairs": [
+                ("BTC", "USDT"),
+                ("ETH", "USDT"),
+                ("EWT", "BTC"),
+                ("EWT", "USDT"),
+            ]
+        }
+    }
 )
 
 # BIBOX
