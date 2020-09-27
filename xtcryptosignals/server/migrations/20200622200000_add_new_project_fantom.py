@@ -19,6 +19,7 @@ PROJECTS = dict(
         name="Fantom",
         website="https://fantom.foundation",
         twitter="https://twitter.com/FantomFDN",
+        wikipedia=None,
     ),
 )
 

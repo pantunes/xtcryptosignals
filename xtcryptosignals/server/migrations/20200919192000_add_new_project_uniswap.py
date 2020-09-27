@@ -17,8 +17,9 @@ from xtcryptosignals.tasks import settings as s
 PROJECTS = dict(
     UNI=dict(
         name="Uniswap",
-        website="https://uniswap.org/",
+        website="https://uniswap.org",
         twitter="https://twitter.com/uniswapprotocol",
+        wikipedia=None,
     ),
 )
 

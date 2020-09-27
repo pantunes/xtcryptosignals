@@ -19,16 +19,19 @@ PROJECTS = dict(
         name="Kyber Network",
         website="https://kyber.network",
         twitter="https://twitter.com/kybernetwork",
+        wikipedia=None,
     ),
     LEND=dict(
         name="Aave",
         website="https://aave.com",
         twitter="https://twitter.com/aaveaave",
+        wikipedia=None,
     ),
     REN=dict(
         name="Ren",
         website="https://renproject.io",
         twitter="https://twitter.com/renprotocol",
+        wikipedia=None,
     ),
 )
 

@@ -19,6 +19,7 @@ PROJECTS = dict(
         name="Energy Web Token",
         website="https://www.energyweb.org",
         twitter="https://twitter.com/energywebx",
+        wikipedia=None,
     ),
 )
 

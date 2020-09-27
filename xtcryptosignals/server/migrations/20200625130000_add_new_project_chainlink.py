@@ -17,8 +17,9 @@ from xtcryptosignals.tasks import settings as s
 PROJECTS = dict(
     LINK=dict(
         name="Chainlink",
-        website="https://chain.link/",
+        website="https://chain.link",
         twitter="https://twitter.com/chainlink",
+        wikipedia=None,
     ),
 )
 
