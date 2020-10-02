@@ -1,9 +1,14 @@
 # Changelog
 All changes will be registered here per release.
 
-## [0.8.2] - Current date
+## [0.8.3] - Current date
+...
+
+## [0.8.2] - 2020-10-02
 Added possibility of having N Market depth Charts per Coin/Token page through configuration.  
-Code fixes and improvements. 
+Added pair `EWT/USDT`.  
+Client website is compliant with Open Graph Protocol.    
+Code fixes and performance improvements. 
 
 ## [0.8.1] - 2020-08-23
 Added Telegram alerts.  
