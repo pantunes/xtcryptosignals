@@ -60,7 +60,7 @@ def get_user_coin_or_token_favourite(auth, coin_or_token):
             user=auth.user, coin_token=coin_or_token
         )
     except DoesNotExist:
-        raise ValueError("Coin or Token is not in favourites.", 404)
+        raise ValueError("Coin or Token is not in favourites.", 204)
 
 
 def toggle_user_coin_or_token_favourite(auth, coin_or_token):

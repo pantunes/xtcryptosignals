@@ -165,7 +165,7 @@ function toggle_favourite(coin_or_token) {
         $(".fa").toggleClass("fa fa-star").toggleClass("fa fa-star-o")
     })
     .fail(function(xhr, status, error) {
-        if (xhr.status === 408) {
+        if (xhr.status === 401) {
             open_modal('#login');
         }
     });

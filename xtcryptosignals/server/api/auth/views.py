@@ -136,7 +136,7 @@ class UserTokenFavouritesGet(Resource):
     @user_auth()
     def get(self, auth, coin_or_token):
         """
-        Get User favourites coin or token
+        Get User favourite coin or token
         ---
         tags:
             - User
@@ -144,13 +144,13 @@ class UserTokenFavouritesGet(Resource):
             - Bearer: []
         responses:
             200:
-                description: List retrieved successfully
+                description: Favourite Coin/Token saved
+            204:
+                description: Coin/Token not in favourites
             400:
                 description: Error in session validation
             401:
                 description: Unauthorized
-            404:
-                description: Coin/Token not in favourites
             405:
                 description: Coin/Token does not exist
         """
@@ -164,7 +164,7 @@ class UserTokenFavouritesPost(Resource):
     @user_auth()
     def post(self, auth, coin_or_token):
         """
-        Toggle User favourites coin or token
+        Toggle User favourite coin or token
         ---
         tags:
             - User
@@ -191,7 +191,7 @@ class UserTokenFavouritesListGet(Resource):
     @validate_io()
     def get(self):
         """
-        Get User's list of favourites coins and tokens
+        Get User's list of favourite coins and tokens
         ---
         tags:
             - User
