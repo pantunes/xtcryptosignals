@@ -11,6 +11,8 @@ __email__ = "pjmlantunes@gmail.com"
 import secrets
 from mongoengine.errors import DoesNotExist, NotUniqueError
 from xtcryptosignals.server.api.auth.models import Auth
+from xtcryptosignals.server.api.user.models import UserTokenFavourites
+from xtcryptosignals.server.api.projects.models import Project
 from xtcryptosignals.server.api.user.service import get_user
 
 
@@ -46,3 +48,31 @@ def logout(auth):
 def subscription(auth, data):
     auth.user.metadata.update(subscription=data)
     auth.user.save()
+
+
+def get_user_coin_or_token_favourite(auth, coin_or_token):
+    try:
+        Project.objects.get(coin_or_token=coin_or_token)
+    except DoesNotExist:
+        raise ValueError("Coin or Token does not exist.", 405)
+    try:
+        return UserTokenFavourites.objects.get(
+            user=auth.user, coin_token=coin_or_token
+        )
+    except DoesNotExist:
+        raise ValueError("Coin or Token is not in favourites.", 404)
+
+
+def toggle_user_coin_or_token_favourite(auth, coin_or_token):
+    try:
+        coin_or_token = get_user_coin_or_token_favourite(
+            auth=auth, coin_or_token=coin_or_token
+        )
+        coin_or_token.delete()
+    except ValueError as err:
+        error, status = err.args
+        if status == 405:
+            raise ValueError(err)
+        UserTokenFavourites.objects.create(
+            user=auth.user, coin_token=coin_or_token
+        )

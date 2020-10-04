@@ -12,7 +12,11 @@
 
 <div id="summary">
     <div class="row">
-      <h5>{{ project.name.upper() }} <small>({{ coin_or_token }})</small></h5>
+        <h5><a href="javascript:;" onClick="(
+          function() {
+            toggle_favourite('{{ coin_or_token }}');
+            return false;
+        })(); return false;"><span class="fa fa-star-o"></span></a> {{ project.name.upper() }} <small>({{ coin_or_token }})</small></h5>
     {% if project.summary %}
         {{ project.summary|replace('. ', '.<br/>')|replace(project.name + ' ', '<code>' + project.name + '</code> ')|safe }} <a href="{{ project.wikipedia }}">[+]</a>
     {% else %}
@@ -78,6 +82,10 @@
 
 <script src="/static/js/charts/coin-or-token.js" type="text/javascript"></script>
 <script src="/static/js/charts/depth.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    get_favourite("{{ coin_or_token }}");
+</script>
 
 <script type="text/javascript">
 {% if reference['market_depth'] %}

@@ -13,8 +13,11 @@ from mongoengine import (
     BooleanField,
     DictField,
     EmailField,
+    ReferenceField,
 )
 from xtcryptosignals.common.models import DocumentValidation
+from xtcryptosignals.common.utils import get_coin_tokens
+from xtcryptosignals.tasks import settings as s
 
 
 class User(DocumentValidation):
@@ -26,4 +29,16 @@ class User(DocumentValidation):
 
     meta = {
         "collection": "user",
+    }
+
+
+class UserTokenFavourites(DocumentValidation):
+    coin_token = StringField(
+        required=True, choices=get_coin_tokens(s.SYMBOLS_PER_EXCHANGE)
+    )
+    user = ReferenceField(User, required=True)
+
+    meta = {
+        "collection": "user_token_favourites",
+        "indexes": [{"fields": ("coin_token", "user",), "unique": True}],
     }

@@ -20,6 +20,7 @@ from xtcryptosignals.server.api.auth.schemas import (
     AuthSubscriptionInputSchema,
     AuthOutputSchema,
 )
+from xtcryptosignals.tasks import settings as s
 
 
 bp = Blueprint("auth", __name__)
@@ -78,6 +79,8 @@ class LogoutPost(Resource):
         responses:
             200:
                 description: User logged out successfully
+            400:
+                description: Error in session validation
             401:
                 description: Unauthorized
         """
@@ -121,14 +124,88 @@ class SubscriptionPost(Resource):
             200:
                 description: Subscription saved
             400:
-                description: Error in input validation
+                description: Error in session validation
             401:
                 description: Unauthorized
         """
         service.subscription(auth=auth, data=valid_data)
 
 
+class UserTokenFavouritesGet(Resource):
+    @validate_io()
+    @user_auth()
+    def get(self, auth, coin_or_token):
+        """
+        Get User favourites coin or token
+        ---
+        tags:
+            - User
+        security:
+            - Bearer: []
+        responses:
+            200:
+                description: List retrieved successfully
+            400:
+                description: Error in session validation
+            401:
+                description: Unauthorized
+            404:
+                description: Coin/Token not in favourites
+            405:
+                description: Coin/Token does not exist
+        """
+        service.get_user_coin_or_token_favourite(
+            auth=auth, coin_or_token=coin_or_token
+        )
+
+
+class UserTokenFavouritesPost(Resource):
+    @validate_io()
+    @user_auth()
+    def post(self, auth, coin_or_token):
+        """
+        Toggle User favourites coin or token
+        ---
+        tags:
+            - User
+        security:
+            - Bearer: []
+        responses:
+            200:
+                description: Set/Unset done successfully
+            400:
+                description: Error in session validation
+            401:
+                description: Unauthorized
+            404:
+                description: Coin/Token not found
+            405:
+                description: Coin/Token does not exist
+        """
+        return service.toggle_user_coin_or_token_favourite(
+            auth=auth, coin_or_token=coin_or_token
+        )
+
+
+class UserTokenFavouritesListGet(Resource):
+    @validate_io()
+    def get(self):
+        """
+        Get User's list of favourites coins and tokens
+        ---
+        tags:
+            - User
+        responses:
+            200:
+                description: Returns list successfully
+        """
+        return s.EXCHANGES_AND_PAIRS_OF_REFERENCE, 200
+
+
 api.add_resource(LoginPost, "/login")
 api.add_resource(LogoutPost, "/logout")
 api.add_resource(AuthGet, "/auth")
 api.add_resource(SubscriptionPost, "/subscription")
+api.add_resource(UserTokenFavouritesGet, "/favourites/<coin_or_token>")
+api.add_resource(UserTokenFavouritesPost, "/favourites/<coin_or_token>")
+api.add_resource(UserTokenFavouritesListGet, "/favourites")

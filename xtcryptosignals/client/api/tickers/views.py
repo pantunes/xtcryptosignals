@@ -15,6 +15,7 @@ from flask import (
     current_app,
     g,
 )
+from flask_login import login_required
 from xtcryptosignals.client import service
 from xtcryptosignals import __version__
 from xtcryptosignals.client.utils import validate_args
@@ -72,6 +73,31 @@ def ticker(frequency):
     return dict(
         template_name_or_list="ticker/ticker.html",
         symbols_per_exchange=g.SYMBOLS_PER_EXCHANGE,
+        attributes=_COLUMN_ATTRIBUTES,
+        frequency=frequency,
+    )
+
+
+@bp.route("/ticker/tokens/<frequency>")
+@validate_args()
+def ticker_coins_or_tokens(frequency):
+    coins_or_tokens_favourites, _ = service.get_coins_or_tokens_favourites()
+    return dict(
+        template_name_or_list="ticker/ticker_tokens.html",
+        coins_or_tokens_favourites=coins_or_tokens_favourites,
+        attributes=_COLUMN_ATTRIBUTES,
+        frequency=frequency,
+    )
+
+
+@bp.route("/ticker/favourites/<frequency>")
+@login_required
+@validate_args()
+def favourites(frequency):
+    coins_or_tokens_favourites, _ = service.get_coins_or_tokens_favourites()
+    return dict(
+        template_name_or_list="ticker/ticker_favourites.html",
+        coins_or_tokens_favourites=coins_or_tokens_favourites,
         attributes=_COLUMN_ATTRIBUTES,
         frequency=frequency,
     )
