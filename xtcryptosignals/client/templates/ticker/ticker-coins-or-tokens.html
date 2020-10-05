@@ -1,0 +1,55 @@
+{% extends 'ticker/ticker.html' %}
+
+{% block body %}
+
+{% with url_ticker='ticker.ticker_coins_or_tokens', params={} %}
+{% include 'menu.html' %}
+{% endwith %}
+
+<br/>
+<div class="row">
+    <div class="twelve columns">
+
+        <table class="u-full-width">
+        <caption><h5>Coins/Tokens - {{frequency}}</h5></caption>
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th></th>
+                    {% for _, att in attributes.items() %}
+                        <th style="text-align: right;">{{ att }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+
+{% for c, d in coins_or_tokens_favourites.items() %}
+    {% set r = d["pair"] %}
+    {% set exchange = d["name"] %}
+            <tr>
+                <td style="width: 32px; vertical-align: middle;">
+                    <a href="{{url_for('ticker.token_frequency', coin_or_token=c, frequency=frequency)}}">
+                        <img src="/static/imgs/logos/{{c}}.png" alt="{{c}}"/>
+                    </a>
+                </td>
+                <td style="width: 100px;">
+                    <a href="{{url_for('ticker.token_frequency', coin_or_token=c, frequency=frequency)}}">{{c}}</a><br/><small>{{ exchange.upper() }}/{{r}}</small>
+                </td>
+                {% for att, _ in attributes.items() %}
+                    {% set _id = "{}_{}{}_{}_{}".format(exchange.lower(), c.lower(), r.lower(), att, frequency) %}
+                    {% if 'price_change_chart' != att %}
+                        <td style="text-align: right;">
+                            <span id="{{_id}}" style='padding-left: 8px'>-</span>
+                        </td>
+                    {% else %}
+                        <td id="{{_id}}" style="width: 120px;"></td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+{% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

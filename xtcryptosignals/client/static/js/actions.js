@@ -1,4 +1,5 @@
 const menu_options_logged_in = [
+    '#menu_favourites_link',
     '#menu_portfolio_link',
     '#menu_transactions_link',
     '#menu_logout_link',
@@ -6,6 +7,7 @@ const menu_options_logged_in = [
 ];
 
 const urls_logout_to_index = [
+    '/ticker/favourites/10s',
     '/transactions',
     '/portfolio',
     '/notifications',
@@ -148,6 +150,23 @@ function captcha() {
             document.getElementById(x).setAttribute(
                 'src', `data:image/png;base64,${data['captcha']}`
             );
+        }
+    });
+}
+
+function get_favourite(coin_or_token) {
+    $.get('/favourites/' + coin_or_token).done(function(response) {
+        $(".fa").toggleClass("fa fa-star").toggleClass("fa fa-star-o")
+    })
+}
+
+function toggle_favourite(coin_or_token) {
+    $.post('/favourites/' + coin_or_token).done(function(response) {
+        $(".fa").toggleClass("fa fa-star").toggleClass("fa fa-star-o")
+    })
+    .fail(function(xhr, status, error) {
+        if (xhr.status === 401) {
+            open_modal('#login');
         }
     });
 }

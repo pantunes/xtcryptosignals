@@ -5,24 +5,24 @@
   <ul class="navbar-list">
     <li class="navbar-item"><a class="navbar-link" href="/">Home</a></li>
     <li class="navbar-item">
-      <a class="navbar-link" href="javascript:;" data-popover="#pairsNavPopover">Pairs</a>
-      <div id="pairsNavPopover" class="popover">
+      <a class="navbar-link" href="javascript:;" data-popover="#tokensNavPopover">Coins</a>
+      <div id="tokensNavPopover" class="popover">
         <ul class="popover-list">
-{% for p in pairs %}
+{% for t in tokens %}
           <li class="popover-item">
-            <a class="popover-link" href="{{url_for('ticker.pair_frequency', frequency=frequency, pair=p) if p != 'ALL' else url_for('ticker.ticker', frequency=frequency)}}">{{p}}</a>
+            <a class="popover-link" href="{{url_for('ticker.token_frequency', frequency=frequency, coin_or_token=t) if t != 'ALL' else url_for('ticker.ticker_coins_or_tokens', frequency=frequency)}}">&nbsp;&nbsp;{{t}}&nbsp;&nbsp;</a>
           </li>
 {% endfor %}
         </ul>
       </div>
     </li>
     <li class="navbar-item">
-      <a class="navbar-link" href="javascript:;" data-popover="#tokensNavPopover">Tokens</a>
-      <div id="tokensNavPopover" class="popover">
+      <a class="navbar-link" href="javascript:;" data-popover="#pairsNavPopover">Pairs</a>
+      <div id="pairsNavPopover" class="popover">
         <ul class="popover-list">
-{% for t in tokens %}
+{% for p in pairs %}
           <li class="popover-item">
-            <a class="popover-link" href="{{url_for('ticker.token_frequency', frequency=frequency, coin_or_token=t)}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{t}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a class="popover-link" href="{{url_for('ticker.pair_frequency', frequency=frequency, pair=p) if p != 'ALL' else url_for('ticker.ticker', frequency=frequency)}}">{{p}}</a>
           </li>
 {% endfor %}
         </ul>
@@ -50,6 +50,9 @@
           </li>
           <li class="popover-item">
             <a class="popover-link" href="javascript:open_modal('#signup');">{{spaces}}Signup{{spaces}}</a>
+          </li>
+          <li id="menu_favourites_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
+            <a class="popover-link" href="{{url_for('ticker.favourites', frequency='10s')}}">Favourites</a>
           </li>
           <li id="menu_transactions_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
             <a class="popover-link" href="{{url_for('transaction.index')}}">Transactions</a>

@@ -10,6 +10,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 import requests
 from flask import current_app
+from flask_login import current_user
 
 
 def get_history_frequency():
@@ -35,6 +36,16 @@ def get_coins_or_tokens_reference():
         url="{}tokens/reference".format(
             current_app.config["SERVER_API_BASE_URL"]
         ),
+    )
+    return response.json(), response.status_code
+
+
+def get_coins_or_tokens_favourites():
+    response = requests.get(
+        url="{}favourites".format(
+            current_app.config["SERVER_API_BASE_URL"]
+        ),
+        headers=dict(Authorization=current_user.id),
     )
     return response.json(), response.status_code
 

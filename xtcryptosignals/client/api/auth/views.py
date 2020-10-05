@@ -89,3 +89,29 @@ def subscription():
         json=request.get_json(),
     )
     return {}, response.status_code
+
+
+@bp.route("/favourites/<coin_or_token>", methods=["GET"])
+def favourite_get(coin_or_token):
+    if not current_user.is_authenticated:
+        return {}, 401
+    response = requests.get(
+        url="{}favourites/{}".format(
+            current_app.config["SERVER_API_BASE_URL"], coin_or_token
+        ),
+        headers=dict(Authorization=current_user.id),
+    )
+    return response.json(), response.status_code
+
+
+@bp.route("/favourites/<coin_or_token>", methods=["POST"])
+def favourite_toggle(coin_or_token):
+    if not current_user.is_authenticated:
+        return {}, 401
+    response = requests.post(
+        url="{}favourites/{}".format(
+            current_app.config["SERVER_API_BASE_URL"], coin_or_token
+        ),
+        headers=dict(Authorization=current_user.id),
+    )
+    return response.json(), response.status_code

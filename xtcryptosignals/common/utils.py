@@ -19,9 +19,7 @@ def use_mongodb(**config_params):
             connect(**config_params)
             f(*args, **kwargs)
             disconnect()
-
         return wrapper
-
     return decorator
 
 
@@ -40,4 +38,4 @@ def get_coin_tokens(symbols_per_exchange):
         for _, b in i.items():
             for c, _ in b["pairs"]:
                 tokens.add(c)
-    return sorted(tokens)
+    return ["ALL"] + sorted(tokens)
