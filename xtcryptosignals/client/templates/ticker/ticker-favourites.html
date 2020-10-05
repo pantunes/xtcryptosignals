@@ -35,7 +35,7 @@
                     </a>
                 </td>
                 <td style="width: 100px;">
-                    <a href="{{url_for('ticker.pair_frequency', frequency=frequency, pair=c+r)}}">{{c}}</a><br/><small>{{ exchange.upper() }}/{{r}}</small>
+                    <a href="{{url_for('ticker.token_frequency', coin_or_token=c, frequency=frequency)}}">{{c}}</a><br/><small>{{ exchange.upper() }}/{{r}}</small>
                 </td>
                 {% for att, _ in attributes.items() %}
                     {% set _id = "{}_{}{}_{}_{}".format(exchange.lower(), c.lower(), r.lower(), att, frequency) %}

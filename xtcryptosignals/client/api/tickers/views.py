@@ -83,7 +83,7 @@ def ticker(frequency):
 def ticker_coins_or_tokens(frequency):
     coins_or_tokens_favourites, _ = service.get_coins_or_tokens_favourites()
     return dict(
-        template_name_or_list="ticker/ticker_tokens.html",
+        template_name_or_list="ticker/ticker-coins-or-tokens.html",
         coins_or_tokens_favourites=coins_or_tokens_favourites,
         attributes=_COLUMN_ATTRIBUTES,
         frequency=frequency,
@@ -96,7 +96,7 @@ def ticker_coins_or_tokens(frequency):
 def favourites(frequency):
     coins_or_tokens_favourites, _ = service.get_coins_or_tokens_favourites()
     return dict(
-        template_name_or_list="ticker/ticker_favourites.html",
+        template_name_or_list="ticker/ticker-favourites.html",
         coins_or_tokens_favourites=coins_or_tokens_favourites,
         attributes=_COLUMN_ATTRIBUTES,
         frequency=frequency,
@@ -147,7 +147,7 @@ def token_frequency(coin_or_token, frequency):
     project = [x for x in projects if x["coin_or_token"] == coin_or_token][0]
     project_twitter, _ = service.get_project_last_tweet(project["_id"])
     return dict(
-        template_name_or_list="ticker/token_frequency.html",
+        template_name_or_list="ticker/token-frequency.html",
         symbols_per_exchange=x,
         attributes={**{"price_usdt": "Price USDT"}, **_COLUMN_ATTRIBUTES},
         frequency=frequency,

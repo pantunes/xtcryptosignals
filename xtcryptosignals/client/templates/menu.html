@@ -5,12 +5,12 @@
   <ul class="navbar-list">
     <li class="navbar-item"><a class="navbar-link" href="/">Home</a></li>
     <li class="navbar-item">
-      <a class="navbar-link" href="javascript:;" data-popover="#tokensNavPopover">Tokens</a>
+      <a class="navbar-link" href="javascript:;" data-popover="#tokensNavPopover">Coins</a>
       <div id="tokensNavPopover" class="popover">
         <ul class="popover-list">
 {% for t in tokens %}
           <li class="popover-item">
-            <a class="popover-link" href="{{url_for('ticker.token_frequency', frequency=frequency, coin_or_token=t) if t != 'ALL' else url_for('ticker.ticker_coins_or_tokens', frequency=frequency)}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{t}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a class="popover-link" href="{{url_for('ticker.token_frequency', frequency=frequency, coin_or_token=t) if t != 'ALL' else url_for('ticker.ticker_coins_or_tokens', frequency=frequency)}}">&nbsp;&nbsp;{{t}}&nbsp;&nbsp;</a>
           </li>
 {% endfor %}
         </ul>
