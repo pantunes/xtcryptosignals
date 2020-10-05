@@ -20,7 +20,6 @@ from xtcryptosignals.server.api.auth.schemas import (
     AuthSubscriptionInputSchema,
     AuthOutputSchema,
 )
-from xtcryptosignals.tasks import settings as s
 
 
 bp = Blueprint("auth", __name__)
@@ -189,9 +188,10 @@ class UserTokenFavouritesPost(Resource):
 
 class UserTokenFavouritesListGet(Resource):
     @validate_io()
-    def get(self):
+    @user_auth()
+    def get(self, auth):
         """
-        Get User's list of favourite coins and tokens
+        Get User's list of favourite coins or tokens
         ---
         tags:
             - User
@@ -199,7 +199,7 @@ class UserTokenFavouritesListGet(Resource):
             200:
                 description: Returns list successfully
         """
-        return s.EXCHANGES_AND_PAIRS_OF_REFERENCE, 200
+        return service.get_favourites(auth=auth)
 
 
 api.add_resource(LoginPost, "/login")

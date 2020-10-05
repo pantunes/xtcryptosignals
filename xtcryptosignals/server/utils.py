@@ -24,9 +24,7 @@ def user_auth():
                 raise ValueError("Invalid Token Session.", 400)
             auth = service.get_auth_with_token(token=token)
             return f(*args, **kwargs, auth=auth)
-
         return wrapper
-
     return decorator
 
 

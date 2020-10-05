@@ -14,6 +14,7 @@ from xtcryptosignals.server.api.auth.models import Auth
 from xtcryptosignals.server.api.user.models import UserTokenFavourites
 from xtcryptosignals.server.api.projects.models import Project
 from xtcryptosignals.server.api.user.service import get_user
+from xtcryptosignals.tasks import settings as s
 
 
 def get_auth_with_token(token):
@@ -76,3 +77,13 @@ def toggle_user_coin_or_token_favourite(auth, coin_or_token):
         UserTokenFavourites.objects.create(
             user=auth.user, coin_token=coin_or_token
         )
+
+
+def get_favourites(auth):
+    favourites = {}
+    for utfav in UserTokenFavourites.objects(user=auth.user):
+        if utfav.coin_token not in s.EXCHANGES_AND_PAIRS_OF_REFERENCE:
+            continue
+        favourites[utfav.coin_token] = \
+            s.EXCHANGES_AND_PAIRS_OF_REFERENCE[utfav.coin_token]
+    return favourites
