@@ -63,7 +63,7 @@ def context_processor():
         current_year=datetime.utcnow().year,
         frequencies=g.HISTORY_FREQUENCY,
         pairs=get_pairs(g.SYMBOLS_PER_EXCHANGE),
-        tokens=get_coin_tokens(g.SYMBOLS_PER_EXCHANGE),
+        tokens=get_coin_tokens(g.SYMBOLS_PER_EXCHANGE, show_all=True),
     )
 
 

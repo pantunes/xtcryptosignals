@@ -23,19 +23,27 @@ def use_mongodb(**config_params):
     return decorator
 
 
-def get_pairs(symbols_per_exchange):
+def get_pairs(symbols_per_exchange, show_all=True):
     pairs = set()
     for i in symbols_per_exchange:
         for _, b in i.items():
             for c, d in b["pairs"]:
                 pairs.add(c + d)
-    return ["ALL"] + sorted(pairs)
+
+    if show_all:
+        return ["ALL"] + sorted(pairs)
+
+    return sorted(pairs)
 
 
-def get_coin_tokens(symbols_per_exchange):
+def get_coin_tokens(symbols_per_exchange, show_all=False):
     tokens = set()
     for i in symbols_per_exchange:
         for _, b in i.items():
             for c, _ in b["pairs"]:
                 tokens.add(c)
-    return ["ALL"] + sorted(tokens)
+
+    if show_all:
+        return ["ALL"] + sorted(tokens)
+
+    return sorted(tokens)
