@@ -340,6 +340,6 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
 # exchange and pair referenced
 from xtcryptosignals.common.utils import get_coin_tokens  # noqa: E402
 
-assert sorted(get_coin_tokens(SYMBOLS_PER_EXCHANGE)[1:]) == sorted(
+assert get_coin_tokens(SYMBOLS_PER_EXCHANGE) == sorted(
     list(EXCHANGES_AND_PAIRS_OF_REFERENCE.keys())
 )
