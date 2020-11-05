@@ -84,6 +84,7 @@ def get_favourites(auth):
     for utfav in UserTokenFavourites.objects(user=auth.user):
         if utfav.coin_token not in s.EXCHANGES_AND_PAIRS_OF_REFERENCE:
             continue
-        favourites[utfav.coin_token] = \
-            s.EXCHANGES_AND_PAIRS_OF_REFERENCE[utfav.coin_token]
+        favourites[utfav.coin_token] = s.EXCHANGES_AND_PAIRS_OF_REFERENCE[
+            utfav.coin_token
+        ]
     return favourites
