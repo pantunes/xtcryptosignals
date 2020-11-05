@@ -19,7 +19,9 @@ def use_mongodb(**config_params):
             connect(**config_params)
             f(*args, **kwargs)
             disconnect()
+
         return wrapper
+
     return decorator
 
 

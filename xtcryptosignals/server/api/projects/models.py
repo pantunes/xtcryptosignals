@@ -13,12 +13,18 @@ from mongoengine import (
     URLField,
 )
 from xtcryptosignals.common.models import DocumentValidation
+from xtcryptosignals.common.utils import get_coin_tokens
+from xtcryptosignals.tasks import settings as s
 
 
 class Project(DocumentValidation):
     name = StringField(required=True, unique=True)
     summary = StringField()
-    coin_or_token = StringField(required=True, unique=True)
+    coin_or_token = StringField(
+        required=True,
+        unique=True,
+        choices=get_coin_tokens(s.SYMBOLS_PER_EXCHANGE),
+    )
     website = URLField(required=True)
     twitter = URLField(required=True)
     wikipedia = URLField()

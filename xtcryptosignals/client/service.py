@@ -42,9 +42,7 @@ def get_coins_or_tokens_reference():
 
 def get_coins_or_tokens_favourites():
     response = requests.get(
-        url="{}favourites".format(
-            current_app.config["SERVER_API_BASE_URL"]
-        ),
+        url="{}favourites".format(current_app.config["SERVER_API_BASE_URL"]),
         headers=dict(Authorization=current_user.id),
     )
     return response.json(), response.status_code
