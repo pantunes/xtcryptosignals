@@ -4,6 +4,7 @@ All changes will be registered here per release.
 ## [0.8.3] - Current date
 Added Coins/Tokens page.  
 Added feature to list/show/mark Coins/Tokens as favourites.  
+Changed from `LEND` to `AAVE` Token.  
 
 ## [0.8.2] - 2020-10-02
 Added possibility of having N Market depth Charts per Coin/Token page through configuration.  

@@ -138,20 +138,6 @@ SYMBOLS_PER_EXCHANGE.append(
     }
 )
 
-# IDEX
-SYMBOLS_PER_EXCHANGE.append(
-    {
-        IDEX: {
-            "pairs": [
-                ("LTO", "ETH"),
-                ("LQD", "ETH"),
-                ("IDEX", "ETH"),
-                ("CARD", "ETH"),
-            ]
-        }
-    }
-)
-
 # OKCoin
 SYMBOLS_PER_EXCHANGE.append(
     {OKCOIN: {"pairs": [("BTC", "USD"), ("ETH", "USD"), ("LTC", "USD"),]}}
@@ -318,21 +304,8 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
-    "IDEX": {
-        "pair": "ETH",
-        "name": IDEX,
-        "market_depth": {"exchange": IDEX, "pairs": ["ETH"]},
-    },
-    "LQD": {
-        "pair": "ETH",
-        "name": BILAXY,
-        "market_depth": {"exchange": IDEX, "pairs": ["ETH"]},
-    },
-    "CARD": {
-        "pair": "ETH",
-        "name": HOTBIT,
-        "market_depth": {"exchange": IDEX, "pairs": ["ETH"]},
-    },
+    "LQD": {"pair": "ETH", "name": HOTBIT,},
+    "CARD": {"pair": "ETH", "name": HOTBIT,},
     "EWT": {"pair": "ETH", "name": LIQUID,},
 }
 
