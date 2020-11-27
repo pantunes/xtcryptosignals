@@ -148,11 +148,6 @@ SYMBOLS_PER_EXCHANGE.append(
     {LIQUID: {"pairs": [("EWT", "BTC"), ("EWT", "ETH"),]}}
 )
 
-# Coinbene
-SYMBOLS_PER_EXCHANGE.append(
-    {COINBENE: {"pairs": [("BTC", "USDT"), ("ETH", "USDT"), ("LTC", "USDT"),]}}
-)
-
 # Hotbit
 SYMBOLS_PER_EXCHANGE.append(
     {
