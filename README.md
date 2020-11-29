@@ -354,3 +354,8 @@ Through the website [xtcryptosignals.com](https://xtcryptosignals.com/#contact).
 ![Jetbrains](xtcryptosignals/client/static/imgs/readme/jetbrains.png)  
 Thanks to [Jetbrains](https://www.jetbrains.com/?from=xtcryptosignals) in order to 
 support us with an Open Source license.
+
+## Donation
+
+In case this project helped you in some way I'm accepting a small donation to keep this open-source project on-🔥 in [donate.xtcryptosignals.com](https://donate.xtcryptosignals.com).  
+Thank you
