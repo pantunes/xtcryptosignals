@@ -62,6 +62,7 @@
     $('#my_portfolio_total_spent').text(price_volume_formatter.format(data.total_paid));
     $('#my_portfolio_total_value').text(price_volume_formatter.format(data.total_value));
     $('#my_portfolio_in_btc').text(Number((data.total_in_btc).toFixed(2)));
+    $('#my_portfolio_in_eth').text(Number((data.total_in_eth).toFixed(2)));
     _set_total_position(data.total_position);
   }
 </script>
@@ -81,7 +82,9 @@
     }
   }
 
-  function _set_total_value_position_btc(total_spent, btc_usdt_price) {
+  function _set_total_value_position_btc_eth(
+      total_spent, btc_usdt_price, eth_usdt_price
+  ) {
     let units_list = [];
     $(".pf-units").each(function() {
         let value = $(this).text().replace(',', '');
@@ -110,7 +113,15 @@
     $('#my_portfolio_total_value').text(price_volume_formatter.format(total_value));
     // in BTC
     if (btc_usdt_price !== null) {
-        $('#my_portfolio_in_btc').text(Number((total_value / btc_usdt_price).toFixed(2)));
+        $('#my_portfolio_in_btc').text(
+            Number((total_value / btc_usdt_price).toFixed(2))
+        );
+    }
+    // in ETH
+    if (eth_usdt_price !== null) {
+        $('#my_portfolio_in_eth').text(
+            Number((total_value / eth_usdt_price).toFixed(2))
+        );
     }
   }
 
@@ -144,7 +155,11 @@
     if (json['symbol'] === 'BTCUSDT') {
         btc_usdt_price = json['price']
     }
-    _set_total_value_position_btc(total_spent, btc_usdt_price);
+    let eth_usdt_price = null;
+    if (json['symbol'] === 'ETHUSDT') {
+        eth_usdt_price = json['price']
+    }
+    _set_total_value_position_btc_eth(total_spent, btc_usdt_price, eth_usdt_price);
     _set_position_and_balance_per_row(id, json, symbol);
   }
 </script>
@@ -167,7 +182,7 @@
         <div class="three columns">Paid: <span id='my_portfolio_total_spent' class="bigger">-</span></div>
         <div class="three columns">Value: <span id='my_portfolio_total_value' class="bigger">-</span></div>
         <div class="three columns">Pos: <span id='my_portfolio_total_position' class="bigger">-</span></div>
-        <div class="three columns">in BTC: <span id='my_portfolio_in_btc' class="bigger">-</span></div>
+        <div class="three columns">BTC/ETH: <span id='my_portfolio_in_btc' class="bigger">-</span> / <span id='my_portfolio_in_eth' class="bigger">-</span></div>
       </div>
     </div>
 
