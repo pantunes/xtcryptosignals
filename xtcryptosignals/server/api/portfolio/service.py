@@ -103,7 +103,7 @@ def portfolio(auth):
         try:
             current_price = _get_current_price(exchange, coin_token)
         except TypeError:
-            # pair is not stored in Redis - most likely Exchange API is
+            # @Note: pair is not stored in Redis - most likely Exchange API is
             # failing
             # TODO: Still display this row in red in UI
             continue
@@ -129,12 +129,14 @@ def portfolio(auth):
         total_value += total_units * current_price
 
     btc_price = _portfolio["coin_tokens"]["BTC"]["current_price"]
+    eth_price = _portfolio["coin_tokens"]["ETH"]["current_price"]
 
     _portfolio.update(
         total_paid=round(total_paid, 2),
         total_value=round(total_value, 2),
         total_position=_get_percentage(total_value, total_paid),
         total_in_btc=round(total_value / btc_price, 2),
+        total_in_eth=round(total_value / eth_price, 2),
     )
 
     _set_share_per_coin_token(_portfolio)
