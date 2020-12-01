@@ -301,7 +301,7 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
     },
     "LQD": {"pair": "ETH", "name": HOTBIT,},
     "CARD": {"pair": "ETH", "name": HOTBIT,},
-    "EWT": {"pair": "ETH", "name": LIQUID,},
+    "EWT": {"pair": "USDT", "name": KUCOIN,},
 }
 
 # Check to make sure that ALL configured symbols must have an
