@@ -96,17 +96,34 @@ SYMBOLS_PER_EXCHANGE.append(
 
 # Bitstamp
 SYMBOLS_PER_EXCHANGE.append(
-    {BITSTAMP: {"pairs": [("BTC", "USD"), ("ETH", "USD"),]}}
+    {
+        BITSTAMP: {
+            "pairs": [
+                ("BTC", "USD"),
+                ("BTC", "EUR"),
+                ("ETH", "USD"),
+                ("LINK", "USD"),
+            ]
+        }
+    }
 )
 
 # OKEx
 SYMBOLS_PER_EXCHANGE.append(
-    {OKEX: {"pairs": [("BTC", "USDT"), ("ETH", "USDT"), ("LTC", "USDT"),]}}
+    {
+        OKEX: {
+            "pairs": [
+                ("BTC", "USDT"),
+                ("ETH", "USDT"),
+                ("LTC", "USDT"),
+            ]
+        }
+    }
 )
 
 # Coinbase Pro
 SYMBOLS_PER_EXCHANGE.append(
-    {COINBASE_PRO: {"pairs": [("BTC", "USD"), ("ETH", "USD"),]}}
+    {COINBASE_PRO: {"pairs": [("BTC", "USD"), ("ETH", "USD"), ("XLM", "USD")]}}
 )
 
 # Kucoin
@@ -138,6 +155,9 @@ SYMBOLS_PER_EXCHANGE.append(
     }
 )
 
+# IDEX
+SYMBOLS_PER_EXCHANGE.append({IDEX: {"pairs": []}})
+
 # OKCoin
 SYMBOLS_PER_EXCHANGE.append(
     {OKCOIN: {"pairs": [("BTC", "USD"), ("ETH", "USD"), ("LTC", "USD"),]}}
@@ -148,28 +168,17 @@ SYMBOLS_PER_EXCHANGE.append(
     {LIQUID: {"pairs": [("EWT", "BTC"), ("EWT", "ETH"),]}}
 )
 
+# Coinbene
+SYMBOLS_PER_EXCHANGE.append({COINBENE: {"pairs": []}})
+
 # Hotbit
-SYMBOLS_PER_EXCHANGE.append(
-    {
-        HOTBIT: {
-            "pairs": [
-                ("LTO", "USDT"),
-                ("LTO", "BTC"),
-                ("LTO", "ETH"),
-                ("LQD", "ETH"),
-                ("LQD", "BTC"),
-                ("CARD", "ETH"),
-            ],
-            "single_request": True,
-        }
-    }
-)
+SYMBOLS_PER_EXCHANGE.append({HOTBIT: {"pairs": [], "single_request": True,}})
 
 # Bilaxy
 SYMBOLS_PER_EXCHANGE.append(
     {
         BILAXY: {
-            "pairs": [("BTC", "USDT"), ("ETH", "USDT"), ("LQD", "ETH"),],
+            "pairs": [("BTC", "USDT"), ("ETH", "USDT"),],
             "single_request": True,
         }
     }
@@ -299,8 +308,6 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
-    "LQD": {"pair": "ETH", "name": HOTBIT,},
-    "CARD": {"pair": "ETH", "name": HOTBIT,},
     "EWT": {"pair": "USDT", "name": KUCOIN,},
 }
 
