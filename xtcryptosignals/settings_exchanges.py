@@ -59,28 +59,16 @@ SYMBOLS_PER_EXCHANGE.append(
         BINANCE: {
             "pairs": [
                 ("BTC", "USDT"),
+                ("BTC", "EUR"),
                 ("ETH", "USDT"),
                 ("ETH", "BTC"),
-                ("LTC", "USDT"),
-                ("BNB", "USDT"),
-                ("BNB", "BTC"),
-                ("XRP", "USDT"),
-                ("XLM", "USDT"),
-                ("XMR", "USDT"),
-                ("ADA", "USDT"),
-                ("XTZ", "USDT"),
-                ("ICX", "USDT"),
-                ("VET", "USDT"),
-                ("NANO", "USDT"),
-                ("ONT", "USDT"),
+                ("ETH", "EUR"),
                 ("LINK", "USDT"),
                 ("LINK", "BTC"),
-                ("HBAR", "USDT"),
-                ("HBAR", "BTC"),
-                ("LTO", "USDT"),
-                ("LTO", "BTC"),
-                ("FTM", "USDT"),
-                ("FTM", "BTC"),
+                ("XRP", "USDT"),
+                ("LTC", "USDT"),
+                ("XLM", "USDT"),
+                ("XMR", "USDT"),
                 ("REN", "USDT"),
                 ("REN", "BTC"),
                 ("KNC", "USDT"),
@@ -89,6 +77,22 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("AAVE", "BTC"),
                 ("UNI", "USDT"),
                 ("UNI", "BTC"),
+                ("BNB", "USDT"),
+                ("BNB", "BTC"),
+                ("ICX", "USDT"),
+                ("VET", "USDT"),
+                ("NANO", "USDT"),
+                ("USDT", "DAI"),
+                ("USDC", "USDT"),
+                ("ADA", "USDT"),
+                ("XTZ", "USDT"),
+                ("LTO", "USDT"),
+                ("LTO", "BTC"),
+                ("FTM", "USDT"),
+                ("FTM", "BTC"),
+                ("ONT", "USDT"),
+                ("HBAR", "USDT"),
+                ("HBAR", "BTC"),
             ],
         }
     }
@@ -102,7 +106,11 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("BTC", "USD"),
                 ("BTC", "EUR"),
                 ("ETH", "USD"),
+                ("ETH", "EUR"),
                 ("LINK", "USD"),
+                ("LINK", "EUR"),
+                ("USDC", "USD"),
+                ("USDC", "EUR"),
             ]
         }
     }
@@ -110,20 +118,24 @@ SYMBOLS_PER_EXCHANGE.append(
 
 # OKEx
 SYMBOLS_PER_EXCHANGE.append(
-    {
-        OKEX: {
-            "pairs": [
-                ("BTC", "USDT"),
-                ("ETH", "USDT"),
-                ("LTC", "USDT"),
-            ]
-        }
-    }
+    {OKEX: {"pairs": [("BTC", "USDT"), ("ETH", "USDT"), ("LTC", "USDT"),]}}
 )
 
 # Coinbase Pro
 SYMBOLS_PER_EXCHANGE.append(
-    {COINBASE_PRO: {"pairs": [("BTC", "USD"), ("ETH", "USD"), ("XLM", "USD")]}}
+    {
+        COINBASE_PRO: {
+            "pairs": [
+                ("BTC", "USD"),
+                ("BTC", "EUR"),
+                ("ETH", "USD"),
+                ("ETH", "EUR"),
+                ("XLM", "USD"),
+                ("UNI", "USD"),
+                ("DAI", "USD"),
+            ]
+        }
+    }
 )
 
 # Kucoin
@@ -212,6 +224,16 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
+    "LINK": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
+    "XRP": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+    },
     "LTC": {
         "pair": "USDT",
         "name": BINANCE,
@@ -222,22 +244,64 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
     },
-    "XRP": {
-        "pair": "USDT",
-        "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
-    },
     "XLM": {
         "pair": "USDT",
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
     },
-    "XMR": {
+    "USDC": {
         "pair": "USDT",
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
     },
+    "USDT": {
+        "pair": "DAI",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["DAI"]},
+    },
+    "DAI": {"pair": "USD", "name": COINBASE_PRO,},
+    "LTO": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
+    "FTM": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
+    "EWT": {"pair": "USDT", "name": KUCOIN,},
     "ADA": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+    },
+    "XTZ": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+    },
+    "KNC": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
+    "AAVE": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
+    "UNI": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
+    "REN": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
+    "XMR": {
         "pair": "USDT",
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
@@ -252,11 +316,6 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
     },
-    "XTZ": {
-        "pair": "USDT",
-        "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
-    },
     "NANO": {
         "pair": "USDT",
         "name": BINANCE,
@@ -267,54 +326,20 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
     },
-    "LINK": {
-        "pair": "USDT",
-        "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
-    },
     "HBAR": {
         "pair": "USDT",
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "BTMX": {"pair": "USDT", "name": BITMAX,},
-    "LTO": {
-        "pair": "USDT",
-        "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
-    },
-    "FTM": {
-        "pair": "USDT",
-        "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
-    },
-    "KNC": {
-        "pair": "USDT",
-        "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
-    },
-    "AAVE": {
-        "pair": "USDT",
-        "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
-    },
-    "REN": {
-        "pair": "USDT",
-        "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
-    },
-    "UNI": {
-        "pair": "USDT",
-        "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
-    },
-    "EWT": {"pair": "USDT", "name": KUCOIN,},
 }
 
 # Check to make sure that ALL configured symbols must have an
 # exchange and pair referenced
 from xtcryptosignals.common.utils import get_coin_tokens  # noqa: E402
 
-assert get_coin_tokens(SYMBOLS_PER_EXCHANGE) == sorted(
-    list(EXCHANGES_AND_PAIRS_OF_REFERENCE.keys())
-)
+tokens_and_coins = get_coin_tokens(SYMBOLS_PER_EXCHANGE)
+tokens_and_coins_ref = sorted(list(EXCHANGES_AND_PAIRS_OF_REFERENCE.keys()))
+assert (
+    tokens_and_coins == tokens_and_coins_ref
+), f"\n{tokens_and_coins}\n{tokens_and_coins_ref}"
