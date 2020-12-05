@@ -48,7 +48,7 @@ function post_ticker_emit(id, json) {
     <label for="select_coin_or_token">
         Coin or Token:
         <select id="select_coin_or_token">
-{% for t in tokens %}
+{% for t in tokens[1:] %}
             <option value="{{ t }}" {{ 'selected' if t == coin_or_token else '' }}>{{ t }}</option>
 {% endfor %}
         </select>
