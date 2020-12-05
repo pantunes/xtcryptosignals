@@ -77,6 +77,8 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("AAVE", "BTC"),
                 ("UNI", "USDT"),
                 ("UNI", "BTC"),
+                ("DOT", "USDT"),
+                ("DOT", "BTC"),
                 ("BNB", "USDT"),
                 ("BNB", "BTC"),
                 ("ICX", "USDT"),
@@ -133,6 +135,8 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("XLM", "USD"),
                 ("UNI", "USD"),
                 ("DAI", "USD"),
+                ("NU", "USD"),
+                ("NU", "EUR"),
             ]
         }
     }
@@ -301,6 +305,12 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
+    "DOT": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
+    "NU": {"pair": "USD", "name": COINBASE_PRO,},
     "XMR": {
         "pair": "USDT",
         "name": BINANCE,
