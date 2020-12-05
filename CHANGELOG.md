@@ -6,6 +6,7 @@ Added Coins/Tokens page.
 Added feature to list/show/mark Coins/Tokens as Favourites.  
 Changed from `LEND` to `AAVE` Token.  
 Added `USDT`, `USDC` and `DAI` Projects/Tokens.  
+Added `DOT` and `NU` Projects/Tokens.  
 
 ## [0.8.2] - 2020-10-02
 Added possibility of having N Market depth Charts per Coin/Token page through configuration.  
