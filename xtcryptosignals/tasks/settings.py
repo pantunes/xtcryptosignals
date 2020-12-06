@@ -45,6 +45,9 @@ TELEGRAM_GROUP_CHAT_ID = env.str("TELEGRAM_GROUP_CHAT_ID")
 
 STATIC_COINS_TOKENS_LOGOS_FOLDER = "/static/imgs/logos/"
 
+# order matters in class BaseSchema
+COIN_OR_TOKEN_REFERENCE = ("ETH", "BTC", "DAI", "USD", "USDT",)
+
 from xtcryptosignals.settings import *  # noqa
 from xtcryptosignals.tasks.settings_local import *  # noqa
 

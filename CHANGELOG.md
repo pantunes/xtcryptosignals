@@ -1,7 +1,7 @@
 # Changelog
 All changes will be registered here per release.
 
-## [0.8.3] - Current date
+## [0.8.3] - 2020-12-06
 Added Coins/Tokens page.  
 Added feature to list/show/mark Coins/Tokens as Favourites.  
 Changed from `LEND` to `AAVE` Token.  
