@@ -1,4 +1,4 @@
-redis==3.4.1
+redis==3.5.3
 celery==4.4.0
 mongoengine==0.19.1
 requests==2.23.0
