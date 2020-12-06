@@ -2,7 +2,7 @@ redis==3.4.1
 celery==4.4.0
 mongoengine==0.19.1
 requests==2.23.0
-click==7.0
+click==7.1.2
 flask==1.1.1
 flask-restful==0.3.8
 flask-session==0.3.1
