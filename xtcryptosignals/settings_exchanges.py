@@ -176,7 +176,16 @@ SYMBOLS_PER_EXCHANGE.append({IDEX: {"pairs": []}})
 
 # OKCoin
 SYMBOLS_PER_EXCHANGE.append(
-    {OKCOIN: {"pairs": [("BTC", "USD"), ("ETH", "USD"), ("LTC", "USD"),]}}
+    {
+        OKCOIN: {
+            "pairs": [
+                ("BTC", "USD"),
+                ("ETH", "USD"),
+                ("LTC", "USD"),
+                ("USDT", "USD"),
+            ]
+        }
+    }
 )
 
 # LIQUID
@@ -258,11 +267,7 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
     },
-    "USDT": {
-        "pair": "DAI",
-        "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["DAI"]},
-    },
+    "USDT": {"pair": "USD", "name": OKCOIN,},
     "DAI": {"pair": "USD", "name": COINBASE_PRO,},
     "LTO": {
         "pair": "USDT",
