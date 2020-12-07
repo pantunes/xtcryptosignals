@@ -35,5 +35,7 @@ class BaseSchema(Schema):
             deser_row = json.loads(ser_row)
             price = deser_row["price"]
             data["price_usdt"] = data["price"] * float(price)
-        elif data_symbol in s.COIN_OR_TOKEN_REFERENCE[2:]:
+        elif data_symbol in s.COIN_OR_TOKEN_REFERENCE[2:4]:
+            data["price_usdt"] = data["price"]
+        elif data["symbol"][-4:] == s.COIN_OR_TOKEN_REFERENCE[4]:
             data["price_usdt"] = data["price"]
