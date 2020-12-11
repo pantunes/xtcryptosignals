@@ -15,6 +15,7 @@ from flask import (
     request,
     current_app,
     session,
+    escape,
     g,
 )
 from flask_login import (
@@ -57,9 +58,7 @@ def info():
      in case of any question.
     <br/><br/>
     The <code>XTCryptoSignals</code> Team
-    """.format(
-            frequency=g.HISTORY_FREQUENCY[0], **current_user.user
-        )
+    """.format(name=escape(current_user.user["name"]))
     )
 
 
