@@ -95,6 +95,10 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("ONT", "USDT"),
                 ("HBAR", "USDT"),
                 ("HBAR", "BTC"),
+                ("SNX", "USDT"),
+                ("SNX", "BTC"),
+                ("RLC", "USDT"),
+                ("RLC", "BTC"),
             ],
         }
     }
@@ -280,15 +284,15 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "EWT": {"pair": "USDT", "name": KUCOIN,},
-    "ADA": {
+    "RLC": {
         "pair": "USDT",
         "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
-    "XTZ": {
+    "SNX": {
         "pair": "USDT",
         "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "KNC": {
         "pair": "USDT",
@@ -314,6 +318,16 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "pair": "USDT",
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
+    "XTZ": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+    },
+    "ADA": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
     },
     "NU": {"pair": "USD", "name": COINBASE_PRO,},
     "XMR": {
