@@ -234,7 +234,7 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
     "BTC": {
         "pair": "USDT",
         "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "EUR"]},
     },
     "ETH": {
         "pair": "USDT",
@@ -249,22 +249,22 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
     "XRP": {
         "pair": "USDT",
         "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "LTC": {
         "pair": "USDT",
         "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "BNB": {
         "pair": "USDT",
         "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "XLM": {
         "pair": "USDT",
         "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "USDC": {
         "pair": "USDT",
@@ -319,21 +319,21 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
-    "XTZ": {
-        "pair": "USDT",
-        "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
-    },
     "ADA": {
         "pair": "USDT",
         "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
+    "XTZ": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "NU": {"pair": "USD", "name": COINBASE_PRO,},
     "XMR": {
         "pair": "USDT",
         "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "VET": {
         "pair": "USDT",
