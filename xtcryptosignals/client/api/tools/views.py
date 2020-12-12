@@ -135,6 +135,18 @@ def spotlight_search():
         )
         rows.append(dict(label=pair, value=pair, url=url))
 
+    url = url_for('ticker.favourites', frequency='1d')
+    rows.append(dict(label="Favourites", value="Favourites", url=url))
+
+    url = url_for('portfolio.index')
+    rows.append(dict(label="Portfolio", value="Portfolio", url=url))
+
+    url = url_for('notification.index')
+    rows.append(dict(label="Notifications", value="Notifications", url=url))
+
+    url = url_for('tools.fear_and_greed')
+    rows.append(dict(label="Fear and Greed", value="Fear and Greed", url=url))
+
     url = url_for('tools.twitter', frequency='1d')
     rows.append(dict(label="Twitter", value="Twitter", url=url))
 
