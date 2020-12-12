@@ -32,13 +32,20 @@ function open_modal(m, id=undefined) {
 
     } else if (m === '#login' || m === '#signup' || m === '#contact') {
         $(_m).on($.modal.OPEN, function (event, modal) {
+            const field2focus = {
+                '#login': '#login_email',
+                '#signup': '#signup_email',
+                '#contact': '#contact_email'
+            }
             captcha();
+            setTimeout(function () {
+                $(field2focus[m]).focus();
+            },250)
             $(_m).off($.modal.OPEN)
         });
 
     } else if (m === '#rule') {
         $(_m).on($.modal.OPEN, function (event, modal) {
-
             function get_tokens(handler1, handler2) {
                 $.get('/ticker/tokens', function (data) {
                     let $dropdown = $('#rule_coin_token');
@@ -94,6 +101,39 @@ function open_modal(m, id=undefined) {
             // Button
             $('#submit_form').html(submit_button);
 
+            $(_m).off($.modal.OPEN)
+        });
+    } else if (m === '#spotlight') {
+        $(_m).on($.modal.OPEN, function (event, modal) {
+            $("#spotlight").val('');
+            $.get('/spotlight/search', function (data) {
+                $("#spotlight").autocomplete({
+                    autoFocus: true,
+                    minLength: 1,
+                    source: function( request, response ) {
+                        let matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i" );
+                        response($.grep(data.rows, function(value) {
+                            value = value.label || value.value || value;
+                            return matcher.test(value);
+                        }));
+                    },
+                    select: function( event, ui ) {
+                        location.href = ui.item.url
+                    }
+                }).data("ui-autocomplete")._renderItem = function( ul, item ) {
+                    let txt = String(item.value).replace(
+                        new RegExp(this.term, "gi"),
+                        "<span style=\"color: #0FA0CE\"><b>$&</b></span>"
+                    );
+                    return $("<li></li>")
+                        .data("ui-autocomplete-item", item)
+                        .append("<a>" + txt + "</a>")
+                        .appendTo(ul);
+                };
+                setTimeout(function () {
+                    $('#spotlight').focus();
+                },250)
+            });
             $(_m).off($.modal.OPEN)
         });
     }

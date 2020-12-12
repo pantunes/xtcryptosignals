@@ -13,6 +13,7 @@ from flask import (
     Blueprint,
     current_app,
     render_template,
+    url_for,
     g,
 )
 from xtcryptosignals.client import service
@@ -111,4 +112,36 @@ def twitter(frequency):
         frequency=g.HISTORY_FREQUENCY[0],
         twitter_frequency="1d",
         projects_twitter=projects_twitter,
+    )
+
+
+@bp.route("/spotlight/search")
+def spotlight_search():
+    rows = []
+
+    for coin_or_token in g.COINS_OR_TOKENS_REFERENCE:
+        url = url_for(
+            'ticker.token_frequency',
+            coin_or_token=coin_or_token,
+            frequency=g.HISTORY_FREQUENCY[0]
+        )
+        rows.append(dict(label=coin_or_token, value=coin_or_token, url=url))
+
+    for pair in get_pairs(g.SYMBOLS_PER_EXCHANGE):
+        url = url_for(
+            'ticker.pair_frequency',
+            pair=pair,
+            frequency=g.HISTORY_FREQUENCY[0]
+        )
+        rows.append(dict(label=pair, value=pair, url=url))
+
+    url = url_for('tools.twitter', frequency='1d')
+    rows.append(dict(label="Twitter", value="Twitter", url=url))
+
+    url = url_for('tools.tether', coin_or_token='BTC')
+    rows.append(dict(label="Tether", value="Tether", url=url))
+
+    return dict(
+        count=len(rows),
+        rows=rows
     )

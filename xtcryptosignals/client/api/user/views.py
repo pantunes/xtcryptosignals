@@ -46,12 +46,19 @@ def info():
     continuous development.
     <br/><br/>
     For now you can manage your <a href="/portfolio">portfolio</a> 
-    adding your <a href="/transactions">transactions</a> and set your 
-    <a href="/notifications">notification alerts</a>.
-    <br/>
-    <br/>
-    In case you are curious about further feature releases have a look 
-    <a href="https://github.com/pantunes/xtcryptosignals">here</a>.
+    adding your <a href="/transactions">transactions</a>, set your 
+    <a href="/notifications">notification alerts</a>, within other 
+    <a href="https://github.com/pantunes/xtcryptosignals/blob/master/CHANGELOG.md">features</a>.
+    <br><br>
+    Keyboard shortcuts:
+    <ul>
+    <li>alt + l: Login</li>
+    <li>alt + c: Contact</li>
+    <li>alt + s: Signup</li>
+    <li>alt + space: Search anything in Platform</li>
+    </ul>
+    In case you are curious about further feature releases Watch/Star this 
+    Project <a href="https://github.com/pantunes/xtcryptosignals">here</a>.
     <br/><br/>
     We hope you like this platform experience and please drop us some 
     <a href="javascript:open_modal('#contact');">lines</a>

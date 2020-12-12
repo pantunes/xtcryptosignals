@@ -1,0 +1,28 @@
+<style>
+    .ui-menu .ui-menu-item a{
+        font-size: large;
+    }
+	.ui-autocomplete {
+		max-height: 400px;
+		overflow-y: auto;
+		/* prevent horizontal scrollbar */
+		overflow-x: hidden;
+	}
+	/* IE 6 doesn't support max-height
+	 * we use height instead, but this forces the menu to always be this tall
+	 */
+	* html .ui-autocomplete {
+		height: 100px;
+	}
+</style>
+
+<!-- Spotlight Modal -->
+<div id="modal_spotlight" class="modal">
+    <h5>Search</h5>
+    <div class="row">
+        <div class="twelve columns">
+            <label for="spotlight"></label><input type="text" id="spotlight" class="u-full-width">
+        </div>
+    </div>
+</div>
+<!-- /Spotlight Modal -->
