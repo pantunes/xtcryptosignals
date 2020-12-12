@@ -2,7 +2,9 @@
 All changes will be registered here per release.
 
 ## [0.8.4] - Current date
-Added `SNX`, `RLC` Projects/Tokens.
+Added Spotlight Search.  
+Added Keyboard shortcuts.  
+Added `SNX`, `RLC` Projects/Tokens.  
 Code fixes and performance improvements. 
 
 ## [0.8.3] - 2020-12-06
