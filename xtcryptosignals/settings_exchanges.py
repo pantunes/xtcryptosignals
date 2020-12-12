@@ -204,14 +204,7 @@ SYMBOLS_PER_EXCHANGE.append({COINBENE: {"pairs": []}})
 SYMBOLS_PER_EXCHANGE.append({HOTBIT: {"pairs": [], "single_request": True,}})
 
 # Bilaxy
-SYMBOLS_PER_EXCHANGE.append(
-    {
-        BILAXY: {
-            "pairs": [("BTC", "USDT"), ("ETH", "USDT"),],
-            "single_request": True,
-        }
-    }
-)
+SYMBOLS_PER_EXCHANGE.append({BILAXY: {"pairs": [], "single_request": True,}})
 
 # Uphold
 SYMBOLS_PER_EXCHANGE.append(

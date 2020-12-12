@@ -65,7 +65,9 @@ def info():
      in case of any question.
     <br/><br/>
     The <code>XTCryptoSignals</code> Team
-    """.format(name=escape(current_user.user["name"]))
+    """.format(
+            name=escape(current_user.user["name"])
+        )
     )
 
 

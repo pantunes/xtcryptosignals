@@ -121,39 +121,34 @@ def spotlight_search():
 
     for coin_or_token in g.COINS_OR_TOKENS_REFERENCE:
         url = url_for(
-            'ticker.token_frequency',
+            "ticker.token_frequency",
             coin_or_token=coin_or_token,
-            frequency=g.HISTORY_FREQUENCY[0]
+            frequency=g.HISTORY_FREQUENCY[0],
         )
         rows.append(dict(label=coin_or_token, value=coin_or_token, url=url))
 
     for pair in get_pairs(g.SYMBOLS_PER_EXCHANGE):
         url = url_for(
-            'ticker.pair_frequency',
-            pair=pair,
-            frequency=g.HISTORY_FREQUENCY[0]
+            "ticker.pair_frequency", pair=pair, frequency=g.HISTORY_FREQUENCY[0]
         )
         rows.append(dict(label=pair, value=pair, url=url))
 
-    url = url_for('ticker.favourites', frequency='1d')
+    url = url_for("ticker.favourites", frequency="1d")
     rows.append(dict(label="Favourites", value="Favourites", url=url))
 
-    url = url_for('portfolio.index')
+    url = url_for("portfolio.index")
     rows.append(dict(label="Portfolio", value="Portfolio", url=url))
 
-    url = url_for('notification.index')
+    url = url_for("notification.index")
     rows.append(dict(label="Notifications", value="Notifications", url=url))
 
-    url = url_for('tools.fear_and_greed')
+    url = url_for("tools.fear_and_greed")
     rows.append(dict(label="Fear and Greed", value="Fear and Greed", url=url))
 
-    url = url_for('tools.twitter', frequency='1d')
+    url = url_for("tools.twitter", frequency="1d")
     rows.append(dict(label="Twitter", value="Twitter", url=url))
 
-    url = url_for('tools.tether', coin_or_token='BTC')
+    url = url_for("tools.tether", coin_or_token="BTC")
     rows.append(dict(label="Tether", value="Tether", url=url))
 
-    return dict(
-        count=len(rows),
-        rows=rows
-    )
+    return dict(count=len(rows), rows=rows)
