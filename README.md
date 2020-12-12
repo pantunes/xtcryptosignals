@@ -325,6 +325,8 @@ Open the browser with the URL `http://127.0.0.1:8000`:
 ![screen-shot](xtcryptosignals/client/static/imgs/readme/10.png) | ![screen-shot](xtcryptosignals/client/static/imgs/readme/11.png)
 **Market Depth** | **Telegram Notifications** | 
 ![screen-shot](xtcryptosignals/client/static/imgs/readme/13.png) | ![screen-shot](xtcryptosignals/client/static/imgs/readme/14.png)
+**Spotlight Search** | | 
+![screen-shot](xtcryptosignals/client/static/imgs/readme/15.png) |
 
 
 ## Example of added Feature
