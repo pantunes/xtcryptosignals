@@ -60,7 +60,10 @@ def index():
     )
 
 
-@bp.route("/portfolio/list", methods=["GET"])
+bp_xhr = Blueprint("portfolio/xhr", __name__)
+
+
+@bp_xhr.route("/portfolio/list", methods=["GET"])
 @login_required
 def _list():
     response = requests.get(

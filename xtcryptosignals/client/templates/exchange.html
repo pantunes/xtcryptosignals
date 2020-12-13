@@ -1,0 +1,72 @@
+{% extends 'ticker/ticker.html' %}
+
+{% block title %}Portfolio{% endblock %}
+
+{% block body %}
+
+{% with url_ticker='ticker.ticker', params={} %}
+{% include 'menu.html' %}
+{% endwith %}
+
+<script type="text/javascript">
+    function render_balance(data) {
+
+    }
+    function render_open_orders(data) {
+
+    }
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    get_balance(render_balance, '{{ exchange }}');
+    get_open_orders(render_open_orders, '{{ exchange }}');
+  });
+</script>
+
+<br/><br/>
+
+<div class="row u-pull-left">
+  <div class="u-pull-left">
+      <h5>My {{ exchange.capitalize() }}</h5>
+  </div>
+
+  <div class="twelve columns">
+
+      <div id="balances" class="custom-grid custom-grid-without-subtitles">
+        <div class="three columns">Balance: <span id='my_exchange_balance' class="bigger">-</span></div>
+        <div class="three columns">Invested: <span id='my_exchange_invested' class="bigger">-</span></div>
+        <div class="three columns">Locked: <span id='my_exchange_locked' class="bigger">-</span></div>
+        <div class="three columns">BTC/ETH: <span id='my_exchange_in_btc' class="bigger">-</span> / <span id='my_exchange_in_eth' class="bigger">-</span></div>
+      </div>
+
+      <table class="u-full-width" id="exchange_balance">
+        <thead>
+          <tr>
+            <th style="text-align: right;">&nbsp;</th>
+            <th>Coin or Token</th>
+            <th style="text-align: right;">Total</th>
+            <th style="text-align: right;">Available</th>
+            <th style="text-align: right;">Locked</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <table class="u-full-width" id="exchange_open_orders">
+        <thead>
+          <tr>
+            <th style="text-align: right;">&nbsp;</th>
+            <th>Symbol</th>
+            <th style="text-align: right;">Amount</th>
+            <th style="text-align: right;">Type</th>
+            <th style="text-align: right;">Created at</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+  </div>
+</div>
+
+{% endblock %}

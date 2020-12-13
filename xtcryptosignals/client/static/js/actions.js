@@ -4,6 +4,7 @@ const menu_options_logged_in = [
     '#menu_transactions_link',
     '#menu_logout_link',
     '#menu_notifications_link',
+    '#menu_binance_link',
 ];
 
 const urls_logout_to_index = [
@@ -168,5 +169,23 @@ function toggle_favourite(coin_or_token) {
         if (xhr.status === 401) {
             open_modal('#login');
         }
+    });
+}
+
+function get_balance(handler, exchange) {
+    $.get(`/exchange/${exchange}/balance`).done(function(response) {
+        handler(response)
+    })
+    .fail(function(xhr, status, error) {
+        process_fail(xhr);
+    });
+}
+
+function get_open_orders(handler, exchange) {
+    $.get(`/exchange/${exchange}/open-orders`).done(function(response) {
+        handler(response)
+    })
+    .fail(function(xhr, status, error) {
+        process_fail(xhr);
     });
 }

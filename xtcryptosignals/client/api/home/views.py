@@ -40,7 +40,7 @@ def context_processor():
     )
 
 
-@bp.route("/")
+@bp.route("/", methods=["GET"])
 def index():
     symbols_per_exchange = []
     for x in g.SYMBOLS_PER_EXCHANGE:
