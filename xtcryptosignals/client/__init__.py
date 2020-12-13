@@ -16,7 +16,7 @@ from flask_wtf.csrf import CSRFProtect
 app = Flask(
     import_name=__name__,
     template_folder="templates",
-    # @Note: let nginx or other more resourceful Load Balancer
+    # @note: let nginx or other more resourceful Load Balancer
     # serve static content within this folder.
     static_folder="static",
 )

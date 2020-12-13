@@ -14,7 +14,8 @@ from xtcryptosignals.server.utils import (
     validate_io,
     user_auth,
 )
-from xtcryptosignals.server.api.portfolio import service
+from xtcryptosignals.server.api.exchanges import service
+from xtcryptosignals.tasks import settings as s
 
 
 bp = Blueprint("exchange", __name__)
@@ -40,7 +41,9 @@ class ExchangeBalance(Resource):
             401:
                 description: Unauthorized
         """
-        return service.portfolio(auth)
+        if exchange not in (s.BINANCE,):
+            return dict(error="Invalid Exchange."), 400
+        return service.get_balance(auth, exchange=exchange)
 
 
 class ExchangeOpenOrders(Resource):
@@ -62,7 +65,9 @@ class ExchangeOpenOrders(Resource):
             401:
                 description: Unauthorized
         """
-        return service.portfolio(auth)
+        if exchange not in (s.BINANCE,):
+            return dict(error="Invalid Exchange."), 400
+        return service.get_open_orders(auth, exchange=exchange)
 
 
 api.add_resource(ExchangeBalance, "/exchange/<exchange>/balance")
