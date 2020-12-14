@@ -47,7 +47,7 @@ class ConfigDevelopment(Config):
 
     TEMPLATES_AUTO_RELOAD = True
 
-    PERMANENT_SESSION_LIFETIME = timedelta(minutes=30)
+    PERMANENT_SESSION_LIFETIME = timedelta(days=7)
 
     SESSION_PROTECTION = "basic"
 

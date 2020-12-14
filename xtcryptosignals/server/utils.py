@@ -54,6 +54,7 @@ def validate_io(
     many_in=False,
     many_out=False,
     is_form=False,
+    skip_validate=False,
 ):
     def decorator(f):
         @wraps(f)
@@ -87,9 +88,13 @@ def validate_io(
                 data, errors = schema_out().dump(data, many=many_out)
                 if errors:
                     return dict(error=_sanitize_errors_marshmallow(errors)), 415
-                errors = schema_out().validate(data, many=many_out)
-                if errors:
-                    return dict(error=_sanitize_errors_marshmallow(errors)), 416
+                if not skip_validate:
+                    errors = schema_out().validate(data, many=many_out)
+                    if errors:
+                        return (
+                            dict(error=_sanitize_errors_marshmallow(errors)),
+                            416,
+                        )
             if data is None:
                 data = dict(status="OK")
             return data, status or 200

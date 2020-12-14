@@ -8,9 +8,16 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-def get_balance(auth, exchange):
-    return {}
+class ExchangeAPI(object):
+    def __init__(self):
+        self.client = None
+        self.auth = None
 
+    def get_balance(self):
+        raise NotImplementedError
 
-def get_open_orders(auth, exchange):
-    return {}
+    def get_open_orders(self):
+        raise NotImplementedError
+
+    def get_account_status(self):
+        raise NotImplementedError

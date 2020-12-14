@@ -48,6 +48,7 @@ def context_processor():
         pairs=get_pairs(g.SYMBOLS_PER_EXCHANGE),
         tokens=get_coin_tokens(g.SYMBOLS_PER_EXCHANGE, show_all=True),
         attributes={"price_usdt": "Price USDT"},
+        frequency=g.HISTORY_FREQUENCY[0],
     )
 
 
@@ -76,11 +77,23 @@ def balance(exchange):
     return response.json(), response.status_code
 
 
-@bp_xhr.route("/exchange/<exchange>/open-orders", methods=["GET"])
+@bp_xhr.route("/exchange/<exchange>/orders/open", methods=["GET"])
 @login_required
 def open_orders(exchange):
     response = requests.get(
-        url="{}exchange/{}/open-orders".format(
+        url="{}exchange/{}/orders/open".format(
+            current_app.config["SERVER_API_BASE_URL"], exchange
+        ),
+        headers=dict(Authorization=current_user.id),
+    )
+    return response.json(), response.status_code
+
+
+@bp_xhr.route("/exchange/<exchange>/account/status", methods=["GET"])
+@login_required
+def account_status(exchange):
+    response = requests.get(
+        url="{}exchange/{}/account/status".format(
             current_app.config["SERVER_API_BASE_URL"], exchange
         ),
         headers=dict(Authorization=current_user.id),

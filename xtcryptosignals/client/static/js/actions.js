@@ -12,6 +12,7 @@ const urls_logout_to_index = [
     '/transactions',
     '/portfolio',
     '/notifications',
+    '/exchange/binance',
 ];
 
 function signup() {
@@ -172,6 +173,15 @@ function toggle_favourite(coin_or_token) {
     });
 }
 
+function get_account_status(handler, exchange) {
+    $.get(`/exchange/${exchange}/account/status`).done(function(response) {
+        handler(response)
+    })
+    .fail(function(xhr, status, error) {
+        process_fail(xhr);
+    });
+}
+
 function get_balance(handler, exchange) {
     $.get(`/exchange/${exchange}/balance`).done(function(response) {
         handler(response)
@@ -182,7 +192,7 @@ function get_balance(handler, exchange) {
 }
 
 function get_open_orders(handler, exchange) {
-    $.get(`/exchange/${exchange}/open-orders`).done(function(response) {
+    $.get(`/exchange/${exchange}/orders/open`).done(function(response) {
         handler(response)
     })
     .fail(function(xhr, status, error) {
