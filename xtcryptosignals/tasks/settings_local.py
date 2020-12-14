@@ -14,22 +14,6 @@ from environs import Env
 env = Env()
 env.read_env(env("SETTINGS_APP"), recurse=False)
 
-##############################################################################
-# WARNING! WARNING! WARNING! WARNING! WARNING! WARNING! WARNING! WARNING!    #
-##############################################################################
-# Add the following Personal Exchange keys and secrets to a config file
-# in order to interact with the Exchange using this platform.
-#
-# These keys and secrets should never be shared or commit in the
-# remote repository. Only you should know them.
-#
-# It's very advisable to create a READ-ONLY API credentials in the
-# Exchange.
-#
-# In case you wish the platform to post orders use it at your own risk.
-##############################################################################
-# WARNING! WARNING! WARNING! WARNING! WARNING! WARNING! WARNING! WARNING!    #
-##############################################################################
 
 BINANCE_API_KEY = env.str("BINANCE_API_KEY", "")
 BINANCE_API_SECRET = env.str("BINANCE_API_SECRET", "")
