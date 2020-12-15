@@ -36,14 +36,30 @@
         let $table = $('#table_exchange_open_orders');
         $table.find("tbody tr").remove();
         $.each(data.results, function () {
+          let css = '';
+          if (this.type === "BUY") {
+            css = 'class="positive"'
+          } else if (this.type === "SELL") {
+            css = 'class="negative"'
+          }
+          let price_buy_average = '-'
+          if ("price_buy_average" in this) {
+              price_buy_average = _get_formatter(this.price_buy_average, false).format(this.price_buy_average)
+          }
+          let position = '-'
+          if ("position" in this) {
+              position = _get_formatter(this.position, false).format(this.position) + '%'
+          }
           $table.append(
-              "<tr>" +
-              "<td>" + this.symbol + "</td>" +
+              "<tr " + css + ">" +
+              "<td style='padding-left: 8px'>" + this.symbol + "</td>" +
               "<td class='align-right'>" + _get_formatter(this.price, false).format(this.price) + "</td>" +
               "<td class='align-right'>" + _get_formatter(this.amount, false).format(this.amount) + "</td>" +
               "<td class='align-right'>" + _get_formatter(this.filled, false).format(this.filled) + "%</td>" +
               "<td class='align-center'>" + this.type + "</td>" +
-              "<td class='align-right'>" + _get_formatter(this.amount, false).format(this.amount) + "</td>" +
+              "<td class='align-right'>" + _get_formatter(this.total, false).format(this.total) + "</td>" +
+              "<td class='align-right'>" + price_buy_average + "</div></td>" +
+              "<td style='padding-right: 8px'><div class='align-right'>" + position + "</div></td>" +
               "</tr>"
           );
         });
@@ -95,6 +111,8 @@
             <th style="text-align: right;">Filled</th>
             <th style="text-align: center;">Type</th>
             <th style="text-align: right;">Total</th>
+            <th style="text-align: right;">Price Buy Avg.</th>
+            <th style="text-align: right;">Position</th>
           </tr>
         </thead>
         <tbody></tbody>

@@ -14,10 +14,9 @@ from xtcryptosignals.tasks import settings as s
 
 
 class BinanceAPI(ExchangeAPI):
-    def __init__(self, auth):
+    def __init__(self):
         super(BinanceAPI, self).__init__()
         self.client = BinanceClient(s.BINANCE_API_KEY, s.BINANCE_API_SECRET)
-        self.auth = auth
 
     def get_balance(self):
         return self.client.get_account()

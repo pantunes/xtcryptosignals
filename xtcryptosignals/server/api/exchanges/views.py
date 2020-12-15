@@ -57,7 +57,7 @@ class ExchangeBalance(Resource):
         if exchange not in (s.BINANCE,):
             return dict(error="Invalid Exchange."), 400
 
-        exchange_api = EXCHANGE_APIS[exchange](auth=auth)
+        exchange_api = EXCHANGE_APIS[exchange]()
         return exchange_api.get_balance()
 
 
@@ -87,7 +87,7 @@ class ExchangeOpenOrders(Resource):
         if exchange not in (s.BINANCE,):
             return dict(error="Invalid Exchange."), 400
 
-        exchange_api = EXCHANGE_APIS[exchange](auth=auth)
+        exchange_api = EXCHANGE_APIS[exchange]()
         return exchange_api.get_open_orders()
 
 
@@ -113,7 +113,7 @@ class ExchangeAccountStatus(Resource):
         if exchange not in (s.BINANCE,):
             return dict(error="Invalid Exchange."), 400
 
-        exchange_api = EXCHANGE_APIS[exchange](auth=auth)
+        exchange_api = EXCHANGE_APIS[exchange]()
         return exchange_api.get_account_status()
 
 
