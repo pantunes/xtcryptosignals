@@ -99,7 +99,7 @@
             console.log('before', value)
             console.log('before', total_price)
             if(!isNaN(value) && value.length !== 0) {
-                total_price += value
+                total_price += parseFloat(value)
                 console.log('in', total_price)
             }
             console.log('after', value)
