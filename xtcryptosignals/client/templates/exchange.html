@@ -16,10 +16,16 @@
         }
         $(".dot").css({"background-color": color});
     }
+
+    let data_balance = {};
     function render_balance(data) {
+        for (const [_, value] of Object.entries(data.results)) {
+            data_balance[value.coin_token] = value
+        }
         let $table = $('#table_exchange_balance');
         $table.find("tbody tr").remove();
         $.each(data.results, function () {
+          const _id = `total_{{ exchange }}_${this.coin_token.toLowerCase()}usdt_price_usdt_10s`
           $table.append(
               "<tr>" +
               "<td style='width: 32px; vertical-align: middle;'>" +
@@ -28,10 +34,12 @@
               "<td class='align-right'>" + _get_formatter(this.free, false).format(this.free) + "</td>" +
               "<td class='align-right'>" + _get_formatter(this.locked, false).format(this.locked) + "</td>" +
               "<td class='align-right'>" + _get_formatter(this.total, false).format(this.total) + "</td>" +
+              "<td class='align-right'><span id=" + _id + " class='pf-total-price'>-</span></td>" +
               "</tr>"
           );
         });
     }
+
     function render_open_orders(data) {
         let $table = $('#table_exchange_open_orders');
         $table.find("tbody tr").remove();
@@ -67,6 +75,39 @@
 </script>
 
 <script type="text/javascript">
+    function post_ticker_emit(id, json) {
+        const symbol = data_balance[json.ticker];
+        if (symbol === undefined) {
+            return;
+        }
+        const pair = json.ticker + "USDT";
+        if(pair !== json.symbol) {
+            return;
+        }
+        if("{{ exchange }}" !== json.source) {
+            return;
+        }
+
+        const _id = `#total_{{ exchange }}_${pair.toLowerCase()}_price_usdt_10s`
+        const total_in_usdt_per_row = json["price_usdt"] * symbol["total"]
+        $(_id).text(
+            _get_formatter(total_in_usdt_per_row, false).format(total_in_usdt_per_row)
+        )
+
+        let total_price = 0.0;
+        $(".pf-total-price").each(function() {
+            let value = $(this).text().replace(',', '');
+            if(!isNaN(value) && value.length !== 0) {
+              total_price += value
+            }
+        });
+        $('#my_balance_total').text(
+            _get_formatter(total_price, false).format(total_price)
+        )
+  }
+</script>
+
+<script type="text/javascript">
   $(document).ready(function() {
     get_account_status(render_account_status, '{{ exchange }}');
     get_balance(render_balance, '{{ exchange }}');
@@ -85,6 +126,14 @@
 </div>
 
 <div class="row">
+    <div class="six columns">
+        <div id="balances" class="custom-grid custom-grid-without-subtitles">
+        <div class="six columns">Total: <span id='my_balance_total' class="bigger">-</span> USDT</div>
+      </div>
+    </div>
+</div>
+
+<div class="row">
   <div class="six columns">
       <h5>My Balance</h5>
       <table id="table_exchange_balance">
@@ -95,11 +144,13 @@
             <th style="text-align: right;">Free</th>
             <th style="text-align: right;">Locked</th>
             <th style="text-align: right;">Total</th>
+            <th style="text-align: right;">in USDT</th>
           </tr>
         </thead>
         <tbody></tbody>
       </table>
   </div>
+
   <div class="six columns">
       <h5>My Open Orders</h5>
       <table id="table_exchange_open_orders">
