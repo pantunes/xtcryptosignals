@@ -93,13 +93,15 @@
         $(_id).text(
             _get_formatter(total_in_usdt_per_row, false).format(total_in_usdt_per_row)
         )
-
         let total_price = 0.0;
         $(".pf-total-price").each(function() {
             let value = $(this).text().replace(',', '');
+            console.log('before', value)
             if(!isNaN(value) && value.length !== 0) {
-              total_price += value
+                total_price += value
+                console.log('in', total_price)
             }
+            console.log('after', value)
         });
         $('#my_balance_total').text(
             _get_formatter(total_price, false).format(total_price)
