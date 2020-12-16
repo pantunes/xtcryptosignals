@@ -93,18 +93,22 @@
         $(_id).text(
             _get_formatter(total_in_usdt_per_row, false).format(total_in_usdt_per_row)
         )
+
+        if ('USDT' in data_balance) {
+            const _id = `#total_{{ exchange }}_usdtusdt_price_usdt_10s`
+            $(_id).text(
+               _get_formatter(data_balance['USDT']['total'], false).format(data_balance['USDT']['total'])
+            )
+        }
+
         let total_price = 0.0;
         $(".pf-total-price").each(function() {
             let value = $(this).text().replace(',', '');
-            console.log('before', value)
-            console.log('before', total_price)
             if(!isNaN(value) && value.length !== 0) {
                 total_price += parseFloat(value)
-                console.log('in', total_price)
             }
-            console.log('after', value)
-            console.log('after', total_price)
         });
+
         $('#my_balance_total').text(
             _get_formatter(total_price, false).format(total_price)
         )
