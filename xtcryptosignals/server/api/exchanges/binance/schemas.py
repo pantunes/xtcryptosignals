@@ -74,21 +74,29 @@ class ExchangeOpenOrdersOutputSchema(Schema):
             if data["created_on_ts"] < x["time"]:
                 continue
 
-            amount_total += float(x["qty"])
-            total_total += float(x["quoteQty"])
+            qty = float(x["qty"])
+            quote_qty = float(x["quoteQty"])
 
-            if amount_total > data["amount"]:
-                ppc = float(x["quoteQty"]) / float(x["qty"])
-                rest = amount_total - data["amount"]
-                amount_total += rest
-                total_total += rest * ppc
-                data["price_buy_average"] = (
-                    total_total - float(x["quoteQty"])
-                ) / (amount_total - float(x["qty"]))
-                data["position"] = (data["price"] * 100) / data[
-                    "price_buy_average"
-                ] - 100
-                return
+            amount_total += qty
+            total_total += quote_qty
+
+            if amount_total <= data["amount"]:
+                continue
+
+            amount_total -= qty
+            total_total -= quote_qty
+
+            ppc = quote_qty / qty
+            rest = data["amount"] - amount_total
+
+            amount_total += rest
+            total_total += rest * ppc
+
+            data["price_buy_average"] = total_total / amount_total
+            data["position"] = (data["price"] * 100) / data[
+                "price_buy_average"
+            ] - 100
+            break
 
     @post_dump(pass_many=True)
     def post_dump_pass_many(self, data, many):
