@@ -25,16 +25,18 @@
         let $table = $('#table_exchange_balance');
         $table.find("tbody tr").remove();
         $.each(data.results, function () {
-          const _id = `total_{{ exchange }}_${this.coin_token.toLowerCase()}usdt_price_usdt_10s`
+          const total_price_id = `total_{{ exchange }}_${this.coin_token.toLowerCase()}usdt_price_usdt_10s`
+          const price_id = `{{ exchange }}_${this.coin_token.toLowerCase()}usdt_price_usdt_10s`
+          console.log(price_id)
           $table.append(
               "<tr>" +
-              "<td style='width: 32px; vertical-align: middle;'>" +
-              "<img src='/static/imgs/logos/" + this.coin_token + ".png' alt='" + this.coin_token + "'/></td>" +
-              "<td class='align-right'>" + this.coin_token + "</td>" +
-              "<td class='align-right'>" + _get_formatter(this.free, false).format(this.free) + "</td>" +
-              "<td class='align-right'>" + _get_formatter(this.locked, false).format(this.locked) + "</td>" +
-              "<td class='align-right'>" + _get_formatter(this.total, false).format(this.total) + "</td>" +
-              "<td class='align-right'><span id=" + _id + " class='pf-total-price'>-</span></td>" +
+                  "<td style='width: 32px; vertical-align: middle;'>" +
+                  "<img src='/static/imgs/logos/" + this.coin_token + ".png' alt='" + this.coin_token + "'/></td>" +
+                  "<td class='align-right'><span id='" + price_id + "'>-</span></td>" +
+                  "<td class='align-right'>" + _get_formatter(this.free, false).format(this.free) + "</td>" +
+                  "<td class='align-right'>" + _get_formatter(this.locked, false).format(this.locked) + "</td>" +
+                  "<td class='align-right'>" + _get_formatter(this.total, false).format(this.total) + "</td>" +
+                  "<td class='align-right'><span id='" + total_price_id + "' class='pf-total-price'>-</span></td>" +
               "</tr>"
           );
         });
@@ -148,7 +150,7 @@
         <thead>
           <tr>
             <th style="text-align: right;">&nbsp;</th>
-            <th>Coin or Token</th>
+            <th>Price</th>
             <th style="text-align: right;">Free</th>
             <th style="text-align: right;">Locked</th>
             <th style="text-align: right;">Total</th>
