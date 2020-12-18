@@ -27,7 +27,6 @@
         $.each(data.results, function () {
           const total_price_id = `total_{{ exchange }}_${this.coin_token.toLowerCase()}usdt_price_usdt_10s`
           const price_id = `{{ exchange }}_${this.coin_token.toLowerCase()}usdt_price_usdt_10s`
-          console.log(price_id)
           $table.append(
               "<tr>" +
                   "<td style='width: 32px; vertical-align: middle;'>" +
