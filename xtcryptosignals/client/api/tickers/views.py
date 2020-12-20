@@ -119,7 +119,7 @@ def pair_frequency(pair, frequency):
     if pair_not_found:
         raise ValueError("Pair not found.")
     return dict(
-        template_name_or_list="ticker/pair_frequency.html",
+        template_name_or_list="ticker/pair-frequency.html",
         symbols_per_exchange=x,
         attributes=_COLUMN_ATTRIBUTES,
         frequency=frequency,

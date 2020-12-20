@@ -1,0 +1,183 @@
+{% extends 'ticker/ticker.html' %}
+
+{% block title %}Portfolio{% endblock %}
+
+{% block body %}
+
+{% with url_ticker='ticker.ticker', params={} %}
+{% include 'menu.html' %}
+{% endwith %}
+
+<script type="text/javascript">
+    function render_account_status(data) {
+        let color = 'red'
+        if (data["success"] === true) {
+            color = "green"
+        }
+        $(".dot").css({"background-color": color});
+    }
+
+    let data_balance = {};
+    function render_balance(data) {
+        for (const [_, value] of Object.entries(data.results)) {
+            data_balance[value.coin_token] = value
+        }
+        let $table = $('#table_exchange_balance');
+        $table.find("tbody tr").remove();
+        $.each(data.results, function () {
+          const total_price_id = `total_{{ exchange }}_${this.coin_token.toLowerCase()}usdt_price_usdt_10s`
+          const price_id = `{{ exchange }}_${this.coin_token.toLowerCase()}usdt_price_usdt_10s`
+          $table.append(
+              "<tr>" +
+              "<td style='width: 32px; vertical-align: middle;'>" +
+              "<img src='/static/imgs/logos/" + this.coin_token + ".png' alt='" + this.coin_token + "'/></td>" +
+              "<td class='align-right'><span id='" + price_id + "'>-</span></td>" +
+              "<td class='align-right'>" + _get_formatter(this.free, false).format(this.free) + "</td>" +
+              "<td class='align-right'>" + _get_formatter(this.locked, false).format(this.locked) + "</td>" +
+              "<td class='align-right'>" + _get_formatter(this.total, false).format(this.total) + "</td>" +
+              "<td class='align-right'><span id='" + total_price_id + "' class='pf-total-price'>-</span></td>" +
+              "</tr>"
+          );
+        });
+    }
+
+    function render_open_orders(data) {
+        let $table = $('#table_exchange_open_orders');
+        $table.find("tbody tr").remove();
+        $.each(data.results, function () {
+          let css = '';
+          if (this.type === "BUY") {
+            css = 'class="positive"'
+          } else if (this.type === "SELL") {
+            css = 'class="negative"'
+          }
+          let price_buy_average = '-'
+          if ("price_buy_average" in this) {
+              price_buy_average = _get_formatter(this.price_buy_average, false).format(this.price_buy_average)
+          }
+          let position = '-'
+          if ("position" in this) {
+              position = _get_formatter(this.position, false).format(this.position) + '%'
+          }
+          $table.append(
+              "<tr " + css + ">" +
+              "<td style='padding-left: 8px'>" + this.symbol + "</td>" +
+              "<td class='align-right'>" + _get_formatter(this.price, false).format(this.price) + "</td>" +
+              "<td class='align-right'>" + _get_formatter(this.amount, false).format(this.amount) + "</td>" +
+              "<td class='align-right'>" + _get_formatter(this.filled, false).format(this.filled) + "%</td>" +
+              "<td class='align-center'>" + this.type + "</td>" +
+              "<td class='align-right'>" + _get_formatter(this.total, false).format(this.total) + "</td>" +
+              "<td class='align-right'>" + price_buy_average + "</div></td>" +
+              "<td style='padding-right: 8px'><div class='align-right'>" + position + "</div></td>" +
+              "</tr>"
+          );
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    function post_ticker_emit(id, json) {
+        const symbol = data_balance[json.ticker];
+        if (symbol === undefined) {
+            return;
+        }
+        const pair = json.ticker + "USDT";
+        if(pair !== json.symbol) {
+            return;
+        }
+        if("{{ exchange }}" !== json.source) {
+            return;
+        }
+
+        const _id = `#total_{{ exchange }}_${pair.toLowerCase()}_price_usdt_10s`
+        const total_in_usdt_per_row = json["price_usdt"] * symbol["total"]
+        $(_id).text(
+            _get_formatter(total_in_usdt_per_row, false).format(total_in_usdt_per_row)
+        )
+
+        if ('USDT' in data_balance) {
+            const _id = `#total_{{ exchange }}_usdtusdt_price_usdt_10s`
+            $(_id).text(
+               _get_formatter(data_balance['USDT']['total'], false).format(data_balance['USDT']['total'])
+            )
+        }
+
+        let total_price = 0.0;
+        $(".pf-total-price").each(function() {
+            let value = $(this).text().replace(',', '');
+            if(!isNaN(value) && value.length !== 0) {
+                total_price += parseFloat(value)
+            }
+        });
+
+        $('#my_balance_total').text(
+            _get_formatter(total_price, false).format(total_price)
+        )
+  }
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    get_account_status(render_account_status, '{{ exchange }}');
+    get_balance(render_balance, '{{ exchange }}');
+    get_open_orders(render_open_orders, '{{ exchange }}');
+  });
+</script>
+
+<br/><br/>
+
+<div class="row">
+    <div class="twelve columns">
+        <div class="u-pull-left">
+            <h6><span class="dot"></span> {{ exchange.upper() }} account status</h6>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="six columns">
+        <div id="balances" class="custom-grid custom-grid-without-subtitles">
+        <div class="four columns">Total: <span id='my_balance_total' class="bigger">-</span> USDT</div>
+      </div>
+    </div>
+</div>
+
+<div class="row">
+  <div class="six columns">
+      <h5>My Balance</h5>
+      <table id="table_exchange_balance">
+        <thead>
+          <tr>
+            <th style="text-align: right;">&nbsp;</th>
+            <th style="text-align: right;">Price</th>
+            <th style="text-align: right;">Free</th>
+            <th style="text-align: right;">Locked</th>
+            <th style="text-align: right;">Total</th>
+            <th style="text-align: right;">in USDT</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+  </div>
+
+  <div class="six columns">
+      <h5>My Open Orders</h5>
+      <table id="table_exchange_open_orders">
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th style="text-align: right;">Price</th>
+            <th style="text-align: right;">Amount</th>
+            <th style="text-align: right;">Filled</th>
+            <th style="text-align: center;">Type</th>
+            <th style="text-align: right;">Total</th>
+            <th style="text-align: right;">Price Buy Avg.</th>
+            <th style="text-align: right;">Position</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+  </div>
+</div>
+
+{% endblock %}

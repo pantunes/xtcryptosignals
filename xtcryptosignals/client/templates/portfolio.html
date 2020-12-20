@@ -45,7 +45,7 @@
           "<td><a href='/ticker/" + pair.replace('-', '') + "/{{frequency}}'>" + pair + "</a> | <small><a href=/ticker/10s#" + exchange + ">" + exchange + "</a></small></td>" +
           "<td class='align-right pf-current-price'><span id=\"" + prefix_id + _prefix_usdt + "{{frequency}}\">" + value.current_price + "</span></td>" +
           "<td class='align-right pf-units'>" + get_units(value.units) + "</td>" +
-          "<td class='align-right pf-total-paid'>" + price_formatter.format(value.amount) + "</td>" +
+          "<td class='align-right'>" + price_formatter.format(value.amount) + "</td>" +
           "<td class='align-right'>" + p.format(value.average_paid) + "</td>" +
           "<td class='align-right'>" + value.share + "%</span></td>" +
           "<td class='align-right'><span id=\"" + balance_id + "\">-</span></td>" +
@@ -177,14 +177,12 @@
       <h5>My Portfolio</h5>
   </div>
   <div class="twelve columns">
-    <div >
       <div id="balances" class="custom-grid custom-grid-without-subtitles">
         <div class="three columns">Paid: <span id='my_portfolio_total_spent' class="bigger">-</span></div>
         <div class="three columns">Value: <span id='my_portfolio_total_value' class="bigger">-</span></div>
         <div class="three columns">Pos: <span id='my_portfolio_total_position' class="bigger">-</span></div>
         <div class="three columns">BTC/ETH: <span id='my_portfolio_in_btc' class="bigger">-</span> / <span id='my_portfolio_in_eth' class="bigger">-</span></div>
       </div>
-    </div>
 
     <table class="u-full-width" id="table_portfolio">
       <thead>

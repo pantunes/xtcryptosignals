@@ -40,7 +40,7 @@ function open_modal(m, id=undefined) {
             captcha();
             setTimeout(function () {
                 $(field2focus[m]).focus();
-            },250)
+            },50)
             $(_m).off($.modal.OPEN)
         });
 
@@ -132,7 +132,7 @@ function open_modal(m, id=undefined) {
                 };
                 setTimeout(function () {
                     $('#spotlight').focus();
-                },250)
+                },50)
             });
             $(_m).off($.modal.OPEN)
         });

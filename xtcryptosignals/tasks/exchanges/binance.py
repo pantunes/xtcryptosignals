@@ -8,14 +8,14 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-from binance.client import Client
+from binance.client import Client as BinanceClient
 from binance.exceptions import BinanceAPIException
 from xtcryptosignals.tasks import settings as s
 
 
 class Binance:
     def __init__(self):
-        self.client = Client(s.BINANCE_API_KEY, s.BINANCE_API_SECRET)
+        self.client = BinanceClient(s.BINANCE_API_KEY, s.BINANCE_API_SECRET)
 
     def get_ticker(self, *_, **kwargs):
         ticker_kwargs = {}

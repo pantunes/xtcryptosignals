@@ -56,7 +56,10 @@ def index():
     )
 
 
-@bp.route("/notifications/list", methods=["GET"])
+bp_xhr = Blueprint("notification/xhr", __name__)
+
+
+@bp_xhr.route("/notifications/list", methods=["GET"])
 @login_required
 def notifications():
     response = requests.get(
@@ -67,7 +70,7 @@ def notifications():
     return dict(results=response.json()), response.status_code
 
 
-@bp.route("/notifications/rules", methods=["GET"])
+@bp_xhr.route("/notifications/rules", methods=["GET"])
 @login_required
 def rules():
     response = requests.get(
@@ -79,7 +82,7 @@ def rules():
     return dict(results=response.json()), response.status_code
 
 
-@bp.route("/notifications/rule/add", methods=["POST"])
+@bp_xhr.route("/notifications/rule/add", methods=["POST"])
 @login_required
 def rule_add():
     response = requests.post(
@@ -92,7 +95,7 @@ def rule_add():
     return response.json(), response.status_code
 
 
-@bp.route("/notifications/rule/<notification>/edit", methods=["POST"])
+@bp_xhr.route("/notifications/rule/<notification>/edit", methods=["POST"])
 @login_required
 def rule_edit(notification):
     response = requests.put(
@@ -105,7 +108,7 @@ def rule_edit(notification):
     return response.json(), response.status_code
 
 
-@bp.route("/notifications/rule/<notification>/delete", methods=["POST"])
+@bp_xhr.route("/notifications/rule/<notification>/delete", methods=["POST"])
 @login_required
 def rule_delete(notification):
     response = requests.delete(
@@ -118,7 +121,7 @@ def rule_delete(notification):
     return {}, response.status_code
 
 
-@bp.route("/notifications/rule/<notification>", methods=["GET"])
+@bp_xhr.route("/notifications/rule/<notification>", methods=["GET"])
 @login_required
 def rule_get(notification):
     response = requests.get(

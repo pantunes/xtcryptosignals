@@ -14,6 +14,7 @@ from environs import Env
 env = Env()
 env.read_env(env("SETTINGS_APP"), recurse=False)
 
+
 MONGODB_NAME = env.str("MONGODB_NAME")
 MONGODB_HOST = env.str("MONGODB_HOST")
 MONGODB_PORT = env.int("MONGODB_PORT")

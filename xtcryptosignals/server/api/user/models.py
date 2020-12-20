@@ -31,6 +31,10 @@ class User(DocumentValidation):
         "collection": "user",
     }
 
+    @property
+    def salt(self):
+        return f"{self.pk}.{self.email}.{self.password}"
+
 
 class UserTokenFavourites(DocumentValidation):
     coin_token = StringField(

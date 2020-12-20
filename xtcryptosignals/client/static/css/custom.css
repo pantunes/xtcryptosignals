@@ -93,6 +93,9 @@ body {
 .align-right {
   text-align: right;
 }
+.align-center {
+  text-align: center;
+}
 .positive {
   background-color: #e6ffee;
 }
@@ -136,4 +139,12 @@ table.market-depth-orders td {
 }
 .market-depth-orders-row-red {
   background-color: #f7f7f7;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
 }

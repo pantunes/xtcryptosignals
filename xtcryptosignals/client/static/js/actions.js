@@ -4,6 +4,7 @@ const menu_options_logged_in = [
     '#menu_transactions_link',
     '#menu_logout_link',
     '#menu_notifications_link',
+    '#menu_binance_link',
 ];
 
 const urls_logout_to_index = [
@@ -11,6 +12,7 @@ const urls_logout_to_index = [
     '/transactions',
     '/portfolio',
     '/notifications',
+    '/exchange/binance',
 ];
 
 function signup() {
@@ -168,5 +170,32 @@ function toggle_favourite(coin_or_token) {
         if (xhr.status === 401) {
             open_modal('#login');
         }
+    });
+}
+
+function get_account_status(handler, exchange) {
+    $.get(`/exchange/${exchange}/account/status`).done(function(response) {
+        handler(response)
+    })
+    .fail(function(xhr, status, error) {
+        process_fail(xhr);
+    });
+}
+
+function get_balance(handler, exchange) {
+    $.get(`/exchange/${exchange}/balance`).done(function(response) {
+        handler(response)
+    })
+    .fail(function(xhr, status, error) {
+        process_fail(xhr);
+    });
+}
+
+function get_open_orders(handler, exchange) {
+    $.get(`/exchange/${exchange}/orders/open`).done(function(response) {
+        handler(response)
+    })
+    .fail(function(xhr, status, error) {
+        process_fail(xhr);
     });
 }

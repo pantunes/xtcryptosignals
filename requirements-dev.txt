@@ -1,5 +1,6 @@
 -r requirements.txt
 
+ipython==7.19.0
 black==19.10b0
 twine
 

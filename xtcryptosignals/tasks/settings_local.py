@@ -8,15 +8,20 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-# Add the following Personal Exchange keys in order to be able to Trade
+from environs import Env
 
-BINANCE_API_KEY = ""
-BINANCE_API_SECRET = ""
 
-KUCOIN_API_KEY = ""
-KUCOIN_API_SECRET = ""
-KUCOIN_API_PASSPHRASE = ""
+env = Env()
+env.read_env(env("SETTINGS_APP"), recurse=False)
 
-IDEX_API_KEY = ""
-IDEX_ADDRESS = ""
-IDEX_PRIVATE_KEY = ""
+
+BINANCE_API_KEY = env.str("BINANCE_API_KEY", "")
+BINANCE_API_SECRET = env.str("BINANCE_API_SECRET", "")
+
+KUCOIN_API_KEY = env.str("KUCOIN_API_KEY", "")
+KUCOIN_API_SECRET = env.str("KUCOIN_API_SECRET", "")
+KUCOIN_API_PASSPHRASE = env.str("KUCOIN_API_PASSPHRASE", "")
+
+IDEX_API_KEY = env.str("IDEX_API_KEY", "")
+IDEX_ADDRESS = env.str("IDEX_ADDRESS", "")
+IDEX_PRIVATE_KEY = env.str("IDEX_PRIVATE_KEY", "")

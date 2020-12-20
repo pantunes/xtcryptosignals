@@ -61,7 +61,10 @@ def index():
     )
 
 
-@bp.route("/transactions/list", methods=["GET"])
+bp_xhr = Blueprint("transaction/xhr", __name__)
+
+
+@bp_xhr.route("/transactions/list", methods=["GET"])
 @login_required
 def _list():
     response = requests.get(
@@ -71,7 +74,7 @@ def _list():
     return dict(results=response.json()), response.status_code
 
 
-@bp.route("/transactions/add", methods=["POST"])
+@bp_xhr.route("/transactions/add", methods=["POST"])
 @login_required
 def add():
     response = requests.post(

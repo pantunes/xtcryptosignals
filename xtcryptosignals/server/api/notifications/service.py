@@ -42,7 +42,7 @@ def edit_notification_rule(auth, notification, data):
     except ValidationError as err:
         error = _sanitize_errors_mongoengine(err)
         raise ValueError(error, 406)
-    # TODO: a little work-around
+    # @note: save modified_on
     notification_rule.save()
 
 
