@@ -19,23 +19,35 @@
 
     let data_balance = {};
     function render_balance(data) {
-        for (const [_, value] of Object.entries(data.results)) {
+        for (const [_, value] of Object.entries(data.results.rows)) {
             data_balance[value.coin_token] = value
         }
+        $('#my_balance_total').text(
+            _get_formatter(data.results.total, false).format(data.results.total)
+        )
+
         let $table = $('#table_exchange_balance');
         $table.find("tbody tr").remove();
-        $.each(data.results, function () {
+        $.each(data.results.rows, function () {
           const total_price_id = `total_{{ exchange }}_${this.coin_token.toLowerCase()}usdt_price_usdt_10s`
           const price_id = `{{ exchange }}_${this.coin_token.toLowerCase()}usdt_price_usdt_10s`
+          let price = '-'
+          if ("price" in this) {
+              price = _get_formatter(this.price, false).format(this.price)
+          }
+          let total_price = '-'
+          if ("total_price" in this) {
+              total_price = _get_formatter(this.total_price, false).format(this.total_price)
+          }
           $table.append(
               "<tr>" +
               "<td style='width: 32px; vertical-align: middle;'>" +
               "<img src='/static/imgs/logos/" + this.coin_token + ".png' alt='" + this.coin_token + "'/></td>" +
-              "<td class='align-right'><span id='" + price_id + "'>-</span></td>" +
+              "<td class='align-right'><span id='" + price_id + "'>" + price + "</span></td>" +
               "<td class='align-right'>" + _get_formatter(this.free, false).format(this.free) + "</td>" +
               "<td class='align-right'>" + _get_formatter(this.locked, false).format(this.locked) + "</td>" +
               "<td class='align-right'>" + _get_formatter(this.total, false).format(this.total) + "</td>" +
-              "<td class='align-right'><span id='" + total_price_id + "' class='pf-total-price'>-</span></td>" +
+              "<td class='align-right'><span id='" + total_price_id + "' class='pf-total-price'>" + total_price + "</span></td>" +
               "</tr>"
           );
         });

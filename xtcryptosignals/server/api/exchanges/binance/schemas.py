@@ -8,12 +8,18 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+import redis
+import json
 from marshmallow import (
     Schema,
     fields,
     post_dump,
 )
+from xtcryptosignals.tasks import settings as s
 from xtcryptosignals.server.api.exchanges.binance.service import BinanceAPI
+
+
+red = redis.Redis.from_url(s.BROKER_URL)
 
 
 class BalanceOutputSchema(Schema):
@@ -25,6 +31,22 @@ class BalanceOutputSchema(Schema):
     def post_dump(self, data):
         data["total"] = data["free"] + data["locked"]
 
+        if data['coin_token'] != 'USDT':
+            key = s.REDIS_KEY_TICKER.format(
+                source=s.BINANCE,
+                symbol=f"{data['coin_token']}USDT",
+                frequency=s.HISTORY_FREQUENCY[0],
+            )
+            ser_row = red.get(key)
+            if ser_row:
+                deser_row = json.loads(ser_row)
+                price = float(deser_row["price"])
+                data["price"] = price
+        else:
+            data["price"] = 1.0
+        if "price" in data:
+            data["total_price"] = data["total"] * data["price"]
+
 
 class ExchangeBalanceOutputSchema(Schema):
     balances = fields.Nested(BalanceOutputSchema, many=True, required=True)
@@ -32,11 +54,14 @@ class ExchangeBalanceOutputSchema(Schema):
     @post_dump(pass_many=True)
     def post_dump(self, data, many):
         rows = []
+        total = 0.0
         for x in data["balances"]:
             if x["free"] == 0 and x["locked"] == 0:
                 continue
+            if "price" in x:
+                total += x["price"] * x["total"]
             rows.append(x)
-        return dict(results=rows)
+        return dict(results=dict(rows=rows, total=total))
 
 
 class ExchangeOpenOrdersOutputSchema(Schema):
