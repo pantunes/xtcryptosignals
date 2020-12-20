@@ -153,7 +153,7 @@ function render_data_depth_chart(coin_or_token, quote) {
         _chart.redraw();
     }
 
-    function reload_orders(json) {
+    function reload_orders(json, pair) {
         const red = 'market-depth-orders-row-red'
         const red_bar = '#ffd2c9'
         const green = 'market-depth-orders-row-green'
@@ -168,7 +168,9 @@ function render_data_depth_chart(coin_or_token, quote) {
             ["intervals_bids_cumulative", green, green_bar, true],
         ]) {
 
-            $(`#orders_${j[0]} > tr`).remove();
+            const sel = `${j[0]}_{{ coin_or_token }}_${pair}`
+
+            $(`#orders_${sel} > tr`).remove();
 
             let list = json[j[0]]
             if (j[3]) {
@@ -188,13 +190,13 @@ function render_data_depth_chart(coin_or_token, quote) {
                 let col2 = f2.format(v[1])
                 let col3 = v[2]
 
-                if (j[0].includes("intervals_")) {
+                if (sel.includes("intervals_")) {
                     col1 = f1.format(v[0]) + ' - ' + f3.format(v[1])
                     col2 = f4.format(v[2])
                     col3 = v[3]
                 }
 
-                $(`#orders_${j[0]} tbody`).after(
+                $(`#orders_${sel} tbody`).after(
                     '<tr>' +
                     '<td class="' + j[1] + '">' + col1 + '</td>' +
                     '<td class="' + j[1] + '">' +
@@ -210,16 +212,13 @@ function render_data_depth_chart(coin_or_token, quote) {
         sockets[i] = io('{{socket_books_url}}order_book/{{ coin_or_token }}' + pairs[i]);
         sockets[i].on('order_book', function(json) {
             reload_chart(json, i)
-            if (i == 0) {
-                reload_orders(json)
-            }
+            reload_orders(json, pairs[i])
         })
     }
 
 </script>
 
 {% if reference['market_depth'] %}
-
 <div class="row">
     {% for pair in reference['market_depth']['pairs'] %}
         <div class="six columns" id="row_chart_depth_{{ coin_or_token }}{{ pair }}" style="display: none;">
@@ -233,53 +232,74 @@ function render_data_depth_chart(coin_or_token, quote) {
 
 <br/><br/>
 
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#tabs").tabs({event: "mouseover"});
+});
+</script>
+
 <div class="row">
-    <div class="two columns">
-        <table id="orders_bids" class="market-depth-orders">
-            <caption><h6>Bids</h6></caption>
-            <thead><tr><th style="text-align: right">Price</th><th>Total</th></thead>
-            <tbody></tbody>
-        </table>
-    </div>
-    <div class="two columns">
-        <table id="orders_asks" class="market-depth-orders">
-            <caption><h6>Asks</h6></caption>
-            <thead><tr><th style="text-align: right">Price</th><th>Total</th></thead>
-            <tbody></tbody>
-        </table>
-    </div>
-    <div class="two columns">
-        <table id="orders_bids_cumulative" class="market-depth-orders">
-            <caption><h6>Accrued Bids</h6></caption>
-            <thead><tr><th style="text-align: right">Price</th><th>Total</th></thead>
-            <tbody></tbody>
-        </table>
-    </div>
-    <div class="two columns">
-        <table id="orders_asks_cumulative" class="market-depth-orders">
-            <caption><h6>Accrued Asks</h6></caption>
-            <thead><tr><th style="text-align: right">Price</th><th>Total</th></thead>
-            <tbody></tbody>
-        </table>
-    </div>
-    <div class="three columns">
-        <table id="orders_intervals_bids_cumulative" class="market-depth-orders">
-            <caption><h6>Accrued Bids Interval</h6></caption>
-            <thead><tr><th style="text-align: right">Price</th><th>Total</th></thead>
-            <tbody></tbody>
-        </table>
-    </div>
-    <div class="three columns">
-        <table id="orders_intervals_asks_cumulative" class="market-depth-orders">
-            <caption><h6>Accrued Asks Interval</h6></caption>
-            <thead><tr><th style="text-align: right">Price</th><th>Total</th></thead>
-            <tbody></tbody>
-        </table>
+    <h5 class="align-center">Order book</h5>
+    <div id="tabs">
+      <ul>
+          {% for pair in reference['market_depth']['pairs'] %}
+              <li><a href="#tab-{{ coin_or_token }}-{{ pair }}">{{ coin_or_token }}/{{ pair }}</a></li>
+          {% endfor %}
+      </ul>
+
+      {% for pair in reference['market_depth']['pairs'] %}
+      <div id="tab-{{ coin_or_token }}-{{ pair }}">
+        <div class="row">
+            <div class="two columns">
+                <table id="orders_bids_{{ coin_or_token }}_{{ pair }}" class="market-depth-orders">
+                    <caption><h6>Bids</h6></caption>
+                    <thead><tr><th style="text-align: right">Price</th><th>Total</th></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="two columns">
+                <table id="orders_asks_{{ coin_or_token }}_{{ pair }}" class="market-depth-orders">
+                    <caption><h6>Asks</h6></caption>
+                    <thead><tr><th style="text-align: right">Price</th><th>Total</th></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="two columns">
+                <table id="orders_bids_cumulative_{{ coin_or_token }}_{{ pair }}" class="market-depth-orders">
+                    <caption><h6>Accrued Bids</h6></caption>
+                    <thead><tr><th style="text-align: right">Price</th><th>Total</th></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="two columns">
+                <table id="orders_asks_cumulative_{{ coin_or_token }}_{{ pair }}" class="market-depth-orders">
+                    <caption><h6>Accrued Asks</h6></caption>
+                    <thead><tr><th style="text-align: right">Price</th><th>Total</th></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="three columns">
+                <table id="orders_intervals_bids_cumulative_{{ coin_or_token }}_{{ pair }}" class="market-depth-orders">
+                    <caption><h6>Accrued Bids Interval</h6></caption>
+                    <thead><tr><th style="text-align: right">Price</th><th>Total</th></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="three columns">
+                <table id="orders_intervals_asks_cumulative_{{ coin_or_token }}_{{ pair }}" class="market-depth-orders">
+                    <caption><h6>Accrued Asks Interval</h6></caption>
+                    <thead><tr><th style="text-align: right">Price</th><th>Total</th></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <b>Source:</b> {{ reference['name']|capitalize }}, <b>Pair:</b> {{ coin_or_token }}/{{ pair }}
+      </div>
+      {% endfor %}
+
     </div>
 </div>
-
-<b>Source:</b> {{ reference['name']|capitalize }}, <b>Pair:</b> {{ coin_or_token }}/{{ reference['pair'] }}
-
 {% endif %}
 
 {% endblock %}
