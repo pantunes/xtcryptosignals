@@ -8,6 +8,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+from cryptography.fernet import InvalidToken
 from binance.client import Client as BinanceClient
 from binance.exceptions import BinanceAPIException
 from xtcryptosignals.server.api.exchanges.service import ExchangeAPI
@@ -23,8 +24,11 @@ class BinanceAPI(ExchangeAPI):
         except (KeyError, AttributeError):
             raise ValueError("No Binance(1).", 403)
 
-        key = Crypto.decrypt(fkey, binance_secrets["api_key"])
-        secret = Crypto.decrypt(fkey, binance_secrets["api_secret"])
+        try:
+            key = Crypto.decrypt(fkey, binance_secrets["api_key"])
+            secret = Crypto.decrypt(fkey, binance_secrets["api_secret"])
+        except InvalidToken:
+            raise ValueError("No Binance(3).", 403)
 
         try:
             self.client = BinanceClient(key, secret)
