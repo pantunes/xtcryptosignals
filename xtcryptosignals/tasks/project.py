@@ -9,6 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import requests
+import time
 import wikipediaapi
 from datetime import date
 from celery.task import task
@@ -57,6 +58,8 @@ def update(self):
                     added_on=today,
                 )
                 pt.save()
+            time.sleep(1.0)
+
     except Exception as error:
         logger.error("twitter error: {}".format(str(error)))
         self.update_state(state=states.FAILURE, meta=str(error))
