@@ -2,6 +2,7 @@
 All changes will be registered here per release.
 
 ## [0.8.4] - Current date
+Added Binance Exchange User Account connectivity.  
 Added Spotlight Search.  
 Added Keyboard shortcuts.  
 Added `SNX`, `RLC` Projects/Tokens.  
