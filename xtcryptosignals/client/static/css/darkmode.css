@@ -121,3 +121,15 @@
 .darkmode--activated .market-depth-orders-row-red {
   background-color: #2b2b2b;
 }
+
+.darkmode--activated .ui-widget-content {
+  background-color: #282b29;
+}
+
+.darkmode--activated .ui-widget-header {
+  background-color: #6c6c6c;
+}
+
+.darkmode--activated .ui-state-default {
+  background-color: #6c6c6c;
+}
