@@ -14,6 +14,7 @@ from xtcryptosignals.server.api.auth.models import Auth
 from xtcryptosignals.server.api.user.models import UserTokenFavourites
 from xtcryptosignals.server.api.projects.models import Project
 from xtcryptosignals.server.api.user.service import get_user
+from xtcryptosignals.server.crypto import Crypto
 from xtcryptosignals.tasks import settings as s
 
 
@@ -48,6 +49,17 @@ def logout(auth):
 
 def subscription(auth, data):
     auth.user.metadata.update(subscription=data)
+    auth.user.save()
+
+
+def exchange_binance_keys(auth, data, pkey):
+    fkey = Crypto._get_fkey(key=pkey, salt=auth.user.salt)
+
+    _data = data.copy()
+    for key in data:
+        _data[key] = Crypto.encrypt(fkey, data[key])
+
+    auth.user.metadata.update(exchanges=dict(binance=_data))
     auth.user.save()
 
 

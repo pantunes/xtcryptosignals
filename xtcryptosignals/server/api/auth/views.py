@@ -8,7 +8,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-from flask import Blueprint
+from flask import Blueprint, current_app
 from flask_restful import Api, Resource
 from xtcryptosignals.server.utils import (
     validate_io,
@@ -18,6 +18,7 @@ from xtcryptosignals.server.api.auth import service
 from xtcryptosignals.server.api.auth.schemas import (
     AuthInputSchema,
     AuthSubscriptionInputSchema,
+    AuthExchangeBinanceKeysInputSchema,
     AuthOutputSchema,
 )
 
@@ -130,6 +131,39 @@ class SubscriptionPost(Resource):
         service.subscription(auth=auth, data=valid_data)
 
 
+class ExchangeBinanceKeysPost(Resource):
+    @validate_io(schema_in=AuthExchangeBinanceKeysInputSchema)
+    @user_auth()
+    def post(self, auth, valid_data):
+        """
+        Adds User's Exchange Binance keys
+        ---
+        tags:
+            - Authentication
+        parameters:
+            - name: payload
+              in: body
+              example:
+                {
+                    api_key: 'some_key',
+                    api_secret: 'some_secret',
+                }
+              required: true
+        security:
+            - Bearer: []
+        responses:
+            200:
+                description: Keys saved
+            400:
+                description: Error in session validation
+            401:
+                description: Unauthorized
+        """
+        service.exchange_binance_keys(
+            auth=auth, data=valid_data, pkey=current_app.config["SECRET_KEY"]
+        )
+
+
 class UserTokenFavouritesGet(Resource):
     @validate_io()
     @user_auth()
@@ -206,6 +240,7 @@ api.add_resource(LoginPost, "/login")
 api.add_resource(LogoutPost, "/logout")
 api.add_resource(AuthGet, "/auth")
 api.add_resource(SubscriptionPost, "/subscription")
+api.add_resource(ExchangeBinanceKeysPost, "/exchanges/binance")
 api.add_resource(UserTokenFavouritesGet, "/favourites/<coin_or_token>")
 api.add_resource(UserTokenFavouritesPost, "/favourites/<coin_or_token>")
 api.add_resource(UserTokenFavouritesListGet, "/favourites")

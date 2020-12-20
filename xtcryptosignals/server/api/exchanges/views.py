@@ -8,7 +8,7 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-from flask import Blueprint
+from flask import Blueprint, current_app
 from flask_restful import Api, Resource
 from xtcryptosignals.server.utils import (
     validate_io,
@@ -29,7 +29,7 @@ api = Api(bp)
 
 EXCHANGE_APIS = {
     s.BINANCE: BinanceAPI,
-    # ...
+    # ... more exchanges,
 }
 
 
@@ -53,22 +53,27 @@ class ExchangeBalance(Resource):
                 description: Error in session validation
             401:
                 description: Unauthorized
+            403:
+                description: Forbidden
         """
         if exchange not in (s.BINANCE,):
             return dict(error="Invalid Exchange."), 400
 
-        exchange_api = EXCHANGE_APIS[exchange]()
+        exchange_api = EXCHANGE_APIS[exchange](
+            pkey=current_app.config["SECRET_KEY"], auth=auth
+        )
         return exchange_api.get_balance()
 
 
 class ExchangeOpenOrders(Resource):
+    @user_auth()
     @validate_io(
         schema_out=ExchangeOpenOrdersOutputSchema,
         many_out=True,
         skip_validate=True,
+        schema_out_auth_context=True,
     )
-    @user_auth()
-    def get(self, auth, exchange):
+    def get(self, exchange, auth):
         """
         User's Exchange open orders
         ---
@@ -83,11 +88,15 @@ class ExchangeOpenOrders(Resource):
                 description: Error in session validation
             401:
                 description: Unauthorized
+            403:
+                description: Forbidden
         """
         if exchange not in (s.BINANCE,):
             return dict(error="Invalid Exchange."), 400
 
-        exchange_api = EXCHANGE_APIS[exchange]()
+        exchange_api = EXCHANGE_APIS[exchange](
+            pkey=current_app.config["SECRET_KEY"], auth=auth
+        )
         return exchange_api.get_open_orders()
 
 
@@ -109,11 +118,15 @@ class ExchangeAccountStatus(Resource):
                 description: Error in session validation
             401:
                 description: Unauthorized
+            403:
+                description: Forbidden
         """
         if exchange not in (s.BINANCE,):
             return dict(error="Invalid Exchange."), 400
 
-        exchange_api = EXCHANGE_APIS[exchange]()
+        exchange_api = EXCHANGE_APIS[exchange](
+            pkey=current_app.config["SECRET_KEY"], auth=auth
+        )
         return exchange_api.get_account_status()
 
 

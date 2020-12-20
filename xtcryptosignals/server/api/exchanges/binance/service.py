@@ -8,15 +8,28 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-from xtcryptosignals.server.api.exchanges.service import ExchangeAPI
 from binance.client import Client as BinanceClient
-from xtcryptosignals.tasks import settings as s
+from binance.exceptions import BinanceAPIException
+from xtcryptosignals.server.api.exchanges.service import ExchangeAPI
+from xtcryptosignals.server.crypto import Crypto
 
 
 class BinanceAPI(ExchangeAPI):
-    def __init__(self):
-        super(BinanceAPI, self).__init__()
-        self.client = BinanceClient(s.BINANCE_API_KEY, s.BINANCE_API_SECRET)
+    def __init__(self, pkey, auth):
+        fkey = Crypto._get_fkey(key=pkey, salt=auth.user.salt)
+
+        try:
+            binance_secrets = auth.user.metadata["exchanges"]["binance"]
+        except (KeyError, AttributeError):
+            raise ValueError("No Binance(1).", 403)
+
+        key = Crypto.decrypt(fkey, binance_secrets["api_key"])
+        secret = Crypto.decrypt(fkey, binance_secrets["api_secret"])
+
+        try:
+            self.client = BinanceClient(key, secret)
+        except BinanceAPIException:
+            raise ValueError("No Binance(2).", 403)
 
     def get_balance(self):
         return self.client.get_account()

@@ -9,9 +9,6 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 class ExchangeAPI(object):
-    def __init__(self):
-        self.client = None
-
     def get_balance(self):
         raise NotImplementedError
 

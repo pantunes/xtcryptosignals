@@ -9,7 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from functools import wraps
-from flask import request
+from flask import request, current_app
 from xtcryptosignals.server.api.auth import service
 from xtcryptosignals.tasks import settings as s
 
@@ -54,7 +54,8 @@ def validate_io(
     many_in=False,
     many_out=False,
     is_form=False,
-    skip_validate=False,
+    skip_validate=False,  # @note: true when schema_out dump() output is customized and can't be validated anymore
+    schema_out_auth_context=False,
 ):
     def decorator(f):
         @wraps(f)
@@ -85,11 +86,15 @@ def validate_io(
             if type(data) is tuple:
                 data, status = data
             if schema_out:
-                data, errors = schema_out().dump(data, many=many_out)
+                schema_out_obj = schema_out()
+                if schema_out_auth_context:
+                    schema_out_obj.context["app"] = current_app
+                    schema_out_obj.context["auth"] = kwargs["auth"]
+                data, errors = schema_out_obj.dump(data, many=many_out)
                 if errors:
                     return dict(error=_sanitize_errors_marshmallow(errors)), 415
                 if not skip_validate:
-                    errors = schema_out().validate(data, many=many_out)
+                    errors = schema_out_obj.validate(data, many=many_out)
                     if errors:
                         return (
                             dict(error=_sanitize_errors_marshmallow(errors)),

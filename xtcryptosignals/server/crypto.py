@@ -10,7 +10,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 import os
 import base64
-from typing import Tuple
+from typing import Optional
 from cryptography.fernet import Fernet
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
@@ -19,26 +19,32 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
 class Crypto(object):
     @staticmethod
-    def _get_fkey(key: str):
+    def _get_fkey(key: str, salt: Optional[str] = None) -> str:
         assert isinstance(key, str)
+        assert isinstance(salt, (str, type(None),))
 
-        kdf = PBKDF2HMAC(
+        kwargs = dict(
             algorithm=hashes.SHA256(),
             length=32,
-            salt=os.urandom(16),
             iterations=100000,
-            backend=default_backend()
+            backend=default_backend(),
         )
-        return base64.urlsafe_b64encode(kdf.derive(key.encode()))
+
+        if salt:
+            kwargs.update(salt=salt.encode())
+        else:
+            kwargs.update(salt=os.urandom(16))
+
+        kdf = PBKDF2HMAC(**kwargs)
+        return base64.urlsafe_b64encode(kdf.derive(key.encode())).decode()
 
     @staticmethod
-    def encrypt(key: str, message: str) -> Tuple[str, str]:
-        assert isinstance(key, str)
+    def encrypt(fkey: str, message: str) -> str:
+        assert isinstance(fkey, str)
         assert isinstance(message, str)
 
-        fkey = Crypto._get_fkey(key)
-        f = Fernet(fkey)
-        return fkey.decode(), f.encrypt(message.encode()).decode()
+        f = Fernet(fkey.encode())
+        return f.encrypt(message.encode()).decode()
 
     @staticmethod
     def decrypt(fkey: str, encrypted_message: str) -> str:

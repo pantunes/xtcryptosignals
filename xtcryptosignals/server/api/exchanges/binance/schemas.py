@@ -57,9 +57,10 @@ class ExchangeOpenOrdersOutputSchema(Schema):
             return
 
         if data["symbol"] not in self.symbols:
-            rows = BinanceAPI().client.get_my_trades(
-                symbol=data["symbol"], limit=40
-            )
+            rows = BinanceAPI(
+                pkey=self.context["app"].config["SECRET_KEY"],
+                auth=self.context["auth"],
+            ).client.get_my_trades(symbol=data["symbol"], limit=40)
             rows.reverse()
             self.symbols.update({data["symbol"]: dict(rows=rows)})
         else:

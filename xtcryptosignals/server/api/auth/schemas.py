@@ -23,6 +23,11 @@ class AuthSubscriptionInputSchema(Schema):
     keys = fields.Dict(required=True)
 
 
+class AuthExchangeBinanceKeysInputSchema(Schema):
+    api_key = fields.String(required=True)
+    api_secret = fields.String(required=True)
+
+
 class AuthOutputSchema(OutputSchema):
     user = fields.Nested(UserOutputSchema, required=True)
     token = fields.String(required=True)
