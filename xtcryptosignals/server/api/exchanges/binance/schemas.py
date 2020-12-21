@@ -31,7 +31,7 @@ class BalanceOutputSchema(Schema):
     def post_dump(self, data):
         data["total"] = data["free"] + data["locked"]
 
-        if data['coin_token'] != 'USDT':
+        if data["coin_token"] != "USDT":
             key = s.REDIS_KEY_TICKER.format(
                 source=s.BINANCE,
                 symbol=f"{data['coin_token']}USDT",

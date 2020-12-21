@@ -30,10 +30,7 @@ class Crypto(object):
             backend=default_backend(),
         )
 
-        if salt:
-            kwargs.update(salt=salt.encode())
-        else:
-            kwargs.update(salt=os.urandom(16))
+        kwargs.update(salt=salt.encode() if salt else os.urandom(16))
 
         kdf = PBKDF2HMAC(**kwargs)
         return base64.urlsafe_b64encode(kdf.derive(key.encode())).decode()
