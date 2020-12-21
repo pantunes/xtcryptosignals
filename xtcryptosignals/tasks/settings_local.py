@@ -15,6 +15,17 @@ env = Env()
 env.read_env(env("SETTINGS_APP"), recurse=False)
 
 
+##############################################################################
+# WARNING! WARNING! WARNING! WARNING! WARNING! WARNING! WARNING! WARNING!    #
+##############################################################################
+#
+# @note: Do not add real credentials of each Exchange as the
+# following data is used to instanciate a READ-ONLY client.
+#
+##############################################################################
+# WARNING! WARNING! WARNING! WARNING! WARNING! WARNING! WARNING! WARNING!    #
+##############################################################################
+
 BINANCE_API_KEY = env.str("BINANCE_API_KEY", "")
 BINANCE_API_SECRET = env.str("BINANCE_API_SECRET", "")
 
