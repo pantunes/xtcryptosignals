@@ -28,18 +28,29 @@ class BinanceAPI(ExchangeAPI):
             key = Crypto.decrypt(fkey, binance_secrets["api_key"])
             secret = Crypto.decrypt(fkey, binance_secrets["api_secret"])
         except InvalidToken:
-            raise ValueError("No Binance(3).", 403)
+            raise ValueError("No Binance(2).", 403)
 
         try:
             self.client = BinanceClient(key, secret)
         except BinanceAPIException:
-            raise ValueError("No Binance(2).", 403)
+            raise ValueError("No Binance(3).", 403)
 
     def get_balance(self):
-        return self.client.get_account()
+        try:
+            return self.client.get_account()
+        except BinanceAPIException:
+            raise ValueError("No Binance(4).", 403)
 
     def get_open_orders(self):
-        return self.client.get_open_orders()
+        try:
+            return self.client.get_open_orders()
+        except BinanceAPIException:
+            raise ValueError("No Binance(5).", 403)
 
     def get_account_status(self):
-        return self.client.get_account_status()
+        try:
+            return self.client.get_account_status()
+        except KeyError:
+            raise ValueError("No Binance(6).", 403)
+        except BinanceAPIException:
+            raise ValueError("No Binance(7).", 403)
