@@ -1,7 +1,5 @@
 redis==3.5.3
-celery==4.4.6
 mongoengine==0.22.1
-requests==2.23.0
 click==7.1.2
 flask==1.1.2
 flask-restful==0.3.8
@@ -9,7 +7,6 @@ flask-session==0.3.2
 flask-socketio==5.0.1
 flask-login==0.5.0
 flask-wtf==0.14.3
-eventlet==0.26.0
 gunicorn==20.0.4
 mongodb-migrations==0.6.3
 bcrypt==3.2.0
@@ -26,7 +23,6 @@ python-kucoin==2.1.2
 python-idex==1.0.0
 python-telegram-bot==13.1
 pycryptodome==3.9.9
-marshmallow==2.20.5
 jsonschema==3.2.0
 mistune==0.8.4
 # switcheo==0.4.2
@@ -34,5 +30,10 @@ flasgger==0.9.5
 python-socketio[client]==5.0.3
 websockets==8.1
 cryptography==3.3.1
+# requires code refactoring
+celery==4.4.6
+requests==2.23.0
+marshmallow==2.20.5
+eventlet==0.26.0
 pymongo==3.10.1
 dnspython<2
