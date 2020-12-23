@@ -1,6 +1,6 @@
 redis==3.4.1
 celery==4.4.0
-mongoengine==0.19.1
+mongoengine==0.22.1
 requests==2.23.0
 click==7.0
 flask==1.1.1
