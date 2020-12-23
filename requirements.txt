@@ -13,7 +13,7 @@ eventlet==0.25.1
 gunicorn==20.0.4
 mongodb-migrations==0.6.3
 bcrypt==3.2.0
-environs==8.0.0
+environs==9.2.0
 pywebpush==1.11.0
 captcha==0.3
 wikipedia-api==0.5.4
