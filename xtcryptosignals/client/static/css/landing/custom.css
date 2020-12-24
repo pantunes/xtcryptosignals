@@ -23,7 +23,7 @@
 .phone {
   position: relative;
   max-width: 80%;
-  margin: 3rem -30rem -12rem;
+  margin: 3rem auto -12rem;
 }
 .phone + .phone {
   display: none;
@@ -62,7 +62,7 @@
   background-size: cover;
   color: #fff;
 }
-.categories .section-description { 
+.categories .section-description {
   margin-bottom: 4rem;
 }
 
@@ -142,10 +142,12 @@
   }
   .phone {
     top: -16rem;
+    right: -16rem;
     max-height: 615px;
   }
   .phone + .phone {
     top: -14rem;
+    right: -28rem;
     max-height: 570px;
   }
 }

@@ -14,7 +14,7 @@
     <meta property="og:url" content="//xtcryptosignals.com"/>
     <meta name="author" content="Paulo Antunes">
     <!-- css -->
-    <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+    <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Raleway:400,300,600' type='text/css'>
     <link rel="stylesheet" href="/static/css/skeleton/normalize.css" type="text/css">
     <link rel="stylesheet" href="/static/css/skeleton/skeleton.css" type="text/css">
     <link rel="stylesheet" href="/static/css/landing/custom.css" type="text/css">
@@ -26,7 +26,7 @@
     <div class="container">
       <div class="row">
         <div class="one-half column">
-          <h4 class="hero-heading">XTCryptoSignals <small>v{{version}}</small></h4>
+          <h4 class="hero-heading"><img src="/static/imgs/logo_transparent_50x50.png" style="vertical-align: bottom; padding-right: 0.5rem;">XTCryptoSignals <small>v{{version}}</small></h4>
           <p>Open source project with cryptocurrencies price data collection, price tickers, telegram and web push notifications, many charts and automatic trading.</p>
           <a class="button button-primary" href="{{url_for('ticker.ticker_coins_or_tokens', frequency=frequencies[0])}}">Try XTCryptoSignals</a>
         </div>
@@ -56,7 +56,6 @@
   </div>
 
   <div class="section categories">
-
     <div class="container">
       <h3 class="section-heading">Screenshots</h3>
       <p class="section-description">&nbsp;</p>
@@ -85,11 +84,9 @@
         </div>
       </div>
     </div>
-
     <div class="row">
         <p>See more screenshots <a href="https://github.com/pantunes/xtcryptosignals#screenshots">here</a> or just use the platform <a href="{{url_for('ticker.ticker_coins_or_tokens', frequency=frequencies[0])}}">here</a>. :)</p>
     </div>
-
   </div>
 
   <div class="container">
