@@ -9,7 +9,6 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import requests
-import time
 import wikipediaapi
 from datetime import date
 from celery.task import task
@@ -22,14 +21,14 @@ from xtcryptosignals.tasks import settings as s
 
 
 def _get_twitter_num_followers(url):
-    _url = (
-        f"https://cdn.syndication.twimg.com/widgets/"
-        f"followbutton/info.json?screen_names={url.rsplit('/', 1)[-1]}"
-    )
+    _url = f"https://cdn.syndication.twimg.com/widgets/followbutton/info.json?screen_names={url.rsplit('/', 1)[-1]}"
     response = requests.get(_url)
     if response.status_code != 200:
         return
-    return response.json()[0]["followers_count"]
+    try:
+        return response.json()[0]["followers_count"]
+    except IndexError:
+        return
 
 
 def _get_wikipedia_summary(url):
@@ -58,7 +57,6 @@ def update(self):
                     added_on=today,
                 )
                 pt.save()
-            time.sleep(1.0)
 
     except Exception as error:
         logger.error("twitter error: {}".format(str(error)))
