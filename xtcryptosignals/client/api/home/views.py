@@ -8,9 +8,9 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import random
 from datetime import datetime
 from flask import (
+    request,
     render_template,
     Blueprint,
     current_app,
@@ -40,17 +40,11 @@ def context_processor():
     )
 
 
+@bp.route("/old", methods=["GET"])
 @bp.route("/", methods=["GET"])
 def index():
-    symbols_per_exchange = []
-    for x in g.SYMBOLS_PER_EXCHANGE:
-        for exchange, item in x.items():
-            if not item["pairs"]:
-                continue
-            random_list = [x[0] + x[1] for x in item["pairs"]]
-            random.shuffle(random_list)
-            symbols_per_exchange.append({exchange: random_list[:3]})
-    return render_template(
-        template_name_or_list="index.html",
-        symbols_per_exchange=symbols_per_exchange,
-    )
+    filenames = {
+        "/": 'landing.html',
+        "/old": 'index.html',
+    }
+    return render_template(template_name_or_list=filenames[str(request.url_rule)])
