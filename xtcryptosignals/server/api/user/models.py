@@ -33,7 +33,7 @@ class User(DocumentValidation):
 
     @property
     def salt(self):
-        return f"{self.pk}.{self.email}.{self.password}"
+        return f"{self.pk}.{self.email}.{self.password}.{self.created_on}"
 
 
 class UserTokenFavourites(DocumentValidation):

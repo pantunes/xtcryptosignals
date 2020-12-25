@@ -89,6 +89,7 @@
 }
 
 .darkmode--activated #balances > div,
+.darkmode--activated #balances_potential > div,
 .darkmode--activated .custom-grid > div {
   color: #e0e0e0;
   background-color: #2b2b2b;

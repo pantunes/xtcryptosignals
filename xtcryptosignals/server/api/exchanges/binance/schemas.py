@@ -76,7 +76,7 @@ class ExchangeOpenOrdersOutputSchema(Schema):
 
     @post_dump
     def post_dump_each(self, data):
-        data["total"] = data["price"] + data["amount"]
+        data["total"] = data["price"] * data["amount"]
 
         if data["type"] == "BUY":
             return
@@ -126,7 +126,10 @@ class ExchangeOpenOrdersOutputSchema(Schema):
 
     @post_dump(pass_many=True)
     def post_dump_pass_many(self, data, many):
-        return dict(results=data)
+        balance_potential = sum(
+            [x["total"] for x in data if x["type"] == "SELL"]
+        )
+        return dict(results=data, balance_potential=balance_potential)
 
 
 class ExchangeAccountStatusOutputSchema(Schema):

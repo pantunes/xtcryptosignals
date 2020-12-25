@@ -9,6 +9,18 @@
 {% endwith %}
 
 <script type="text/javascript">
+    let balance_potential = 0.0;
+    let balance_potential_flag = false;
+    function mutex(val) {
+        if (balance_potential_flag) {
+            const bp = val + balance_potential;
+            $("#my_balance_potential").text(_get_formatter(bp, false).format(bp))
+        } else {
+            balance_potential = val
+            balance_potential_flag = true
+        }
+    }
+
     function render_account_status(data) {
         let color = 'red'
         if (data["success"] === true) {
@@ -25,6 +37,12 @@
         $('#my_balance_total').text(
             _get_formatter(data.results.total, false).format(data.results.total)
         )
+
+        let val = 0
+        if ('USDT' in data_balance) {
+            val = data_balance['USDT'].total_price
+        }
+        mutex(val)
 
         let $table = $('#table_exchange_balance');
         $table.find("tbody tr").remove();
@@ -84,6 +102,8 @@
               "</tr>"
           );
         });
+
+        mutex(data.balance_potential)
     }
 </script>
 
@@ -148,6 +168,12 @@
     <div class="four columns">
         <div id="balances" class="custom-grid custom-grid-without-subtitles">
             <div class="six columns">Total: <span id='my_balance_total' class="bigger">-</span> USDT</div>
+        </div>
+    </div>
+
+    <div class="six columns">
+        <div id="balances_potential" class="custom-grid custom-grid-without-subtitles">
+            <div class="four columns">Potential: <span id='my_balance_potential' class="bigger">-</span> USDT</div>
         </div>
     </div>
 </div>
