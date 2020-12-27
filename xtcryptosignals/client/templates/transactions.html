@@ -24,7 +24,7 @@
       const p = _get_formatter(this.unit_price, false)
       $table.append(
           "<tr>" +
-          "<td style='width: 32px; vertical-align: middle;'><img src='/static/imgs/logos/" + this.coin_token + ".png' alt='" + this.coin_token + "'/></td>" +
+          "<td style='vertical-align: middle;'><div class=\"coin-or-token one-coin\"><img src='/static/imgs/logos/" + this.coin_token + ".png' alt='" + this.coin_token + "'/></div></td>" +
           "<td class='align-right'>" + get_units(this.units) + "</td>" +
           "<td class='align-right'>" + price_formatter.format(this.amount) + "</td>" +
           "<td class='align-right'>" + p.format(this.unit_price) + "</td>" +

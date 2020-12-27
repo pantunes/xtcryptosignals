@@ -59,8 +59,8 @@
           }
           $table.append(
               "<tr>" +
-              "<td style='width: 32px; vertical-align: middle;'>" +
-              "<img src='/static/imgs/logos/" + this.coin_token + ".png' alt='" + this.coin_token + "'/></td>" +
+              "<td style='vertical-align: middle;'>" +
+              "<div class=\"coin-or-token one-coin\"><img src='/static/imgs/logos/" + this.coin_token + ".png' alt='" + this.coin_token + "'/></div></td>" +
               "<td class='align-right'><span id='" + price_id + "'>" + price + "</span></td>" +
               "<td class='align-right'>" + _get_formatter(this.free, false).format(this.free) + "</td>" +
               "<td class='align-right'>" + _get_formatter(this.locked, false).format(this.locked) + "</td>" +

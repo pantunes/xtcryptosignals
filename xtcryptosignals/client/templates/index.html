@@ -1,74 +1,109 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XTCryptoSignals - Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/static/imgs/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/static/imgs/favicon-32x32.png" sizes="32x32">
+    <!--open graph protocol -->
+    <meta name="title" property="og:title" content="XTCryptoSignals"/>
+    <meta property="og:type" content="Crypto Platform Data Tools">
+    <meta name="image" property="og:image" content="//xtcryptosignals.com/static/imgs/logo_transparent.png"/>
+    <meta name="description" property="og:description" content="Cryptocurrencies price data collection, price tickers, signals notifications, charts and automatic trading."/>
+    <meta property="og:url" content="//xtcryptosignals.com"/>
+    <meta name="author" content="Paulo Antunes">
+    <!-- css -->
+    <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Raleway:400,300,600' type='text/css'>
+    <link rel="stylesheet" href="/static/css/skeleton/normalize.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/skeleton/skeleton.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/landing/custom.css" type="text/css">
+</head>
 
-{% block title %}Home{% endblock %}
+<body>
 
-{% block include_scripts_top %}
-<script type="text/javascript">
-  const socket = io('{{socket_base_url}}');
-    socket.on('general', function(json) {
-        $("#active_users").html(json['/']);
-    });
-</script>
-{% endblock %}
-
-{% block body %}
-
-<section class="header">
-  <img alt="Logo" src="/static/imgs/logo_transparent.png"><br/><br/>
-  <h4 class="title">XTCryptoSignals <small>v{{version}}</small></h4>
-  <a class="button button-primary" href="https://github.com/pantunes/xtcryptosignals">Clone GitHub Project</a>&nbsp;&nbsp;
-  <a class="button button-primary" href="https://pypi.org/project/XTCryptoSignals">Install from Pypi</a>
-  <div class="value-props row">
-    <div class="four columns value-prop">
-      <img alt="Ticker" class="value-img" src="/static/imgs/ticker.png">
-        <ul>
-            <h6 style="font-weight: 500">TASKS</h6>
-            <li>Price Ticker</li>
-            <li>Web browser/Telegram bot Notifications</li>
-            <li>Real-Time Market Depth</li>
-            <li>Crypto Fear & Greed Index</li>
-            <li>Twitter/Tether Stats</li>
-        </ul>
-    </div>
-    <div class="four columns value-prop">
-      <img alt="Server API" class="value-img" src="/static/imgs/server.png">
-        <ul>
-            <h6 style="font-weight: 500">SERVER</h6>
-            <li>RESTFul API</li>
-            <li>Celery</li>
-            <li>Redis</li>
-            <li>Socket.IO</li>
-            <li>Swagger</li>
-        </ul>
-    </div>
-    <div class="four columns value-prop">
-      <img alt="Website" class="value-img" src="/static/imgs/client.png">
-        <ul>
-            <h6 style="font-weight: 500">CLIENT</h6>
-            <li>Website</li>
-        </ul>
+  <div class="section hero">
+    <div class="container">
+      <div class="row">
+        <div class="one-half column">
+          <h4 class="hero-heading"><img src="/static/imgs/logo_transparent_50x50.png" style="vertical-align: bottom; padding-right: 0.5rem;">XTCryptoSignals <small>v{{version}}</small></h4>
+          <p>Open source project with cryptocurrencies price data collection, price tickers, telegram and web push notifications, many charts and automatic trading.</p>
+          <a class="button button-primary" href="{{url_for('ticker.ticker_coins_or_tokens', frequency=frequencies[0])}}">Try XTCryptoSignals</a>
+        </div>
+        <div class="phones">
+          <img class="phone" src="/static/imgs/landing/mac1.png">
+          <img class="phone" src="/static/imgs/landing/mac2.png">
+        </div>
+      </div>
     </div>
   </div>
-  <a class="button button-primary" href="{{url_for('ticker.ticker_coins_or_tokens', frequency=frequencies[0])}}">Enter the Website</a>
-  <br/><br/><br/><br/><br/><br/><br/>
-</section>
 
-{% endblock %}
+  <div class="section values">
+    <div class="container">
+      <h3 class="section-heading">Do you want to install and deploy this platform?</h3>
+      <p class="section-description">Just follow the instructions described in the Github Repository!</p>
+      <a class="button button-primary" href="https://github.com/pantunes/xtcryptosignals">Clone Github Repository</a>&nbsp;&nbsp;&nbsp;
+      <a class="button button-primary" href="https://pypi.org/project/XTCryptoSignals">Install from Pypi</a>
+    </div>
+  </div>
 
-{% block footer %}
-<div class="title"><small><b>Pooling frequency:</b> {{frequencies|join(", ")}}</small></div>
-<div class="title"><small><b>Active users:</b> <span id="active_users">-</span></small></div>
-<br/>
-<div class="title">
-  In case this project helped you in some way I'm accepting a small <a href="https://donate.xtcryptosignals.com/">donation</a> to keep this <code>open-source</code> project on-🔥.
-</div>
-<br/>
-{% endblock %}
+  <div class="section get-help">
+    <div class="container">
+      <h3 class="section-heading">Do you want to be part of this project?</h3>
+      <p class="section-description">XTCryptoSignals is open source and ready to welcome to new contributors!</p>
+      <a class="button button-primary" href="https://github.com/pantunes/xtcryptosignals#xtcryptosignals">View XTCryptoSignals Docs</a>
+    </div>
+  </div>
 
-{% block include_extra_scripts_bottom %}
-<script type="text/javascript">
-    $(document).ready(function() {
-        $(".container").css("maxWidth", "1024px" );
-    });
-</script>
-{% endblock %}
+  <div class="section categories">
+    <div class="container">
+      <h3 class="section-heading">Screenshots</h3>
+      <p class="section-description">&nbsp;</p>
+      <div class="row">
+        <div class="one-half column category">
+          <img class="u-max-full-width" src="/static/imgs/landing/1.png">
+        </div>
+        <div class="one-half column category">
+          <img class="u-max-full-width" src="/static/imgs/landing/2.png">
+        </div>
+      </div>
+      <div class="row">
+        <div class="one-half column category">
+          <img class="u-max-full-width" src="/static/imgs/landing/3.png">
+        </div>
+        <div class="one-half column category">
+          <img class="u-max-full-width" src="/static/imgs/landing/4.png">
+        </div>
+      </div>
+      <div class="row">
+        <div class="one-half column category">
+          <img class="u-max-full-width" src="/static/imgs/landing/5.png">
+        </div>
+        <div class="one-half column category">
+          <img class="u-max-full-width" src="/static/imgs/landing/6.png">
+        </div>
+      </div>
+      <div class="row">
+        <div class="one-half column category">
+          <img class="u-max-full-width" src="/static/imgs/landing/7.png">
+        </div>
+        <div class="one-half column category">
+          <img class="u-max-full-width" src="/static/imgs/landing/8.png">
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 2rem;">
+        <p>See more screenshots <a href="https://github.com/pantunes/xtcryptosignals#screenshots">here</a> or just use the platform <a href="{{url_for('ticker.ticker_coins_or_tokens', frequency=frequencies[0])}}">here</a>. :)</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div style="margin-top: 3rem;">
+      <p><b>{{ current_year }} @ XTCryptoSignals v{{version}}</b> - In case this project helped you in some way, I'm accepting a small <a href="https://donate.xtcryptosignals.com/">donation</a> to keep it on-🔥.</p>
+    </div>
+  </div>
+
+{% if ga_tracking_id %}{% include 'ga.html' %}{% endif %}
+
+</body>
+</html>
