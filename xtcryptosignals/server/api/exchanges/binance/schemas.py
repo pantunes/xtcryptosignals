@@ -85,7 +85,7 @@ class ExchangeOpenOrdersOutputSchema(Schema):
             rows = BinanceAPI(
                 pkey=self.context["app"].config["SECRET_KEY"],
                 auth=self.context["auth"],
-            ).client.get_my_trades(symbol=data["symbol"], limit=40)
+            ).client.get_my_trades(symbol=data["symbol"], limit=20)
             rows.reverse()
             self.symbols.update({data["symbol"]: dict(rows=rows)})
         else:
