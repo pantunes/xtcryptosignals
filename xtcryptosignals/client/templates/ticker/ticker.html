@@ -211,7 +211,8 @@ function _post_and_get_ticker_emit(id, json, reference_name, reference_pair, coi
                     <tr>
                         <td style="width: 32px; vertical-align: middle;">
                             <a href="{{url_for('ticker.token_frequency', coin_or_token=c, frequency=frequency)}}">
-                                <img src="/static/imgs/logos/{{c}}.png" alt="{{c}}"/>
+                                <div class="coin-or-token one-coin"><img src="/static/imgs/logos/{{c}}.png" alt="{{c}}"/></div>
+                                <div class="coin-or-token two-coin"><img src="/static/imgs/logos/{{r}}.png" alt="{{r}}"/></div>
                             </a>
                         </td>
                         <td style="width: 100px;">

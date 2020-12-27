@@ -148,3 +148,20 @@ table.market-depth-orders td {
   border-radius: 50%;
   display: inline-block;
 }
+
+.coin-or-token {
+  position: relative;
+  width: 32px;
+  height: 32px;
+}
+
+.one-coin {
+  z-index: 2;
+}
+
+.two-coin {
+  z-index: 1;
+  margin-top: -22px;
+  margin-left: 12px;
+  filter: blur(1px);
+}
