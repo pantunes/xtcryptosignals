@@ -57,8 +57,8 @@
         {% for c, r in d['pairs'] %}
         <tr>
             <td style="vertical-align: middle;">
-                <div class="coin-or-token one-coin"><img src="/static/imgs/logos/{{c}}.png" alt="{{c}}"/></div>
-                <div class="coin-or-token two-coin"><img src="/static/imgs/logos/{{r}}.png" alt="{{r}}"/></div>
+                <div class="coin-or-token one-coin"><img src="/static/imgs/logos/{{c}}.png" alt="{{c}}" title="{{c}}"/></div>
+                <div class="coin-or-token two-coin"><img src="/static/imgs/logos/{{r}}.png" alt="{{r}}" title="{{r}}"/></div>
             </td>
             <td style="width: 100px;"><a href="{{url_for('ticker.pair_frequency', frequency=frequency, pair=c+r)}}">{{c}}-{{r}}</a></td>
             <td style="width: 100px;"><a href="{{url_for('ticker.ticker', frequency=frequency)}}#{{exchange.upper()}}">{{exchange.replace('_', ' ').upper()}}</a>

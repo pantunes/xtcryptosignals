@@ -29,11 +29,11 @@
             <tr>
                 <td style="vertical-align: middle;">
                     <a href="{{url_for('ticker.token_frequency', coin_or_token=c, frequency=frequency)}}">
-                        <div class="coin-or-token one-coin"><img src="/static/imgs/logos/{{c}}.png" alt="{{c}}"/></div>
+                        <div class="coin-or-token one-coin"><img src="/static/imgs/logos/{{c}}.png" alt="{{c}}" title="{{c}}"/></div>
                     </a>
                 </td>
                 <td style="width: 100px;">
-                    <a href="{{url_for('ticker.token_frequency', coin_or_token=c, frequency=frequency)}}">{{c}}</a><br/><small>{{ exchange.upper() }}/{{r}}</small>
+                    <a href="{{url_for('tools.coin_or_token_frequency', coin_or_token=c)}}">{{c}}</a><br/><small>{{ exchange.upper() }}/{{r}}</small>
                 </td>
                 {% for att, _ in attributes.items() %}
                     {% set _id = "{}_{}{}_{}_{}".format(exchange.lower(), c.lower(), r.lower(), att, frequency) %}

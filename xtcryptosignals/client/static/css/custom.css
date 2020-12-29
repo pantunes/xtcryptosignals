@@ -164,5 +164,5 @@ table.market-depth-orders td {
   z-index: 0;
   margin-top: -22px;
   margin-left: 12px;
-  filter: blur(3px);
+  filter: blur(2px);
 }

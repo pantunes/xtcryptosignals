@@ -78,18 +78,29 @@ class ExchangeOpenOrdersOutputSchema(Schema):
     def post_dump_each(self, data):
         data["total"] = data["price"] * data["amount"]
 
-        if data["type"] == "BUY":
+        if data["type"] != "SELL":
             return
 
         if data["symbol"] not in self.symbols:
             rows = BinanceAPI(
                 pkey=self.context["app"].config["SECRET_KEY"],
                 auth=self.context["auth"],
-            ).client.get_my_trades(symbol=data["symbol"], limit=20)
+            ).client.get_my_trades(symbol=data["symbol"], limit=30)
             rows.reverse()
             self.symbols.update({data["symbol"]: dict(rows=rows)})
         else:
             rows = self.symbols[data["symbol"]]["rows"]
+
+        key = s.REDIS_KEY_TICKER.format(
+            source=s.BINANCE,
+            symbol=data["symbol"],
+            frequency=s.HISTORY_FREQUENCY[0],
+        )
+        ser_row = red.get(key)
+        if ser_row:
+            deser_row = json.loads(ser_row)
+            price = float(deser_row["price"])
+            data["distance"] = ((data["price"] * 100) / price) - 100.0
 
         amount_total = 0.0
         total_total = 0.0
@@ -123,6 +134,9 @@ class ExchangeOpenOrdersOutputSchema(Schema):
                 "price_buy_average"
             ] - 100
             break
+
+        if "distance" in data:
+            data["status"] = data["distance"] < data["position"]
 
     @post_dump(pass_many=True)
     def post_dump_pass_many(self, data, many):

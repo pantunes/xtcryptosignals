@@ -26,7 +26,7 @@
         if (data["success"] === true) {
             color = "green"
         }
-        $(".dot").css({"background-color": color});
+        $("#binance_status").css({"background-color": color});
     }
 
     let data_balance = {};
@@ -57,12 +57,16 @@
           if ("total_price" in this) {
               total_price = _get_formatter(this.total_price, false).format(this.total_price)
           }
+          let css = ''
+          if (this.free > 1.0) {
+              css = ' negative'
+          }
           $table.append(
               "<tr>" +
               "<td style='vertical-align: middle;'>" +
-              "<div class=\"coin-or-token one-coin\"><img src='/static/imgs/logos/" + this.coin_token + ".png' alt='" + this.coin_token + "'/></div></td>" +
+              "<div class='coin-or-token one-coin'><img src='/static/imgs/logos/" + this.coin_token + ".png' alt='" + this.coin_token + "' title='" + this.coin_token + "'/></div></td>" +
               "<td class='align-right'><span id='" + price_id + "'>" + price + "</span></td>" +
-              "<td class='align-right'>" + _get_formatter(this.free, false).format(this.free) + "</td>" +
+              "<td class='align-right" + css + "'>" + _get_formatter(this.free, false).format(this.free) + "</td>" +
               "<td class='align-right'>" + _get_formatter(this.locked, false).format(this.locked) + "</td>" +
               "<td class='align-right'>" + _get_formatter(this.total, false).format(this.total) + "</td>" +
               "<td class='align-right'><span id='" + total_price_id + "' class='pf-total-price'>" + total_price + "</span></td>" +
@@ -89,6 +93,14 @@
           if ("position" in this) {
               position = _get_formatter(this.position, false).format(this.position) + '%'
           }
+          let distance = '-'
+          if ("distance" in this) {
+              distance = _get_formatter(this.distance, false).format(this.distance) + '%'
+          }
+          let status = '-'
+          if ("status" in this) {
+              status = this.status ? '✅' : '❌';
+          }
           $table.append(
               "<tr " + css + ">" +
               "<td style='padding-left: 8px'>" + this.symbol + "</td>" +
@@ -97,8 +109,10 @@
               "<td class='align-right'>" + _get_formatter(this.filled, false).format(this.filled) + "%</td>" +
               "<td class='align-center'>" + this.type + "</td>" +
               "<td class='align-right'>" + _get_formatter(this.total, false).format(this.total) + "</td>" +
-              "<td class='align-right'>" + price_buy_average + "</div></td>" +
-              "<td style='padding-right: 8px'><div class='align-right'>" + position + "</div></td>" +
+              "<td class='align-right'>" + price_buy_average + "</td>" +
+              "<td class='align-right'>" + position + "</td>" +
+              "<td style='padding-right: 8px'><div class='align-right'>" + distance + "</div></td>" +
+              "<td style='padding-right: 8px'><div class='align-center'>" + status + "</div></td>" +
               "</tr>"
           );
         });
@@ -149,10 +163,12 @@
 </script>
 
 <script type="text/javascript">
+  const exchange = '{{ exchange }}';
+
   $(document).ready(function() {
-    get_account_status(render_account_status, '{{ exchange }}');
-    get_balance(render_balance, '{{ exchange }}');
-    get_open_orders(render_open_orders, '{{ exchange }}');
+    get_account_status(render_account_status, exchange);
+    get_balance(render_balance, exchange);
+    get_open_orders(render_open_orders, exchange);
   });
 </script>
 
@@ -161,17 +177,17 @@
 <div class="row">
     <div class="two columns">
         <div class="u-pull-left">
-            <h6><span class="dot"></span> {{ exchange.upper() }} status</h6>
+            <h6><span id="binance_status" class="dot"></span> {{ exchange.upper() }} status</h6>
         </div>
     </div>
 
-    <div class="four columns">
+    <div class="three columns">
         <div id="balances" class="custom-grid custom-grid-without-subtitles">
-            <div class="six columns">Total: <span id='my_balance_total' class="bigger">-</span> USDT</div>
+            <div class="eight columns">Total: <span id='my_balance_total' class="bigger">-</span> USDT</div>
         </div>
     </div>
 
-    <div class="six columns">
+    <div class="seven columns">
         <div id="balances_potential" class="custom-grid custom-grid-without-subtitles">
             <div class="four columns">Potential: <span id='my_balance_potential' class="bigger">-</span> USDT</div>
         </div>
@@ -179,7 +195,7 @@
 </div>
 
 <div class="row">
-  <div class="six columns">
+  <div class="five columns">
       <h5>My Balance</h5>
       <table id="table_exchange_balance">
         <thead>
@@ -196,7 +212,7 @@
       </table>
   </div>
 
-  <div class="six columns">
+  <div class="seven columns">
       <h5>My Open Orders</h5>
       <table id="table_exchange_open_orders">
         <thead>
@@ -207,8 +223,10 @@
             <th style="text-align: right;">Filled</th>
             <th style="text-align: center;">Type</th>
             <th style="text-align: right;">Total</th>
-            <th style="text-align: right;">Price Buy Avg.</th>
-            <th style="text-align: right;">Position</th>
+            <th style="text-align: right;">Buy Price Avg.</th>
+            <th style="text-align: right;">Buy Position</th>
+            <th style="text-align: right;">Distance</th>
+            <th style="text-align: center;">Status</th>
           </tr>
         </thead>
         <tbody></tbody>
