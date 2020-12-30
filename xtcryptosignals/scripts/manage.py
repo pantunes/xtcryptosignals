@@ -15,16 +15,19 @@ from shutil import copyfile
 
 
 SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+CHOICES = (
+    "copy-config-files",
+    "start",
+    "stop",
+    "start-except-order-books",
+    "start-order-books",
+)
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
-@click.argument(
-    "operation",
-    required=True,
-    type=click.Choice(("copy-config-files", "start", "stop", "restart",)),
-)
+@click.argument("operation", required=True, type=click.Choice(CHOICES))
 def main(operation):
-    if operation == "copy-config-files":
+    if operation == CHOICES[0]:
         for x in (
             "client.prod.env",
             "server.prod.env",
@@ -52,13 +55,6 @@ def main(operation):
                     )
                 )
         return
-    if operation == "start":
-        subprocess.call("sh {}/xt-start.sh".format(SCRIPT_PATH), shell=True)
-        return
-    if operation == "stop":
-        subprocess.call("sh {}/xt-stop.sh".format(SCRIPT_PATH), shell=True)
-        return
-    subprocess.call(
-        "sh {}/xt-stop.sh ; sh {}/xt-start.sh".format(SCRIPT_PATH, SCRIPT_PATH),
-        shell=True,
-    )
+
+    i = CHOICES.index(operation)
+    subprocess.call(f"sh {SCRIPT_PATH}/xt-{CHOICES[i]}.sh", shell=True)
