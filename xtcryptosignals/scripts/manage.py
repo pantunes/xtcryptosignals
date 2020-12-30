@@ -17,9 +17,9 @@ from shutil import copyfile
 SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 CHOICES = (
     "copy-config-files",
-    "start-all",
-    "stop-all",
-    "start-all-except-order-books",
+    "start",
+    "stop",
+    "start-except-order-books",
     "start-order-books",
 )
 
