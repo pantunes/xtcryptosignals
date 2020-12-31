@@ -4,7 +4,9 @@ const menu_options_logged_in = [
     '#menu_transactions_link',
     '#menu_logout_link',
     '#menu_notifications_link',
+    '#menu_exchanges_link',
     '#menu_binance_link',
+    '#menu_uniswap_link',
 ];
 
 const urls_logout_to_index = [

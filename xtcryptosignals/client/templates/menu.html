@@ -1,9 +1,8 @@
 <div class="navbar-spacer"></div>
 <nav class="navbar">
-<div style="float: left; padding: 8px"><img alt="XTCryptoSignals" title="XTCryptoSignals v{{version}}" src="/static/imgs/logo_transparent_50x50.png"></div>
+<div style="float: left; padding: 8px"><a href="/"><img alt="XTCryptoSignals logo" title="XTCryptoSignals v{{version}}" src="/static/imgs/logo_transparent_50x50.png"></a></div>
 <div class="container">
   <ul class="navbar-list">
-    <li class="navbar-item"><a class="navbar-link" href="/">Home</a></li>
     <li class="navbar-item">
       <a class="navbar-link" href="javascript:;" data-popover="#tokensNavPopover">Coins</a>
       <div id="tokensNavPopover" class="popover">
@@ -51,8 +50,11 @@
           <li class="popover-item">
             <a class="popover-link" href="javascript:open_modal('#signup');">{{spaces}}Signup{{spaces}}</a>
           </li>
-          <li id="menu_binance_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
-            <a class="popover-link" href="{{url_for('exchange.index', exchange='binance')}}">Binance</a>
+          <li id="menu_logout_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
+            <a class="popover-link" href="javascript:;" onClick="(
+              function() {
+                  logout(); return false;
+              })(); return false;">Logout</a>
           </li>
           <li id="menu_favourites_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
             <a class="popover-link" href="{{url_for('ticker.favourites', frequency='10s')}}">Favourites</a>
@@ -66,11 +68,9 @@
           <li id="menu_notifications_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
             <a class="popover-link" href="{{url_for('notification.index')}}">Notifications</a>
           </li>
-          <li id="menu_logout_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
-            <a class="popover-link" href="javascript:;" onClick="(
-              function() {
-                  logout(); return false;
-              })(); return false;">Logout</a>
+          <li id="menu_exchanges_link" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}"><div class="popover-link2 market-depth-orders-row-red">Exchanges</div></li>
+          <li id="menu_binance_link" class="popover-item" style="display:{{ 'inline' if current_user.is_authenticated else 'none' }}">
+            <a class="popover-link" href="{{url_for('exchange.index', exchange='binance')}}">Binance</a>
           </li>
         </ul>
       </div>

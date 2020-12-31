@@ -15,11 +15,13 @@ from marshmallow import (
     fields,
     post_dump,
 )
+from xtcryptosignals.common.utils import get_pairs_ex
 from xtcryptosignals.tasks import settings as s
 from xtcryptosignals.server.api.exchanges.binance.service import BinanceAPI
 
 
 red = redis.Redis.from_url(s.BROKER_URL)
+pairs = get_pairs_ex(s.SYMBOLS_PER_EXCHANGE)
 
 
 class BalanceOutputSchema(Schema):
@@ -77,6 +79,10 @@ class ExchangeOpenOrdersOutputSchema(Schema):
     @post_dump
     def post_dump_each(self, data):
         data["total"] = data["price"] * data["amount"]
+
+        token_pair = pairs[data["symbol"]]
+        data["coin_token"] = token_pair["token"]
+        data["pair"] = token_pair["pair"]
 
         if data["type"] != "SELL":
             return
