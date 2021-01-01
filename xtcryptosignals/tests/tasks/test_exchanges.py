@@ -22,8 +22,10 @@ def test_exchanges():
     for filename in files:
         if filename[0] == "_":
             continue
+        name = filename.partition(".")[0]
+        if name == "switcheo":
+            continue
         _class = get_class(
-            folder="xtcryptosignals.tasks.exchanges",
-            module=filename.partition(".")[0],
+            folder="xtcryptosignals.tasks.exchanges", module=name,
         )
         assert _class.get_ticker

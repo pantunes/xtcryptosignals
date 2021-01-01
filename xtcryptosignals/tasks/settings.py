@@ -50,6 +50,7 @@ STATIC_COINS_TOKENS_LOGOS_FOLDER = "/static/imgs/logos/"
 COIN_OR_TOKEN_REFERENCE = (
     "ETH",
     "BTC",
+    # Stable coins/tokens/currencies
     "DAI",
     "USD",
     "USDT",

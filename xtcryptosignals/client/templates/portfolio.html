@@ -33,11 +33,12 @@
     let $table = $('#table_portfolio');
     $table.find("tbody tr").remove();
     for (const [key, value] of Object.entries(data_portf.coin_tokens)) {
-      const prefix_id = value.exchange.name + "_" + key.toLowerCase() + value.exchange.pair.toLowerCase();
+      const reference_info = value.reference_info
+      const prefix_id = reference_info.name + "_" + key.toLowerCase() + reference_info.pair.toLowerCase();
       const balance_id = prefix_id + "_balance_{{frequency}}";
       const position_id = prefix_id + "_position_{{frequency}}";
-      const pair = key + "-" + value.exchange.pair;
-      const exchange = value.exchange.name.toUpperCase();
+      const pair = key + "-" + reference_info.pair;
+      const exchange = reference_info.name.toUpperCase();
       const p = _get_formatter(value.average_paid, false)
       $table.append(
           "<tr>" +

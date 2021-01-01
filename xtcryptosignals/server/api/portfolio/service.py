@@ -18,7 +18,7 @@ from xtcryptosignals.tasks import settings as s
 red = redis.Redis.from_url(s.BROKER_URL)
 
 
-def get_exchange_for(coin_token):
+def _get_reference_info_for(coin_token):
     return s.EXCHANGES_AND_PAIRS_OF_REFERENCE[coin_token]
 
 
@@ -30,20 +30,22 @@ def _get_percentage(x, y):
         return 0.0
 
 
-def _get_current_price(exchange, coin_token):
+def _get_current_price_in_usdt(coin_token):
+    reference_info = _get_reference_info_for(coin_token)
+
     key = s.REDIS_KEY_TICKER.format(
-        source=exchange["name"],
-        symbol=coin_token + exchange["pair"],
+        source=reference_info["name"],
+        symbol=coin_token + reference_info["pair"],
         frequency=s.HISTORY_FREQUENCY[0],
     )
     ser_row = red.get(key)
     deser_row = json.loads(ser_row)
     price = float(deser_row["price"])
 
-    if exchange["pair"] != "USDT":
+    if reference_info["pair"] != "USDT":
         key = s.REDIS_KEY_TICKER.format(
-            source=s.BINANCE,
-            symbol=exchange["pair"] + "USDT",
+            source=reference_info["name"],
+            symbol=reference_info["pair"] + "USDT",
             frequency=s.HISTORY_FREQUENCY[0],
         )
         ser_row = red.get(key)
@@ -98,10 +100,8 @@ def portfolio(auth):
 
         average_paid = total_amount / total_units
 
-        exchange = get_exchange_for(coin_token)
-
         try:
-            current_price = _get_current_price(exchange, coin_token)
+            current_price = _get_current_price_in_usdt(coin_token)
         except TypeError:
             # @note: pair is not stored in Redis - most likely Exchange API is
             # failing
@@ -110,7 +110,7 @@ def portfolio(auth):
         _portfolio["coin_tokens"].update(
             {
                 coin_token: dict(
-                    exchange=exchange,
+                    reference_info=_get_reference_info_for(coin_token),
                     current_price=round(
                         current_price, s.SYMBOL_FLOAT_PRECISION
                     ),
@@ -127,15 +127,12 @@ def portfolio(auth):
 
         total_value += total_units * current_price
 
-    btc_price = _portfolio["coin_tokens"]["BTC"]["current_price"]
-    eth_price = _portfolio["coin_tokens"]["ETH"]["current_price"]
-
     _portfolio.update(
         total_paid=round(total_paid, 2),
         total_value=round(total_value, 2),
         total_position=_get_percentage(total_value, total_paid),
-        total_in_btc=round(total_value / btc_price, 2),
-        total_in_eth=round(total_value / eth_price, 2),
+        total_in_btc=round(total_value / _get_current_price_in_usdt("BTC"), 2),
+        total_in_eth=round(total_value / _get_current_price_in_usdt("ETH"), 2),
     )
 
     _set_share_per_coin_token(_portfolio)
