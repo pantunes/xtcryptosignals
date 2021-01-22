@@ -2,9 +2,9 @@
 All changes will be registered here per release.
 
 ## [0.8.4] - Current date
+Added Telegram group to landing page.
 
-
-## [0.8.4] - 2020-12026
+## [0.8.4] - 2020-12-26
 Updated Landing page.  
 Added Binance Exchange User Account connectivity.  
 Added Spotlight Search.  
