@@ -21,7 +21,7 @@ cfscrape==2.1.1
 python-binance==0.7.5
 python-kucoin==2.1.2
 python-idex==1.0.0
-python-telegram-bot==13.1
+python-telegram-bot==13.2
 pycryptodome==3.9.9
 jsonschema==3.2.0
 mistune==0.8.4
