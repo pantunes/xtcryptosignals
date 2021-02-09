@@ -29,7 +29,7 @@ mistune==0.8.4
 flasgger==0.9.5
 python-socketio[client]==5.0.3
 websockets==8.1
-cryptography==3.3.1
+cryptography==3.4.3
 # requires code refactoring
 celery==4.4.6
 requests==2.23.0
