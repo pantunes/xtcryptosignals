@@ -145,7 +145,7 @@ eth-utils==1.10.0
     #   eth-hash
     #   py-ecc
     #   rlp
-eventlet==0.26.0
+eventlet==0.30.1
     # via -r requirements.txt
 flasgger==0.9.5
     # via -r requirements.txt
@@ -235,10 +235,6 @@ mongodb-migrations==1.0.1
     # via -r requirements.txt
 mongoengine==0.22.1
     # via -r requirements.txt
-monotonic==1.5
-    # via
-    #   -r requirements.txt
-    #   eventlet
 multidict==5.1.0
     # via
     #   -r requirements.txt
