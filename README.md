@@ -32,8 +32,8 @@ that is compatible with the most known web browsers.)
 * [x] Implement web push notification signals for price range, price change, 
 trading volume, price sentiment, etc (From July 2019)
 * [x] Implement Telegram bot to broadcast notifications (From 2020)
-* [ ] Implement automatic trading (From 2020)
-* [ ] Build Mobile app (From 2020)
+* [ ] Implement automatic trading (From 2021)
+* [ ] Build Mobile app (From 2021)
 
 
 ## Getting Started
