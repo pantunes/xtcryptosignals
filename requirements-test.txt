@@ -105,7 +105,7 @@ constantly==15.1.0
     # via
     #   -r requirements.txt
     #   twisted
-cryptography==3.4.4
+cryptography==3.4.6
     # via
     #   -r requirements.txt
     #   autobahn
