@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements-test.in
 #
-aiohttp==3.7.3
+aiohttp==3.7.4
     # via
     #   -r requirements.txt
     #   python-idex

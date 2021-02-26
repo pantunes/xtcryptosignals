@@ -4,7 +4,7 @@
 #
 #    pip-compile
 #
-aiohttp==3.7.3
+aiohttp==3.7.4
     # via python-idex
 amqp==2.6.1
     # via kombu
