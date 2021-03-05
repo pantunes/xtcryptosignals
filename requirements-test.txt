@@ -233,7 +233,7 @@ mistune==0.8.4
     #   flasgger
 mongodb-migrations==1.0.1
     # via -r requirements.txt
-mongoengine==0.22.1
+mongoengine==0.23.0
     # via -r requirements.txt
 monotonic==1.5
     # via
