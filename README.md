@@ -8,7 +8,7 @@
     any other pair that is supported by the Exchange API.
     * A **Signals** service based on setup rules to send real-time alerts about 
     price, price change, trading volume or market sentiment sending Web Push 
-    Notifications to the client browser (Firefox, Chrome).
+    Notifications to the client browser (Firefox, Chrome) or/and to Telegram Channel.
     * **Market Depth**, **Content** and **Data** fetching Tasks.
     * **Automatic trading** *(in progress)*.
 
