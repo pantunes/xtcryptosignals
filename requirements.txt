@@ -184,7 +184,7 @@ mypy-extensions==0.4.3
     # via py-ecc
 pillow==8.1.0
     # via captcha
-pip-tools==5.5.0
+pip-tools==6.0.0
     # via -r requirements.in
 py-ecc==5.1.0
     # via python-idex
