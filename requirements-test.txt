@@ -250,11 +250,15 @@ mypy-extensions==0.4.3
     #   py-ecc
 packaging==20.9
     # via pytest
+pep517==0.10.0
+    # via
+    #   -r requirements.txt
+    #   pip-tools
 pillow==8.1.0
     # via
     #   -r requirements.txt
     #   captcha
-pip-tools==5.5.0
+pip-tools==6.0.1
     # via -r requirements.txt
 pluggy==0.13.1
     # via pytest
@@ -394,7 +398,10 @@ soupsieve==2.2
     #   -r requirements.txt
     #   beautifulsoup4
 toml==0.10.2
-    # via pytest
+    # via
+    #   -r requirements.txt
+    #   pep517
+    #   pytest
 toolz==0.11.1
     # via
     #   -r requirements.txt
