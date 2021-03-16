@@ -341,7 +341,7 @@ pytz==2021.1
     #   flask-restful
     #   python-telegram-bot
     #   tzlocal
-pywebpush==1.11.0
+pywebpush==1.12.0
     # via -r requirements.txt
 pyyaml==5.4.1
     # via
@@ -388,6 +388,7 @@ six==1.15.0
     #   pyopenssl
     #   python-binance
     #   python-dateutil
+    #   pywebpush
     #   websocket-client
 soupsieve==2.2
     # via
