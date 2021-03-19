@@ -250,7 +250,7 @@ mypy-extensions==0.4.3
     #   py-ecc
 packaging==20.9
     # via pytest
-pillow==8.1.0
+pillow==8.1.1
     # via
     #   -r requirements.txt
     #   captcha
