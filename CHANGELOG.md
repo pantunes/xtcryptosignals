@@ -1,7 +1,7 @@
 # Changelog
 All changes will be registered here per release.
 
-## [0.8.4] - Current date
+## [0.8.5] - Current date
 Added Telegram group to landing page.
 Code fixes and performance improvements. 
 
