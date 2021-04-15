@@ -182,9 +182,11 @@ multidict==5.1.0
     #   yarl
 mypy-extensions==0.4.3
     # via py-ecc
+pep517==0.10.0
+    # via pip-tools
 pillow==8.1.0
     # via captcha
-pip-tools==5.5.0
+pip-tools==6.1.0
     # via -r requirements.in
 py-ecc==5.1.0
     # via python-idex
@@ -280,6 +282,8 @@ six==1.15.0
     #   websocket-client
 soupsieve==2.2
     # via beautifulsoup4
+toml==0.10.2
+    # via pep517
 toolz==0.11.1
     # via cytoolz
 tornado==6.1
