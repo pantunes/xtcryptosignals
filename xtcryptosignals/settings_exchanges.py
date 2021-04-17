@@ -133,14 +133,8 @@ SYMBOLS_PER_EXCHANGE.append(
         COINBASE_PRO: {
             "pairs": [
                 ("BTC", "USD"),
-                ("BTC", "EUR"),
                 ("ETH", "USD"),
-                ("ETH", "EUR"),
-                ("XLM", "USD"),
-                ("UNI", "USD"),
                 ("DAI", "USD"),
-                ("NU", "USD"),
-                ("NU", "EUR"),
             ]
         }
     }
@@ -322,7 +316,6 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
-    "NU": {"pair": "USD", "name": COINBASE_PRO,},
     "XMR": {
         "pair": "USDT",
         "name": BINANCE,
