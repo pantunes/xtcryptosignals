@@ -18,9 +18,7 @@ from xtcryptosignals.server.api.user.models import User
 
 
 def create_user(data):
-    data["password"] = bcrypt.hashpw(
-        data["password"].encode(), bcrypt.gensalt()
-    )
+    data["password"] = bcrypt.hashpw(data["password"].encode(), bcrypt.gensalt())
 
     del data["confirm_password"]
 
@@ -29,9 +27,7 @@ def create_user(data):
     try:
         user.save()
     except NotUniqueError:
-        raise ValueError(
-            "User account already exists ({email}).".format(**data), 409
-        )
+        raise ValueError("User account already exists ({email}).".format(**data), 409)
     except ValidationError as err:
         from xtcryptosignals.server.utils import _sanitize_errors_mongoengine
 
@@ -46,8 +42,6 @@ def get_user(data, authenticate=True):
     except DoesNotExist:
         raise ValueError("Bad credentials.", 404)
     if authenticate:
-        if not bcrypt.checkpw(
-            data["password"].encode(), user.password.encode()
-        ):
+        if not bcrypt.checkpw(data["password"].encode(), user.password.encode()):
             raise ValueError("Bad credentials.", 404)
     return user

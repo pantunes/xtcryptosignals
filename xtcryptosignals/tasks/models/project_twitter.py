@@ -24,6 +24,14 @@ class ProjectTwitter(DocumentValidation):
 
     meta = {
         "collection": "project_twitter",
-        "indexes": [{"fields": ("project", "added_on",), "unique": True}],
+        "indexes": [
+            {
+                "fields": (
+                    "project",
+                    "added_on",
+                ),
+                "unique": True,
+            }
+        ],
         "ordering": ["-added_on"],
     }

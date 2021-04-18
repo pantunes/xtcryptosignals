@@ -44,5 +44,13 @@ class UserTokenFavourites(DocumentValidation):
 
     meta = {
         "collection": "user_token_favourites",
-        "indexes": [{"fields": ("coin_token", "user",), "unique": True}],
+        "indexes": [
+            {
+                "fields": (
+                    "coin_token",
+                    "user",
+                ),
+                "unique": True,
+            }
+        ],
     }

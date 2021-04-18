@@ -44,11 +44,17 @@ class ChartFearAndGreedIndexAndBTC(Resource):
             400:
                 description: Error in input validation
         """
-        if frequency not in ("1d", "4d", "1w", "4w",):
+        if frequency not in (
+            "1d",
+            "4d",
+            "1w",
+            "4w",
+        ):
             return dict(error="Frequency is incorrect."), 400
 
         return service.get_chart_fear_and_greed_index(
-            coin_or_token="BTC", frequency=frequency,
+            coin_or_token="BTC",
+            frequency=frequency,
         )
 
 
@@ -76,7 +82,8 @@ class ChartCoinTokenFrequency(Resource):
                 description: Error in input validation
         """
         return service.get_chart_coin_or_token_frequency(
-            coin_or_token=coin_or_token, frequency=frequency,
+            coin_or_token=coin_or_token,
+            frequency=frequency,
         )
 
 
@@ -100,11 +107,18 @@ class ChartTetherBTC(Resource):
             400:
                 description: Error in input validation
         """
-        if frequency not in ("1h", "1d", "4d", "1w", "4w",):
+        if frequency not in (
+            "1h",
+            "1d",
+            "4d",
+            "1w",
+            "4w",
+        ):
             return dict(error="Frequency is incorrect."), 400
 
         return service.get_chart_tether_btc(
-            coin_or_token="BTC", frequency=frequency,
+            coin_or_token="BTC",
+            frequency=frequency,
         )
 
 

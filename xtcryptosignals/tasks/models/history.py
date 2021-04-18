@@ -39,7 +39,14 @@ class History(DocumentValidation):
     meta = {
         "abstract": True,
         "indexes": [
-            {"fields": ("symbol", "source", "-created_on",), "unique": True}
+            {
+                "fields": (
+                    "symbol",
+                    "source",
+                    "-created_on",
+                ),
+                "unique": True,
+            }
         ],
         "ordering": ["-created_on"],
     }
@@ -65,7 +72,9 @@ class History(DocumentValidation):
 
         for x in s.PRICE_CHANGE_FREQUENCIES:
             key = s.REDIS_KEY_TICKER.format(
-                source=self.source, symbol=self.symbol, frequency=x,
+                source=self.source,
+                symbol=self.symbol,
+                frequency=x,
             )
             try:
                 ser_row = red.get(key)
@@ -85,7 +94,9 @@ class History(DocumentValidation):
             for exchange, items in x.items():
                 for symbol in [x[0] + x[1] for x in items["pairs"]]:
                     key = s.REDIS_KEY_TICKER.format(
-                        source=exchange, symbol=symbol, frequency=namespace[1:],
+                        source=exchange,
+                        symbol=symbol,
+                        frequency=namespace[1:],
                     )
                     ser_row = red.get(key)
                     if not ser_row:

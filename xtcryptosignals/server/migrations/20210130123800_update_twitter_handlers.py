@@ -17,9 +17,15 @@ from xtcryptosignals.tasks import settings as s
 class Migration(BaseMigration):
     @use_mongodb(db=s.MONGODB_NAME, host=s.MONGODB_HOST, port=s.MONGODB_PORT)
     def upgrade(self):
-        Project.objects(coin_or_token="UNI").update(twitter="https://twitter.com/Uniswap")
-        Project.objects(coin_or_token="LTO").update(twitter="https://twitter.com/TheLTONetwork")
-        Project.objects(coin_or_token="HBAR").update(twitter="https://twitter.com/hedera")
+        Project.objects(coin_or_token="UNI").update(
+            twitter="https://twitter.com/Uniswap"
+        )
+        Project.objects(coin_or_token="LTO").update(
+            twitter="https://twitter.com/TheLTONetwork"
+        )
+        Project.objects(coin_or_token="HBAR").update(
+            twitter="https://twitter.com/hedera"
+        )
 
     def downgrade(self):
         pass

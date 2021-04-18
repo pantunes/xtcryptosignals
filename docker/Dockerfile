@@ -1,4 +1,4 @@
-FROM python:3.7.2-alpine3.8
+FROM python:3.7.9-alpine3.13
 
 RUN python -m pip install --upgrade pip
 RUN apk add --no-cache \
@@ -18,13 +18,15 @@ RUN apk add --no-cache \
     gcc \
     python3-dev \
     musl-dev \
-    bash
+    bash \
+    rust \
+    cargo
 
 WORKDIR /xtcryptosignals
 
 ADD ./ ./
 
-RUN pip install -r requirements.txt
+RUN pip install -r requirements/requirements.txt
 RUN pip install -e .
 
 ENV FLASK_ENV=docker

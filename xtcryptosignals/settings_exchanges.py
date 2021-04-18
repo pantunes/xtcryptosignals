@@ -124,7 +124,15 @@ SYMBOLS_PER_EXCHANGE.append(
 
 # OKEx
 SYMBOLS_PER_EXCHANGE.append(
-    {OKEX: {"pairs": [("BTC", "USDT"), ("ETH", "USDT"), ("LTC", "USDT"),]}}
+    {
+        OKEX: {
+            "pairs": [
+                ("BTC", "USDT"),
+                ("ETH", "USDT"),
+                ("LTC", "USDT"),
+            ]
+        }
+    }
 )
 
 # Coinbase Pro
@@ -156,14 +164,26 @@ SYMBOLS_PER_EXCHANGE.append(
 
 # BIBOX
 SYMBOLS_PER_EXCHANGE.append(
-    {BIBOX: {"pairs": [("BTC", "USDT"), ("ETH", "USDT"), ("LTC", "USDT"),]}}
+    {
+        BIBOX: {
+            "pairs": [
+                ("BTC", "USDT"),
+                ("ETH", "USDT"),
+                ("LTC", "USDT"),
+            ]
+        }
+    }
 )
 
 # Bitmax
 SYMBOLS_PER_EXCHANGE.append(
     {
         BITMAX: {
-            "pairs": [("LTO", "USDT"), ("LTO", "BTC"), ("BTMX", "USDT"),],
+            "pairs": [
+                ("LTO", "USDT"),
+                ("LTO", "BTC"),
+                ("BTMX", "USDT"),
+            ],
             "single_request": True,
         }
     }
@@ -188,33 +208,83 @@ SYMBOLS_PER_EXCHANGE.append(
 
 # LIQUID
 SYMBOLS_PER_EXCHANGE.append(
-    {LIQUID: {"pairs": [("EWT", "BTC"), ("EWT", "ETH"),]}}
+    {
+        LIQUID: {
+            "pairs": [
+                ("EWT", "BTC"),
+                ("EWT", "ETH"),
+            ]
+        }
+    }
 )
 
 # Coinbene
 SYMBOLS_PER_EXCHANGE.append({COINBENE: {"pairs": []}})
 
 # Hotbit
-SYMBOLS_PER_EXCHANGE.append({HOTBIT: {"pairs": [], "single_request": True,}})
+SYMBOLS_PER_EXCHANGE.append(
+    {
+        HOTBIT: {
+            "pairs": [],
+            "single_request": True,
+        }
+    }
+)
 
 # Bilaxy
-SYMBOLS_PER_EXCHANGE.append({BILAXY: {"pairs": [], "single_request": True,}})
+SYMBOLS_PER_EXCHANGE.append(
+    {
+        BILAXY: {
+            "pairs": [],
+            "single_request": True,
+        }
+    }
+)
 
 # Uphold
 SYMBOLS_PER_EXCHANGE.append(
-    {UPHOLD: {"pairs": [("BTC", "USD"), ("ETH", "USD"), ("LTC", "USD"),]}}
+    {
+        UPHOLD: {
+            "pairs": [
+                ("BTC", "USD"),
+                ("ETH", "USD"),
+                ("LTC", "USD"),
+            ]
+        }
+    }
 )
 
 # Binance DEX
 SYMBOLS_PER_EXCHANGE.append(
-    {BINANCE_DEX: {"pairs": [("LTO", "BNB"),], "single_request": True,}}
+    {
+        BINANCE_DEX: {
+            "pairs": [
+                ("LTO", "BNB"),
+            ],
+            "single_request": True,
+        }
+    }
 )
 
 # DCoin
-SYMBOLS_PER_EXCHANGE.append({DCOIN: {"pairs": [], "single_request": True,}})
+SYMBOLS_PER_EXCHANGE.append(
+    {
+        DCOIN: {
+            "pairs": [],
+            "single_request": True,
+        }
+    }
+)
 
 # Switcheo
-SYMBOLS_PER_EXCHANGE.append({SWITCHEO: {"pairs": [], "single_request": True,}})
+SYMBOLS_PER_EXCHANGE.append(
+    {
+        SWITCHEO: {
+            "pairs": [],
+            "single_request": True,
+        }
+    }
+)
 
 
 EXCHANGES_AND_PAIRS_OF_REFERENCE = {
@@ -258,8 +328,14 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
     },
-    "USDT": {"pair": "USD", "name": OKCOIN,},
-    "DAI": {"pair": "USD", "name": COINBASE_PRO,},
+    "USDT": {
+        "pair": "USD",
+        "name": OKCOIN,
+    },
+    "DAI": {
+        "pair": "USD",
+        "name": COINBASE_PRO,
+    },
     "LTO": {
         "pair": "USDT",
         "name": BINANCE,
@@ -270,7 +346,10 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
-    "EWT": {"pair": "USDT", "name": KUCOIN,},
+    "EWT": {
+        "pair": "USDT",
+        "name": KUCOIN,
+    },
     "RLC": {
         "pair": "USDT",
         "name": BINANCE,
@@ -346,7 +425,10 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
-    "BTMX": {"pair": "USDT", "name": BITMAX,},
+    "BTMX": {
+        "pair": "USDT",
+        "name": BITMAX,
+    },
 }
 
 # Check to make sure that ALL configured symbols must have an

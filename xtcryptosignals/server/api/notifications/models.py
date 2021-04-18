@@ -25,7 +25,13 @@ class NotificationRule(DocumentValidation):
     coin_token = StringField(
         required=True, choices=get_coin_tokens(s.SYMBOLS_PER_EXCHANGE)
     )
-    metric = StringField(required=True, choices=("price", "volume",))
+    metric = StringField(
+        required=True,
+        choices=(
+            "price",
+            "volume",
+        ),
+    )
     interval = StringField(required=True, choices=s.HISTORY_FREQUENCY)
     percentage = DecimalField(required=True, precision=2)
     user = ReferenceField(User, required=True)

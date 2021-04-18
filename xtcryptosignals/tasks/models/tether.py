@@ -21,7 +21,9 @@ class Tether(DocumentValidation):
 
     meta = {
         "collection": "tether",
-        "indexes": [("-created_on",),],
+        "indexes": [
+            ("-created_on",),
+        ],
         "ordering": ["-created_on"],
     }
 

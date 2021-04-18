@@ -34,7 +34,16 @@ class Auth(DocumentValidation):
 
     meta = {
         "collection": "auth",
-        "indexes": [{"fields": ("user", "token", "active",), "unique": True}],
+        "indexes": [
+            {
+                "fields": (
+                    "user",
+                    "token",
+                    "active",
+                ),
+                "unique": True,
+            }
+        ],
     }
 
     def to_dict(self):

@@ -33,18 +33,14 @@ def _process(logger, socketio, exchange_class, schema_class, symbol, pairs):
     elif pairs:
         ticker_kwargs.update(pairs=pairs)
     else:
-        logger.error(
-            "{}: Not either a symbol or pair".format(exchange_class.__name__)
-        )
+        logger.error("{}: Not either a symbol or pair".format(exchange_class.__name__))
     try:
         ticker_data = exchange_class().get_ticker(**ticker_kwargs)
     except ValueError as err:
         logger.error(err)
         return
 
-    ticker, errors = schema_class(strict=True, many=symbol is None).load(
-        ticker_data
-    )
+    ticker, errors = schema_class(strict=True, many=symbol is None).load(ticker_data)
     assert errors == {}, errors
 
     try:
@@ -55,22 +51,13 @@ def _process(logger, socketio, exchange_class, schema_class, symbol, pairs):
             ticker_model.save(temporary=not s.CREATE_MODEL_TICKER)
             if socketio:
                 for h in ticker_model.get_history():
-                    socketio.emit(
-                        "ticker", h, namespace="/{}".format(h["frequency"])
-                    )
+                    socketio.emit("ticker", h, namespace="/{}".format(h["frequency"]))
     except ServerSelectionTimeoutError as error:
         logger.error("{}: {}".format(exchange_class.__name__, error))
 
 
 def _get_24h_price_ticker_data(
-    jobs,
-    logger,
-    exchange_class,
-    schema_class,
-    symbol=None,
-    pairs=None,
-    *_,
-    **kwargs
+    jobs, logger, exchange_class, schema_class, symbol=None, pairs=None, *_, **kwargs
 ):
     socketio = None
 
@@ -82,7 +69,14 @@ def _get_24h_price_ticker_data(
     p = Process(
         name="{} {}".format(exchange_class.__name__, symbol_or_pairs),
         target=_process,
-        args=(logger, socketio, exchange_class, schema_class, symbol, pairs,),
+        args=(
+            logger,
+            socketio,
+            exchange_class,
+            schema_class,
+            symbol,
+            pairs,
+        ),
     )
     jobs.append(
         dict(
@@ -98,9 +92,7 @@ def _get_24h_price_ticker_data(
 @task(bind=True)
 def update(self, *_, **kwargs):
     if not kwargs["disable_ticker_messaging"]:
-        log_level = (
-            logging.INFO if not kwargs["log_ticker_minimal"] else logging.ERROR
-        )
+        log_level = logging.INFO if not kwargs["log_ticker_minimal"] else logging.ERROR
         logging.getLogger("engineio").setLevel(log_level)
         logging.getLogger("socketio").setLevel(log_level)
 
@@ -163,7 +155,8 @@ def update(self, *_, **kwargs):
 
 def test(*_, **kwargs):
     logging.basicConfig(
-        format="%(asctime)s %(levelname)s %(message)s", level=logging.INFO,
+        format="%(asctime)s %(levelname)s %(message)s",
+        level=logging.INFO,
     )
     logging.info("Process 1 Tick")
     logging.info("Starting...")

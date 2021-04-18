@@ -62,7 +62,9 @@ def _set_share_per_coin_token(p):
 
     for coin_or_token, struct in p["coin_tokens"].items():
         p["coin_tokens"][coin_or_token].update(
-            {"share": round(struct["amount"] * 100 / total_paid, 2),}
+            {
+                "share": round(struct["amount"] * 100 / total_paid, 2),
+            }
         )
 
 
@@ -111,9 +113,7 @@ def portfolio(auth):
             {
                 coin_token: dict(
                     reference_info=_get_reference_info_for(coin_token),
-                    current_price=round(
-                        current_price, s.SYMBOL_FLOAT_PRECISION
-                    ),
+                    current_price=round(current_price, s.SYMBOL_FLOAT_PRECISION),
                     units=round(total_units, s.SYMBOL_FLOAT_PRECISION),
                     amount=total_amount,
                     average_paid=average_paid,
