@@ -16,9 +16,7 @@ ROOT_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
 
 def test_exchanges():
-    files = os.listdir(
-        os.path.join(ROOT_FOLDER, "../../", "tasks", "exchanges")
-    )
+    files = os.listdir(os.path.join(ROOT_FOLDER, "../../", "tasks", "exchanges"))
     for filename in files:
         if filename[0] == "_":
             continue
@@ -26,6 +24,7 @@ def test_exchanges():
         if name == "switcheo":
             continue
         _class = get_class(
-            folder="xtcryptosignals.tasks.exchanges", module=name,
+            folder="xtcryptosignals.tasks.exchanges",
+            module=name,
         )
         assert _class.get_ticker

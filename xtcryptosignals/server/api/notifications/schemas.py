@@ -29,9 +29,7 @@ class NotificationsOutputSchema(OutputSchema):
 
 
 class NotificationOutputSchema(Schema):
-    notifications = fields.Nested(
-        NotificationsOutputSchema, many=True, required=True
-    )
+    notifications = fields.Nested(NotificationsOutputSchema, many=True, required=True)
     coin_tokens = fields.Raw(many=True, required=True)
 
 

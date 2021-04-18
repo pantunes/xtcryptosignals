@@ -17,7 +17,13 @@ from xtcryptosignals.common.models import DocumentValidation
 
 class Contact(DocumentValidation):
     email = EmailField(required=True)
-    reason = StringField(required=True, choices=("question", "bug",))
+    reason = StringField(
+        required=True,
+        choices=(
+            "question",
+            "bug",
+        ),
+    )
     message = StringField(required=True)
 
     meta = {

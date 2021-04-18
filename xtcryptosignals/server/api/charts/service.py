@@ -37,18 +37,15 @@ def get_chart_fear_and_greed_index(frequency, coin_or_token):
 
     model_history = type("History{}".format(frequency), (History,), {})
     rows = model_history.objects(
-        symbol=coin_or_token + ref["pair"], source=ref["name"],
+        symbol=coin_or_token + ref["pair"],
+        source=ref["name"],
     )[:NUM_OCCURRENCES]
 
-    btc_prices = {
-        x.created_on.strftime("%Y-%m-%d"): int(x.price_usdt) for x in rows
-    }
+    btc_prices = {x.created_on.strftime("%Y-%m-%d"): int(x.price_usdt) for x in rows}
 
     cfgi_values = {
         x.added_on.strftime("%Y-%m-%d"): x.index
-        for x in CFGI.objects[
-            : (NUM_OCCURRENCES * 12)
-        ]  # CFGI_MAX=12w in client
+        for x in CFGI.objects[: (NUM_OCCURRENCES * 12)]  # CFGI_MAX=12w in client
     }
 
     days = list(btc_prices.keys())
@@ -61,7 +58,11 @@ def get_chart_fear_and_greed_index(frequency, coin_or_token):
         except KeyError:
             cfgi.append(None)
 
-    return dict(days=days, BTC=[btc_prices[x] for x in days], cfgi=cfgi,)
+    return dict(
+        days=days,
+        BTC=[btc_prices[x] for x in days],
+        cfgi=cfgi,
+    )
 
 
 def get_chart_coin_or_token_frequency(coin_or_token, frequency):
@@ -72,7 +73,8 @@ def get_chart_coin_or_token_frequency(coin_or_token, frequency):
 
     model_history = type("History{}".format(frequency), (History,), {})
     rows = model_history.objects(
-        symbol=coin_or_token + ref["pair"], source=ref["name"],
+        symbol=coin_or_token + ref["pair"],
+        source=ref["name"],
     )[:100]
 
     prices = []
@@ -89,9 +91,7 @@ def get_chart_coin_or_token_frequency(coin_or_token, frequency):
     volumes.reverse()
     num_trades.reverse()
 
-    return dict(
-        prices=prices, volumes=volumes, num_trades=num_trades, quote="USDT"
-    )
+    return dict(prices=prices, volumes=volumes, num_trades=num_trades, quote="USDT")
 
 
 def _normalize_ts(ts, frequency):
@@ -100,8 +100,7 @@ def _normalize_ts(ts, frequency):
     else:
         kwargs = dict(hour=0, minute=0, second=0, microsecond=0)
     return (
-        datetime.timestamp(datetime.fromtimestamp(ts / 1000).replace(**kwargs))
-        * 1000
+        datetime.timestamp(datetime.fromtimestamp(ts / 1000).replace(**kwargs)) * 1000
     )
 
 
@@ -113,15 +112,14 @@ def get_chart_tether_btc(coin_or_token, frequency):
 
     model_history = type("History{}".format(frequency), (History,), {})
     rows = model_history.objects(
-        symbol=coin_or_token + ref["pair"], source=ref["name"],
+        symbol=coin_or_token + ref["pair"],
+        source=ref["name"],
     )[:NUM_OCCURRENCES]
 
     btc_prices = {}
     for row in rows:
         obj = row.to_dict(frequency=frequency)
-        btc_prices[_normalize_ts(obj["created_on_ts"], frequency)] = obj[
-            "price_usdt"
-        ]
+        btc_prices[_normalize_ts(obj["created_on_ts"], frequency)] = obj["price_usdt"]
 
     tether = {}
     for row in Tether.objects[: (NUM_OCCURRENCES * 8 * 12)]:
@@ -168,9 +166,15 @@ def get_chart_twitter(project, frequency):
     )[:30]:
         obj = pt.to_dict()
         num_followers.append(
-            [_normalize_ts(obj["created_on_ts"], "1d"), obj["num_followers"],]
+            [
+                _normalize_ts(obj["created_on_ts"], "1d"),
+                obj["num_followers"],
+            ]
         )
 
     num_followers.reverse()
 
-    return dict(project=project.to_dict(), num_followers=num_followers,)
+    return dict(
+        project=project.to_dict(),
+        num_followers=num_followers,
+    )

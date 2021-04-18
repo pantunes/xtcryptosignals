@@ -21,7 +21,13 @@ class Crypto(object):
     @staticmethod
     def _get_fkey(key: str, salt: Optional[str] = None) -> str:
         assert isinstance(key, str)
-        assert isinstance(salt, (str, type(None),))
+        assert isinstance(
+            salt,
+            (
+                str,
+                type(None),
+            ),
+        )
 
         kwargs = dict(
             algorithm=hashes.SHA256(),

@@ -21,6 +21,8 @@ class CFGI(DocumentValidation):
 
     meta = {
         "collection": "fear_and_greed_index",
-        "indexes": [("-added_on",),],
+        "indexes": [
+            ("-added_on",),
+        ],
         "ordering": ["-added_on"],
     }

@@ -21,7 +21,6 @@ py-etherscan-api
 cfscrape
 python-binance
 python-kucoin
-python-idex
 python-telegram-bot
 pycryptodome
 jsonschema
@@ -30,6 +29,7 @@ flasgger
 python-socketio[client]
 websockets
 cryptography
+# python-idex
 # switcheo
 
 # requires code refactoring

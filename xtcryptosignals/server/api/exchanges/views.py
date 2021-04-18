@@ -35,7 +35,8 @@ EXCHANGE_APIS = {
 
 class ExchangeBalance(Resource):
     @validate_io(
-        schema_out=ExchangeBalanceOutputSchema, skip_validate=True,
+        schema_out=ExchangeBalanceOutputSchema,
+        skip_validate=True,
     )
     @user_auth()
     def get(self, auth, exchange):

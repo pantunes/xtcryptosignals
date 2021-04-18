@@ -34,10 +34,7 @@ def cfgi():
 @bp.route("/parties/captcha", methods=["GET"])
 def captcha():
     val = "".join(
-        [
-            random.choice(string.ascii_lowercase + string.digits)
-            for _ in range(6)
-        ]
+        [random.choice(string.ascii_lowercase + string.digits) for _ in range(6)]
     )
 
     image = ImageCaptcha()

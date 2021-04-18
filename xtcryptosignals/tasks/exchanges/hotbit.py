@@ -18,9 +18,7 @@ class Hotbit:
     def get_ticker(self, pairs):
         request = requests.get(self.base_url)
         if request.status_code != 200:
-            raise ValueError(
-                "Error connecting Hotbit on URL: {}".format(self.base_url)
-            )
+            raise ValueError("Error connecting Hotbit on URL: {}".format(self.base_url))
         response = request.json()
         rows = []
         for x in pairs:
