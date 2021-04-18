@@ -10,8 +10,6 @@ aniso8601==9.0.1
     # via flask-restful
 appdirs==1.4.4
     # via black
-appnope==0.1.2
-    # via ipython
 apscheduler==3.6.3
     # via python-telegram-bot
 attrs==20.3.0
@@ -78,6 +76,7 @@ cryptography==3.4.7
     #   pyopenssl
     #   python-binance
     #   pywebpush
+    #   secretstorage
     #   service-identity
 dateparser==1.0.0
     # via python-binance
@@ -91,7 +90,7 @@ docutils==0.17.1
     # via readme-renderer
 environs==9.3.2
     # via -r requirements/requirements.in
-eventlet==0.26.0
+eventlet==0.30.2
     # via -r requirements/requirements.in
 flasgger==0.9.5
     # via -r requirements/requirements.in
@@ -132,10 +131,7 @@ idna==2.10
     #   requests
 importlib-metadata==4.0.0
     # via
-    #   jsonschema
     #   keyring
-    #   kombu
-    #   pep517
     #   twine
 incremental==21.3.0
     # via twisted
@@ -149,6 +145,10 @@ itsdangerous==1.1.0
     #   flask-wtf
 jedi==0.18.0
     # via ipython
+jeepney==0.6.0
+    # via
+    #   keyring
+    #   secretstorage
 jinja2==2.11.3
     # via flask
 jsonschema==3.2.0
@@ -177,8 +177,6 @@ mongodb-migrations==1.0.1
     # via -r requirements/requirements.in
 mongoengine==0.23.0
     # via -r requirements/requirements.in
-monotonic==1.6
-    # via eventlet
 mypy-extensions==0.4.3
     # via black
 packaging==20.9
@@ -283,6 +281,8 @@ requests==2.23.0
     #   wikipedia-api
 rfc3986==1.4.0
     # via twine
+secretstorage==3.3.1
+    # via keyring
 service-identity==18.1.0
     # via python-binance
 six==1.15.0
@@ -322,9 +322,7 @@ txaio==21.2.1
 typed-ast==1.4.3
     # via black
 typing-extensions==3.7.4.3
-    # via
-    #   black
-    #   importlib-metadata
+    # via black
 tzlocal==2.1
     # via
     #   apscheduler
@@ -356,9 +354,7 @@ wikipedia-api==0.5.4
 wtforms==2.3.3
     # via flask-wtf
 zipp==3.4.1
-    # via
-    #   importlib-metadata
-    #   pep517
+    # via importlib-metadata
 zope.interface==5.4.0
     # via twisted
 

@@ -36,6 +36,6 @@ cryptography
 celery==4.4.6
 requests==2.23.0
 marshmallow==2.20.5
-eventlet==0.26.0
+eventlet==0.30.2
 pymongo==3.10.1
 dnspython<2
