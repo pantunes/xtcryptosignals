@@ -35,7 +35,7 @@ cryptography
 # requires code refactoring
 celery==4.4.6
 requests==2.23.0
-marshmallow==2.20.5
+marshmallow==3.11.1
 eventlet==0.26.0
 pymongo==3.10.1
 dnspython<2
