@@ -113,11 +113,6 @@ idna==2.10
     # via
     #   hyperlink
     #   requests
-importlib-metadata==4.0.0
-    # via
-    #   jsonschema
-    #   kombu
-    #   pep517
 incremental==21.3.0
     # via twisted
 itsdangerous==1.1.0
@@ -181,7 +176,7 @@ pyopenssl==20.0.1
     # via python-binance
 pyrsistent==0.17.3
     # via jsonschema
-python-binance==0.7.10
+python-binance==0.7.11
     # via -r requirements/requirements.in
 python-dateutil==2.8.1
     # via dateparser
@@ -248,8 +243,6 @@ twisted==21.2.0
     # via python-binance
 txaio==21.2.1
     # via autobahn
-typing-extensions==3.7.4.3
-    # via importlib-metadata
 tzlocal==2.1
     # via
     #   apscheduler
@@ -276,10 +269,6 @@ wikipedia-api==0.5.4
     # via -r requirements/requirements.in
 wtforms==2.3.3
     # via flask-wtf
-zipp==3.4.1
-    # via
-    #   importlib-metadata
-    #   pep517
 zope.interface==5.4.0
     # via twisted
 
