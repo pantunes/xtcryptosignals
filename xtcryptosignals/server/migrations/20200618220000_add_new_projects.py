@@ -21,12 +21,6 @@ PROJECTS = dict(
         twitter="https://twitter.com/kybernetwork",
         wikipedia=None,
     ),
-    LEND=dict(
-        name="Aave",
-        website="https://aave.com",
-        twitter="https://twitter.com/aaveaave",
-        wikipedia=None,
-    ),
     REN=dict(
         name="Ren",
         website="https://renproject.io",

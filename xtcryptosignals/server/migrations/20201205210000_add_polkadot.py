@@ -15,12 +15,6 @@ from xtcryptosignals.tasks import settings as s
 
 
 PROJECTS = dict(
-    NU=dict(
-        name="Nucypher",
-        website="https://www.nucypher.com",
-        twitter="https://twitter.com/NuCypher",
-        wikipedia=None,
-    ),
     DOT=dict(
         name="Polkadot",
         website="https://polkadot.network",

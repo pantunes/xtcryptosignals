@@ -33,18 +33,6 @@ PROJECTS = dict(
         twitter="https://twitter.com/Bitcoin",
         wikipedia="https://en.wikipedia.org/wiki/Bitcoin",
     ),
-    BTMX=dict(
-        name="Bitmax",
-        website="https://bitmax.io",
-        twitter="https://twitter.com/BitMax_Official",
-        wikipedia=None,
-    ),
-    CARD=dict(
-        name="Cardstack",
-        website="https://cardstack.com",
-        twitter="https://twitter.com/cardstack",
-        wikipedia=None,
-    ),
     ETH=dict(
         name="Ethereum",
         website="https://ethereum.org",
@@ -61,18 +49,6 @@ PROJECTS = dict(
         name="Icon",
         website="https://icon.foundation",
         twitter="https://twitter.com/helloiconworld",
-        wikipedia=None,
-    ),
-    IDEX=dict(
-        name="IDEX",
-        website="https://idex.market",
-        twitter="https://twitter.com/idexio",
-        wikipedia=None,
-    ),
-    LQD=dict(
-        name="Liquidity Network",
-        website="https://liquidity.network",
-        twitter="https://twitter.com/liquiditynet",
         wikipedia=None,
     ),
     LTC=dict(
