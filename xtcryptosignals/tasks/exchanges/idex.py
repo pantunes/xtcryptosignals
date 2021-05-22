@@ -7,8 +7,10 @@ __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
-
-from idex.client import Client
+try:
+    from idex.client import Client
+except ModuleNotFoundError:
+    pass
 from xtcryptosignals.tasks import settings as s
 
 
