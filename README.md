@@ -350,7 +350,7 @@ This project is licensed under the [GNU](https://www.gnu.org/licenses/gpl-3.0.en
 
 ## Contact
 
-Through the website [xtcryptosignals.com](https://xtcryptosignals.com/#contact).  
+Through the website [xtcryptosignals.com](https://xtcryptosignals.com/ticker/tokens/10s#contact).  
 
 ## Acknowledgments
 ![Jetbrains](xtcryptosignals/client/static/imgs/readme/jetbrains.png)  
