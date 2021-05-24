@@ -33,7 +33,7 @@ cryptography
 # switcheo
 
 # requires code refactoring
-celery==4.4.6
+celery==5.1.0
 requests==2.23.0
 marshmallow==2.20.5
 eventlet==0.26.0

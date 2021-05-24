@@ -6,14 +6,12 @@
 #
 aiohttp==3.7.4.post0
     # via python-binance
-amqp==2.6.1
+amqp==5.0.6
     # via kombu
 aniso8601==9.0.1
     # via flask-restful
 appdirs==1.4.4
     # via black
-appnope==0.1.2
-    # via ipython
 apscheduler==3.6.3
     # via python-telegram-bot
 async-timeout==3.0.1
@@ -40,7 +38,7 @@ cachelib==0.1.1
     # via flask-session
 captcha==0.3
     # via -r requirements/requirements.in
-celery==4.4.6
+celery==5.1.0
     # via -r requirements/requirements.in
 certifi==2020.12.5
     # via
@@ -56,10 +54,20 @@ chardet==3.0.4
     # via
     #   aiohttp
     #   requests
-click==8.0.1
+click-didyoumean==0.0.3
+    # via celery
+click-plugins==1.1.1
+    # via celery
+click-repl==0.1.6
+    # via celery
+click==7.1.2
     # via
     #   -r requirements/requirements.in
     #   black
+    #   celery
+    #   click-didyoumean
+    #   click-plugins
+    #   click-repl
     #   flask
     #   pip-tools
 colorama==0.4.4
@@ -72,6 +80,7 @@ cryptography==3.4.7
     #   http-ece
     #   py-vapid
     #   pywebpush
+    #   secretstorage
 dateparser==1.0.0
     # via python-binance
 decorator==5.0.9
@@ -107,8 +116,6 @@ flask==2.0.1
     #   flask-session
     #   flask-socketio
     #   flask-wtf
-future==0.18.2
-    # via celery
 greenlet==1.1.0
     # via eventlet
 gunicorn==20.1.0
@@ -133,6 +140,10 @@ itsdangerous==2.0.1
     #   flask-wtf
 jedi==0.18.0
     # via ipython
+jeepney==0.6.0
+    # via
+    #   keyring
+    #   secretstorage
 jinja2==3.0.1
     # via flask
 jsonschema==3.2.0
@@ -141,7 +152,7 @@ jsonschema==3.2.0
     #   flasgger
 keyring==23.0.1
     # via twine
-kombu==4.6.11
+kombu==5.1.0
     # via celery
 markupsafe==2.0.1
     # via
@@ -190,7 +201,9 @@ pip-tools==6.1.0
 pkginfo==1.7.0
     # via twine
 prompt-toolkit==3.0.18
-    # via ipython
+    # via
+    #   click-repl
+    #   ipython
 ptyprocess==0.7.0
     # via pexpect
 py-etherscan-api==0.8.0
@@ -265,11 +278,14 @@ requests==2.23.0
     #   wikipedia-api
 rfc3986==1.5.0
     # via twine
+secretstorage==3.3.1
+    # via keyring
 six==1.16.0
     # via
     #   apscheduler
     #   bcrypt
     #   bleach
+    #   click-repl
     #   eventlet
     #   flasgger
     #   flask-restful
@@ -304,10 +320,11 @@ ujson==4.0.2
     # via python-binance
 urllib3==1.25.11
     # via requests
-vine==1.3.0
+vine==5.0.0
     # via
     #   amqp
     #   celery
+    #   kombu
 wcwidth==0.2.5
     # via prompt-toolkit
 webencodings==0.5.1
