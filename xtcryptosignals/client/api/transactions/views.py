@@ -78,7 +78,9 @@ def _list():
 @login_required
 def add():
     response = requests.post(
-        url="{}transactions/add".format(current_app.config["SERVER_API_BASE_URL"]),
+        url="{}transactions/add".format(
+            current_app.config["SERVER_API_BASE_URL"]
+        ),
         headers=dict(Authorization=current_user.id),
         json=request.form.to_dict(),
     )

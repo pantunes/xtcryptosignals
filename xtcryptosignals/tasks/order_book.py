@@ -37,7 +37,9 @@ socketio = SocketIO(message_queue=BROKER_URL)
 def _get_intervals(k, _order_book, totals, offset):
     _intervals = []
     a, b = (0, -1) if k == "asks" else (-1, 0)
-    for x in [_order_book[i : i + offset] for i in range(0, len(_order_book), offset)]:
+    for x in [
+        _order_book[i : i + offset] for i in range(0, len(_order_book), offset)
+    ]:
         v = x[-1][-2]
         _intervals.append([x[a][0], x[b][0], v, int((v / totals[k]) * 100)])
     return _intervals
@@ -46,7 +48,9 @@ def _get_intervals(k, _order_book, totals, offset):
 def _process_idex(_, symbol):
     client = IdexClient(s.IDEX_API_KEY, s.IDEX_ADDRESS, s.IDEX_PRIVATE_KEY)
 
-    order_book = client.get_order_book(market="_".join(reversed(symbol)), count=100)
+    order_book = client.get_order_book(
+        market="_".join(reversed(symbol)), count=100
+    )
 
     _order_book = {
         "asks": [],
@@ -67,7 +71,9 @@ def _process_binance(_, symbol):
     client = BinanceClient(s.BINANCE_API_KEY, s.BINANCE_API_SECRET)
 
     _symbol = "{}{}".format(*symbol)
-    order_book = client.get_order_book(symbol=_symbol, limit=ORDER_BOOK_BINANCE_LIMIT)
+    order_book = client.get_order_book(
+        symbol=_symbol, limit=ORDER_BOOK_BINANCE_LIMIT
+    )
 
     _process(_symbol, order_book, offset=ORDER_BOOK_BINANCE_OFFSET)
 

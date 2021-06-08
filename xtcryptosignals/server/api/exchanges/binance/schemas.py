@@ -136,7 +136,9 @@ class ExchangeOpenOrdersOutputSchema(Schema):
             total_total += rest * ppc
 
             data["price_buy_average"] = total_total / amount_total
-            data["position"] = (data["price"] * 100) / data["price_buy_average"] - 100
+            data["position"] = (data["price"] * 100) / data[
+                "price_buy_average"
+            ] - 100
             break
 
         if "distance" in data:
@@ -144,7 +146,9 @@ class ExchangeOpenOrdersOutputSchema(Schema):
 
     @post_dump(pass_many=True)
     def post_dump_pass_many(self, data, many):
-        balance_potential = sum([x["total"] for x in data if x["type"] == "SELL"])
+        balance_potential = sum(
+            [x["total"] for x in data if x["type"] == "SELL"]
+        )
         return dict(results=data, balance_potential=balance_potential)
 
 

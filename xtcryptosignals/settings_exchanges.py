@@ -179,11 +179,7 @@ SYMBOLS_PER_EXCHANGE.append(
 SYMBOLS_PER_EXCHANGE.append(
     {
         BITMAX: {
-            "pairs": [
-                ("LTO", "USDT"),
-                ("LTO", "BTC"),
-                ("BTMX", "USDT"),
-            ],
+            "pairs": [],
             "single_request": True,
         }
     }
@@ -424,10 +420,6 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "pair": "USDT",
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
-    },
-    "BTMX": {
-        "pair": "USDT",
-        "name": BITMAX,
     },
 }
 

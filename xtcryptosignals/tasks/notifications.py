@@ -30,9 +30,7 @@ from xtcryptosignals.tasks import settings as s
 
 red = redis.Redis.from_url(s.BROKER_URL)
 
-PATH_LOGOS = (
-    f"{os.path.dirname(os.path.realpath(__file__))}/../client/static/imgs/logos/"
-)
+PATH_LOGOS = f"{os.path.dirname(os.path.realpath(__file__))}/../client/static/imgs/logos/"
 
 
 @task(bind=True)
@@ -114,7 +112,9 @@ def update(self):
         redis_key = hash_object.hexdigest()
 
         if red.get(redis_key):
-            logger.warning("Already sent notifications to {}".format(notif.user.pk))
+            logger.warning(
+                "Already sent notifications to {}".format(notif.user.pk)
+            )
             continue
 
         red.setex(
@@ -142,7 +142,9 @@ def update(self):
 
         try:
             try:
-                logger.warning("Sending web notification to {}".format(notif.user.pk))
+                logger.warning(
+                    "Sending web notification to {}".format(notif.user.pk)
+                )
                 webpush(
                     subscription_info=notif.user.metadata["subscription"],
                     data=json.dumps(

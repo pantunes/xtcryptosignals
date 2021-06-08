@@ -74,7 +74,9 @@ def notifications():
 @login_required
 def rules():
     response = requests.get(
-        url="{}notifications/rules".format(current_app.config["SERVER_API_BASE_URL"]),
+        url="{}notifications/rules".format(
+            current_app.config["SERVER_API_BASE_URL"]
+        ),
         headers=dict(Authorization=current_user.id),
     )
     return dict(results=response.json()), response.status_code

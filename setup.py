@@ -17,7 +17,9 @@ from setuptools import (
 
 _ROOT_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
-with open(os.path.join(_ROOT_FOLDER, "requirements/requirements.txt"), "r") as f:
+with open(
+    os.path.join(_ROOT_FOLDER, "requirements/requirements.txt"), "r"
+) as f:
     _REQUIREMENTS = [x for x in f.readlines()]
 
 with open(os.path.join(_ROOT_FOLDER, "README.md"), "r") as f:

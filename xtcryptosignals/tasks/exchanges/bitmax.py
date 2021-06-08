@@ -18,7 +18,9 @@ class Bitmax:
     def get_ticker(self, pairs):
         request = requests.get(self.base_url)
         if request.status_code != 200:
-            raise ValueError("Error connecting Bitmax on URL: {}".format(self.base_url))
+            raise ValueError(
+                "Error connecting Bitmax on URL: {}".format(self.base_url)
+            )
         response = request.json()
         _pairs = ["/".join(x) for x in pairs]
         counter = 0
