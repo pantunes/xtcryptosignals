@@ -1,41 +1,47 @@
 pip-tools
-redis
-mongoengine
-click
-flask
-flask-restful
-flask-session
-flask-socketio
-flask-login
-flask-wtf
-gunicorn
-mongodb-migrations
-bcrypt
-environs
-pywebpush
-captcha
-wikipedia-api
-beautifulsoup4
-millify
-py-etherscan-api
-cfscrape
-python-binance
-python-kucoin
-python-telegram-bot
-pycryptodome
-jsonschema
-mistune
-flasgger
-python-socketio[client]
-websockets
-cryptography
-# python-idex
-# switcheo
+redis==3.5.3
+mongoengine==0.23.1
+click==8.0.1
+flask==2.0.1
+flask-restful==0.3.9
+flask-session==0.3.2
+flask-socketio==5.1.0
+flask-login==0.5.0
+flask-wtf==0.15.1
+gunicorn==20.1.0
+mongodb-migrations==1.0.1
+bcrypt==3.2.0
+environs==9.3.2
+pywebpush==1.13.0
+captcha==0.3
+wikipedia-api==0.5.4
+beautifulsoup4==4.9.3
+millify==0.1.1
+py-etherscan-api==0.8.0
+cfscrape==2.1.1
+python-telegram-bot==13.6
+pycryptodome==3.10.1
+jsonschema==3.2.0
+mistune==0.8.4
+flasgger==0.9.5
+python-socketio[client]==5.3.0
+websockets==9.1
+cryptography==3.4.7
+python-binance==0.7.9
+python-kucoin==2.1.2
+requests==2.23.0
+
 
 # requires code refactoring
+
 celery==4.4.6
-requests==2.23.0
-marshmallow==2.20.5
-eventlet==0.26.0
-pymongo==3.10.1
 dnspython<2
+eventlet==0.26.0
+marshmallow==2.20.5
+pymongo==3.10.1
+
+
+# not needed for now
+
+# python-idex
+# switcheo

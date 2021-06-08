@@ -66,7 +66,9 @@ def _set_history(ticker):
                 volume_change,
             ) = ticker._calculate_changes(row)
             price_change_prepared = _get_abs_zero(price_change)
-            price_change_chart = _get_price_change_chart(row, price_change_prepared)
+            price_change_chart = _get_price_change_chart(
+                row, price_change_prepared
+            )
 
         history_object = model_history(
             symbol=ticker["symbol"],
@@ -145,7 +147,9 @@ class Ticker(DocumentValidation):
         return e
 
     def _exists_row_offset(self, model, offset):
-        dt = datetime.utcnow() - timedelta(seconds=convert_to_seconds(offset) - 1.0)
+        dt = datetime.utcnow() - timedelta(
+            seconds=convert_to_seconds(offset) - 1.0
+        )
         return model.objects(
             symbol=self["symbol"], source=self["source"], created_on__gte=dt
         ).first()
@@ -160,7 +164,8 @@ class Ticker(DocumentValidation):
         if self["number_trades_24h"]:
             try:
                 number_trades_change = (
-                    float(self["number_trades_24h"] / row.number_trades_24h) - 1.0
+                    float(self["number_trades_24h"] / row.number_trades_24h)
+                    - 1.0
                 ) * 100.0
             except ZeroDivisionError:
                 number_trades_change = 1.0

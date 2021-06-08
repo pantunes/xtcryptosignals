@@ -27,7 +27,12 @@ URL = f"https://etherscan.io/token/{TETHER_CONTRACT_ADDRESS}"
 def _get_tether_num_holders():
     scraper = cfscrape.create_scraper()
     soup = BeautifulSoup(scraper.get(URL).content, "html.parser")
-    selector = soup.find(id="ContentPlaceHolder1_tr_tokenHolders").find_all("div")[-1]
+
+    # @note: If fails, most likely CAPTCHA! > can't do anything to prevent it :-(
+    selector = soup.find(id="ContentPlaceHolder1_tr_tokenHolders").find_all(
+        "div"
+    )[-1]
+
     try:
         return int(
             selector.string.replace(".", "")

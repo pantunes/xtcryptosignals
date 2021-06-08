@@ -26,7 +26,9 @@ class CoinbasePro:
 
             request = requests.get(url)
             if request.status_code != 200:
-                raise ValueError("Error connecting CoinbasePro on URL: {}".format(url))
+                raise ValueError(
+                    "Error connecting CoinbasePro on URL: {}".format(url)
+                )
             item.update(request.json())
 
         item.update(symbol="".join(symbol), ticker=symbol[0])
