@@ -19,8 +19,6 @@ beautifulsoup4
 millify
 py-etherscan-api
 cfscrape
-python-binance
-python-kucoin
 python-telegram-bot
 pycryptodome
 jsonschema
@@ -29,13 +27,21 @@ flasgger
 python-socketio[client]
 websockets
 cryptography
-# python-idex
-# switcheo
+
 
 # requires code refactoring
+
 celery==4.4.6
-requests==2.23.0
-marshmallow==2.20.5
-eventlet==0.26.0
-pymongo==3.10.1
 dnspython<2
+eventlet==0.26.0
+marshmallow==2.20.5
+pymongo==3.10.1
+python-binance==0.7.9
+python-kucoin==2.1.2
+requests==2.23.0
+
+
+# not needed for now
+
+# python-idex
+# switcheo
