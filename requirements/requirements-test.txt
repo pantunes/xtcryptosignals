@@ -118,14 +118,6 @@ idna==2.10
     # via
     #   hyperlink
     #   requests
-importlib-metadata==4.5.0
-    # via
-    #   click
-    #   jsonschema
-    #   kombu
-    #   pep517
-    #   pluggy
-    #   pytest
 incremental==21.3.0
     # via twisted
 iniconfig==1.1.1
@@ -168,7 +160,7 @@ pep517==0.10.0
     # via pip-tools
 pillow==8.2.0
     # via captcha
-pip-tools==6.1.0
+pip-tools==6.2.0
     # via -r requirements/requirements.in
 pluggy==0.13.1
     # via pytest
@@ -275,8 +267,6 @@ twisted==21.2.0
     # via python-binance
 txaio==21.2.1
     # via autobahn
-typing-extensions==3.10.0.0
-    # via importlib-metadata
 tzlocal==2.1
     # via
     #   apscheduler
@@ -299,14 +289,12 @@ websockets==9.1
     #   python-kucoin
 werkzeug==2.0.1
     # via flask
+wheel==0.36.2
+    # via pip-tools
 wikipedia-api==0.5.4
     # via -r requirements/requirements.in
 wtforms==2.3.3
     # via flask-wtf
-zipp==3.4.1
-    # via
-    #   importlib-metadata
-    #   pep517
 zope.interface==5.4.0
     # via twisted
 

@@ -10,8 +10,6 @@ aniso8601==9.0.1
     # via flask-restful
 appdirs==1.4.4
     # via black
-appnope==0.1.2
-    # via ipython
 apscheduler==3.6.3
     # via python-telegram-bot
 attrs==21.2.0
@@ -80,6 +78,7 @@ cryptography==3.4.7
     #   pyopenssl
     #   python-binance
     #   pywebpush
+    #   secretstorage
     #   service-identity
 dateparser==1.0.0
     # via python-binance
@@ -134,11 +133,7 @@ idna==2.10
     #   requests
 importlib-metadata==4.5.0
     # via
-    #   click
-    #   jsonschema
     #   keyring
-    #   kombu
-    #   pep517
     #   twine
 incremental==21.3.0
     # via twisted
@@ -152,6 +147,10 @@ itsdangerous==2.0.1
     #   flask-wtf
 jedi==0.18.0
     # via ipython
+jeepney==0.6.0
+    # via
+    #   keyring
+    #   secretstorage
 jinja2==3.0.1
     # via flask
 jsonschema==3.2.0
@@ -200,7 +199,7 @@ pickleshare==0.7.5
     # via ipython
 pillow==8.2.0
     # via captcha
-pip-tools==6.1.0
+pip-tools==6.2.0
     # via -r requirements/requirements.in
 pkginfo==1.7.0
     # via twine
@@ -288,6 +287,8 @@ requests==2.23.0
     #   wikipedia-api
 rfc3986==1.5.0
     # via twine
+secretstorage==3.3.1
+    # via keyring
 service-identity==21.1.0
     # via python-binance
 six==1.16.0
@@ -326,12 +327,6 @@ twisted==21.2.0
     # via python-binance
 txaio==21.2.1
     # via autobahn
-typed-ast==1.4.3
-    # via black
-typing-extensions==3.10.0.0
-    # via
-    #   black
-    #   importlib-metadata
 tzlocal==2.1
     # via
     #   apscheduler
@@ -358,14 +353,14 @@ websockets==9.1
     #   python-kucoin
 werkzeug==2.0.1
     # via flask
+wheel==0.36.2
+    # via pip-tools
 wikipedia-api==0.5.4
     # via -r requirements/requirements.in
 wtforms==2.3.3
     # via flask-wtf
 zipp==3.4.1
-    # via
-    #   importlib-metadata
-    #   pep517
+    # via importlib-metadata
 zope.interface==5.4.0
     # via twisted
 
