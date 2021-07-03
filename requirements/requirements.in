@@ -21,7 +21,7 @@ beautifulsoup4==4.9.3
 millify==0.1.1
 py-etherscan-api==0.8.0
 cfscrape==2.1.1
-python-telegram-bot==13.6
+python-telegram-bot==13.7
 pycryptodome==3.10.1
 jsonschema==3.2.0
 mistune==0.8.4

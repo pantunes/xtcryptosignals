@@ -10,8 +10,6 @@ aniso8601==9.0.1
     # via flask-restful
 appdirs==1.4.4
     # via black
-appnope==0.1.2
-    # via ipython
 apscheduler==3.6.3
     # via python-telegram-bot
 attrs==21.2.0
@@ -80,6 +78,7 @@ cryptography==3.4.7
     #   pyopenssl
     #   python-binance
     #   pywebpush
+    #   secretstorage
     #   service-identity
 dateparser==1.0.0
     # via python-binance
@@ -97,15 +96,6 @@ eventlet==0.26.0
     # via -r requirements/requirements.in
 flasgger==0.9.5
     # via -r requirements/requirements.in
-flask==2.0.1
-    # via
-    #   -r requirements/requirements.in
-    #   flasgger
-    #   flask-login
-    #   flask-restful
-    #   flask-session
-    #   flask-socketio
-    #   flask-wtf
 flask-login==0.5.0
     # via -r requirements/requirements.in
 flask-restful==0.3.9
@@ -116,6 +106,15 @@ flask-socketio==5.1.0
     # via -r requirements/requirements.in
 flask-wtf==0.15.1
     # via -r requirements/requirements.in
+flask==2.0.1
+    # via
+    #   -r requirements/requirements.in
+    #   flasgger
+    #   flask-login
+    #   flask-restful
+    #   flask-session
+    #   flask-socketio
+    #   flask-wtf
 future==0.18.2
     # via celery
 greenlet==1.1.0
@@ -134,24 +133,24 @@ idna==2.10
     #   requests
 importlib-metadata==4.6.0
     # via
-    #   click
-    #   jsonschema
     #   keyring
-    #   kombu
-    #   pep517
     #   twine
 incremental==21.3.0
     # via twisted
-ipython==7.25.0
-    # via -r requirements/requirements-dev.in
 ipython-genutils==0.2.0
     # via traitlets
+ipython==7.25.0
+    # via -r requirements/requirements-dev.in
 itsdangerous==2.0.1
     # via
     #   flask
     #   flask-wtf
 jedi==0.18.0
     # via ipython
+jeepney==0.6.0
+    # via
+    #   keyring
+    #   secretstorage
 jinja2==3.0.1
     # via flask
 jsonschema==3.2.0
@@ -212,12 +211,12 @@ py-etherscan-api==0.8.0
     # via -r requirements/requirements.in
 py-vapid==1.8.2
     # via pywebpush
+pyasn1-modules==0.2.8
+    # via service-identity
 pyasn1==0.4.8
     # via
     #   pyasn1-modules
     #   service-identity
-pyasn1-modules==0.2.8
-    # via service-identity
 pycparser==2.20
     # via cffi
 pycryptodome==3.10.1
@@ -251,7 +250,7 @@ python-socketio[client]==5.3.0
     # via
     #   -r requirements/requirements.in
     #   flask-socketio
-python-telegram-bot==13.6
+python-telegram-bot==13.7
     # via -r requirements/requirements.in
 pytz==2021.1
     # via
@@ -273,6 +272,8 @@ regex==2021.7.1
     # via
     #   black
     #   dateparser
+requests-toolbelt==0.9.1
+    # via twine
 requests==2.23.0
     # via
     #   -r requirements/requirements.in
@@ -284,10 +285,10 @@ requests==2.23.0
     #   requests-toolbelt
     #   twine
     #   wikipedia-api
-requests-toolbelt==0.9.1
-    # via twine
 rfc3986==1.5.0
     # via twine
+secretstorage==3.3.1
+    # via keyring
 service-identity==21.1.0
     # via python-binance
 six==1.16.0
@@ -326,12 +327,6 @@ twisted==21.2.0
     # via python-binance
 txaio==21.2.1
     # via autobahn
-typed-ast==1.4.3
-    # via black
-typing-extensions==3.10.0.0
-    # via
-    #   black
-    #   importlib-metadata
 tzlocal==2.1
     # via
     #   apscheduler
@@ -365,9 +360,7 @@ wikipedia-api==0.5.4
 wtforms==2.3.3
     # via flask-wtf
 zipp==3.5.0
-    # via
-    #   importlib-metadata
-    #   pep517
+    # via importlib-metadata
 zope.interface==5.4.0
     # via twisted
 
