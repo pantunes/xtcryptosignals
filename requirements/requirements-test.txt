@@ -79,19 +79,10 @@ dnspython==1.16.0
     #   eventlet
 environs==9.3.2
     # via -r requirements/requirements.in
-eventlet==0.26.0
+eventlet==0.31.0
     # via -r requirements/requirements.in
 flasgger==0.9.5
     # via -r requirements/requirements.in
-flask==2.0.1
-    # via
-    #   -r requirements/requirements.in
-    #   flasgger
-    #   flask-login
-    #   flask-restful
-    #   flask-session
-    #   flask-socketio
-    #   flask-wtf
 flask-login==0.5.0
     # via -r requirements/requirements.in
 flask-restful==0.3.9
@@ -102,6 +93,15 @@ flask-socketio==5.1.0
     # via -r requirements/requirements.in
 flask-wtf==0.15.1
     # via -r requirements/requirements.in
+flask==2.0.1
+    # via
+    #   -r requirements/requirements.in
+    #   flasgger
+    #   flask-login
+    #   flask-restful
+    #   flask-session
+    #   flask-socketio
+    #   flask-wtf
 future==0.18.2
     # via celery
 greenlet==1.1.0
@@ -118,14 +118,6 @@ idna==2.10
     # via
     #   hyperlink
     #   requests
-importlib-metadata==4.6.0
-    # via
-    #   click
-    #   jsonschema
-    #   kombu
-    #   pep517
-    #   pluggy
-    #   pytest
 incremental==21.3.0
     # via twisted
 iniconfig==1.1.1
@@ -160,8 +152,6 @@ mongodb-migrations==1.0.1
     # via -r requirements/requirements.in
 mongoengine==0.23.1
     # via -r requirements/requirements.in
-monotonic==1.6
-    # via eventlet
 packaging==21.0
     # via pytest
 pep517==0.10.0
@@ -172,18 +162,18 @@ pip-tools==6.2.0
     # via -r requirements/requirements.in
 pluggy==0.13.1
     # via pytest
-py==1.10.0
-    # via pytest
 py-etherscan-api==0.8.0
     # via -r requirements/requirements.in
 py-vapid==1.8.2
     # via pywebpush
+py==1.10.0
+    # via pytest
+pyasn1-modules==0.2.8
+    # via service-identity
 pyasn1==0.4.8
     # via
     #   pyasn1-modules
     #   service-identity
-pyasn1-modules==0.2.8
-    # via service-identity
 pycparser==2.20
     # via cffi
 pycryptodome==3.10.1
@@ -199,12 +189,12 @@ pyparsing==2.4.7
     # via packaging
 pyrsistent==0.18.0
     # via jsonschema
+pytest-cov==2.12.1
+    # via -r requirements/requirements-test.in
 pytest==6.2.4
     # via
     #   -r requirements/requirements-test.in
     #   pytest-cov
-pytest-cov==2.12.1
-    # via -r requirements/requirements-test.in
 python-binance==0.7.9
     # via -r requirements/requirements.in
 python-dateutil==2.8.1
@@ -275,8 +265,6 @@ twisted==21.2.0
     # via python-binance
 txaio==21.2.1
     # via autobahn
-typing-extensions==3.10.0.0
-    # via importlib-metadata
 tzlocal==2.1
     # via
     #   apscheduler
@@ -305,10 +293,6 @@ wikipedia-api==0.5.4
     # via -r requirements/requirements.in
 wtforms==2.3.3
     # via flask-wtf
-zipp==3.5.0
-    # via
-    #   importlib-metadata
-    #   pep517
 zope.interface==5.4.0
     # via twisted
 

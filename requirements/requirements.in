@@ -38,7 +38,7 @@ requests==2.23.0
 
 celery==4.4.6
 dnspython<2
-eventlet==0.26.0
+eventlet==0.31.0
 marshmallow==2.20.5
 pymongo==3.10.1
 
