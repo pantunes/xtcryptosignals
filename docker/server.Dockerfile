@@ -1,6 +1,5 @@
 FROM python:3.7.9-alpine3.13
 
-RUN python -m pip install --upgrade pip
 RUN apk add --no-cache \
     alpine-sdk \
     zlib \
@@ -26,6 +25,9 @@ WORKDIR /xtcryptosignals
 
 ADD ./ ./
 
+RUN ln -fs /usr/share/zoneinfo/Etc/UTC /etc/localtime
+
+RUN python -m pip install --upgrade pip
 RUN pip install -r requirements/requirements.txt
 RUN pip install -e .
 

@@ -186,7 +186,7 @@ monotonic==1.6
     # via eventlet
 mypy-extensions==0.4.3
     # via black
-packaging==20.9
+packaging==21.0
     # via bleach
 parso==0.8.2
     # via jedi
