@@ -28,10 +28,13 @@ def _get_tether_num_holders():
     scraper = cfscrape.create_scraper()
     soup = BeautifulSoup(scraper.get(URL).content, "html.parser")
 
-    # @note: If fails, most likely CAPTCHA! > can't do anything to prevent it :-(
-    selector = soup.find(id="ContentPlaceHolder1_tr_tokenHolders").find_all(
-        "div"
-    )[-1]
+    try:
+        selector = soup.find(id="ContentPlaceHolder1_tr_tokenHolders").find_all(
+            "div"
+        )[-1]
+    except AttributeError:
+        # @note: If fails, most likely CAPTCHA! > can't do anything to prevent it :-(
+        return -1
 
     try:
         return int(
@@ -41,9 +44,11 @@ def _get_tether_num_holders():
             .strip()
         )
     except AttributeError:
-        pass
-    try:
         # @note: HTML structure changed a bit recently
+        pass
+
+    try:
+        # @note: Trying a bit differently...
         return int(
             selector.text.replace(".", "")
             .replace(",", "")
@@ -53,6 +58,9 @@ def _get_tether_num_holders():
         )
     except AttributeError:
         pass
+
+    # We can't get this one right
+    return -1
 
 
 @task(bind=True)
