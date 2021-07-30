@@ -23,11 +23,13 @@
             </thead>
             <tbody>
 
-{% for c, d in coins_or_tokens_favourites.items() %}
+{% for c, d in coins_or_tokens_reference.items() %}
     {% set r = d["pair"] %}
+    {% set is = d["is_stable"] %}
     {% set exchange = d["name"] %}
             <tr>
                 <td style="vertical-align: middle;">
+                    {{ '<span class="backg1">stable</span>'|safe if is else '' }}
                     <a href="{{url_for('ticker.token_frequency', coin_or_token=c, frequency=frequency)}}">
                         <div class="coin-or-token one-coin"><img src="/static/imgs/logos/{{c}}.png" alt="{{c}}" title="{{c}}"/></div>
                     </a>

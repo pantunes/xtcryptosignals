@@ -81,10 +81,9 @@ def ticker(frequency):
 @bp.route("/ticker/tokens/<frequency>")
 @validate_args()
 def ticker_coins_or_tokens(frequency):
-    coins_or_tokens_favourites, _ = service.get_coins_or_tokens_reference()
     return dict(
         template_name_or_list="ticker/ticker-coins-or-tokens.html",
-        coins_or_tokens_favourites=coins_or_tokens_favourites,
+        coins_or_tokens_reference=g.COINS_OR_TOKENS_REFERENCE,
         attributes=_COLUMN_ATTRIBUTES,
         frequency=frequency,
     )

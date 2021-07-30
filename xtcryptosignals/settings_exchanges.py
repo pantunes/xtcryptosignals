@@ -319,19 +319,6 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
-    "USDC": {
-        "pair": "USDT",
-        "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
-    },
-    "USDT": {
-        "pair": "USD",
-        "name": OKCOIN,
-    },
-    "DAI": {
-        "pair": "USD",
-        "name": COINBASE_PRO,
-    },
     "LTO": {
         "pair": "USDT",
         "name": BINANCE,
@@ -420,6 +407,22 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "pair": "USDT",
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
+    "USDC": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+        "is_stable": True,
+    },
+    "USDT": {
+        "pair": "USD",
+        "name": OKCOIN,
+        "is_stable": True,
+    },
+    "DAI": {
+        "pair": "USD",
+        "name": COINBASE_PRO,
+        "is_stable": True,
     },
 }
 
