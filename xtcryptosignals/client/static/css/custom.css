@@ -180,3 +180,9 @@ table.market-depth-orders td {
   text-align: center;
   letter-spacing: .1rem;
 }
+
+.backg1 {
+  background-color: yellow;
+  color: black;
+  padding: 2px;
+}
