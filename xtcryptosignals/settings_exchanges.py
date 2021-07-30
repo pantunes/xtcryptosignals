@@ -79,6 +79,8 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("UNI", "BTC"),
                 ("DOT", "USDT"),
                 ("DOT", "BTC"),
+                ("ICP", "USDT"),
+                ("ICP", "BTC"),
                 ("BNB", "USDT"),
                 ("BNB", "BTC"),
                 ("ICX", "USDT"),
@@ -320,6 +322,11 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "LTO": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+    },
+    "ICP": {
         "pair": "USDT",
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
