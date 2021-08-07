@@ -27,7 +27,7 @@ body {
   font-size: 1.3em;
 }
 .container {
-  max-width: none;
+  max-width: 1380px;
 }
 .numeric_value {
   color: #000;
