@@ -146,10 +146,16 @@ def spotlight_search():
     url = url_for("ticker.favourites", frequency="1d")
     rows.append(dict(label="Favourites", value="Favourites", url=url))
 
+    url = url_for("transaction.index")
+    rows.append(dict(label="Transactions", value="Transactions", url=url))
+
     url = url_for("portfolio.index")
     rows.append(dict(label="Portfolio", value="Portfolio", url=url))
 
     url = url_for("notification.index")
     rows.append(dict(label="Notifications", value="Notifications", url=url))
+
+    url = url_for("exchange.index", exchange="binance")
+    rows.append(dict(label="Binance", value="Binance", url=url))
 
     return dict(count=len(rows), rows=rows)
