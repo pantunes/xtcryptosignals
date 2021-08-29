@@ -181,8 +181,13 @@ table.market-depth-orders td {
   letter-spacing: .1rem;
 }
 
-.backg1 {
-  background-color: yellow;
-  color: black;
-  padding: 2px;
+.label-token-type {
+  background-color: gray;
+  color: white;
+  padding-left: 4px;
+  text-transform: uppercase;
+  font-size: 1.0rem;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: .1rem;
 }

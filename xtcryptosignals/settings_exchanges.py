@@ -335,6 +335,7 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "pair": "USDT",
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+        "is_defi": True,
     },
     "EWT": {
         "pair": "USDT",
@@ -349,26 +350,31 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "pair": "USDT",
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+        "is_defi": True,
     },
     "KNC": {
         "pair": "USDT",
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+        "is_defi": True,
     },
     "AAVE": {
         "pair": "USDT",
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+        "is_defi": True,
     },
     "UNI": {
         "pair": "USDT",
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+        "is_defi": True,
     },
     "REN": {
         "pair": "USDT",
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+        "is_defi": True,
     },
     "DOT": {
         "pair": "USDT",
