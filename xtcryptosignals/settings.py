@@ -13,7 +13,6 @@ TICKER_SCHEDULE = 10  # executed each X seconds
 # mongodb collections created during runtime
 HISTORY_FREQUENCY = (
     str(TICKER_SCHEDULE) + "s",
-    "30s",
     "1m",
     "10m",
     "30m",
@@ -21,7 +20,6 @@ HISTORY_FREQUENCY = (
     "4h",
     "12h",
     "1d",
-    "4d",
     "1w",
     "4w",
     "12w",

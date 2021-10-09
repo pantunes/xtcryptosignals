@@ -35,7 +35,7 @@ _COLUMN_ATTRIBUTES = {
     "price_change_1h": "1h",
     "price_change_1d": "1d",
     "price_change_1w": "1w",
-    "price_change_4w": "1m",
+    "price_change_4w": "4w",
     # /PRICE_CHANGE_FREQUENCIES
     "volume_24h": "Volume 24h",
     "volume_change": "Change",

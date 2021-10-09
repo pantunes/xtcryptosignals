@@ -68,7 +68,7 @@ def coin_or_token_frequency(coin_or_token):
         template_name_or_list="tools/coin-token.html",
         socket_base_url=current_app.config["SOCKET_BASE_URL"],
         frequency=g.HISTORY_FREQUENCY[0],
-        frequencies_charts=["10s", "1m", "10m", "30m", "1h", "4h", "12h", "1d"],
+        frequencies_charts=["10s", "10m", "30m", "1h", "4h", "12h", "1d", "4w"],
         attributes={"price_usdt": "Price USDT"},
         coin_or_token=coin_or_token,
         reference=g.COINS_OR_TOKENS_REFERENCE[coin_or_token],
@@ -84,7 +84,7 @@ def tether(coin_or_token):
     return dict(
         template_name_or_list="tools/tether.html",
         frequency=g.HISTORY_FREQUENCY[0],
-        frequencies_charts=["1h", "1d", "4d", "1w", "4w"],
+        frequencies_charts=["1h", "1d", "1w", "4w"],
         coin_or_token=coin_or_token,
         reference=g.COINS_OR_TOKENS_REFERENCE[coin_or_token],
     )

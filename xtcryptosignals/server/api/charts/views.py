@@ -46,7 +46,6 @@ class ChartFearAndGreedIndexAndBTC(Resource):
         """
         if frequency not in (
             "1d",
-            "4d",
             "1w",
             "4w",
         ):
@@ -110,7 +109,6 @@ class ChartTetherBTC(Resource):
         if frequency not in (
             "1h",
             "1d",
-            "4d",
             "1w",
             "4w",
         ):

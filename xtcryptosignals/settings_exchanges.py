@@ -256,9 +256,7 @@ SYMBOLS_PER_EXCHANGE.append(
 SYMBOLS_PER_EXCHANGE.append(
     {
         BINANCE_DEX: {
-            "pairs": [
-                ("LTO", "BNB"),
-            ],
+            "pairs": [],
             "single_request": True,
         }
     }
