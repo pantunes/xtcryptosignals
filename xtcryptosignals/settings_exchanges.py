@@ -94,6 +94,8 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("LTO", "BTC"),
                 ("FTM", "USDT"),
                 ("FTM", "BTC"),
+                ("ALGO", "USDT"),
+                ("ALGO", "BTC"),
                 ("ONT", "USDT"),
                 ("HBAR", "USDT"),
                 ("HBAR", "BTC"),
@@ -334,6 +336,11 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
         "is_defi": True,
+    },
+    "ALGO": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "EWT": {
         "pair": "USDT",
