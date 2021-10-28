@@ -2,6 +2,7 @@
 All changes will be registered here per release.
 
 ## [0.8.6] - Current date
+Added `Algorand / ALGO` Project/Token.  
 Added `Dfinity / ICP` Project/Token.  
 
 ## [0.8.6] - 2021-07-03
