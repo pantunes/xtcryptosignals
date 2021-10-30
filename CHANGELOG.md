@@ -4,6 +4,7 @@ All changes will be registered here per release.
 ## [0.8.6] - Current date
 Added `Algorand / ALGO` Project/Token.  
 Added `Dfinity / ICP` Project/Token.  
+Added `BUSD` stable coin.  
 
 ## [0.8.6] - 2021-07-03
 Fix `COINBASE` Exchange Rate limits that would result in an HTTP 429 Too Many Requests.  

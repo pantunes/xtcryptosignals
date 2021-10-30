@@ -19,7 +19,7 @@ from xtcryptosignals import (
 class Config(object):
     IP_ADDRESS = "0.0.0.0"
 
-    PORT = 5000
+    PORT = 5050
 
     TESTING = False
 
@@ -65,5 +65,7 @@ class ConfigDevelopment(Config):
 
 
 class ConfigDocker(ConfigDevelopment):
+    PORT = 5000
+
     BROKER_URL = "redis://172.19.10.6:6379"
     SESSION_REDIS = Redis.from_url(BROKER_URL)

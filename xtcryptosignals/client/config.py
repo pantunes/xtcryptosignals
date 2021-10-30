@@ -20,7 +20,7 @@ class Config(object):
 
     SECRET_KEY = None
 
-    SERVER_API_BASE_URL = "http://127.0.0.1:5000/"
+    SERVER_API_BASE_URL = "http://127.0.0.1:5050/"
 
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = "Lax"

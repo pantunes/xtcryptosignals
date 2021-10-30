@@ -23,7 +23,7 @@ class BaseSchema(Schema):
 
     def post_load(self, data):
         data_symbol = data["symbol"][-3:]
-        if data_symbol in s.COIN_OR_TOKEN_REFERENCE[:2]:
+        if data_symbol in s.COIN_OR_TOKEN_REFERENCE["VAR"]:
             key = s.REDIS_KEY_TICKER.format(
                 source=s.BINANCE,
                 symbol=data_symbol + "USDT",
@@ -35,7 +35,7 @@ class BaseSchema(Schema):
             deser_row = json.loads(ser_row)
             price = float(deser_row["price"])
             data["price_usdt"] = data["price"] * price
-        elif data_symbol in s.COIN_OR_TOKEN_REFERENCE[2:4]:
+        elif data_symbol in s.COIN_OR_TOKEN_REFERENCE["STABLE"]:
             data["price_usdt"] = data["price"]
-        elif data["symbol"][-4:] == s.COIN_OR_TOKEN_REFERENCE[4]:
+        elif data["symbol"][-4:] == s.COIN_OR_TOKEN_REFERENCE_DEFAULT:
             data["price_usdt"] = data["price"]

@@ -46,15 +46,19 @@ TELEGRAM_GROUP_CHAT_ID = env.str("TELEGRAM_GROUP_CHAT_ID")
 
 STATIC_COINS_TOKENS_LOGOS_FOLDER = "/static/imgs/logos/"
 
-# order matters in class BaseSchema
-COIN_OR_TOKEN_REFERENCE = (
-    "ETH",
-    "BTC",
-    # Stable coins/tokens/currencies
-    "DAI",
-    "USD",
-    "USDT",
-)
+COIN_OR_TOKEN_REFERENCE = {
+    "VAR": (
+        "ETH",
+        "BTC",
+    ),
+    "STABLE": (
+        "DAI",
+        "USD",
+        "BUSD",
+        "USDT",
+    ),
+}
+COIN_OR_TOKEN_REFERENCE_DEFAULT = "USDT"
 
 from xtcryptosignals.settings import *  # noqa
 from xtcryptosignals.tasks.settings_local import *  # noqa
@@ -62,10 +66,16 @@ from xtcryptosignals.tasks.settings_local import *  # noqa
 TIMEOUT_PER_SYMBOL_REQUEST = TICKER_SCHEDULE * 0.4
 TIMEOUT_PER_SYMBOLS_REQUEST = TICKER_SCHEDULE * 0.8
 
+# Settings validations
 assert (
     TIMEOUT_PER_SYMBOL_REQUEST < TIMEOUT_PER_SYMBOLS_REQUEST < TICKER_SCHEDULE
 )
 assert TIMEOUT_ORDER_BOOK < ORDER_BOOK_SCHEDULE
 
 for _, x in EXCHANGES_AND_PAIRS_OF_REFERENCE.items():
-    assert x["pair"] in COIN_OR_TOKEN_REFERENCE
+    assert (
+        x["pair"]
+        in COIN_OR_TOKEN_REFERENCE["VAR"] + COIN_OR_TOKEN_REFERENCE["STABLE"]
+    )
+
+assert COIN_OR_TOKEN_REFERENCE_DEFAULT in COIN_OR_TOKEN_REFERENCE["STABLE"]
