@@ -141,7 +141,7 @@ class ExchangeOpenOrdersOutputSchema(Schema):
             ] - 100
             break
 
-        if "distance" in data:
+        if "distance" in data and "position" in data:
             data["status"] = data["distance"] < data["position"]
 
     @post_dump(pass_many=True)
