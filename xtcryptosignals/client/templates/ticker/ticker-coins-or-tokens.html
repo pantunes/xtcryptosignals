@@ -33,7 +33,7 @@
                     {{ '<span class="label-token-type">stable</span>'|safe if is_stable else '' }}
                     {{ '<span class="label-token-type">defi</span>'|safe if is_defi else '' }}
                     <a href="{{url_for('ticker.token_frequency', coin_or_token=c, frequency=frequency)}}">
-                        <div class="coin-or-token one-coin"><img src="/static/imgs/logos/{{c}}.png" alt="{{c}}" title="{{c}}"/></div>
+                        <div class="coin-or-token one-coin"><img src="{{url_for('static', filename='imgs/logos/' + c + '.png')}}" alt="{{c}}" title="{{c}}"/></div>
                     </a>
                 </td>
                 <td style="width: 100px;">

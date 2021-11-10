@@ -4,8 +4,8 @@
 
 {% block include_scripts_top %}
 <script src="//code.highcharts.com/highcharts.js" type="text/javascript"></script>
-<script src="/static/js/sparkline.js" type="text/javascript"></script>
-<script src="/static/js/site.js" type="text/javascript"></script>
+<script src="{{url_for('static', filename='js/sparkline.js')}}" type="text/javascript"></script>
+<script src="{{url_for('static', filename='js/site.js')}}" type="text/javascript"></script>
 
 <script type="text/javascript">
     let timeleft = 1;
@@ -211,8 +211,8 @@ function _post_and_get_ticker_emit(id, json, reference_name, reference_pair, coi
                     <tr>
                         <td style="vertical-align: middle;">
                             <a href="{{url_for('ticker.token_frequency', coin_or_token=c, frequency=frequency)}}">
-                                <div class="coin-or-token one-coin"><img src="/static/imgs/logos/{{c}}.png" alt="{{c}}" title="{{c}}"/></div>
-                                <div class="coin-or-token two-coin"><img src="/static/imgs/logos/{{r}}.png" alt="{{r}}" title="{{r}}"/></div>
+                                <div class="coin-or-token one-coin"><img src="{{url_for('static', filename='imgs/logos/' + c + '.png')}}" alt="{{c}}" title="{{c}}"/></div>
+                                <div class="coin-or-token two-coin"><img src="{{url_for('static', filename='imgs/logos/' + r + '.png')}}" alt="{{r}}" title="{{r}}"/></div>
                             </a>
                         </td>
                         <td style="width: 100px;">

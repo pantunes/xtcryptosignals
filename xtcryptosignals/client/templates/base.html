@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <title>XTCryptoSignals - {% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="/static/imgs/favicon-16x16.png" sizes="16x16">
-    <link rel="icon" type="image/png" href="/static/imgs/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{url_for('static', filename='imgs/favicon-16x16.png')}}" sizes="16x16">
+    <link rel="icon" type="image/png" href="{{url_for('static', filename='imgs/favicon-32x32.png')}}" sizes="32x32">
     <!--open graph protocol -->
     <meta name="title" property="og:title" content="XTCryptoSignals"/>
     <meta property="og:type" content="Crypto Platform Data Tools">
-    <meta name="image" property="og:image" content="//xtcryptosignals.com/static/imgs/logo_transparent.png"/>
+    <meta name="image" property="og:image" content="//xtcryptosignals.com/{{url_for('static', filename='imgs/logo_transparent.png')}}"/>
     <meta name="description" property="og:description" content="Cryptocurrencies price data collection, price tickers, signals notifications, charts and automatic trading."/>
     <meta property="og:url" content="//xtcryptosignals.com"/>
     <meta name="author" content="Paulo Antunes">
@@ -19,11 +19,11 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" type="text/css">
     <link rel="stylesheet" href="//unpkg.com/nprogress@0.2.0/nprogress.css" type="text/css">
-    <link rel="stylesheet" href="/static/css/skeleton/normalize.css" type="text/css">
-    <link rel="stylesheet" href="/static/css/skeleton/skeleton.css" type="text/css">
-    <link rel="stylesheet" href="/static/css/skeleton/custom.css" type="text/css">
-    <link rel="stylesheet" href="/static/css/custom.css" type="text/css">
-    <link rel="stylesheet" href="/static/css/darkmode.css" type="text/css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/skeleton/normalize.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/skeleton/skeleton.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/skeleton/custom.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/custom.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/darkmode.css')}}" type="text/css">
     <!-- js -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.min.js" type="text/javascript"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
@@ -36,12 +36,12 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.28/moment-timezone-with-data-10-year-range.min.js" type="text/javascript"></script>
     <script src="//unpkg.com/nprogress@0.2.0/nprogress.js" type="text/javascript"></script>
     <!-- local -->
-    <script src="/static/js/modals.js" type="text/javascript"></script>
-    <script src="/static/js/actions.js" type="text/javascript"></script>
-    <script src="/static/js/formatters.js" type="text/javascript"></script>
-    <script src="/static/js/notify/styles/bootstrap.js" type="text/javascript"></script>
-    <script src="/static/js/jquery.key.js" type="text/javascript"></script>
-    <script src="/static/js/actions.key.js" type="text/javascript"></script>
+    <script src="{{url_for('static', filename='js/modals.js')}}" type="text/javascript"></script>
+    <script src="{{url_for('static', filename='js/actions.js')}}" type="text/javascript"></script>
+    <script src="{{url_for('static', filename='js/formatters.js')}}" type="text/javascript"></script>
+    <script src="{{url_for('static', filename='js/notify/styles/bootstrap.js')}}" type="text/javascript"></script>
+    <script src="{{url_for('static', filename='js/jquery.key.js')}}" type="text/javascript"></script>
+    <script src="{{url_for('static', filename='js/actions.key.js')}}" type="text/javascript"></script>
 
     <!-- custom -->
     <script type="text/javascript">
@@ -52,6 +52,10 @@
             }
             $.notify(JSON.parse(xhr.responseText).error);
         }
+    </script>
+
+    <script type="text/javascript">
+        const static_folder = "{{url_for('static', filename='imgs/logos/')}}"
     </script>
 
     <script type="text/javascript">

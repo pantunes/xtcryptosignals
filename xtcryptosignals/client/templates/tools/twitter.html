@@ -3,9 +3,9 @@
 {% block title %}Twitter Data{% endblock %}
 
 {% block include_scripts_top %}
-<script src="/static/js/site.js" type="text/javascript"></script>
+<script src="{{url_for('static', filename='js/site.js')}}" type="text/javascript"></script>
 <script src="//code.highcharts.com/highcharts.js" type="text/javascript"></script>
-<script src="/static/js/charts/twitter.js" type="text/javascript"></script>
+<script src="{{url_for('static', filename='js/charts/twitter.js')}}" type="text/javascript"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {
