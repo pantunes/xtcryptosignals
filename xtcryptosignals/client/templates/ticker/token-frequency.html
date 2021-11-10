@@ -224,8 +224,8 @@ function render_data_depth_chart(coin_or_token, quote) {
 {% if reference['market_depth'] %}
 <div class="row">
     {% for pair in reference['market_depth']['pairs'] %}
-        <div class="six columns" id="row_chart_depth_{{ coin_or_token }}{{ pair }}" style="display: none;">
-            <div id="chart_depth_{{ coin_or_token }}{{ pair }}" style="min-width: 310px; max-width: 1048px; height: 560px; margin: 0 auto;"></div>
+        <div class="four columns" id="row_chart_depth_{{ coin_or_token }}{{ pair }}" style="display: none;">
+            <div id="chart_depth_{{ coin_or_token }}{{ pair }}" style="min-width: 110px; max-width: 1048px; height: 560px; margin: 0 auto;"></div>
             <p class="highcharts-description" style="font-size:small">
                 <b>Source:</b> {{ reference['market_depth']['exchange']|capitalize }}, <b>Pair:</b> {{ coin_or_token }}/{{ pair }}
             </p>
