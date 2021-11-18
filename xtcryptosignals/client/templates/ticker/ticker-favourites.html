@@ -31,7 +31,7 @@
             <tr>
                 <td style="vertical-align: middle;">
                     <a href="{{url_for('ticker.token_frequency', coin_or_token=c, frequency=frequency)}}">
-                        <div class="coin-or-token one-coin"><img src="/static/imgs/logos/{{c}}.png" alt="{{c}}" title="{{c}}"/></div>
+                        <div class="coin-or-token one-coin"><img src="{{url_for('static', filename='imgs/logos/' + c + '.png')}}" alt="{{c}}" title="{{c}}"/></div>
                     </a>
                 </td>
                 <td style="width: 100px;">

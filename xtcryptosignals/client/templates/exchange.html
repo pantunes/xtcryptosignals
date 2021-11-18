@@ -64,7 +64,7 @@
           $table.append(
               "<tr>" +
               "<td style='vertical-align: middle;'>" +
-              "<div class='coin-or-token one-coin'><img src='/static/imgs/logos/" + this.coin_token + ".png' alt='" + this.coin_token + "' title='" + this.coin_token + "'/></div></td>" +
+              "<div class='coin-or-token one-coin'><img src='" + static_folder  + this.coin_token + ".png' alt='" + this.coin_token + "' title='" + this.coin_token + "'/></div></td>" +
               "<td class='align-right'><span id='" + price_id + "'>" + price + "</span></td>" +
               "<td class='align-right" + css + "'>" + _get_formatter(this.free, false).format(this.free) + "</td>" +
               "<td class='align-right'>" + _get_formatter(this.locked, false).format(this.locked) + "</td>" +
@@ -104,8 +104,8 @@
           $table.append(
               "<tr " + css + ">" +
               "<td style='padding-left: 8px; vertical-align: middle;'>" +
-              "<div class='coin-or-token one-coin'><img src='/static/imgs/logos/" + this.coin_token + ".png' alt='" + this.coin_token + "' title='" + this.coin_token + "'/></div>" +
-              "<div class='coin-or-token two-coin'><img src='/static/imgs/logos/" + this.pair + ".png' alt='" + this.pair + "' title='" + this.pair + "'/></div></td>" +
+              "<div class='coin-or-token one-coin'><img src='" + static_folder + this.coin_token + ".png' alt='" + this.coin_token + "' title='" + this.coin_token + "'/></div>" +
+              "<div class='coin-or-token two-coin'><img src='" + static_folder + this.pair + ".png' alt='" + this.pair + "' title='" + this.pair + "'/></div></td>" +
               "<td class='align-right'>" + _get_formatter(this.price, false).format(this.price) + "</td>" +
               "<td class='align-right'>" + _get_formatter(this.amount, false).format(this.amount) + "</td>" +
               "<td class='align-right'>" + _get_formatter(this.filled, false).format(this.filled) + "%</td>" +

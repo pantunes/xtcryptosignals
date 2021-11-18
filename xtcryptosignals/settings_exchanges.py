@@ -7,7 +7,6 @@ __license__ = "GPL"
 __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
-
 # Exchanges
 BINANCE = "binance"
 BINANCE_DEX = "binance_dex"
@@ -27,7 +26,6 @@ BITSTAMP = "bitstamp"
 KUCOIN = "kucoin"
 COINBASE_PRO = "coinbase_pro"
 LIQUID = "liquid"
-
 
 EXCHANGES = [
     BINANCE,
@@ -49,7 +47,6 @@ EXCHANGES = [
     COINBASE_PRO,
     LIQUID,
 ]
-
 
 SYMBOLS_PER_EXCHANGE = []
 
@@ -92,6 +89,7 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("XTZ", "USDT"),
                 ("LTO", "USDT"),
                 ("LTO", "BTC"),
+                ("LTO", "BUSD"),
                 ("FTM", "USDT"),
                 ("FTM", "BTC"),
                 ("ALGO", "USDT"),
@@ -103,6 +101,7 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("SNX", "BTC"),
                 ("RLC", "USDT"),
                 ("RLC", "BTC"),
+                ("BUSD", "USDT"),
             ],
         }
     }
@@ -179,19 +178,6 @@ SYMBOLS_PER_EXCHANGE.append(
     }
 )
 
-# Bitmax
-SYMBOLS_PER_EXCHANGE.append(
-    {
-        BITMAX: {
-            "pairs": [],
-            "single_request": True,
-        }
-    }
-)
-
-# IDEX
-SYMBOLS_PER_EXCHANGE.append({IDEX: {"pairs": []}})
-
 # OKCoin
 SYMBOLS_PER_EXCHANGE.append(
     {
@@ -218,8 +204,36 @@ SYMBOLS_PER_EXCHANGE.append(
     }
 )
 
+# Uphold
+SYMBOLS_PER_EXCHANGE.append(
+    {
+        UPHOLD: {
+            "pairs": [
+                ("BTC", "USD"),
+                ("ETH", "USD"),
+                ("LTC", "USD"),
+            ]
+        }
+    }
+)
+
+# EMPTY EXCHANGES (LOW VOLUME) #######
+
+# IDEX
+SYMBOLS_PER_EXCHANGE.append({IDEX: {"pairs": []}})
+
 # Coinbene
 SYMBOLS_PER_EXCHANGE.append({COINBENE: {"pairs": []}})
+
+# Bitmax
+SYMBOLS_PER_EXCHANGE.append(
+    {
+        BITMAX: {
+            "pairs": [],
+            "single_request": True,
+        }
+    }
+)
 
 # Hotbit
 SYMBOLS_PER_EXCHANGE.append(
@@ -237,19 +251,6 @@ SYMBOLS_PER_EXCHANGE.append(
         BILAXY: {
             "pairs": [],
             "single_request": True,
-        }
-    }
-)
-
-# Uphold
-SYMBOLS_PER_EXCHANGE.append(
-    {
-        UPHOLD: {
-            "pairs": [
-                ("BTC", "USD"),
-                ("ETH", "USD"),
-                ("LTC", "USD"),
-            ]
         }
     }
 )
@@ -283,7 +284,6 @@ SYMBOLS_PER_EXCHANGE.append(
         }
     }
 )
-
 
 EXCHANGES_AND_PAIRS_OF_REFERENCE = {
     "BTC": {
@@ -324,7 +324,7 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
     "LTO": {
         "pair": "USDT",
         "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC", "BUSD"]},
     },
     "ICP": {
         "pair": "USDT",
@@ -437,12 +437,20 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "name": OKCOIN,
         "is_stable": True,
     },
+    "BUSD": {
+        "pair": "USDT",
+        "name": BINANCE,
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+        "is_stable": True,
+    },
     "DAI": {
         "pair": "USD",
         "name": COINBASE_PRO,
         "is_stable": True,
     },
 }
+
+# Settings validations
 
 # Check to make sure that ALL configured symbols must have an
 # exchange and pair referenced

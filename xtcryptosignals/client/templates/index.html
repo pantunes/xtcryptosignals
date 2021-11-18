@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <title>XTCryptoSignals - Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="/static/imgs/favicon-16x16.png" sizes="16x16">
-    <link rel="icon" type="image/png" href="/static/imgs/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{url_for('static', filename='imgs/favicon-16x16.png')}}" sizes="16x16">
+    <link rel="icon" type="image/png" href="{{url_for('static', filename='imgs/favicon-32x32.png')}}" sizes="32x32">
     <!--open graph protocol -->
     <meta name="title" property="og:title" content="XTCryptoSignals"/>
     <meta property="og:type" content="Crypto Platform Data Tools">
-    <meta name="image" property="og:image" content="//xtcryptosignals.com/static/imgs/logo_transparent.png"/>
+    <meta name="image" property="og:image" content="//xtcryptosignals.com/{{url_for('static', filename='imgs/logo_transparent.png')}}"/>
     <meta name="description" property="og:description" content="Cryptocurrencies price data collection, price tickers, signals notifications, charts and automatic trading."/>
     <meta property="og:url" content="//xtcryptosignals.com"/>
     <meta name="author" content="Paulo Antunes">
     <!-- css -->
     <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Raleway:400,300,600' type='text/css'>
-    <link rel="stylesheet" href="/static/css/skeleton/normalize.css" type="text/css">
-    <link rel="stylesheet" href="/static/css/skeleton/skeleton.css" type="text/css">
-    <link rel="stylesheet" href="/static/css/landing/custom.css" type="text/css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/skeleton/normalize.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/skeleton/skeleton.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/landing/custom.css')}}" type="text/css">
 </head>
 
 <body>
@@ -26,14 +26,14 @@
     <div class="container">
       <div class="row">
         <div class="one-half column">
-          <h4 class="hero-heading"><img src="/static/imgs/logo_transparent_50x50.png" style="vertical-align: bottom; padding-right: 0.5rem;">XTCryptoSignals <small>v{{version}}</small></h4>
+          <h4 class="hero-heading"><img src="{{url_for('static', filename='imgs/logo_transparent_50x50.png')}}" style="vertical-align: bottom; padding-right: 0.5rem;">XTCryptoSignals <small>v{{version}}</small></h4>
           <p>Open source project with cryptocurrencies price data collection, price tickers, telegram and web push notifications, many charts and automatic trading.</p>
           <a class="button button-primary" href="{{url_for('ticker.ticker_coins_or_tokens', frequency=frequencies[0])}}">Check XTCryptoSignals</a>
           <a class="button button-secondary" href="//t.me/xtcryptosignals">Join XTCryptoSignals Alerts in Telegram</a>
         </div>
         <div class="phones">
-          <img class="phone" src="/static/imgs/landing/mac1.png">
-          <img class="phone" src="/static/imgs/landing/mac2.png">
+          <img class="phone" src="{{url_for('static', filename='imgs/landing/mac1.png')}}">
+          <img class="phone" src="{{url_for('static', filename='imgs/landing/mac2.png')}}">
         </div>
       </div>
     </div>
@@ -62,34 +62,34 @@
       <p class="section-description">&nbsp;</p>
       <div class="row">
         <div class="one-half column category">
-          <img class="u-max-full-width" src="/static/imgs/landing/1.png">
+          <img class="u-max-full-width" src="{{url_for('static', filename='imgs/landing/1.png')}}">
         </div>
         <div class="one-half column category">
-          <img class="u-max-full-width" src="/static/imgs/landing/2.png">
-        </div>
-      </div>
-      <div class="row">
-        <div class="one-half column category">
-          <img class="u-max-full-width" src="/static/imgs/landing/3.png">
-        </div>
-        <div class="one-half column category">
-          <img class="u-max-full-width" src="/static/imgs/landing/4.png">
+          <img class="u-max-full-width" src="{{url_for('static', filename='imgs/landing/2.png')}}">
         </div>
       </div>
       <div class="row">
         <div class="one-half column category">
-          <img class="u-max-full-width" src="/static/imgs/landing/5.png">
+          <img class="u-max-full-width" src="{{url_for('static', filename='imgs/landing/3.png')}}">
         </div>
         <div class="one-half column category">
-          <img class="u-max-full-width" src="/static/imgs/landing/6.png">
+          <img class="u-max-full-width" src="{{url_for('static', filename='imgs/landing/4.png')}}">
         </div>
       </div>
       <div class="row">
         <div class="one-half column category">
-          <img class="u-max-full-width" src="/static/imgs/landing/7.png">
+          <img class="u-max-full-width" src="{{url_for('static', filename='imgs/landing/5.png')}}">
         </div>
         <div class="one-half column category">
-          <img class="u-max-full-width" src="/static/imgs/landing/8.png">
+          <img class="u-max-full-width" src="{{url_for('static', filename='imgs/landing/6.png')}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="one-half column category">
+          <img class="u-max-full-width" src="{{url_for('static', filename='imgs/landing/7.png')}}">
+        </div>
+        <div class="one-half column category">
+          <img class="u-max-full-width" src="{{url_for('static', filename='imgs/landing/8.png')}}">
         </div>
       </div>
     </div>
