@@ -12,6 +12,8 @@ include xtcryptosignals/client/static/css/*.*
 include xtcryptosignals/client/static/css/skeleton/*.*
 include xtcryptosignals/client/static/css/notify/styles/*.*
 include xtcryptosignals/client/static/css/landing/*.*
+include xtcryptosignals/client/static/css/remote/*.*
+include xtcryptosignals/client/static/css/fonts/*.*
 include xtcryptosignals/client/static/imgs/*.*
 include xtcryptosignals/client/static/imgs/readme/*.*
 include xtcryptosignals/client/static/imgs/logos/*.*
@@ -19,3 +21,4 @@ include xtcryptosignals/client/static/imgs/landing/*.*
 include xtcryptosignals/client/static/js/*.*
 include xtcryptosignals/client/static/js/notify/styles/*.*
 include xtcryptosignals/client/static/js/charts/*.*
+include xtcryptosignals/client/static/js/remote/*.*
