@@ -10,7 +10,7 @@ function create_chart_depth(chart_id, num_formatter, coin_or_token, quote) {
             }
         },
         title: {
-            text: `${coin_or_token} Market Depth`
+            text: `${coin_or_token}/${quote} Market Depth`
         },
         subtitle: {
             text: document.ontouchstart === undefined ?

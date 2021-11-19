@@ -3,7 +3,7 @@
 {% block title %}{{frequency}}{% endblock %}
 
 {% block include_scripts_top %}
-<script src="//code.highcharts.com/highcharts.js" type="text/javascript"></script>
+<script src="{{url_for('static', filename='js/remote/highcharts.js')}}" type="text/javascript"></script>
 <script src="{{url_for('static', filename='js/sparkline.js')}}" type="text/javascript"></script>
 <script src="{{url_for('static', filename='js/site.js')}}" type="text/javascript"></script>
 
@@ -20,9 +20,14 @@
         return Number(n) === n && n % 1 !== 0;
     }
 
+    function is_usd_or_euro(json) {
+        const fiat = json['symbol'].replace(json['ticker'], "");
+        if (fiat === 'USD') return '$';
+        if (fiat === 'EUR') return '€';
+    }
+
     const socket = io('{{socket_base_url}}{{frequency}}');
     socket.on('ticker', function(json) {
-        const is_usd = json['symbol'].substr(json['symbol'].length - 3) === 'USD';
         const _dict = {{attributes|safe}}
         for (let _attr in _dict) {
             let val = json[_attr];
@@ -51,7 +56,7 @@
                     } catch (e) {}
                 }
 
-                val = _get_formatter(val, is_usd).format(val)
+                val = _get_formatter(val, is_usd_or_euro(json)).format(val)
 
             } else if (['number_trades_24h'].includes(_attr)) {
                 val = numeral(val).format('0,0');
