@@ -80,7 +80,12 @@ class ExchangeOpenOrdersOutputSchema(Schema):
     def post_dump_each(self, data):
         data["total"] = data["price"] * data["amount"]
 
-        token_pair = pairs[data["symbol"]]
+        try:
+            token_pair = pairs[data["symbol"]]
+        except KeyError:
+            # Not supported - Must be added in project settings
+            return
+
         data["coin_token"] = token_pair["token"]
         data["pair"] = token_pair["pair"]
 
