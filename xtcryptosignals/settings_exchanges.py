@@ -58,6 +58,7 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("BTC", "USDT"),
                 ("BTC", "EUR"),
                 ("ETH", "USDT"),
+                ("ETH", "BUSD"),
                 ("ETH", "BTC"),
                 ("ETH", "EUR"),
                 ("LINK", "USDT"),
@@ -91,6 +92,7 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("LTO", "BTC"),
                 ("LTO", "BUSD"),
                 ("FTM", "USDT"),
+                ("FTM", "BUSD"),
                 ("FTM", "BTC"),
                 ("ALGO", "USDT"),
                 ("ALGO", "BTC"),
@@ -294,7 +296,7 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
     "ETH": {
         "pair": "USDT",
         "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC", "BUSD"]},
     },
     "LINK": {
         "pair": "USDT",
@@ -334,7 +336,7 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
     "FTM": {
         "pair": "USDT",
         "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC", "BUSD"]},
         "is_defi": True,
     },
     "ALGO": {
