@@ -46,7 +46,9 @@ class BalanceOutputSchema(Schema):
                 data["price"] = price
         else:
             data["price"] = 1.0
+
         if "price" in data:
+            # the ones configured in `settings_exchanges.py`
             data["total_price"] = data["total"] * data["price"]
 
 
@@ -63,6 +65,9 @@ class ExchangeBalanceOutputSchema(Schema):
             if "price" in x:
                 total += x["price"] * x["total"]
             rows.append(x)
+
+        rows = sorted(rows, key=lambda i: i.get('total_price', 0.0), reverse=True)
+
         return dict(results=dict(rows=rows, total=total))
 
 
