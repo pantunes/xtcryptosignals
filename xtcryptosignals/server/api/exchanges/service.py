@@ -15,5 +15,5 @@ class ExchangeAPI(object):
     def get_open_orders(self):
         raise NotImplementedError
 
-    def get_account_status(self):
+    def ping(self):
         raise NotImplementedError

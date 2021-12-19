@@ -168,7 +168,7 @@
   const exchange = '{{ exchange }}';
 
   $(document).ready(function() {
-    get_account_status(render_account_status, exchange);
+    ping(render_account_status, exchange);
     get_balance(render_balance, exchange);
     get_open_orders(render_open_orders, exchange);
   });
