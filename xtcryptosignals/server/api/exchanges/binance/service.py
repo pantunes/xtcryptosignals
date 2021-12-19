@@ -49,8 +49,7 @@ class BinanceAPI(ExchangeAPI):
 
     def ping(self):
         try:
-            status = True if self.client.ping() == {} else False
-            return {"success": status}
+            return {"success": self.client.ping() == {}}
         except BinanceRequestException:
             raise ValueError("No Binance(6).", 403)
         except BinanceAPIException:
