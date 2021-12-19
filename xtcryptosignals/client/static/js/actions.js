@@ -175,7 +175,7 @@ function toggle_favourite(coin_or_token) {
     });
 }
 
-function get_account_status(handler, exchange) {
+function ping(handler, exchange) {
     $.get(`/exchange/${exchange}/account/status`).done(function(response) {
         handler(response)
     })

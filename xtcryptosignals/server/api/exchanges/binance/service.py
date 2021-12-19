@@ -10,7 +10,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 from cryptography.fernet import InvalidToken
 from binance.client import Client as BinanceClient
-from binance.exceptions import BinanceAPIException
+from binance.exceptions import BinanceAPIException, BinanceRequestException
 from xtcryptosignals.server.api.exchanges.service import ExchangeAPI
 from xtcryptosignals.server.crypto import Crypto
 
@@ -47,10 +47,10 @@ class BinanceAPI(ExchangeAPI):
         except BinanceAPIException:
             raise ValueError("No Binance(5).", 403)
 
-    def get_account_status(self):
+    def ping(self):
         try:
-            return self.client.get_account_status()
-        except KeyError:
+            return {"success": self.client.ping() == {}}
+        except BinanceRequestException:
             raise ValueError("No Binance(6).", 403)
         except BinanceAPIException:
             raise ValueError("No Binance(7).", 403)

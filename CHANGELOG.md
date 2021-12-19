@@ -2,6 +2,7 @@
 All changes will be registered here per release.
 
 ## [0.8.8] - Current data
+Fix Binance status call.  
 Code refactoring and fixes. 
 
 ## [0.8.7] - 2021-11-20

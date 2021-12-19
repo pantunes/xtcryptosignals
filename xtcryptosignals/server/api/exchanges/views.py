@@ -125,7 +125,7 @@ class ExchangeAccountStatus(Resource):
 
         pkey = current_app.config["SECRET_KEY"]
         exchange_api = EXCHANGE_APIS[exchange](pkey=pkey, auth=auth)
-        return exchange_api.get_account_status()
+        return exchange_api.ping()
 
 
 api.add_resource(ExchangeAccountStatus, "/exchange/<exchange>/account/status")
