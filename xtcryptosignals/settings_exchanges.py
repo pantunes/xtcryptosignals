@@ -324,7 +324,7 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
     "LINK": {
         "pair": "USDT",
         "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC", "BUSD"]},
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "XRP": {
         "pair": "USDT",
@@ -339,7 +339,7 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
     "BNB": {
         "pair": "USDT",
         "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC", "BUSD"]},
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "XLM": {
         "pair": "USDT",
@@ -384,7 +384,7 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
     "RLC": {
         "pair": "USDT",
         "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC", "BUSD"]},
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "SNX": {
         "pair": "USDT",
@@ -419,7 +419,7 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
     "DOT": {
         "pair": "USDT",
         "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC", "BUSD"]},
+        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "ADA": {
         "pair": "USDT",
@@ -429,12 +429,10 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
     "XTZ": {
         "pair": "USDT",
         "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "XMR": {
         "pair": "USDT",
         "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "VET": {
         "pair": "USDT",
