@@ -447,7 +447,6 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
     "NANO": {
         "pair": "USDT",
         "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "ONT": {
         "pair": "USDT",
