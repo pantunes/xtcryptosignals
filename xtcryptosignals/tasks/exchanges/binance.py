@@ -17,10 +17,9 @@ class Binance:
     def __init__(self):
         self.client = BinanceClient(s.BINANCE_API_KEY, s.BINANCE_API_SECRET)
 
-    def get_ticker(self, *_, **kwargs):
+    def get_ticker(self, symbol=None, pairs=None):
         ticker_kwargs = {}
 
-        symbol = kwargs.get("symbol")
         if symbol:
             ticker_kwargs = dict(symbol="".join(symbol))
 
@@ -30,16 +29,16 @@ class Binance:
             raise ValueError(str(err))
 
         if symbol:
-            item = items_or_item
-            item.update(ticker=symbol[0])
-            return item
+            row = items_or_item
+            row.update(ticker=symbol[0])
+            return row
 
-        items = []
-        pairs = [x[0] + x[1] for x in kwargs["pairs"]]
-        for item in items_or_item:
-            if item["symbol"] in pairs:
-                item.update(ticker=item["symbol"])
-                items.append(item)
-                if len(items) >= len(pairs):
+        rows = []
+        _pairs = [x[0] + x[1] for x in pairs]
+        for row in items_or_item:
+            if row["symbol"] in _pairs:
+                row.update(ticker=row["symbol"])
+                rows.append(row)
+                if len(rows) >= len(_pairs):
                     break
-        return items
+        return rows
