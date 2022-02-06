@@ -64,7 +64,7 @@ from xtcryptosignals.settings import *  # noqa
 from xtcryptosignals.tasks.settings_local import *  # noqa
 
 TIMEOUT_PER_SYMBOL_REQUEST = TICKER_SCHEDULE * 0.4
-TIMEOUT_PER_SYMBOLS_REQUEST = TICKER_SCHEDULE * 0.8
+TIMEOUT_PER_SYMBOLS_REQUEST = TICKER_SCHEDULE * 0.9
 
 # Settings validations
 assert (
