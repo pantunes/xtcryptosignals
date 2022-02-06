@@ -66,7 +66,9 @@ class ExchangeBalanceOutputSchema(Schema):
                 total += x["price"] * x["total"]
             rows.append(x)
 
-        rows = sorted(rows, key=lambda i: i.get('total_price', 0.0), reverse=True)
+        rows = sorted(
+            rows, key=lambda i: i.get("total_price", 0.0), reverse=True
+        )
 
         return dict(results=dict(rows=rows, total=total))
 

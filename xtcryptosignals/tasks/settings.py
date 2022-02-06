@@ -26,7 +26,7 @@ BROKER_URL = env.str("BROKER_URL")
 CREATE_MODEL_TICKER = env.bool("CREATE_MODEL_TICKER")
 
 ORDER_BOOK_SCHEDULE = 6.0  # executed each X seconds
-TIMEOUT_ORDER_BOOK = ORDER_BOOK_SCHEDULE * 0.8
+TIMEOUT_ORDER_BOOK = ORDER_BOOK_SCHEDULE * 2.5
 
 SYMBOL_FLOAT_PRECISION = 8
 PRICES_CHANGE_CHART_SIZE = 12
@@ -64,13 +64,11 @@ from xtcryptosignals.settings import *  # noqa
 from xtcryptosignals.tasks.settings_local import *  # noqa
 
 TIMEOUT_PER_SYMBOL_REQUEST = TICKER_SCHEDULE * 0.4
-TIMEOUT_PER_SYMBOLS_REQUEST = TICKER_SCHEDULE * 0.8
+# Binance can have many pairs with a single call, timeout should be increased, just in case
+TIMEOUT_PER_SYMBOLS_REQUEST = TICKER_SCHEDULE * 2.5
 
 # Settings validations
-assert (
-    TIMEOUT_PER_SYMBOL_REQUEST < TIMEOUT_PER_SYMBOLS_REQUEST < TICKER_SCHEDULE
-)
-assert TIMEOUT_ORDER_BOOK < ORDER_BOOK_SCHEDULE
+assert TIMEOUT_PER_SYMBOL_REQUEST < TIMEOUT_PER_SYMBOLS_REQUEST
 
 for _, x in EXCHANGES_AND_PAIRS_OF_REFERENCE.items():
     assert (
