@@ -34,10 +34,10 @@ class Binance:
             return row
 
         rows = []
-        _pairs = [x[0] + x[1] for x in pairs]
+        _pairs = {x[0] + x[1]: x[0] for x in pairs}
         for row in items_or_item:
             if row["symbol"] in _pairs:
-                row.update(ticker=row["symbol"])
+                row.update(ticker=_pairs[row["symbol"]])
                 rows.append(row)
                 if len(rows) >= len(_pairs):
                     break
