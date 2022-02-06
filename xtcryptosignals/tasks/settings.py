@@ -64,11 +64,12 @@ from xtcryptosignals.settings import *  # noqa
 from xtcryptosignals.tasks.settings_local import *  # noqa
 
 TIMEOUT_PER_SYMBOL_REQUEST = TICKER_SCHEDULE * 0.4
-TIMEOUT_PER_SYMBOLS_REQUEST = TICKER_SCHEDULE * 0.9
+# Binance can have many pairs with a single call, timeout should be increased, just in case
+TIMEOUT_PER_SYMBOLS_REQUEST = TICKER_SCHEDULE * 2
 
 # Settings validations
 assert (
-    TIMEOUT_PER_SYMBOL_REQUEST < TIMEOUT_PER_SYMBOLS_REQUEST < TICKER_SCHEDULE
+    TIMEOUT_PER_SYMBOL_REQUEST < TIMEOUT_PER_SYMBOLS_REQUEST  # < TICKER_SCHEDULE
 )
 assert TIMEOUT_ORDER_BOOK < ORDER_BOOK_SCHEDULE
 
