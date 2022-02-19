@@ -40,7 +40,7 @@ setup(
     maintainer_email=_CFG["__email__"],
     description="Platform that collects cryptocurrencies price "
     "data, fires alerts based on price sentiment and "
-    "performs automatic trading.",
+    "many other features.",
     long_description=_LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
     url="https://xtcryptosignals.com",
