@@ -10,7 +10,6 @@
     price, price change, trading volume or market sentiment sending Web Push 
     Notifications to the client browser (Firefox, Chrome) or/and to Telegram Channel.
     * **Market Depth**, **Content** and **Data** fetching Tasks.
-    * **Automatic trading** *(in progress)*.
 
 (Web Push Notifications are implemented with [ServiceWorker](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification) 
 that is compatible with the most known web browsers.)
@@ -25,15 +24,14 @@ that is compatible with the most known web browsers.)
 
 * [x] Add crypto-currencies exchanges (Dec 2018)
 * [x] Implement RESTFul API and socket.io to access price data in real time (Jan 2019)
-* [x] Build website (From Jan 2019)
+* [x] Build website (Jan 2019)
 * [x] Add Gunicorn to make it production ready (March 2019)
-* [x] Building Unit, functional and end-to-end testing for existing and future features (From Jan 2019)
-* [x] User account creation, Session and Assets Management (From Oct 2019)
+* [x] Building Unit, functional and end-to-end testing for existing and future features (Jan 2019)
+* [x] User account creation, Session and Assets Management (Oct 2019)
 * [x] Implement web push notification signals for price range, price change, 
-trading volume, price sentiment, etc (From July 2019)
-* [x] Implement Telegram bot to broadcast notifications (From 2020)
-* [ ] Implement automatic trading (From 2021)
-* [ ] Build Mobile app (From 2021)
+trading volume, price sentiment, etc (July 2019)
+* [x] Implement Telegram bot to broadcast notifications (Feb 2020)
+* [x] Create nice features and make platform improvements on-the-fly (From 2020 onwards)
 
 
 ## Getting Started
