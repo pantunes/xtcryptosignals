@@ -35,7 +35,7 @@ def get_chart_fear_and_greed_index(frequency, coin_or_token):
     except ValueError as err:
         return dict(error=str(err)), 400
 
-    model_history = type("History{}".format(frequency), (History,), {})
+    model_history = type(f"History{frequency}", (History,), {})
     rows = model_history.objects(
         symbol=coin_or_token + ref["pair"],
         source=ref["name"],
@@ -75,7 +75,7 @@ def get_chart_coin_or_token_frequency(coin_or_token, frequency):
     except ValueError as err:
         return dict(error=str(err)), 400
 
-    model_history = type("History{}".format(frequency), (History,), {})
+    model_history = type(f"History{frequency}", (History,), {})
     rows = model_history.objects(
         symbol=coin_or_token + ref["pair"],
         source=ref["name"],
@@ -117,7 +117,7 @@ def get_chart_tether_btc(coin_or_token, frequency):
     except ValueError as err:
         return dict(error=str(err)), 400
 
-    model_history = type("History{}".format(frequency), (History,), {})
+    model_history = type(f"History{frequency}", (History,), {})
     rows = model_history.objects(
         symbol=coin_or_token + ref["pair"],
         source=ref["name"],

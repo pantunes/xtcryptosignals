@@ -19,7 +19,7 @@ from xtcryptosignals.tasks import settings as s
 class Migration(BaseMigration):
     @use_mongodb(db=s.MONGODB_NAME, host=s.MONGODB_HOST, port=s.MONGODB_PORT)
     def upgrade(self):
-        response = requests.get(url="{}/?limit=180".format(s.URL_CFGI))
+        response = requests.get(url=f"{s.URL_CFGI}/?limit=180")
         for i, x in enumerate(response.json()["data"]):
             index = x["value"]
             added_on = datetime.fromtimestamp(int(x["timestamp"])).date()

@@ -23,9 +23,9 @@ class Liquid:
         try:
             request = requests.get(url)
         except SSLError:
-            raise ValueError("SSLError in URL: {}".format(url))
+            raise ValueError(f"SSLError in URL: {url}")
         if request.status_code != 200:
-            raise ValueError("Error connecting Liquid on URL: {}".format(url))
+            raise ValueError(f"Error connecting Liquid on URL: {url}")
         item = request.json()
         item.update(symbol=_symbol, ticker=symbol[0])
         return item

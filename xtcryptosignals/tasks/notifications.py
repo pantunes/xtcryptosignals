@@ -41,7 +41,7 @@ def update(self):
     for notif in NotificationRule.objects():
         exchange_and_pair = s.EXCHANGES_AND_PAIRS_OF_REFERENCE[notif.coin_token]
 
-        model_history = type("History{}".format(notif.interval), (History,), {})
+        model_history = type(f"History{notif.interval}", (History,), {})
         row_history = model_history.objects(
             symbol=notif.coin_token + exchange_and_pair["pair"],
             source=exchange_and_pair["name"],
@@ -53,7 +53,7 @@ def update(self):
         obj_history = row_history.to_dict(frequency=notif.interval)
 
         try:
-            obj_history_change = obj_history["{}_change".format(notif.metric)]
+            obj_history_change = obj_history[f"{notif.metric}_change"]
         except KeyError:
             continue
 
@@ -88,13 +88,7 @@ def update(self):
             direction = "down"
 
         logger.warning(
-            "{} {}_change {} {}% {}".format(
-                obj_history["ticker"],
-                notif.metric,
-                direction,
-                obj_history_change,
-                notif.interval,
-            )
+            f"{obj_history['ticker']} {notif.metric}_change {direction} {obj_history_change}% {notif.interval}"
         )
 
         message_web = message_templ.format(

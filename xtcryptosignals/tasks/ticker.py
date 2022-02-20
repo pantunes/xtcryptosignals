@@ -33,9 +33,7 @@ def _process(logger, socketio, exchange_class, schema_class, symbol, pairs):
     elif pairs:
         ticker_kwargs.update(pairs=pairs)
     else:
-        logger.error(
-            "{}: Not either a symbol or pair".format(exchange_class.__name__)
-        )
+        logger.error(f"{exchange_class.__name__}: Not either a symbol or pair")
     try:
         ticker_data = exchange_class().get_ticker(**ticker_kwargs)
     except ValueError as err:
@@ -55,11 +53,9 @@ def _process(logger, socketio, exchange_class, schema_class, symbol, pairs):
             ticker_model.save(temporary=not s.CREATE_MODEL_TICKER)
             if socketio:
                 for h in ticker_model.get_history():
-                    socketio.emit(
-                        "ticker", h, namespace="/{}".format(h["frequency"])
-                    )
+                    socketio.emit("ticker", h, namespace=f"/{h['frequency']}")
     except ServerSelectionTimeoutError as error:
-        logger.error("{}: {}".format(exchange_class.__name__, error))
+        logger.error(f"{exchange_class.__name__}: {error}")
 
 
 def _get_24h_price_ticker_data(
@@ -80,7 +76,7 @@ def _get_24h_price_ticker_data(
     symbol_or_pairs = "-".join(symbol) if symbol else "PAIRS"
 
     p = Process(
-        name="{} {}".format(exchange_class.__name__, symbol_or_pairs),
+        name=f"{exchange_class.__name__} {symbol_or_pairs}",
         target=_process,
         args=(
             logger,
@@ -119,7 +115,7 @@ def update(self, *_, **kwargs):
             for exchange, data in row.items():
                 pairs = data["pairs"]
                 if not pairs:
-                    logger.info("No pairs for {}".format(exchange))
+                    logger.info(f"No pairs for {exchange}")
                     continue
                 try:
                     exchange_class = get_class(
@@ -161,7 +157,7 @@ def update(self, *_, **kwargs):
             j["job"].join(timeout=j["timeout"])
 
     except Exception as error:
-        logger.error("ticker error: {}".format(str(error)))
+        logger.error(f"ticker error: {error}")
         self.update_state(state=states.FAILURE, meta=str(error))
         raise Ignore()
     finally:

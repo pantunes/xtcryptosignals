@@ -40,20 +40,12 @@ def main(operation):
             filepath_dest = os.path.join(os.getcwd(), "config", x)
             try:
                 copyfile(filepath_source, filepath_dest)
-                click.echo(
-                    "Copied from {} to {}".format(
-                        filepath_source, filepath_dest
-                    )
-                )
+                click.echo(f"Copied from {filepath_source} to {filepath_dest}")
             except IOError:
                 os.makedirs(os.path.dirname(filepath_dest))
-                click.echo("Created folder {}".format(filepath_dest))
+                click.echo(f"Created folder {filepath_dest}")
                 copyfile(filepath_source, filepath_dest)
-                click.echo(
-                    "Copied from {} to {}".format(
-                        filepath_source, filepath_dest
-                    )
-                )
+                click.echo(f"Copied from {filepath_source} to {filepath_dest}")
         return
 
     i = CHOICES.index(operation)

@@ -58,7 +58,5 @@ class TickerSocketIONamespace(Namespace):
 
 
 for x in s.HISTORY_FREQUENCY:
-    socketio_model = type(
-        "SocketIONamespace{}".format(x), (TickerSocketIONamespace,), {}
-    )
-    socketio.on_namespace(socketio_model("/{}".format(x)))
+    socketio_model = type(f"SocketIONamespace{x}", (TickerSocketIONamespace,), {})
+    socketio.on_namespace(socketio_model(f"/{x}"))

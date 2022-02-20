@@ -52,10 +52,10 @@ def info():
     <br><br>
     Keyboard shortcuts:
     <ul>
-    <li>alt + l: Login</li>
-    <li>alt + c: Contact</li>
-    <li>alt + s: Signup</li>
-    <li>alt + space: Search anything in Platform</li>
+    <li>ALT + L: Login</li>
+    <li>ALT + C: Contact</li>
+    <li>ALT + S: Signup</li>
+    <li>ALT + SPACE: Activate Spotlight. Search anything in the Platform</li>
     </ul>
     In case you are curious about further feature releases Watch/Star this 
     Project <a href="https://github.com/pantunes/xtcryptosignals">here</a>.
