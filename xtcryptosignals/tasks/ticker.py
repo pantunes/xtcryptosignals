@@ -66,7 +66,7 @@ def _get_24h_price_ticker_data(
     symbol=None,
     pairs=None,
     *_,
-    **kwargs
+    **kwargs,
 ):
     socketio = None
 
@@ -141,7 +141,7 @@ def update(self, *_, **kwargs):
                             exchange_class,
                             schema_class,
                             symbol=[coin, quote],
-                            **kwargs
+                            **kwargs,
                         )
                 else:
                     _get_24h_price_ticker_data(
@@ -150,7 +150,7 @@ def update(self, *_, **kwargs):
                         exchange_class,
                         schema_class,
                         pairs=pairs,
-                        **kwargs
+                        **kwargs,
                     )
 
         for j in jobs:

@@ -18,9 +18,7 @@ class Bilaxy:
     def get_ticker(self, pairs):
         request = requests.get(self.base_url)
         if request.status_code != 200:
-            raise ValueError(
-                "Error connecting Bilaxy on URL: {}".format(self.base_url)
-            )
+            raise ValueError(f"Error connecting Bilaxy on URL: {self.base_url}")
         response = request.json()["dataMap"]
         _pairs = {}
         for x, y in pairs:
@@ -37,7 +35,7 @@ class Bilaxy:
                     request = requests.get(url)
                     if request.status_code != 200:
                         raise ValueError(
-                            "Error connecting Bilaxy on URL: {}".format(url)
+                            f"Error connecting Bilaxy on URL: {url}"
                         )
                     ticker = [z["fShortName"], x]
                     response_per_pair = request.json()["data"]

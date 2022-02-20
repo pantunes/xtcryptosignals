@@ -126,17 +126,13 @@ def update(self):
         Notification(**notification_kwargs).save()
 
         message_push_notification = message_web.replace(
-            '<a href="{domain}/ticker/source/{ticker}/10s">{ticker}</a>'.format(
-                domain=s.WEBSITE_ADDRESS, ticker=obj_history["ticker"]
-            ),
+            f'<a href="{s.WEBSITE_ADDRESS}/ticker/source/{obj_history["ticker"]}/10s">{obj_history["ticker"]}</a>',
             obj_history["ticker"],
         )
 
         try:
             try:
-                logger.warning(
-                    "Sending web notification to {}".format(notif.user.pk)
-                )
+                logger.warning(f"Sending web notification to {notif.user.pk}")
                 webpush(
                     subscription_info=notif.user.metadata["subscription"],
                     data=json.dumps(

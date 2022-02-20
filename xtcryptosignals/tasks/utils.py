@@ -49,9 +49,7 @@ def terminate_running_jobs(logger, jobs):
     for j in jobs:
         if j["job"].is_alive():
             logger.warning(
-                "Exceeded timeout of {} seconds in {}".format(
-                    j["timeout"], j["job"].name
-                )
+                f"Exceeded timeout of {j['timeout']} seconds in {j['job'].name}"
             )
             j["job"].terminate()
             j["job"].join()
