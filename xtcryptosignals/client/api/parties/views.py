@@ -26,7 +26,7 @@ bp = Blueprint("parties", __name__)
 @bp.route("/parties/cfgi", methods=["GET"])
 def cfgi():
     response = requests.get(
-        url="{}parties/cfgi".format(current_app.config["SERVER_API_BASE_URL"]),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}parties/cfgi",
     )
     return response.json(), response.status_code
 

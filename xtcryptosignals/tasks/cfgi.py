@@ -36,6 +36,6 @@ def update(self):
         CFGI(**kwargs).save()
         red.set(s.REDIS_CFGI, index)
     except Exception as error:
-        logger.error("cfgi error: {}".format(str(error)))
+        logger.error(f"cfgi error: {error}")
         self.update_state(state=states.FAILURE, meta=str(error))
         raise Ignore()

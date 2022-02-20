@@ -101,14 +101,12 @@ def update(self):
             price=price,
         )
 
-        key = "{}{}".format(notif.user.pk, message_web)
+        key = f"{notif.user.pk}{message_web}"
         hash_object = hashlib.md5(key.encode())
         redis_key = hash_object.hexdigest()
 
         if red.get(redis_key):
-            logger.warning(
-                "Already sent notifications to {}".format(notif.user.pk)
-            )
+            logger.warning(f"Already sent notifications to {notif.user.pk}")
             continue
 
         red.setex(
@@ -155,7 +153,7 @@ def update(self):
                         )
                     ),
                     vapid_private_key=s.VAPID_PRIVATE_KEY,
-                    vapid_claims=dict(sub="mailto:{}".format(s.VAPID_CLAIMS)),
+                    vapid_claims=dict(sub=f"mailto:{s.VAPID_CLAIMS}"),
                 )
             except WebPushException as error:
                 if error.response and error.response.json():
@@ -167,7 +165,7 @@ def update(self):
                         extra.message,
                     )
         except Exception as error:
-            logger.error("web notification error: {}".format(str(error)))
+            logger.error(f"web notification error: {error}")
             self.update_state(state=states.FAILURE, meta=str(error))
             raise Ignore()
 
@@ -186,6 +184,6 @@ def update(self):
                     parse_mode=telegram.ParseMode.HTML,
                 )
         except Exception as error:
-            logger.error("telegram notification error: {}".format(str(error)))
+            logger.error(f"telegram notification error: {error}")
             self.update_state(state=states.FAILURE, meta=str(error))
             raise Ignore()

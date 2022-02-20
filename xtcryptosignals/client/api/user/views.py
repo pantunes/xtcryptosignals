@@ -39,8 +39,8 @@ def before_request():
 @login_required
 def info():
     return Response(
-        """<h5>Welcome to <code>XTCryptoSignals</code>!</h5>
-    Hi {name},
+        f"""<h5>Welcome to <code>XTCryptoSignals</code>!</h5>
+    Hi {escape(current_user.user["name"])},
     <br/><br/>
     This is an open-source software platform that is in 
     continuous development.
@@ -65,9 +65,7 @@ def info():
      in case of any question.
     <br/><br/>
     The <code>XTCryptoSignals</code> Team
-    """.format(
-            name=escape(current_user.user["name"])
-        )
+    """
     )
 
 
@@ -82,7 +80,7 @@ def signup():
         return dict(error="Bad Captcha."), 404
 
     response = requests.post(
-        url="{}signup".format(current_app.config["SERVER_API_BASE_URL"]),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}signup",
         json=form_data,
     )
 

@@ -31,7 +31,7 @@ def contact():
         return dict(error="Bad Captcha."), 404
 
     response = requests.post(
-        url="{}contact".format(current_app.config["SERVER_API_BASE_URL"]),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}contact",
         data=form_data,
     )
     return response.text, response.status_code

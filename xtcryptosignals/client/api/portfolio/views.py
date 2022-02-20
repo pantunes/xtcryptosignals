@@ -67,7 +67,7 @@ bp_xhr = Blueprint("portfolio/xhr", __name__)
 @login_required
 def _list():
     response = requests.get(
-        url="{}portfolio".format(current_app.config["SERVER_API_BASE_URL"]),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}portfolio",
         headers=dict(Authorization=current_user.id),
     )
     return response.json(), response.status_code

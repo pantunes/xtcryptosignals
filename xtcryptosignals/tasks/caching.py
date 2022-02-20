@@ -32,7 +32,7 @@ def prepare_cache():
         for x in s.SYMBOLS_PER_EXCHANGE:
             for exchange, items in x.items():
                 for symbol in [x[0] + x[1] for x in items["pairs"]]:
-                    model_history = type("History{}".format(f), (History,), {})
+                    model_history = type(f"History{f}", (History,), {})
                     row = model_history.objects(
                         symbol=symbol, source=exchange
                     ).first()
