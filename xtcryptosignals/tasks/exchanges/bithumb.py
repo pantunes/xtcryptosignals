@@ -21,9 +21,9 @@ class Bithumb:
         try:
             request = requests.get(url)
         except SSLError:
-            raise ValueError("SSLError in URL: {}".format(url))
+            raise ValueError(f"SSLError in URL: {url}")
         if request.status_code != 200:
-            raise ValueError("Error connecting Bithumb on URL: {}".format(url))
+            raise ValueError(f"Error connecting Bithumb on URL: {url}")
         item = request.json()["data"]
         item.update(symbol="".join(symbol), ticker=symbol[0])
         return item

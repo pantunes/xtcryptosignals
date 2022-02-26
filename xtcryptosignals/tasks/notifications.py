@@ -41,7 +41,7 @@ def update(self):
     for notif in NotificationRule.objects():
         exchange_and_pair = s.EXCHANGES_AND_PAIRS_OF_REFERENCE[notif.coin_token]
 
-        model_history = type("History{}".format(notif.interval), (History,), {})
+        model_history = type(f"History{notif.interval}", (History,), {})
         row_history = model_history.objects(
             symbol=notif.coin_token + exchange_and_pair["pair"],
             source=exchange_and_pair["name"],
@@ -53,7 +53,7 @@ def update(self):
         obj_history = row_history.to_dict(frequency=notif.interval)
 
         try:
-            obj_history_change = obj_history["{}_change".format(notif.metric)]
+            obj_history_change = obj_history[f"{notif.metric}_change"]
         except KeyError:
             continue
 
@@ -88,13 +88,7 @@ def update(self):
             direction = "down"
 
         logger.warning(
-            "{} {}_change {} {}% {}".format(
-                obj_history["ticker"],
-                notif.metric,
-                direction,
-                obj_history_change,
-                notif.interval,
-            )
+            f"{obj_history['ticker']} {notif.metric}_change {direction} {obj_history_change}% {notif.interval}"
         )
 
         message_web = message_templ.format(
@@ -107,14 +101,12 @@ def update(self):
             price=price,
         )
 
-        key = "{}{}".format(notif.user.pk, message_web)
+        key = f"{notif.user.pk}{message_web}"
         hash_object = hashlib.md5(key.encode())
         redis_key = hash_object.hexdigest()
 
         if red.get(redis_key):
-            logger.warning(
-                "Already sent notifications to {}".format(notif.user.pk)
-            )
+            logger.warning(f"Already sent notifications to {notif.user.pk}")
             continue
 
         red.setex(
@@ -134,17 +126,13 @@ def update(self):
         Notification(**notification_kwargs).save()
 
         message_push_notification = message_web.replace(
-            '<a href="{domain}/ticker/source/{ticker}/10s">{ticker}</a>'.format(
-                domain=s.WEBSITE_ADDRESS, ticker=obj_history["ticker"]
-            ),
+            f'<a href="{s.WEBSITE_ADDRESS}/ticker/source/{obj_history["ticker"]}/10s">{obj_history["ticker"]}</a>',
             obj_history["ticker"],
         )
 
         try:
             try:
-                logger.warning(
-                    "Sending web notification to {}".format(notif.user.pk)
-                )
+                logger.warning(f"Sending web notification to {notif.user.pk}")
                 webpush(
                     subscription_info=notif.user.metadata["subscription"],
                     data=json.dumps(
@@ -161,7 +149,7 @@ def update(self):
                         )
                     ),
                     vapid_private_key=s.VAPID_PRIVATE_KEY,
-                    vapid_claims=dict(sub="mailto:{}".format(s.VAPID_CLAIMS)),
+                    vapid_claims=dict(sub=f"mailto:{s.VAPID_CLAIMS}"),
                 )
             except WebPushException as error:
                 if error.response and error.response.json():
@@ -173,7 +161,7 @@ def update(self):
                         extra.message,
                     )
         except Exception as error:
-            logger.error("web notification error: {}".format(str(error)))
+            logger.error(f"web notification error: {error}")
             self.update_state(state=states.FAILURE, meta=str(error))
             raise Ignore()
 
@@ -192,6 +180,6 @@ def update(self):
                     parse_mode=telegram.ParseMode.HTML,
                 )
         except Exception as error:
-            logger.error("telegram notification error: {}".format(str(error)))
+            logger.error(f"telegram notification error: {error}")
             self.update_state(state=states.FAILURE, meta=str(error))
             raise Ignore()

@@ -68,7 +68,7 @@ bp_xhr = Blueprint("transaction/xhr", __name__)
 @login_required
 def _list():
     response = requests.get(
-        url="{}transactions".format(current_app.config["SERVER_API_BASE_URL"]),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}transactions",
         headers=dict(Authorization=current_user.id),
     )
     return dict(results=response.json()), response.status_code
@@ -78,9 +78,7 @@ def _list():
 @login_required
 def add():
     response = requests.post(
-        url="{}transactions/add".format(
-            current_app.config["SERVER_API_BASE_URL"]
-        ),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}transactions/add",
         headers=dict(Authorization=current_user.id),
         json=request.form.to_dict(),
     )

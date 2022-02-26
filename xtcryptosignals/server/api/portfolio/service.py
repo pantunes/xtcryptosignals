@@ -35,7 +35,7 @@ def _get_current_price_in_usdt(coin_token):
 
     key = s.REDIS_KEY_TICKER.format(
         source=reference_info["name"],
-        symbol=coin_token + reference_info["pair"],
+        symbol=f"{coin_token}{reference_info['pair']}",
         frequency=s.HISTORY_FREQUENCY[0],
     )
     ser_row = red.get(key)
@@ -45,7 +45,7 @@ def _get_current_price_in_usdt(coin_token):
     if reference_info["pair"] != "USDT":
         key = s.REDIS_KEY_TICKER.format(
             source=reference_info["name"],
-            symbol=reference_info["pair"] + "USDT",
+            symbol=f"{reference_info['pair']}USDT",
             frequency=s.HISTORY_FREQUENCY[0],
         )
         ser_row = red.get(key)

@@ -12,7 +12,7 @@ from importlib import import_module
 
 
 def get_class(folder, module):
-    exchange_module = import_module("{}.{}".format(folder, module))
+    exchange_module = import_module(f"{folder}.{module}")
     module_class_name = "".join([x.capitalize() for x in module.split("_")])
     return getattr(exchange_module, module_class_name)
 
@@ -22,7 +22,7 @@ def convert_to_seconds(x):
     try:
         seconds = int(x[:-1])
     except ValueError:
-        raise ValueError("Invalid item: {}".format(x))
+        raise ValueError(f"Invalid item: {x}")
     if _t == "s":
         return seconds
     minutes = seconds * 60
@@ -41,17 +41,15 @@ def convert_to_seconds(x):
     year = months * 12
     if _t == "y":
         return year
-    raise ValueError("Undefined item: {}".format(x))
+    raise ValueError(f"Undefined item: {x}")
 
 
 def terminate_running_jobs(logger, jobs):
-    logger.warning("Number of jobs completed: {}".format(len(jobs)))
+    logger.warning(f"Number of jobs completed: {len(jobs)}")
     for j in jobs:
         if j["job"].is_alive():
             logger.warning(
-                "Exceeded timeout of {} seconds in {}".format(
-                    j["timeout"], j["job"].name
-                )
+                f"Exceeded timeout of {j['timeout']} seconds in {j['job'].name}"
             )
             j["job"].terminate()
             j["job"].join()

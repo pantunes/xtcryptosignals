@@ -63,7 +63,7 @@ bp_xhr = Blueprint("notification/xhr", __name__)
 @login_required
 def notifications():
     response = requests.get(
-        url="{}notifications".format(current_app.config["SERVER_API_BASE_URL"]),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}notifications",
         headers=dict(Authorization=current_user.id),
         params=request.args,
     )
@@ -74,9 +74,7 @@ def notifications():
 @login_required
 def rules():
     response = requests.get(
-        url="{}notifications/rules".format(
-            current_app.config["SERVER_API_BASE_URL"]
-        ),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}notifications/rules",
         headers=dict(Authorization=current_user.id),
     )
     return dict(results=response.json()), response.status_code
@@ -86,9 +84,7 @@ def rules():
 @login_required
 def rule_add():
     response = requests.post(
-        url="{}notifications/rule/add".format(
-            current_app.config["SERVER_API_BASE_URL"]
-        ),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}notifications/rule/add",
         headers=dict(Authorization=current_user.id),
         json=request.form.to_dict(),
     )
@@ -99,9 +95,7 @@ def rule_add():
 @login_required
 def rule_edit(notification):
     response = requests.put(
-        url="{}notifications/rule/{}".format(
-            current_app.config["SERVER_API_BASE_URL"], notification
-        ),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}notifications/rule/{notification}",
         headers=dict(Authorization=current_user.id),
         json=request.form.to_dict(),
     )
@@ -112,9 +106,7 @@ def rule_edit(notification):
 @login_required
 def rule_delete(notification):
     response = requests.delete(
-        url="{}notifications/rule/{}".format(
-            current_app.config["SERVER_API_BASE_URL"], notification
-        ),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}notifications/rule/{notification}",
         headers=dict(Authorization=current_user.id),
         json=request.form.to_dict(),
     )
@@ -125,9 +117,7 @@ def rule_delete(notification):
 @login_required
 def rule_get(notification):
     response = requests.get(
-        url="{}notifications/rule/{}".format(
-            current_app.config["SERVER_API_BASE_URL"], notification
-        ),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}notifications/rule/{notification}",
         headers=dict(Authorization=current_user.id),
         json=request.form.to_dict(),
     )

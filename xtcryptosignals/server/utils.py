@@ -33,7 +33,7 @@ def user_auth():
 def _sanitize_errors_mongoengine(errors):
     _errors = []
     for k, v in errors.to_dict().items():
-        _errors.append("{} ({}).".format(v, k))
+        _errors.append(f"{v} ({k}).")
     return "\n".join(_errors)
 
 
@@ -44,7 +44,7 @@ def _sanitize_errors_marshmallow(errors):
             _errors += v
             continue
         for x in v:
-            _errors.append("{} ({}).".format(x[:-1], k))
+            _errors.append(f"{x[:-1]} ({k}).")
     return "\n".join(_errors)
 
 

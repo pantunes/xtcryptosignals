@@ -59,6 +59,6 @@ def update(self):
                 pt.save()
 
     except Exception as error:
-        logger.error("twitter error: {}".format(str(error)))
+        logger.error(f"twitter error: {error}")
         self.update_state(state=states.FAILURE, meta=str(error))
         raise Ignore()

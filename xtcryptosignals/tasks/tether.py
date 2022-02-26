@@ -79,6 +79,6 @@ def update(self):
         ).save()
 
     except Exception as error:
-        logger.error("tether error: {}".format(str(error)))
+        logger.error(f"tether error: {error}")
         self.update_state(state=states.FAILURE, meta=str(error))
         raise Ignore()

@@ -124,7 +124,7 @@ def main(
     if version:
         from xtcryptosignals import __title__, __version__
 
-        click.echo("{} {}".format(__title__, __version__))
+        click.echo(f"{__title__} {__version__}")
         ctx.exit()
 
     from celery import current_app

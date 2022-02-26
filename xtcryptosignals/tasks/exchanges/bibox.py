@@ -20,7 +20,7 @@ class Bibox:
         url = self.base_url.format(_symbol)
         request = requests.get(url)
         if request.status_code != 200:
-            raise ValueError("Error connecting Bibox on URL: {}".format(url))
+            raise ValueError(f"Error connecting Bibox on URL: {url}")
         item = request.json()["result"]
         item.update(ticker=symbol[0])
         return item

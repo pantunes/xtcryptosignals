@@ -69,9 +69,7 @@ bp_xhr = Blueprint("exchange/xhr", __name__)
 @login_required
 def balance(exchange):
     response = requests.get(
-        url="{}exchange/{}/balance".format(
-            current_app.config["SERVER_API_BASE_URL"], exchange
-        ),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}exchange/{exchange}/balance",
         headers=dict(Authorization=current_user.id),
     )
     return response.json(), response.status_code
@@ -81,9 +79,7 @@ def balance(exchange):
 @login_required
 def open_orders(exchange):
     response = requests.get(
-        url="{}exchange/{}/orders/open".format(
-            current_app.config["SERVER_API_BASE_URL"], exchange
-        ),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}exchange/{exchange}/orders/open",
         headers=dict(Authorization=current_user.id),
     )
     return response.json(), response.status_code
@@ -93,9 +89,7 @@ def open_orders(exchange):
 @login_required
 def account_status(exchange):
     response = requests.get(
-        url="{}exchange/{}/account/status".format(
-            current_app.config["SERVER_API_BASE_URL"], exchange
-        ),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}exchange/{exchange}/account/status",
         headers=dict(Authorization=current_user.id),
     )
     return response.json(), response.status_code

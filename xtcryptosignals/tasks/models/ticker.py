@@ -48,7 +48,7 @@ def _get_price_change_chart(row, price_change):
 def _set_history(ticker):
     ticker.history_list_dicts = []
     for x in s.HISTORY_FREQUENCY:
-        model_history = type("History{}".format(x), (History,), {})
+        model_history = type(f"History{x}", (History,), {})
 
         row = model_history.objects(
             symbol=ticker["symbol"], source=ticker["source"]

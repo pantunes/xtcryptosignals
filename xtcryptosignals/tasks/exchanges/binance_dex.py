@@ -19,7 +19,7 @@ class BinanceDex:
         request = requests.get(self.base_url)
         if request.status_code != 200:
             raise ValueError(
-                "Error connecting Binance-Dex on URL: {}".format(self.base_url)
+                f"Error connecting Binance-Dex on URL: {self.base_url}"
             )
         response = request.json()
 

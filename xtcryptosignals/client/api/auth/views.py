@@ -31,7 +31,7 @@ bp = Blueprint("auth", __name__)
 @login_manager.user_loader
 def load_user(token):
     response = requests.get(
-        url="{}auth".format(current_app.config["SERVER_API_BASE_URL"]),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}auth",
         headers=dict(Authorization=token),
     )
 
@@ -53,7 +53,7 @@ def login():
         return dict(error="Bad credentials."), 404
 
     response = requests.post(
-        url="{}login".format(current_app.config["SERVER_API_BASE_URL"]),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}login",
         json=form_data,
     )
 
@@ -69,7 +69,7 @@ def login():
 @login_required
 def logout():
     response = requests.post(
-        url="{}logout".format(current_app.config["SERVER_API_BASE_URL"]),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}logout",
         headers=dict(Authorization=current_user.id),
     )
 
@@ -84,7 +84,7 @@ def logout():
 @login_required
 def subscription():
     response = requests.post(
-        url="{}subscription".format(current_app.config["SERVER_API_BASE_URL"]),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}subscription",
         headers=dict(Authorization=current_user.id),
         json=request.get_json(),
     )
@@ -96,9 +96,7 @@ def favourite_get(coin_or_token):
     if not current_user.is_authenticated:
         return {}, 401
     response = requests.get(
-        url="{}favourites/{}".format(
-            current_app.config["SERVER_API_BASE_URL"], coin_or_token
-        ),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}favourites/{coin_or_token}",
         headers=dict(Authorization=current_user.id),
     )
     return response.json(), response.status_code
@@ -109,9 +107,7 @@ def favourite_toggle(coin_or_token):
     if not current_user.is_authenticated:
         return {}, 401
     response = requests.post(
-        url="{}favourites/{}".format(
-            current_app.config["SERVER_API_BASE_URL"], coin_or_token
-        ),
+        url=f"{current_app.config['SERVER_API_BASE_URL']}favourites/{coin_or_token}",
         headers=dict(Authorization=current_user.id),
     )
     return response.json(), response.status_code

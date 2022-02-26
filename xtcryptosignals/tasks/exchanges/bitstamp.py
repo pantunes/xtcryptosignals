@@ -20,7 +20,7 @@ class Bitstamp:
         url = self.base_url.format(_symbol)
         request = requests.get(url)
         if request.status_code != 200:
-            raise ValueError("Error connecting Bitstamp on URL: {}".format(url))
+            raise ValueError(f"Error connecting Bitstamp on URL: {url}")
         item = request.json()
         item.update(symbol="".join(symbol), ticker=symbol[0])
         return item

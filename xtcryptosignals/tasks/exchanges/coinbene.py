@@ -20,7 +20,7 @@ class Coinbene:
         url = self.base_url.format(_symbol)
         request = requests.get(url)
         if request.status_code != 200:
-            raise ValueError("Error connecting Coinbene on URL: {}".format(url))
+            raise ValueError(f"Error connecting Coinbene on URL: {url}")
         item = request.json()["ticker"][0]
         item.update(ticker=symbol[0])
         return item
