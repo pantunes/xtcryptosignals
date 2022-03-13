@@ -159,7 +159,7 @@ class Ticker(DocumentValidation):
         volume_change = None
         try:
             price_change = (float(self["price"] / row.price) - 1.0) * 100.0
-        except ZeroDivisionError:
+        except Exception:
             price_change = 1.0
         if self["number_trades_24h"]:
             try:
@@ -167,14 +167,14 @@ class Ticker(DocumentValidation):
                     float(self["number_trades_24h"] / row.number_trades_24h)
                     - 1.0
                 ) * 100.0
-            except ZeroDivisionError:
+            except Exception:
                 number_trades_change = 1.0
         if self["volume_24h"]:
             try:
                 volume_change = (
                     float(self["volume_24h"] / row.volume_24h) - 1.0
                 ) * 100.0
-            except ZeroDivisionError:
+            except Exception:
                 volume_change = 1.0
         return price_change, number_trades_change, volume_change
 
