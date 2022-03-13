@@ -161,19 +161,6 @@ SYMBOLS_PER_EXCHANGE.append(
     }
 )
 
-# OKEx
-SYMBOLS_PER_EXCHANGE.append(
-    {
-        OKEX: {
-            "pairs": [
-                ("BTC", "USDT"),
-                ("ETH", "USDT"),
-                ("LTC", "USDT"),
-            ]
-        }
-    }
-)
-
 # Coinbase Pro
 SYMBOLS_PER_EXCHANGE.append(
     {
@@ -252,6 +239,11 @@ SYMBOLS_PER_EXCHANGE.append(
         }
     }
 )
+
+# Deprecated/Upgraded APIs #######
+
+# OKEx
+SYMBOLS_PER_EXCHANGE.append({OKEX: {"pairs": []}})
 
 # EMPTY EXCHANGES (LOW VOLUME) #######
 
