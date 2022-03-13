@@ -95,8 +95,8 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("ICX", "BTC"),
                 ("VET", "USDT"),
                 ("VET", "BTC"),
-                ("NANO", "USDT"),
-                ("NANO", "BTC"),
+                ("XNO", "USDT"),
+                ("XNO", "BTC"),
                 ("USDT", "DAI"),
                 ("USDC", "USDT"),
                 ("ADA", "USDT"),
@@ -244,6 +244,7 @@ SYMBOLS_PER_EXCHANGE.append(
 
 # OKEx
 SYMBOLS_PER_EXCHANGE.append({OKEX: {"pairs": []}})
+
 
 # EMPTY EXCHANGES (LOW VOLUME) #######
 
@@ -462,7 +463,7 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
-    "NANO": {
+    "XNO": {
         "pair": "USDT",
         "name": BINANCE,
     },

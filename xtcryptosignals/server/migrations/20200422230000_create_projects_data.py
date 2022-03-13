@@ -63,7 +63,7 @@ PROJECTS = dict(
         twitter="https://twitter.com/LTOnetwork",
         wikipedia=None,
     ),
-    NANO=dict(
+    XNO=dict(
         name="Nano",
         website="https://nano.org",
         twitter="https://twitter.com/nano",
