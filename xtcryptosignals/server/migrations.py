@@ -9,15 +9,23 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from mongodb_migrations.base import BaseMigration
+
 from xtcryptosignals.common.utils import use_mongodb
 from xtcryptosignals.server.api.projects.models import Project
 from xtcryptosignals.tasks import settings as s
 
 
-class Migration(BaseMigration):
+class AddProjectMigration(BaseMigration):
+    PROJECTS = None
+
     @use_mongodb(db=s.MONGODB_NAME, host=s.MONGODB_HOST, port=s.MONGODB_PORT)
     def upgrade(self):
-        Project.objects(coin_or_token="LEND").update(coin_or_token="AAVE")
+        if not self.PROJECTS:
+            raise ValueError("PROJECTS must not be empty")
+
+        for k, v in self.PROJECTS.items():
+            Project(**{**{"coin_or_token": k}, **v}).save()
+            print(f"Adding Project: {k}")
 
     def downgrade(self):
         pass
