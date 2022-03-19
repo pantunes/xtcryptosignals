@@ -1,7 +1,10 @@
 # Changelog
 All changes will be registered here per release.
 
-## [0.8.8] - (WIP) Current date
+## [0.8.9] - Current date
+WIP
+
+## [0.8.8] - 2022-03-19
 Added `Solana / SOL` Project/Token.  
 Added `Cosmos / ATOM` Project/Token.  
 Fix Binance status call.  
