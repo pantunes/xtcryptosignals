@@ -106,14 +106,6 @@ class ChartTetherBTC(Resource):
             400:
                 description: Error in input validation
         """
-        if frequency not in (
-            "1h",
-            "1d",
-            "1w",
-            "4w",
-        ):
-            return dict(error="Frequency is incorrect."), 400
-
         return service.get_chart_tether_btc(
             coin_or_token="BTC",
             frequency=frequency,
