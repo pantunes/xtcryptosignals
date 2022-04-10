@@ -48,12 +48,22 @@ class StatusSocketsAPI(Resource):
         responses:
             200:
                 description: Sockets API is OK
+            404:
+                description: Sockets API is NOT OK
         """
-        response = requests.get(
-            f"http://{current_app.config['IP_ADDRESS']}:"
-            f"{current_app.config['PORT']}/socket.io/?EIO=4"
-        )
-        return dict(status="OK" if response.status_code == 200 else "NOT OK")
+
+        try:
+            response = requests.get(
+                f"http://{current_app.config['IP_ADDRESS']}:"
+                f"{current_app.config['PORT']}/socket.io/?EIO=4"
+            )
+            status_code = response.status_code
+            status_text = "OK"
+        except Exception:
+            status_code = 404
+            status_text = "NOT OK"
+
+        return dict(status=status_text), status_code
 
 
 api.add_resource(StatusAPI, "/status/api")

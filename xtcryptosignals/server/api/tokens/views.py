@@ -10,9 +10,10 @@ __email__ = "pjmlantunes@gmail.com"
 
 from flask import Blueprint
 from flask_restful import Api, Resource
+
+from xtcryptosignals.server.api.tokens import service
 from xtcryptosignals.server.utils import validate_io
 from xtcryptosignals.tasks import settings as s
-
 
 bp = Blueprint("tokens", __name__)
 api = Api(bp)
@@ -63,6 +64,28 @@ class CoinsOrTokensReferenceGet(Resource):
         return s.EXCHANGES_AND_PAIRS_OF_REFERENCE, 200
 
 
+class CoinsOrTokensTickerPairLastGet(Resource):
+    @validate_io()
+    def get(self, pair):
+        """
+        Gets Last Pair Ticker
+        ---
+        tags:
+            - Tokens
+        parameters:
+            - name: pair
+              in: path
+              required: true
+        responses:
+            200:
+                description: Returns Pair data successfully
+            404:
+                description: Pair does not exist
+        """
+        return service.get_ticker_pair_last(pair=pair)
+
+
 api.add_resource(FrequencyGet, "/tokens/frequency")
 api.add_resource(SymbolsGet, "/tokens/symbols")
 api.add_resource(CoinsOrTokensReferenceGet, "/tokens/reference")
+api.add_resource(CoinsOrTokensTickerPairLastGet, "/tokens/ticker/<pair>/last")
