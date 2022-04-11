@@ -12,6 +12,7 @@ from flask import Blueprint
 from flask_restful import Api, Resource
 
 from xtcryptosignals.server.api.tokens import service
+from xtcryptosignals.server.api.tokens.schemas import TickerOutputSchema
 from xtcryptosignals.server.utils import validate_io
 from xtcryptosignals.tasks import settings as s
 
@@ -65,7 +66,7 @@ class CoinsOrTokensReferenceGet(Resource):
 
 
 class CoinsOrTokensTickerPairLastGet(Resource):
-    @validate_io()
+    @validate_io(schema_out=TickerOutputSchema)
     def get(self, pair):
         """
         Gets Last Pair Ticker
@@ -79,8 +80,8 @@ class CoinsOrTokensTickerPairLastGet(Resource):
         responses:
             200:
                 description: Returns Pair data successfully
-            404:
-                description: Pair does not exist
+            416:
+                description: Error in output validation
         """
         return service.get_ticker_pair_last(pair=pair)
 

@@ -23,9 +23,9 @@ def get_ticker_pair_last(pair):
         symbol=pair,
         frequency=s.HISTORY_FREQUENCY[0],
     )
+
     ser_row = red.get(key)
-    if ser_row:
-        deser_row = json.loads(ser_row)
-        price = float(deser_row["price"])
-        return {"pair": pair, "price": price}, 200
-    return {"pair": pair}, 404
+    if not ser_row:
+        return
+
+    return json.loads(ser_row)
