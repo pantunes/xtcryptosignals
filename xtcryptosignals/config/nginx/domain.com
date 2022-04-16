@@ -71,6 +71,8 @@ server {
 
     server_name domain.com;
 
+    add_header Access-Control-Allow-Origin "https://domain.com";
+
     ssl_certificate /etc/letsencrypt/live/domain.com/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/domain.com/privkey.pem;
     include /etc/letsencrypt/options-ssl-nginx.conf;
