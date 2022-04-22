@@ -8,11 +8,12 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import redis
 import json
-from marshmallow import Schema, fields
-from xtcryptosignals.tasks import settings as s
 
+import redis
+from marshmallow import Schema, fields
+
+from xtcryptosignals.tasks import settings as s
 
 red = redis.Redis.from_url(s.BROKER_URL)
 

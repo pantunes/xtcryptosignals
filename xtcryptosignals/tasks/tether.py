@@ -10,14 +10,14 @@ __email__ = "pjmlantunes@gmail.com"
 
 import cfscrape
 from bs4 import BeautifulSoup
-from etherscan.tokens import Tokens
-from celery.task import task
-from celery.exceptions import Ignore
 from celery import states
-from xtcryptosignals.common.utils import use_mongodb
-from xtcryptosignals.tasks.models.tether import Tether
-from xtcryptosignals.tasks import settings as s
+from celery.exceptions import Ignore
+from celery.task import task
+from etherscan.tokens import Tokens
 
+from xtcryptosignals.common.utils import use_mongodb
+from xtcryptosignals.tasks import settings as s
+from xtcryptosignals.tasks.models.tether import Tether
 
 TETHER_CONTRACT_ADDRESS = "0xdac17f958d2ee523a2206206994597c13d831ec7"
 

@@ -23,9 +23,9 @@ from flask_login import (
     login_user,
     current_user,
 )
+
 from xtcryptosignals.client import service
 from xtcryptosignals.client.api.auth.models import Auth
-
 
 bp = Blueprint("user", __name__)
 

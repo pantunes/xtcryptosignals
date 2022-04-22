@@ -8,9 +8,10 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-from cryptography.fernet import InvalidToken
 from binance.client import Client as BinanceClient
 from binance.exceptions import BinanceAPIException, BinanceRequestException
+from cryptography.fernet import InvalidToken
+
 from xtcryptosignals.server.api.exchanges.service import ExchangeAPI
 from xtcryptosignals.server.crypto import Crypto
 

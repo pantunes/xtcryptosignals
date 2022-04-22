@@ -9,20 +9,22 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import logging
-from celery.task import task
-from celery.exceptions import Ignore
-from celery import states
+
 from billiard.context import Process
-from pymongo.errors import ServerSelectionTimeoutError
+from celery import states
+from celery.exceptions import Ignore
+from celery.task import task
 from flask_socketio import SocketIO
-from xtcryptosignals.tasks.celeryconfig import BROKER_URL
+from pymongo.errors import ServerSelectionTimeoutError
+
 from xtcryptosignals.common.utils import use_mongodb
+from xtcryptosignals.tasks import settings as s
+from xtcryptosignals.tasks.celeryconfig import BROKER_URL
+from xtcryptosignals.tasks.models.ticker import Ticker
 from xtcryptosignals.tasks.utils import (
     get_class,
     terminate_running_jobs,
 )
-from xtcryptosignals.tasks.models.ticker import Ticker
-from xtcryptosignals.tasks import settings as s
 
 
 @use_mongodb(db=s.MONGODB_NAME, host=s.MONGODB_HOST, port=s.MONGODB_PORT)

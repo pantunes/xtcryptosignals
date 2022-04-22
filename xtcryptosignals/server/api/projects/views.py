@@ -10,13 +10,13 @@ __email__ = "pjmlantunes@gmail.com"
 
 from flask import Blueprint
 from flask_restful import Api, Resource
-from xtcryptosignals.server.utils import validate_io
+
 from xtcryptosignals.server.api.projects import service
 from xtcryptosignals.server.api.projects.schemas import (
     ProjectsOutputSchema,
     ProjectTwitterOutputSchema,
 )
-
+from xtcryptosignals.server.utils import validate_io
 
 bp = Blueprint("projects", __name__)
 api = Api(bp)

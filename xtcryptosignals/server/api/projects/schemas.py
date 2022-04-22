@@ -8,8 +8,9 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-from millify import millify
 from marshmallow import fields, post_dump
+from millify import millify
+
 from xtcryptosignals.server.api.common.schemas import OutputSchema
 
 

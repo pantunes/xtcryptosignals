@@ -13,8 +13,9 @@ from marshmallow import (
     pre_load,
     post_load,
 )
-from xtcryptosignals.tasks.schemas.base import BaseSchema
+
 from xtcryptosignals.tasks import settings as s
+from xtcryptosignals.tasks.schemas.base import BaseSchema
 
 
 class Bitstamp(BaseSchema):

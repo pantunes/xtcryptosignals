@@ -9,8 +9,9 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from marshmallow import Schema, fields
-from xtcryptosignals.server.api.user.schemas import UserOutputSchema
+
 from xtcryptosignals.server.api.common.schemas import OutputSchema
+from xtcryptosignals.server.api.user.schemas import UserOutputSchema
 
 
 class AuthInputSchema(Schema):

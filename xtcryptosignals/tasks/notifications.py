@@ -8,25 +8,26 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import os
-import json
-import redis
 import hashlib
-import telegram
+import json
+import os
 from datetime import timedelta
-from celery.task import task
-from celery.exceptions import Ignore
+
+import redis
+import telegram
 from celery import states
+from celery.exceptions import Ignore
+from celery.task import task
 from pywebpush import webpush, WebPushException
+
 from xtcryptosignals.common.utils import use_mongodb
-from xtcryptosignals.tasks.utils import convert_to_seconds
 from xtcryptosignals.server.api.notifications.models import (
     NotificationRule,
     Notification,
 )
-from xtcryptosignals.tasks.models.history import History
 from xtcryptosignals.tasks import settings as s
-
+from xtcryptosignals.tasks.models.history import History
+from xtcryptosignals.tasks.utils import convert_to_seconds
 
 red = redis.Redis.from_url(s.BROKER_URL)
 

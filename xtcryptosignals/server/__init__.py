@@ -8,12 +8,11 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+from flasgger import Swagger
 from flask import Flask
 from flask_session import Session
 from flask_socketio import SocketIO
-from flasgger import Swagger
 from mongoengine import connect
-
 
 app = Flask(__name__)
 

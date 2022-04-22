@@ -10,6 +10,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 from mongoengine import Q
 from mongoengine.errors import ValidationError
+
 from xtcryptosignals.server.api.projects.models import Project
 from xtcryptosignals.tasks.models.project_twitter import ProjectTwitter
 

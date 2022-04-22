@@ -28,6 +28,8 @@ class Config(object):
     CFGI_MIN = "1d"
     CFGI_MAX = "12w"
 
+    SHOW_DONATION = False
+
 
 class ConfigProduction(Config):
     DEBUG = False

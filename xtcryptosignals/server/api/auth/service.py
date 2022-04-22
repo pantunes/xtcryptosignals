@@ -9,10 +9,12 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import secrets
+
 from mongoengine.errors import DoesNotExist, NotUniqueError
+
 from xtcryptosignals.server.api.auth.models import Auth
-from xtcryptosignals.server.api.user.models import UserTokenFavourites
 from xtcryptosignals.server.api.projects.models import Project
+from xtcryptosignals.server.api.user.models import UserTokenFavourites
 from xtcryptosignals.server.api.user.service import get_user
 from xtcryptosignals.server.crypto import Crypto
 from xtcryptosignals.tasks import settings as s

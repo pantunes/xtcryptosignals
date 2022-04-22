@@ -9,15 +9,16 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from datetime import datetime
+
 from mongoengine import Q
 from mongoengine.errors import DoesNotExist, ValidationError
-from xtcryptosignals.tasks.models.history import History
-from xtcryptosignals.tasks.models.cfgi import CFGI
-from xtcryptosignals.tasks.models.tether import Tether
-from xtcryptosignals.tasks.models.project_twitter import ProjectTwitter
+
 from xtcryptosignals.server.api.projects.models import Project
 from xtcryptosignals.tasks import settings as s
-
+from xtcryptosignals.tasks.models.cfgi import CFGI
+from xtcryptosignals.tasks.models.history import History
+from xtcryptosignals.tasks.models.project_twitter import ProjectTwitter
+from xtcryptosignals.tasks.models.tether import Tether
 
 NUM_OCCURRENCES = 30  # CFGI_MIN=1d in client
 

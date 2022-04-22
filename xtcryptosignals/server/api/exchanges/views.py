@@ -10,18 +10,18 @@ __email__ = "pjmlantunes@gmail.com"
 
 from flask import Blueprint, current_app
 from flask_restful import Api, Resource
-from xtcryptosignals.server.utils import (
-    validate_io,
-    user_auth,
-)
-from xtcryptosignals.tasks import settings as s
-from xtcryptosignals.server.api.exchanges.binance.service import BinanceAPI
+
 from xtcryptosignals.server.api.exchanges.binance.schemas import (
     ExchangeBalanceOutputSchema,
     ExchangeOpenOrdersOutputSchema,
     ExchangeAccountStatusOutputSchema,
 )
-
+from xtcryptosignals.server.api.exchanges.binance.service import BinanceAPI
+from xtcryptosignals.server.utils import (
+    validate_io,
+    user_auth,
+)
+from xtcryptosignals.tasks import settings as s
 
 bp = Blueprint("exchange", __name__)
 api = Api(bp)

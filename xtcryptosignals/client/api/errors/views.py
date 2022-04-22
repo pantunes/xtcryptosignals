@@ -15,9 +15,9 @@ from flask import (
     g,
 )
 from flask_wtf.csrf import CSRFError
-from xtcryptosignals.client import service
-from xtcryptosignals import __version__
 
+from xtcryptosignals import __version__
+from xtcryptosignals.client import service
 
 bp = Blueprint("errors", __name__)
 

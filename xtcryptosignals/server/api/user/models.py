@@ -15,6 +15,7 @@ from mongoengine import (
     EmailField,
     ReferenceField,
 )
+
 from xtcryptosignals.common.models import DocumentValidation
 from xtcryptosignals.common.utils import get_coin_tokens
 from xtcryptosignals.tasks import settings as s

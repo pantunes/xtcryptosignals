@@ -12,6 +12,7 @@ from mongoengine import (
     StringField,
     URLField,
 )
+
 from xtcryptosignals.common.models import DocumentValidation
 from xtcryptosignals.common.utils import get_coin_tokens
 from xtcryptosignals.tasks import settings as s

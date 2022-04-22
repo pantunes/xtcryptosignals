@@ -8,16 +8,18 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+from datetime import date
+
 import requests
 import wikipediaapi
-from datetime import date
-from celery.task import task
-from celery.exceptions import Ignore
 from celery import states
+from celery.exceptions import Ignore
+from celery.task import task
+
 from xtcryptosignals.common.utils import use_mongodb
 from xtcryptosignals.server.api.projects.models import Project
-from xtcryptosignals.tasks.models.project_twitter import ProjectTwitter
 from xtcryptosignals.tasks import settings as s
+from xtcryptosignals.tasks.models.project_twitter import ProjectTwitter
 
 
 def _get_twitter_num_followers(url):

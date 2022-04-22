@@ -9,8 +9,8 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import os
-from xtcryptosignals.tasks.utils import get_class
 
+from xtcryptosignals.tasks.utils import get_class
 
 ROOT_FOLDER = os.path.dirname(os.path.abspath(__file__))
 

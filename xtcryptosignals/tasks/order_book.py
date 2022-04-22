@@ -8,13 +8,14 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-from celery.task import task
-from celery.exceptions import Ignore
-from celery import states
 from billiard.context import Process
-from flask_socketio import SocketIO
-from xtcryptosignals.tasks.celeryconfig import BROKER_URL
 from binance.client import Client as BinanceClient
+from celery import states
+from celery.exceptions import Ignore
+from celery.task import task
+from flask_socketio import SocketIO
+
+from xtcryptosignals.tasks.celeryconfig import BROKER_URL
 
 try:
     from idex.client import Client as IdexClient

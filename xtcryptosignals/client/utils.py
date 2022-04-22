@@ -9,6 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from functools import wraps
+
 from flask import render_template, g
 
 

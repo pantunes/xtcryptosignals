@@ -10,6 +10,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 from kucoin.client import Client
 from kucoin.exceptions import KucoinAPIException
+
 from xtcryptosignals.tasks import settings as s
 
 

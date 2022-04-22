@@ -11,10 +11,10 @@ __email__ = "pjmlantunes@gmail.com"
 import redis
 from flask import Blueprint
 from flask_restful import Api, Resource
-from xtcryptosignals.server.utils import validate_io
-from xtcryptosignals.server.api.charts import service
-from xtcryptosignals.tasks import settings as s
 
+from xtcryptosignals.server.api.charts import service
+from xtcryptosignals.server.utils import validate_io
+from xtcryptosignals.tasks import settings as s
 
 bp = Blueprint("charts", __name__)
 api = Api(bp)

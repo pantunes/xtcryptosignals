@@ -9,6 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import pytest
+
 from xtcryptosignals.tasks.utils import (
     get_class,
     convert_to_seconds,

@@ -8,12 +8,13 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import redis
 import json
-from xtcryptosignals.server.api.transactions.models import Transaction
-from xtcryptosignals.common.utils import get_coin_tokens
-from xtcryptosignals.tasks import settings as s
 
+import redis
+
+from xtcryptosignals.common.utils import get_coin_tokens
+from xtcryptosignals.server.api.transactions.models import Transaction
+from xtcryptosignals.tasks import settings as s
 
 red = redis.Redis.from_url(s.BROKER_URL)
 

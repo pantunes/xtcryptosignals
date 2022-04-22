@@ -12,6 +12,7 @@ from marshmallow import (
     Schema,
     fields,
 )
+
 from xtcryptosignals.server.api.common.schemas import OutputSchema
 
 

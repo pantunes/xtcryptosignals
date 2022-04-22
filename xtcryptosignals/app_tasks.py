@@ -9,8 +9,9 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import click
-from xtcryptosignals.tasks import ticker
+
 from xtcryptosignals.tasks import settings as s
+from xtcryptosignals.tasks import ticker
 
 
 def _prepare_celery_beat(app, *_, tasks, **kwargs):

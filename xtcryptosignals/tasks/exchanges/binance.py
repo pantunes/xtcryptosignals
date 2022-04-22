@@ -10,6 +10,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 from binance.client import Client as BinanceClient
 from binance.exceptions import BinanceAPIException
+
 from xtcryptosignals.tasks import settings as s
 
 

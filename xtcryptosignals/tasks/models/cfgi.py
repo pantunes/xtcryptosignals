@@ -12,6 +12,7 @@ from mongoengine import (
     IntField,
     DateField,
 )
+
 from xtcryptosignals.common.models import DocumentValidation
 
 

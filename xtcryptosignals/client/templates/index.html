@@ -99,8 +99,13 @@
   </div>
 
   <div class="container">
-    <div style="margin-top: 3rem;">
-      <p><b>{{ current_year }} @ XTCryptoSignals v{{version}}</b> - In case this project helped you in some way, I'm accepting a small <a href="https://donate.xtcryptosignals.com/">donation</a> to keep it on-🔥.</p>
+    <div style="margin-top: 3rem; text-align: center">
+      <p>
+        <b>{{ current_year }} @ XTCryptoSignals v{{version}}</b>
+{% if show_donation %}
+  - In case this project helped you in some way, I'm accepting a small <a href="https://donate.xtcryptosignals.com/">donation</a> to keep it on-🔥.
+{% endif %}
+      </p>
     </div>
   </div>
 

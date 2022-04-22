@@ -8,16 +8,17 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+from datetime import datetime
+
 import redis
 import requests
-from datetime import datetime
-from celery.task import task
-from celery.exceptions import Ignore
 from celery import states
-from xtcryptosignals.common.utils import use_mongodb
-from xtcryptosignals.tasks.models.cfgi import CFGI
-from xtcryptosignals.tasks import settings as s
+from celery.exceptions import Ignore
+from celery.task import task
 
+from xtcryptosignals.common.utils import use_mongodb
+from xtcryptosignals.tasks import settings as s
+from xtcryptosignals.tasks.models.cfgi import CFGI
 
 red = redis.Redis.from_url(s.BROKER_URL)
 

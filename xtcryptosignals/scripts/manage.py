@@ -9,10 +9,10 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import os
-import click
 import subprocess
 from shutil import copyfile
 
+import click
 
 SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 CHOICES = (

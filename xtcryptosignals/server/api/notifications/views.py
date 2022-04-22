@@ -10,15 +10,16 @@ __email__ = "pjmlantunes@gmail.com"
 
 from flask import Blueprint, request
 from flask_restful import Api, Resource
-from xtcryptosignals.server.utils import (
-    validate_io,
-    user_auth,
-)
+
 from xtcryptosignals.server.api.notifications import service
 from xtcryptosignals.server.api.notifications.schemas import (
     NotificationRuleInputSchema,
     NotificationOutputSchema,
     NotificationRuleOutputSchema,
+)
+from xtcryptosignals.server.utils import (
+    validate_io,
+    user_auth,
 )
 
 bp = Blueprint("notification", __name__)

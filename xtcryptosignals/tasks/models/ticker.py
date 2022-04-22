@@ -8,23 +8,24 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import redis
 import json
 from datetime import datetime, timedelta
+
+import redis
 from mongoengine import (
     StringField,
     DecimalField,
     IntField,
     DateTimeField,
 )
+
 from xtcryptosignals.common.models import (
     DocumentValidation,
     _set_timestamp,
 )
+from xtcryptosignals.tasks import settings as s
 from xtcryptosignals.tasks.models.history import History
 from xtcryptosignals.tasks.utils import convert_to_seconds
-from xtcryptosignals.tasks import settings as s
-
 
 red = redis.Redis.from_url(s.BROKER_URL)
 

@@ -14,6 +14,7 @@ from marshmallow import (
     ValidationError,
     validates_schema,
 )
+
 from xtcryptosignals.server.api.common.schemas import OutputSchema
 
 

@@ -9,8 +9,9 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from marshmallow import fields, pre_load, post_load
-from xtcryptosignals.tasks.schemas.base import BaseSchema
+
 from xtcryptosignals.tasks import settings as s
+from xtcryptosignals.tasks.schemas.base import BaseSchema
 
 
 class Bibox(BaseSchema):

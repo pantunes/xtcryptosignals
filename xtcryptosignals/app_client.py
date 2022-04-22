@@ -9,9 +9,9 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import click
-from xtcryptosignals.production.wsgi import start
-from xtcryptosignals.client import create_app
 
+from xtcryptosignals.client import create_app
+from xtcryptosignals.production.wsgi import start
 
 app = create_app()
 

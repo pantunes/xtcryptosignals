@@ -9,8 +9,8 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import click
-from xtcryptosignals.server import create_app, socketio
 
+from xtcryptosignals.server import create_app, socketio
 
 app = create_app()
 
@@ -24,7 +24,7 @@ app = create_app()
 )
 def main(port):
     """
-    Start RESTFul API and socketIO servers.
+    Start RESTFul API and socketIO server.
     """
     socketio.run(
         app=app,

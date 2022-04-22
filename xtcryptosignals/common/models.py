@@ -8,8 +8,9 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import pytz
 from datetime import datetime
+
+import pytz
 from mongoengine import Document, DateTimeField
 
 

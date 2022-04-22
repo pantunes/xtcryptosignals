@@ -9,6 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from mongoengine.errors import ValidationError, DoesNotExist
+
 from xtcryptosignals.server.api.notifications.models import (
     Notification,
     NotificationRule,

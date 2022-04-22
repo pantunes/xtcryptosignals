@@ -15,9 +15,10 @@ from mongoengine import (
     ReferenceField,
     queryset_manager,
 )
+
 from xtcryptosignals.common.models import DocumentValidation
-from xtcryptosignals.server.api.user.models import User
 from xtcryptosignals.common.utils import get_coin_tokens
+from xtcryptosignals.server.api.user.models import User
 from xtcryptosignals.tasks import settings as s
 
 

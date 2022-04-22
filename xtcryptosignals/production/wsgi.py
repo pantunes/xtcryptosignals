@@ -9,8 +9,8 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 import multiprocessing
-import gunicorn.app.base
 
+import gunicorn.app.base
 
 NUMBER_OF_WORKERS = (multiprocessing.cpu_count() * 2) + 1
 

@@ -12,6 +12,7 @@ from mongoengine import (
     StringField,
     EmailField,
 )
+
 from xtcryptosignals.common.models import DocumentValidation
 
 

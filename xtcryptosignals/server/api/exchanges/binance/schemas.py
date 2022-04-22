@@ -8,17 +8,18 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import redis
 import json
+
+import redis
 from marshmallow import (
     Schema,
     fields,
     post_dump,
 )
-from xtcryptosignals.common.utils import get_pairs_ex
-from xtcryptosignals.tasks import settings as s
-from xtcryptosignals.server.api.exchanges.binance.service import BinanceAPI
 
+from xtcryptosignals.common.utils import get_pairs_ex
+from xtcryptosignals.server.api.exchanges.binance.service import BinanceAPI
+from xtcryptosignals.tasks import settings as s
 
 red = redis.Redis.from_url(s.BROKER_URL)
 pairs = get_pairs_ex(s.SYMBOLS_PER_EXCHANGE)

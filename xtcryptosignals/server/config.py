@@ -9,6 +9,7 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from redis import Redis
+
 from xtcryptosignals import (
     __title__,
     __version__,

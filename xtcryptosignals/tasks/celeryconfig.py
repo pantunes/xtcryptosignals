@@ -9,8 +9,8 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from celery.schedules import crontab
-from xtcryptosignals.tasks import settings as s
 
+from xtcryptosignals.tasks import settings as s
 
 CELERY_DEFAULT_QUEUE = "XTCryptoSignals"
 

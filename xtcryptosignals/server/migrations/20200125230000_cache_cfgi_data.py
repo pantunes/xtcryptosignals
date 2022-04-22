@@ -8,12 +8,14 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import requests
 from datetime import datetime
+
+import requests
 from mongodb_migrations.base import BaseMigration
+
 from xtcryptosignals.common.utils import use_mongodb
-from xtcryptosignals.tasks.models.cfgi import CFGI
 from xtcryptosignals.tasks import settings as s
+from xtcryptosignals.tasks.models.cfgi import CFGI
 
 
 class Migration(BaseMigration):

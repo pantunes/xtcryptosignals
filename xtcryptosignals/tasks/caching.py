@@ -8,13 +8,14 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
-import redis
 import json
-import requests
-from xtcryptosignals.common.utils import use_mongodb
-from xtcryptosignals.tasks.models.history import History
-from xtcryptosignals.tasks import settings as s
 
+import redis
+import requests
+
+from xtcryptosignals.common.utils import use_mongodb
+from xtcryptosignals.tasks import settings as s
+from xtcryptosignals.tasks.models.history import History
 
 red = redis.Redis.from_url(s.BROKER_URL)
 

@@ -9,15 +9,16 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from datetime import datetime
+
 from flask import (
     render_template,
     Blueprint,
     current_app,
     g,
 )
-from xtcryptosignals.client import service
-from xtcryptosignals import __version__
 
+from xtcryptosignals import __version__
+from xtcryptosignals.client import service
 
 bp = Blueprint("home", __name__)
 
@@ -33,6 +34,7 @@ def context_processor():
         version=__version__,
         ga_tracking_id=current_app.config["GA_TRACKING_ID"],
         current_year=datetime.utcnow().year,
+        show_donation=current_app.config["SHOW_DONATION"],
         frequencies=g.HISTORY_FREQUENCY,
     )
 

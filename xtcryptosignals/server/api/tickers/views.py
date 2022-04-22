@@ -10,10 +10,10 @@ __email__ = "pjmlantunes@gmail.com"
 
 import eventlet
 from flask_socketio import Namespace
-from xtcryptosignals.server import socketio
-from xtcryptosignals.tasks.models.history import History
-from xtcryptosignals.tasks import settings as s
 
+from xtcryptosignals.server import socketio
+from xtcryptosignals.tasks import settings as s
+from xtcryptosignals.tasks.models.history import History
 
 eventlet.monkey_patch()
 

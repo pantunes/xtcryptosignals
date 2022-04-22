@@ -9,7 +9,9 @@ __email__ = "pjmlantunes@gmail.com"
 
 
 from functools import wraps
+
 from flask import request, current_app
+
 from xtcryptosignals.server.api.auth import service
 from xtcryptosignals.tasks import settings as s
 

@@ -8,17 +8,17 @@ __maintainer__ = "Paulo Antunes"
 __email__ = "pjmlantunes@gmail.com"
 
 
+import base64
 import random
 import string
+
 import requests
+from captcha.image import ImageCaptcha
 from flask import (
     Blueprint,
     current_app,
     session,
 )
-import base64
-from captcha.image import ImageCaptcha
-
 
 bp = Blueprint("parties", __name__)
 
