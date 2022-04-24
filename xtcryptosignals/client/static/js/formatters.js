@@ -41,6 +41,13 @@ let price_formatter_setup_low_values_euro = {
     currency: 'EUR',
 };
 const price_formatter_low_values_euro = new Intl.NumberFormat('en-US', price_formatter_setup_low_values_euro);
+let price_volume_formatter_setup = {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+    style: 'currency',
+    currency: 'USD',
+};
+const price_volume_formatter = new Intl.NumberFormat('en-US', price_volume_formatter_setup);
 
 function _get_formatter(val, is_usd_or_euro) {
     let p;

@@ -125,7 +125,7 @@ function post_ticker_emit(id, json) {
 function render_data_depth_chart(coin_or_token, quote) {
     const chart_id = `chart_depth_${coin_or_token}${quote}`
     const chart = create_chart_depth(
-        chart_id, num_formatter_low_values, coin_or_token, quote
+        chart_id, coin_or_token, quote
     );
     charts.push(chart);
     setChartTheme([chart]);
