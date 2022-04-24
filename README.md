@@ -326,36 +326,30 @@ Open the browser with the URL `http://127.0.0.1:8000`:
 **Spotlight Search** | | 
 ![screen-shot](xtcryptosignals/client/static/imgs/readme/15.png) |
 
-
 ## Example of added Feature
 Pull Request to show how easy is to [Add Kyber Network, Aave and Ren Projects/Tokens](https://github.com/pantunes/xtcryptosignals/commit/95e1ec9cda86e5b457343163068ad164f8df81aa).
-
-## Team
-
-* Paulo Antunes
-
-* you?
 
 ## Disclaimer
 
 This project is work in progress and when it comes to trading use it at your own risk.
 
-
 ## License
 
 This project is licensed under the [GNU](https://www.gnu.org/licenses/gpl-3.0.en.html) License.
-
 
 ## Contact
 
 Through the website [xtcryptosignals.com](https://xtcryptosignals.com/ticker/tokens/10s#contact).  
 
 ## Acknowledgments
+
 ![Jetbrains](xtcryptosignals/client/static/imgs/readme/jetbrains.png)  
 Thanks to [Jetbrains](https://www.jetbrains.com/?from=xtcryptosignals) in order to 
 support us with an Open Source license.
 
 ## Donation
 
-In case this project helped you in some way I'm accepting a small donation to keep this open-source project on-🔥 in [donate.xtcryptosignals.com](https://donate.xtcryptosignals.com).  
-Thank you
+In case this project helped you in some way I'm accepting a small donation to keep this open-source project on-🔥 :
+- BTC: bc1qheg9zjhezsvnzywvnj9tunsj39llslqp33ekrs
+- ETH: 0x2e9B4409d40d2605361Ea1278B1514C74c66Eac3
+
