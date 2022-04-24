@@ -1,4 +1,5 @@
 function create_chart_fear_and_greed(data, quote, frequency) {
+
     return Highcharts.chart('chart', {
         chart: {
             zoomType: 'x',

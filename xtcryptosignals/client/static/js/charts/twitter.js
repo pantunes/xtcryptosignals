@@ -1,4 +1,5 @@
 function create_chart_twitter(chart_id, data, frequency) {
+
       return Highcharts.chart(chart_id, {
         chart: {
             zoomType: 'x',
