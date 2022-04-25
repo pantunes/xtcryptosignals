@@ -1,4 +1,5 @@
-function create_chart_tether(chart_id, num_formatter, data, coin_or_token, quote, frequency) {
+function create_chart_tether(chart_id, data, coin_or_token, quote, frequency) {
+
       return Highcharts.chart(chart_id, {
         chart: {
             zoomType: 'x',

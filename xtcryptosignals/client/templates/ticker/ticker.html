@@ -134,23 +134,12 @@
 </script>
 
 <script type="text/javascript">
-let price_volume_formatter_setup = {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-    style: 'currency',
-    currency: 'USD',
-};
-const price_volume_formatter = new Intl.NumberFormat('en-US', price_volume_formatter_setup);
-</script>
-
-<script type="text/javascript">
 let charts=[];
 function render_data_charts(data, coin_or_token, quote, frequency) {
     const dyn_formatter = _get_formatter(data.prices[0][1], false)
     const chart_id = 'chart_' + coin_or_token + frequency;
     let chart = create_chart_coin_or_token(
-        chart_id, dyn_formatter, price_volume_formatter,
-        num_formatter, data, coin_or_token, quote, frequency,
+        chart_id, dyn_formatter, data, coin_or_token, quote, frequency,
     );
     charts.push(chart);
     setChartTheme([chart]);

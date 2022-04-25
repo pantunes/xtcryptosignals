@@ -1,4 +1,5 @@
-function create_chart_depth(chart_id, num_formatter, coin_or_token, quote) {
+function create_chart_depth(chart_id, coin_or_token, quote) {
+
     return Highcharts.chart(chart_id, {
         chart: {
             type: 'area',
@@ -75,9 +76,9 @@ function create_chart_depth(chart_id, num_formatter, coin_or_token, quote) {
         tooltip: {
             formatter: function() {
                 return '<span style="color:' + this.color + '">\u25CF</span> ' +
-                    this.series.name + ': <b>' + num_formatter.format(this.y) + ' ' + coin_or_token + '</b><br/>' +
+                    this.series.name + ': <b>' + num_formatter_low_values.format(this.y) + ' ' + coin_or_token + '</b><br/>' +
                     '<span style="color:' + this.color + '">\u25CF</span> ' +
-                    'Price: <b>' + num_formatter.format(this.x) + ' ' + quote + '</b><br/>';
+                    'Price: <b>' + num_formatter_low_values.format(this.x) + ' ' + quote + '</b><br/>';
             }
         },
         series: [{

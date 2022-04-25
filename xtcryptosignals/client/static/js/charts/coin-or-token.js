@@ -1,6 +1,4 @@
-function create_chart_coin_or_token(
-    chart_id, dyn_formatter, price_volume_formatter, num_formatter, data, coin_or_token, quote, frequency
-) {
+function create_chart_coin_or_token(chart_id, dyn_formatter, data, coin_or_token, quote, frequency) {
 
       let titleTxt = `Price (${data["quote"]})`
       if (data["quote"] !== quote) {
