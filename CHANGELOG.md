@@ -1,8 +1,9 @@
 # Changelog
 All changes will be registered here per release.
 
-## [0.8.9] - Current date
-Added endpoint GET /tokens/ticker/<pair>/last
+## [0.8.9rc] - Current date
+Added endpoint GET /tokens/ticker/<pair>/last.  
+Code refactoring and fixes. 
 
 ## [0.8.8] - 2022-03-19
 Added `Solana / SOL` Project/Token.  
