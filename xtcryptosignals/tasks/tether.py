@@ -29,9 +29,9 @@ def _get_tether_num_holders():
     soup = BeautifulSoup(scraper.get(URL).content, "html.parser")
 
     try:
-        selector = soup.find(id="ContentPlaceHolder1_tr_tokenHolders").find_all(
-            "div"
-        )[-1]
+        selector = soup.find(id="ContentPlaceHolder1_tr_tokenHolders").find_all("div")[
+            -1
+        ]
     except AttributeError:
         # @note: If fails, most likely CAPTCHA! > can't do anything to prevent it :-(
         return -1
@@ -74,7 +74,7 @@ def update(self):
             api_key=s.ETHERSCAN_API_KEY,
         )
         Tether(
-            total_supply_eth=int(api.get_total_supply()) / 10 ** 6,
+            total_supply_eth=int(api.get_total_supply()) / 10**6,
             num_holders_eth=_get_tether_num_holders(),
         ).save()
 

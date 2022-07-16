@@ -187,9 +187,7 @@ class UserTokenFavouritesGet(Resource):
             405:
                 description: Coin/Token does not exist
         """
-        service.get_user_coin_or_token_favourite(
-            auth=auth, coin_or_token=coin_or_token
-        )
+        service.get_user_coin_or_token_favourite(auth=auth, coin_or_token=coin_or_token)
 
 
 class UserTokenFavouritesPost(Resource):

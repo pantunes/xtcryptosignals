@@ -42,9 +42,7 @@ def _process(logger, socketio, exchange_class, schema_class, symbol, pairs):
         logger.error(err)
         return
 
-    ticker, errors = schema_class(strict=True, many=symbol is None).load(
-        ticker_data
-    )
+    ticker, errors = schema_class(strict=True, many=symbol is None).load(ticker_data)
     assert errors == {}, errors
 
     try:
@@ -103,9 +101,7 @@ def _get_24h_price_ticker_data(
 @task(bind=True)
 def update(self, *_, **kwargs):
     if not kwargs["disable_ticker_messaging"]:
-        log_level = (
-            logging.INFO if not kwargs["log_ticker_minimal"] else logging.ERROR
-        )
+        log_level = logging.INFO if not kwargs["log_ticker_minimal"] else logging.ERROR
         logging.getLogger("engineio").setLevel(log_level)
         logging.getLogger("socketio").setLevel(log_level)
 

@@ -34,13 +34,9 @@ class Bilaxy:
                     url = url_template.format(z["fid"])
                     request = requests.get(url)
                     if request.status_code != 200:
-                        raise ValueError(
-                            f"Error connecting Bilaxy on URL: {url}"
-                        )
+                        raise ValueError(f"Error connecting Bilaxy on URL: {url}")
                     ticker = [z["fShortName"], x]
                     response_per_pair = request.json()["data"]
-                    response_per_pair.update(
-                        symbol="".join(ticker), ticker=ticker[0]
-                    )
+                    response_per_pair.update(symbol="".join(ticker), ticker=ticker[0])
                     rows.append(response_per_pair)
         return rows

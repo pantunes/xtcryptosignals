@@ -34,9 +34,7 @@ def prepare_cache():
             for exchange, items in x.items():
                 for symbol in [x[0] + x[1] for x in items["pairs"]]:
                     model_history = type(f"History{f}", (History,), {})
-                    row = model_history.objects(
-                        symbol=symbol, source=exchange
-                    ).first()
+                    row = model_history.objects(symbol=symbol, source=exchange).first()
                     if not row:
                         print(f"No need to Cache, db is empty")
                         continue

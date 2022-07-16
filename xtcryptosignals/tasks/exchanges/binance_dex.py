@@ -18,9 +18,7 @@ class BinanceDex:
     def get_ticker(self, pairs):
         request = requests.get(self.base_url)
         if request.status_code != 200:
-            raise ValueError(
-                f"Error connecting Binance-Dex on URL: {self.base_url}"
-            )
+            raise ValueError(f"Error connecting Binance-Dex on URL: {self.base_url}")
         response = request.json()
 
         _pairs = {

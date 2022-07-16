@@ -114,9 +114,7 @@ def portfolio(auth):
             {
                 coin_token: dict(
                     reference_info=_get_reference_info_for(coin_token),
-                    current_price=round(
-                        current_price, s.SYMBOL_FLOAT_PRECISION
-                    ),
+                    current_price=round(current_price, s.SYMBOL_FLOAT_PRECISION),
                     units=round(total_units, s.SYMBOL_FLOAT_PRECISION),
                     amount=total_amount,
                     average_paid=average_paid,

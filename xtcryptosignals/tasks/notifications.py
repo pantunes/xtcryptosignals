@@ -31,7 +31,9 @@ from xtcryptosignals.tasks.utils import convert_to_seconds
 
 red = redis.Redis.from_url(s.BROKER_URL)
 
-PATH_LOGOS = f"{os.path.dirname(os.path.realpath(__file__))}/../client/static/imgs/logos/"
+PATH_LOGOS = (
+    f"{os.path.dirname(os.path.realpath(__file__))}/../client/static/imgs/logos/"
+)
 
 
 @task(bind=True)

@@ -43,9 +43,7 @@ def get_coins_or_tokens_favourites():
 
 
 def get_projects():
-    response = requests.get(
-        url=f"{current_app.config['SERVER_API_BASE_URL']}projects"
-    )
+    response = requests.get(url=f"{current_app.config['SERVER_API_BASE_URL']}projects")
     return response.json(), response.status_code
 
 

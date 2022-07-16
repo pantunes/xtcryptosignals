@@ -71,9 +71,7 @@ def get_user_coin_or_token_favourite(auth, coin_or_token):
     except DoesNotExist:
         raise ValueError("Coin or Token does not exist.", 405)
     try:
-        return UserTokenFavourites.objects.get(
-            user=auth.user, coin_token=coin_or_token
-        )
+        return UserTokenFavourites.objects.get(user=auth.user, coin_token=coin_or_token)
     except DoesNotExist:
         raise ValueError("Coin or Token is not in favourites.", 204)
 
@@ -88,9 +86,7 @@ def toggle_user_coin_or_token_favourite(auth, coin_or_token):
         error, status = err.args
         if status == 405:
             raise ValueError(err)
-        UserTokenFavourites.objects.create(
-            user=auth.user, coin_token=coin_or_token
-        )
+        UserTokenFavourites.objects.create(user=auth.user, coin_token=coin_or_token)
 
 
 def get_favourites(auth):

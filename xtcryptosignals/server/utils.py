@@ -62,10 +62,7 @@ def validate_io(
     def decorator(f):
         @wraps(f)
         def wrapper(*args, **kwargs):
-            if (
-                "frequency" in kwargs
-                and kwargs["frequency"] not in s.HISTORY_FREQUENCY
-            ):
+            if "frequency" in kwargs and kwargs["frequency"] not in s.HISTORY_FREQUENCY:
                 return dict(error="Frequency is incorrect."), 400
             if schema_in:
                 try:
