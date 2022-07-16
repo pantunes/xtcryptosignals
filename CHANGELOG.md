@@ -1,8 +1,10 @@
 # Changelog
 All changes will be registered here per release.
 
-## [0.8.9rc] - Current date
-Added endpoint GET /tokens/ticker/<pair>/last.  
+## [0.9.0] - Current date
+
+## [0.8.9] - 2022-07-16
+Added endpoint `GET /tokens/ticker/<pair>/last`.  
 Code refactoring and fixes. 
 
 ## [0.8.8] - 2022-03-19
