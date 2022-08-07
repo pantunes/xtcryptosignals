@@ -15,7 +15,7 @@ from celery.exceptions import Ignore
 from celery.task import task
 from flask_socketio import SocketIO
 
-from celeryconfig import BROKER_URL
+from xtcryptosignals.celeryconfig import BROKER_URL
 
 try:
     from idex.client import Client as IdexClient
