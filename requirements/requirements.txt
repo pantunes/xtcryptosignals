@@ -35,7 +35,9 @@ cachetools==4.2.2
 captcha==0.3
     # via -r requirements/requirements.in
 celery==4.4.6
-    # via -r requirements/requirements.in
+    # via
+    #   -r requirements/requirements.in
+    #   flower
 certifi==2021.5.30
     # via
     #   python-binance
@@ -99,6 +101,8 @@ flask-socketio==5.1.0
     # via -r requirements/requirements.in
 flask-wtf==0.15.1
     # via -r requirements/requirements.in
+flower==0.9.7
+    # via -r requirements/requirements.in
 future==0.18.2
     # via celery
 greenlet==1.1.0
@@ -107,6 +111,8 @@ gunicorn==20.1.0
     # via -r requirements/requirements.in
 http-ece==1.1.0
     # via pywebpush
+humanize==4.3.0
+    # via flower
 hyperlink==21.0.0
     # via
     #   autobahn
@@ -118,6 +124,7 @@ idna==2.10
 importlib-metadata==4.6.0
     # via
     #   click
+    #   humanize
     #   jsonschema
     #   kombu
     #   pep517
@@ -161,6 +168,8 @@ pillow==8.3.0
     # via captcha
 pip-tools==6.2.0
     # via -r requirements/requirements.in
+prometheus-client==0.8.0
+    # via flower
 py-etherscan-api==0.8.0
     # via -r requirements/requirements.in
 py-vapid==1.8.2
@@ -206,6 +215,7 @@ pytz==2021.1
     #   celery
     #   dateparser
     #   flask-restful
+    #   flower
     #   python-telegram-bot
     #   tzlocal
 pywebpush==1.13.0
@@ -246,7 +256,9 @@ soupsieve==2.2.1
 toml==0.10.2
     # via pep517
 tornado==6.1
-    # via python-telegram-bot
+    # via
+    #   flower
+    #   python-telegram-bot
 twisted==21.2.0
     # via python-binance
 txaio==21.2.1
@@ -267,6 +279,7 @@ vine==1.3.0
     # via
     #   amqp
     #   celery
+    #   flower
 websocket-client==1.1.0
     # via python-socketio
 websockets==9.1
@@ -285,7 +298,7 @@ zipp==3.5.0
     # via
     #   importlib-metadata
     #   pep517
-zope.interface==5.4.0
+zope-interface==5.4.0
     # via twisted
 
 # The following packages are considered to be unsafe in a requirements file:

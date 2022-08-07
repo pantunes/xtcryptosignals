@@ -19,7 +19,7 @@ from pymongo.errors import ServerSelectionTimeoutError
 
 from xtcryptosignals.common.utils import use_mongodb
 from xtcryptosignals.tasks import settings as s
-from xtcryptosignals.tasks.celeryconfig import BROKER_URL
+from celeryconfig import BROKER_URL
 from xtcryptosignals.tasks.models.ticker import Ticker
 from xtcryptosignals.tasks.utils import (
     get_class,

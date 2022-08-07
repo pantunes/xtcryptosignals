@@ -133,7 +133,7 @@ def main(
 
     app = current_app._get_current_object()
 
-    app.config_from_object("xtcryptosignals.tasks.celeryconfig")
+    app.config_from_object("celeryconfig")
 
     # tasks passed by argument or default
     tasks = list(task)

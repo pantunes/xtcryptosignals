@@ -32,7 +32,7 @@ cryptography==3.4.7
 python-binance==0.7.9
 python-kucoin==2.1.2
 requests==2.23.0
-
+flower==0.9.7
 
 # requires code refactoring
 
