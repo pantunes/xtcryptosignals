@@ -220,8 +220,8 @@ SYMBOLS_PER_EXCHANGE.append(
     {
         LIQUID: {
             "pairs": [
-                ("EWT", "BTC"),
-                ("EWT", "ETH"),
+                ("BTC", "USD"),
+                ("ETH", "BTC"),
             ]
         }
     }

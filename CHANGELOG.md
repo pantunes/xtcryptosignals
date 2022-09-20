@@ -2,6 +2,7 @@
 All changes will be registered here per release.
 
 ## [0.9.0] - Current date
+Fix Liquid fetched pairs, as they were removed.  
 
 ## [0.8.9] - 2022-07-16
 Added endpoint `GET /tokens/ticker/<pair>/last`.  
