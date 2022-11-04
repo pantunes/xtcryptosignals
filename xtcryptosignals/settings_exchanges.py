@@ -477,12 +477,6 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
-    "USDC": {
-        "pair": "USDT",
-        "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
-        "is_stable": True,
-    },
     "USDT": {
         "pair": "USD",
         "name": OKCOIN,
