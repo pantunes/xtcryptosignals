@@ -98,7 +98,6 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("XNO", "USDT"),
                 ("XNO", "BTC"),
                 ("USDT", "DAI"),
-                ("USDC", "USDT"),
                 ("ADA", "USDT"),
                 ("ADA", "BTC"),
                 ("XTZ", "USDT"),
