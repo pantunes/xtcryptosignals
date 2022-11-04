@@ -98,7 +98,6 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("XNO", "USDT"),
                 ("XNO", "BTC"),
                 ("USDT", "DAI"),
-                ("USDC", "USDT"),
                 ("ADA", "USDT"),
                 ("ADA", "BTC"),
                 ("XTZ", "USDT"),
@@ -478,9 +477,8 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "USDC": {
-        "pair": "USDT",
-        "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT"]},
+        "pair": "USD",
+        "name": BITSTAMP,
         "is_stable": True,
     },
     "USDT": {
