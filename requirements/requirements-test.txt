@@ -22,9 +22,9 @@ autobahn==21.3.1
 automat==20.2.0
     # via twisted
 bcrypt==3.2.0
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 beautifulsoup4==4.9.3
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 bidict==0.21.2
     # via python-socketio
 billiard==3.6.4.0
@@ -34,9 +34,9 @@ cachelib==0.2.0
 cachetools==4.2.2
     # via python-telegram-bot
 captcha==0.3
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 celery==4.4.6
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 certifi==2021.5.30
     # via
     #   python-binance
@@ -47,12 +47,12 @@ cffi==1.14.5
     #   bcrypt
     #   cryptography
 cfscrape==2.1.1
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 chardet==3.0.4
     # via requests
 click==8.0.1
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   flask
     #   pip-tools
 configparser==5.0.2
@@ -61,9 +61,9 @@ constantly==15.1.0
     # via twisted
 coverage==5.5
     # via pytest-cov
-cryptography==3.4.7
+cryptography==39.0.1
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   autobahn
     #   http-ece
     #   py-vapid
@@ -75,17 +75,17 @@ dateparser==1.0.0
     # via python-binance
 dnspython==1.16.0
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   eventlet
 environs==9.3.2
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 eventlet==0.26.0
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 flasgger==0.9.5
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 flask==2.0.1
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   flasgger
     #   flask-login
     #   flask-restful
@@ -93,21 +93,21 @@ flask==2.0.1
     #   flask-socketio
     #   flask-wtf
 flask-login==0.5.0
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 flask-restful==0.3.9
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 flask-session==0.3.2
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 flask-socketio==5.1.0
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 flask-wtf==0.15.1
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 future==0.18.2
     # via celery
 greenlet==1.1.0
     # via eventlet
 gunicorn==20.1.0
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 http-ece==1.1.0
     # via pywebpush
 hyperlink==21.0.0
@@ -118,14 +118,6 @@ idna==2.10
     # via
     #   hyperlink
     #   requests
-importlib-metadata==4.6.0
-    # via
-    #   click
-    #   jsonschema
-    #   kombu
-    #   pep517
-    #   pluggy
-    #   pytest
 incremental==21.3.0
     # via twisted
 iniconfig==1.1.1
@@ -138,7 +130,7 @@ jinja2==3.0.1
     # via flask
 jsonschema==3.2.0
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   flasgger
 kombu==4.6.11
     # via celery
@@ -148,18 +140,18 @@ markupsafe==2.0.1
     #   wtforms
 marshmallow==2.20.5
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   environs
 millify==0.1.1
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 mistune==0.8.4
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   flasgger
 mongodb-migrations==1.0.1
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 mongoengine==0.23.1
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 monotonic==1.6
     # via eventlet
 packaging==21.0
@@ -169,13 +161,13 @@ pep517==0.10.0
 pillow==8.3.0
     # via captcha
 pip-tools==6.2.0
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 pluggy==0.13.1
     # via pytest
 py==1.10.0
     # via pytest
 py-etherscan-api==0.8.0
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 py-vapid==1.8.2
     # via pywebpush
 pyasn1==0.4.8
@@ -187,10 +179,10 @@ pyasn1-modules==0.2.8
 pycparser==2.20
     # via cffi
 pycryptodome==3.10.1
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 pymongo==3.10.1
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   mongodb-migrations
     #   mongoengine
 pyopenssl==20.0.1
@@ -201,12 +193,12 @@ pyrsistent==0.18.0
     # via jsonschema
 pytest==6.2.4
     # via
-    #   -r requirements/requirements-test.in
+    #   -r requirements-test.in
     #   pytest-cov
 pytest-cov==2.12.1
-    # via -r requirements/requirements-test.in
+    # via -r requirements-test.in
 python-binance==0.7.9
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 python-dateutil==2.8.1
     # via dateparser
 python-dotenv==0.18.0
@@ -214,13 +206,13 @@ python-dotenv==0.18.0
 python-engineio==4.2.0
     # via python-socketio
 python-kucoin==2.1.2
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 python-socketio[client]==5.3.0
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   flask-socketio
 python-telegram-bot==13.6
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 pytz==2021.1
     # via
     #   apscheduler
@@ -230,16 +222,16 @@ pytz==2021.1
     #   python-telegram-bot
     #   tzlocal
 pywebpush==1.13.0
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 pyyaml==5.4.1
     # via flasgger
 redis==3.5.3
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 regex==2021.7.1
     # via dateparser
 requests==2.23.0
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   cfscrape
     #   python-binance
     #   python-kucoin
@@ -275,8 +267,6 @@ twisted==21.2.0
     # via python-binance
 txaio==21.2.1
     # via autobahn
-typing-extensions==3.10.0.0
-    # via importlib-metadata
 tzlocal==2.1
     # via
     #   apscheduler
@@ -295,21 +285,17 @@ websocket-client==1.1.0
     # via python-socketio
 websockets==9.1
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   python-kucoin
 werkzeug==2.0.1
     # via flask
 wheel==0.36.2
     # via pip-tools
 wikipedia-api==0.5.4
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 wtforms==2.3.3
     # via flask-wtf
-zipp==3.5.0
-    # via
-    #   importlib-metadata
-    #   pep517
-zope.interface==5.4.0
+zope-interface==5.4.0
     # via twisted
 
 # The following packages are considered to be unsafe in a requirements file:
