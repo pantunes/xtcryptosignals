@@ -117,7 +117,7 @@ It will populate some collections with data:
 FLASK_ENV=development SETTINGS_APP=server.dev.env mongodb-migrate --url mongodb://127.0.0.1:27017/XTC-Dev --migrations xtcryptosignals/server/migrations/
 ```
 
-### Install from docker-compose
+### Install from docker-compose (the simplest way):
 Clone project repository:
 ```bash
 git clone https://github.com/pantunes/xtcryptosignals.git
@@ -125,8 +125,9 @@ cd xtcryptosignals
 ```
 Create multi-container Docker Applications:
 ```bash
-docker-compose up
+docker-compose build
 ```
+Nothing more is necessary...
 
 ## Tasks
 ### Start service
@@ -299,10 +300,13 @@ to copy default config files to the folder `/config`.
 The configuration should be reviewed and changed, before running `xt-all start`
 to start all 3 services: `xt-server`, `xt-client` and `xt-tasks`.  
 
-#### Docker Compose:
+#### Docker Compose (the simplest way):
+With the following command all services will be started and running:
+
 ```bash
 docker-compose up
 ```
+Access the URL `http://127.0.0.1:5000` to load the Platform client UI, nothing more is necessary...
 
 ## Screenshots
 

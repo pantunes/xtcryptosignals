@@ -207,7 +207,6 @@ SYMBOLS_PER_EXCHANGE.append(
             "pairs": [
                 ("BTC", "USD"),
                 ("ETH", "USD"),
-                ("LTC", "USD"),
                 ("USDT", "USD"),
             ]
         }

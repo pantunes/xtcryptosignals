@@ -2,10 +2,12 @@
 All changes will be registered here per release.
 
 ## [0.9.1] - Current date
+Updated `README.md`.  
+Removed OkCoin pair `LTC / USD`.  
 
-## [0.9.0] - Current date
-Fix Liquid fetched pairs, as they were removed.  
-Remove Binance pair `USDC / USDT`.  
+## [0.9.0] - 2022-12-12
+Fixed Liquid fetched pairs, as they were removed.  
+Removed Binance pair `USDC / USDT`.  
 Decrease pooling time of `ORDER_BOOK_SCHEDULE` due to Binance restrictions.  
 
 ## [0.8.9] - 2022-07-16
