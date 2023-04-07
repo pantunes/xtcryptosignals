@@ -23,12 +23,16 @@ from xtcryptosignals.tasks.models.project_twitter import ProjectTwitter
 
 
 def _get_twitter_num_followers(url):
-    _url = f"https://cdn.syndication.twimg.com/widgets/followbutton/info.json?screen_names={url.rsplit('/', 1)[-1]}"
-    response = requests.get(_url)
+    headers = {"Authorization": f"Bearer {s.TWITTER_BEARER}"}
+
+    _url = f"https://api.twitter.com/2/users/by/username/{url.rsplit('/', 1)[-1]}?user.fields=public_metrics"
+
+    response = requests.get(_url, headers=headers)
     if response.status_code != 200:
         return
+
     try:
-        return response.json()[0]["followers_count"]
+        return response.json()["data"]["public_metrics"]["followers_count"]
     except IndexError:
         return
 
