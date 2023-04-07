@@ -2,6 +2,7 @@
 All changes will be registered here per release.
 
 ## [0.9.1] - Current date
+Fix Projects Twitter Followers count.  
 Updated `README.md`.  
 Removed OkCoin pair `LTC / USD`.  
 
