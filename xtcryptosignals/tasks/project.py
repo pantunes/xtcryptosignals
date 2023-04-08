@@ -33,7 +33,7 @@ def _get_twitter_num_followers(url):
 
     try:
         return response.json()["data"]["public_metrics"]["followers_count"]
-    except IndexError:
+    except KeyError:
         return
 
 
