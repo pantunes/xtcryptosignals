@@ -57,7 +57,7 @@ class Migration(AddProjectMigration):
         LTO=dict(
             name="LTO Network",
             website="https://www.ltonetwork.com",
-            twitter="https://twitter.com/LTOnetwork",
+            twitter="https://twitter.com/TheLTONetwork",
             wikipedia=None,
         ),
         XNO=dict(
