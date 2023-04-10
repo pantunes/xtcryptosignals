@@ -1,10 +1,12 @@
 # Changelog
 All changes will be registered here per release.
 
-## [0.9.1] - Current date
+
+## [1.0.0] - 2023-04-10
 Fix Projects Twitter Followers count.  
 Updated `README.md`.  
 Removed OkCoin pair `LTC / USD`.  
+Code refactoring and fixes.  
 
 ## [0.9.0] - 2022-12-12
 Fixed Liquid fetched pairs, as they were removed.  
