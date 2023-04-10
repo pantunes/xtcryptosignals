@@ -58,7 +58,7 @@ def fear_and_greed():
 
     return render_template(
         template_name_or_list="tools/fear-and-greed.html",
-        frequency=current_app.config["CFGI_MIN"],
+        frequency=g.HISTORY_FREQUENCY[0],
         chart_frequencies=chart_frequencies,
         quote="USDT",
     )
