@@ -2,6 +2,9 @@
 All changes will be registered here per release.
 
 
+## [1.0.1] - Current date
+Increase log verbosity in Notifications Task.  
+
 ## [1.0.0] - 2023-04-10
 Fix Projects Twitter Followers count.  
 Updated `README.md`.  

@@ -41,28 +41,34 @@ PATH_LOGOS = (
 def update(self):
     logger = self.get_logger()
 
+    logger.info("Starting Notifications Task...")
+
     for notif in NotificationRule.objects():
         exchange_and_pair = s.EXCHANGES_AND_PAIRS_OF_REFERENCE[notif.coin_token]
 
         model_history = type(f"History{notif.interval}", (History,), {})
-        row_history = model_history.objects(
+        row_history = model_history.objects(  # noqa
             symbol=notif.coin_token + exchange_and_pair["pair"],
             source=exchange_and_pair["name"],
         ).first()
 
         if not row_history:
+            logger.warning("No coins/tokens to send notifications")
             continue
 
         obj_history = row_history.to_dict(frequency=notif.interval)
 
+        key = f"{notif.metric}_change"
         try:
-            obj_history_change = obj_history[f"{notif.metric}_change"]
+            obj_history_change = obj_history[key]
         except KeyError:
+            logger.error(f"The `obj_history_change` was not found with key: {key}")
             continue
 
         try:
             price = obj_history["price_usdt"]
         except KeyError:
+            logger.error("`price_usdt` not found")
             continue
 
         if price < 1:
@@ -80,11 +86,13 @@ def update(self):
 
         if notif.percentage > 0.0:
             if obj_history_change < notif.percentage:
+                logger.info("obj_history_change < notif.percentage")
                 continue
 
             direction = "up"
 
         elif obj_history_change > notif.percentage:
+            logger.info("obj_history_change > notif.percentage")
             continue
 
         else:
@@ -109,7 +117,7 @@ def update(self):
         redis_key = hash_object.hexdigest()
 
         if red.get(redis_key):
-            logger.warning(f"Already sent notifications to {notif.user.pk}")
+            logger.warning(f"Already sent notifications to user: {notif.user.pk}")
             continue
 
         red.setex(
@@ -186,3 +194,5 @@ def update(self):
             logger.error(f"telegram notification error: {error}")
             self.update_state(state=states.FAILURE, meta=str(error))
             raise Ignore()
+
+    logger.info("Notifications Task Finished Successfully")

@@ -25,6 +25,6 @@ class Migration(AddProjectMigration):
         AVAX=dict(
             name="Avalanche",
             website="https://www.avax.network",
-            twitter="https://twitter.com/avalancheavax",
+            twitter="https://twitter.com/Avax",
         ),
     )
