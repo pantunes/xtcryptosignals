@@ -132,7 +132,7 @@ def update(self):
             user=notif.user,
         )
         if notif.metric == "price":
-            notification_kwargs.update(is_positive=(direction is "up"))
+            notification_kwargs.update(is_positive=(direction == "up"))
 
         Notification(**notification_kwargs).save()
 
@@ -176,7 +176,7 @@ def update(self):
             self.update_state(state=states.FAILURE, meta=str(error))
             raise Ignore()
 
-        heart = "💚" if direction is "up" else "❤️"
+        heart = "💚" if direction == "up" else "❤️"
         try:
             logger.warning("Sending telegram notification")
             bot = telegram.Bot(token=s.TELEGRAM_BOT_TOKEN)

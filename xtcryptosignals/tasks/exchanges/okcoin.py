@@ -20,6 +20,6 @@ class Okcoin:
         request = requests.get(url)
         if request.status_code != 200:
             raise ValueError(f"Error connecting OkCoin on URL: {url}")
-        item = request.json()
+        item = request.json()["data"][0]
         item.update(symbol="".join(symbol), ticker=symbol[0])
         return item
