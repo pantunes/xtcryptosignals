@@ -133,7 +133,6 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("SNX", "USDT"),
                 ("SNX", "BTC"),
                 ("RLC", "USDT"),
-                ("RLC", "BUSD"),
                 ("RLC", "BTC"),
                 ("BUSD", "USDT"),
             ],

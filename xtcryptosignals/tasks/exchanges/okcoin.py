@@ -13,13 +13,13 @@ import requests
 
 class Okcoin:
     def __init__(self):
-        self.base_url = "https://www.okcoin.com/api/spot/v3/instruments/{}-{}/ticker"
+        self.base_url = "https://www.okcoin.com/api/v5/market/ticker?instId={}-{}"
 
     def get_ticker(self, symbol):
         url = self.base_url.format(*symbol)
         request = requests.get(url)
         if request.status_code != 200:
             raise ValueError(f"Error connecting OkCoin on URL: {url}")
-        item = request.json()
+        item = request.json()["data"][0]
         item.update(symbol="".join(symbol), ticker=symbol[0])
         return item
