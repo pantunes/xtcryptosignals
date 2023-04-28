@@ -13,7 +13,13 @@ server {
 
     ssl_certificate /etc/letsencrypt/live/books.domain.com/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/books.domain.com/privkey.pem;
+    ssl_trusted_certificate /etc/letsencrypt/live/books.domain.com/chain.pem;
     include /etc/letsencrypt/options-ssl-nginx.conf;
+
+    location / {
+        deny all;
+        return 404;
+    }
 
     location /socket.io {
         include proxy_params;

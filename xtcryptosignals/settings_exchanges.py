@@ -212,18 +212,6 @@ SYMBOLS_PER_EXCHANGE.append(
     }
 )
 
-# LIQUID
-SYMBOLS_PER_EXCHANGE.append(
-    {
-        LIQUID: {
-            "pairs": [
-                ("BTC", "USD"),
-                ("ETH", "BTC"),
-            ]
-        }
-    }
-)
-
 # Uphold
 SYMBOLS_PER_EXCHANGE.append(
     {
@@ -242,7 +230,6 @@ SYMBOLS_PER_EXCHANGE.append(
 # OKEx
 SYMBOLS_PER_EXCHANGE.append({OKEX: {"pairs": []}})
 
-
 # EMPTY EXCHANGES (LOW VOLUME) #######
 
 # IDEX
@@ -250,6 +237,9 @@ SYMBOLS_PER_EXCHANGE.append({IDEX: {"pairs": []}})
 
 # Coinbene
 SYMBOLS_PER_EXCHANGE.append({COINBENE: {"pairs": []}})
+
+# LIQUID
+SYMBOLS_PER_EXCHANGE.append({LIQUID: {"pairs": []}})
 
 # Bitmax
 SYMBOLS_PER_EXCHANGE.append(
