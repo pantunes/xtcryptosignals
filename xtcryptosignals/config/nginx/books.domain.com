@@ -1,3 +1,12 @@
+upstream socketio_nodes {
+    ip_hash;
+
+    server 127.0.0.1:5004;
+    server 127.0.0.1:5005;
+    server 127.0.0.1:5006;
+    server 127.0.0.1:5007;
+}
+
 server {
     listen 80;
 
@@ -27,6 +36,6 @@ server {
         proxy_buffering off;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "Upgrade";
-        proxy_pass http://server.instance:<port>/socket.io;
+        proxy_pass http://socketio_nodes/socket.io;
     }
 }

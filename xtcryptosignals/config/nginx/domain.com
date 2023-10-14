@@ -3,13 +3,17 @@ upstream backend_nodes {
 
     server 127.0.0.1:5000;
     server 127.0.0.1:5001;
+    server 127.0.0.1:5002;
+    server 127.0.0.1:5003;
 }
 
 upstream socketio_nodes {
     ip_hash;
 
-    server 127.0.0.1:5002;
-    server 127.0.0.1:5003;
+    server 127.0.0.1:5004;
+    server 127.0.0.1:5005;
+    server 127.0.0.1:5006;
+    server 127.0.0.1:5007;
 }
 
 server {
