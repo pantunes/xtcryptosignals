@@ -36,7 +36,7 @@ requests==2.23.0
 
 # requires code refactoring
 
-celery==4.4.6
+celery==5.2.2
 dnspython<2
 eventlet==0.26.0
 marshmallow==2.20.5
