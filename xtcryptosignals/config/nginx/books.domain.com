@@ -1,4 +1,4 @@
-upstream socketio_nodes {
+upstream socketio_server_nodes {
     ip_hash;
 
     server 127.0.0.1:5004;
@@ -36,6 +36,6 @@ server {
         proxy_buffering off;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "Upgrade";
-        proxy_pass http://socketio_nodes/socket.io;
+        proxy_pass http://socketio_server_nodes/socket.io;
     }
 }
