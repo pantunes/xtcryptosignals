@@ -56,7 +56,6 @@ COIN_OR_TOKEN_REFERENCE = {
     "STABLE": (
         "DAI",
         "USD",
-        "BUSD",
         "USDT",
     ),
 }
