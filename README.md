@@ -1,4 +1,5 @@
 # XTCryptoSignals
+[![Downloads](https://pepy.tech/badge/xtcryptosignals)](https://pepy.tech/project/xtcryptosignals) [![Downloads](https://pepy.tech/badge/xtcryptosignals/month)](https://pepy.tech/project/xtcryptosignals) [![Downloads](https://pepy.tech/badge/xtcryptosignals/week)](https://pepy.tech/project/xtcryptosignals)
 
 **XTCryptoSignals** is a Python library that includes the following 3 services:
 
@@ -8,7 +9,7 @@
     any other pair that is supported by the Exchange API.
     * A **Signals** service based on setup rules to send real-time alerts about 
     price, price change, trading volume or market sentiment sending Web Push 
-    Notifications to the client browser (Firefox, Chrome) or/and to Telegram Channel.
+    Notifications to the client browser (Firefox, Chrome) or/and to a [Telegram Channel](https://t.me/xtcryptosignals).
     * **Market Depth**, **Content** and **Data** fetching Tasks.
 
 (Web Push Notifications are implemented with [ServiceWorker](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification) 
@@ -32,7 +33,7 @@ that is compatible with the most known web browsers.)
 trading volume, price sentiment, etc (July 2019)
 * [x] Implement Telegram bot to broadcast notifications (Feb 2020)
 * [x] Create nice features and make platform improvements on-the-fly (From 2020 onwards)
-
+* [ ] Create more Test cases and setup a more meaningful CI/CD Github Actions
 
 ## Getting Started
 

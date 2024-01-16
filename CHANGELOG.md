@@ -2,9 +2,9 @@
 All changes will be registered here per release.
 
 
-## [1.0.1] - Current date
+## [1.0.1] - 2023-01-16
 Increase log verbosity in Notifications Task.  
-Removed `BUSD`
+Removed `BUSD` token and pairs.  
 
 ## [1.0.0] - 2023-04-10
 Fix Projects Twitter Followers count.  
