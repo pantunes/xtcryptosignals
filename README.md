@@ -1,4 +1,5 @@
 # XTCryptoSignals
+[![Version](https://img.shields.io/pypi/v/xtcryptosignals?style=flat-square)](https://pypi.org/project/xtcryptosignals)  
 [![Downloads](https://pepy.tech/badge/xtcryptosignals)](https://pepy.tech/project/xtcryptosignals) [![Downloads](https://pepy.tech/badge/xtcryptosignals/month)](https://pepy.tech/project/xtcryptosignals) [![Downloads](https://pepy.tech/badge/xtcryptosignals/week)](https://pepy.tech/project/xtcryptosignals)
 
 **XTCryptoSignals** is a Python library that includes the following 3 services:
