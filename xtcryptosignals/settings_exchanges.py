@@ -68,8 +68,6 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("LTC", "BTC"),
                 ("XLM", "USDT"),
                 ("XLM", "BTC"),
-                ("XMR", "USDT"),
-                ("XMR", "BTC"),
                 ("REN", "USDT"),
                 ("REN", "BTC"),
                 ("KNC", "USDT"),
@@ -417,10 +415,6 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
     },
     "XTZ": {
-        "pair": "USDT",
-        "name": BINANCE,
-    },
-    "XMR": {
         "pair": "USDT",
         "name": BINANCE,
     },
