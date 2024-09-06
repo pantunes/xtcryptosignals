@@ -2,8 +2,9 @@
 All changes will be registered here per release.
 
 
-## [1.0.2] - WIP
-Removed `XMR` token and pairs from `Binance`.  
+## [1.0.2] - 2024-09-06
+Add countdown timer in main page to redirect to main coins/tokens page.  
+Removed `XMR` token and pairs from `Binance`.
 
 ## [1.0.1] - 2023-01-16
 Increase log verbosity in Notifications Task.  
