@@ -14,8 +14,8 @@ import requests
 class CoinbasePro:
     def __init__(self):
         self.base_urls = (
-            "https://api.pro.coinbase.com/products/{0}-{1}/stats",
-            "https://api.pro.coinbase.com/products/{0}-{1}/ticker",
+            "https://api.exchange.coinbase.com/products/{0}-{1}/stats",
+            "https://api.exchange.coinbase.com/products/{0}-{1}/ticker",
         )
 
     def get_ticker(self, symbol):

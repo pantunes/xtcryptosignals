@@ -1,6 +1,9 @@
 # Changelog
 All changes will be registered here per release.
 
+## [1.0.3] - 2025-01-18
+Disabled `FTM` as they are rebranding to `S` and not clear when swap is done in Exchanges.  
+Fix `Coinbase Pro` exchange API
 
 ## [1.0.2] - 2024-09-06
 Add countdown timer in main page to redirect to main coins/tokens page.  
