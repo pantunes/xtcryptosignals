@@ -14,7 +14,7 @@ gunicorn==20.1.0
 mongodb-migrations==1.0.1
 bcrypt==3.2.0
 environs==9.3.2
-pywebpush==1.13.0
+pywebpush==1.14.0
 captcha==0.3
 wikipedia-api==0.5.4
 beautifulsoup4==4.9.3
