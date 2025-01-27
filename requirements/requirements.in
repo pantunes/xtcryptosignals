@@ -24,7 +24,7 @@ cfscrape==2.1.1
 python-telegram-bot==13.6
 pycryptodome==3.10.1
 jsonschema==3.2.0
-mistune==0.8.4
+mistune==2.0.3
 flasgger==0.9.5
 python-socketio[client]==5.3.0
 websockets==9.1
