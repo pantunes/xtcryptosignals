@@ -19,7 +19,7 @@ red = redis.Redis.from_url(s.BROKER_URL)
 
 def get_ticker_pair_last(pair):
     key = s.REDIS_KEY_TICKER.format(
-        source=s.BINANCE,
+        source=s.KUCOIN,
         symbol=pair,
         frequency=s.HISTORY_FREQUENCY[0],
     )
