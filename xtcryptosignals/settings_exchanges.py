@@ -68,8 +68,6 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("LTC", "BTC"),
                 ("XLM", "USDT"),
                 ("XLM", "BTC"),
-                ("REN", "USDT"),
-                ("REN", "BTC"),
                 ("KNC", "USDT"),
                 ("KNC", "BTC"),
                 ("AAVE", "USDT"),
@@ -160,7 +158,6 @@ SYMBOLS_PER_EXCHANGE.append(
                 ("BTC", "USDT"),
                 ("ETH", "USDT"),
                 ("LTO", "USDT"),
-                ("LTO", "BTC"),
                 ("EWT", "BTC"),
                 ("EWT", "USDT"),
             ]
@@ -392,12 +389,6 @@ EXCHANGES_AND_PAIRS_OF_REFERENCE = {
         "is_defi": True,
     },
     "UNI": {
-        "pair": "USDT",
-        "name": BINANCE,
-        "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},
-        "is_defi": True,
-    },
-    "REN": {
         "pair": "USDT",
         "name": BINANCE,
         "market_depth": {"exchange": BINANCE, "pairs": ["USDT", "BTC"]},

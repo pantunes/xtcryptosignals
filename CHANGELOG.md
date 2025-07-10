@@ -1,6 +1,9 @@
 # Changelog
 All changes will be registered here per release.
 
+## [1.0.4] - Current
+Disabled a couple of Tokens and Pairs from Binance.
+
 ## [1.0.3] - 2025-01-18
 Disabled `FTM` as they are rebranding to `S` and not clear when swap is done in Exchanges.  
 Fix `Coinbase Pro` exchange API
