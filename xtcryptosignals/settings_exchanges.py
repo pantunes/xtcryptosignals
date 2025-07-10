@@ -169,17 +169,17 @@ SYMBOLS_PER_EXCHANGE.append(
 )
 
 # BIBOX
-SYMBOLS_PER_EXCHANGE.append(
-    {
-        BIBOX: {
-            "pairs": [
-                ("BTC", "USDT"),
-                ("ETH", "USDT"),
-                ("LTC", "USDT"),
-            ]
-        }
-    }
-)
+# SYMBOLS_PER_EXCHANGE.append(
+#     {
+#         BIBOX: {
+#             "pairs": [
+#                 ("BTC", "USDT"),
+#                 ("ETH", "USDT"),
+#                 ("LTC", "USDT"),
+#             ]
+#         }
+#     }
+# )
 
 # OKCoin
 SYMBOLS_PER_EXCHANGE.append(
